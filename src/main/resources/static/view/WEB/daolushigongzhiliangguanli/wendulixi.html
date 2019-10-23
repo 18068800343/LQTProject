@@ -26,7 +26,10 @@
         var myChart = echarts.init(document.getElementById('main'));
  
         var option = {
-				    color: ['#3398DB'],
+				    title: {
+				            text: '百分比(%)',
+				        },
+					color: ['#3398DB'],
 				    tooltip : {
 				        trigger: 'axis',
 				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
@@ -58,7 +61,7 @@
 				            name:'直接访问',
 				            type:'bar',
 				            barWidth: '20%',
-				            data:[10, 52, 200]
+				            data:[10, 52, 90]
 				        }
 				    ]
 				};

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
 
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<link href="../favicon.ico" rel="shortcut icon">
-		<link href="../style/bootstrap.min.css" rel="stylesheet">
-		<link href="../style/style.css" rel="stylesheet">
-		<link href="../toastr/toastr.css" rel="stylesheet">
-		<link rel="stylesheet" href="../font2/iconfont.css">
-		<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
-		<link rel="stylesheet" type="text/css" href="../easyUI/themes/default/easyui.css" />
-		<link rel="stylesheet" type="text/css" href="../easyUI/themes/icon.css" />
-		<link rel="stylesheet" type="text/css" href="../easyUI/demo/demo.css" />
-		<link rel="stylesheet" type="text/css" href="../css/layui.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/layui.mobile.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/laydate.css"/>
+		<link href="/view/favicon.ico" rel="shortcut icon">
+		<link href="/view/style/bootstrap.min.css" rel="stylesheet">
+		<link href="/view/style/style.css" rel="stylesheet">
+		<link href="/view/toastr/toastr.css" rel="stylesheet">
+		<link rel="stylesheet" href="/view/font2/iconfont.css">
+		<link rel="stylesheet" href="/view/style/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="/view/easyUI/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="/view/easyUI/themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="/view/easyUI/demo/demo.css" />
+		<link rel="stylesheet" type="text/css" href="/view/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="/view/css/layui.mobile.css"/>
+		<link rel="stylesheet" type="text/css" href="/view/css/laydate.css"/>
 		<style lang="">
 			html {
 				overflow-x: hidden;
@@ -144,7 +144,7 @@
 			}
 			
 			#leftTab {
-				/* 			background:#3f9cff url(../img/leftcd.png) no-repeat bottom; */
+				/* 			background:#3f9cff url(/view/img/leftcd.png) no-repeat bottom; */
 				background-size: 100% 100%;
 				background-color: #f2f6fb;
 				color: #fff;
@@ -299,13 +299,13 @@
 									<div class="easyui-panel" style="background-color:#f2f6fb;overflow:hidden;">
 										<ul class="easyui-tree">
 											<li>
-												<span><a href="home.html"   target="view_frame"  class="yijicaidan Pab" >首页</a></span>
+												<span><a href="templates/WEB/home.html"   target="view_frame"  class="yijicaidan Pab" >首页</a></span>
 											</li>
 											<li data-options="state:'closed'">
 												<span><a href="javascript:;"   target="view_frame" class="yijicaidan Paa" >沥青砼生产监控管理</a></span>
 												<ul>
 													<li>
-														<a href="table_sec/jinliaoguanli.html" target="view_frame" class="yijicaidan Pbda">进料监控管理</a>
+														<a href="templates/WEB/table_sec/jinliaoguanli.html" target="view_frame" class="yijicaidan Pbda">进料监控管理</a>
 													</li>
 													<li>
 														<a href="javascript:;" target="view_frame" class="yijicaidan Pbdb">生产计划管理</a>
@@ -323,7 +323,7 @@
 														<a href="javascript:;" target="view_frame" class="yijicaidan Pbdd">实料生产预警</a>
 													</li>
 													<li>
-														<a href="table_sec/chengbenjindu.html" target="view_frame" class="yijicaidan Pbdd">成本及进度管理</a>
+														<a href="templates/WEB/table_sec/chengbenjindu.html" target="view_frame" class="yijicaidan Pbdd">成本及进度管理</a>
 													</li>
 												</ul>
 											</li>
@@ -331,10 +331,10 @@
 												<span><a href="javascript:;"   target="view_frame"  class="yijicaidan Pab" >沥青砼运输监控管理</a></span>
 												<ul>
 													<li>
-														<a href="table_thi/cheliang.html" target="view_frame" class="yijicaidan Pbda">车辆管理</a>
+														<a href="templates/WEB/table_thi/cheliang.html" target="view_frame" class="yijicaidan Pbda">车辆管理</a>
 													</li>
 													<li>
-														<a href="table_thi/liqingpici.html" target="view_frame" class="yijicaidan Pbdb">沥青砼批次管理</a>
+														<a href="templates/WEB/table_thi/liqingpici.html" target="view_frame" class="yijicaidan Pbdb">沥青砼批次管理</a>
 													</li>
 													<li>
 														<a href="javascript:;" target="view_frame" class="yijicaidan Pbdc">行驶轨迹管理</a>
@@ -351,25 +351,25 @@
 														<span><a href="javascript:;"  target="view_frame" class="yijicaidan Peca" >沥青砼摊铺监控管理</a></span>
 														<ul>
 															<li>
-																<a href="table_four/tanpudidian.html" target="view_frame" class="yijicaidan Pecbxb">摊铺地点管理</a>
+																<a href="daolushigongzhiliangguanli/tanpudidian.html" target="view_frame" class="yijicaidan Pecbxb">摊铺地点管理</a>
 															</li>
 															<li>
-																<a href="table_four/lailiao.html" target="view_frame" class="yijicaidan Pecgc">施工现场来料管理</a>
+																<a href="daolushigongzhiliangguanli/lailiao.html" target="view_frame" class="yijicaidan Pecgc">施工现场来料管理</a>
 															</li>
 															<li>
-																<a href="javascript:;" target="view_frame" class="yijicaidan Pecgc">来料温度预警</a>
+																<a href="daolushigongzhiliangguanli/lailiaowenduyujing.html" target="view_frame" class="yijicaidan Pecgc">来料温度预警</a>
 															</li>
 															<li>
-																<a href="table_four/tanpulichengsudu.html" target="view_frame" class="yijicaidan Pecbxb">摊铺里程速度管理</a>
+																<a href="daolushigongzhiliangguanli/tanpulichengsudu.html" target="view_frame" class="yijicaidan Pecbxb">摊铺里程速度管理</a>
 															</li>
 															<li>
-																<a href="table_four/tanpuwendu.html" target="view_frame" class="yijicaidan Pecgc">摊铺温度管理</a>
+																<a href="daolushigongzhiliangguanli/tanpuwendu.html" target="view_frame" class="yijicaidan Pecgc">摊铺温度管理</a>
 															</li>
 															<li>
-																<a href="table_four/wendulixi.html" target="view_frame" class="yijicaidan Pecbxb">摊铺温度离析度</a>
+																<a href="daolushigongzhiliangguanli/wendulixi.html" target="view_frame" class="yijicaidan Pecbxb">摊铺温度离析度</a>
 															</li>
 															<!--<li>
-																<a href="table_four/tanpulixidu.html" target="view_frame" class="yijicaidan Pecgc">摊铺离析度管理</a>
+																<a href="daolushigongzhiliangguanli/tanpulixidu.html" target="view_frame" class="yijicaidan Pecgc">摊铺离析度管理</a>
 															</li>-->
 															<!--<li>
 																<a href="./shengchanGuanli/UndertakeContract.html" target="view_frame" class="yijicaidan Pecgc">视频管理</a>
@@ -378,17 +378,14 @@
 														<li data-options="state:'closed'">
 															<span><a href="javascript:;"  target="view_frame" class="yijicaidan Peca" >沥青砼压实监控管理</a></span>
 															<ul>
-																<!--<li>
-																	<a href="javascript:;" target="view_frame" class="yijicaidan Pecbxb">摊铺地点管理</a>
-																</li>-->
 																<li>
-																	<a href="table_four/nianyacishu.html" target="view_frame" class="yijicaidan Pecgc">碾压次数管理</a>
+																	<a href="daolushigongzhiliangguanli/nianyacishu.html" target="view_frame" class="yijicaidan Pecgc">碾压次数管理</a>
 																</li>
 																<li>
-																	<a href="table_four/yashisudu.html" target="view_frame" class="yijicaidan Pecbxb">压实速度管理</a>
+																	<a href="daolushigongzhiliangguanli/yashisudu.html" target="view_frame" class="yijicaidan Pecbxb">压实速度管理</a>
 																</li>
 																<li>
-																	<a href="table_four/yashiwendu.html" target="view_frame" class="yijicaidan Pecgc">初始压实温度管理</a>
+																	<a href="daolushigongzhiliangguanli/yashiwendu.html" target="view_frame" class="yijicaidan Pecgc">初始压实温度管理</a>
 																</li>
 																<!--<li>
 																	<a href="javascript:;" target="view_frame" class="yijicaidan Pecbxb">压实度管·理</a>
@@ -399,34 +396,34 @@
 													<span><a href="javascript:;"   target="view_frame" class="yijicaidan Paa" >综合统计分析</a></span>
 													<ul>
 														<li>
-															<a href="javascript:;" target="view_frame" class="yijicaidan Pbda">温度统计分析</a>
+															<a href="zonghetongjifenxi/wendutongjifenxi.html" target="view_frame" class="yijicaidan Pbda">温度统计分析</a>
 														</li>
 														<li>
-															<a href="javascript:;" target="view_frame" class="yijicaidan Pbdb">用料统计分析</a>
+															<a href="zonghetongjifenxi/yongliaotongjifenxi.html" target="view_frame" class="yijicaidan Pbdb">用料统计分析</a>
 														</li>
 														<li>
-															<a href="table_sec/shengchanguanli.html" target="view_frame" class="yijicaidan Pbdc">拌合站产能分析</a>
+															<a href="zonghetongjifenxi/banhezhanchannengfenxi.html" target="view_frame" class="yijicaidan Pbdc">拌合站产能分析</a>
 														</li>
 													</ul>
-												</li
+												</li>
 												<!--4.5-->
 												<li data-options="state:'closed'">
 													<span><a href="javascript:;"   target="view_frame" class="yijicaidan Paa" >视频监控</a></span>
 													<ul>
 														<li>
-															<a href="javascript:;" target="view_frame" class="yijicaidan Pbda">进料视频监控</a>
+															<a href="shipinjiankong/jinliaoshipin.html" target="view_frame" class="yijicaidan Pbda">进料视频监控</a>
 														</li>
 														<li>
-															<a href="javascript:;" target="view_frame" class="yijicaidan Pbdb">仓储视频监控</a>
+															<a href="shipinjiankong/cangchushipin.html" target="view_frame" class="yijicaidan Pbdb">仓储视频监控</a>
 														</li>
 														<li>
-															<a href="javascript:;" target="view_frame" class="yijicaidan Pbdb  ">用料视频监控</a>
+															<a href="shipinjiankong/yongliaoshipin.html" target="view_frame" class="yijicaidan Pbdb  ">用料视频监控</a>
 														</li>
 														<li>
-															<a href="javascript:;" target="view_frame" class="yijicaidan Pbdb  ">出料视频监控</a>
+															<a href="shipinjiankong/chuliaoshipin.html" target="view_frame" class="yijicaidan Pbdb  ">出料视频监控</a>
 														</li>
 														<li>
-															<a href="javascript:;" target="view_frame" class="yijicaidan Pbdb  ">施工视频监控</a>
+															<a href="shipinjiankong/shigongshipin.html" target="view_frame" class="yijicaidan Pbdb  ">施工视频监控</a>
 														</li>
 													</ul>
 												</li>
@@ -434,13 +431,13 @@
 													<span><a href="javascript:;"   target="view_frame" class="yijicaidan Paa" >系统管理</a></span>
 													<ul>
 														<li>
-															<a href="javascript:;" target="view_frame" class="yijicaidan Pbda">用户权限管理</a>
+															<a href="xitongquanxian/yonghuquanxianguanli.html" target="view_frame" class="yijicaidan Pbda">用户权限管理</a>
 														</li>
 														<li>
-															<a href="javascript:;" target="view_frame" class="yijicaidan Pbdb">配比管理</a>
+															<a href="xitongquanxian/peibiguanli.html" target="view_frame" class="yijicaidan Pbdb">配比管理</a>
 														</li>
 														<li>
-															<a href="javascript:;" target="view_frame" class="yijicaidan Pbdc">预警管理</a>
+															<a href="xitongquanxian/yujingguanli.html" target="view_frame" class="yijicaidan Pbdc">预警管理</a>
 							  							</li>
 													</ul>
 												</li>
@@ -477,18 +474,18 @@
 
 			</nav>
 		</section>
-			<iframe src="jinliaoguanli.html" width="90%" height="1000"style="margin-left: 13%;">
+			<iframe src="templates/WEB/jinliaoguanli.html" width="90%" height="1000"style="margin-left: 13%;">
 			</iframe>
 		</div>
-		<script src="../js/jquery.js"></script>
-		<script src="../easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/common-scripts.js"></script>
-		<script src="../js/jquery.dataTables.min.js"></script>
-		<script src="../js/main.js"></script>
-		<script src="../js/bootstrap.min.js"></script>
-		<!--<script src="../toastr/toastr.js"></script>
-		<script src="../js/quanxian.js"></script>-->
+		<script src="/view/js/jquery.js"></script>
+		<script src="/view/easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/view/easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/view/js/common-scripts.js"></script>
+		<script src="/view/js/jquery.dataTables.min.js"></script>
+		<script src="/view/js/main.js"></script>
+		<script src="/view/js/bootstrap.min.js"></script>
+		<!--<script src="/view/toastr/toastr.js"></script>
+		<script src="/view/js/quanxian.js"></script>-->
 
 <!--		<script type="text/javascript">
 			var user;

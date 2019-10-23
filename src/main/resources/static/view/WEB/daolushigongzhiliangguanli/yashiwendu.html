@@ -26,7 +26,10 @@
         var myChart = echarts.init(document.getElementById('main'));
  
         var option = {
-				    color: ['#3398DB'],
+				    title: {
+				            text: '初始压实温度(°C)',
+				        },
+					color: ['#3398DB'],
 				    tooltip : {
 				        trigger: 'axis',
 				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
@@ -42,7 +45,7 @@
 				    xAxis : [
 				        {
 				            type : 'category',
-				            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+				            data : ['2019-10-11', '2019-10-12', '2019-10-13', '2019-10-14', '2019-10-15', '2019-10-16', '2019-10-17'],
 				            axisTick: {
 				                alignWithLabel: true
 				            }
@@ -50,7 +53,7 @@
 				    ],
 				    yAxis : [
 				        {
-				            type : 'value'
+				            type : 'value',
 				        }
 				    ],
 				    series : [
@@ -58,7 +61,7 @@
 				            name:'直接访问',
 				            type:'bar',
 				            barWidth: '60%',
-				            data:[10, 52, 200, 334, 390, 330, 220]
+				            data:[10, 18, 23, 35, 55, 62, 71]
 				        }
 				    ]
 				};

@@ -19,6 +19,20 @@
 		<link rel="stylesheet" type="text/css" href="../../css/code.css" />
 		<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+		<style lang="">
+		    .UpperPart{
+		        display: flex;
+		        justify-content:space-between;
+		        border-bottom: 1px solid #ccc;
+		        padding-bottom: 12px;
+		    }
+		    .selected{
+		        background: rgba(247, 161, 3,0.2);
+		    }
+		    #mainContent th{
+		        cursor: pointer;
+		    }
+		</style>
 	</head>
 
 	<body>
@@ -30,58 +44,190 @@
 				<li>摊铺里程统计</li>
 				<li>逐标段摊铺里程统计</li>
 			</ul>
+		<div class="UpperPart">
+			
+		<!-- Modal -->
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel"><b>录入摊铺速度里程</b></h4>
+				</div>
+				<div class="modal-body">
+						<div>     
+							<form class="form-inline">
+								<table class="table table-bordered">
+									<tr>
+										<td>序号</td>
+										<td><input type="text" /></td>
+										<td>路段编号</td>
+										<td><input type="text" /></td>
+									</tr>
+									<tr>
+										<td>摊铺速度</td>
+										<td><input type="text" /></td>
+										<td>摊铺里程</td>
+										<td><input type="text" /></td>
+									</tr>
+									<tr>
+										<td>施工时间</td>
+										<td><input type="text" /></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
+							</form> 
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-success" >保存</button>
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- model结束 -->
+		
+		<!-- 修改Modal -->
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel"><b>修改温度统计分析</b></h4>
+				</div>
+				<div class="modal-body">
+					<div>     
+						<form class="form-inline">
+							<table class="table table-bordered">
+								<tr>
+									<td>序号</td>
+									<td><input type="text" /></td>
+									<td>路段编号</td>
+									<td><input type="text" /></td>
+								</tr>
+								<tr>
+									<td>摊铺速度</td>
+									<td><input type="text" /></td>
+									<td>摊铺里程</td>
+									<td><input type="text" /></td>
+								</tr>
+								<tr>
+									<td>施工时间</td>
+									<td><input type="text" /></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</form>  
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-success">保存</button>
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- 修改model结束 -->
+		
+				</div>
 			<div class="layui-tab-content">
 				<div class="layui-tab-item layui-show">
+					<div class="UpperPart">
+							<div class="UpperPartL">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入摊铺速度里程</button>
+							</div>
+							<div class="UpperPartR">
+								<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
+							</div>
+					</div>
 					<div class="bottom">
 						<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入</button>-->
-						<table class="layui-table">
-							<colgroup>
-								<col width="150">
-								<col width="200">
-								<col>
-							</colgroup>
+						<table class="table table-bordered table-condensed" id="mainContent">
 							<thead>
 								<tr>
 									<th>序号</th>
-									<td>施工时间</td>
-									<td>里程</td>
+									<th>路段编号</th>
+									<th>摊铺速度</th>
+									<th>摊铺里程</th>
+									<th>施工时间</th>
+									<th style="width:70px;">操作</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>1</td>
-									<td></td>
-									<td></td>
+									<td>1</td>
+									<td>1</td>
+									<td>1</td>
+									<td>2019-10-10 10:10:10</td>
+									<td>
+									    <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
+									    <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
+									    <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
+									</td>
 								</tr>
 								<tr>
 									<td>1</td>
-									<td></td>
-									<td></td>
+									<td>1</td>
+									<td>1</td>
+									<td>1</td>
+									<td>2019-10-10 10:10:10</td>
+									<td>
+									    <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
+									    <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
+									    <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
+									</td>
 								</tr>
 								<tr>
 									<td>1</td>
-									<td></td>
-									<td></td>
+									<td>1</td>
+									<td>1</td>
+									<td>1</td>
+									<td>2019-10-10 10:10:10</td>
+									<td>
+									    <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
+									    <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
+									    <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
+									</td>
 								</tr>
 								<tr>
 									<td>1</td>
-									<td></td>
-									<td></td>
+									<td>1</td>
+									<td>1</td>
+									<td>1</td>
+									<td>2019-10-10 10:10:10</td>
+									<td>
+									    <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
+									    <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
+									    <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
+									</td>
 								</tr>
 								<tr>
 									<td>1</td>
-									<td></td>
-									<td></td>
+									<td>1</td>
+									<td>1</td>
+									<td>1</td>
+									<td>2019-10-10 10:10:10</td>
+									<td>
+									    <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
+									    <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
+									    <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
+									</td>
 								</tr>
 								<tr>
 									<td>1</td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
 									<td>1</td>
-									<td></td>
-									<td></td>
+									<td>1</td>
+									<td>1</td>
+									<td>2019-10-10 10:10:10</td>
+									<td>
+									    <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
+									    <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
+									    <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -103,6 +249,45 @@
 					<div id="fou" style="width: 1000px;height:400px;"></div>        
 				</div>
 			</div>
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
+	    <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content">
+	        <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <h4 class="modal-title" id="myModalLabel"><b>所有信息</b></h4>
+	        </div>
+	        <div class="modal-body">
+	            <div>     
+	                <form class="form-inline">
+	                    <table class="table table-bordered">
+	                       <tr>
+	                       	<td style="width: 20%;">序号</td>
+	                       	<td style="width: 30%;">1</td>
+	                       	<td style="width: 20%;">路段编号</td>
+	                       	<td style="width: 30%;">1</td>
+	                       </tr>
+	                       <tr>
+	                       	<td>摊铺速度</td>
+	                       	<td>1</td>
+	                       	<td>摊铺里程</td>
+	                       	<td>1</td>
+	                       </tr>
+	                       <tr>
+	                       	<td>施工时间</td>
+	                       	<td>2019-10-10 10:10:10</td>
+	                       	<td></td>
+	                       	<td></td>
+	                       </tr>
+	                    </table>
+	                </form>  
+	            </div>
+	        </div>
+	        <div class="modal-footer">
+	            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	        </div>
+	        </div>
+	    </div>
+	</div>
 		</div>
 		</div>
 	</body>
@@ -121,7 +306,10 @@
         var myChart = echarts.init(document.getElementById('main'));
  
         var option = {
-				    color: ['#3398DB'],
+				    title: {
+				            text: '速度(m/min)',
+				        },
+					color: ['#3398DB'],
 				    tooltip : {
 				        trigger: 'axis',
 				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
@@ -164,7 +352,10 @@
          var myChart = echarts.init(document.getElementById('two'));
  
         var option = {
-				    color: ['#3398DB'],
+				    title: {
+				            text: '速度(m/min)',
+				        },
+					color: ['#3398DB'],
 				    tooltip : {
 				        trigger: 'axis',
 				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
@@ -249,7 +440,10 @@
  var myChart = echarts.init(document.getElementById('fou'));
  
         var option = {
-				    color: ['#3398DB'],
+				    title: {
+				            text: '摊铺里程(km)',
+				        },
+					color: ['#3398DB'],
 				    tooltip : {
 				        trigger: 'axis',
 				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
@@ -281,7 +475,7 @@
 				            name:'直接访问',
 				            type:'bar',
 				            barWidth: '30%',
-				            data:[0, 0,100,70]
+				            data:[10, 50,100,70]
 				        }
 				    ]
 				};
@@ -330,5 +524,51 @@
 			});
 
 		});
+		
+		var table=$('#mainContent').dataTable({
+		    "deferRender": true,
+		    "processing": true,
+		    "bDestroy": true,
+		    "iDisplayLength": 10,
+		    "searching": true,
+		    "lengthChange": false,
+		    "oLanguage": {
+			    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+			},
+		    "order": [[0, 'asc']],
+		    "oLanguage": { //国际化配置
+		    "sProcessing": "正在获取数据，请稍后...",
+		    "sLengthMenu": "显示 _MENU_ 条",
+		    "sZeroRecords": "查询不到相关数据",
+		    "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+		    "sInfoEmpty": "记录数为0",
+		    "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+		    "sInfoPostFix": "",
+		    "sSearch": "搜索",
+		    "sUrl": "",
+		    "oPaginate": {
+		        "sFirst": "第一页",
+		        "sPrevious": "上一页",
+		        "sNext": "下一页",
+		        "sLast": "最后一页"
+		    }},
+		    
+		});
+		function initTable(){
+		    $.ajax({
+		        type: 'POST',
+		        url: '',
+		        dataType: 'json',
+		        data: {
+		        },
+		        error: function (msg) {
+		            errMessage("请求UserController失败");
+		        },
+		        success: function (json) {
+		            $('#').dataTable().fnClearTable();
+		            $('#').DataTable().rows.add(json).draw(false);
+		        }
+		    });
+		}
 	</script>
 </html>
