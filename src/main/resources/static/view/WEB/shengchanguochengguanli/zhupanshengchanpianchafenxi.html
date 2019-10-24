@@ -26,19 +26,20 @@
 </head>
 <body>
    
+    <!-- 面包屑 -->
 	<div class="mianbao">
     	<ul class="breadcrumb">
     		<li><i class="iconfont icon-knowledgebase"></i></li>
 			<li>沥青砼生产质量管理</li>
 			<li>拌和生产质量监控</li>
-			<li class="active">关键筛孔通过率</li>
+			<li class="active">逐盘生产偏差分析</li>
 		</ul>
     </div>
 
     <div class="zhuti-content">
         <div class="UpperPart">
             <div class="UpperPartL">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入关键筛孔通过率</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入生产偏差</button>
             </div>
             <div class="UpperPartR">
                 <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
@@ -50,10 +51,19 @@
                     <tr>
                         <th>序号</th>
                         <th>路段编号</th>
-                        <th>生产时间</th>
-						<th>4.75</th>
-						<th>2.36</th>
-						<th>0.075</th>
+                        <th>料1偏差</th>
+						<th>料2偏差</th>
+						<th>料3偏差</th>
+						<th>料4偏差</th>
+						<th>料5偏差</th>
+						<th>料6偏差</th>
+						<th>粉偏差</th>
+						<th>沥青偏差</th>
+						<th>最低温度</th>
+						<th>最高温度</th>
+						<th>干拌偏差</th>
+						<th>湿拌偏差</th>
+						<th>生产时间</th>
                         <th style="width:50px;">操作</th>
                     </tr>
                 </thead>
@@ -61,6 +71,15 @@
                     <tr>
                         <td id="1">1</td>
                         <td>1</td>
+                        <td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
 						<td>1</td>
 						<td>1</td>
 						<td>1</td>
@@ -72,12 +91,21 @@
                         </td>
                     </tr>
                     <tr>
-                        <td id="2">2</td>
+                        <td id="1">1</td>
                         <td>1</td>
                         <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
                         <td>
                             <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
                             <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
@@ -85,12 +113,21 @@
                         </td>
                     </tr>
                     <tr>
-                        <td id="3">3</td>
+                        <td id="1">1</td>
                         <td>1</td>
                         <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
                         <td>
                             <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
                             <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
@@ -101,9 +138,6 @@
             </table>
         </div>
     </div>
-    
-    
-    
 <!-- allMsg -->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
     <div class="modal-dialog modal-lg" role="document">
@@ -125,7 +159,7 @@
                         <tr>
                         	<td>备用</td>
                         	<td>1</td>
-                        	<td>备用</td>
+                        	<td>用料量</td>
                         	<td>1</td>
                         </tr>
                     </table>
@@ -145,32 +179,56 @@
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>录入关键筛孔通过率</b></h4>
+            <h4 class="modal-title" id="myModalLabel"><b>录入生产偏差</b></h4>
         </div>
         <div class="modal-body">
                 <div>     
                     <form class="form-inline">
                         <table class="table table-bordered table-condensed" style="height:auto;">
                         	<tr>
-                        		<td style="width: 20%;">设备编号</td>
+                        		<td style="width: 20%;">序号</td>
                         		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">设备名称</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">设备型号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">设备类型</td>
+                        		<td style="width: 20%;">路段编号</td>
                         		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
-                        		<td style="width: 20%;">生产厂家</td>
+                        		<td style="width: 20%;">料1偏差</td>
                         		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">联系方式</td>
+                        		<td style="width: 20%;">料2偏差</td>
                         		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
-                        		<td style="width: 20%;">完好情况</td>
+                        		<td style="width: 20%;">料3偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td style="width: 20%;">料4偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        	</tr>
+                        	<tr>
+                        		<td style="width: 20%;">料5偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td style="width: 20%;">料6偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        	</tr>
+                        	<tr>
+                        		<td style="width: 20%;">粉偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td style="width: 20%;">沥青偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        	</tr>
+                        	<tr>
+                        		<td style="width: 20%;">最低温度</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td style="width: 20%;">最高温度</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        	</tr>
+                        	<tr>
+                        		<td style="width: 20%;">干拌偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td style="width: 20%;">湿拌偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        	</tr>
+                        	<tr>
+                        		<td style="width: 20%;">生产时间</td>
                         		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         		<td></td>
                         		<td></td>
@@ -194,11 +252,11 @@
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>修改信息</b></h4>
+            <h4 class="modal-title" id="myModalLabel"><b>修改设备信息</b></h4>
         </div>
         <div class="modal-body">
             <div>     
-                <form class="form-inline">
+                    <form class="form-inline">
                         <table class="table table-bordered table-condensed" style="height:auto;">
                         	<tr>
                         		<td style="width: 20%;">序号</td>
@@ -207,19 +265,49 @@
                         		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
-                        		<td style="width: 20%;">生产时间</td>
+                        		<td style="width: 20%;">料1偏差</td>
                         		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">4.75</td>
+                        		<td style="width: 20%;">料2偏差</td>
                         		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
-                        		<td style="width: 20%;">2.36</td>
+                        		<td style="width: 20%;">料3偏差</td>
                         		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">0.075</td>
+                        		<td style="width: 20%;">料4偏差</td>
                         		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
+                        	<tr>
+                        		<td style="width: 20%;">料5偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td style="width: 20%;">料6偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        	</tr>
+                        	<tr>
+                        		<td style="width: 20%;">粉偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td style="width: 20%;">沥青偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        	</tr>
+                        	<tr>
+                        		<td style="width: 20%;">最低温度</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td style="width: 20%;">最高温度</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        	</tr>
+                        	<tr>
+                        		<td style="width: 20%;">干拌偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td style="width: 20%;">湿拌偏差</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        	</tr>
+                        	<tr>
+                        		<td style="width: 20%;">生产时间</td>
+                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td></td>
+                        		<td></td>
+                        	</tr>
                         </table>
-                </form>  
+                    </form> 
             </div>
         </div>
         <div class="modal-footer">
