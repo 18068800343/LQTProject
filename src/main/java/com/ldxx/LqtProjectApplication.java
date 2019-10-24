@@ -9,5 +9,4 @@ public class LqtProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LqtProjectApplication.class, args);
 	}
-
 }
