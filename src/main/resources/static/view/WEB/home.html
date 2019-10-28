@@ -1,9 +1,1732 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>首页</title>
-	</head>
-	<body>
-	</body>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>OA</title>
+	<link href="../style/bootstrap.min.css" rel="stylesheet">
+	<link href="../style/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="../font2/iconfont.css">
+	<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="../kindeditor/themes/default/default.css">
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/font.css">
+    <!-- SmartAdmin RTL Support  -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-rtl.min.css">
+	<link href="./../toastr/toastr.css" rel="stylesheet">
+	<style>
+		
+		#titles{
+            width:100%;
+            height:60px;
+            text-indent:16px;
+            padding-top:6px;
+            background:#eee;
+        }
+        #srcontent{
+            width:100%;
+        }
+        #BTon{
+            text-align:right;
+            margin-top:18px;
+            margin-right:36px;
+        }
+        .lianjieColor{
+            color: #3d7dd5;
+        }
+        
+       @media screen and (max-height:1080px) {
+		    .home-content{
+		        margin-bottom:50px !important;
+		    }
+		}
+		/* 1080px */
+        @media screen and (max-height: 1050px) {
+		    .home-content{
+		        margin-bottom:170px !important;
+		    }
+		}
+		/* 1050px */
+		@media screen and (max-height: 900px) {
+		    .home-content{
+		        margin-bottom:120px !important;
+		    }
+		}
+		/* 900px */
+		@media screen and (max-height: 768px) {
+		    .home-content{
+		        margin-bottom:120px !important;
+		    }
+		}
+		
+		/* @media screen and (max-width: 1920px) {
+		    .dada{
+		        margin-bottom:170px !important;
+		    }
+		}
+		@media screen and (max-width: 1920px) {
+		    .dadayb{
+		        margin-bottom:170px !important;
+		    }
+		} */
+    @page {
+        size: auto;
+        margin: 0mm;
+    }
+	</style>
+</head>
+<body>
+	
+	<div class="home-content" style="background:#fff;width:100%;height:100%;position:absolute; padding: 5px;padding-left: 10px;"">
+		<div class="home-import">
+			<div class="unfinish mission">
+				<table id="tb1" class="tb1 table table-hover">
+					<tr class="tb1-unfinish">
+                        <th>
+                        	<div class="yihang2">
+                        		<div>沥青砼生产过程管理(<span>0</span>)</div>
+                        		<div><span style="cursor: pointer;" class="Paa"><a href="./gerenRenwu/JobManagement.html">查看更多</a></span></div>
+                        	
+                        	</div>
+                        	
+                        </th>
+					</tr>
+				</table>
+				<ul class="gundong" >
+						<li><span data-toggle="modal"  style="cursor: pointer;" class="lianjieColor">人员管理</span></li>
+				</ul>
+				<ul class="gundong" >
+						<li><span data-toggle="modal"  style="cursor: pointer;" class="lianjieColor">人员管理</span></li>
+				</ul>
+			</div>
+
+				<div class="management-notifications mission" style="margin-left:6px;float:left;width:67% !important;">
+					<table id="tb3" class="tb3 table table-hover">
+						<tr class="tb3-management">
+							<th colspan="4">
+								<div class="yihang2">
+	                        		<div>沥青砼生产质量管理(<span>0</span>)</div>
+	                        		<div><span style="cursor: pointer;" class="Pad"><a href="./gerenRenwu/BusinessNotice.html">查看更多</a></span></div>
+	                        	</div>
+                            </th>
+						</tr>
+					</table>
+				</div>
+
+<!-- 				<div id="scrollDiv" class="mission">
+					<div class="task">
+						<div class="yihang2">
+                       		<div >通知公告(<span>10</span>)</div>
+                       		<div><span style="cursor: pointer;" class="Pba"><a href="./xingzhengShiwu/NoticeBulletin.html">查看更多</a></span></div>
+                       	</div>
+                    </div>
+					<ul class="gundong" id="gundong">
+						<li><span data-toggle="modal" data-target="#tzgg" style="cursor: pointer;" class="lianjieColor">张三出差细节通知1</span></li>
+					</ul>
+				</div> -->
+<!-- Modal -->
+    <div class="modal fade" id="tzgg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">通知公告</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline" id="tzgg1">
+                       <table class="table table-bordered table-condensed" >
+                           <tr>
+                               <td style="width:100px;">标题  </td>
+                               <td id="look_title_all"></td>
+                               <td style="width:100px;">类型</td>
+                               <td id="look_type_all"></td>
+                           </tr>
+                           <tr>
+                               <td>重要程度</td>
+                               <td id="look_importance_all"></td>
+                               <td>发布部门</td>
+                               <td id="lookfabubumen" ></td>
+                           </tr>
+                           <tr>
+                               <td>发布人</td>
+                               <td id="look_user_all"></td>
+                               <td></td>
+                               <td></td>
+                           </tr>
+                           <tr>
+                               <td>内容  </td>
+                               <td colspan="3" id=""><textarea style="width:100%;" rows="4" class="form-control" id="look_info_all"></textarea></td>
+                           </tr>
+                       </table>
+                       <br/>
+                       <table class="table table-bordered table-condensed"  id="look_all_table">
+                       		
+                       </table> 
+                   </form> 
+                   
+                   
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+            </div>
+        </div>
+    </div>
+<!-- Modal结束 -->
+		</div>
+		<div class="home-other" id="shipei">
+
+			<div class="notice-bulletin mission">
+				<div class="finished">
+					<table id="tb2" class="tb2 table table-hover">
+						<tr class="tb2-finished">
+							<th>
+								<div class="yihang2">
+		                       		<div>沥青砼运输监控管理(<span>0</span>)</div>
+		                       		<div><span style="cursor: pointer;" class="Pab"><a href="./gerenRenwu/RunMatters.html">查看更多</a></span></div>
+		                       	</div>
+                            </th>
+						</tr>
+					</table>
+                </div>
+                
+			</div>
+				<div id="scrollDiv" class="mission">
+					<div class="task">
+						 <div class="yihang2">
+	                      		<div >道路施工质量管理(<span>10</span>)</div>
+	                      		<div><span style="cursor: pointer;" class="Pba"><a href="./xingzhengShiwu/NoticeBulletin.html">查看更多</a></span></div>
+	                      	</div>
+	                   </div>
+					<ul class="gundong" id="gundong">
+					</ul> 
+				</div>
+<!-- 			<div class="management-notifications mission">
+				<table class="tb4 table table-hover">
+					<tr class="tb4-offen">
+						<th><i class="iconfont icon-changyong-" style="font-size:18px;"></i>常用功能</th>
+					</tr>
+					<tr>
+						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/TaskManagement.html" class="lianjieColor">任务单管理</a></span></td>
+					</tr>
+					<tr>
+						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/BudgetManagement.html" class="lianjieColor">预算单管理</a></span></td>
+					</tr>
+					<tr>
+						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/ContractManagement.html" class="lianjieColor">承接合同管理</a></span></td>
+					</tr>
+					<tr>
+						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/SubcontractManagement.html" class="lianjieColor">分包合同管理</a></span></td>
+					</tr>
+					<tr>
+						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/ProcurementContract.html" class="lianjieColor">采购合同管理</a></span></td>
+					</tr>
+					<tr>
+						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/ProgressManagement.html" class="lianjieColor">进度管理</a></span></td>
+                    </tr>
+                    <tr>
+						<td><span style="cursor: pointer;"><a href="./xitongGuanli/PersonneManagement.html" class="lianjieColor">人员管理</a></span></td>
+					</tr>
+				</table>
+			</div> -->
+
+			<div class="notice-bulletin mission">
+				<div class="finished">
+					<table class="tb5 table table-hover" id="tb5">
+						
+						<tr class="tb5-finished">
+							<th>
+								<div class="yihang2">
+		                       		<div>回收站(<span>10</span>)</div>
+		                       		<div><span data-toggle="modal" data-target="#myModal4" style="cursor: pointer;">查看更多</span></div>
+		                       	</div>
+                            </th>
+						</tr>
+						<tbody id="tb5T">
+						<tr>
+							<td>无</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel"><i class="iconfont icon-huishouzhan" style="font-size:18px;"></i>回收站</h4>
+						</div>
+						<div class="modal-body">
+							<table class="tb6 table table-hover" id="tb6">
+							   <thead>
+	                   			  <tr>
+	                              <th>title</th>
+	                              <th>操作人</th>
+	                              <th>意见</th>
+	                              <th>操作类型</th>
+	                       		  </tr>
+			                   	</thead>
+		                        <tbody id="tb6T">
+		                       		<tr>
+									  <td>废弃1</td>
+									  <td>废弃1</td>
+									  <td>废弃1</td>
+									  <td>废弃1</td>
+									</tr>
+		                        </tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+<!-- frame modal -->
+<div class="modal fade bs-example-modal-lg dada" id="tjModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width:85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">处理业务</h4>
+            </div>
+            <div class="modal-body">
+                <iframe name="view_frame" id="rightMain" src="" frameborder="false" scrolling="auto" style="border: none;" width="100%" height=700 allowtransparency="true"></iframe>
+                
+                <div id="topBox" hidden="true">
+                    <div id="titles">流程备注</div>
+                    <div id="srcontent">
+                        <textarea cols="30" rows="4" class="form-control" id="viewTop" placeholder="" disabled></textarea>
+                    </div>
+                </div>
+                <div id="NodeBox">
+                    <div class="yihang"><b>审批流程:</b><div id="nodeRole"></div></div>
+                </div>                
+                <div id="nextBox" hidden="true">
+                    <!-- <div id="titles">上一步操作人:<lable id="lastPerson"></lable>&nbsp;&nbsp;意见：↓</div>
+                    <div id="srcontent">
+                        <textarea cols="30" rows="2" class="form-control" id="viewNext" placeholder="" disabled></textarea>
+                    </div> -->
+                    <table class="table table-bordered table-condensed" id="message_table">
+                    	<thead>
+                    		<tr>
+                    			<th style="width:15%;">操作人</th>
+                    			<th style="width:15%;">部门</th>
+                    			<th style="width:15%;">操作步骤</th>
+                    			<th style="width:40%;">意见</th>
+                    			<th style="width:15%;">操作时间</th>
+                    		</tr>
+                    	</thead>
+                    	<tbody></tbody>
+                    </table>
+                </div>
+                <div id="midBox">
+                    <div id="titles">意见</div>
+                    <div id="srcontent">
+                        <textarea cols="30" rows="8" class="form-control" id="view" placeholder="请输入内容"></textarea>
+                    </div>
+                </div> 
+            </div>
+            <div class="modal-footer">
+              <div id="tjButtons" >
+                <div  style="text-align:center" >
+                  <button type="button" id="getReceiver" onclick="getReceive()" class="btn btn-success"  >同意</button>
+                  <button type="button" id="tuiHui"  onclick="tuiHui()" class="btn btn-default" data-dismiss="modal">退回修改</button>
+                  <button type="button" id="baoCun" class="btn btn-default" onclick="baoCun()">保存</button>
+                  <button type="button" id="shanChuFlow" class="btn btn-default" onclick="shanChuFlow()">删除</button>
+                  <button type="button" id="boHui" class="btn btn-default" onclick="boHui()">废止</button>
+                </div>
+              </div>
+              <div id="shanchu" hidden="true" style="text-align:center">
+                <button type="button" class="btn btn-default" onclick="yidu()">已读</button>
+                <button type="button" class="btn btn-default" onclick="shanchu()">删除</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- frame modal结束 -->
+<!-- 提交 modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="tijiaogei">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">提交给</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+                    <table class="table table-bordered table-condensed" id="tijiaoren">
+	                   	<thead>
+	                   			<tr>
+	                         	<th></th>
+	                             <th>部门</th>
+	                             <th>职务</th>
+	                             <th>审批人</th>
+	                         </tr>
+	                   	</thead>
+                       <tbody>
+                       	
+                       </tbody>
+                   </table>
+                </form>
+                <form id="zabzy" hidden="true" class="form-inline">
+                    <div class="table table-bordered table-condensed" >
+                      <b>质安部提交注意事项:</b><p>
+                                                                    工建一部二部为生产部门的,选<b>王军</b><p>
+                                                                    检测部为生产部门的,选<b>杜高明</b><p>
+                                                                    其他部门为生产部门的,选<b>王继林</b>
+                   </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="tijiaorenwudan2()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 提交 modal结束 -->
+<!-- frame modalyb -->
+<div class="modal fade bs-example-modal-lg dadayb" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width:80%;">
+        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="gridSystemModalLabel">业务</h4>
+	            </div>
+	            <div class="modal-body">
+	                <iframe name="view_frame" id="rightMainyb" src="" frameborder="false" scrolling="auto" style="border: none;" width="100%" height=700 allowtransparency="true"></iframe>
+	            </div>
+	            <div id="dy_html">
+	            	<table class="table table-bordered table-condensed" id="message_table2">
+	                   	<thead>
+	                   		<tr>
+	                   			<th style="width:15%;">操作人</th>
+	                   			<th style="width:15%;">部门</th>
+	                   			<th style="width:15%;">操作步骤</th>
+	                   			<th style="width:40%;">意见</th>
+	                   			<th style="width:15%;">操作时间</th>
+	                   		</tr>
+	                   	</thead>
+	                   	<tbody></tbody>
+	                </table>
+	            </div>
+            <div class="modal-footer">
+            	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="day()">打印页面</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- frame modalyb结束 -->
+<!--  modal结束 -->
+<!-- 提交 modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="tuihuigei">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">退回至</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-condensed" id="tijiaoren">
+	                   	<thead>
+	                   			<tr>
+	                         	<th></th>
+	                             <th>步骤</th>
+	                             <th>操作人</th>
+	                             <th>内容</th>
+	                         </tr>
+	                   	</thead>
+                       <tbody>
+                       	
+                       </tbody>
+                   </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="tuihuisubmit()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 提交 modal结束 -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="look_modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+       
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><b>查看审批进度</b></h4>
+        </div>
+        <div class="modal-body">
+                <div>     
+                    <form class="form-inline" >
+                    	<table class="table table-bordered table-condensed" id="d_table">
+                    		<thead>
+                    			<tr>
+                    				<th style="width:30%;">业务名称</th>
+                    				<th style="width:12%;">操作人</th>
+                    				<th style="width:23%;">意见</th>
+                    				<th style="width:12%;">操作类型</th>
+                    				<th style="width:23%;">操作时间</th>
+                    			</tr>
+                    		</thead>
+                    		<tbody></tbody>
+                    	</table>
+                    </form>  
+                </div>
+        </div>
+        <div id="NodeBox" style="margin-left:15px;">
+            <div class="yihang"><b>审批流程:</b><div id="nodeRole3"></div></div>
+        </div> 
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+        </div>
+    </div>
+</div> 
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/common-scripts.js"></script>
+<script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="./../toastr/toastr.js"></script>
+<script type="text/javascript" src="../kindeditor/kindeditor-all.js" ></script>
+<script type="text/javascript" src="../kindeditor/lang/zh-CN.js" ></script>
+<script src="../js/quanxian.js"></script>
+<script src="../js/SmartNotification.min.js"></script>
+<script src="../js/myTool.js"></script>
+<script type="text/javascript">  
+	$(document).ready( function () {
+    	initTable1();
+    	initTable2();
+    	initTable3();
+    	initTable5();
+    	$.ajax({
+            type: 'POST',
+            url: getContextPath()+'/announcement/getAnnouncementNum',
+            dataType: 'json',
+            data: {
+            },
+            success: function (json) {
+            	//console.log(json)
+            	$(".yihang2 div:first-of-type").eq(3).find("span").html(json.length);
+            	for(var i=0;i<json.length;i++){
+            		$("#gundong").append('<li><span data-id='+json[i].aId+' data-toggle="modal" data-target="#tzgg" style="cursor: pointer;" class="lianjieColor" onclick="showtzgg(this)">'+json[i].aTitle+'</span></li>')
+            	}
+               
+            }
+        });
+    	/* $.ajax({
+            type: 'POST',
+            url: getContextPath()+'/announcement/selectAnnouncement',
+            dataType: 'json',
+            data: {
+            	type:2,
+            	status:2
+            },
+            success: function (json) {
+            	console.log(json)
+            	for(var i=0;i<json.length;i++){
+            		$("#gundong").append('<li><span data-id='+json[i].aId+'  data-toggle="modal" data-target="#tzgg" style="cursor: pointer;" class="lianjieColor" onclick="showtzgg(this)">'+json[i].aTitle+'</span></li>')
+            	}
+            }
+        }); */
+    	
+	});
+	
+	KindEditor.ready(function(K) {
+        window.editor5 = K.create('#look_info_all',{
+            items : [
+                    
+            ],
+            allowFileManager:true,
+            afterBlur:function(){this.sync()},
+            readonlyMode : true
+        });
+     
+     
+    });
+	function showtzgg(aa){
+		var data_id=$(aa).attr("data-id");
+		//console.log(data_id);
+		$.ajax({
+	        type: 'POST',
+	        url: getContextPath()+'/announcement/selectAnnouncementById',
+	        dataType: 'json',
+	        data: {
+	        	id:data_id
+	        },
+	        success: function (json) {
+	        	console.log(json);
+	        	var data=json;
+	        	$("#look_title_all").text(data.aTitle);
+	    		$("#look_type_all").text(data.aType);
+	    		$("#look_importance_all").text(data.aImportance);
+	    		$("#look_user_all").text(data.issuer);
+	    		//$("#look_info_all").text(data.aDesc);
+	    		// 取得HTML内容
+		        html = editor5.html();
+		        // 同步数据后可以直接取得textarea的value
+		        editor5.sync();
+		        // 设置HTML内容
+		        editor5.html(data.aDesc);
+	    		$.ajax({
+	    	        type: 'POST',
+	    	        url: getContextPath()+'/organizationManagement/getOrgNameById',
+	    	        dataType: 'json',
+	    	        data: {
+	    	        	omId:data.aDepartment
+	    	        },
+	    	        success: function (json) {
+	    	        	$("#lookfabubumen").text(json.omName)
+	    	        }
+	    	    });
+	    		
+	    		
+	    		
+	    		var id=data.aId;
+	    		$.ajax({
+	    			type: 'POST',
+	                url: getContextPath()+'/announcement/selectAccessoryById',
+	                dataType: 'json',
+	                data: {
+	                	id:id
+	                },
+	                success: function (json) {
+	                	$("#look_all_table").empty();
+	                   for(var i=0;i<json.length;i++){
+	                	   $("#look_all_table").append("<tr>"+
+	                	   														"<td>附件"+(i+1)+"</td>"+
+	    												            	    	"<td colspan='2'><input type='text' class='form-control' style='width:100%;' value='"+json[i].acName+"' disabled></td>"+
+	    												            	    	"<td><button type='button' class='btn btn-primary' data1='"+json[i].acUrl+"' onclick='download_all(this)'>下载附件</button></td>"+
+	    												            	    "</tr>");
+	                   }
+	                }
+	    		}) 
+	        }
+	    });
+		
+		
+	}
+
+
+	function download_all(obj){
+		var url=$(obj).attr("data1");
+		var name=$(obj).parents("tr").find("td").eq(1).find("input").val();
+		
+		window.location.href=encodeURI(getContextPath()+"/FileDownLoad?fileName="+name+"&filePath="+url);
+	}
+	
+	
+    function clock(){
+        $("#scrollDiv ul").animate({marginTop:"-25px"},5,function(){
+            $(this).css({marginTop:"0px"}).find("li:first").appendTo(this);                                                         
+        })
+    }
+    $(function(){
+        var myvar=setInterval("clock()",2000);
+        $("#scrollDiv").hover(function(){
+            clearInterval(myvar);                          
+        },function(){
+            myvar = setInterval("clock()",2000);
+        })
+	})
+	var table=$('#example').dataTable( {
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+		},
+        "columns": [
+					{ "data": null},
+					{ "data": "userName"}, 
+		            { "data": "pwd"},
+		            { "data": null},
+		        ],
+      	 "columnDefs": [
+							{
+								"class": "tcenter",
+								"targets": 3,
+								"searchable": true,
+								"render": function(data, type, full) {
+									return '<button type="button" class="editUser btn btn-default"  data-toggle="modal" data-target="#myModal" onclick="changeP(this)">修改</button><button type="button" id="delUser" class="btn btn-default">删除</button>';
+									
+								}
+							}
+						],
+        "order": [[1, 'asc']],
+        "oLanguage": { //国际化配置
+        "sProcessing": "正在获取数据，请稍后...",
+        "sLengthMenu": "显示 _MENU_ 条",
+        "sZeroRecords": "查询不到相关数据",
+        "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+        "sInfoEmpty": "记录数为0",
+        "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+        "sInfoPostFix": "",
+        "sSearch": "搜索",
+        "sUrl": "",
+        "oPaginate": {
+            "sFirst": "第一页",
+            "sPrevious": "上一页",
+            "sNext": "下一页",
+            "sLast": "最后一页"
+        }},
+        "fnDrawCallback"  : function(){
+          　　this.api().column(0).nodes().each(function(cell, i) {
+          　　　　cell.innerHTML =  i + 1;
+          　  　});
+            }
+	} );
+	function initTable1(){
+		/* var us = getCookie("msg");
+		var usJson = JSON.parse(us);
+		var userId = usJson.userId; */
+		/* JSON.parse(user); */
+		$.ajax({
+            type: 'POST',
+            url: getContextPath()+'/currentFlow/getCurrentFlowListByStatus',
+            data:{
+            	userId:""
+            },
+            dataType: 'json',
+            success: function (json) {
+            	var k ;
+            	if(json.length>9){
+            		k=10;
+            	}else{
+            		k=json.length;
+            	}
+            	$("#tb1").empty();
+        		$("#tb1").append('<tr class="tb1-unfinish">'
+                        +'<th>'
+            	        +'<div class="yihang2">'
+            		    +'<div>待办任务(<span>10</span>)</div>'
+            		    +'<div><span style="cursor: pointer;" class="Paa"><a href="./gerenRenwu/JobManagement.html">查看更多</a></span></div>'
+            	        +'</div>'
+                        +'</th>'
+		                +'</tr>"');
+        		$(".yihang2 div:first-of-type").eq(0).find("span").html(json.length)
+            	for(var i=0;i<k;i++){
+            		var full = json[i];
+            		$("#tb1").append("<tr><td style='width:50px;'><span data-toggle='modal' data-target='.dada' style='cursor:pointer;' data-floTmpId='"+full.floTmpId+"' data-wfstate='"+full.wfstate+"' data-flowLast='"+full.flowNodeLast+"' data-flowStatus='"+full.flowStatus+"' data-lastPerson='"+full.lastPerson+"' data-lastView='"+full.lastView+"' data-cNodeId='"+full.id+"'  data-url='"+full.url+"' data-params="+full.params+" data-step='"+full.step+"'  data-edit='"+full.editOrView+"' data-flowNodeLast='"+full.flowNodeLast+"' onclick='initIframe(this)' class='lianjieColor'>"+json[i].title+"</span></td></tr>");
+            	}
+            }
+        });
+    }
+    //全局变量
+    var page_url;
+    var page_flowNodeLast;
+    var page_edit;
+    var page_step;
+    var page_cNodeId;
+    var page_flag;
+    function bindclick(dom){
+        	var data_id = $(dom).attr("data-url");
+        	var strs = data_id.split("-")
+        	var edit = $(dom).attr("data-edit");
+        	var params = $(dom).attr("data-params");
+        	var step = $(dom).attr("data-step");
+        	var cNodeId = $(dom).attr("data-cNodeId"); 
+        	var wfstate = $(dom).attr("data-wfstate");  
+        	var flowLast = $(dom).attr("data-flowLast");
+        	var lastPerson = $(dom).attr("data-lastPerson");
+        	var lastView = $(dom).attr("data-lastView");
+        	if(wfstate=='1'){
+        		$("#midBox").hide();
+        		$("#tjButtons").hide();
+        		$("#shanchu").show();
+        		$("#yidu").show();
+        	}else{
+        		$("#midBox").show();
+        		$("#tjButtons").show();
+        		$("#shanchu").hide();
+        		$("#yidu").hide();
+        	}
+        	page_step = step;
+        	if(params.indexOf("{'cs':'1'}")!=-1||params==''||params==null){
+        		$("#topBox").hide();
+        	}else{
+        		$("#viewTop").text(params);
+        		$("#topBox").show();
+        	}
+        	if(flowLast==''||flowLast==null){
+        		$("#nextBox").hide();
+        	}else{
+        		lookHistory(data_id);
+        		$("#nextBox").show();
+        	}
+        	page_flowNodeLast =  $(dom).attr("data-flowNodeLast");
+        	page_url=data_id;
+        	page_edit=edit;
+        	page_cNodeId=cNodeId;
+        	var flag = $(dom).attr("data-flowStatus");
+        	var floTmpId = $(dom).attr("data-floTmpId");
+        	addNodeRoles(floTmpId,step);
+        	page_flag=flag;
+        	var ul = strs[0];
+        	var ulnew = ul.replace("Look","Change");
+        	if(flag=='1'){
+        	$("#rightMain").attr("src","./"+strs[0]+"?prjId="+strs[1]+"&editOrView="+edit+"&step="+step);
+        	shipeitanchu(ul);
+        	$("#tuiHui").show();
+        	$("#boHui").show();
+        	$("#shanChuFlow").hide();
+        	}else if(flag=='4'){
+        	$("#rightMain").attr("src","./"+ulnew+"?prjId="+strs[1]+"&editOrView="+edit);
+        	$("#getReceiver").empty();
+        	$("#getReceiver").append("提交");
+        	$("#tuiHui").hide();
+        	$("#boHui").hide();
+        	$("#shanChuFlow").show();
+        	}
+    }
+    function addNodeRoles(floTmpId,step){
+		$.ajax({
+            type: 'POST',
+            url: getContextPath()+'/flowNode/getNodeRoleById',
+            data:{
+            	id:floTmpId
+            },
+            dataType: 'json',
+            success: function (json) {
+            	$("#nodeRole").empty();
+            	for(var i=0;i<json.length;i++){
+           		 var name = json[i];
+           		 if(name==null||name==""||name=="null"){
+           			name="提交人"; 
+           		 }
+           		 if(i==json.length-1){
+           			 if(step!=null&&i==step-1){
+           		      $("#nodeRole").append("<lable style='color:red'>"+name+"</lable>");
+           			 }else{
+           			  $("#nodeRole").append("<lable>"+name+"</lable>"); 
+           			 }
+           		 }else{
+           			 if(step!=null&&i==step-1){
+            		      $("#nodeRole").append("<lable style='color:red'>"+name+"→</lable>");
+           			 }else{
+           			  $("#nodeRole").append("<lable>"+name+"→</lable>"); 
+           			 }
+           		 }
+            	}
+            }
+        });
+    }
+	function initTable3(){
+		$.ajax({
+            type: 'POST',
+            url: getContextPath()+'/flowHistory/getDistinctFlowHistoryByUser',
+            data:{
+            	userId:"88b6f133f129"
+            },
+            dataType: 'json',
+            success: function (json) {
+            	$(".yihang2 div:first-of-type").eq(1).find("span").html(json.length);
+            	if(json.length>9){
+            		json.length=10;
+            	}
+            	for(var i=0;i<json.length;i++){
+            		var statu = json[i].flowStatus;
+            		if(statu=="1"){
+            			statu="进行中";
+            		}else if(statu=="2"){
+            			statu="审批通过";
+            		}else if(statu=="0"){
+            			statu="审批未通过";
+            		}else if(statu=="4"){
+            			statu="进行中";
+            		}
+            		$("#tb3").append("<tr><td>"+json[i].businessname+"</td><td>"+json[i].title+"</td><td style='width:100px;'>"+statu+"</td>"+
+            		"<td><i class='iconfont icon-icon-test Pfac' data-url="+json[i].url+" data-step="+json[i].step+" data-flowTmpId="+json[i].floTmpId+" data-title="+json[i].title+" style='font-size: 20px; cursor: pointer; margin-left: 5px;' title='查看历史流程信息' onclick='lookHistory3(this)'></i></td>"+
+            		"</tr>");
+            	}
+            }
+        });
+    }
+	
+	
+	function lookHistory3(dom){
+    	var url = $(dom).attr("data-url");
+    	var step = $(dom).attr("data-step");
+    	var floTmpId = $(dom).attr("data-flowTmpId");
+    	addNodeRoles3(floTmpId,step);
+    	$.ajax({
+        	type: 'POST',
+            url: getContextPath()+'/flowHistory/getHistoryNowAndLast',
+            data:{
+            	url:url
+            },
+            success: function (json) {
+            		$("#d_table tbody").html('');
+            		for(var i=0;i<json.length;i++){
+            		var operatorType = json[i].operateType;
+            		operatorType = getCnByOt(operatorType);
+            		var date = json[i].doDate;
+            		var title = json[i].title;
+            		var name = json[i].actorname;
+            		if(date == null){
+            			date="";
+            			if(json[i].operateType==8){
+            				title="<lable style='color:red'>"+json[i].title+"</lable>";
+            				name="<lable style='color:red'>"+json[i].actorname+"</lable>";
+            				operatorType="<lable style='color:red'>"+operatorType+"</lable>";
+            			}else{
+            				title = json[i].title;
+            				name = json[i].actorname;
+            			}
+            		}
+                	$("#d_table tbody").append("<tr><td>"+title+"</td><td>"+name+"</td><td></td><td>"+operatorType+"</td><td>"+date+"</td></tr>");
+                    $("#look_modal").modal("show");
+            	}
+            }
+        });
+    }
+	 function addNodeRoles3(floTmpId,step){
+			$.ajax({
+	            type: 'POST',
+	            url: getContextPath()+'/flowNode/getNodeRoleById',
+	            data:{
+	            	id:floTmpId
+	            },
+	            dataType: 'json',
+	            success: function (json) {
+	            	$("#nodeRole3").empty();
+	            	for(var i=0;i<json.length;i++){
+	           		 var name = json[i];
+	           		 if(name==null||name==""||name=="null"){
+	           			name="提交人"; 
+	           		 }
+	           		 if(i==json.length-1){
+	           			 if(step!=null&&i==step-1){
+	           		      $("#nodeRole3").append("<lable style='color:red'>"+name+"</lable>");
+	           			 }else{
+	           			  $("#nodeRole3").append("<lable>"+name+"</lable>"); 
+	           			 }
+	           		 }else{
+	           			 if(step!=null&&i==step-1){
+	            		      $("#nodeRole3").append("<lable style='color:red'>"+name+"→</lable>");
+	           			 }else{
+	           			  $("#nodeRole3").append("<lable>"+name+"→</lable>"); 
+	           			 }
+	           		 }
+	            	}
+	            }
+	        });
+	    }
+	
+	 function getCnByOt(s){
+		  if(s==1){
+			  return "提交";
+		  }else if(s==2){
+			  return "退回";
+		  }else if(s==3){
+			  return "撤销";
+		  }else if(s==0){
+			  return "废止";
+		  }else if(s==8){
+			  return "待审批";
+		  }
+	  }
+	 
+	function initTable2(){
+		$.ajax({
+            type: 'POST',
+            url: getContextPath()+'/flowHistory/getFlowHistoryByUser',
+            data:{
+            	userId:"88b6f133f129",
+            	status:''
+            },
+            dataType: 'json',
+            success: function (json) {
+            	console.log(json.length)
+            	$(".yihang2 div:first-of-type").eq(2).find("span").html(json.length);
+            	var k ;
+            	if(json.length>9){
+            		k=10;
+            	}else{
+            		k=json.length;
+            	}
+            	for(var i=0;i<k;i++){
+            		$("#tb2").append("<tr><td><span data-toggle='modal' data-target='.dadayb' style='cursor:pointer;' class='lianjieColor' data-url='"+json[i].url+"' onclick='initIframeDb(this)'>"+json[i].title+"</span></td></tr>");
+            	}
+            }
+        });
+    }
+	
+	
+	function initTable4(){
+		$.ajax({
+            type: 'POST',
+            url: getContextPath()+'/flowHistory/getFlowHistoryByUser',
+            data:{
+            	userId:"88b6f133f129",
+            	status:''
+            },
+            dataType: 'json',
+            success: function (json) {
+            	$(".yihang2 div:first-of-type").eq(2).find("span").html(json.length);
+            	for(var i=0;i<json.length;i++){
+            		$("#tb4").append("<tr><td>"+json[i].title+"</td><td style='width:100px;'>"+statu+"</td></tr>");
+            	}
+            }
+        });
+    }
+	function initTable5(){
+		$.ajax({ 
+            type: 'POST',
+            url: getContextPath()+'/flowHistory/getFlowHistoryDeleteByUser',
+            data:{
+            	userId:"88b6f133f129",
+            	status:''
+            },   
+            dataType: 'json',
+            success: function (json) {
+            	$(".yihang2 div:first-of-type").eq(4).find("span").html(json.length);
+            	$("#tb5T").empty('');
+            	$("#tb6T").empty('');
+                var k ;
+                if(json.length>9){
+                 	k=10; 
+                }else{
+                 	k=json.length;
+                }
+           	    if(json.length>0){
+            	 for(var i=0;i<k;i++){
+            	 	 var op =getCnByOt(json[i].operateType);
+             	 	$("#tb5T").append("<tr><td><span data-toggle='modal' data-target='.dadayb' style='cursor:pointer;' class='lianjieColor' data-url='"+json[i].url+"' onclick='initIframeDb(this)'>"+json[i].title+"</span></td></tr>");
+             	 	$("#tb6T").append("<tr><td><span data-toggle='modal' data-target='.dadayb' style='cursor:pointer;' class='lianjieColor' data-url='"+json[i].url+"' onclick='initIframeDb(this)'>"+json[i].title+"</span></td><td>"+json[i].actorname+"</td><td>"+json[i].view+"</td><td>"+op+"</td></tr>");
+            	 } 
+            	}
+            }
+        });
+    }
+
+	function initIframeDb(dom){
+		var url = $(dom).attr("data-url");
+    	var strs = url.split("-");
+    	lookHistory2(url);
+    	$("#rightMainyb").attr("src","./"+strs[0]+"?prjId="+strs[1]+"&editOrView=view&viewIndex=viewIndex");
+	}
+	var page_dom;
+	function initIframe(dom){
+		page_dom = dom;	
+		var url = $(dom).attr("data-url");
+    	var strs = url.split("-");
+    	$("#rightMain").attr("src","./"+strs[0]+"?prjId="+strs[1]+"&editOrView=view&viewIndex=viewIndex");
+    	$("#view").val('');
+    	bindclick(dom);
+    	$.ajax({
+            type: 'POST',
+            url: getContextPath()+'/currentFlow/updateReadReceipts',
+            data:{
+            	url:url,
+            },
+            dataType: 'json',
+            success: function (json) {
+            	if(json=='0'){
+            		alert("修改已读失败");
+            	}
+            }
+        });
+	}
+	
+	function showMask() {
+	   	myTool.mask.show('操作中...');
+	}
+	function hidMask() {
+		myTool.mask.hide();
+	}
+	
+    function shipeitanchu(ul){
+    	if(ul.indexOf("NoticeBulletinLookBM")>0){
+        	$("#rightMain").attr("height",300);
+        	}else{
+       		$("#rightMain").attr("height",700);	
+       	}
+    	
+    	if(ul.indexOf("wendangshanchu")>0){
+        	$("#rightMain").attr("height",300);
+        	}else{
+       		$("#rightMain").attr("height",700);	
+       	}
+    	
+    }
+    var page_save_submit="0";
+    function getReceive(){
+    	page_save_submit="1";
+    	var flag = page_flag;
+    	/* showMask(); */
+    	if(flag=='4'){
+   		    baoCun();
+	 		if(page_result=='0'){
+	 			toastr.error("保存出错");
+	 			return ;
+	 		}else if(page_result==undefined){
+	 			toastr.error("保存出错");
+	 		}else if(page_result=='1'){
+	 			toastr.success("保存成功");
+	 		}else{	
+	 			if(page_result!=undefined&&page_result!=""){
+	 			toastr.error(page_result);
+	 			return ;
+	 			}
+	 		}
+    	}
+    	if(page_edit=='edit'&&page_step=='2'){
+    		updateFkDept2(page_cNodeId);
+    		var k = flowEdit2();
+    		if(k=="0"){
+    			toastr.error("请检查信息是否完整!");
+    			return ;
+    		}
+    	}
+    	if(page_edit=='edit'&&page_step=='3'){
+    		updateFkDept3(page_cNodeId);
+    		var k = flowEdit3();
+    		if(k=="0"){
+    			toastr.error("请检查信息是否完整!");
+    			return ;
+    		}
+    	}
+    	if(page_edit=='edit'&&page_step=='4'){
+    		var k = flowEdit4();
+    		if(k=="0"){
+    			toastr.error("请检查信息是否完整!");
+    			return ;
+    		}
+    	}
+    	if(page_edit=='edit'&&page_step=='5'){
+    		var k = flowEdit5();
+    		if(k=="0"){
+    			toastr.error("请检查信息是否完整!");
+    			return ;
+    		}
+   		}
+   		if(page_edit=='edit'&&page_step=='6'){
+    		var k = flowEdit6();
+    		if(k=="0"){
+    			toastr.error("请检查信息是否完整!");
+    			return ;
+    		}
+   		}
+   		var dok = doChildIframeMethod();
+	    if(dok=="0"){
+		   toastr.error("请检查信息完整性!");
+	 	   return;
+	    }
+   		$("#tjModal").modal("hide");
+    	$.ajax({
+            type: 'POST',
+            url: getContextPath()+'/task/getReceiver',
+            data:{ 
+            	url:page_url,
+            },
+            dataType: 'json',
+            success: function (json) {
+            	console.log(json);
+            	lianjie=json.url;
+            	
+            	if(json.receiver!=null&&json.receiver.length>1){
+	        		  $("#tijiaogei").modal('show'); 
+	        		  $("#tijiaoren tbody").empty("");
+	        		  /* hidMask(); */
+	        		  for(var i=0;i<json.receiver.length;i++){
+	        			  $("#tijiaoren tbody").append('<tr><td>'
+	        					  +'<input type="radio" name="tijiaorenming" data-id="'+json.receiver[i].userId+'" data-id2="'+json.receiver[i].omId+'" data-id3="'+json.receiver[i].dutyId+'">'
+	        					  +'</td><td>'
+	        					  +json.receiver[i].omName
+	        					  +'</td><td>'
+	        					  +json.receiver[i].dutyName
+	        					  +'</td><td>'
+	        					  +json.receiver[i].uName
+	        					  +'</td></tr>');
+	        		  }
+	        		  var zabOmName = json.receiver[0].omName;
+	        		  if(zabOmName.indexOf("安全")>0){
+	        			  $("#zabzy").show();
+	        		  }else{
+	        			  $("#zabzy").hide();
+	        		  }
+	        	  }else if(json.receiver==null||json.receiver.length==1){
+	        		  
+	        		  var userId;var uName;var omName;var dutyName;var omId;var dutyId;
+	        		  if(json.receiver==undefined||json.receiver==null){
+	        			  userId="";uName="";omName="";dutyName="";omId="";dutyId="";
+	        		  }else{
+	        			  userId=json.receiver[0].userId
+	        			  uName=json.receiver[0].uName;
+	        			  omName=json.receiver[0].omName;
+	        			  dutyName=json.receiver[0].dutyName;
+	        			  omId=json.receiver[0].omId;
+	        			  dutyId=json.receiver[0].dutyId;
+	        		  }
+	        		  $.ajax({
+	        	          type: 'POST',
+	        	          url: getContextPath()+'/task/addTask4',
+	        	          dataType: 'json',
+	        	          data:{
+	        	        	  url:json.url,
+	        	        	  userId:userId,
+	        	        	  uName:uName,
+	        	        	  omName:omName,
+	        	        	  dutyName:dutyName,
+	        	        	  omId:json.omId,
+	        	        	  dutyId:dutyId,
+	        	        	  view:$("#view").val()
+	        	          },
+	        	          success: function (json) {
+	        	        	  /* hidMask(); */
+	        	        	  console.log(json.end);
+	        	        	  if(json.end=="jieshu"){
+	        	        		  doChangeData(json.modeId);
+	        	        	  }
+	        	        	  if(uName!=''&&uName!=undefined){
+	        	        	  uName='至'+uName;
+	        	        	  }
+	        	        	  alert('提交'+uName+'成功');
+	        	        	  initTable1();
+	        	          }
+	        	      }); 
+	        	  }else if(json.receiver!=null&&json.receiver.length==0){
+	        		  /* hidMask(); */
+	        		  toastr.error('下一步无操作人');
+	        	  }
+            }
+        });
+    }
+    
+    function tuiHui(){
+    	$.ajax({
+            type: 'POST',
+            url: getContextPath()+'/task/tuiHui',
+            data:{
+            	url:page_url,
+            	view:$("#view").val()
+            },
+            dataType: 'json',
+            success: function (json) {
+              if(json.result==2){
+              $("#tuihuigei").modal('show'); 
+      		  $("#tuihuigei tbody").empty("");
+      		  for(var i=0;i<json.list.length;i++){
+      			$("#tuihuigei tbody").append('<tr><td>'
+  					  +'<input type="radio" name="tuihuiZhi"  data-id="'+json.list[i].floNodeId+'">'
+  					  +'</td><td data-name="'+json.list[i].deptname+'">'
+  					  +json.list[i].flowNodeName
+  					  +'</td><td  data-id="'+json.list[i].actor+'">'
+  					  +json.list[i].actorname
+  					  +'</td><td>'
+  					  +json.list[i].view
+  					  +'</td></tr>');
+ 		      	}
+              }
+            }
+        });
+    }
+    function tuihuisubmit(){
+    	var tuihuiFloNodeId = $("input[name='tuihuiZhi']:checked").attr("data-id");
+    	var tuihuiDeptName = $("input[name='tuihuiZhi']:checked").parent().next().attr("data-name");
+    	var tuihuiActor = $("input[name='tuihuiZhi']:checked").parent().next().next().attr("data-id");
+    	var tuihuiActorName = $("input[name='tuihuiZhi']:checked").parent().next().next().text();
+    	if(tuihuiActor==undefined||tuihuiActor==null||tuihuiActor==""){
+    		toastr.error("未选择退回人员!");
+    		return false;
+    	}
+    	 $.ajax({
+             type: 'POST',
+             url: getContextPath()+'/task/returnPerson',
+             dataType: 'json',
+             data:{
+           	  url:page_url,
+           	  tuihuiFloNodeId:tuihuiFloNodeId,
+           	  tuihuiDeptName:tuihuiDeptName,
+           	  tuihuiActor:tuihuiActor,
+           	  tuihuiActorName:tuihuiActorName,
+           	  view:$("#view").val()
+             },
+             success: function (json) {
+              tuihuiActorName='至'+tuihuiActorName;
+           	  alert('退回'+tuihuiActorName+'成功');
+              initTable1();
+             }
+         });
+    }
+    function tijiaorenwudan2(){
+   	  var dok = doChildIframeMethod();
+	  if(dok=="0"){
+		  toastr.error("请检查信息完整性!");
+		  return;
+	  }
+  	  var uid=$("input[name='tijiaorenming']:checked").attr("data-id");
+  	  var omid=$("input[name='tijiaorenming']:checked").attr("data-id2");
+	  var dutyid=$("input[name='tijiaorenming']:checked").attr("data-id3");
+  	  var bmmc=$("input[name='tijiaorenming']:checked").parent().next().text();
+  	  var zw=$("input[name='tijiaorenming']:checked").parent().next().next().text();
+  	  var uname=$("input[name='tijiaorenming']:checked").parent().next().next().next().text();
+  	  console.log(uid,omid,dutyid,bmmc,zw,uname)
+  	  //var uname=$("input[name='tijiaorenming']:checked").val();
+  	 $.ajax({
+            type: 'POST',
+            url: getContextPath()+'/task/addTask4',
+            dataType: 'json',
+            data:{
+          	  url:lianjie,
+          	  userId:uid,
+          	  uName:uname,
+          	  omName:bmmc,
+          	  dutyName:zw,
+          	  omId:omid,
+        	  dutyId:dutyid,
+        	  view:$("#view").val()
+            },
+            success: function (json) {
+              console.log(json.end);
+              if(json.end=="jieshu"){
+	            doChangeData(json.modeId);
+	          }
+              if(uname!=''&&uname!=undefined){
+              uname='至'+uname;
+              }
+              alert('提交'+uname+'成功');
+          	  initTable1();
+            }
+        });
+    }
+	 function boHui(){
+	    	var msg = "点击后,流程废止！您真的确定要废止吗？\n\n请确认！";
+	    	if (confirm(msg)==true){
+	    		if(page_flowNodeLast==null||page_flowNodeLast==undefined||page_flowNodeLast==""){
+	        		toastr.error('该步骤为第一步,无法废止');
+	        		return false;
+	        	}
+	        	$.ajax({
+	                type: 'POST',
+	                url: getContextPath()+'/task/boHui',
+	                data:{
+	                	url:page_url,
+	                	view:$("#view").val()
+	                },
+	                dataType: 'json',
+	                success: function (json) {
+	                	  $("#myModal").modal("hide");
+	                	  toastr.success('废止成功');
+	                	  try{
+	     		    		 boHuiFeizhi();
+		     		    	}catch(err){
+		     		    		
+		     		    	}
+	                	  initTable1();
+	                }
+	            });
+	        	
+	    	return true;
+	    	}else{
+	    	return false;
+	    	}
+	    	
+	    	
+	    }
+		 function boHuiFeizhi(){
+		    	var childWindow = $("#rightMain")[0].contentWindow; //表示获取了嵌入在iframe中的子页面的window对象。  []将JQuery对象转成DOM对象，用DOM对象的contentWindow获取子页面window对象。
+		    	try {
+		    		var a = childWindow.boHuiFeizhi();
+		    		if(a=="0"){
+		    			return "0";
+		    		}
+		    		}
+		    		catch(err){
+		    		}
+		    }
+	    var page_result;
+	    function baoCun(){
+	    	var childWindow = $("#rightMain")[0].contentWindow; //表示获取了嵌入在iframe中的子页面的window对象。  []将JQuery对象转成DOM对象，用DOM对象的contentWindow获取子页面window对象。
+	    	try{
+	    		 doChildIframeMethod();
+	    	}catch(err){
+	    		
+	    	}
+	    	try {
+	    		  var result = childWindow.liuchengGaibian(page_save_submit);
+	    		  page_result=result;
+	    		  page_save_submit="0";
+	    		  if(result=='0'){
+	      			toastr.error("保存出错");
+	      		  }else if(result==undefined){
+     			    toastr.error("保存出错");
+	      		  }else if(result=="1"){
+	      			toastr.success("保存成功");
+	      		  }else{
+  	   			    toastr.error(result);
+	      		  }
+   		    }
+	    		catch(err){
+	   		    } 
+	    	    try{
+	    	    childWindow.updateFkDept(page_cNodeId);
+	    	    }catch(err){
+	    	    	
+	    	    }
+	    		;
+	    		if(page_edit=='edit'&&page_step=='2'){
+	    		updateFkDept2(page_cNodeId);
+	    		flowEdit2();
+	    		}
+	    		if(page_edit=='edit'&&page_step=='3'){
+	   			updateFkDept3(page_cNodeId);
+	    		flowEdit3();
+	    		}
+	    		if(page_edit=='edit'&&page_step=='4'){
+	    		flowEdit4();
+	    		}
+	    		if(page_edit=='edit'&&page_step=='5'){
+	    		flowEdit5();
+	    		}
+	    		if(page_edit=='edit'&&page_step=='6'){
+	    		flowEdit6();
+	    		}
+	    }
+	    function flowEdit2(){
+	    	var childWindow = $("#rightMain")[0].contentWindow;
+	    	var view=$("#view").val();
+	    	try {
+				var resultEdit = childWindow.saveFlow2(view);
+	  		    if(resultEdit=='0'){
+	      			toastr.error("保存出错");
+	      			return '0';
+	  		    }else{
+	      			toastr.success("保存成功");
+	      			return '1';
+	  		    }
+		    }
+	  		catch(err){
+		    } 
+	    }
+	    function flowEdit3(){
+	    	var childWindow = $("#rightMain")[0].contentWindow;
+	    	var view=$("#view").val();
+	    	try {
+				var resultEdit = childWindow.saveFlow3(view);
+	  		    if(resultEdit=='0'){
+	      			toastr.error("保存出错");
+	      			return '0';
+	  		    }else{
+	      			toastr.success("保存成功");
+	      			return '1';
+	  		    }
+		    }
+	  		catch(err){
+		    } 
+	    }
+	    function flowEdit4(){
+	    	
+	    	var childWindow = $("#rightMain")[0].contentWindow;
+	    	var view=$("#view").val();
+	    	try {
+				var resultEdit = childWindow.saveFlow4(view);
+	  		    if(resultEdit=='0'){
+	      			return '0';
+	  		    }else if(resultEdit=='1'){
+	      			return '1';
+	  		    }
+		    }
+	  		catch(err){
+		    } 
+	    }
+	    function flowEdit5(){
+	    	var childWindow = $("#rightMain")[0].contentWindow;
+	    	var view=$("#view").val();
+	    	try {
+				var resultEdit = childWindow.saveFlow5(view);
+	  		    if(resultEdit=='0'){
+	      			toastr.error("保存出错");
+	      			return '0';
+	  		    }else{
+	      			toastr.success("保存成功");
+	      			return '1';
+	  		    }
+		    }
+	  		catch(err){
+		    } 
+	    }
+	    function flowEdit6(){
+	    	var childWindow = $("#rightMain")[0].contentWindow;
+	    	var view=$("#view").val();
+	    	try {
+				var resultEdit = childWindow.saveFlow6(view);
+	  		    if(resultEdit=='0'){
+	      			toastr.error("保存出错");
+	      			return '0';
+	  		    }else if(resultEdit=='1'){
+	      			toastr.success("保存成功");
+	      			return '1';
+	  		    }
+		    }
+	  		catch(err){
+		    } 
+	    }
+	    function updateFkDept2(page_cNodeId){
+	    	var childWindow = $("#rightMain")[0].contentWindow;
+	    	try {
+				var resultEdit = childWindow.updateFkDept2(page_cNodeId);
+	  		    if(resultEdit=='0'){
+	      			toastr.error("保存下一步部门编号出错");
+	      			return '0';
+	  		    }else{
+	      			return '1';
+	  		    }
+		    }
+	  		catch(err){
+		    } 
+	    }
+	    function updateFkDept3(page_cNodeId){
+	    	var childWindow = $("#rightMain")[0].contentWindow;
+	    	try {
+				var resultEdit = childWindow.updateFkDept3(page_cNodeId);
+	  		    if(resultEdit=='0'){
+	      			toastr.error("保存下一步部门编号出错");
+	      			return '0';
+	  		    }else{
+	      			return '1';
+	  		    }
+		    }
+	  		catch(err){
+		    } 
+	    }
+	    function doChildIframeMethod(){
+	    	var childWindow = $("#rightMain")[0].contentWindow; //表示获取了嵌入在iframe中的子页面的window对象。  []将JQuery对象转成DOM对象，用DOM对象的contentWindow获取子页面window对象。
+	    	try {
+	    		var a = childWindow.save();
+	    		if(a=="0"){
+	    			return "0";
+	    		}
+	    		}
+	    		catch(err){
+	    		}
+	    }
+	    
+	    function doChangeData(did){
+	    	var childWindow = $("#rightMain")[0].contentWindow; //表示获取了嵌入在iframe中的子页面的window对象。  []将JQuery对象转成DOM对象，用DOM对象的contentWindow获取子页面window对象。
+	    	try {
+	    		var result = childWindow.changeData(did);
+	    		}
+	    		catch(err){
+	    		}
+	    }
+
+	    function shanchu(){
+	    	$.ajax({
+	            type: 'POST',
+	            url: getContextPath()+'/task/deleteChaoSong',
+	            data:{
+	            	id:page_cNodeId
+	            },
+	            dataType: 'text',
+	            success: function (json) {
+	            	  $("#tjModal").modal("hide");
+	            	  toastr.success('删除成功');
+	            	  initTable1();
+	            }
+	        });
+	    }
+	    function yidu(){
+	    	$.ajax({
+	            type: 'POST',
+	            url: getContextPath()+'/task/deleteChaoSong',
+	            data:{
+	            	id:page_cNodeId
+	            },
+	            dataType: 'text',
+	            success: function (json) {
+	            	  $("#tjModal").modal("hide");
+	            	  toastr.success('操作成功');
+	            	  initTable1();
+	            }
+	        });
+	    }
+	
+	    function lookHistory(obj){
+	    	$.ajax({
+	        	type: 'POST',
+	            url: getContextPath()+'/flowHistory/getHistoryNowAndLast',
+	            data:{
+	            	url:obj
+	            },
+	            success: function (json) {
+	            	$("#message_table tbody").html('');
+	            	for(var i=0;i<json.length;i++){
+	            		var operatorType = json[i].operateType;
+	            		operatorType = getCnByOt(operatorType);
+	            		var date = json[i].doDate;
+	            		var title = json[i].title;
+	            		var name = json[i].actorname;
+	            		var deptname = json[i].deptname;
+	            		if(date == null){
+	            			date="";
+	            			if(json[i].operateType==8){
+	            				title="<lable style='color:red'>"+json[i].title+"</lable>";
+	            				name="<lable style='color:red'>"+json[i].actorname+"</lable>";
+	            				operatorType="<lable style='color:red'>"+operatorType+"</lable>";
+	            			}else{
+	            				title = json[i].title;
+	            				name = json[i].actorname;
+	            			}
+	            		}
+	                	$("#message_table tbody").append("<tr><td>"+name+"</td><td>"+deptname+"</td><td>"+operatorType+"</td><td>"+json[i].view+"</td><td>"+date+"</td></tr>")
+	            	}
+	            }
+	        });
+	    }
+	    
+	    function lookHistory2(obj){
+	    	$.ajax({
+	        	type: 'POST',
+	            url: getContextPath()+'/flowHistory/getHistoryNowAndLast',
+	            data:{
+	            	url:obj
+	            },
+	            success: function (json) {
+	            	$("#message_table2 tbody").html('');
+	            	for(var i=0;i<json.length;i++){
+	            		var operatorType = json[i].operateType;
+	            		operatorType = getCnByOt(operatorType);
+	            		var date = json[i].doDate;
+	            		var title = json[i].title;
+	            		var name = json[i].actorname;
+	            		var deptname = json[i].deptname;
+	            		if(date == null){
+	            			date="";
+	            			if(json[i].operateType==8){
+	            				title="<lable style='color:red'>"+json[i].title+"</lable>";
+	            				name="<lable style='color:red'>"+json[i].actorname+"</lable>";
+	            				operatorType="<lable style='color:red'>"+operatorType+"</lable>";
+	            			}else{
+	            				title = json[i].title;
+	            				name = json[i].actorname;
+	            			}
+	            		}
+	                	$("#message_table2 tbody").append("<tr><td>"+name+"</td><td>"+deptname+"</td><td>"+operatorType+"</td><td>"+json[i].view+"</td><td>"+date+"</td></tr>")
+	            	}
+	            }
+	        });
+	    }
+	    function shanChuFlow(){
+			var id=page_cNodeId;
+			var tr=$(page_dom).parents("tr");
+			$.SmartMessageBox({
+	            title: "删除提示",
+	            content: "确认删除？",
+	            buttons: '[取消][确定]'
+	        }, function (ButtonPressed) {
+	        	if (ButtonPressed === "确定") {
+	        		$.ajax({
+	                	type: 'POST',
+	                    url: getContextPath()+'/flowHistory/deleteCurrentFlow',
+	                    data:{
+	                    	id:id
+	                    },
+	                    success: function (json) {
+	                    	if(json>0){
+	                    		toastr.success('删除成功');
+	                    		initTable1();
+	                    		$("#tjModal").modal("hide");
+	                    	}else{
+	                    		toastr.error('删除失败');
+	                    	}
+	                    }
+	                });
+	        	}
+	        })
+	    }
+	  function getCnByOt(s){
+		  if(s==1){
+			  return "提交";
+		  }else if(s==2){
+			  return "退回";
+		  }else if(s==3){
+			  return "撤销";
+		  }else if(s==0){
+			  return "废止";
+		  }else if(s==8){
+			  return "待操作";
+		  }else if(s==4){
+			  return "删除";
+		  }
+	  }
+	
+	  
+	   function day(){
+		// 获取当前页的html代码
+		    var bdhtml = window.document.body.innerHTML;
+		    //设置打印开始区域
+		    //var startStr = '<!--startprint-->';
+		    // 设置打印结束区域
+		    //var endStr = '<!--endprint-->';
+		    //从标记里获取需要打印的页面
+		    //var printHtml = bdhtml.substring(bdhtml.indexOf(startStr) + startStr.length, bdhtml.indexOf(endStr));
+		    //隐藏不必要的按钮和样式
+		    var iframe = document.getElementById('rightMainyb');
+		    var iframeHtml=iframe.contentWindow.document.body;
+		    $(iframeHtml).find("a").each(function(){
+		    	var fileName=$(this).text();
+		    	var qq=$(this).parent("td");
+		    	qq.empty();
+		    	qq.append("<span>"+fileName+"</span>");
+		    })
+		    var iframeHtml2=iframeHtml.innerHTML;
+		    var printHtml = document.getElementById('dy_html').innerHTML;
+		    var allHtml=iframeHtml2+printHtml;
+		    
+		    
+		   /*  iframe.contentWindow.focus();
+		    iframe.contentWindow.print(); */
+		    
+		 	// 通过id获取需要打印的页面
+		    
+		    window.document.body.innerHTML = allHtml;
+		    if (!!window.ActiveXObject || "ActiveXObject" in window) { //是否ie
+		        remove_ie_header_and_footer();
+		     }
+		    remove_ie_header_and_footer();
+		    window.print();
+		    // 还原界面
+		    window.document.body.innerHTML = allHtml;
+		    window.location.reload();
+	  }
+
+	  
+
+	//去掉页眉、页脚
+	function remove_ie_header_and_footer() {
+	    var hkey_path;
+	    hkey_path = "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
+	    try {
+	       var RegWsh = new ActiveXObject("WScript.Shell");
+	       RegWsh.RegWrite(hkey_path + "header", "");
+	       RegWsh.RegWrite(hkey_path + "footer", "");
+	    } catch (e) {
+	    }
+
+	}
+</script> 
 </html>

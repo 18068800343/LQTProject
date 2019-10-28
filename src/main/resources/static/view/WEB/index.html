@@ -154,7 +154,7 @@
 				position: absolute;
 				overflow-y: auto;
 				padding-bottom: 100px;
-				box-shadow: 1px 0px 10px #333333;
+				border: 1px solid #dedede;
 			}
 			
 			.panel-body {
@@ -230,6 +230,12 @@
 			.right{
 				margin-left: 13%;	
 			}
+			body{
+				background-image: url(../images/QQ图片20191025175652.png);
+			}
+			#rightTab{
+			    height:55%;
+			}
 		</style>
 	</head>
 
@@ -237,9 +243,20 @@
 
 		<section>
 			<!-- header -->
-			<header class="header white-bg yihang2">
+			<header class="header white-bg yihang2" style="background-color: white;height: 40px;border: 1px solid #DEDEDE;">
 				<div style="display:flex;align-items:center;">
-					<a class="logo" style="padding-bottom:4px;margin-left:12px;color:white;font-size:28px;">沥青质量信息管理一体化平台</a>
+				<div class="logo">
+						<img src="../images/logo.png" height="65px"/>
+					</div>
+					<a class="logo" style="padding-bottom:4px;margin-left:12px;color:black;font-size:28px;">沥青质量信息管理一体化平台</a>
+				    	<div class="dl" style="width: 1200px;">
+						 <a href="" style="float: right;margin-left: 40px;margin-top: 10px;">退出</a>
+						 <p style="float: right;display: inline-block;margin-top: 10px;margin-left: 10px;font-size: 20px;">玛维影歌</p>
+				    	<img src="../images/QQ图片20191025162923.jpg"/ style="height: 50px;border: 2px solid #0000CC; float: right;">
+				    	 
+				    	
+				       
+					</div>
 				</div>
 			</header>
 			<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
@@ -299,7 +316,7 @@
 									<div class="easyui-panel" style="background-color:#f2f6fb;overflow:hidden;">
 										<ul class="easyui-tree">
 											<li>
-												<span><a href="templates/WEB/home.html"   target="view_frame"  class="yijicaidan Pab" >首页</a></span>
+												<span><a href="home.html"   target="view_frame"  class="yijicaidan Pab" >首页</a></span>
 											</li>
 											<li data-options="state:'closed'">
 												<span><a href="javascript:;"   target="view_frame" class="yijicaidan Paa" >沥青砼生产过程管理</a></span>
