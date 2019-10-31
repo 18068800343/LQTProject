@@ -59,10 +59,10 @@
                         <table class="table table-bordered">
 							<tr>
 								<td style="width: 20%;">批次</td>
-								<td style="width: 30%;"><input type="text" /></td>
+								<td style="width: 30%;"><input type="text" style="width: 70%;"/></td>
 								<td style="width: 20%;">压路机</td>
 								<td style="width: 30%;">
-									<select class="form-inline" style="width: 60%;">
+									<select class="form-inline" style="width: 70%;">
 										<option>静压钢轮</option>
 										<option>振动压钢轮</option>
 										<option>胶轮</option>
@@ -70,10 +70,16 @@
 								</td>
 							</tr>
 							<tr>
+								<td>摊铺地点</td>
+								<td><input type="text" style="width: 70%;"/></td>
 								<td>碾压次数</td>
-								<td><input type="text" /></td>
+								<td><input type="text" style="width: 70%;"/></td>
+							</tr>
+							<tr>
 								<td>时间</td>
-								<td><input type="date" /></td>
+								<td><input type="date" style="width: 70%;"/></td>
+								<td></td>
+								<td></td>
 							</tr>
                         </table>
                     </form> 
@@ -99,25 +105,31 @@
         <div class="modal-body">
             <div>     
                 <form class="form-inline">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered ">
 						<tr>
-							<td style="width: 20%;">批次</td>
-							<td style="width: 30%;"><input type="text" /></td>
-							<td style="width: 20%;">压路机</td>
-							<td style="width: 30%;">
-								<select class="form-inline" style="width: 60%;">
-									<option>静压钢轮</option>
-									<option>振动压钢轮</option>
-									<option>胶轮</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>碾压次数</td>
-							<td><input type="text" /></td>
-							<td>时间</td>
-							<td><input type="date" /></td>
-						</tr>
+								<td style="width: 20%;">批次</td>
+								<td style="width: 30%;"><input type="text" style="width: 70%;"/></td>
+								<td style="width: 20%;">压路机</td>
+								<td style="width: 30%;">
+									<select class="form-inline" style="width: 70%;">
+										<option>静压钢轮</option>
+										<option>振动压钢轮</option>
+										<option>胶轮</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>摊铺地点</td>
+								<td><input type="text" style="width: 70%;"/></td>
+								<td>碾压次数</td>
+								<td><input type="text" style="width: 70%;"/></td>
+							</tr>
+							<tr>
+								<td>时间</td>
+								<td><input type="date" style="width: 70%;"/></td>
+								<td></td>
+								<td></td>
+							</tr>
                     </table>
                 </form>  
             </div>
@@ -138,6 +150,7 @@
                     <tr>
                         <th>序号</th>
                         <th>压路机</th>
+                        <th>摊铺地点</th>
                         <th>碾压次数</th>
 						<th>时间</th>
                         <th style="width:70px;">操作</th>
@@ -148,6 +161,7 @@
                         <td id="1">1</td>
                         <td>1</td>
                         <td>1</td>
+						<td>1</td>
 						<td>1</td>
                         <td>
                             <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
@@ -160,6 +174,7 @@
                         <td>1</td>
                         <td>1</td>
                         <td>1</td>
+                        <td>1</td>
                         <td>
                             <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
                             <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
@@ -168,6 +183,7 @@
                     </tr>
                     <tr>
                         <td id="3">3</td>
+                        <td>1</td>
                         <td>1</td>
                         <td>1</td>
                         <td>1</td>
@@ -200,10 +216,16 @@
                         	<td style="width: 30%;">胶轮</td>
                         </tr>
                         <tr>
-                        	<td>碾压次数</td>
-                        	<td>1</td>
+	                        <td>摊铺地点</td>
+	                        <td>22</td>
+	                        <td>碾压次数</td>
+	                        <td>1</td>
+                        </tr>
+                        <tr>
                         	<td>时间</td>
                         	<td>2019-10-15 15:00:00</td>
+                        	<td></td>
+                        	<td></td>
                         </tr>
                     </table>
                 </form>  
