@@ -51,128 +51,12 @@
     <div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist" style="background:#fff;">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本信息</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">考勤管理</a></li>
+            <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">考勤管理</a></li>
             <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">值班管理</a></li>
         </ul>     
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="home">
-                <div class="zhuti-content">
-                    <div class="UpperPart">
-                        <div class="UpperPartL">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入人员信息</button>
-                        </div>
-                        <div class="UpperPartR">
-                            <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
-                        </div>
-                    </div>
-                    <div class="LowerPart" style="margin-top:3px;">
-                        <table class="table table-bordered table-condensed" id="mainContent">
-                            <thead>
-                                <tr>
-                                    <td>工号</td>
-                                    <td>姓名</td>
-                                    <td>性别</td>
-                                    <td>身份证号</td>
-                                    <td>联系方式</td>
-                                    <td>职务</td>
-                                    <th style="width:75px;">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>SC0201901</td>
-                                    <td>高俅</td>
-                                    <td>男</td>
-                                    <td>321308198705231365</td>
-                                    <td>18085824999</td>
-                                    <td>检察人员</td>
-                                    <td>
-                                        <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
-                                        <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
-                                        <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>SC0201901</td>
-                                    <td>高俅</td>
-                                    <td>男</td>
-                                    <td>321308198705231365</td>
-                                    <td>18085824999</td>
-                                    <td>检察人员</td>
-                                    <td>
-                                        <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
-                                        <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
-                                        <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>SC0201901</td>
-                                    <td>高俅</td>
-                                    <td>男</td>
-                                    <td>321308198705231365</td>
-                                    <td>18085824999</td>
-                                    <td>检察人员</td>
-                                    <td>
-                                        <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
-                                        <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
-                                        <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                                    </td>
-                                </tr>
-                            </tbody>   
-                        </table>
-<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>所有信息</b></h4>
-        </div>
-        <div class="modal-body">
-            <div>     
-                <form class="form-inline">
-                    <table class="table table-bordered table-condensed" style="height: auto;">
-                    	<tr>
-                    		<td style="width: 20%;">账户</td>
-                    		<td>gaoq</td>
-                    		<td style="width: 20%;">密码</td>
-                    		<td>123</td>
-                    	</tr>
-                    	<tr>
-                    		<td style="width: 20%;">邮箱</td>
-                    		<td>893522105@qq.com</td>
-                    		<td style="width: 20%;">学历</td>
-                    		<td>本科</td>
-                    	</tr>
-                    	<tr>
-                    		<td style="width: 20%;">住址</td>
-                    		<td>保密</td>
-                    		<td style="width: 20%;">婚姻状况</td>
-                    		<td>未婚</td>
-                    	</tr>
-                    	<tr>
-                    		<td style="width: 20%;">备用</td>
-                    		<td>1</td>
-                    		<td style="width: 20%;">备用</td>
-                    		<td>1</td>
-                    	</tr>
-                    </table>
-                </form>  
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- allMsg结束 -->
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="profile">
+         <div role="tabpanel" class="tab-pane active" id="profile">
     <div class="zhuti-content">
         <div class="UpperPart">
             <div class="UpperPartL">
@@ -745,6 +629,55 @@
 							<td style="width: 20%;">备用</td>
                     		<td>1</td>
                     		<td>备用</td>
+                    		<td>1</td>
+                    	</tr>
+                    </table>
+                </form>  
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- allMsg结束 -->
+
+
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><b>所有信息</b></h4>
+        </div>
+        <div class="modal-body">
+            <div>     
+                <form class="form-inline">
+                    <table class="table table-bordered table-condensed" style="height: auto;">
+                    	<tr>
+                    		<td style="width: 20%;">账户</td>
+                    		<td>gaoq</td>
+                    		<td style="width: 20%;">密码</td>
+                    		<td>123</td>
+                    	</tr>
+                    	<tr>
+                    		<td style="width: 20%;">邮箱</td>
+                    		<td>893522105@qq.com</td>
+                    		<td style="width: 20%;">学历</td>
+                    		<td>本科</td>
+                    	</tr>
+                    	<tr>
+                    		<td style="width: 20%;">住址</td>
+                    		<td>保密</td>
+                    		<td style="width: 20%;">婚姻状况</td>
+                    		<td>未婚</td>
+                    	</tr>
+                    	<tr>
+                    		<td style="width: 20%;">备用</td>
+                    		<td>1</td>
+                    		<td style="width: 20%;">备用</td>
                     		<td>1</td>
                     	</tr>
                     </table>

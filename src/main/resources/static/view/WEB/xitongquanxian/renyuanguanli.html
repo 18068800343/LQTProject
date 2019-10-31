@@ -43,20 +43,13 @@
     <div class="mianbao">
     	<ul class="breadcrumb">
     		<li><i class="iconfont icon-knowledgebase"></i></li>
-			<li>沥青生产过程管理</li>
+			<li>系统管理</li>
 			<li class="active">人员管理</li>
 		</ul>
     </div>
 
     <div>
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist" style="background:#fff;">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本信息</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">考勤管理</a></li>
-            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">值班管理</a></li>
-        </ul>     
         <!-- Tab panes -->
-        <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
                 <div class="zhuti-content">
                     <div class="UpperPart">
@@ -122,268 +115,10 @@
                                 </tr>
                             </tbody>   
                         </table>
-<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>所有信息</b></h4>
-        </div>
-        <div class="modal-body">
-            <div>     
-                <form class="form-inline">
-                    <table class="table table-bordered table-condensed" style="height: auto;">
-                    	<tr>
-                    		<td style="width: 20%;">账户</td>
-                    		<td>gaoq</td>
-                    		<td style="width: 20%;">密码</td>
-                    		<td>123</td>
-                    	</tr>
-                    	<tr>
-                    		<td style="width: 20%;">邮箱</td>
-                    		<td>893522105@qq.com</td>
-                    		<td style="width: 20%;">学历</td>
-                    		<td>本科</td>
-                    	</tr>
-                    	<tr>
-                    		<td style="width: 20%;">住址</td>
-                    		<td>保密</td>
-                    		<td style="width: 20%;">婚姻状况</td>
-                    		<td>未婚</td>
-                    	</tr>
-                    	<tr>
-                    		<td style="width: 20%;">备用</td>
-                    		<td>1</td>
-                    		<td style="width: 20%;">备用</td>
-                    		<td>1</td>
-                    	</tr>
-                    </table>
-                </form>  
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- allMsg结束 -->
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="profile">
-    <div class="zhuti-content">
-        <div class="UpperPart">
-            <div class="UpperPartL">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" style="margin: 5PX;float: left;">录入考勤</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal4" style="margin: 5PX;float: left;">考勤统计</button>
-            </div>
-            <div class="UpperPartR">
-				<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
-            </div>
-        </div>
-        <div class="LowerPart" style="margin-top:3px;">
-            <table class="table table-bordered table-condensed" id="mainContent2">
-                <thead>
-                    <tr>
-                       <th>姓名</th>
-                       <th>工号</th>
-                       <th>日期</th>
-                       <th>签到时间</th>
-                       <th>离开时间</th>
-                        <th style="width:75px;">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>张三</td>
-                        <td>SC201901</td>
-                        <td>2019-10-30</td>
-                        <td>2019-10-30 08:49:52</td>
-                        <td>2019-10-30 18:14:08</td>
-                        <td>
-                            <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg2"></i>
-                            <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change2'></i>
-                            <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>张三</td>
-                        <td>SC201901</td>
-                        <td>2019-10-30</td>
-                        <td>2019-10-30 08:49:52</td>
-                        <td>2019-10-30 18:14:08</td>
-                        <td>
-                            <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg2"></i>
-                            <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change2'></i>
-                            <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>张三</td>
-                        <td>SC201901</td>
-                        <td>2019-10-30</td>
-                        <td>2019-10-30 08:49:52</td>
-                        <td>2019-10-30 18:14:08</td>
-                        <td>
-                            <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg2"></i>
-                            <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change2'></i>
-                            <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                        </td>
-                    </tr>
-                </tbody>   
-            </table>
-        </div>
-    </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="messages">
-                <div class="zhuti-content">
-        <div class="UpperPart">
-            <div class="UpperPartL">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3" style="margin: 5PX;float: left;">录入值班信息</button>
-            </div>
-            <div class="UpperPartR">
-                <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
-            </div>
-        </div>
-        <div class="LowerPart" style="margin-top:3px;">
-                        <table class="table table-bordered table-condensed" id="mainContent3">
-                <thead>
-                    <tr>
-                       <th>工号</th>
-                       <th>姓名</th>
-                       <th>开始时间</th>
-                       <th>结束时间</th>
-                        <th style="width:75px;">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>
-                            <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg2"></i>
-                            <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change2'></i>
-                            <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>
-                            <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg2"></i>
-                            <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change2'></i>
-                            <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>
-                            <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg2"></i>
-                            <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change2'></i>
-                            <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                        </td>
-                    </tr>
-                </tbody>   
-            </table>
-<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg3">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>所有信息</b></h4>
-        </div>
-        <div class="modal-body">
-            <div>     
-                <form class="form-inline">
-                    <table class="table table-bordered table-condensed" style="height: 400PX;">
-                    	<tr>
-                    		<td style="width: 20%;">序号</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>路段</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>成品差</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>料1用量</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>料2用量</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>料3用量</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>料4用量</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>料5用量</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>料6用量</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>粉料偏差量</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>沥青偏差量</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>干拌时间</td>
-                    		<td>2019-10-10 12:00:00</td>
-                    	</tr>
-                    	<tr>
-                    		<td>油石比</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-                    		<td>湿拌时间</td>
-                    		<td>2019-10-10 12:00:00</td>
-                    	</tr>
-                    	<tr>
-                    		<td>级配</td>
-                    		<td>1</td>
-                    	</tr>
-                    </table>
-
-                </form>  
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- allMsg结束 -->
-    </div>
-</div>
-        </div>
-    </div>
-</div>
+ </div>
 
  <!-- Modal -->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
@@ -391,7 +126,7 @@
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>录入配方信息</b></h4>
+            <h4 class="modal-title" id="myModalLabel"><b>录入人员信息</b></h4>
         </div>
         <div class="modal-body">
                 <div>     
@@ -470,255 +205,8 @@
     </div>
 </div>
 <!-- 修改model结束 --> 
-<!-- Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal2">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>录入生产数据计划</b></h4>
-        </div>
-        <div class="modal-body">
-                <div>     
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height:auto;">
-                        	<tr>
-                        		<td style="width: 20%;">工号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">日期</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">签到时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">姓名</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        </table>
-                    </form>  
-                </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-default">保存</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- model结束 -->
-
-<!-- Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal4">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>考勤统计</b></h4>
-        </div>
-        <div class="modal-body">
-                <div>     
-                
-                   	 <div>
-                         <div class="leftItem">选择考勤统计月份:</div>
-                         <div class="leftItem"><input type="text" class="form-control" id="xgstartTime" style="width:50%;"></div>
-                     </div>
-              
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height:auto;">
-                        	<tr>
-                        		<td style="width: 16.6%;">工号</td>
-                        		<td style="width: 16.6%;">SC201901</td>
-                        		<td style="width: 16.6%;">姓名</td>
-                        		<td style="width: 16.6%;">赵辉</td>
-                        		<td style="width: 16.6%;">签到天数</td>
-                        		<td style="width: 16.6%;">25</td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 16.6%;">工号</td>
-                        		<td style="width: 16.6%;">SC201901</td>
-                        		<td style="width: 16.6%;">姓名</td>
-                        		<td style="width: 16.6%;">赵辉</td>
-                        		<td style="width: 16.6%;">签到天数</td>
-                        		<td style="width: 16.6%;">25</td>
-                        	</tr>
-                        </table>
-                    </form>  
-                </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-default">保存</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- model结束 -->
-
-<!-- 修改Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change2">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>修改考勤信息</b></h4>
-        </div>
-        <div class="modal-body">
-                <div>     
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height:auto;">
-                        	<tr>
-                        		<td style="width: 20%;">工号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">日期</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">签到时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">姓名</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        </table>
-                    </form>  
-                </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success">保存</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- 修改model结束 -->  
-<!-- Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal3">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>录入值班信息</b></h4>
-        </div>
-        <div class="modal-body">
-                <div>     
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height:auto;">
-                        	<tr>
-                        		<td style="width: 20%;">工号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">日期</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">签到开始时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">签到结束时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">姓名</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td></td>
-                        		<td></td>
-                        	</tr>
-                        </table>
-                    </form>  
-                </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-default">保存</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- model结束 -->
-
-<!-- 修改Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change3">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>修改生产数据监控</b></h4>
-        </div>
-        <div class="modal-body">
-                <div>     
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height: 400PX;">
-                        	<tr>
-                        		<td style="width: 20%;">序号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>路段</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>成品差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料1用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料2用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料3用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料4用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料5用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料6用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>粉料偏差量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>沥青偏差量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>干拌时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>油石比</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>湿拌时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>级配</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        </table>
-                    </form> 
-                </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success">保存</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- 修改model结束 --> 
 <!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg2">
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -730,21 +218,27 @@
                 <form class="form-inline">
                     <table class="table table-bordered table-condensed" style="height: auto;">
                     	<tr>
+                    		<td style="width: 20%;">账户</td>
+                    		<td>gaoq</td>
+                    		<td style="width: 20%;">密码</td>
+                    		<td>123</td>
+                    	</tr>
+                    	<tr>
+                    		<td style="width: 20%;">邮箱</td>
+                    		<td>893522105@qq.com</td>
+                    		<td style="width: 20%;">学历</td>
+                    		<td>本科</td>
+                    	</tr>
+                    	<tr>
+                    		<td style="width: 20%;">住址</td>
+                    		<td>保密</td>
+                    		<td style="width: 20%;">婚姻状况</td>
+                    		<td>未婚</td>
+                    	</tr>
+                    	<tr>
                     		<td style="width: 20%;">备用</td>
                     		<td>1</td>
-                    		<td>备用</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-							<td style="width: 20%;">备用</td>
-                    		<td>1</td>
-                    		<td>备用</td>
-                    		<td>1</td>
-                    	</tr>
-                    	<tr>
-							<td style="width: 20%;">备用</td>
-                    		<td>1</td>
-                    		<td>备用</td>
+                    		<td style="width: 20%;">备用</td>
                     		<td>1</td>
                     	</tr>
                     </table>
