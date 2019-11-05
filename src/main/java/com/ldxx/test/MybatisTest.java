@@ -1,4 +1,4 @@
-package com.ldxx.controller;
+package com.ldxx.test;
 
 
 import org.junit.jupiter.api.Test;
