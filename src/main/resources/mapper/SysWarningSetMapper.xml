@@ -3,11 +3,11 @@
 <mapper namespace="com.ldxx.dao.SysWarningSetDao" >
 	
 	<insert id="addSysWarningSet" parameterType="SysWarningSet">
-		insert into sys_warning_set (id,warn_name,warn_set) values(#{ss.Id},#{ss.warnName},#{ss.warnSet})
+		insert into sys_warning_set (id,warn_name,warn_set) values(#{ss.id},#{ss.warnName},#{ss.warnSet})
 	</insert>
 	
 	<update id="updateSysWarningSetById">
-		update sys_warning_set set warn_name=#{ss.warnName},warn_set=#{ss.warnSet} where id=#{ss.Id}
+		update sys_warning_set set warn_name=#{ss.warnName},warn_set=#{ss.warnSet} where id=#{ss.id}
 	</update>
 	
 	<select id="getAllSysWarningSet" resultType="SysWarningSet">

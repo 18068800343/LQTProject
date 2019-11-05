@@ -7,17 +7,17 @@ package com.ldxx.bean;
  */
 public class SysWarningSet {
 	
-	private String Id;
+	private String id;
 	//预警项
 	private String warnName;
 	//是否预警
 	private int warnSet;//0:否；1：预警
 	
 	public String getId() {
-		return Id;
+		return id;
 	}
-	public void setId(String Id) {
-		this.Id = Id;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getWarnName() {
 		return warnName;
