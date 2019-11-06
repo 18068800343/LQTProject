@@ -29,7 +29,7 @@
     		<li><i class="iconfont icon-knowledgebase"></i></li>
 			<li>沥青砼生产质量管理</li>
 			<li>拌和生产质量监控</li>
-			<li class="active">油石比走势<</li>
+			<li class="active">油石比走势</li>
 		</ul>
     </div>
 		<div class="UpperPartR">
@@ -46,31 +46,13 @@
             <table class="table table-bordered table-condensed" id="mainContent">
                 <thead>
                     <tr>
-                        <th>序号</th>
                         <th>计划编号</th>
+                        <th>日期</th>
                         <th>时间</th>
 						<th>油石比</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td id="1">1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-                    </tr>
-                    <tr>
-                        <td id="1">1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-                    </tr>
-                    <tr>
-                        <td id="1">1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-                    </tr>
                 </tbody>   
             </table>
 					</div>
@@ -164,6 +146,10 @@
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
+	$(document).ready( function () {
+		initTable()
+	});
+
 	layui.use('element', function() {
 		var $ = layui.jquery,
 			element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
@@ -218,6 +204,12 @@
 	        "oLanguage": {
 			    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 			},
+			"columns": [
+	            { "data": "planNo"},
+	            { "data": "date"}, 
+	            { "data": "time"},
+	            { "data": "asphaltAggregateRatio"},
+	        ],
 	        "order": [[0, 'asc']],
 	        "oLanguage": { //国际化配置
 	        "sProcessing": "正在获取数据，请稍后...",
@@ -256,5 +248,23 @@
 
 		// 使用刚指定的配置项和数据显示图表。
 		myChart.setOption(option);
+		
+		
+		function initTable(){
+	        $.ajax({
+	            type: 'POST',
+	            url: '/QualityByPlateAsphaltAggregateRatio/getAllQualityByPlateAsphaltAggregateRatio',
+	            dataType: 'json',
+	            data: {
+	            },
+	            error: function (msg) {
+	                errMessage("请求UserController失败");
+	            },
+	            success: function (json) {
+	                $('#mainContent').dataTable().fnClearTable();
+	                $('#mainContent').DataTable().rows.add(json).draw(false);
+	            }
+	        });
+	    }
 </script>
 </html>

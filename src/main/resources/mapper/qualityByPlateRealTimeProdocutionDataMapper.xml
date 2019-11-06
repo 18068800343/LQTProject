@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.QualityByPlateRealTimeProdocutionDataDao" >
+
+	<select id="getAllQualityByPlateRealTimeProdocutionData" resultType="QualityByPlateRealTimeProdocutionData">
+		select ID,plan_id,plan_no,materials_use_1,materials_use_2,materials_use_3,materials_use_4,materials_use_5,materials_use_6,
+			bone_flour_use,pitch_use,min_temperature,max_temperature,dry_time,wet_time,production_time 
+		from quality_by_plate_real_time_prodocution_data
+	</select>
+	
+</mapper>

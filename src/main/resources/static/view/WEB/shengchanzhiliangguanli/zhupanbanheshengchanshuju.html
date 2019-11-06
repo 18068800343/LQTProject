@@ -30,7 +30,7 @@
     		<li><i class="iconfont icon-knowledgebase"></i></li>
 			<li>沥青砼生产质量管理</li>
 			<li>拌和生产质量监控</li>
-			<li class="active">逐盘拌合生产数据实时监控<</li>
+			<li class="active">逐盘拌合生产数据实时监控</li>
 		</ul>
     </div>
 
@@ -47,7 +47,6 @@
             <table class="table table-bordered table-condensed" id="mainContent">
                 <thead>
                     <tr>
-                        <th>序号</th>
                         <th>路段编号</th>
                         <th>料1用量</th>
 						<th>料2用量</th>
@@ -66,57 +65,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td id="1">1</td>
-                        <td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-                    </tr>
-                    <tr>
-                        <td id="1">1</td>
-                        <td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-                    </tr>
-                    <tr>
-                        <td id="1">1</td>
-                        <td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-                    </tr>
+                    
                 </tbody>   
             </table>
 					</div>
@@ -175,7 +124,10 @@
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
-
+	$(document).ready( function () {
+		initTable()
+	});
+ 
 	var myChart = echarts.init(document.getElementById('two'));
 
 	var option = {
@@ -296,6 +248,22 @@
 	        "oLanguage": {
 			    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 			},
+			"columns": [
+	            { "data": "planNo"},
+	            { "data": "materialsUse1"}, 
+	            { "data": "materialsUse2"},
+	            { "data": "materialsUse3"},
+	            { "data": "materialsUse4"},
+	            { "data": "materialsUse5"},
+	            { "data": "materialsUse6"},
+	            { "data": "boneFlourUse"},
+	            { "data": "pitchUse"},
+	            { "data": "minTemperature"},
+	            { "data": "maxTemperature"},
+	            { "data": "dryTime"},
+	            { "data": "wetTime"},
+	            { "data": "productionTime"},
+	        ],
 	        "order": [[0, 'asc']],
 	        "oLanguage": { //国际化配置
 	        "sProcessing": "正在获取数据，请稍后...",
@@ -313,8 +281,25 @@
 	            "sNext": "下一页",
 	            "sLast": "最后一页"
 	        }},
-	        
 		});
+	    
+	    function initTable(){
+	        $.ajax({
+	            type: 'POST',
+	            url: '/QualityByPlateRealTimeProdocutionData/getAllQualityByPlateRealTimeProdocutionData',
+	            dataType: 'json',
+	            data: {
+	            },
+	            error: function (msg) {
+	                errMessage("请求UserController失败");
+	            },
+	            success: function (json) {
+	                $('#mainContent').dataTable().fnClearTable();
+	                $('#mainContent').DataTable().rows.add(json).draw(false);
+	            }
+	        });
+	    }
+	    
 	</script>
 
 </html>
