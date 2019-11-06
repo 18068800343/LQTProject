@@ -546,44 +546,45 @@
                         <table class="table table-bordered table-condensed" style="height: auto;" >
                         	<tr>
                         		<td>生产计划编号</td>
-                        		<td><input type="text" ref="planno" id="planno" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" v-model="planno" id="planno" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         		<td>路段</td>
                         		<td>
-                        		    <select class="form-control" style="width:100%;" ref="roadid" id="roadid">
+                        		    <select class="form-control" style="width:100%;" v-model="roadid" id="roadid">
+                        		      <option value="1">1</option>
                                     </select>
                                 </td>
                         	</tr>
                         	<tr>
                         		<td>标段</td>
                         		<td>
-                                	<select class="form-control" style="width:100%;" ref="rdnumber" id="rdnumber">
+                                	<select class="form-control" style="width:100%;" v-model="rdnumber" id="rdnumber">
                                     </select>
                                 </td>
                         		<td>成品需要量</td>
-                        		<td><input type="text" ref="pdneed" id="pdneed" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" v-model="pdneed" id="pdneed" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
                         		<td>干拌时间</td>
-                        		<td><input type="text" ref="drymixingtime" id="drymixingtime" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" v-model="drymixingtime" id="drymixingtime" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         		<td>湿拌时间</td>
-                        		<td><input type="text" ref="wetmixingtime" id="wetmixingtime" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" v-model="wetmixingtime" id="wetmixingtime" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
                         		<td>油石比</td>
-                        		<td><input type="text" ref="radio" id="radio" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" v-model="radio" id="radio" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         		<td>成品温度要求</td>
-                        		<td><input type="text" ref="pdtemp" id="pdtemp" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" v-model="pdtemp" id="pdtemp" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
                         		<td>到现场温度要求</td>
-                        		<td><input type="text" ref="arrivetemp" id="arrivetemp" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" v-model="arrivetemp" id="arrivetemp" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         		<td>单价</td>
-                        		<td><input type="text" ref="price" id="price" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" v-model="price" id="price" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
                         		<td>配方</td>
                         		<td>
-                        			<select class="form-control" style="width:100%;" ref="price" id="recipeid">
+                        			<select class="form-control" style="width:100%;" v-model="price" id="recipeid">
                                     </select>
                                 </td>
                                 <td></td>
@@ -1063,13 +1064,13 @@
 	var app5 = new Vue({
 	  el: '#NewShengChanJiHua',
 	  data: {
-		  planno:null,
-		  
+		  planno:"",
+		  roadid:"",
 	  },
 	  methods: {
 		//新建生产计划保存按钮事件
 	    save: function () {
-	    	
+	    	alert(this.planno)
 	    }
 	  }
 	})
