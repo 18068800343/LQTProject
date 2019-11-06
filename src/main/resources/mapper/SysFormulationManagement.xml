@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.SysFormulationManagementDao" >
+	<insert id="addSysFormulationManagement" parameterType="sysFormulationManagement">
+		insert into 
+		sys_formulation_management(fl_id,fl_no,fl_name,materials_use_1,materials_use_2,
+		materials_use_3,materials_use_4,materials_use_5,materials_use_6,
+		bone_flour_use,pitch_use,other_use,delete_state)
+		values(#{sysFormulationManagement.flId},
+			   #{sysFormulationManagement.flNo},
+			   #{sysFormulationManagement.flName},
+			   #{sysFormulationManagement.materialsUse1},
+			   #{sysFormulationManagement.materialsUse2},
+			   #{sysFormulationManagement.materialsUse3},
+			   #{sysFormulationManagement.materialsUse4},
+			   #{sysFormulationManagement.materialsUse5},
+			   #{sysFormulationManagement.materialsUse6},
+			   #{sysFormulationManagement.boneFlourUse},
+			   #{sysFormulationManagement.pitchUse},
+			   #{sysFormulationManagement.otherUse},
+			   1)
+	</insert>
+	
+	<update id="updateSysFormulationManagement" parameterType="sysFormulationManagement">
+		update sys_formulation_management
+		set 
+		     fl_no=#{sysFormulationManagement.flNo},
+			 fl_name=#{sysFormulationManagement.flName},
+			 materials_use_1=#{sysFormulationManagement.materialsUse1},
+			 materials_use_2=#{sysFormulationManagement.materialsUse2},
+			 materials_use_3=#{sysFormulationManagement.materialsUse3},
+			 materials_use_4=#{sysFormulationManagement.materialsUse4},
+			 materials_use_5=#{sysFormulationManagement.materialsUse5},
+			 materials_use_6=#{sysFormulationManagement.materialsUse6},
+			 bone_flour_use=#{sysFormulationManagement.boneFlourUse},
+			 pitch_use=#{sysFormulationManagement.pitchUse},
+			 other_use=#{sysFormulationManagement.otherUse},
+	    where fl_id=#{sysFormulationManagement.flId} and delete_state=1
+	</update>
+	<select id="selectAllSysFormulationManagement" resultType="SysFormulationManagement">
+		select 
+			fl_id,fl_no,fl_name,materials_use_1,materials_use_2,
+			materials_use_3,materials_use_4,materials_use_5,materials_use_6,
+			bone_flour_use,pitch_use,other_use,delete_state
+		from
+		  sys_formulation_management
+		where delete_state=1
+	</select>
+	
+	<select id="selectByIdSysFormulationManagement" resultType="SysFormulationManagement">
+		select
+			fl_id,fl_no,fl_name,materials_use_1,materials_use_2,
+			materials_use_3,materials_use_4,materials_use_5,materials_use_6,
+			bone_flour_use,pitch_use,other_use,delete_state
+		from
+		  sys_formulation_management
+		where fl_id=#{sysFormulationManagement.flId} and delete_state=1
+	</select>
+	
+	<update id="deleteSysFormulationManagement">
+		update sys_formulation_management 
+		set
+			delete_state=0
+		 where fl_id=#{sysFormulationManagement.flId}
+	</update>
+	
+	
+</mapper>
