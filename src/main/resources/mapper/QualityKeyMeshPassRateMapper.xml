@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.QualityKeyMeshPassRateDao" >
+
+	<select id="getAllQualityKeyMeshPassRate" resultType="QualityKeyMeshPassRate">
+		select id,plan_id,plan_no,production_time,r1,r2,r3 from quality_key_mesh_pass_rate
+	</select>
+	
+</mapper>
