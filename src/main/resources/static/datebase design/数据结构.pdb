@@ -11076,10 +11076,10 @@ LABL 0 新宋体,8,N</a:FontList>
 <a:Code>material_name</a:Code>
 <a:CreationDate>1573024972</a:CreationDate>
 <a:Creator>wzsdch</a:Creator>
-<a:ModificationDate>1573025027</a:ModificationDate>
+<a:ModificationDate>1573028779</a:ModificationDate>
 <a:Modifier>wzsdch</a:Modifier>
-<a:DataType>varchar(30)</a:DataType>
-<a:Length>30</a:Length>
+<a:DataType>varchar(50)</a:DataType>
+<a:Length>50</a:Length>
 </o:Column>
 <o:Column Id="o517">
 <a:ObjectID>09506FD2-4310-4E1C-B9AB-6C5CF6313796</a:ObjectID>

@@ -11,7 +11,7 @@
 
 <insert id="addDicMaterials" parameterType="dicMaterials">
 		insert into 
-		dic_materials(id,material_name)
+		dic_materials(id,material_name,delete_state)
 		values(#{dicMaterials.id},
 			   #{dicMaterials.materialName},
 			   1)

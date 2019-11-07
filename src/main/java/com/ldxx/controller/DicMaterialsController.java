@@ -1,6 +1,8 @@
 package com.ldxx.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,18 +22,25 @@ public class DicMaterialsController {
 	
 	@RequestMapping("/addDicMaterials")
 	@ResponseBody
-	public int addDicMaterials(DicMaterials dicMaterials)
+	public Map<String,Object> addDicMaterials(DicMaterials dicMaterials)
 	{	
+		Map<String, Object> map = new HashMap<String, Object>();
 		dicMaterials.setId(LDXXUtils.getUUID12());
 		int state = dicmService.addDicMaterials(dicMaterials);
-		return state;
+		
+		map.put("result",state);
+		map.put("dicMaterials", dicMaterials);
+		return map;
 	}
 	
 	@RequestMapping("/updateDicMaterials")
 	@ResponseBody
-	public int updateDicMaterials(DicMaterials dicMaterials) {
+	public Map<String,Object> updateDicMaterials(DicMaterials dicMaterials) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		int state = dicmService.updateDicMaterials(dicMaterials);
-		return state;
+		map.put("result",state);
+		map.put("dicMaterials", dicMaterials);
+		return map;
 	}
 	@RequestMapping("/selectAllDicMaterials")
 	@ResponseBody
