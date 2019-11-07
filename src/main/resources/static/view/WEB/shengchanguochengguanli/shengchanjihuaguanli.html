@@ -535,7 +535,7 @@
 <!-- Modal -->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal2">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content" id="NewShengChanJiHua">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel"><b>录入生产计划数据</b></h4>
@@ -543,54 +543,52 @@
         <div class="modal-body">
                 <div>     
                     <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height: 100PX;">
+                        <table class="table table-bordered table-condensed" style="height: auto;" >
                         	<tr>
-                        		<td style="width: 20%;">生产计划编号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>生产计划编号</td>
+                        		<td><input type="text" v-model="planno" id="planno" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         		<td>路段</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>
+                        		    <select class="form-control" style="width:100%;" v-model="roadid" id="roadid">
+                        		      <option value="1">1</option>
+                                    </select>
+                                </td>
                         	</tr>
                         	<tr>
-                        		<td></td>
-                        		<td></td>
-                        		<td>成品差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料1用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td>料2用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料3用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td>料4用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料5用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td>料6用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>粉料偏差量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td>沥青偏差量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>标段</td>
+                        		<td>
+                                	<select class="form-control" style="width:100%;" v-model="rdnumber" id="rdnumber">
+                                    </select>
+                                </td>
+                        		<td>成品需要量</td>
+                        		<td><input type="text" v-model="pdneed" id="pdneed" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
                         		<td>干拌时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" v-model="drymixingtime" id="drymixingtime" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         		<td>湿拌时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" v-model="wetmixingtime" id="wetmixingtime" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
                         		<td>油石比</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td>级配</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" v-model="radio" id="radio" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>成品温度要求</td>
+                        		<td><input type="text" v-model="pdtemp" id="pdtemp" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        	</tr>
+                        	<tr>
+                        		<td>到现场温度要求</td>
+                        		<td><input type="text" v-model="arrivetemp" id="arrivetemp" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>单价</td>
+                        		<td><input type="text" v-model="price" id="price" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        	</tr>
+                        	<tr>
+                        		<td>配方</td>
+                        		<td>
+                        			<select class="form-control" style="width:100%;" v-model="price" id="recipeid">
+                                    </select>
+                                </td>
+                                <td></td>
+                                <td></td>
                         	</tr>
                         </table>
                     </form>  
@@ -598,7 +596,8 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-default">保存</button>
+            
+            <button type="button" class="btn btn-default" v-on:click="save" id="saveShengChanJiHua">保存</button>
         </div>
         </div>
     </div>
@@ -694,66 +693,51 @@
         <div class="modal-body">
                 <div>     
                     <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height: 400PX;">
+                        <table class="table table-bordered table-condensed" style="height: auto;">
                         	<tr>
-                        		<td style="width: 20%;">序号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
+                        		<td>生产计划编号</td>
+                        		<td><input type="text" id="xg_planno" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         		<td>路段</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>
+                        		    <select class="form-control" style="width:100%;" id="xg_roadid">
+                                    </select>
+                                </td>
                         	</tr>
                         	<tr>
-                        		<td>成品差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料1用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料2用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料3用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料4用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料5用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>料6用量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>粉料偏差量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td>沥青偏差量</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>标段</td>
+                        		<td>
+                                	<select class="form-control" style="width:100%;" id="xg_rdnumber">
+                                    </select>
+                                </td>
+                        		<td>成品需要量</td>
+                        		<td><input type="text" id="xg_pdneed" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
                         		<td>干拌时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" id="xg_drymixingtime" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>湿拌时间</td>
+                        		<td><input type="text" id="xg_wetmixingtime" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
                         		<td>油石比</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" id="xg_radio" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>成品温度要求</td>
+                        		<td><input type="text" id="xg_pdtemp" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
-                        		<td>湿拌时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>到现场温度要求</td>
+                        		<td><input type="text" id="xg_arrivetemp" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>单价</td>
+                        		<td><input type="text" id="xg_price" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
-                        		<td>级配</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>配方</td>
+                        		<td>
+                        			<select class="form-control" style="width:100%;" id="xg_recipeid">
+                                    </select>
+                                </td>
+                                <td></td>
+                                <td></td>
                         	</tr>
                         </table>
                     </form>  
@@ -947,13 +931,24 @@
 <script src="../../js/jquery-editable-select.js"></script>
 <script src="../../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/main.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
 <script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
     $(document).ready( function () {
     	$("#channeng").trigger("change");
     	initTable();
+    	laydate.render({
+            elem: '#drymixingtime', //指定元素
+   		    type: 'time',
+        });
+    	
+    	laydate.render({
+            elem: '#wetmixingtime', //指定元素
+   		    type: 'time',
+        });
 	});
     var table=$('#mainContent').DataTable({
         "deferRender": true,
@@ -1064,6 +1059,20 @@
             }
         });
     }
-	 
+	//新建生产计划
+	
+	var app5 = new Vue({
+	  el: '#NewShengChanJiHua',
+	  data: {
+		  planno:"",
+		  roadid:"",
+	  },
+	  methods: {
+		//新建生产计划保存按钮事件
+	    save: function () {
+	    	alert(this.planno)
+	    }
+	  }
+	})
 </script>
 </html>
