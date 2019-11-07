@@ -3,6 +3,8 @@ package com.ldxx.bean;
 import java.math.BigDecimal;
 import java.sql.Time;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class PlanProductionCollection
 {
     private String planid;
@@ -17,8 +19,9 @@ public class PlanProductionCollection
 
     private String pdneed;
 
+    @DateTimeFormat(pattern = "hh-mm-ss")
     private Time drymixingtime;
-
+    @DateTimeFormat(pattern = "hh-mm-ss")
     private Time wetmixingtime;
 
     private BigDecimal radio;

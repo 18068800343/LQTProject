@@ -9,4 +9,6 @@ public interface  ShengChanJiHuaDao {
 	
 	List<PlanProductionCollectionVo> getShengChanJiHuaListByCondition();
 	
+	int addShengChanJiHua(PlanProductionCollection planProductionCollection);
+	
 }

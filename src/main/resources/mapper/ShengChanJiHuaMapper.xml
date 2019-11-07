@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ldxx.dao.ShengChanJiHuaDao" >
-	<insert id="addUser" parameterType="user">
-		insert into u_user 
-			(user_Id,username,password,user_code,work_id,record_no,u_name,sex,birthday,nation,
-			marriage,political_status,entry_time,card_id,address,postal_code,phone_no,email,
-			diploma,school,specialty,graduation_time,om_id,duty_id,duty_name,certificate,certificate_grade,delete_state,position)
-			values(#{user.userId,jdbcType=VARCHAR},#{user.username,jdbcType=VARCHAR},#{user.password,jdbcType=VARCHAR},#{user.userCode,jdbcType=VARCHAR},#{user.workId,jdbcType=VARCHAR},#{user.recordNo,jdbcType=VARCHAR},
-			#{user.uName,jdbcType=VARCHAR},#{user.sex,jdbcType=VARCHAR},#{user.birthday,jdbcType=VARCHAR},#{user.nation,jdbcType=VARCHAR},#{user.marriage,jdbcType=VARCHAR},#{user.politicalStatus,jdbcType=VARCHAR},
-			#{user.entryTime,jdbcType=VARCHAR},#{user.cardId,jdbcType=VARCHAR},#{user.address,jdbcType=VARCHAR},#{user.postalCode,jdbcType=VARCHAR},#{user.phoneNo,jdbcType=VARCHAR},#{user.email,jdbcType=VARCHAR},
-			#{user.diploma,jdbcType=VARCHAR},#{user.school,jdbcType=VARCHAR},#{user.specialty,jdbcType=VARCHAR},#{user.graduationTime,jdbcType=VARCHAR},#{user.omId,jdbcType=VARCHAR},#{user.dutyId,jdbcType=VARCHAR},
-			#{user.dutyName,jdbcType=VARCHAR},#{user.certificate,jdbcType=VARCHAR},#{user.certificateGrade,jdbcType=VARCHAR},1,#{user.position,jdbcType=VARCHAR})
+	<insert id="addShengChanJiHua" parameterType="planProductionCollection">
+		insert into plan_production_collection 
+			(plan_id,road_id,plan_no,road_number,recipe_id,pd_need,dry_mixing_time,wet_mixing_time,radio,pd_temp,
+			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state)
+			values(#{_parameter.planId},#{_parameter.road_id},#{_parameter.plan_no},
+			#{_parameter.road_number},#{_parameter.recipe_id},#{_parameter.pd_need},
+			#{_parameter.dry_mixing_time},#{_parameter.wet_mixing_time},
+			#{_parameter.radio},#{_parameter.pd_temp},
+			#{_parameter.arrive_temp},#{_parameter.price},
+			#{_parameter.datetime},#{_parameter.edit_user_id},
+			#{_parameter.edit_datetime},#{_parameter.delete_state})
 	</insert>
 
 	<update id="deleteUser" parameterType="String">

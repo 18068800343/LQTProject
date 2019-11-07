@@ -8,4 +8,6 @@ import com.ldxx.vo.PlanProductionCollectionVo;
 public interface ShengChanJiHuaService {
 	
 	List<PlanProductionCollectionVo> getShengChanJiHuaListByCondition();
+	
+	int addShengChanJiHua(PlanProductionCollection planProductionCollection);
 }

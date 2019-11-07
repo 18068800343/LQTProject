@@ -26,4 +26,10 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService{
 		// TODO Auto-generated method stub
 		return dao.getShengChanJiHuaListByCondition();
 	}
+
+	@Override
+	public int addShengChanJiHua(PlanProductionCollection planProductionCollection) {
+		// TODO Auto-generated method stub
+		return dao.addShengChanJiHua(planProductionCollection);
+	}
 }

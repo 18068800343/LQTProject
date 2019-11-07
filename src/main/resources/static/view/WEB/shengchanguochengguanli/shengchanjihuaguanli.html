@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../../font2/iconfont.css">
 	<link href="../../style/bootstrap.min.css" rel="stylesheet">
+	<link href="../../toastr/toastr.css" rel="stylesheet">
     <link href="../../style/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../../style/jquery-editable-select.css">
@@ -557,7 +558,7 @@
                         	<tr>
                         		<td>标段</td>
                         		<td>
-                                	<select class="form-control" style="width:100%;" v-model="rdnumberSelected" id="rdnumber">
+                                	<select class="form-control" style="width:100%;" v-model="rdnumberSelected" id="roadnumber">
                                 	 <option :value="item.id" v-for="item in rdnumberList" >{{item.roadnumber}}</option>       
                                     </select>
                                 </td>
@@ -930,6 +931,7 @@
 <script src="../../js/jquery.js"></script>
 <script src="../../js/common-scripts.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../toastr/toastr.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
 <script src="../../js/jquery-editable-select.js"></script>
 <script src="../../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
@@ -958,7 +960,7 @@
 		"columns": [
             { "data": "roadno"}, 
             { "data": "sitename"}, 
-            { "data": "rdnumber"}, 
+            { "data": "roadnumber"}, 
             { "data": "flno"}, 
             { "data": "pdneed"}, 
             { "data": "drymixingtime"}, 
@@ -1073,7 +1075,7 @@
 	  data: {
 		  planno:"",
 		  roadid:"",
-		  rdnumber:"",
+		  roadnumber:"",
 		  //成品需要量
 		  pdneed:"",
 		  drymixingtime:"",
@@ -1096,7 +1098,12 @@
 	  methods: {
 		//新建生产计划保存按钮事件
 	    save: function () {
-	    	
+            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+            this.$http.post('/ShengChanJiHua/addShengChanJiHua',JSON.stringify(this._data),{}).then((res)=>{
+            	
+            },(res)=>{
+            	
+            });
 	    },
 	    reg:function(value,regType,id){
 	    	var re = new RegExp(regMap[regType]);
@@ -1105,7 +1112,7 @@
     		if(null!=value&&''!=value){
 		    	if(!flag){
 		    		app5[id]="";
-		    		alert(errMsg[id]);
+		    		toastr.error(errMsg[id]);
     		    }
     		}
 	    },
@@ -1121,9 +1128,11 @@
             });
         },
         roadChange:function(){
+        	
        	 	this.$http.post('/TanPuDiDianGuanLi/getBiaoDuanByLuDuan',{'roadno':this.roadSelected},{emulateJSON:true}).then((res)=>{
             	this.rdnumberList=res.body;
             	this.rdnumberSelected=this.rdnumberList[0].id;
+            	this.roadid=this.rdnumberSelected;
             },(res)=>{
                 console.log(res.status);
             });
