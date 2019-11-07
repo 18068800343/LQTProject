@@ -13,5 +13,4 @@ public interface DicMaterialsService {
 	public int deleteDicMaterials(String id);
 	
 	public int updateDicMaterials(DicMaterials dicMaterials);
-	
 }

@@ -29,7 +29,7 @@ public class DicMaterialsController {
 		int state = dicmService.addDicMaterials(dicMaterials);
 		
 		map.put("result",state);
-		map.put("dicMaterials", dicMaterials);
+		map.put("DicMaterials", dicMaterials);
 		return map;
 	}
 	
@@ -39,7 +39,7 @@ public class DicMaterialsController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int state = dicmService.updateDicMaterials(dicMaterials);
 		map.put("result",state);
-		map.put("dicMaterials", dicMaterials);
+		map.put("DicMaterials", dicMaterials);
 		return map;
 	}
 	@RequestMapping("/selectAllDicMaterials")
@@ -49,7 +49,7 @@ public class DicMaterialsController {
 		return list;
 	}
 	
-	@RequestMapping("/deleteDicMaterials")
+	@RequestMapping("/delDicMaterials")
 	@ResponseBody
 	public int deleteDicMaterials(String id) {
 		int state = dicmService.deleteDicMaterials(id);

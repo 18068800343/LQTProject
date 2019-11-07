@@ -25,7 +25,7 @@
 </update>
 
 <update id="deleteDicMaterials">
-	update sys_formulation_management 
+	update dic_materials 
 	set
 		delete_state=0
 	where id=#{id}
