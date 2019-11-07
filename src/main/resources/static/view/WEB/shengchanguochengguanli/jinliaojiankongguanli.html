@@ -230,7 +230,7 @@
 											<td>编号</td>
 											<td><input type="text"  id="bianhao" style="width: 70%;"/></td>
 											<td>时间</td>
-											<td><input type="date"  id="shijian" placeholder="请选择"style="width: 70%;" /></td>
+											<td><input type="text"  id="shijian" placeholder="请选择"style="width: 70%;" /></td>
 										</tr>
 										 <tr>
 											<!-- <td>重量</td>
@@ -286,7 +286,7 @@
 											<td>编号</td>
 											<td><input type="text"  id="xg_bianhao" style="width: 70%;"/></td>
 											<td>时间</td>
-											<td><input type="date"  id="xg_shijian" placeholder="请选择"style="width: 70%;" /></td>
+											<td><input type="text"  id="xg_shijian" placeholder="请选择"style="width: 70%;" /></td>
 										</tr>
 										 <tr>
 											<td>重量</td>
@@ -339,6 +339,7 @@
 <script src="../../js/jquery.dataTables.min.js"></script>
 <script src="../../js/main.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
 <script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
@@ -348,6 +349,15 @@
 
 	<script>
 		$(document).ready( function () {
+			laydate.render({
+		        elem: '#shijian', //指定元素
+		        type: 'datetime' 
+		    });
+			laydate.render({
+		        elem: '#xg_shijian', //指定元素
+		        type: 'datetime' 
+		    });
+			
 			initTable();
 			initCailiao();
 		});
