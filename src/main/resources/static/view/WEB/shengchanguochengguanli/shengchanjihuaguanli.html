@@ -549,19 +549,20 @@
                         		<td><input type="text" v-model="planno" id="planno" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         		<td>路段</td>
                         		<td>
-                        		    <select class="form-control" style="width:100%;" v-model="roadid" id="roadid">
-                        		      <option value="1">1</option>
+                        		    <select class="form-control" @change="roadChange" style="width:100%;" v-model="roadSelected" id="roadid">
+                        		       <option :value="road.roadno" v-for="road in roadList" >{{road.sitename}}</option>       
                                     </select>
                                 </td>
                         	</tr>
                         	<tr>
                         		<td>标段</td>
                         		<td>
-                                	<select class="form-control" style="width:100%;" v-model="rdnumber" id="rdnumber">
+                                	<select class="form-control" style="width:100%;" v-model="rdnumberSelected" id="rdnumber">
+                                	 <option :value="item.id" v-for="item in rdnumberList" >{{item.roadnumber}}</option>       
                                     </select>
                                 </td>
                         		<td>成品需要量</td>
-                        		<td><input type="text" v-model="pdneed" id="pdneed" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td><input type="text" @blur="reg(pdneed,'xiaoshu','pdneed')"  v-model="pdneed" id="pdneed" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
                         	</tr>
                         	<tr>
                         		<td>干拌时间</td>
@@ -925,6 +926,7 @@
 <!-- 修改model结束 -->
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="../../js/jquery.js"></script>
 <script src="../../js/common-scripts.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
@@ -940,7 +942,8 @@
     $(document).ready( function () {
     	$("#channeng").trigger("change");
     	initTable();
-	});
+    });
+    
     var table=$('#mainContent').DataTable({
         "deferRender": true,
         "processing": true,
@@ -1061,6 +1064,7 @@
 			pdtemp:'成品温度要求输入错误，请输入纯数字',
 			arrivetemp:'到现场温度要求输入错误，请输入纯数字',
 			price:'单价输入错误，请输入纯数字',
+			pdneed:'成品需要量输入错误，请输入纯数字',
 	}
 	//新建生产计划
 	var app5 = new Vue({
@@ -1070,8 +1074,8 @@
 		  planno:"",
 		  roadid:"",
 		  rdnumber:"",
+		  //成品需要量
 		  pdneed:"",
-		  
 		  drymixingtime:"",
 		  wetmixingtime:"",
 		  //油石比
@@ -1084,6 +1088,10 @@
 		  price:"",
 		  // 配方编号
 		  recipeid:"",
+		  roadList:'',
+       	  roadSelected:'',
+       	  rdnumberList:'',
+       	  rdnumberSelected:'',
 	  },
 	  methods: {
 		//新建生产计划保存按钮事件
@@ -1093,16 +1101,37 @@
 	    reg:function(value,regType,id){
 	    	var re = new RegExp(regMap[regType]);
 	    	var flag;
-	    		flag = reg(parseFloat(value),re);
-	    		if(null!=value&&''!=value){
-			    	if(!flag){
-			    		app5._data[id]="";
-			    		alert(errMsg[id]);
-	    		    }
-	    		}
-	    }
+    		flag = reg(parseFloat(value),re);
+    		if(null!=value&&''!=value){
+		    	if(!flag){
+		    		app5[id]="";
+		    		alert(errMsg[id]);
+    		    }
+    		}
+	    },
+        roadPost:function(){
+            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+            this.$http.post('/TanPuDiDianGuanLi/getDistinctTanPuDiDian',{},{emulateJSON:true}).then((res)=>{
+            	this.roadList=res.body;
+            	this.roadSelected=app5.roadList[0].roadno;
+            	//初始化路段时,同时初始化标段
+            	this.roadChange();
+            },(res)=>{
+                console.log(res.status);
+            });
+        },
+        roadChange:function(){
+       	 	this.$http.post('/TanPuDiDianGuanLi/getBiaoDuanByLuDuan',{'roadno':this.roadSelected},{emulateJSON:true}).then((res)=>{
+            	this.rdnumberList=res.body;
+            	this.rdnumberSelected=this.rdnumberList[0].id;
+            },(res)=>{
+                console.log(res.status);
+            });
+        }
 	  }
 	})
+	//初始化下拉框路段
+	app5.roadPost();
 	
 	laydate.render({
         elem: '#drymixingtime', //指定元素
