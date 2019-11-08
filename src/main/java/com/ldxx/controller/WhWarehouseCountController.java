@@ -42,7 +42,7 @@ public class WhWarehouseCountController {
 	@RequestMapping("/updWhWarehouseCountById")
 	@ResponseBody
 	public Map<String,Object> updWhWarehouseCountById(WhWarehouseCount wwc) {
-		wwc.setEditDatetime2(GetThisTimeUtils.getTime());
+		wwc.setEditDatetime2(GetThisTimeUtils.getDateTime());
 		int i= service.updWhWarehouseCountById(wwc);
 		map.put("result",i);
 		map.put("WhWarehouseCount",wwc);
@@ -59,7 +59,7 @@ public class WhWarehouseCountController {
 	@ResponseBody
 	public Map<String,Object> insertWhWarehouseCount(WhWarehouseCount wwc) {
 		wwc.setId(LDXXUtils.getUUID12());
-		wwc.setEditDatetime2(GetThisTimeUtils.getTime());
+		wwc.setEditDatetime2(GetThisTimeUtils.getDateTime());
 		int i= service.insertWhWarehouseCount(wwc);
 		map.put("result",i);
 		map.put("WhWarehouseCount",wwc);
