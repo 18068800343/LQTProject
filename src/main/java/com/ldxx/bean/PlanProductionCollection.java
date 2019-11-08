@@ -17,7 +17,7 @@ public class PlanProductionCollection
 
     private String recipeid;
 
-    private String pdneed;
+    private BigDecimal pdneed;
 
     @DateTimeFormat(pattern = "hh-mm-ss")
     private Time drymixingtime;
@@ -78,14 +78,6 @@ public class PlanProductionCollection
 
 	public void setRecipeid(String recipeid) {
 		this.recipeid = recipeid;
-	}
-
-	public String getPdneed() {
-		return pdneed;
-	}
-
-	public void setPdneed(String pdneed) {
-		this.pdneed = pdneed;
 	}
 	
 	public Time getDrymixingtime() {
@@ -167,4 +159,13 @@ public class PlanProductionCollection
 	public void setDeletestate(int deletestate) {
 		this.deletestate = deletestate;
 	}
+
+	public BigDecimal getPdneed() {
+		return pdneed;
+	}
+
+	public void setPdneed(BigDecimal pdneed) {
+		this.pdneed = pdneed;
+	}
+	
 }

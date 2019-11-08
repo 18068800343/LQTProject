@@ -3,15 +3,15 @@
 <mapper namespace="com.ldxx.dao.ShengChanJiHuaDao" >
 	<insert id="addShengChanJiHua" parameterType="planProductionCollection">
 		insert into plan_production_collection 
-			(plan_id,road_id,plan_no,road_number,recipe_id,pd_need,dry_mixing_time,wet_mixing_time,radio,pd_temp,
+			(plan_id,road_id,plan_no,recipe_id,pd_need,dry_mixing_time,wet_mixing_time,radio,pd_temp,
 			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state)
-			values(#{_parameter.planId},#{_parameter.road_id},#{_parameter.plan_no},
-			#{_parameter.road_number},#{_parameter.recipe_id},#{_parameter.pd_need},
-			#{_parameter.dry_mixing_time},#{_parameter.wet_mixing_time},
-			#{_parameter.radio},#{_parameter.pd_temp},
-			#{_parameter.arrive_temp},#{_parameter.price},
-			#{_parameter.datetime},#{_parameter.edit_user_id},
-			#{_parameter.edit_datetime},#{_parameter.delete_state})
+			values(#{planid},#{roadid},#{planno},
+			#{recipeid},#{pdneed},
+			#{drymixingtime},#{wetmixingtime},
+			#{radio},#{pdtemp},
+			#{arrivetemp},#{price},
+			#{datetime},#{edituserid},
+			#{editdatetime},#{deletestate})
 	</insert>
 
 	<update id="deleteUser" parameterType="String">
@@ -53,7 +53,7 @@
 	
 	<select id="getShengChanJiHuaListByCondition" resultType="planProductionCollectionVo">
 		SELECT
-			a.*,usr.u_name,sfm.fl_no,sc.site_name,sc.road_number as rdnumber,sc.road_no
+			round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,sc.site_name,sc.road_number as rdnumber,sc.road_no
 		FROM
 			plan_production_collection AS a
 		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1

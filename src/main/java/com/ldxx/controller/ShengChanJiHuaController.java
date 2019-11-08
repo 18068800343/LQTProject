@@ -1,9 +1,12 @@
 package com.ldxx.controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,11 +43,12 @@ public class ShengChanJiHuaController {
 	
 	@RequestMapping("/addShengChanJiHua")
 	@ResponseBody
-	public JSONObject addShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection) {
+	public JSONObject addShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection,HttpSession session) {
 		
 		JSONObject jsonObject = new JSONObject();
 		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
 		planProductionCollection.setDatetime(dateTime);
+		planProductionCollection.setPlanid(LDXXUtils.getUUID12());
 		try {
 			int i = service.addShengChanJiHua(planProductionCollection);
 			String daoMsg = MsgFormatUtils.getMsgByResult(i, "插入");
