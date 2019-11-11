@@ -49,4 +49,9 @@ public class BatchMgtServiceImpl implements BatchMgtService {
 		return dao.insertBatchMgt(bm);
 	}
 
+	@Override
+	public BatchMgt getBatchMgtByPlate(String licencePlate) {
+		return dao.getBatchMgtByPlate(licencePlate);
+	}
+
 }

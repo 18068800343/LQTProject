@@ -17,6 +17,7 @@ public class BatchMgt {
 	public String id;
 
     public String roadNo;//路段编号
+    public String roadName;
 
     public String batch;//批次
 
@@ -29,6 +30,7 @@ public class BatchMgt {
     public BigDecimal loadingTemperature;//装料温度
 
     public String pitchType;//成品沥青类型
+    public String pitchTypeName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -43,6 +45,23 @@ public class BatchMgt {
     public String editDatetime;//最后录入日期
 
     public int deleteState;//逻辑删除1存在，0删除
+
+    
+	public String getRoadName() {
+		return roadName;
+	}
+
+	public void setRoadName(String roadName) {
+		this.roadName = roadName;
+	}
+
+	public String getPitchTypeName() {
+		return pitchTypeName;
+	}
+
+	public void setPitchTypeName(String pitchTypeName) {
+		this.pitchTypeName = pitchTypeName;
+	}
 
 	public String getId() {
 		return id;

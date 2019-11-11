@@ -17,4 +17,6 @@ public interface BatchMgtDao {
 	int delBatchMgt(@Param("id")String id);
 
 	int insertBatchMgt(@Param("bm")BatchMgt bm);
+	
+	BatchMgt getBatchMgtByPlate(@Param("licencePlate")String licencePlate);
 }

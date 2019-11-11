@@ -48,7 +48,7 @@
         <div class="UpperPart">
             <div class="UpperPartL">
             	<button type="button" class="btn btn-primary" data-toggle="modal"  id="kc_luru" style="margin: 5PX;">空车重量录入</button> 
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入沥青砼批次管理</button> 
+                 <button type="button" class="btn btn-primary" data-toggle="modal" id="luru" style="margin: 5PX;">录入沥青砼批次管理</button> 
             </div>
             <div class="UpperPartR">
                 <!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
@@ -60,7 +60,7 @@
                 <thead>
                     <tr>
                         <th>路段编号</th>
-                        <th>批次</th>
+                        <!-- <th>批次</th> -->
                         <th>车牌</th>
                         <th>空车重量</th>
                         <th>装料重量</th>
@@ -151,7 +151,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success" id="baocun">保存</button>
+            <button type="button" class="btn btn-success" id="kc_baocun">保存</button>
         </div>
         </div>
     </div>
@@ -173,18 +173,19 @@
 								<td>路段编号</td>
 								<td>
 									<select class="form-inline" id="luduanbianhao" style="width: 70%;">
-										<option>11</option>
-										<option>22</option>
 									</select>
 								</td>
 								<td>车牌</td>
-								<td><input type="text" id="chepai" style="width: 70%;"/></td>
+								<td><input type="text" id="chepai" style="width: 70%;" disabled/></td>
 							</tr>
 							<tr>
 								<td>空车重量</td>
-								<td><input type="text" id="kongchezhongliang" style="width: 70%;"/></td>
+								<td><input type="text" id="kongchezhongliang" style="width: 70%;" disabled/></td>
 								<td>装料后重量</td>
-								<td><input type="text" id="zhuangzaihouzhongliang" style="width: 70%;"/></td>
+								<td>
+									<select class="form-inline" id="zhuangzaihouzhongliang" style="width: 70%;">
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td>装料温度</td>
@@ -197,7 +198,7 @@
 							</tr>
 							<tr>
 								<td>入场时间</td>
-								<td><input type="text" id="ruchangshijian" style="width: 70%;"/></td>
+								<td><input type="text" id="ruchangshijian" style="width: 70%;" disabled/></td>
 								<td>出场时间</td>
 								<td><input type="text" id="chuchangshijian" style="width: 70%;"/></td>
 							</tr>
@@ -213,7 +214,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success" >保存</button>
+            <button type="button" class="btn btn-success" id="baocun">保存</button>
         </div>
         </div>
     </div>
@@ -236,8 +237,6 @@
 								<td>路段编号</td>
 								<td>
 									<select class="form-inline" id="xg_luduanbianhao" style="width: 70%;">
-										<option>11</option>
-										<option>22</option>
 									</select>
 								</td>
 								<td>车牌</td>
@@ -276,7 +275,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success">保存</button>
+            <button type="button" class="btn btn-success" id="xg_baocun">保存</button>
         </div>
         </div>
     </div>
@@ -325,13 +324,13 @@
 		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
 		"columns": [
-            { "data": "roadNo"}, 
-            { "data": "batch"},
+            { "data": "roadName"}, 
+            /* { "data": "batch"}, */
             { "data": "licencePlate"},
             { "data": "unloadedWeight"},
             { "data": "loadingWeight"},
             { "data": "loadingTemperature"},
-            { "data": "pitchType"},
+            { "data": "pitchTypeName"},
             { "data": "datetimeIn"},
             { "data": "datetimeOut"},
             { "data": "editUserId"},
@@ -339,11 +338,11 @@
         ],
         "columnDefs": [{	
 					 "class": "tcenter",
-					    "targets": 10,
+					    "targets": 9,
 					    "searchable": true,
 					    "render": function(data, type, full) {
-					  	  		return '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
-	                            +'<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" id="del"  title="删除"></i>'
+					  	  		//'<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
+	                            return '<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" id="del"  title="删除"></i>'
 					        }
 					  }
 					  
@@ -385,23 +384,24 @@
     }
 	
 	function initluduanbianhao(){
-		/* $.ajax({
+		 $.ajax({
             type: 'POST',
-            url: '/TanPuDiDianGuanLi/getDistinctTanPuDiDian',
+            url: '/SysRoadMgnController/getAllSysRoadMgn',
             dataType: 'json',
             data: {
             },
             success: function (json) {
+            	console.log(json)
             	$("#luduanbianhao").html('');
 	        	$("#xg_luduanbianhao").html('');
 	        	 for(var i=0;i<json.length;i++){
-	        		 $("#luduanbianhao").append( "<option value='" + json[i].roadno + "'>"
-			                    + json[i].sitename + "</option>")
+	        		$("#luduanbianhao").append( "<option value='" + json[i].roadno + "'>"
+			                    + json[i].roadname + "</option>")
 		            $("#xg_luduanbianhao").append( "<option value='" + json[i].roadno + "'>"
-		                    + json[i].sitename + "</option>")
-	        	}
+		                    + json[i].roadname + "</option>")
+	        	} 
             }
-        }); */
+        }); 
 	}
 	
 
@@ -426,47 +426,55 @@
 	}
 	
 	function getChepai(){
+		var chepai;
 		$.ajax({
             type: 'POST',
             url: '/TmpPlate/getTmpPlate',
             dataType: 'json',
+            async: false, 
             data: {
             },
             success: function (json) {
-            	$("#kc_chepai").val(json.plate);
+            	chepai=json;
             }
         });
+		return chepai;
 	}
-	function getkc_zhongliang(){
+	function getzhongliang(){
+		var zhongliang;
 		$.ajax({
             type: 'POST',
             url: '/TmpWeight/getTmpWeight',
             dataType: 'json',
+            async: false, 
             data: {
             },
             success: function (json) {
-            	$("#kc_chepaizhongliang").html('');
-            	 for(var i=0;i<json.length;i++){
-	            	$("#kc_chepaizhongliang").append( "<option value='" + json[i].weight + "'>"
-		                    + json[i].weight + "</option>")
-            	 }
+            	zhongliang=json;
             }
         });
+		return zhongliang;
 	}
 	$("#kc_luru").click(function(){
-		getChepai();
-		getkc_zhongliang();
+		var chepai=getChepai();
+		$("#kc_chepai").val(chepai.plate);
+		var kc_zhongliang=getzhongliang();
+		$("#kc_chepaizhongliang").html('');
+	   	for(var i=0;i<kc_zhongliang.length;i++){
+	       	$("#kc_chepaizhongliang").append( "<option value='" + kc_zhongliang[i].weight + "'>"
+	                   + kc_zhongliang[i].weight + "</option>")
+	   	}
 		$("#myModal2").modal("show")
 	})
 	
 	
-	$("#baocun").click(function(){
+	$("#kc_baocun").click(function(){
 		var chepai=$("#kc_chepai").val();
 		var kongchezhongliang=$("#kc_chepaizhongliang").val();
 		var ruchangshijian=$("#kc_ruchangshijian").val();
 		$.ajax({
 	            type: 'POST',
-	            url: '/WhIncomingMaterial/insertWhIncomingMaterial',
+	            url: '/BatchMgt/insertBatchMgt',
 	            dataType: 'json',
 	            data: {
 	            	licencePlate:chepai,
@@ -480,7 +488,7 @@
 	               if(json.result>0){
 	            	   toastr.success("添加成功");
 	            	   $('#mainContent').DataTable().row.add(json.BatchMgt).draw(false);     //新增行立即显示
-	            	   $("#myModal").modal('hide');
+	            	   $("#myModal2").modal('hide');
 	               }else{
 	            	   toastr.error("添加失败");
 	               }
@@ -488,6 +496,74 @@
 	        });
 	})
 	
+	var luru_id;
+	$("#luru").click(function(){
+		var chepai=getChepai();
+		$("#chepai").val(chepai.plate)
+		var zhongliang=getzhongliang();
+		$("#zhuangzaihouzhongliang").html('');
+	   	for(var i=0;i<zhongliang.length;i++){
+	       	$("#zhuangzaihouzhongliang").append( "<option value='" + zhongliang[i].weight + "'>"
+	                   + zhongliang[i].weight + "</option>")
+	   	}
+		$.ajax({
+            type: 'POST',
+            url: '/BatchMgt/getBatchMgtByPlate',
+            dataType: 'json',
+            data: {
+            	licencePlate:chepai.plate
+            },
+            error: function (msg) {
+                toastr.error("请先录入空车重量");
+            },
+            success: function (json) {
+            	luru_id=json.id;
+            	$("#kongchezhongliang").val(json.unloadedWeight)
+            	$("#ruchangshijian").val(json.datetimeIn)
+				$("#myModal").modal("show")
+            }
+        });
+	})
+	
+	
+	$("#baocun").click(function(){
+		var roadNo=$("#luduanbianhao").val();
+		var licencePlate=$("#chepai").val();
+		var unloadedWeight=$("#kongchezhongliang").val();
+		var loadingWeight=$("#zhuangzaihouzhongliang").val();
+		var loadingTemperature=$("#zhuangliaowendu").val();
+		var pitchType=$("#liqingleixing").val();
+		var datetimeIn=$("#ruchangshijian").val();
+		var datetimeOut=$("#chuchangshijian").val();
+		var editUserId=$("#lururen").val();
+		
+		$.ajax({
+            type: 'POST',
+            url:'/BatchMgt/updBatchMgt',
+            dataType: 'json',
+            data: {
+            	id:luru_id,
+            	roadNo:roadNo,
+            	licencePlate:licencePlate,
+            	unloadedWeight:unloadedWeight,
+            	loadingWeight:loadingWeight,
+            	loadingTemperature:loadingTemperature,
+            	pitchType:pitchType,
+            	datetimeIn:datetimeIn,
+            	datetimeOut:datetimeOut,
+            	editUserId:editUserId,
+            },
+            success: function (json) {
+            	if(json.result>0){
+            	   toastr.success("录入成功");
+            	   $("#myModal").modal('hide');
+            	   initTable();
+               }else{
+            	   toastr.error("录入失败");
+               }
+            }
+        });
+	})
 	
 	//删除
     $('#mainContent').delegate('#del','click', function () {
@@ -541,6 +617,47 @@
 		$("#xg_lururen").val(data.editUserId);
 	})
 	
+	
+	$("#xg_baocun").click(function(){
+		var roadNo=$("#xg_luduanbianhao").val();
+		var licencePlate=$("#xg_chepai").val();
+		var unloadedWeight=$("#xg_kongchezhongliang").val();
+		var loadingWeight=$("#xg_zhuangzaihouzhongliang").val();
+		var loadingTemperature=$("#xg_zhuangliaowendu").val();
+		var pitchType=$("#xg_liqingleixing").val();
+		var datetimeIn=$("#xg_ruchangshijian").val();
+		var datetimeOut=$("#xg_chuchangshijian").val();
+		var editUserId=$("#xg_lururen").val();
+		
+		$.ajax({
+            type: 'POST',
+            url:'/BatchMgt/updBatchMgt',
+            dataType: 'json',
+            data: {
+            	id:xgId,
+            	roadNo:roadNo,
+            	licencePlate:licencePlate,
+            	unloadedWeight:unloadedWeight,
+            	loadingWeight:loadingWeight,
+            	loadingTemperature:loadingTemperature,
+            	pitchType:pitchType,
+            	datetimeIn:datetimeIn,
+            	datetimeOut:datetimeOut,
+            	editUserId:editUserId,
+            },
+            success: function (json) {
+            	if(json.result>0){
+            	   toastr.success("修改成功");
+            	   json.BatchMgt.pitchTypeName=$("#xg_liqingleixing").find("option:selected").text();
+            	   json.BatchMgt.roadName=$("#xg_luduanbianhao").find("option:selected").text();
+            	   $('#mainContent').DataTable().row(tr).data(json.BatchMgt);//修改行立即显示 */
+            	   $("#change").modal('hide');
+               }else{
+            	   toastr.error("修改失败");
+               }
+            }
+        });
+	})
     
 </script>
 </html>

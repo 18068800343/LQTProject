@@ -64,4 +64,11 @@ public class BatchMgtController {
 		map.put("BatchMgt", bm);
 		return map;
 	}
+	
+	@RequestMapping("/getBatchMgtByPlate")
+	@ResponseBody
+	public BatchMgt getBatchMgtByPlate(String licencePlate){
+		BatchMgt bm = service.getBatchMgtByPlate(licencePlate);
+		return bm;
+	}
 }

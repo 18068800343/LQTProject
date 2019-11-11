@@ -14,5 +14,7 @@ public interface BatchMgtService {
 	int delBatchMgt(String id);
 
 	int insertBatchMgt(BatchMgt bm);
+	
+	BatchMgt getBatchMgtByPlate(String licencePlate);
 
 }
