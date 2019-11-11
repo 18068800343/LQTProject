@@ -8,8 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -18,14 +16,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.ldxx.Constant.DateConstant;
+import com.ldxx.bean.PlanConstructionDeviation;
 import com.ldxx.bean.PlanProductionCollection;
 import com.ldxx.bean.User;
+import com.ldxx.dao.ShengChanJiHuaDao;
 import com.ldxx.service.ShengChanJiHuaService;
-import com.ldxx.service.UserService;
 import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
+import com.ldxx.vo.PlanConstructionDeviationVo;
 import com.ldxx.vo.PlanProductionCollectionVo;
 
 @Controller
@@ -34,6 +36,8 @@ public class ShengChanJiHuaController {
 	
 	@Autowired
 	private ShengChanJiHuaService service;
+	@Autowired
+	private ShengChanJiHuaDao dao;
 	
 	@RequestMapping("/getAllShengChanJiHua")
 	@ResponseBody
@@ -41,24 +45,66 @@ public class ShengChanJiHuaController {
         return service.getShengChanJiHuaListByCondition();
     }
 	
+	@RequestMapping("/getAllShiGongPianCha")
+	@ResponseBody
+	public List<PlanConstructionDeviationVo> getAllShiGongPianCha() {
+		return dao.getAllShiGongPianCha();
+	}
+	
 	@RequestMapping("/addShengChanJiHua")
 	@ResponseBody
-	public JSONObject addShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection,HttpSession session) {
+	public String addShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection,HttpSession session) {
 		
 		JSONObject jsonObject = new JSONObject();
 		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		String jhDateTime = DateUtil.getDateStrByPattern(DateConstant.DATE14_, new Date());
+		String planno = planProductionCollection.getPlanno();
+		planProductionCollection.setPlanno(planno+jhDateTime);
 		planProductionCollection.setDatetime(dateTime);
+		planProductionCollection.setEditdatetime(dateTime);
+		planProductionCollection.setDeletestate(1);
+		User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			planProductionCollection.setEdituserid(user.getUserId());;
+		}
 		planProductionCollection.setPlanid(LDXXUtils.getUUID12());
 		try {
 			int i = service.addShengChanJiHua(planProductionCollection);
-			String daoMsg = MsgFormatUtils.getMsgByResult(i, "插入");
+			String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
 			jsonObject.put("resultMsg",daoMsg);
+			jsonObject.put("daoMsg",i);
+			jsonObject.put("obj",planProductionCollection);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String result = jsonObject.toString();
+		return result;
+		
+	}
+	
+	@RequestMapping("/updateShengChanJiHua")
+	@ResponseBody
+	public String updateShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection,HttpSession session) {
+		
+		JSONObject jsonObject = new JSONObject();
+		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		planProductionCollection.setEditdatetime(dateTime);
+		planProductionCollection.setDeletestate(1);
+		User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			planProductionCollection.setEdituserid(user.getUserId());;
+		}
+		try {
+			int i = dao.updateShengChanJiHua(planProductionCollection);
+			String chnsMsg = MsgFormatUtils.getMsgByResult(i, "修改");
+			jsonObject.put("resultMsg",chnsMsg);
 			jsonObject.put("daoMsg",i);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return jsonObject;
+		return jsonObject.toString();
 		
 	}
 

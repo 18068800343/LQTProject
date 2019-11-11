@@ -20,9 +20,9 @@
 		where id=#{t.id}
 	</update>
 	
-	<delete id="delTruckInfo">
+	<update id="delTruckInfo">
 		update  truck_info set delete_state=0 where id=#{id}
-	</delete>
+	</update>
 	
 	<insert id="insertTruckInfo" parameterType="TruckInfo">
 		insert into truck_info(id,truck_ic,truck_type,weight,driver,GPS_id,delete_state) values(#{t.id},#{t.truckIc},#{t.truckType},#{t.weight},#{t.driver},#{t.GPSId},1)

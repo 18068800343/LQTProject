@@ -16,5 +16,7 @@ public interface SysFormulationManagementDao {
 	
 	public SysFormulationManagement selectByIdSysFormulationManagement();
 	
+	public List<SysFormulationManagement> getFlName();
+	
 	
 }

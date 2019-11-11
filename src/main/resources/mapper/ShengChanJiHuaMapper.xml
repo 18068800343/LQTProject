@@ -13,6 +13,16 @@
 			#{datetime},#{edituserid},
 			#{editdatetime},#{deletestate})
 	</insert>
+	
+	<update id="updateShengChanJiHua" parameterType="planProductionCollection">
+		update plan_production_collection 
+			set road_id=#{roadid},plan_no=#{planno},
+			recipe_id=#{recipeid},pd_need=#{pdneed},dry_mixing_time=#{drymixingtime},
+			wet_mixing_time=#{wetmixingtime},radio=#{radio},pd_temp=#{pdtemp},
+			arrive_temp=#{arrivetemp},price=#{price},datetime=#{datetime},
+			edit_user_id=#{edituserid},edit_datetime=#{editdatetime},delete_state=#{deletestate}
+			where plan_id=#{planid}
+	</update>
 
 	<update id="deleteUser" parameterType="String">
 		update u_user set delete_state=0 where user_id=#{userId}
@@ -53,7 +63,7 @@
 	
 	<select id="getShengChanJiHuaListByCondition" resultType="planProductionCollectionVo">
 		SELECT
-			round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,sc.site_name,sc.road_number as rdnumber,sc.road_no
+			sc.road_number,round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,sc.site_name,sc.road_no
 		FROM
 			plan_production_collection AS a
 		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
@@ -61,6 +71,11 @@
 		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = a.recipe_id and sfm.delete_state = 1
 		WHERE
   		a.delete_state = 1 order by a.datetime desc
+	</select>
+	
+	<select id="getAllShiGongPianCha" resultType="planConstructionDeviationVo">
+		SELECT a.* from plan_construction_deviation a
+    WHERE  a.delete_state = 1 order by a.datetime desc
 	</select>
 	
 	<select id="selectUserById" parameterType="String" resultType="user">

@@ -34,7 +34,7 @@
 			 materials_use_6=#{sysFormulationManagement.materialsUse6},
 			 bone_flour_use=#{sysFormulationManagement.boneFlourUse},
 			 pitch_use=#{sysFormulationManagement.pitchUse},
-			 other_use=#{sysFormulationManagement.otherUse},
+			 other_use=#{sysFormulationManagement.otherUse}
 	    where fl_id=#{sysFormulationManagement.flId} and delete_state=1
 	</update>
 	<select id="selectAllSysFormulationManagement" resultType="SysFormulationManagement">
@@ -64,5 +64,13 @@
 		 where fl_id=#{sysFormulationManagement.flId}
 	</update>
 	
+	
+	<select id="getFlName" resultType="SysFormulationManagement">
+		select 
+			fl_id,fl_no,fl_name
+		from
+		  sys_formulation_management
+		where delete_state=1
+	</select>
 	
 </mapper>
