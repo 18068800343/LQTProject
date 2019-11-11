@@ -11,6 +11,13 @@
     <link href="../../toastr/toastr.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
+     <!-- SmartAdmin RTL Support  -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
     <style lang="">
         .UpperPart{
             display: flex;
@@ -177,13 +184,16 @@
 								<td>空车重量</td>
 								<td><input type="text" id="kongchezhongliang" style="width: 70%;"/></td>
 								<td>装料后重量</td>
-								<td><input type="text" style="width: 70%;"/></td>
+								<td><input type="text" id="zhuangzaihouzhongliang" style="width: 70%;"/></td>
 							</tr>
 							<tr>
 								<td>装料温度</td>
-								<td><input type="text" style="width: 70%;"/></td>
+								<td><input type="text" id="zhuangliaowendu" style="width: 70%;"/></td>
 								<td>成品沥青类型</td>
-								<td><input type="text" style="width: 70%;"/></td>
+								<td>
+									<select class="form-inline" id="liqingleixing" style="width: 70%;">
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td>入场时间</td>
@@ -193,7 +203,7 @@
 							</tr>
 							<tr>
 								<td>录入人</td>
-								<td><input type="text" style="width: 70%;"/></td>
+								<td><input type="text" id="lururen" style="width: 70%;"/></td>
 								<td></td>
 								<td></td>
 							</tr>
@@ -233,25 +243,28 @@
 							</tr>
 							<tr>
 								<td>空车重量</td>
-								<td><input type="text" id="xg_kongchezhongliang"/></td>
+								<td><input type="text" id="xg_kongchezhongliang" style="width: 70%;"/></td>
 								<td>装料后重量</td>
-								<td><input type="text" /></td>
+								<td><input type="text" id="xg_zhuangzaihouzhongliang" style="width: 70%;"/></td>
 							</tr>
 							<tr>
 								<td>装料温度</td>
-								<td><input type="text" /></td>
+								<td><input type="text" id="xg_zhuangliaowendu" style="width: 70%;"/></td>
 								<td>成品沥青类型</td>
-								<td><input type="text" /></td>
+								<td>
+									<select class="form-inline" id="xg_liqingleixing" style="width: 70%;">
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td>入场时间</td>
-								<td><input type="text" /></td>
+								<td><input type="text" id="xg_ruchangshijian" style="width: 70%;"/></td>
 								<td>出场时间</td>
-								<td><input type="text" /></td>
+								<td><input type="text" id="xg_chuchangshijian" style="width: 70%;"/></td>
 							</tr>
 							<tr>
 								<td>录入人</td>
-								<td><input type="text" /></td>
+								<td><input type="text" id="xg_lururen" style="width: 70%;"/></td>
 								<td></td>
 								<td></td>
 							</tr>
@@ -274,10 +287,13 @@
 <script src="../../js/jquery.dataTables.min.js"></script>
 <script src="../../toastr/toastr.js"></script>
 <script src="../../js/laydate/laydate.js"></script>
+<script src="../../js/SmartNotification.min.js"></script>
+<script src="../../js/myTool.js"></script>
 <script>
     $(document).ready( function () {
     	initTable();
     	initluduanbianhao();
+    	initliqingleixing();
     	
     	laydate.render({
 	        elem: '#ruchangshijian', //指定元素
@@ -366,7 +382,7 @@
             data: {
             },
             success: function (json) {
-            	$("#xg_luduanbianhao").html('');
+            	$("#luduanbianhao").html('');
 	        	$("#xg_luduanbianhao").html('');
 	        	 for(var i=0;i<json.length;i++){
 	        		 $("#luduanbianhao").append( "<option value='" + json[i].roadno + "'>"
@@ -377,7 +393,81 @@
             }
         });
 	}
+	
 
+	function initliqingleixing(){
+		$.ajax({
+            type: 'POST',
+            url: '/SysFormulationManagement/getFlName',
+            dataType: 'json',
+            data: {
+            },
+            success: function (json) {
+            	$("#liqingleixing").html('');
+	        	$("#xg_liqingleixing").html('');
+	        	 for(var i=0;i<json.length;i++){
+	        		 $("#liqingleixing").append( "<option value='" + json[i].flId + "'>"
+			                    + json[i].flName + "</option>")
+		            $("#xg_liqingleixing").append( "<option value='" + json[i].flId + "'>"
+		                    + json[i].flName + "</option>")
+	        	}
+            }
+        });
+	}
+	
+	
+	//删除
+    $('#mainContent').delegate('#del','click', function () {
+		var dom = $(this).parents('tr');
+		var data=$('#mainContent').DataTable().row(dom).data();
+		$.SmartMessageBox({
+	            title: "删除提示",
+	            content: "确认删除？",
+	            buttons: '[取消][确定]'
+	        }, function (ButtonPressed) {
+	        	if (ButtonPressed === "确定") {
+	        		myTool.mask.show('删除中...');
+	        		$.ajax({
+	                    type: 'POST',
+	                    url:'/BatchMgt/delBatchMgt',
+	                    dataType: 'json',
+	                    data: {
+	                    	id:data.id
+	                    },
+	                    success: function (json) {
+							myTool.mask.hide();
+	                    	if(json!=0){
+	                    		$('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
+	                    		toastr.success('删除成功');
+	                    	}else{
+	                    		 toastr.error('删除失败');
+	                    	}
+	                    }
+	                }); 
+	        	    	
+	        	}
+	        });
+		
+	})
+	
+	var xgId;
+	var tr;
+	$("#mainContent").delegate("#upd","click",function(){
+		var dom = $(this).parents('tr');
+		tr = $(this).closest('tr');
+		var data=$('#mainContent').DataTable().row(dom).data();
+		xgId=data.id
+		$("#xg_luduanbianhao").val(data.roadNo);
+		$("#xg_chepai").val(data.licencePlate);
+		$("#xg_kongchezhongliang").val(data.unloadedWeight);
+		$("#xg_zhuangzaihouzhongliang").val(data.loadingWeight);
+		$("#xg_zhuangliaowendu").val(data.loadingTemperature);
+		$("#xg_liqingleixing").val(data.pitchType);
+		$("#xg_ruchangshijian").val(data.datetimeIn);
+		$("#xg_chuchangshijian").val(data.datetimeOut);
+		$("#xg_lururen").val(data.editUserId);
+	})
+	
     
 </script>
 </html>

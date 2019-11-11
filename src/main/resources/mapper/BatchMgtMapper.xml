@@ -29,7 +29,7 @@
 	</update>
 	
 	<update id="delBatchMgt">
-		update batch_mgt set delete_state=0 whereid=#{id}
+		update batch_mgt set delete_state=0 where id=#{id}
 	</update>
 	
 	<insert id="insertBatchMgt" parameterType="BatchMgt">

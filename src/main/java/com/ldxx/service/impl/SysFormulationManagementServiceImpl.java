@@ -46,4 +46,9 @@ public class SysFormulationManagementServiceImpl implements SysFormulationManage
 		return s;
 	}
 
+	@Override
+	public List<SysFormulationManagement> getFlName() {
+		return sdao.getFlName();
+	}
+
 }

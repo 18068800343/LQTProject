@@ -51,4 +51,11 @@ public class SysFormulationManagementController {
 		SysFormulationManagement s =sfmService.selectByIdSysFormulationManagement();
 		return s;
 	}
+	
+	@RequestMapping("/getFlName")
+	@ResponseBody
+	public List<SysFormulationManagement> getFlName(){
+		List<SysFormulationManagement> s =sfmService.getFlName();
+		return s;
+	}
 }

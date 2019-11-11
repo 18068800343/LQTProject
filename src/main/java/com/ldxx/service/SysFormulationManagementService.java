@@ -15,4 +15,6 @@ public interface SysFormulationManagementService {
 	public List<SysFormulationManagement> selectAllSysFormulationManagement();
 	
 	public SysFormulationManagement selectByIdSysFormulationManagement();
+	
+	public List<SysFormulationManagement> getFlName();
 }
