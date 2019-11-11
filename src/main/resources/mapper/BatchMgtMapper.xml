@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.BatchMgtDao" >
+
+	<select id="getAllBatchMgt" resultType="BatchMgt">
+		select id,road_no,batch,licence_plate,unloaded_weight,loading_weight,loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state
+		from batch_mgt where delete_state=1
+	</select>
+	
+	<select id="getBatchMgtById" resultType="BatchMgt">
+		select id,road_no,batch,licence_plate,unloaded_weight,loading_weight,loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state
+		from batch_mgt where id=#{id}
+	</select>
+	
+	<update id="updBatchMgt" parameterType="BatchMgt">
+		update batch_mgt set
+		road_no=#{bm.roadNo},
+		batch=#{bm.batch},
+		licence_plate=#{bm.licencePlate},
+		unloaded_weight=#{bm.unloadedWeight},
+		loading_weight=#{bm.loadingWeight},
+		loading_temperature=#{bm.loadingTemperature},
+		pitch_type=#{bm.pitchType},
+		datetime_in=#{bm.datetimeIn},
+		datetime_out=#{bm.datetimeOut},
+		edit_user_id=#{bm.editUserId},
+		edit_datetime=#{bm.editDatetime}
+		where id=#{bm.id}
+	</update>
+	
+	<update id="delBatchMgt">
+		update batch_mgt set delete_state=0 whereid=#{id}
+	</update>
+	
+	<insert id="insertBatchMgt" parameterType="BatchMgt">
+		insert into batch_mgt(id,road_no,batch,licence_plate,unloaded_weight,loading_weight,
+		loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state)
+		values(#{bm.id},#{bm.roadNo},#{bm.batch},#{bm.licencePlate},#{bm.unloadedWeight},#{bm.loadingWeight},
+		#{bm.loadingTemperature},#{bm.pitchType},#{bm.datetimeIn},#{bm.datetimeOut},#{bm.editUserId},#{bm.editDatetime},1)
+	</insert>
+
+</mapper>

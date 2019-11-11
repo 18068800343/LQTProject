@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ldxx.bean.WhIncomingMaterial;
 import com.ldxx.service.WhIncomingMaterialService;
 import com.ldxx.util.LDXXUtils;
-
+/**
+ * 进料监控报表
+ * @author hp
+ *
+ */
 @Controller
 @RequestMapping("WhIncomingMaterial")
 public class WhIncomingMaterialController {

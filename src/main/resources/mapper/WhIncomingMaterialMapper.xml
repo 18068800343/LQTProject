@@ -31,9 +31,9 @@
 		where id=#{wm.id}
 	</update>
 	
-	<delete id="delWhIncomingMaterialById">
+	<update id="delWhIncomingMaterialById">
 		update wh_incoming_material set delete_state=0 where id=#{id}
-	</delete>
+	</update>
 	
 	<insert id="insertWhIncomingMaterial" parameterType="WhIncomingMaterial">
 		insert into wh_incoming_material(id,no,datetime,weight,materials,water_content,company_id,price,stor_no,meminfo,edit_user_id,delete_state)
