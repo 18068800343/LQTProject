@@ -8,11 +8,17 @@ public class PlanProductionCollectionVo extends PlanProductionCollection
 	
 	private String flno;
 	
-	private String sitename;
-	
-	private String rdnumber;
+	private String roadname;
 	
 	private String roadno;
+	
+	public String getRoadno() {
+		return roadno;
+	}
+
+	public void setRoadno(String roadno) {
+		this.roadno = roadno;
+	}
 
 	public String getUname() {
 		return uname;
@@ -30,28 +36,12 @@ public class PlanProductionCollectionVo extends PlanProductionCollection
 		this.flno = flno;
 	}
 
-	public String getSitename() {
-		return sitename;
+	public String getRoadname() {
+		return roadname;
 	}
 
-	public void setSitename(String sitename) {
-		this.sitename = sitename;
+	public void setRoadname(String roadname) {
+		this.roadname = roadname;
 	}
 
-	public String getRoadno() {
-		return roadno;
-	}
-
-	public void setRoadno(String roadno) {
-		this.roadno = roadno;
-	}
-
-	public String getRdnumber() {
-		return rdnumber;
-	}
-
-	public void setRdnumber(String rdnumber) {
-		this.rdnumber = rdnumber;
-	}
-	
 }

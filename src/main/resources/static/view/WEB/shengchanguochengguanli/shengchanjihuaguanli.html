@@ -84,7 +84,6 @@ body {
 									<tr>
 										<th>路段编号</th>
 										<th>路段名称</th>
-										<th>标段号</th>
 										<th>配方编号</th>
 										<th>成品需要量（每日）</th>
 										<th>干拌时间</th>
@@ -498,7 +497,7 @@ body {
 									<td><input type="text" v-model="planno" id="planno" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 									<td>路段</td>
 									<td><select class="form-control" @change="roadChange" style="width: 100%;" v-model="roadSelected" id="roadid">
-											<option :value="road.roadno" v-for="road in roadList">{{road.sitename}}</option>
+											<option :value="road.roadno" v-for="road in roadList">{{road.roadname}}</option>
 										</select></td>
 								</tr>
 								<tr>
@@ -659,7 +658,7 @@ body {
 									<td><input type="text" v-model="planno" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 									<td>路段</td>
 									<td><select class="form-control" @change="roadChange" style="width: 100%;" v-model="roadSelected">
-											<option :value="road.roadno" v-for="road in roadList">{{road.sitename}}</option>
+											<option :value="road.roadno" v-for="road in roadList">{{road.roadname}}</option>
 										</select></td>
 								</tr>
 								<tr>
@@ -712,9 +711,97 @@ body {
 	</div>
 	<!-- 修改model结束 -->
 
-	<!-- 录入生产数据监控 -->
+	<!-- 录入施工路段偏差-->
 	<!-- Modal -->
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal3">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" id="addSGPC">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<b>录入施工路段偏差</b>
+					</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<form class="form-inline">
+							<table class="table table-bordered table-condensed" style="height: auto;">
+								<tr>
+									<td style="width: 20%;">偏差编号</td>
+									<td><input type="text" v-model="pianchano" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td>路段</td>
+									<td><select class="form-control" style="width: 100%;" v-model="roadSelected">
+											<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
+										</select></select></td>
+								</tr>
+								<tr>
+									<td>料1用量</td>
+									<td><input type="text" @blur="reg(Materialdeviation1,'xiaoshu','Materialdeviation1')" v-model="Materialdeviation1" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td>料2用量</td>
+									<td><input type="text" @blur="reg(Materialdeviation2,'xiaoshu','Materialdeviation2')" v-model="Materialdeviation2" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								</tr>
+								<tr>
+									<td>料3用量</td>
+									<td><input type="text" @blur="reg(Materialdeviation3,'xiaoshu','Materialdeviation3')" v-model="Materialdeviation3" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td>料4用量</td>
+									<td><input type="text" @blur="reg(Materialdeviation4,'xiaoshu','Materialdeviation4')" v-model="Materialdeviation4" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								</tr>
+								<tr>
+									<td>料5用量</td>
+									<td><input type="text" @blur="reg(Materialdeviation5,'xiaoshu','Materialdeviation5')" v-model="Materialdeviation5" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td>料6用量</td>
+									<td><input type="text" @blur="reg(Materialdeviation6,'xiaoshu','Materialdeviation6')" v-model="Materialdeviation6" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								</tr>
+								<tr>
+									<td>粉料偏差量</td>
+									<td><input type="text" @blur="reg(Boneflourdeviation,'xiaoshu','Boneflourdeviation')" v-model="Boneflourdeviation" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td>沥青偏差量</td>
+									<td><input type="text" @blur="reg(pitchdeviation,'xiaoshu','pitchdeviation')" v-model="pitchdeviation" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								</tr>
+								<tr>
+								</tr>
+								<tr>
+									<td>最高温度</td>
+									<td><input type="text" @blur="reg(tempmax,'xiaoshu','tempmax')" v-model="tempmax" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td>最低温度</td>
+									<td><input type="text" @blur="reg(tempmin,'xiaoshu','tempmin')" v-model="tempmin" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								</tr>
+								<tr>
+									<td>干拌时间偏差</td>
+									<td><input type="text" @blur="reg(drymixingtimedeviation,'xiaoshu','drymixingtimedeviation')" v-model="drymixingtimedeviation" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td>湿拌时间偏差</td>
+									<td><input type="text" @blur="reg(wetmixingtimedeviation,'xiaoshu','wetmixingtimedeviation')" v-model="wetmixingtimedeviation" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								</tr>
+								<tr>
+									<td>通过率偏差4.75</td>
+									<td><input type="text" @blur="reg(pass475,'xiaoshu','pass475')" v-model="pass475" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td>通过率偏差2.36</td>
+									<td><input type="text" @blur="reg(pass236,'xiaoshu','pass236')" v-model="pass236" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								</tr>
+								<tr>
+									<td>通过率偏差0.075</td>
+									<td><input type="text" @blur="reg(pass0075,'xiaoshu','pass0075')" v-model="pass0075" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-default" @click="save">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- model结束 -->
+
+	<!-- 修改施工路段偏差-->
+	<!-- Modal -->
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change3">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -722,72 +809,68 @@ body {
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						<b>录入生产数据监控</b>
+						<b>修改施工路段偏差</b>
 					</h4>
 				</div>
 				<div class="modal-body">
 					<div>
 						<form class="form-inline">
-							<table class="table table-bordered table-condensed" style="height: 400PX;">
+							<table class="table table-bordered table-condensed" style="height: auto;">
 								<tr>
-									<td style="width: 20%;">序号</td>
+									<td style="width: 20%;">偏差编号</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
 									<td>路段</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>成品差</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
 									<td>料1用量</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
 									<td>料2用量</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
 									<td>料3用量</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
 									<td>料4用量</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
 									<td>料5用量</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
 									<td>料6用量</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
 									<td>粉料偏差量</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
 									<td>沥青偏差量</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
-									<td>干拌时间</td>
+								</tr>
+								<tr>
+									<td>最高温度</td>
+									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td>最低温度</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
-									<td>油石比</td>
+									<td>干拌时间偏差</td>
+									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td>湿拌时间偏差</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
-									<td>湿拌时间</td>
+									<td>通过率偏差4.75</td>
+									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td>通过率偏差2.36</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
-									<td>级配</td>
+									<td>通过率偏差0.075</td>
 									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td></td>
+									<td></td>
 								</tr>
 							</table>
 						</form>
@@ -801,96 +884,6 @@ body {
 		</div>
 	</div>
 	<!-- model结束 -->
-
-	<!-- 修改Modal -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change3">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>修改生产数据监控</b>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<form class="form-inline">
-							<table class="table table-bordered table-condensed" style="height: 400PX;">
-								<tr>
-									<td style="width: 20%;">序号</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>路段</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>成品差</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料1用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料2用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料3用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料4用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料5用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料6用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>粉料偏差量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>沥青偏差量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>干拌时间</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>油石比</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>湿拌时间</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>级配</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-							</table>
-
-						</form>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-success">保存</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 修改model结束 -->
 </body>
 <script src="../../js/jquery.js"></script>
 <script src="../../js/common-scripts.js"></script>
@@ -926,8 +919,7 @@ body {
         "order": [[11, 'desc']],
 		"columns": [
             { "data": "roadno"}, 
-            { "data": "sitename"}, 
-            { "data": "roadnumber"}, 
+            { "data": "roadname"}, 
             { "data": "flno"}, 
             { "data": "pdneed"}, 
             { "data": "drymixingtime"}, 
@@ -943,7 +935,7 @@ body {
         "columnDefs": [
 						 {	
 						 	"class": "tcenter",
-						    "targets": 13,
+						    "targets": 12,
 						    "searchable": true,
 						    "render": function(data, type, full) {
 						    	var xiangqing= '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看偏差信息"   data-toggle="modal" data-target="#allMsg2"></i>'
@@ -1015,12 +1007,12 @@ body {
 			    "searchable": true,
 			    "render": function(data, type, full) {
 			    	
-			    	var xiangqing= '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看偏差信息"   data-toggle="modal" data-target="#allMsg3"></i>'
+			    	//var xiangqing= '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看偏差信息"   data-toggle="modal" data-target="#allMsg3"></i>'
 			    	var xiugai='<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+full+'"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change3"></i>'
 			    	
 			    	var qiyong='<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>'
 			    	
-		    		return xiangqing+xiugai+qiyong;
+		    		return xiugai+qiyong;
 	    	    }
 		    }
 		  ],
@@ -1059,6 +1051,23 @@ body {
 			arrivetemp:'到现场温度要求输入错误，请输入纯数字',
 			price:'单价输入错误，请输入纯数字',
 			pdneed:'成品需要量输入错误，请输入纯数字',
+			
+			Materialdeviation1:'料1偏差量输入错误，请输入纯数字',
+			Materialdeviation2:'料2偏差量输入错误，请输入纯数字',
+			Materialdeviation3:'料3偏差量输入错误，请输入纯数字',
+			Materialdeviation4:'料4偏差量输入错误，请输入纯数字',
+			Materialdeviation5:'料5偏差量输入错误，请输入纯数字',
+			Materialdeviation6:'料6偏差量输入错误，请输入纯数字',
+			
+			Boneflourdeviation:'粉料偏差量输入错误，请输入纯数字',
+			pitchdeviation:'沥青偏差量输入错误，请输入纯数字',
+			tempmax:'最高温度输入错误，请输入纯数字',
+			tempmin:'最低温度输入错误，请输入纯数字',
+			drymixingtimedeviation:'干拌时间偏差输入错误，请输入纯数字',
+		  wetmixingtimedeviation:'成品需要量输入错误，请输入纯数字',
+		  pass475:'成品需要量输入错误，请输入纯数字',
+		  pass236:'成品需要量输入错误，请输入纯数字',
+		  pass0075:'成品需要量输入错误，请输入纯数字',
 	}
 	//新建生产计划
 	var app5 = new Vue({
@@ -1120,7 +1129,7 @@ body {
 	    },
         roadPost:function(){
             //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-            this.$http.post('/TanPuDiDianGuanLi/getDistinctTanPuDiDian',{},{emulateJSON:true}).then((res)=>{
+            this.$http.post('/SysRoadMgnController/getAllSysRoadMgn',{},{emulateJSON:true}).then((res)=>{
             	this.roadList=res.body;
             	this.roadSelected=app5.roadList[0].roadno;
             	//初始化路段时,同时初始化标段
@@ -1237,7 +1246,7 @@ body {
 	    },
         roadPost:function(){
             //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-            this.$http.post('/TanPuDiDianGuanLi/getDistinctTanPuDiDian',{},{emulateJSON:true}).then((res)=>{
+            this.$http.post('/SysRoadMgnController/getAllSysRoadMgn',{},{emulateJSON:true}).then((res)=>{
             	this.roadList=res.body;
             	this.roadSelected=app5.roadList[0].roadno;
             	//初始化路段时,同时初始化标段
@@ -1357,7 +1366,7 @@ body {
 	            url: '/ShengChanJiHua/delShengChanJiHuaById',
 	            dataType: 'json',
 	            data: {
-	            	id:$(e).attr("data-id")
+	            	planid:$(e).attr("data-id")
 	            },
 	            error: function (msg) {
 	                errMessage("请求UserController失败");
@@ -1365,7 +1374,7 @@ body {
 	            success: function (json) {
 	            	if(json>0){
 	            		toastr.success("删除成功");
-	                $('#mainContent2').DataTable().row(tr).remove().draw(false); //删除行立即显示
+	                $('#mainContent').DataTable().row(tr).remove().draw(false); //删除行立即显示
 	            	}else{
 	            	  toastr.error("删除失败");
 	            	}
@@ -1376,5 +1385,87 @@ body {
 		}
 	  console.log(msg);
 	}
+	
+	
+	//新建生产计划
+	var addSGPC = new Vue({
+	  el: '#addSGPC',
+	  //表单数据
+	  data: {
+		  pianchano:"",
+		  roadid:"",
+		  Materialdeviation1:"",
+		  Materialdeviation2:"",
+		  Materialdeviation3:"",
+		  Materialdeviation4:"",
+		  Materialdeviation5:"",
+		  Materialdeviation6:"",
+		  //粉料偏差量
+		  Boneflourdeviation:"",
+		  //沥青偏差量
+		  pitchdeviation:"",
+		  tempmax:"",
+		  tempmin:"",
+		  //干拌
+		  drymixingtimedeviation:'',
+		  //湿拌
+		  wetmixingtimedeviation:'',
+		  pass475:'',
+		  pass236:'',
+		  pass0075:'',
+		  roadList:'',
+   	  roadSelected:'',
+	  },
+	  methods: {
+		//新建生产计划保存按钮事件
+	    save: function () {
+            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+            this.$http.post('/ShengChanJiHua/addShiGongPianCha',JSON.stringify(this._data),{}).then((res)=>{
+            	var resMsg = res.body;
+            	if(resMsg.daoMsg>0){
+            		/* $('#mainContent').DataTable().row.add(resMsg.obj).draw(); */
+            		$("#myModal3").modal("hide");
+            		initTablePianCha();
+            		toastr.success(resMsg.resultMsg);
+            	}else{
+            		toastr.error(resMsg.resultMsg);
+            	}
+            },(res)=>{
+            	
+            });
+	    },
+	    reg:function(value,regType,id){
+	    	var re = new RegExp(regMap[regType]);
+	    	var flag;
+    		flag = reg(parseFloat(value),re);
+    		if(null!=value&&''!=value){
+		    	if(!flag){
+		    		addSGPC[id]="";
+		    		toastr.error(errMsg[id]);
+    		    }
+    		}
+	    },
+        roadPost:function(){
+            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+            this.$http.post('/SysRoadMgnController/getAllSysRoadMgn',{},{emulateJSON:true}).then((res)=>{
+            	this.roadList=res.body;
+            	this.roadSelected=this.roadList[0].roadid;
+            	//初始化路段时,同时初始化标段
+            },(res)=>{
+                console.log(res.status);
+            });
+        },
+        recipePost:function(){
+        	
+       	 	this.$http.post('/SysFormulationManagement/selectAllSysFormulationManagement',{'roadno':this.roadSelected},{emulateJSON:true}).then((res)=>{
+		       	 	this.recipeList=res.body;
+		        	this.recipeSelected=this.recipeList[0].flId;
+            },(res)=>{
+                console.log(res.status);
+            });
+        }
+	  }
+	})
+	addSGPC.roadPost();
 </script>
 </html>

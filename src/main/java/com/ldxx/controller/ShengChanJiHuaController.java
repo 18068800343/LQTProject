@@ -57,6 +57,16 @@ public class ShengChanJiHuaController {
 		return dao.delShengChanJiHuaById(planid);
 	}
 	
+	@RequestMapping("/addShiGongPianCha")
+	@ResponseBody
+	public int addShiGongPianCha(PlanConstructionDeviation planConstructionDeviation) {
+		planConstructionDeviation.setDeletestate(1);
+		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		planConstructionDeviation.setDatetime(dateTime);
+		
+		return dao.addShiGongPianCha(planConstructionDeviation);
+	}
+	
 	@RequestMapping("/addShengChanJiHua")
 	@ResponseBody
 	public String addShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection,HttpSession session) {

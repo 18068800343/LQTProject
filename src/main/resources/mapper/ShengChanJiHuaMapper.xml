@@ -63,11 +63,11 @@
 	
 	<select id="getShengChanJiHuaListByCondition" resultType="planProductionCollectionVo">
 		SELECT
-			round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,sc.site_name,sc.road_no
+			round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,srm.road_name,srm.road_no
 		FROM
 			plan_production_collection AS a
 		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
-		LEFT JOIN site_construction sc on a.road_id = sc.id and sc.delete_state = 1
+		LEFT JOIN sys_road_mgn srm on a.road_id = srm.road_id and srm.delete_state = 1
 		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = a.recipe_id and sfm.delete_state = 1
 		WHERE
   		a.delete_state = 1 order by a.datetime desc

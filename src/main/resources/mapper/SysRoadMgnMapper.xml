@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.SysRoadMgnDao" >
+	
+	<insert id="addSysRoadMgn" parameterType="SysRoadMgn">
+		insert into sys_road_mgn (id,warn_name,warn_set) values(#{ss.id},#{ss.warnName},#{ss.warnSet})
+	</insert>
+	
+	<update id="updateSysRoadMgnById">
+		update sys_road_mgn set 
+		road_no=#{roadno},road_name=#{roadname},
+		start_lng=#{startlng},start_lat=#{startlat},
+		end_lng=#{endlng},end_lat=#{endlat},
+		remarks=#{remarks}
+		where id=#{roadid}
+	</update>
+	
+	<select id="getAllSysRoadMgn" resultType="SysRoadMgn">
+		select * from sys_road_mgn where delete_state = 1
+	</select>
+	
+	<delete id="delSysRoadMgn">
+		delete from sys_road_mgn where id=#{id}
+	</delete>
+
+</mapper>
