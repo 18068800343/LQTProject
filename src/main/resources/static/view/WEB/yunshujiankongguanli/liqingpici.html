@@ -47,7 +47,7 @@
     <div class="zhuti-content">
         <div class="UpperPart">
             <div class="UpperPartL">
-            	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" style="margin: 5PX;">空车重量录入</button> 
+            	<button type="button" class="btn btn-primary" data-toggle="modal"  id="kc_luru" style="margin: 5PX;">空车重量录入</button> 
                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入沥青砼批次管理</button> 
             </div>
             <div class="UpperPartR">
@@ -134,18 +134,16 @@
                         <table class="table table-bordered">
 							<tr>
 								<td style="width: 20%;">车牌</td>
-								<td style="width: 30%;"><input type="text" style="width: 70%;"/></td>
+								<td style="width: 30%;"><input type="text" id="kc_chepai" style="width: 70%;"/></td>
 								<td style="width: 20%;">空车重量</td>
 								<td style="width: 30%;">
-									<select class="form-inline" id="" style="width: 70%;">
-										<option>1</option>
-										<option>2</option>
+									<select class="form-inline" id="kc_chepaizhongliang" style="width: 70%;">
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<td>入场时间</td>
-								<td><input type="text" style="width: 70%;"/></td>
+								<td><input type="text" id="kc_ruchangshijian" style="width: 70%;"/></td>
 							</tr>
                         </table>
                     </form> 
@@ -153,7 +151,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success" >保存</button>
+            <button type="button" class="btn btn-success" id="baocun">保存</button>
         </div>
         </div>
     </div>
@@ -175,6 +173,8 @@
 								<td>路段编号</td>
 								<td>
 									<select class="form-inline" id="luduanbianhao" style="width: 70%;">
+										<option>11</option>
+										<option>22</option>
 									</select>
 								</td>
 								<td>车牌</td>
@@ -236,6 +236,8 @@
 								<td>路段编号</td>
 								<td>
 									<select class="form-inline" id="xg_luduanbianhao" style="width: 70%;">
+										<option>11</option>
+										<option>22</option>
 									</select>
 								</td>
 								<td>车牌</td>
@@ -294,7 +296,15 @@
     	initTable();
     	initluduanbianhao();
     	initliqingleixing();
-    	
+    	var now=new Date().getTime();
+    	laydate.render({
+	        elem: '#kc_ruchangshijian', //指定元素
+	        type: 'datetime' ,
+	        value:new Date(now),
+	        done:function(value,date,endDate){
+	        	this.value=value;
+	        }
+	    });
     	laydate.render({
 	        elem: '#ruchangshijian', //指定元素
 	        type: 'datetime' 
@@ -375,7 +385,7 @@
     }
 	
 	function initluduanbianhao(){
-		$.ajax({
+		/* $.ajax({
             type: 'POST',
             url: '/TanPuDiDianGuanLi/getDistinctTanPuDiDian',
             dataType: 'json',
@@ -391,7 +401,7 @@
 		                    + json[i].sitename + "</option>")
 	        	}
             }
-        });
+        }); */
 	}
 	
 
@@ -414,6 +424,69 @@
             }
         });
 	}
+	
+	function getChepai(){
+		$.ajax({
+            type: 'POST',
+            url: '/TmpPlate/getTmpPlate',
+            dataType: 'json',
+            data: {
+            },
+            success: function (json) {
+            	$("#kc_chepai").val(json.plate);
+            }
+        });
+	}
+	function getkc_zhongliang(){
+		$.ajax({
+            type: 'POST',
+            url: '/TmpWeight/getTmpWeight',
+            dataType: 'json',
+            data: {
+            },
+            success: function (json) {
+            	$("#kc_chepaizhongliang").html('');
+            	 for(var i=0;i<json.length;i++){
+	            	$("#kc_chepaizhongliang").append( "<option value='" + json[i].weight + "'>"
+		                    + json[i].weight + "</option>")
+            	 }
+            }
+        });
+	}
+	$("#kc_luru").click(function(){
+		getChepai();
+		getkc_zhongliang();
+		$("#myModal2").modal("show")
+	})
+	
+	
+	$("#baocun").click(function(){
+		var chepai=$("#kc_chepai").val();
+		var kongchezhongliang=$("#kc_chepaizhongliang").val();
+		var ruchangshijian=$("#kc_ruchangshijian").val();
+		$.ajax({
+	            type: 'POST',
+	            url: '/WhIncomingMaterial/insertWhIncomingMaterial',
+	            dataType: 'json',
+	            data: {
+	            	licencePlate:chepai,
+	            	unloadedWeight:kongchezhongliang,
+	            	datetimeIn:ruchangshijian,
+	            },
+	            error: function (msg) {
+	                errMessage("请求UserController失败");
+	            },
+	            success: function (json) {
+	               if(json.result>0){
+	            	   toastr.success("添加成功");
+	            	   $('#mainContent').DataTable().row.add(json.BatchMgt).draw(false);     //新增行立即显示
+	            	   $("#myModal").modal('hide');
+	               }else{
+	            	   toastr.error("添加失败");
+	               }
+	            }
+	        });
+	})
 	
 	
 	//删除
