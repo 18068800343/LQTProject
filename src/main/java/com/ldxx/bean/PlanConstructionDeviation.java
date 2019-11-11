@@ -3,47 +3,53 @@ package com.ldxx.bean;
 import java.math.BigDecimal;
 import java.sql.Time;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class PlanConstructionDeviation
 {
-	private String id;
+    public String id;
 
-	private String planid;
+    public String planid;
 
-	private String roadid;
+    public String roadid;
 
-	private BigDecimal Material_deviation_1;
-
-	private BigDecimal Material_deviation_2;
-
-	private BigDecimal Material_deviation_3;
-
-	private BigDecimal Material_deviation_4;
-
-	private BigDecimal Material_deviation_5;
-
-	private BigDecimal Material_deviation_6;
-
-	private BigDecimal Bone_flour_deviation;
-
-	private BigDecimal pitchdeviation;
-
-	private BigDecimal tempmax;
-
-	private BigDecimal tempmin;
-
-	private Time dry_mixing_time_deviation;
-
-	private Time wet_mixing_time_deviation;
-
-	private BigDecimal pass_475;
-
-	private BigDecimal pass_236;
-
-	private BigDecimal pass_0075;
-
-	private String datetime;
+    public String pianchaname;
     
-	private int delete_state;
+    private String pianchano;
+    
+    public BigDecimal Materialdeviation1;
+
+    public BigDecimal Materialdeviation2;
+
+    public BigDecimal Materialdeviation3;
+
+    public BigDecimal Materialdeviation4;
+
+    public BigDecimal Materialdeviation5;
+
+    public BigDecimal Materialdeviation6;
+
+    public BigDecimal Boneflourdeviation;
+
+    public BigDecimal pitchdeviation;
+
+    public BigDecimal tempmax;
+
+    public BigDecimal tempmin;
+    @DateTimeFormat(pattern = "hh-mm-ss")
+    public Time drymixingtimedeviation;
+    @DateTimeFormat(pattern = "hh-mm-ss")
+    public Time wetmixingtimedeviation;
+
+    public BigDecimal pass475;
+
+    public BigDecimal pass236;
+
+    public BigDecimal pass0075;
+
+    public String datetime;
+
+    public int deletestate;
 
 	public String getId() {
 		return id;
@@ -69,60 +75,60 @@ public class PlanConstructionDeviation
 		this.roadid = roadid;
 	}
 
-	public BigDecimal getMaterial_deviation_1() {
-		return Material_deviation_1;
+	public BigDecimal getMaterialdeviation1() {
+		return Materialdeviation1;
 	}
 
-	public void setMaterial_deviation_1(BigDecimal material_deviation_1) {
-		Material_deviation_1 = material_deviation_1;
+	public void setMaterialdeviation1(BigDecimal materialdeviation1) {
+		Materialdeviation1 = materialdeviation1;
 	}
 
-	public BigDecimal getMaterial_deviation_2() {
-		return Material_deviation_2;
+	public BigDecimal getMaterialdeviation2() {
+		return Materialdeviation2;
 	}
 
-	public void setMaterial_deviation_2(BigDecimal material_deviation_2) {
-		Material_deviation_2 = material_deviation_2;
+	public void setMaterialdeviation2(BigDecimal materialdeviation2) {
+		Materialdeviation2 = materialdeviation2;
 	}
 
-	public BigDecimal getMaterial_deviation_3() {
-		return Material_deviation_3;
+	public BigDecimal getMaterialdeviation3() {
+		return Materialdeviation3;
 	}
 
-	public void setMaterial_deviation_3(BigDecimal material_deviation_3) {
-		Material_deviation_3 = material_deviation_3;
+	public void setMaterialdeviation3(BigDecimal materialdeviation3) {
+		Materialdeviation3 = materialdeviation3;
 	}
 
-	public BigDecimal getMaterial_deviation_4() {
-		return Material_deviation_4;
+	public BigDecimal getMaterialdeviation4() {
+		return Materialdeviation4;
 	}
 
-	public void setMaterial_deviation_4(BigDecimal material_deviation_4) {
-		Material_deviation_4 = material_deviation_4;
+	public void setMaterialdeviation4(BigDecimal materialdeviation4) {
+		Materialdeviation4 = materialdeviation4;
 	}
 
-	public BigDecimal getMaterial_deviation_5() {
-		return Material_deviation_5;
+	public BigDecimal getMaterialdeviation5() {
+		return Materialdeviation5;
 	}
 
-	public void setMaterial_deviation_5(BigDecimal material_deviation_5) {
-		Material_deviation_5 = material_deviation_5;
+	public void setMaterialdeviation5(BigDecimal materialdeviation5) {
+		Materialdeviation5 = materialdeviation5;
 	}
 
-	public BigDecimal getMaterial_deviation_6() {
-		return Material_deviation_6;
+	public BigDecimal getMaterialdeviation6() {
+		return Materialdeviation6;
 	}
 
-	public void setMaterial_deviation_6(BigDecimal material_deviation_6) {
-		Material_deviation_6 = material_deviation_6;
+	public void setMaterialdeviation6(BigDecimal materialdeviation6) {
+		Materialdeviation6 = materialdeviation6;
 	}
 
-	public BigDecimal getBone_flour_deviation() {
-		return Bone_flour_deviation;
+	public BigDecimal getBoneflourdeviation() {
+		return Boneflourdeviation;
 	}
 
-	public void setBone_flour_deviation(BigDecimal bone_flour_deviation) {
-		Bone_flour_deviation = bone_flour_deviation;
+	public void setBoneflourdeviation(BigDecimal boneflourdeviation) {
+		Boneflourdeviation = boneflourdeviation;
 	}
 
 	public BigDecimal getPitchdeviation() {
@@ -149,44 +155,44 @@ public class PlanConstructionDeviation
 		this.tempmin = tempmin;
 	}
 
-	public Time getDry_mixing_time_deviation() {
-		return dry_mixing_time_deviation;
+	public Time getDrymixingtimedeviation() {
+		return drymixingtimedeviation;
 	}
 
-	public void setDry_mixing_time_deviation(Time dry_mixing_time_deviation) {
-		this.dry_mixing_time_deviation = dry_mixing_time_deviation;
+	public void setDrymixingtimedeviation(Time drymixingtimedeviation) {
+		this.drymixingtimedeviation = drymixingtimedeviation;
 	}
 
-	public Time getWet_mixing_time_deviation() {
-		return wet_mixing_time_deviation;
+	public Time getWetmixingtimedeviation() {
+		return wetmixingtimedeviation;
 	}
 
-	public void setWet_mixing_time_deviation(Time wet_mixing_time_deviation) {
-		this.wet_mixing_time_deviation = wet_mixing_time_deviation;
+	public void setWetmixingtimedeviation(Time wetmixingtimedeviation) {
+		this.wetmixingtimedeviation = wetmixingtimedeviation;
 	}
 
-	public BigDecimal getPass_475() {
-		return pass_475;
+	public BigDecimal getPass475() {
+		return pass475;
 	}
 
-	public void setPass_475(BigDecimal pass_475) {
-		this.pass_475 = pass_475;
+	public void setPass475(BigDecimal pass475) {
+		this.pass475 = pass475;
 	}
 
-	public BigDecimal getPass_236() {
-		return pass_236;
+	public BigDecimal getPass236() {
+		return pass236;
 	}
 
-	public void setPass_236(BigDecimal pass_236) {
-		this.pass_236 = pass_236;
+	public void setPass236(BigDecimal pass236) {
+		this.pass236 = pass236;
 	}
 
-	public BigDecimal getPass_0075() {
-		return pass_0075;
+	public BigDecimal getPass0075() {
+		return pass0075;
 	}
 
-	public void setPass_0075(BigDecimal pass_0075) {
-		this.pass_0075 = pass_0075;
+	public void setPass0075(BigDecimal pass0075) {
+		this.pass0075 = pass0075;
 	}
 
 	public String getDatetime() {
@@ -197,12 +203,28 @@ public class PlanConstructionDeviation
 		this.datetime = datetime;
 	}
 
-	public int getDelete_state() {
-		return delete_state;
+	public int getDeletestate() {
+		return deletestate;
 	}
 
-	public void setDelete_state(int delete_state) {
-		this.delete_state = delete_state;
+	public void setDeletestate(int deletestate) {
+		this.deletestate = deletestate;
 	}
-    
+
+	public String getPianchaname() {
+		return pianchaname;
+	}
+
+	public void setPianchaname(String pianchaname) {
+		this.pianchaname = pianchaname;
+	}
+
+	public String getPianchano() {
+		return pianchano;
+	}
+
+	public void setPianchano(String pianchano) {
+		this.pianchano = pianchano;
+	}
+	
 }

@@ -77,35 +77,38 @@ body {
 							<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
 						</div>
 					</div>
-					<div class="LowerPart" style="margin-top: 3px;">
-						<table class="table table-bordered table-condensed" id="mainContent" style="white-space: nowrap;">
-							<thead>
-								<tr>
-									<th>路段编号</th>
-									<th>路段名称</th>
-									<th>标段号</th>
-									<th>配方编号</th>
-									<th>成品需要量（每日）</th>
-									<th>干拌时间</th>
-									<th>湿拌时间</th>
-									<th>油石比</th>
-									<th>成品温度要求</th>
-									<th>到现场温度要求</th>
-									<th>总价</th>
-									<th>日期时间</th>
-									<th>录入人</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<!--<tr>
+					<div class="LowerPart" style="margin-top: 3px;" name="tbVm">
+						<div>
+							<table class="table table-bordered table-condensed " id="mainContent" style="white-space: nowrap;">
+								<thead>
+									<tr>
+										<th>路段编号</th>
+										<th>路段名称</th>
+										<th>标段号</th>
+										<th>配方编号</th>
+										<th>成品需要量（每日）</th>
+										<th>干拌时间</th>
+										<th>湿拌时间</th>
+										<th>油石比</th>
+										<th>成品温度要求</th>
+										<th>到现场温度要求</th>
+										<th>总价</th>
+										<th>日期时间</th>
+										<th>录入人</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!--<tr>
                         <td>
                             <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg2"></i>
                             <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change2'></i>
                             <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
                         </td>
                     </tr> -->
-							</tbody>
-						</table>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -124,93 +127,28 @@ body {
 						<table class="table table-bordered table-condensed" id="mainContent2" style="white-space: nowrap;">
 							<thead>
 								<tr>
-									<th>序号</th>
+									<th>偏差编号</th>
+									<th>偏差名称</th>
 									<th>料1偏差量</th>
 									<th>料2偏差量</th>
 									<th>料3偏差量</th>
 									<th>料4偏差量</th>
 									<th>料5偏差量</th>
 									<th>料6偏差量</th>
-									<th>最低温度偏差量</th>
+									<th>粉偏差量</th>
+									<th>沥青偏差量</th>
 									<th>最高温度偏差量</th>
-									<th>现场温度偏差量</th>
-									<th>出厂温度偏差量</th>
+									<th>最低温度偏差量</th>
 									<th>干拌用时偏差量</th>
 									<th>湿拌用时偏差量</th>
 									<th>4.75偏差量</th>
 									<th>2.36偏差量</th>
 									<th>0.075偏差量</th>
-									<th>生产用时偏差</th>
 									<th style="width: 75px;">操作</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td><i class="iconfont icon-icon-test" style="font-size: 20px; cursor: pointer;" title="查看详细信息" data-toggle="modal" data-target="#allMsg3"></i> <i
-										class="iconfont icon-xiugai" style="font-size: 18px; cursor: pointer;" title="修改" data-toggle='modal' data-target='#change3'></i> <i
-										class="iconfont icon-shanchu" style="font-size: 18px; cursor: pointer;" title="删除"></i></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td><i class="iconfont icon-icon-test" style="font-size: 20px; cursor: pointer;" title="查看详细信息" data-toggle="modal" data-target="#allMsg3"></i> <i
-										class="iconfont icon-xiugai" style="font-size: 18px; cursor: pointer;" title="修改" data-toggle='modal' data-target='#change3'></i> <i
-										class="iconfont icon-shanchu" style="font-size: 18px; cursor: pointer;" title="删除"></i></td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td><i class="iconfont icon-icon-test" style="font-size: 20px; cursor: pointer;" title="查看详细信息" data-toggle="modal" data-target="#allMsg3"></i> <i
-										class="iconfont icon-xiugai" style="font-size: 18px; cursor: pointer;" title="修改" data-toggle='modal' data-target='#change3'></i> <i
-										class="iconfont icon-shanchu" style="font-size: 18px; cursor: pointer;" title="删除"></i></td>
-								</tr>
+							
 							</tbody>
 						</table>
 					</div>
@@ -598,7 +536,8 @@ body {
 								</tr>
 								<tr>
 									<td>配方</td>
-									<td><select class="form-control" style="width: 100%;" v-model="recipeid" id="recipeid">
+									<td><select class="form-control" style="width: 100%;" v-model="recipeid = recipeSelected" id="recipeid">
+											<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
 										</select></td>
 									<td></td>
 									<td></td>
@@ -717,39 +656,45 @@ body {
 							<table class="table table-bordered table-condensed" style="height: auto;">
 								<tr>
 									<td>生产计划编号</td>
-									<td><input type="text" id="xg_planno" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td><input type="text" v-model="planno" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 									<td>路段</td>
-									<td><select class="form-control" style="width: 100%;" id="xg_roadid">
+									<td><select class="form-control" @change="roadChange" style="width: 100%;" v-model="roadSelected">
+											<option :value="road.roadno" v-for="road in roadList">{{road.sitename}}</option>
 										</select></td>
 								</tr>
 								<tr>
 									<td>标段</td>
-									<td><select class="form-control" style="width: 100%;" id="xg_rdnumber">
+									<td><select class="form-control" style="width: 100%;" v-model="rdnumberSelected">
+											<option :value="item.id" v-for="item in rdnumberList">{{item.roadnumber}}</option>
 										</select></td>
 									<td>成品需要量</td>
-									<td><input type="text" id="xg_pdneed" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td><input type="text" @blur="reg(pdneed,'xiaoshu','pdneed')" v-model="pdneed" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
 									<td>干拌时间</td>
-									<td><input type="text" id="xg_drymixingtime" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td><input type="text" readonly="true" v-model="drymixingtime" placeholder="请输入" id="xgdrymixingtime"
+											style="width: 100%; height: 100%; border: none;"></td>
 									<td>湿拌时间</td>
-									<td><input type="text" id="xg_wetmixingtime" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td><input type="text" readonly="true" v-model="wetmixingtime" placeholder="请输入" id="xgwetmixingtime"
+											style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
 									<td>油石比</td>
-									<td><input type="text" id="xg_radio" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td><input type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 									<td>成品温度要求</td>
-									<td><input type="text" id="xg_pdtemp" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td><input type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
 									<td>到现场温度要求</td>
-									<td><input type="text" id="xg_arrivetemp" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td><input type="text" @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp" placeholder="请输入"
+											style="width: 100%; height: 100%; border: none;"></td>
 									<td>单价</td>
-									<td><input type="text" id="xg_price" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+									<td><input type="text" @blur="reg(price,'xiaoshu','price')" v-model="price" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
 								</tr>
 								<tr>
 									<td>配方</td>
-									<td><select class="form-control" style="width: 100%;" id="xg_recipeid">
+									<td><select class="form-control" style="width: 100%;" v-model="recipeid = recipeSelected">
+											<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
 										</select></td>
 									<td></td>
 									<td></td>
@@ -760,7 +705,7 @@ body {
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-success">保存</button>
+					<button type="button" class="btn btn-success" @click="save">保存</button>
 				</div>
 			</div>
 		</div>
@@ -947,13 +892,11 @@ body {
 	</div>
 	<!-- 修改model结束 -->
 </body>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="../../js/jquery.js"></script>
 <script src="../../js/common-scripts.js"></script>
-<script src="../../js/jquery.dataTables.min.js"></script>
 <script src="../../toastr/toastr.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/jquery.dataTables.min.js"></script>
 <script src="../../js/jquery-editable-select.js"></script>
 <script src="../../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/main.js"></script>
@@ -961,10 +904,13 @@ body {
 <script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script>
     $(document).ready( function () {
     	$("#channeng").trigger("change");
     	initTable();
+    	initTablePianCha();
     });
     
     var table=$('#mainContent').DataTable({
@@ -977,7 +923,7 @@ body {
         "oLanguage": {
 		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
-        "order": [[0, 'asc']],
+        "order": [[11, 'desc']],
 		"columns": [
             { "data": "roadno"}, 
             { "data": "sitename"}, 
@@ -1000,9 +946,11 @@ body {
 						    "targets": 13,
 						    "searchable": true,
 						    "render": function(data, type, full) {
-						    	var xiangqing= '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看偏差信息"  data-toggle="modal" data-target="#allMsg2"></i>'
-						    	var xiugai='<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle="modal" data-target="#change2"></i>'
-						    	var qiyong='<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>'
+						    	var xiangqing= '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看偏差信息"   data-toggle="modal" data-target="#allMsg2"></i>'
+						    	var xiugai='<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+full+'"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change2"></i>'
+						    	
+						    	var qiyong='<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'+data+'" onclick="delMsg()" title="删除"></i>'
+						    	
 					    		return xiangqing+xiugai+qiyong;
 				    	    }
 					    }
@@ -1011,7 +959,7 @@ body {
         "sScrollX":true,
          // 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
           //表中的数据自适应 ，表头的宽度固定
-        "bAutoWidth":true,
+        "bAutoWidth":false,
         "oLanguage": { //国际化配置
         "sProcessing": "正在获取数据，请稍后...",
         "sLengthMenu": "显示 _MENU_ 条",
@@ -1040,6 +988,47 @@ body {
 		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
         "order": [[0, 'asc']],
+				"columns": [
+            { "data": "pianchano"}, 
+            { "data": "pianchaname"}, 
+            { "data": "Materialdeviation1"}, 
+            { "data": "Materialdeviation2"}, 
+            { "data": "Materialdeviation3"}, 
+            { "data": "Materialdeviation4"}, 
+            { "data": "Materialdeviation5"}, 
+            { "data": "Materialdeviation6"}, 
+            { "data": "Boneflourdeviation"}, 
+            { "data": "pitchdeviation"}, 
+            { "data": "tempmax"}, 
+            { "data": "tempmin"}, 
+            { "data": "drymixingtimedeviation"}, 
+            { "data": "wetmixingtimedeviation"}, 
+            { "data": "pass475"},
+            { "data": "pass236"},
+            { "data": "pass0075"},
+            { "data": "id"},
+        ],
+        "columnDefs": [
+			 {	
+			 	"class": "tcenter",
+			    "targets": 17,
+			    "searchable": true,
+			    "render": function(data, type, full) {
+			    	
+			    	var xiangqing= '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看偏差信息"   data-toggle="modal" data-target="#allMsg3"></i>'
+			    	var xiugai='<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+full+'"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change3"></i>'
+			    	
+			    	var qiyong='<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>'
+			    	
+		    		return xiangqing+xiugai+qiyong;
+	    	    }
+		    }
+		  ],
+    	  //让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
+        "sScrollX":true,
+         // 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
+          //表中的数据自适应 ，表头的宽度固定
+        "bAutoWidth":false,
         "oLanguage": { //国际化配置
         "sProcessing": "正在获取数据，请稍后...",
         "sLengthMenu": "显示 _MENU_ 条",
@@ -1058,24 +1047,6 @@ body {
         }},
         
 	});
-	
-	 
-	function initTable(){
-        $.ajax({
-            type: 'POST',
-            url: '/ShengChanJiHua/getAllShengChanJiHua',
-            dataType: 'json',
-            data: {
-            },
-            error: function (msg) {
-                errMessage("请求UserController失败");
-            },
-            success: function (json) {
-                $("#mainContent").dataTable().fnClearTable();
-                $("#mainContent").DataTable().rows.add(json).draw(false);
-            }
-        });
-    }
 	
 	//全局正则KV集合
 	var regMap = {
@@ -1112,16 +1083,26 @@ body {
 		  // 配方编号
 		  recipeid:"",
 		  roadList:'',
-       	  roadSelected:'',
-       	  rdnumberList:'',
-       	  rdnumberSelected:'',
+   	  roadSelected:'',
+   	  rdnumberList:'',
+   	  rdnumberSelected:'',
+   		recipeList:'',
+   		recipeSelected:'',
 	  },
 	  methods: {
 		//新建生产计划保存按钮事件
 	    save: function () {
             //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
             this.$http.post('/ShengChanJiHua/addShengChanJiHua',JSON.stringify(this._data),{}).then((res)=>{
-            	
+            	var resMsg = res.body;
+            	if(resMsg.daoMsg>0){
+            		/* $('#mainContent').DataTable().row.add(resMsg.obj).draw(); */
+            		$("#myModal2").modal("hide");
+            		initTable();
+            		toastr.success(resMsg.resultMsg);
+            	}else{
+            		toastr.error(resMsg.resultMsg);
+            	}
             },(res)=>{
             	
             });
@@ -1148,6 +1129,123 @@ body {
                 console.log(res.status);
             });
         },
+	        roadChange:function(){
+	        	
+	       	 	this.$http.post('/TanPuDiDianGuanLi/getBiaoDuanByLuDuan',{'roadno':this.roadSelected},{emulateJSON:true}).then((res)=>{
+	            	this.rdnumberList=res.body;
+	            	this.rdnumberSelected=this.rdnumberList[0].id;
+	            	this.roadid=this.rdnumberSelected;
+	            },(res)=>{
+	                console.log(res.status);
+	            });
+	        },
+        recipePost:function(){
+        	
+       	 	this.$http.post('/SysFormulationManagement/selectAllSysFormulationManagement',{'roadno':this.roadSelected},{emulateJSON:true}).then((res)=>{
+		       	 	this.recipeList=res.body;
+		        	this.recipeSelected=this.recipeList[0].flId;
+            },(res)=>{
+                console.log(res.status);
+            });
+        }
+	  }
+	})
+	//初始化下拉框路段
+	app5.roadPost();
+	app5.recipePost();
+	
+	function udMsg(obj){
+		var tr=$(obj).parents("tr");
+  	var data=$("#mainContent").DataTable().row(tr).data();
+  	xgSCVm.planid = data.planid;
+  	xgSCVm.planno = data.planno;
+  	xgSCVm.roadid = data.roadid;
+  	xgSCVm.roadnumber = data.rdnumber;
+  	xgSCVm.pdneed = data.pdneed;
+  	xgSCVm.drymixingtime = data.drymixingtime;
+  	xgSCVm.wetmixingtime = data.wetmixingtime;
+  	xgSCVm.radio = data.radio;
+  	xgSCVm.pdtemp = data.pdtemp;
+  	xgSCVm.arrivetemp = data.arrivetemp;
+  	xgSCVm.price = data.price;
+  	xgSCVm.recipeid = data.recipeid;
+  	xgSCVm.price = data.price;
+  	xgSCVm.roadSelected = data.roadno;
+  	xgSCVm.roadChange();
+  	xgSCVm.rdnumberSelected = data.roadid;
+  	xgSCVm.recipeSelected = data.recipeid;
+  	console.log(data);
+	}
+	
+	//修改生产计划
+	var xgSCVm = new Vue({
+	  el: '#change2',
+	  //表单数据
+	  data: {
+		  planid:"",
+		  planno:"",
+		  roadid:"",
+		  roadnumber:"",
+		  //成品需要量
+		  pdneed:"",
+		  drymixingtime:"",
+		  wetmixingtime:"",
+		  //油石比
+		  radio:"",
+		  //成品温度要求
+		  pdtemp:"",
+ 		  //到现场温度要求
+		  arrivetemp:"",
+		  //单价
+		  price:"",
+		  // 配方编号
+		  recipeid:"",
+		  roadList:'',
+   	  roadSelected:'',
+   	  rdnumberList:'',
+   	  rdnumberSelected:'',
+	   	recipeList:'',
+			recipeSelected:'',
+	  },
+	  methods: {
+		//新建生产计划保存按钮事件
+	    save: function () {
+            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+            this.$http.post('/ShengChanJiHua/updateShengChanJiHua',JSON.stringify(this._data),{}).then((res)=>{
+            	var resMsg = res.body;
+            	if(resMsg.daoMsg>0){
+            		$("#change2").modal("hide");
+            		initTable();
+            		toastr.success(resMsg.resultMsg);
+            	}else{
+            		toastr.error(resMsg.resultMsg);
+            	}
+            },(res)=>{
+            	
+            });
+	    },
+	    reg:function(value,regType,id){
+	    	var re = new RegExp(regMap[regType]);
+	    	var flag;
+    		flag = reg(parseFloat(value),re);
+    		if(null!=value&&''!=value){
+		    	if(!flag){
+		    		this._data[id]="";
+		    		toastr.error(errMsg[id]);
+    		    }
+    		}
+	    },
+        roadPost:function(){
+            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+            this.$http.post('/TanPuDiDianGuanLi/getDistinctTanPuDiDian',{},{emulateJSON:true}).then((res)=>{
+            	this.roadList=res.body;
+            	this.roadSelected=app5.roadList[0].roadno;
+            	//初始化路段时,同时初始化标段
+            	this.roadChange();
+            },(res)=>{
+                console.log(res.status);
+            });
+        },
         roadChange:function(){
         	
        	 	this.$http.post('/TanPuDiDianGuanLi/getBiaoDuanByLuDuan',{'roadno':this.roadSelected},{emulateJSON:true}).then((res)=>{
@@ -1157,11 +1255,59 @@ body {
             },(res)=>{
                 console.log(res.status);
             });
+        },
+        recipePost:function(){
+        	
+       	 	this.$http.post('/SysFormulationManagement/selectAllSysFormulationManagement',{'roadno':this.roadSelected},{emulateJSON:true}).then((res)=>{
+		       	 	this.recipeList=res.body;
+		        	this.recipeId=this.recipeSelected;
+            },(res)=>{
+                console.log(res.status);
+            });
         }
 	  }
 	})
+	
 	//初始化下拉框路段
-	app5.roadPost();
+	xgSCVm.roadPost();
+	xgSCVm.recipePost();
+	
+	function initTable(){
+        $.ajax({
+            type: 'POST',
+            url: '/ShengChanJiHua/getAllShengChanJiHua',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $("#mainContent").dataTable().fnClearTable();
+                $("#mainContent").DataTable().rows.add(json).draw(false);
+                /* initTbVm(); */
+            }
+        });
+    }
+	
+	function initTablePianCha(){
+        $.ajax({
+            type: 'POST',
+            url: '/ShengChanJiHua/getAllShiGongPianCha',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $("#mainContent2").dataTable().fnClearTable();
+                $("#mainContent2").DataTable().rows.add(json).draw(false);
+                /* initTbVm(); */
+            }
+        });
+    }
+	
 	
 	laydate.render({
         elem: '#drymixingtime', //指定元素
@@ -1178,6 +1324,21 @@ body {
 			app5.wetmixingtime=value;
 	    }
     });
+	laydate.render({
+        elem: '#xgdrymixingtime', //指定元素
+	    type: 'time',
+		done: function(value, date){
+			app5.drymixingtime=value;
+	    }
+    });
+	
+	laydate.render({
+        elem: '#xgwetmixingtime', //指定元素
+        type: 'time',
+		done: function(value, date){
+			app5.wetmixingtime=value;
+	    }
+    });
 	
 	function reg(str,re){
 		if (re.test(str)) {
@@ -1186,6 +1347,27 @@ body {
 			return false;
 		}
 	}
-	
+	//箭头函数，内部this永远指向父级
+	var delMsg = (e)=>{
+		var msg = "确定要删除吗？\n\n请确认！";
+		if (confirm(msg) == true) {
+	        $.ajax({
+	            type: 'POST',
+	            url: '/ShengChanJiHua/getAllShiGongPianCha',
+	            dataType: 'json',
+	            data: {
+	            	id:$(e).attr("data-id");
+	            },
+	            error: function (msg) {
+	                errMessage("请求UserController失败");
+	            },
+	            success: function (json) {
+	                $("#mainContent2").dataTable().fnClearTable();
+	                $("#mainContent2").DataTable().rows.add(json).draw(false);
+	            }
+	        });
+		}else{}
+	  console.log(msg);
+	}
 </script>
 </html>
