@@ -24,8 +24,8 @@
 			where plan_id=#{planid}
 	</update>
 
-	<update id="deleteUser" parameterType="String">
-		update u_user set delete_state=0 where user_id=#{userId}
+	<update id="delShengChanJiHuaById" parameterType="String">
+		update plan_production_collection set delete_state=0 where plan_id=#{planid}
 	</update>
 
 	<update id="updateUser" parameterType="user" >
@@ -63,7 +63,7 @@
 	
 	<select id="getShengChanJiHuaListByCondition" resultType="planProductionCollectionVo">
 		SELECT
-			sc.road_number,round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,sc.site_name,sc.road_no
+			round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,sc.site_name,sc.road_no
 		FROM
 			plan_production_collection AS a
 		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1

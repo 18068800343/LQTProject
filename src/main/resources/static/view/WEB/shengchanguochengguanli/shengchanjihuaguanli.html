@@ -949,7 +949,7 @@ body {
 						    	var xiangqing= '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看偏差信息"   data-toggle="modal" data-target="#allMsg2"></i>'
 						    	var xiugai='<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+full+'"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change2"></i>'
 						    	
-						    	var qiyong='<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'+data+'" onclick="delMsg()" title="删除"></i>'
+						    	var qiyong='<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'+data+'" onclick="delMsg(this)" title="删除"></i>'
 						    	
 					    		return xiangqing+xiugai+qiyong;
 				    	    }
@@ -1067,7 +1067,7 @@ body {
 	  data: {
 		  planno:"",
 		  roadid:"",
-		  roadnumber:"",
+		  /* roadnumber:"", */
 		  //成品需要量
 		  pdneed:"",
 		  drymixingtime:"",
@@ -1349,24 +1349,31 @@ body {
 	}
 	//箭头函数，内部this永远指向父级
 	var delMsg = (e)=>{
+		var tr = $(e).parents("tr");
 		var msg = "确定要删除吗？\n\n请确认！";
 		if (confirm(msg) == true) {
 	        $.ajax({
 	            type: 'POST',
-	            url: '/ShengChanJiHua/getAllShiGongPianCha',
+	            url: '/ShengChanJiHua/delShengChanJiHuaById',
 	            dataType: 'json',
 	            data: {
-	            	id:$(e).attr("data-id");
+	            	id:$(e).attr("data-id")
 	            },
 	            error: function (msg) {
 	                errMessage("请求UserController失败");
 	            },
 	            success: function (json) {
-	                $("#mainContent2").dataTable().fnClearTable();
-	                $("#mainContent2").DataTable().rows.add(json).draw(false);
+	            	if(json>0){
+	            		toastr.success("删除成功");
+	                $('#mainContent2').DataTable().row(tr).remove().draw(false); //删除行立即显示
+	            	}else{
+	            	  toastr.error("删除失败");
+	            	}
 	            }
 	        });
-		}else{}
+		}else{
+			return false;
+		}
 	  console.log(msg);
 	}
 </script>

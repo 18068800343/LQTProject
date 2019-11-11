@@ -16,4 +16,6 @@ public interface  ShengChanJiHuaDao {
 	
 	int updateShengChanJiHua(PlanProductionCollection planProductionCollection);
 	
+	int delShengChanJiHuaById(String planid);
+	
 }

@@ -51,6 +51,12 @@ public class ShengChanJiHuaController {
 		return dao.getAllShiGongPianCha();
 	}
 	
+	@RequestMapping("/delShengChanJiHuaById")
+	@ResponseBody
+	public int delShengChanJiHuaById(String planid) {
+		return dao.delShengChanJiHuaById(planid);
+	}
+	
 	@RequestMapping("/addShengChanJiHua")
 	@ResponseBody
 	public String addShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection,HttpSession session) {
