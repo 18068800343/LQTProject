@@ -20,4 +20,9 @@ public class GetThisTimeUtils {
 		SimpleDateFormat dateFormat= new SimpleDateFormat("HH:mm:ss");
 		return dateFormat.format(date);
 	}
+	public static String getDateTimeNumber(){
+		Date date = new Date();
+		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyyMMddHHmmss");
+		return dateFormat.format(date);
+	}
 }

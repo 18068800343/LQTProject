@@ -3,6 +3,7 @@ package com.ldxx.dao;
 import java.util.List;
 
 import com.ldxx.bean.SysFormulationManagement;
+import com.ldxx.bean.SysMaterialAttached;
 
 public interface SysFormulationManagementDao {
 
@@ -18,5 +19,8 @@ public interface SysFormulationManagementDao {
 	
 	public List<SysFormulationManagement> getFlName();
 	
+	public int addFuShuCaiLiao(List<SysMaterialAttached> list);
+	
+	public List<SysMaterialAttached> selectAllFuShuCaiLiao();
 	
 }

@@ -266,7 +266,7 @@
 						<th>料6用量</th>
 						<th>粉用量</th>
 						<th>沥青用量</th>
-						<th>附属材料</th>
+						
                         <th style="width:50px;">操作</th>
                     </tr>
                 </thead>
@@ -332,10 +332,10 @@
 		 "columnDefs": [
 							{
 							"class": "tcenter",
-							"targets": 11,
+							"targets": 10,
 							"searchable": false,
 							"render": function(data, type, full) {
-								    	return  ''
+								    	return  '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>'
 			                            +'<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle="modal" data-target="#change"></i>'
 			                            +'<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>';
 								        }

@@ -4,8 +4,8 @@
 	<insert id="addSysFormulationManagement" parameterType="sysFormulationManagement">
 		insert into 
 		sys_formulation_management(fl_id,fl_no,fl_name,materials_use_1,materials_use_2,
-		materials_use_3,materials_use_4,materials_use_5,materials_use_6,
-		bone_flour_use,pitch_use,other_use,delete_state)
+			materials_use_3,materials_use_4,materials_use_5,materials_use_6,
+			bone_flour_use,pitch_use,delete_state)
 		values(#{sysFormulationManagement.flId},
 			   #{sysFormulationManagement.flNo},
 			   #{sysFormulationManagement.flName},
@@ -17,8 +17,8 @@
 			   #{sysFormulationManagement.materialsUse6},
 			   #{sysFormulationManagement.boneFlourUse},
 			   #{sysFormulationManagement.pitchUse},
-			   #{sysFormulationManagement.otherUse},
-			   1)
+			   1
+			   )
 	</insert>
 	
 	<update id="updateSysFormulationManagement" parameterType="sysFormulationManagement">
@@ -41,7 +41,7 @@
 		select 
 			fl_id,fl_no,fl_name,materials_use_1,materials_use_2,
 			materials_use_3,materials_use_4,materials_use_5,materials_use_6,
-			bone_flour_use,pitch_use,other_use,delete_state
+			bone_flour_use,pitch_use,delete_state
 		from
 		  sys_formulation_management
 		where delete_state=1
@@ -51,7 +51,7 @@
 		select
 			fl_id,fl_no,fl_name,materials_use_1,materials_use_2,
 			materials_use_3,materials_use_4,materials_use_5,materials_use_6,
-			bone_flour_use,pitch_use,other_use,delete_state
+			bone_flour_use,pitch_use,delete_state
 		from
 		  sys_formulation_management
 		where fl_id=#{sysFormulationManagement.flId} and delete_state=1
@@ -72,5 +72,24 @@
 		  sys_formulation_management
 		where delete_state=1
 	</select>
-	
+	<insert id="addFuShuCaiLiao" parameterType="java.util.List" useGeneratedKeys="false">
+		insert into 
+		sys_material_attached(fl_id,m_name,weight)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			  (
+			    #{item.flId},
+			    #{item.mName},
+			    #{item.weight}
+			  )
+	    </foreach>
+	</insert>
+	<select id="selectAllFuShuCaiLiao" resultType="SysMaterialAttached">
+		select
+			a.fl_id,m_name,weight
+		from
+		  sys_material_attached as a
+		left join sys_formulation_management as b on a.fl_id=b.fl_id
+		where b.delete_state=1
+	</select>
 </mapper>
