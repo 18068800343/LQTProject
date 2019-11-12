@@ -9,69 +9,79 @@ public class User {
     
     private String userCode;//用户编码
 
-    private String workId;
+    private String workId;//工号
 
-    private String recordNo;
+    private String recordNo;//档案号
 
-    private String uName;
+    private String uName;//姓名
 
-    private String sex;
+    private String sex;//性别
 
-    private String birthday;
+    private String birthday;//出生日期
 
-    private String nation;
+    private String nation;//民族
 
-    private String marriage;
+    private String marriage;//婚姻状况
 
-    private String politicalStatus;
+    private String politicalStatus;//政治面貌
 
-    private String entryTime;
+    private String entryTime;//入职时间
 
-    private String address;
+    private String address;//住址
 
-    private String cardId;
+    private String cardId;//身份证号
 
-    private String postalCode;
+    private String postalCode;//邮编编码
 
-    private String fixPhone;
+    private String fixPhone;//固定电话
 
-    private String phoneNo;
+    private String phoneNo;//手机号码
 
-    private String email;
+    private String email;//邮箱
 
-    private String diploma;
+    private String diploma;//文化程度
 
-    private String school;
+    private String school;//毕业学校
 
-    private String specialty;
+    private String specialty;//专业
 
-    private String graduationTime;
+    private String graduationTime;//毕业时间
 
-    private String omId;
+    private String omId;//部门外键
 
-    private String dutyId;
+    private String dutyId;//岗位外键
 
-    private String dutyName;//岗位
+    private String dutyName;//岗位名称
 
-    private String certificate;
+    private String certificate;//证书
     
-    private String certificateGrade;
+    private String certificateGrade;//人员证书等级
     
-    private String userRole;
+    private String userRole;//用户角色
 
-    private String deleteState;//删除状态，0：已删除；1：未删除
+    private String deleteState;//删除状态，0：已删除；1：存在
 
     private String position;//职称
     
-
-    private String flowOmNo;
+    private String zhiwu;//职务
+    private String danwei;//单位
     
-	public String getFlowOmNo() {
-		return flowOmNo;
+
+    
+	public String getZhiwu() {
+		return zhiwu;
 	}
 
-	public void setFlowOmNo(String flowOmNo) {
-		this.flowOmNo = flowOmNo;
+	public void setZhiwu(String zhiwu) {
+		this.zhiwu = zhiwu;
+	}
+
+	public String getDanwei() {
+		return danwei;
+	}
+
+	public void setDanwei(String danwei) {
+		this.danwei = danwei;
 	}
 
 	public String getPosition() {

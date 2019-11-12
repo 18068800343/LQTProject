@@ -1,8 +1,10 @@
 package com.ldxx.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,13 +20,49 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
-	 @RequestMapping("/addUser")
-	 @ResponseBody
-    public int addUser() {
-		 User user=new User();
-		 user.setUserId(LDXXUtils.getUUID12());
-		 user.setuName("lisi");
-        return service.addUser( user );
+	private Map<String,Object> map=new HashMap<>();
+	
+	@RequestMapping("/addUser")
+	@ResponseBody
+    public Map<String,Object> addUser(User user) {
+		user.setUserId(LDXXUtils.getUUID12());
+        int i= service.addUser( user );
+        map.put("result", i);
+        map.put("user", user);
+        return map;
     }
+	 
+	@RequestMapping("/deleteUser")
+	@ResponseBody
+    public int deleteUser(String userId) {
+        return service.deleteUser( userId );
+    }
+	
+	@RequestMapping("/updateUser")
+	@ResponseBody
+    public Map<String,Object> updateUser(User user) {
+        int i= service.updateUser(user);
+        map.put("result",i);
+        map.put("user",user);
+        return map;
+    }
+	
+	@RequestMapping("/updUserup")
+	@ResponseBody
+	public int updUserup(User user){
+		return service.updUserup(user);
+	}
+	
+	@RequestMapping("/selectAllUser")
+	@ResponseBody
+	public List<User> selectAllUser(){
+		return service.selectAllUser();
+	}
+	
+	@RequestMapping("/selectUserById")
+	@ResponseBody
+	public User selectUserById(String userId){
+		return service.selectUserById(userId);
+	}
 
 }
