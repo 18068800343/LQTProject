@@ -13,12 +13,20 @@ public interface  ShengChanJiHuaDao {
 	
 	List<PlanConstructionDeviationVo> getAllShiGongPianCha();
 	
+	PlanConstructionDeviationVo getPianChaById(String id);
+	
 	int addShengChanJiHua(PlanProductionCollection planProductionCollection);
 	
 	int addShiGongPianCha(PlanConstructionDeviation planConstructionDeviation);
 	
+	int updateShiGongPianCha(PlanConstructionDeviation planConstructionDeviation);
+	
 	int updateShengChanJiHua(PlanProductionCollection planProductionCollection);
 	
 	int delShengChanJiHuaById(String planid);
+	
+	int delShiGongPianChaById(String id);
+	
+	int linkShiGongPianCha(String planid,String pianchaid);
 	
 }

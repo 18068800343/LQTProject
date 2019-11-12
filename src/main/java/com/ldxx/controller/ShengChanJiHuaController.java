@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONException;
@@ -45,6 +46,18 @@ public class ShengChanJiHuaController {
         return service.getShengChanJiHuaListByCondition();
     }
 	
+	@RequestMapping("/getPianChaById")
+	@ResponseBody
+	public PlanConstructionDeviationVo getPianChaById(String id) {
+		return dao.getPianChaById(id);
+	}
+	@RequestMapping("/linkShiGongPianCha")
+	@ResponseBody
+	public int linkShiGongPianCha(String planid, String pianchaid) {
+ 		int i = dao.linkShiGongPianCha(planid,pianchaid);
+		return i;
+	}
+	
 	@RequestMapping("/getAllShiGongPianCha")
 	@ResponseBody
 	public List<PlanConstructionDeviationVo> getAllShiGongPianCha() {
@@ -57,14 +70,41 @@ public class ShengChanJiHuaController {
 		return dao.delShengChanJiHuaById(planid);
 	}
 	
+	@RequestMapping("/delShiGongPianChaById")
+	@ResponseBody
+	public int delShiGongPianChaById(String id) {
+		return dao.delShiGongPianChaById(id);
+	}
+	
 	@RequestMapping("/addShiGongPianCha")
 	@ResponseBody
-	public int addShiGongPianCha(PlanConstructionDeviation planConstructionDeviation) {
+	public String addShiGongPianCha(@RequestBody PlanConstructionDeviation planConstructionDeviation) {
 		planConstructionDeviation.setDeletestate(1);
 		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
 		planConstructionDeviation.setDatetime(dateTime);
-		
-		return dao.addShiGongPianCha(planConstructionDeviation);
+		planConstructionDeviation.setId(LDXXUtils.getUUID12());
+		JSONObject jsonObject = new JSONObject();
+		int i = dao.addShiGongPianCha(planConstructionDeviation);
+		String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
+		jsonObject.put("resultMsg",daoMsg);
+		jsonObject.put("daoMsg",i);
+		jsonObject.put("obj",planConstructionDeviation);
+		return jsonObject.toString();
+	}
+	
+	@RequestMapping("/updateShiGongPianCha")
+	@ResponseBody
+	public String updateShiGongPianCha(@RequestBody PlanConstructionDeviation planConstructionDeviation) {
+		planConstructionDeviation.setDeletestate(1);
+		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		planConstructionDeviation.setDatetime(dateTime);
+		JSONObject jsonObject = new JSONObject();
+		int i = dao.updateShiGongPianCha(planConstructionDeviation);
+		String daoMsg = MsgFormatUtils.getMsgByResult(i, "修改");
+		jsonObject.put("resultMsg",daoMsg);
+		jsonObject.put("daoMsg",i);
+		jsonObject.put("obj",planConstructionDeviation);
+		return jsonObject.toString();
 	}
 	
 	@RequestMapping("/addShengChanJiHua")

@@ -11,3 +11,4 @@ public class LqtProjectApplication {
 		SpringApplication.run(LqtProjectApplication.class, args);
 	} 
 }
+ 

@@ -39,6 +39,16 @@ public class PlanProductionCollection
     private String editdatetime;
 
     private int deletestate;
+    
+    private String pianchaid;
+    
+	public String getPianchaid() {
+		return pianchaid;
+	}
+
+	public void setPianchaid(String pianchaid) {
+		this.pianchaid = pianchaid;
+	}
 
 	public String getPlanid() {
 		return planid;

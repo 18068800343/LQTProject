@@ -12,6 +12,26 @@ public class PlanProductionCollectionVo extends PlanProductionCollection
 	
 	private String roadno;
 	
+	private String pianchano;
+	
+	private String pianchaname;
+	
+	public String getPianchano() {
+		return pianchano;
+	}
+
+	public void setPianchano(String pianchano) {
+		this.pianchano = pianchano;
+	}
+
+	public String getPianchaname() {
+		return pianchaname;
+	}
+
+	public void setPianchaname(String pianchaname) {
+		this.pianchaname = pianchaname;
+	}
+
 	public String getRoadno() {
 		return roadno;
 	}
