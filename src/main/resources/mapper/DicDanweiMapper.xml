@@ -5,5 +5,17 @@
 	<select id="getAllDicDanwei" resultType="DicDanwei">
 		select id,danwei_name from dic_danwei where delete_state=1
 	</select>
+	
+	<update id="updDicDanwei" parameterType="DicDanwei">
+		update dic_danwei set danwei_name=#{dw.danweiName} where id=#{dw.id}
+	</update>
+	
+	<update id="delDicDanwei">
+		update dic_danwei set delete_state=0 where id=#{id}
+	</update>
+	
+	<insert id="insertDicDanwei" parameterType="DicDanwei">
+		insert into dic_danwei(id,danwei_name,delete_state) values(#{dw.id},#{dw.danweiName},1)
+	</insert>
 
 </mapper>

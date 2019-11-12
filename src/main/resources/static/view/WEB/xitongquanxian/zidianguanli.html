@@ -57,6 +57,8 @@
         <ul class="nav nav-tabs" role="tablist" style="background:#fff;">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">设备</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">材料</a></li>
+            <li role="presentation"><a href="#danwei" aria-controls="danwei" role="tab" data-toggle="tab">单位</a></li>
+            <li role="presentation"><a href="#zhiwu" aria-controls="zhiwu" role="tab" data-toggle="tab">职务</a></li>
         </ul>     
         <!-- Tab panes -->
         <div class="tab-content">
@@ -69,7 +71,103 @@
                         <div class="UpperPartR">
                             
                         </div>
-            <!-- Modal -->
+
+                    </div>
+                    <div class="LowerPart" style="margin-top:3px;">
+                        <table class="table table-bordered table-condensed" style="width:100%;" id="mainContent">
+                            <thead>
+                                <tr>
+                                    <!-- <td>设备类型</td> -->
+                                    <th style="width: 20%;">序号</th>
+                                    <th>设备类型</th>
+                                    <th style="width:75px;">操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="profile">
+    			<div class="zhuti-content">
+                    <div class="UpperPart">
+                        <div class="UpperPartL">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" style="margin: 5PX;float: left;">录入材料</button>
+                        </div>
+                        <div class="UpperPartR">
+                            
+                        </div>
+
+                    </div>
+                    <div class="LowerPart" style="margin-top:3px;">
+                        <table class="table table-bordered table-condensed" style="width:100%;" id="mainContent2">
+                            <thead>
+                                <tr>
+                                	<th >序号</th>
+                                    <th>材料名称</th>
+                                    <th style="width:75px;">操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div role="tabpanel" class="tab-pane" id="danwei">
+    			<div class="zhuti-content">
+                    <div class="UpperPart">
+                        <div class="UpperPartL">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3" style="margin: 5PX;float: left;">录入单位</button>
+                        </div>
+                        <div class="UpperPartR">
+                            
+                        </div>
+
+                    </div>
+                    <div class="LowerPart" style="margin-top:3px;">
+                        <table class="table table-bordered table-condensed" style="width:100%;" id="mainContent3">
+                            <thead>
+                                <tr>
+                                	<th>序号</th>
+                                    <th>单位</th>
+                                    <th style="width:75px;">操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div role="tabpanel" class="tab-pane" id="zhiwu">
+    			<div class="zhuti-content">
+                    <div class="UpperPart">
+                        <div class="UpperPartL">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal4" style="margin: 5PX;float: left;">录入职务</button>
+                        </div>
+                        <div class="UpperPartR">
+                            
+                        </div>
+
+                    </div>
+                    <div class="LowerPart" style="margin-top:3px;">
+                        <table class="table table-bordered table-condensed" style="width:100%;" id="mainContent4">
+                            <thead>
+                                <tr>
+                                	<th>序号</th>
+                                    <th>职务</th>
+                                    <th style="width:75px;">操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+    
+    <!-- Modal -->
             <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal1">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -126,44 +224,7 @@
                 </div>
             </div>
             <!-- 修改model结束 -->
-
-                    </div>
-                    <div class="LowerPart" style="margin-top:3px;">
-                        <table class="table table-bordered table-condensed" style="width:100%;" id="mainContent">
-                            <thead>
-                                <tr>
-                                    <!-- <td>设备类型</td> -->
-                                    <th style="width: 20%;">序号</th>
-                                    <th>设备类型</th>
-                                    <th style="width:75px;">操作</th>
-                                </tr>
-                            </thead>
-<!--                         <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>高粘剂</td>
-                                    <td>
-                                        <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
-                                        <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                                    </td>
-                                </tr>
-                            </tbody>    -->
-                        </table>
-<!-- allMsg -->
-<!-- allMsg结束 -->
-                    </div>
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="profile">
-    			<div class="zhuti-content">
-                    <div class="UpperPart">
-                        <div class="UpperPartL">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" style="margin: 5PX;float: left;">录入材料</button>
-                        </div>
-                        <div class="UpperPartR">
-                            
-                        </div>
+            
             <!-- Modal -->
             <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal2">
                 <div class="modal-dialog modal-lg" role="document">
@@ -221,37 +282,121 @@
                 </div>
             </div>
             <!-- 修改model结束 -->
-
+            
+            <!-- Modal -->
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal3">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><b>录入单位</b></h4>
                     </div>
-                    <div class="LowerPart" style="margin-top:3px;">
-                        <table class="table table-bordered table-condensed" style="width:100%;" id="mainContent2">
-                            <thead>
-                                <tr>
-                                	<th >序号</th>
-                                    <th>材料名称</th>
-                                    <th style="width:75px;">操作</th>
-                                </tr>
-                            </thead>
-                           <!--  <tbody>
-                                <tr>
-                                    <td>2</td>
-                                    <td>高粘剂2</td>
-                                    <td>
-                                        <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change2'></i>
-                                        <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                                    </td>
-                                </tr>
-                            </tbody>  -->  
-                        </table>
-<!-- allMsg -->
-<!-- allMsg结束 -->
+                    <div class="modal-body">
+                            <div>     
+                                <form class="form-inline" id="add_form">
+                                    <table class="table table-bordered table-condensed" >
+                                    	<tr>
+											<td style="width: 20%;">名称</td>
+											<td style="width: 30%;"><input type="text" style="width: 70%;" id="add_danwei" /></td>
+										</tr>
+                                    </table>
+                                </form>  
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-default" onclick="adddicmSave3()">保存</button>
+                    </div>
                     </div>
                 </div>
             </div>
-
+            <!-- model结束 -->
+            <!-- 修改Modal -->
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change3">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><b>修改单位</b></h4>
+                    </div>
+                    <div class="modal-body">
+                            <div>     
+                                <form class="form-inline" id="edit_form">
+                                    <table class="table table-bordered table-condensed" >
+                                    	<tr>
+											<td style="width: 20%;">名称</td>
+											<td style="width: 30%;"><input type="text" style="width: 70%;" id="xg_danwei" /></td>
+										</tr>
+                                    </table>
+                                </form>  
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-success" onclick="editdicmSave3()">保存</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 修改model结束 -->
             
-        </div>
-    </div>
+            <!-- Modal -->
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal4">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><b>录入职务</b></h4>
+                    </div>
+                    <div class="modal-body">
+                            <div>     
+                                <form class="form-inline" id="add_form">
+                                    <table class="table table-bordered table-condensed" >
+                                    	<tr>
+											<td style="width: 20%;">名称</td>
+											<td style="width: 30%;"><input type="text" style="width: 70%;" id="add_zw" /></td>
+										</tr>
+                                    </table>
+                                </form>  
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-default" onclick="adddicmSave4()">保存</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- model结束 -->
+            <!-- 修改Modal -->
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change4">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><b>修改单位</b></h4>
+                    </div>
+                    <div class="modal-body">
+                            <div>     
+                                <form class="form-inline" id="edit_form">
+                                    <table class="table table-bordered table-condensed" >
+                                    	<tr>
+											<td style="width: 20%;">名称</td>
+											<td style="width: 30%;"><input type="text" style="width: 70%;" id="xg_zw" /></td>
+										</tr>
+                                    </table>
+                                </form>  
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-success" onclick="editdicmSave4()">保存</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 修改model结束 -->
+            
 	</body>
 		<script src="../../js/jquery.js"></script>
 	<script src="../../easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
@@ -271,6 +416,8 @@
 	$(document).ready( function () {
     	initTable();
     	initTable2();
+    	initTable3()
+    	initTable4()
 	});	
 	
 		var table=$('#mainContent').dataTable({
@@ -377,6 +524,110 @@
 	            "sLast": "最后一页"
 	        }},  
 		});
+		
+		var table3=$('#mainContent3').dataTable({
+	        "deferRender": true,
+	        "processing": true,
+	        "bDestroy": true,
+	        "iDisplayLength": 10,
+	        "sDom": 
+				"t"+
+				"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+	        "searching": true,
+	        "lengthChange": false,
+	        "oLanguage": {
+			    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+			},
+			"columns": [
+						{ "data" : null },
+			            { "data": "danweiName"}
+			        ],
+			 "columnDefs": [
+								{
+								"class": "tcenter",
+								"targets": 2,
+								"searchable": false,
+								"render": function(data, type, full) {
+									    	return '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle="modal" onclick="dwChange(this)"></i>'
+				                            +'<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除" onclick="dwdelete(this)"></i>';
+									        }
+								},
+							],
+			"fnDrawCallback" : function() {
+				this.api().column(0).nodes().each(function(cell, i){
+					cell.innerHTML=i+1;
+				});
+			},
+	        "order": [[0, 'asc']],
+	        "oLanguage": { //国际化配置
+	        "sProcessing": "正在获取数据，请稍后...",
+	        "sLengthMenu": "显示 _MENU_ 条",
+	        "sZeroRecords": "查询不到相关数据",
+	        "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+	        "sInfoEmpty": "记录数为0",
+	        "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+	        "sInfoPostFix": "",
+	        "sSearch": "搜索",
+	        "sUrl": "",
+	        "oPaginate": {
+	            "sFirst": "第一页",
+	            "sPrevious": "上一页",
+	            "sNext": "下一页",
+	            "sLast": "最后一页"
+	        }},  
+		});
+		
+		var table4=$('#mainContent4').dataTable({
+	        "deferRender": true,
+	        "processing": true,
+	        "bDestroy": true,
+	        "iDisplayLength": 10,
+	        "sDom": 
+				"t"+
+				"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+	        "searching": true,
+	        "lengthChange": false,
+	        "oLanguage": {
+			    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+			},
+			"columns": [
+						{ "data" : null },
+			            { "data": "zhiwuName"}
+			        ],
+			 "columnDefs": [
+								{
+								"class": "tcenter",
+								"targets": 2,
+								"searchable": false,
+								"render": function(data, type, full) {
+									    	return '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle="modal" onclick="zwChange(this)"></i>'
+				                            +'<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除" onclick="zwdelete(this)"></i>';
+									        }
+								},
+							],
+			"fnDrawCallback" : function() {
+				this.api().column(0).nodes().each(function(cell, i){
+					cell.innerHTML=i+1;
+				});
+			},
+	        "order": [[0, 'asc']],
+	        "oLanguage": { //国际化配置
+	        "sProcessing": "正在获取数据，请稍后...",
+	        "sLengthMenu": "显示 _MENU_ 条",
+	        "sZeroRecords": "查询不到相关数据",
+	        "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+	        "sInfoEmpty": "记录数为0",
+	        "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+	        "sInfoPostFix": "",
+	        "sSearch": "搜索",
+	        "sUrl": "",
+	        "oPaginate": {
+	            "sFirst": "第一页",
+	            "sPrevious": "上一页",
+	            "sNext": "下一页",
+	            "sLast": "最后一页"
+	        }},  
+		});
 		//设备类型表格初始化
 		function initTable(){
 	        $.ajax({
@@ -411,6 +662,43 @@
 	            }
 	        });
 	    }
+		
+		//单位初始化
+		function initTable3(){
+	        $.ajax({
+	            type: 'POST',
+	            url: '/DicDanwei/getAllDicDanwei',
+	            dataType: 'json',
+	            data: {
+	            },
+	            error: function (msg) {
+	                errMessage("请求UserController失败");
+	            },
+	            success: function (json) {
+	                $('#mainContent3').dataTable().fnClearTable();
+	                $('#mainContent3').DataTable().rows.add(json).draw(false);
+	            }
+	        });
+	    }
+		//职务初始化
+		function initTable4(){
+	        $.ajax({
+	            type: 'POST',
+	            url: '/DicZhiwu/getAllDicZhiwu',
+	            dataType: 'json',
+	            data: {
+	            },
+	            error: function (msg) {
+	                errMessage("请求UserController失败");
+	            },
+	            success: function (json) {
+	                $('#mainContent4').dataTable().fnClearTable();
+	                $('#mainContent4').DataTable().rows.add(json).draw(false);
+	            }
+	        });
+	    }
+		
+		
 		//设备类型新增
 		function addddtSave(){
 			var typeName=$("#add_type_name").val();
@@ -620,6 +908,192 @@
 		                }); 
 		        	}
 		        });
+		}
+		
+		
+		
+		
+		
+	  
+		//单位增加
+		function adddicmSave3() {
+			var danwei = $("#add_danwei").val();
+			$.ajax({
+				type : 'POST',
+				url : '/DicDanwei/insertDicDanwei',
+				dataType : 'json',
+				data : {
+					danweiName : danwei
+				},
+				success : function(json) {
+					if (json.result == '0') {
+						toastr.error("保存失败");
+					} else {
+						$("#myModal3").modal("hide");
+						toastr.success('保存成功');
+						$('#mainContent3').DataTable().row.add(json.dw).draw(false); //新增行立即显示
+					}
+				}
+			});
+		}
+
+		//单位修改回显
+		var dwId;
+		var trr3;
+		function dwChange(obj) {
+			var tr = $(obj).parents("tr");
+			trr3 = $(obj).closest('tr');
+			var data = $("#mainContent3").DataTable().row(tr).data();
+			dwId = data.id;
+			$("#xg_danwei").val(data.danweiName);
+			$("#change3").modal("show");
+		}
+
+		function editdicmSave3() {
+			var xg_danwei = $("#xg_danwei").val();
+			var oldNum = $(trr3.children()[0]).text();
+			$.ajax({
+				type : 'POST',
+				url : '/DicDanwei/updDicDanwei',
+				dataType : 'json',
+				data : {
+					id : dwId,
+					danweiName : xg_danwei
+				},
+				success : function(json) {
+					if (json.result == '0') {
+						toastr.error("修改失败");
+					} else {
+						$("#change3").modal("hide");
+						toastr.success('修改成功');
+						$('#mainContent3').DataTable().row(trr3).data(json.dw);//修改行立即显示 */
+						$(trr3.children()[0]).text(oldNum);
+					}
+				}
+			});
+		}
+
+		//单位删除
+		function dwdelete(obj) {
+			var dom = $(obj).parents('tr');
+			var data = $('#mainContent3').DataTable().row(dom).data();
+			$.SmartMessageBox({
+				title : "删除提示",
+				content : "确认删除？",
+				buttons : '[取消][确定]'
+			}, function(ButtonPressed) {
+				if (ButtonPressed === "确定") {
+					myTool.mask.show('删除中...');
+					$.ajax({
+						type : 'POST',
+						url : '/DicDanwei/delDicDanwei',
+						dataType : 'json',
+						data : {
+							id : data.id
+						},
+						success : function(json) {
+							myTool.mask.hide();
+							if (json != 0) {
+								$('#mainContent3').DataTable().row(dom).remove().draw(false); //删除行立即显示
+								toastr.success('删除成功');
+							} else {
+								toastr.error('删除失败');
+							}
+						}
+					});
+				}
+			});
+		}
+
+		//职务增加
+		function adddicmSave4() {
+			var zw = $("#add_zw").val();
+			$.ajax({
+				type : 'POST',
+				url : '/DicZhiwu/insertDicZhiwu',
+				dataType : 'json',
+				data : {
+					zhiwuName : zw
+				},
+				success : function(json) {
+					if (json.result == '0') {
+						toastr.error("保存失败");
+					} else {
+						$("#myModal4").modal("hide");
+						toastr.success('保存成功');
+						$('#mainContent4').DataTable().row.add(json.zw).draw(false); //新增行立即显示
+					}
+				}
+			});
+		}
+
+		//单位修改回显
+		var zwId;
+		var trr4;
+		function zwChange(obj) {
+			var tr = $(obj).parents("tr");
+			trr4 = $(obj).closest('tr');
+			var data = $("#mainContent4").DataTable().row(tr).data();
+			zwId = data.id;
+			$("#xg_zw").val(data.zhiwuName);
+			$("#change4").modal("show");
+		}
+
+		function editdicmSave4() {
+			var xg_zw = $("#xg_zw").val();
+			var oldNum = $(trr4.children()[0]).text();
+
+			$.ajax({
+				type : 'POST',
+				url : '/DicZhiwu/updDicZhiwu',
+				dataType : 'json',
+				data : {
+					id : zwId,
+					zhiwuName : xg_zw
+				},
+				success : function(json) {
+					if (json.result == '0') {
+						toastr.error("修改失败");
+					} else {
+						$("#change4").modal("hide");
+						toastr.success('修改成功');
+						$('#mainContent4').DataTable().row(trr4).data(json.zw);//修改行立即显示 */
+						$(trr4.children()[0]).text(oldNum);
+					}
+				}
+			});
+		}
+
+		//职务删除
+		function zwdelete(obj) {
+			var dom = $(obj).parents('tr');
+			var data = $('#mainContent4').DataTable().row(dom).data();
+			$.SmartMessageBox({
+				title : "删除提示",
+				content : "确认删除？",
+				buttons : '[取消][确定]'
+			}, function(ButtonPressed) {
+				if (ButtonPressed === "确定") {
+					myTool.mask.show('删除中...');
+					$.ajax({
+						type : 'POST',
+						url : '/DicZhiwu/delDicZhiwu',
+						dataType : 'json',
+						data : {
+							id : data.id
+						},
+						success : function(json) {
+							myTool.mask.hide();
+							if (json != 0) {
+								$('#mainContent4').DataTable().row(dom).remove().draw(false); //删除行立即显示
+								toastr.success('删除成功');
+							} else {
+								toastr.error('删除失败');
+							}
+						}
+					});
+				}
+			});
 		}
 	</script>
 </html>
