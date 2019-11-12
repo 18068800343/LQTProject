@@ -69,6 +69,7 @@
                                     <th>联系方式</th>
                                     <th>职务</th>
                                     <th>单位</th>
+                                    <th>是否有账户</th>
                                     <th style="width:75px;">操作</th>
                                 </tr>
                             </thead>
@@ -244,10 +245,10 @@
                 <form class="form-inline">
                     <table class="table table-bordered table-condensed" style="height: auto;">
                     	<tr>
-                    		<td style="width: 20%;">账户</td>
-                    		<td id="look_username"></td>
-                    		<td style="width: 20%;">密码</td>
-                    		<td id="look_password"></td>
+                    		<td style="width: 20%;">用户名</td>
+                       		<td><input type="text" id="xg_username" class="form-control" placeholder="请输入" style="width: 80%;"></td>
+                       		<td>密码</td>
+                       		<td><input type="password" id="xg_password" class="form-control" placeholder="请输入" style="width: 80%;"></td>
                     	</tr>
                     </table>
                 </form>  
@@ -255,6 +256,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        	<button type="button" class="btn btn-success" id="xgup_baocun">保存</button>
         </div>
         </div>
     </div>
@@ -304,24 +306,37 @@
             { "data": "phoneNo"}, 
             { "data": "zhiwu"}, 
             { "data": "danwei"}, 
+            { "data": "username"}, 
             { "data": null},
         ],
         "columnDefs": [{	
 					 "class": "tcenter",
-					    "targets": 7,
+					    "targets": 8,
 					    "searchable": true,
 					    "render": function(data, type, full) {
 					  	  		var xiugai='<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
 	                            var shanchu='<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" id="del"  title="删除"></i>';
 	                            var tianjia='<i class="glyphicon glyphicon-plus" style="font-size:18px;cursor:pointer;" id="tianjia"  title="添加"></i>';
-	                            var look='<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" id="look" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>';
+	                            var look='<i class="glyphicon glyphicon-pencil" style="font-size:20px;cursor:pointer;" id="xg" title="修改用户密码"></i>';
 	                            if(full.username==null||full.username==""||full.username==undefined){
 	                            	return xiugai+shanchu+tianjia;
 	                            }else{
 		                            return xiugai+shanchu+look;
 	                            }
 					        }
-					  }
+					  },
+					  {	
+							 "class": "tcenter",
+							    "targets": 7,
+							    "searchable": true,
+							    "render": function(data, type, full) {
+							    	if(data==null){
+						    			return '<span class="label label-info state">否</span>';
+						    		}else{
+						    			return '<span class="label label-danger state">是</span>';
+						    		}
+							        }
+							  }
 			],
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -565,10 +580,12 @@
 	
 	
 	var tianjiaId;
+	var tr2;
 	$("#mainContent").delegate("#tianjia","click",function(){
 		var dom = $(this).parents('tr');
 		var data=$('#mainContent').DataTable().row(dom).data();
 		tianjiaId=data.userId
+		tr2 = $(this).closest('tr');
 		$("#change2").modal('show')
 	})
 	
@@ -599,6 +616,7 @@
                if(json>0){
             	   toastr.success("添加成功");
             	   $("#change2").modal('hide');
+            	   initTable();
                }else{
             	   toastr.error("添加失败");
                }
@@ -606,11 +624,48 @@
         });
 	})
 	
-	$("#mainContent").delegate("#look","click",function(){
+	var xgupId
+	$("#mainContent").delegate("#xg","click",function(){
 		var dom = $(this).parents('tr');
 		var data=$('#mainContent').DataTable().row(dom).data();
-		$("#look_username").text(data.username)
-		$("#look_password").text(data.password!=""?"***":"")
+		xgupId=data.userId;
+		$("#xg_username").val(data.username)
+		$("#xg_password").val(data.password)
+		$("#allMsg1").modal('show');
+	})
+	
+	$("#xgup_baocun").click(function(){
+		var username=$("#xg_username").val();
+		var password=$("#xg_password").val();
+		if(username==""){
+			toastr.error("用户名不能为空");
+			return fasle;
+		}
+		if(password==""){
+			toastr.error("密码不能为空");
+			return fasle;
+		}
+		$.ajax({
+            type: 'POST',
+            url: '/user/updUserup',
+            dataType: 'json',
+            data: {
+            	userId:xgupId,
+            	username:username,
+            	password:password,
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+               if(json>0){
+            	   toastr.success("修改成功");
+            	   $("#allMsg1").modal('hide');
+               }else{
+            	   toastr.error("修改失败");
+               }
+            }
+        });
 	})
 	
 </script>
