@@ -97,15 +97,15 @@
                         <table class="table table-bordered table-condensed" style="height:auto;">
                         	<tr>
                         		<td style="width: 20%;">工号</td>
-                        		<td style="width: 30%;"><input type="text" id="gonghao" placeholder="请输入" style="width: 80%;"></td>
+                        		<td style="width: 30%;"><input type="text" id="gonghao" class="form-control" placeholder="请输入" style="width: 80%;"></td>
                         		<td style="width: 20%;">姓名</td>
-                        		<td style="width: 30%;"><input type="text" id="xingming" placeholder="请输入" style="width: 80%;"></td>
+                        		<td style="width: 30%;"><input type="text" id="xingming" class="form-control" placeholder="请输入" style="width: 80%;"></td>
                         	</tr>
                         	<tr>
                         		<td>签到开始时间</td>
-                        		<td><input type="text" id="kaishishijian" placeholder="请输入" style="width: 80%;"></td>
+                        		<td><input type="text" id="kaishishijian" placeholder="请输入" class="form-control" style="width: 80%;"></td>
                         		<td>签到结束时间</td>
-                        		<td><input type="text" id="jieshushijian" placeholder="请输入" style="width: 80%;"></td>
+                        		<td><input type="text" id="jieshushijian" placeholder="请输入" class="form-control" style="width: 80%;"></td>
                         	</tr>
                         	<tr>
 								<td>备注</td>
@@ -312,7 +312,6 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-            	console.log(json)
             	$("#gonghao").html('');
             	$("#xingming").html('');
             	$("#xg_gonghao").html('');
@@ -432,6 +431,41 @@
 		$("#xg_kaishishijian").val(data.datetimeStart);
 		$("#xg_jieshushijian").val(data.datetimeEnd);
 		$("#xg_beizhu").val(data.remarks);
+	})
+	
+	$("#xg_baocun").click(function(){
+		var workId=$("#xg_gonghao").val();
+		var uName=$("#xg_xingming").val();
+		var userId=$("#xg_gonghao").attr("data-id");
+		var kaishishijian=$("#xg_kaishishijian").val();
+		var jieshushijian=$("#xg_jieshushijian").val();
+		var beizhu=$("#xg_beizhu").val();
+		$.ajax({
+            type: 'POST',
+            url: '/UDutySchedule/updUDutySchedule',
+            dataType: 'json',
+            data: {
+            	id:xgId,
+            	userId:userId,
+            	datetimeStart:kaishishijian,
+            	datetimeEnd:jieshushijian,
+            	remarks:beizhu,
+            	workId:workId,
+            	uName:uName,
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+               if(json.result>0){
+            	   toastr.success("修改成功");
+            	   $('#mainContent').DataTable().row(tr).data(json.obj);//修改行立即显示 */
+            	   $("#change").modal('hide');
+               }else{
+            	   toastr.error("修改失败");
+               }
+            }
+        });
 	})
 	
 	//删除
