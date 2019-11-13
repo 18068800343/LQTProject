@@ -143,10 +143,11 @@
 				border-radius: 6px;
 			}
 			
+			
 			#leftTab {
 				/* 			background:#3f9cff url(/view/img/leftcd.png) no-repeat bottom; */
 				background-size: 100% 100%;
-				background-color: #f2f6fb;
+				background-color: #022141;
 				color: #fff;
 				width: 13%;
 				z-index: 99;
@@ -224,8 +225,9 @@
 			}
 			
 			.tree-node {
-				border: 1px solid white !important;
-				height: 30px;
+				/* border: 1px solid white !important; */
+				height: 50px;
+				line-height:50px;
 			}
 			.right{
 				margin-left: 13%;	
@@ -236,6 +238,23 @@
 			#rightTab{
 			    height:100%;
 			}
+			.yijicaidan{
+			    color:white;
+			}
+			.tree-node-hover{
+			    background-color:#1F7EFE;
+			    
+			}
+			a:hover{
+			    color:white;
+			}
+			.tree-node-selected{
+			    background-color:#1F7EFE;
+			    color:white;
+			}
+		    .tree-indent{
+		        margin-top:30px;
+		    }
 		</style>
 	</head>
 
@@ -243,21 +262,19 @@
 
 		<section>
 			<!-- header -->
-			<header class="header white-bg yihang2" style="background-color: white;height: 40px;border: 1px solid #DEDEDE;">
+			<header class="header white-bg yihang2" style="background-color:#1F7EFE;height: 40px;border: 1px solid #DEDEDE;">
 				<div style="display:flex;align-items:center;">
 				<div class="logo">
-						<img src="../images/logo.png" height="65px"/>
+						<img src="../images/首页logo.png" height="28px"/>
 				</div>
 					<div style="width:50%;">
-						<a class="logo" style="padding-bottom:4px;margin-left:12px;color:black;font-size:28px;">沥青质量信息管理一体化平台</a>
+						<a class="logo" style="padding-bottom:4px;margin-left:12px;color:white;font-size:28px;">沥青质量信息管理一体化平台</a>
 					</div>
-				    	<div class="dl" style="width: 1100px;">
-						 <a href="" style="float: right;margin-left: 40px;margin-top: 10px;">退出</a>
-						 <p style="float: right;display: inline-block;margin-top: 10px;margin-left: 10px;font-size: 20px;">玛维影歌</p>
-				    	<img src="../images/QQ图片20191025162923.jpg" style="height: 50px;border: 2px solid #0000CC; float: right;"/>
-				    	 
-				    	
-				       
+				    	<div class="dl" style="width: 1350px;color:white;">
+						 <a href="" style="float
+						 : right;margin-left: 40px;margin-top: 8px; color:white;font-size:16px">退出</a>
+						 <div class="s" style="width:2px;height:20px;background-color:white;float:right;position:relative;left:20px;top:10px;"></div>
+						 <p style="float: right;display: inline-block;margin-top: 10px;margin-left: 10px;font-size: 18	px;">admin</p>
 					</div>
 				</div>
 			</header>
@@ -315,7 +332,7 @@
 							<div role="tabpanel" class="tab-pane active erjicaidan" id="gerenRenwu" style="padding-top:22px;">
 								<!-- <span style="margin-left:10px;font-size:18px;" class="Pa" ><i class="iconfont icon-yonghuguanli" style="font-size:18px;"></i>个人任务</span><br> -->
 								<div style="text-align:left;background-color:  #f2f6fb;">
-									<div class="easyui-panel" style="background-color:#f2f6fb;overflow:hidden;">
+									<div class="easyui-panel" style="background-color:#022141;overflow:hidden;border:none;">
 										<ul class="easyui-tree">
 											<li>
 												<span><a href="home.html"   target="view_frame"  class="yijicaidan Pab" >首页</a></span>
