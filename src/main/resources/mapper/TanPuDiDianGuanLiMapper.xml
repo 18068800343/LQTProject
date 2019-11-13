@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ldxx.dao.TanPuDiDianGuanLiDao" >
-	<insert id="addUser" parameterType="user">
-		insert into u_user 
-			(user_Id,username,password,user_code,work_id,record_no,u_name,sex,birthday,nation,
-			marriage,political_status,entry_time,card_id,address,postal_code,phone_no,email,
-			diploma,school,specialty,graduation_time,om_id,duty_id,duty_name,certificate,certificate_grade,delete_state,position)
-			values(#{user.userId,jdbcType=VARCHAR},#{user.username,jdbcType=VARCHAR},#{user.password,jdbcType=VARCHAR},#{user.userCode,jdbcType=VARCHAR},#{user.workId,jdbcType=VARCHAR},#{user.recordNo,jdbcType=VARCHAR},
-			#{user.uName,jdbcType=VARCHAR},#{user.sex,jdbcType=VARCHAR},#{user.birthday,jdbcType=VARCHAR},#{user.nation,jdbcType=VARCHAR},#{user.marriage,jdbcType=VARCHAR},#{user.politicalStatus,jdbcType=VARCHAR},
-			#{user.entryTime,jdbcType=VARCHAR},#{user.cardId,jdbcType=VARCHAR},#{user.address,jdbcType=VARCHAR},#{user.postalCode,jdbcType=VARCHAR},#{user.phoneNo,jdbcType=VARCHAR},#{user.email,jdbcType=VARCHAR},
-			#{user.diploma,jdbcType=VARCHAR},#{user.school,jdbcType=VARCHAR},#{user.specialty,jdbcType=VARCHAR},#{user.graduationTime,jdbcType=VARCHAR},#{user.omId,jdbcType=VARCHAR},#{user.dutyId,jdbcType=VARCHAR},
-			#{user.dutyName,jdbcType=VARCHAR},#{user.certificate,jdbcType=VARCHAR},#{user.certificateGrade,jdbcType=VARCHAR},1,#{user.position,jdbcType=VARCHAR})
+	<insert id="addTanPuDiDian" parameterType="siteConstructionVo">
+		insert into site_construction 
+			(id,road_id,site_number,lng,lat,stake_mark,lane,remarks,delete_state)
+			values(#{id},#{roadid},#{sitenumber},#{lng},#{lat},#{stakemark},
+			#{lane},#{remarks},#{deletestate})
 	</insert>
+	
+	<update id="updateTanPuDiDian" parameterType="siteConstructionVo">
+		update site_construction 
+			set road_id=#{roadid},
+			site_number=#{sitenumber},
+			lng=#{lng},lat=#{lat},
+			stake_mark=#{stakemark},
+			lane=#{lane},remarks=#{remarks} where id=#{id}
+	</update>
+	
 
-	<update id="deleteUser" parameterType="String">
-		update u_user set delete_state=0 where user_id=#{userId}
+	<update id="delTanPuDiDian" parameterType="String">
+		update site_construction set delete_state=0 where id=#{id}
 	</update>
 
 	<update id="updateUser" parameterType="user" >
@@ -52,6 +57,11 @@
 	
 	<select id="getDistinctTanPuDiDian" resultType="siteConstruction">
 		select DISTINCT road_no,site_name from site_construction where delete_state = 1
+	</select>
+	
+	<select id="getAllTanPuDiDian" resultType="siteConstructionVo">
+		select sc.*,srm.road_no,srm.road_name from site_construction sc LEFT JOIN sys_road_mgn srm on sc.road_id = srm.road_id and srm.delete_state = 1
+		where sc.delete_state = 1
 	</select>
 	
 	<select id="getBiaoDuanByLuDuan" resultType="siteConstruction" parameterType="map">

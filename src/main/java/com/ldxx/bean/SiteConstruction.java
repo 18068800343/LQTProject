@@ -6,17 +6,13 @@ public class SiteConstruction {
 	
     private String id;
 
-    private String roadno;
+    private String roadid;
 
-    private String sitename;
+    private String sitenumber;
 
-    private BigDecimal startlng;
+    private BigDecimal lng;
 
-    private BigDecimal startlat;
-
-    private BigDecimal endlng;
-
-    private BigDecimal endlat;
+    private BigDecimal lat;
 
     private String stakemark;
 
@@ -26,8 +22,6 @@ public class SiteConstruction {
 
     private int deletestate;
 
-    private String roadnumber;
-
 	public String getId() {
 		return id;
 	}
@@ -36,52 +30,36 @@ public class SiteConstruction {
 		this.id = id;
 	}
 
-	public String getRoadno() {
-		return roadno;
+	public String getRoadid() {
+		return roadid;
 	}
 
-	public void setRoadno(String roadno) {
-		this.roadno = roadno;
+	public void setRoadid(String roadid) {
+		this.roadid = roadid;
 	}
 
-	public String getSitename() {
-		return sitename;
+	public String getSitenumber() {
+		return sitenumber;
 	}
 
-	public void setSitename(String sitename) {
-		this.sitename = sitename;
+	public void setSitenumber(String sitenumber) {
+		this.sitenumber = sitenumber;
 	}
 
-	public BigDecimal getStartlng() {
-		return startlng;
+	public BigDecimal getLng() {
+		return lng;
 	}
 
-	public void setStartlng(BigDecimal startlng) {
-		this.startlng = startlng;
+	public void setLng(BigDecimal lng) {
+		this.lng = lng;
 	}
 
-	public BigDecimal getStartlat() {
-		return startlat;
+	public BigDecimal getLat() {
+		return lat;
 	}
 
-	public void setStartlat(BigDecimal startlat) {
-		this.startlat = startlat;
-	}
-
-	public BigDecimal getEndlng() {
-		return endlng;
-	}
-
-	public void setEndlng(BigDecimal endlng) {
-		this.endlng = endlng;
-	}
-
-	public BigDecimal getEndlat() {
-		return endlat;
-	}
-
-	public void setEndlat(BigDecimal endlat) {
-		this.endlat = endlat;
+	public void setLat(BigDecimal lat) {
+		this.lat = lat;
 	}
 
 	public String getStakemark() {
@@ -115,13 +93,6 @@ public class SiteConstruction {
 	public void setDeletestate(int deletestate) {
 		this.deletestate = deletestate;
 	}
-
-	public String getRoadnumber() {
-		return roadnumber;
-	}
-
-	public void setRoadnumber(String roadnumber) {
-		this.roadnumber = roadnumber;
-	}
+    
     
 }

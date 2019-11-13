@@ -1,209 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../font2/iconfont.css">
-	<link href="../../style/bootstrap.min.css" rel="stylesheet">
-    <link href="../../style/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
-	<link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
-    <style lang="">
-        * { margin: 0; padding: 0; }
-		a { text-decoration: none; }
-		ul { list-style: none; }
-		body,  html { height: 100%; font-family: "微软雅黑"; }
-		.box { width: 100%; height: 600px; margin: 40px 0; }
-		#container1,  #container2 { width: 100%; height: 100%; }
-		#container3 { width: 80%; height: 100%; }
-		.list { width: 20%; height: 100%; background: #eee; }
-		.list li { height: 34px; line-height: 34px; padding-left: 20px; }
-		.list li.active a { color: red; }
-		.title { font-size: 14px; font-weight: bold; color: #cc5522; }
-		.content { font-size: 13px; color: #333; margin-top: 6px; }
-		.fl { float: left; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<link rel="stylesheet" href="../../font2/iconfont.css">
+<link href="../../style/bootstrap.min.css" rel="stylesheet">
+<link href="../../style/style.css" rel="stylesheet">
+<link href="../../toastr/toastr.css" rel="stylesheet">
+<link rel="stylesheet" href="../../style/jquery-editable-select.css">
+<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css" />
+<link rel="stylesheet" type="text/css" href="../../css/layui.css" />
+<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css" />
+<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+<link rel="stylesheet" type="text/css" href="../../css/code.css" />
+<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
+<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+<link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
+<style lang="">
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+
+body, html {
+	height: 100%;
+	font-family: "微软雅黑";
+}
+
+.box {
+	width: 100%;
+	height: 600px;
+	margin: 40px 0;
+}
+
+#container1, #container2 {
+	width: 100%;
+	height: 100%;
+}
+
+#container3 {
+	width: 80%;
+	height: 100%;
+}
+
+.list {
+	width: 20%;
+	height: 100%;
+	background: #eee;
+}
+
+.list li {
+	height: 34px;
+	line-height: 34px;
+	padding-left: 20px;
+}
+
+.list li.active a {
+	color: red;
+}
+
+.title {
+	font-size: 14px;
+	font-weight: bold;
+	color: #cc5522;
+}
+
+.content {
+	font-size: 13px;
+	color: #333;
+	margin-top: 6px;
+}
+
+.fl {
+	float: left;
+}
+</style>
 </head>
 <body>
-   
-    <!-- 面包屑 -->
-    <div class="mianbao">
-    	<ul class="breadcrumb">
-    		<li><i class="iconfont icon-knowledgebase"></i></li>
+
+	<!-- 面包屑 -->
+	<div class="mianbao">
+		<ul class="breadcrumb">
+			<li>
+				<i class="iconfont icon-knowledgebase"></i>
+			</li>
 			<li>道路施工质量管理</li>
 			<li class="active">沥青砼摊铺监控管理</li>
 			<li class="active">摊铺地点管理</li>
 		</ul>
-    </div>
+	</div>
+	<!-- Nav tabs -->
+	<div role="tabpanel" class="tab-pane active" id="profile">
+	</div>
+	<div role="tabpanel" class="tab-pane" id="messages">
+		<div class="zhuti-content">
+			<div class="UpperPart">
+				<div class="UpperPartL">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入摊铺地点管理</button>
+				</div>
+				<div class="UpperPartR">
+					<!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
+				</div>
+				<div class="LowerPart">
+					<div>
+						<table class="table table-bordered table-condensed " id="mainContent" style="white-space: nowrap;width:100% !important;">
+							<thead>
+								<tr >
+									<th>路段编号</th>
+									<th>路段名称</th>
+									<th>标段号</th>
+									<th>经度</th>
+									<th>纬度</th>
+									<th>桩号</th>
+									<th>车道</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="LowerPart" style="margin-top: 3px;">
+				<div class="box">
+					<div id="container1"></div>
+				</div>
+		</div>
+	</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" id="newDiDian">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<b>录入摊铺地点</b>
+					</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<form class="form-inline">
+							<table class="table table-bordered">
+								<tr>
+									<td style="width: 20%;">路段</td>
+									<td style="width: 30%;"><input type="text" style="display: none;" ref="getInputValue2" :value="roadid | optionTxt(roadList,'roadid','roadno')" />
+										<input type="text" style="display: none;" ref="getInputValue1" :value="roadid | optionTxt(roadList,'roadid','roadname')" /> <select
+											class="form-control" style="width: 100%;" v-model="roadid" id="roadid">
+											<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
+										</select></td>
+									<td style="width: 20%;">标段</td>
+									<td style="width: 30%;"><input type="text" v-model="sitenumber" id="sitenumber" /></td>
+								</tr>
+								<tr>
+									<td>经度</td>
+									<td><input type="text" @blur="reg(lng,'xiaoshu','lng')" v-model="lng" id="lng" /></td>
+									<td>纬度</td>
+									<td><input type="text" @blur="reg(lat,'xiaoshu','lat')" v-model="lat" id="lat" /></td>
+								</tr>
+								<tr>
+									<td>桩号</td>
+									<td><input type="text" v-model="stakemark" id="stakemark" /></td>
+									<td>车道</td>
+									<td><input type="text" v-model="lane" id="lane" /></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-success" @click="save">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- model结束 -->
 
-    <div class="zhuti-content">
-        <div class="UpperPart">
-            <div class="UpperPartL">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入摊铺地点管理</button>
-            </div>
-            <div class="UpperPartR">
-                <!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
-            </div>
-<!-- Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>录入摊铺地点</b></h4>
-        </div>
-        <div class="modal-body">
-                <div>     
-                    <form class="form-inline">
-                        <table class="table table-bordered">
-							<tr>
-								<td style="width: 20%;">序号</td>
-								<td style="width: 30%;"><input type="text" id="xuhao"/></td>
-								<td style="width: 20%;">工地名称</td>
-								<td style="width: 30%;"><input type="text" id="gongdimingcheng"/></td>
-							</tr>
-							<tr>
-								<td>经度</td>
-								<td><input type="text" id="jingdu"/></td>
-								<td>纬度</td>
-								<td><input type="text" id="weidu"/></td>
-							</tr>
-							<tr>
-								<td>桩号</td>
-								<td><input type="text" id="zhuanghao"/></td>
-								<td>车道</td>
-								<td><input type="text" id="chedao"/></td>
-							</tr>
-                        </table>
-                    </form> 
-                </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success" id="baocun" >保存</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- model结束 -->
+	<!-- 修改Modal -->
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" id="xgDiDianVm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<b>修改摊铺地点管理</b>
+					</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<form class="form-inline">
+							<table class="table table-bordered">
+								<tr>
+									<td style="width: 20%;">路段</td>
+									<td style="width: 30%;"><input type="text" style="display: none;" ref="getInputValue2" :value="roadid | optionTxt(roadList,'roadid','roadno')" />
+										<input type="text" style="display: none;" ref="getInputValue1" :value="roadid | optionTxt(roadList,'roadid','roadname')" /> <select
+											class="form-control" style="width: 100%;" v-model="roadid" id="roadid">
+											<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
+										</select></td>
+									<td style="width: 20%;">标段</td>
+									<td style="width: 30%;"><input type="text" v-model="sitenumber" id="sitenumber" /></td>
+								</tr>
+								<tr>
+									<td>经度</td>
+									<td><input type="text" @blur="reg(lng,'xiaoshu','lng')" v-model="lng" id="lng" /></td>
+									<td>纬度</td>
+									<td><input type="text" @blur="reg(lat,'xiaoshu','lat')" v-model="lat" id="lat" /></td>
+								</tr>
+								<tr>
+									<td>桩号</td>
+									<td><input type="text" v-model="stakemark" id="stakemark" /></td>
+									<td>车道</td>
+									<td><input type="text" v-model="lane" id="lane" /></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" @click="save" class="btn btn-success">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 修改model结束 -->
 
-<!-- 修改Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>修改摊铺地点管理</b></h4>
-        </div>
-        <div class="modal-body">
-            <div>     
-                <form class="form-inline">
-                    <table class="table table-bordered">
-						<tr>
-							<td style="width: 20%;">序号</td>
-							<td style="width: 30%;"><input type="text" /></td>
-							<td style="width: 20%;">工地名称</td>
-							<td style="width: 30%;"><input type="text" /></td>
-						</tr>
-						<tr>
-							<td>经度</td>
-							<td><input type="text" /></td>
-							<td>纬度</td>
-							<td><input type="text" /></td>
-						</tr>
-						<tr>
-							<td>桩号</td>
-							<td><input type="text" /></td>
-							<td>车道</td>
-							<td><input type="text" /></td>
-						</tr>
-                    </table>
-                </form>  
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success">保存</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- 修改model结束 -->
-
-        </div>
-        <div class="LowerPart" style="margin-top:3px;">
-            <div class="box">
-	          <div id="container1" ></div>
-	        </div>
-        </div>
-    </div>
-<!-- allMsg -->
-
-<!-- allMsg结束 -->
 </body>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BmTwezCvWyGaH3KNYkc5P6uq"></script>
 <script src="../../js/jquery.js"></script>
-<script src="../../js/common-scripts.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/common-scripts.js"></script>
+<script src="../../toastr/toastr.js"></script>
+<script src="../../js/jquery-editable-select.js"></script>
+<script src="../../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
+<script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
-<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-<script src="http://api.map.baidu.com/api?v=2.0&ak=mvusu4bCgPW13rbGBCfOz7GZF9mh3yaa"></script>
-<script src="../../js/jquery.baiduMap.min.js"></script>
 <script>
-    $(document).ready( function () {
-    	
+	$(document).ready(function() {
+		initMap();
+		initTable();
 	});
-    
-    var points = [{
-		id: 1,
-		lng: 118.096525,
-		lat: 24.462602,
-		title: "工地名称：厦门中山公园",
-		content: ["经度：118.096525;纬度：24.462602","桩号：010 ; 车道：010"]
-	}, {
-		id: 2,
-		lng: 118.095231,
-		lat: 24.461615,
-		title: "工地名称：厦门实验小学",
-		content: ["经度：118.095231 , 纬度：24.461615", "桩号：011 , 车道：011"]
-	}, {
-		id: 3,
-		lng: 118.092644,
-		lat: 24.468522,
-		title: "工地名称：厦门光明大厦",
-		content: ["经度：118.092644 , 纬度：24.468522", "桩号：012 , 车道：012"]
-	}, {
-		id: 4,
-		lng: 118.106586,
-		lat: 24.467207,
-		title: "工地名称：厦门将军祠",
-		content: ["经度：118.106586 , 纬度：24.467207", "桩号：013 , 车道：013"]
-	}, {
-		id: 5,
-		lng: 118.108526,
-		lat: 24.474245,
-		title: "工地名称：厦门古龙商城",
-		content: ["经度：118.108526 , 纬度：24.474245","桩号：014 , 车道：014"]
+
+	var points = [ {
+		id : 1,
+		lng : 118.096525,
+		lat : 24.462602,
+		title : "工地名称：厦门中山公园",
+		content : [ "经度：118.096525;纬度：24.462602", "桩号：010 ; 车道：010" ]
 	}];
+	var page_map;
+  var initMap = ()=>{
+		  page_map = new BMap.Map("container1");
+			//添加地图类型控件
+			page_map.addControl(new BMap.MapTypeControl({
+				mapTypes:[
+		            BMAP_NORMAL_MAP,
+		            BMAP_HYBRID_MAP
+		        ]}));	
+      // 创建点坐标  
+      page_map.centerAndZoom("江苏", 7);
+      page_map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+      
+  }
+	
+	function theLocation(data){
+		var jingdu = data.lng;
+		var weidu = data.lat;
+		if(jingdu != "" && weidu != ""){
+			page_map.clearOverlays(); 
+			var new_point = new BMap.Point(data.lng,data.lat);
+			var marker = new BMap.Marker(new_point);  // 创建标注
+			page_map.addOverlay(marker);              // 将标注添加到地图中
+			page_map.panTo(new_point);  
+      var sContent =
+          "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>" + data.roadname + "</h4>" +"<br/>"+
+          "";
+      var infoWindow = new BMap.InfoWindow(sContent);
+      marker.addEventListener("click", function () {
+          this.openInfoWindow(infoWindow);
+      });
+		}
+	}
+	
+	
+	var table = $('#mainContent')
+			.DataTable(
+					{
+						"deferRender" : true,
+						"processing" : true,
+						"bDestroy" : true,
+						"iDisplayLength" : 10,
+						"searching" : true,
+						"lengthChange" : false,
+						"oLanguage" : {
+							"sSearch" : '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+						},
+						"order" : [ [ 0, 'desc' ] ],
+						"columns" : [ {
+							"data" : "roadno"
+						}, {
+							"data" : "roadname"
+						}, {
+							"data" : "sitenumber"
+						}, {
+							"data" : "lng"
+						}, {
+							"data" : "lat"
+						}, {
+							"data" : "stakemark"
+						}, {
+							"data" : "lane"
+						}, {
+							"data" : "remarks"
+						}, ],
+						"columnDefs" : [ {
+							"class" : "tcenter",
+							"targets" : 7,
+							"searchable" : true,
+							"render" : function(data, type, full) {
+								var xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'
+										+ full
+										+ '"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>';
+
+								var qiyong = '<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'
+										+ data
+										+ '" onclick="delMsg(this)" title="删除"></i>';
+										
+								var marker = '<i class="glyphicon glyphicon-map-marker" style="font-size:14px;cursor:pointer;" data-id="'
+									+ data
+									+ '" onclick="markPoint(this)" title="删除"></i>';
+										
+								return   xiugai + qiyong + marker;
+							}
+						} ],
+						//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
+						"sScrollX" : true,
+						// 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
+						//表中的数据自适应 ，表头的宽度固定
+						"bAutoWidth" : false,
+						"oLanguage" : { //国际化配置
+							"sProcessing" : "正在获取数据，请稍后...",
+							"sLengthMenu" : "显示 _MENU_ 条",
+							"sZeroRecords" : "查询不到相关数据",
+							"sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+							"sInfoEmpty" : "记录数为0",
+							"sInfoFiltered" : "(全部记录数 _MAX_ 条)",
+							"sInfoPostFix" : "",
+							"sSearch" : "搜索",
+							"sUrl" : "",
+							"oPaginate" : {
+								"sFirst" : "第一页",
+								"sPrevious" : "上一页",
+								"sNext" : "下一页",
+								"sLast" : "最后一页"
+							}
+						},
+					});
+	
+	function initTable() {
+		$.ajax({
+			type : 'POST',
+			url : '/TanPuDiDianGuanLi/getAllTanPuDiDian',
+			dataType : 'json',
+			data : {},
+			async:false,
+			error : function(msg) {
+				errMessage("请求UserController失败");
+			},
+			success : function(json) {
+				$("#mainContent").dataTable().fnClearTable();
+				$("#mainContent").DataTable().rows.add(json).draw(false);
+				for(var i in json){
+				var point = new BMap.Point(json[i].lng, json[i].lat);
+        addMarker(point, json[i].stakemark, json[i].lane,json[i]);
+				}
+			}
+		});
+	}
+
+    function addMarker(point, stakemark,lane,obj) {
+        var marker = new BMap.Marker(point);
+        marker = new BMap.Marker(point);
+        var sContent =
+            "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>" + obj.sitenumber + "</h4>" +"<br/>"
+            "";
+        var infoWindow = new BMap.InfoWindow(sContent);
+        page_map.addOverlay(marker);
+        marker.addEventListener("click", function () {
+            this.openInfoWindow(infoWindow);
+        });
+    } 
     
-    new BaiduMap({
-		id: "container1",
-		level: 16,//  选填--地图级别--(默认15)
-		zoom: true, // 选填--是否启用鼠标滚轮缩放功能--(默认false)
-		type: ["地图", "卫星"],// 选填--显示地图类型--(默认不显示)
-		width: 320, // 选填--信息窗口width--(默认自动调整)
-		height: 70, // 选填--信息窗口height--(默认自动调整)
-		titleClass: "title",
-		contentClass: "content",
-		centerPoint: { // 地图中心点经纬度
-			lng: 118.106586,
-			lat: 24.467207
-		},
-		index: -1,// 开启对应的信息窗口，默认-1不开启
-		points: points,
-		//showLabel: true
-	});
     
+	Vue.filter('optionTxt',function(value,obj,val,text){
+	    var newObj = {};
+	    if(value=='请选择'){
+	        return value
+	    }else{
+	        for(var i=0; i<obj.length; i++){
+	            newObj[obj[i][val]] = obj[i][text];
+	        }
+	        return newObj[value]
+	    }
+	})
+	
+	var newDiDianVm = new Vue({
+	  el: '#newDiDian',
+	  //表单数据
+	  data: {
+		  roadid:"",
+		  roadname:"",
+		  roadno:"",
+		  sitenumber:"",
+		  lng:"",
+		  lat:"",
+		  stakemark:"",
+		  lane:"",
+		  remarks:"",
+		  roadList:'',
+	  },
+	  methods: {
+		//新建生产计划保存按钮事件
+	    save: function () {
+            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+           	this.roadname = this.$refs.getInputValue1.value;
+           	this.roadno = this.$refs.getInputValue2.value;
+            this.$http.post('/TanPuDiDianGuanLi/addTanPuDiDian',JSON.stringify(this._data),{}).then((res)=>{
+           	var resMsg = res.body;
+	            	if(resMsg.daoMsg>0){
+	            		$("#myModal").modal("hide");
+	            		$('#mainContent').DataTable().row.add(resMsg.obj).draw(false);     //新增行立即显示
+	            		toastr.success(resMsg.resultMsg);
+	            	}else{
+	            		toastr.error(resMsg.errMsg);
+	            	}
+            },(res)=>{
+            	var resMsg = res.body;
+            	toastr.error(resMsg.errMsg);
+            });
+	    },
+	    reg:function(value,regType,id){
+	    	var re = new RegExp(regMap[regType]);
+	    	var flag;
+    		flag = reg(parseFloat(value),re);
+    		if(null!=value&&''!=value){
+		    	if(!flag){
+		    		newDiDianVm[id]="";
+		    		toastr.error(errMsg[id]);
+    		    }
+    		}
+	    },
+      roadPost:function(){
+          //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+          this.$http.post('/SysRoadMgnController/getAllSysRoadMgn',{},{emulateJSON:true}).then((res)=>{
+          	this.roadList=res.body;
+          	this.roadid=this.roadList[0].roadid;
+          },(res)=>{
+              console.log(res.status);
+          });
+      }
+	  }
+	})
+	newDiDianVm.roadPost();
+	
+	
+	var xgDiDianVm = new Vue({
+	  el: '#xgDiDianVm',
+	  //表单数据
+	  data: {
+		  id:"",
+		  roadid:"",
+		  roadname:"",
+		  roadno:"",
+		  sitenumber:"",
+		  lng:"",
+		  lat:"",
+		  stakemark:"",
+		  lane:"",
+		  remarks:"",
+		  roadList:'',
+	  },
+	  methods: {
+		//新建生产计划保存按钮事件
+	    save: function () {
+            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+           	this.roadname = this.$refs.getInputValue1.value;
+           	this.roadno = this.$refs.getInputValue2.value;
+            this.$http.post('/TanPuDiDianGuanLi/updateTanPuDiDian',JSON.stringify(this._data),{}).then((res)=>{
+           	var resMsg = res.body;
+	            	if(resMsg.daoMsg>0){
+	            		$("#change").modal("hide");
+	            		$('#mainContent').DataTable().row(page_tr).data(resMsg.obj);     //新增行立即显示
+	            		toastr.success(resMsg.resultMsg);
+	            	}else{
+	            		toastr.error(resMsg.errMsg);
+	            	}
+            },(res)=>{
+            	var resMsg = res.body;
+            	toastr.error(resMsg.errMsg);
+            });
+	    },
+	    reg:function(value,regType,id){
+	    	var re = new RegExp(regMap[regType]);
+	    	var flag;
+    		flag = reg(parseFloat(value),re);
+    		if(null!=value&&''!=value){
+		    	if(!flag){
+		    		xgDiDianVm[id]="";
+		    		toastr.error(errMsg[id]);
+    		    }
+    		}
+	    },
+      roadPost:function(){
+          //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+          this.$http.post('/SysRoadMgnController/getAllSysRoadMgn',{},{emulateJSON:true}).then((res)=>{
+          	this.roadList=res.body;
+          	this.roadid=this.roadList[0].roadid;
+          },(res)=>{
+              console.log(res.status);
+          });
+      }
+	  }
+	})
+	xgDiDianVm.roadPost();
+	
+	//全局正则KV集合
+	var regMap = {
+			xiaoshu: '^[0-9]+\.?[0-9]*$'
+	}
+	
+	function reg(str,re){
+		if (re.test(str)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	var markPoint = (e) => {
+		var tr=$(e).parents("tr");
+  	var data=$("#mainContent").DataTable().row(tr).data();
+		theLocation(data);
+	}
+	
+	var page_tr;
+	var udMsg = (e) => {
+		var tr=$(e).parents("tr");
+		page_tr=tr;
+  	var data=$("#mainContent").DataTable().row(tr).data();
+  	xgDiDianVm.id=data.id;
+  	xgDiDianVm.roadid=data.roadid;
+  	xgDiDianVm.roadname=data.roadname;
+  	xgDiDianVm.roadno=data.roadno;
+  	xgDiDianVm.sitenumber=data.sitenumber;
+  	xgDiDianVm.lng=data.lng;
+  	xgDiDianVm.lat=data.lat;
+  	xgDiDianVm.stakemark=data.stakemark;
+  	xgDiDianVm.lane=data.lane;
+	}
+	
+	//全局错误提示
+	var errMsg = {
+		  lng:'经度输入错误，请输入纯数字',
+		  lat:'纬度输入错误，请输入纯数字',
+	}
+	
+	//箭头函数，内部this永远指向父级
+	var delMsg = (e)=>{
+		var tr = $(e).parents("tr");
+		var data=$("#mainContent").DataTable().row(tr).data();
+		var msg = "确定要删除吗？\n\n请确认！";
+		if (confirm(msg) == true) {
+	        $.ajax({
+	            type: 'POST',
+	            url: '/TanPuDiDianGuanLi/delTanPuDiDian',
+	            dataType: 'json',
+	            data: {
+	            	id:data.id
+	            },
+	            error: function (msg) {
+	                errMessage("请求UserController失败");
+	            },
+	            success: function (json) {
+	            	if(json>0){
+	            		toastr.success("删除成功");
+	                $('#mainContent').DataTable().row(tr).remove().draw(false); //删除行立即显示
+	            	}else{
+	            	  toastr.error("删除失败");
+	            	}
+	            }
+	        });
+		}else{
+			return false;
+		}
+	  console.log(msg);
+	}
 </script>
 </html>
