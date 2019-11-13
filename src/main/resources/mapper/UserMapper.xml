@@ -43,4 +43,32 @@
 		select * from u_user where user_id=#{userId}
 	</select>
 	
+	<select id="iscountWorkId"  resultType="int">
+		select count(work_id) from u_user where work_id=#{workId} and delete_state=1
+	</select>
+	
+	<select id="iscountUName" resultType="int">
+		select count(u_name) from u_user where u_name=#{uName} and delete_state=1
+	</select>
+	
+	<select id="iscountWorkIdEdit" parameterType="String" resultType="int">
+		select count(work_id) from u_user where work_id=#{workId} and user_id !=#{userId} and delete_state=1
+	</select>
+	
+	<select id="iscountUNameEdit" parameterType="String" resultType="int">
+		select count(u_name) from u_user where u_name=#{uName} and user_id !=#{userId} and delete_state=1
+	</select>
+	
+	<select id="getWorkIdAnduName" resultType="user">
+		select user_id,work_id,u_name from u_user where delete_state=1
+	</select>
+	
+	<select id="getWorkIdByuName" resultType="user">
+		select user_id,work_id,u_name from u_user where delete_state=1 and u_name=#{uName}
+	</select>
+	
+	<select id="getuNameByWorkId" resultType="user">
+		select user_id,work_id,u_name from u_user where delete_state=1 and work_id=#{workId}
+	</select>
+	
 </mapper>

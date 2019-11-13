@@ -469,6 +469,10 @@
             	   toastr.success("添加成功");
             	   $('#mainContent').DataTable().row.add(json.user).draw(false);     //新增行立即显示
             	   $("#myModal").modal('hide');
+               }else if(json.result==-1){
+            	   toastr.error("工号重复");
+               }else if(json.result==-2){
+            	   toastr.error("姓名重复");
                }else{
             	   toastr.error("添加失败");
                }
@@ -571,6 +575,10 @@
             	   toastr.success("修改成功");
             	   $('#mainContent').DataTable().row(tr).data(json.user);//修改行立即显示 */
             	   $("#change").modal('hide');
+               }else if(json.result==-1){
+            	   toastr.error("工号重复");
+               }else if(json.result==-2){
+            	   toastr.error("姓名重复");
                }else{
             	   toastr.error("添加失败");
                }

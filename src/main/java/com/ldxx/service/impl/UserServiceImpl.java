@@ -24,32 +24,63 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int deleteUser(String userId) {
-		// TODO Auto-generated method stub
 		return dao.deleteUser(userId);
 	}
 
 	@Override
 	public int updateUser(User user) {
-		// TODO Auto-generated method stub
 		return dao.updateUser(user);
 	}
 
 	@Override
 	public List<User> selectAllUser() {
-		// TODO Auto-generated method stub
 		return dao.selectAllUser();
 	}
 
 	@Override
 	public User selectUserById(String userId) {
-		// TODO Auto-generated method stub
 		return dao.selectUserById(userId);
 	}
 
 	@Override
 	public int updUserup(User user) {
-		// TODO Auto-generated method stub
 		return dao.updUserup(user);
 	}
+	
+	@Override
+	public int iscountWorkId(String workId) {
+		return dao.iscountWorkId(workId);
+	}
+
+	@Override
+	public List<User> getWorkIdAnduName() {
+		return dao.getWorkIdAnduName();
+	}
+
+	@Override
+	public User getWorkIdByuName(String uName) {
+		return dao.getWorkIdByuName(uName);
+	}
+
+	@Override
+	public User getuNameByWorkId(String workId) {
+		return dao.getuNameByWorkId(workId);
+	}
+
+	@Override
+	public int iscountUName(String uName) {
+		return dao.iscountUName(uName);
+	}
+
+	@Override
+	public int iscountWorkIdEdit(String workId, String userId) {
+		return dao.iscountWorkIdEdit(workId, userId);
+	}
+
+	@Override
+	public int iscountUNameEdit(String uName, String userId) {
+		return dao.iscountUNameEdit(uName, userId);
+	}
+
 
 }

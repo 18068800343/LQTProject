@@ -19,5 +19,18 @@ public interface  UserDao {
 	User selectUserById(@Param("userId")String userId);
 	
 	int updUserup(@Param("user")User user);
+	
+	int iscountWorkId(@Param("workId")String workId);
 
+	List<User> getWorkIdAnduName();
+	
+	User getWorkIdByuName(@Param("uName")String uName);
+
+	User getuNameByWorkId(@Param("workId")String workId);
+
+	int iscountUName(@Param("uName")String uName);
+	
+	int iscountWorkIdEdit(@Param("workId")String workId,@Param("userId")String userId);
+	
+	int iscountUNameEdit(@Param("uName")String uName,@Param("userId")String userId);
 }
