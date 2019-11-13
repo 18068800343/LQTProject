@@ -38,7 +38,7 @@
 	where delete_state=1 and type_name=#{typeName}
 </select>
 	
-<select id="selectByIdDicDeviceType" resultType="DiDeviceType">
+<select id="selectByIdDicDeviceType" resultType="DicDeviceType">
 	select 
 		id,type_name,delete_state 
 	from dic_device_type
