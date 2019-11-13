@@ -22,10 +22,15 @@ public class SysFormulationManagementServiceImpl implements SysFormulationManage
 	private SysFormulationManagementDao sdao;
 	@Override
 	public int addSysFormulationManagement(SysFormulationManagement sysFormulationManagement) {
-		String s ="PF"+GetThisTimeUtils.getDateTimeNumber();
-		sysFormulationManagement.setFlNo(s);
+		String str ="PF"+GetThisTimeUtils.getDateTimeNumber();
+		sysFormulationManagement.setFlNo(str);
 		sysFormulationManagement.setFlId(LDXXUtils.getUUID12());
 		int num = sdao.addSysFormulationManagement(sysFormulationManagement);
+		List<SysMaterialAttached> fslist = sysFormulationManagement.getFsclList();
+		for(SysMaterialAttached sma : fslist)
+		{
+			sma.setFlId(sysFormulationManagement.getFlId());
+		}
 		sdao.addFuShuCaiLiao(sysFormulationManagement.getFsclList());
 		return num;
 	}
@@ -33,6 +38,8 @@ public class SysFormulationManagementServiceImpl implements SysFormulationManage
 	@Override
 	public int updateSysFormulationManagement(SysFormulationManagement sysFormulationManagement) {
 		int num = sdao.updateSysFormulationManagement(sysFormulationManagement);
+		sdao.deleteByIdFuShuCaiLiao(sysFormulationManagement.getFlId());
+		sdao.addFuShuCaiLiao(sysFormulationManagement.getFsclList());
 		return num;
 	}
 
@@ -65,8 +72,9 @@ public class SysFormulationManagementServiceImpl implements SysFormulationManage
 	}
 
 	@Override
-	public SysFormulationManagement selectByIdSysFormulationManagement() {
-		SysFormulationManagement s =sdao.selectByIdSysFormulationManagement();
+	public SysFormulationManagement selectByIdSysFormulationManagement(String id) {
+		SysFormulationManagement s =sdao.selectByIdSysFormulationManagement(id);
+		s.setFsclList(sdao.selectByIdFuShuCaiLiao(s.getFlId()));
 		return s;
 	}
 

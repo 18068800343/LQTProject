@@ -33,8 +33,7 @@
 			 materials_use_5=#{sysFormulationManagement.materialsUse5},
 			 materials_use_6=#{sysFormulationManagement.materialsUse6},
 			 bone_flour_use=#{sysFormulationManagement.boneFlourUse},
-			 pitch_use=#{sysFormulationManagement.pitchUse},
-			 other_use=#{sysFormulationManagement.otherUse}
+			 pitch_use=#{sysFormulationManagement.pitchUse}
 	    where fl_id=#{sysFormulationManagement.flId} and delete_state=1
 	</update>
 	<select id="selectAllSysFormulationManagement" resultType="SysFormulationManagement">
@@ -54,16 +53,15 @@
 			bone_flour_use,pitch_use,delete_state
 		from
 		  sys_formulation_management
-		where fl_id=#{sysFormulationManagement.flId} and delete_state=1
+		where fl_id=#{id} and delete_state=1
 	</select>
 	
 	<update id="deleteSysFormulationManagement">
 		update sys_formulation_management 
 		set
 			delete_state=0
-		 where fl_id=#{sysFormulationManagement.flId}
+		 where fl_id=#{id}
 	</update>
-	
 	
 	<select id="getFlName" resultType="SysFormulationManagement">
 		select 
@@ -72,6 +70,7 @@
 		  sys_formulation_management
 		where delete_state=1
 	</select>
+	
 	<insert id="addFuShuCaiLiao" parameterType="java.util.List" useGeneratedKeys="false">
 		insert into 
 		sys_material_attached(fl_id,m_name,weight)
@@ -84,6 +83,7 @@
 			  )
 	    </foreach>
 	</insert>
+	
 	<select id="selectAllFuShuCaiLiao" resultType="SysMaterialAttached">
 		select
 			a.fl_id,m_name,weight
@@ -91,5 +91,20 @@
 		  sys_material_attached as a
 		left join sys_formulation_management as b on a.fl_id=b.fl_id
 		where b.delete_state=1
+	</select>
+	
+	<delete id="deleteByIdFuShuCaiLiao" >
+		delete 
+		from sys_material_attached
+		where fl_id=#{id}
+	</delete>
+	
+	<select id="selectByIdFuShuCaiLiao" resultType="SysMaterialAttached">
+		select
+			a.fl_id,m_name,weight
+		from
+		  sys_material_attached as a
+		left join sys_formulation_management as b on a.fl_id=b.fl_id
+		where b.delete_state=1 and a.fl_id=#{id}
 	</select>
 </mapper>

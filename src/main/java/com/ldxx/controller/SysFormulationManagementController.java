@@ -28,9 +28,7 @@ public class SysFormulationManagementController {
 	@ResponseBody
 	public Map<String,Object> addSysFormulationManagement(@RequestBody SysFormulationManagement sysFormulationManagement) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		int state=0;
-		sysFormulationManagement.setFlId(LDXXUtils.getUUID12());
 		state = sfmService.addSysFormulationManagement(sysFormulationManagement);
 		map.put("result",state);
 		map.put("SysFormulationManagement", sysFormulationManagement);
@@ -39,10 +37,10 @@ public class SysFormulationManagementController {
 	
 	@RequestMapping("/updateSysFormulationManagement")
 	@ResponseBody
-	public Map<String,Object> updateSysFormulationManagement(SysFormulationManagement sysFormulationManagement) {
+	public Map<String,Object> updateSysFormulationManagement(@RequestBody SysFormulationManagement sysFormulationManagement) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		sysFormulationManagement.setFlId(LDXXUtils.getUUID12());
-		int state = sfmService.updateSysFormulationManagement(sysFormulationManagement);
+		int state=0;
+		state = sfmService.updateSysFormulationManagement(sysFormulationManagement);
 		map.put("result",state);
 		map.put("SysFormulationManagement", sysFormulationManagement);
 		return map;
@@ -50,9 +48,12 @@ public class SysFormulationManagementController {
 	
 	@RequestMapping("/deleteSysFormulationManagement")
 	@ResponseBody
-	public int deleteSysFormulationManagement(String id) {
-		int num = sfmService.deleteSysFormulationManagement(id);
-		return num;
+	public Map<String,Object> deleteSysFormulationManagement(String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int state=0;
+		state = sfmService.deleteSysFormulationManagement(id);
+		map.put("result",state);
+		return map;
 	}
 	
 	@RequestMapping("/selectAllSysFormulationManagement")
@@ -64,8 +65,8 @@ public class SysFormulationManagementController {
 	
 	@RequestMapping("/selectByIdSysFormulationManagement")
 	@ResponseBody
-	public SysFormulationManagement selectByIdSysFormulationManagement() {
-		SysFormulationManagement s =sfmService.selectByIdSysFormulationManagement();
+	public SysFormulationManagement selectByIdSysFormulationManagement(String id) {
+		SysFormulationManagement s =sfmService.selectByIdSysFormulationManagement(id);
 		return s;
 	}
 	

@@ -83,18 +83,18 @@ public class SysFormulationManagement {
 	public void setPitchUse(BigDecimal pitchUse) {
 		this.pitchUse = pitchUse;
 	}
-	public Integer getDeleteState() {
-		return deleteState;
-	}
-	public void setDeleteState(Integer deleteState) {
-		this.deleteState = deleteState;
-	}
 	public List<SysMaterialAttached> getFsclList() {
 		return fsclList;
 	}
 	public void setFsclList(List<SysMaterialAttached> fsclList) {
 		this.fsclList = fsclList;
 	}
-
+	public Integer getDeleteState() {
+		return deleteState;
+	}
+	public void setDeleteState(Integer deleteState) {
+		this.deleteState = deleteState;
+	}
+	
 	
 }
