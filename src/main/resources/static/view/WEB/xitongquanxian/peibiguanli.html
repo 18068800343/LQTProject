@@ -214,33 +214,33 @@
                     <table class="table table-bordered">
                     	 	<tr>
                     	 		<td>配方编号</td>
-                                <td><input type="text" class="form-control" id="xq_fl_no" disabled></td>
+                                <td><input type="text" class="form-control" id="xq_fl_no" readonly="readonly"></td>
                                 <td>配方名称:</td>
-                                <td><input type="text" class="form-control" id="xq_fl_name" disabled></td>
+                                <td><input type="text" class="form-control" id="xq_fl_name" readonly="readonly"></td>
                             </tr>
 							<tr>
 								<td>料1用量:</td>
-								<td><input type="text" class="form-control" id="xq_materials_use_1" disabled></td>
+								<td><input type="text" class="form-control" id="xq_materials_use_1" readonly="readonly"></td>
 							    <td>料2用量:</td>
-							    <td><input type="text" class="form-control" id="xq_materials_use_2" disabled></td>
+							    <td><input type="text" class="form-control" id="xq_materials_use_2" readonly="readonly"></td>
 							</tr>
 							<tr>   
 								<td>料3用量:</td>
-								<td><input type="text" class="form-control" id="xq_materials_use_3" disabled></td>
+								<td><input type="text" class="form-control" id="xq_materials_use_3" readonly="readonly"></td>
 							    <td>料4用量:</td>
-							    <td><input type="text" class="form-control" id="xq_materials_use_4" disabled></td>
+							    <td><input type="text" class="form-control" id="xq_materials_use_4" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<td>料5用量:</td>
-								<td><input type="text" class="form-control" id="xq_materials_use_5" disabled></td>
+								<td><input type="text" class="form-control" id="xq_materials_use_5" readonly="readonly"></td>
 							    <td>料6用量:</td>
-							    <td><input type="text" class="form-control" id="xq_materials_use_6" disabled></td>
+							    <td><input type="text" class="form-control" id="xq_materials_use_6" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<td>粉用量:</td>
-								<td><input type="text" class="form-control" id="xq_bone_flour_use" disabled></td>
+								<td><input type="text" class="form-control" id="xq_bone_flour_use" readonly="readonly"></td>
 							    <td>沥青用量:</td>
-							    <td><input type="text" class="form-control" id="xq_pitch_use" disabled></td>
+							    <td><input type="text" class="form-control" id="xq_pitch_use" readonly="readonly"></td>
 							</tr>
                     </table>
                     <table class="table table-bordered table-condensed" id="xq_fushumaterials">
@@ -754,8 +754,8 @@
 			{
 				$("#xq_fushumaterials tbody").append(
 						"<tr><td>附属材料</td>"+
-						"<td><input type='text'  name='xq_materialWeight' class='form-control' value='"+data.fsclList[k].mName+"' disabled></td>"+
-						"<td><input type='text'  name='xq_materialWeight' class='form-control' value='"+data.fsclList[k].weight+"' disabled></td>"+
+						"<td><input type='text'  name='xq_materialWeight' class='form-control' value='"+data.fsclList[k].mName+"' readonly='readonly'></td>"+
+						"<td><input type='text'  name='xq_materialWeight' class='form-control' value='"+data.fsclList[k].weight+"' readonly='readonly'></td>"+
 						"</tr>");
 			}
 		}
