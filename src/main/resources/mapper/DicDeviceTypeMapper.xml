@@ -38,4 +38,10 @@
 	where delete_state=1 and type_name=#{typeName}
 </select>
 	
+<select id="selectByIdDicDeviceType" resultType="DiDeviceType">
+	select 
+		id,type_name,delete_state 
+	from dic_device_type
+	where delete_state=1 and id=#{id}
+</select>
 </mapper>

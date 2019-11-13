@@ -17,4 +17,6 @@ public interface DicDeviceTypeDao {
 	public int deleteDicDeviceType(String id);
 	
 	public DicDeviceType selectByTypeName(@Param("typeName")String typeName);
+	
+	public DicDeviceType selectByIdDicDeviceType(String id);
 }
