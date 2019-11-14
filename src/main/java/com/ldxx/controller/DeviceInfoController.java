@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,10 +37,12 @@ public class DeviceInfoController {
 	
 	@RequestMapping("/addDeviceInfo")
 	@ResponseBody
-	public Map<String,Object> addDeviceInfo(DeviceInfo deviceInfo){
+	public Map<String,Object> addDeviceInfo(@RequestBody DeviceInfo deviceInfo){
 		Map<String, Object> map = new HashMap<String, Object>();
-	//	map.put("result",state);
-	//	map.put("DicDeviceType", dicDeviceType);
+		int state = 0;
+		state = diservice.addDeviceInfo(deviceInfo);
+		map.put("result",state);
+		map.put("deviceInfo", deviceInfo);
 		return map;
 	};
 	

@@ -11,6 +11,7 @@ import com.ldxx.bean.DicDeviceType;
 import com.ldxx.dao.DeviceInfoDao;
 import com.ldxx.dao.DicDeviceTypeDao;
 import com.ldxx.service.DeviceInfoService;
+import com.ldxx.util.LDXXUtils;
 
 @Service
 @Transactional
@@ -50,6 +51,7 @@ public class DeviceInfoServiceImpl implements DeviceInfoService{
 	@Override
 	public int addDeviceInfo(DeviceInfo deviceInfo) {
 		int state;
+		deviceInfo.setId(LDXXUtils.getUUID12());
 		state = didao.addDeviceInfo(deviceInfo);
 		return state;
 	}

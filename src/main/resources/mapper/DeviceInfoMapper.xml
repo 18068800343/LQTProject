@@ -17,17 +17,17 @@
 		insert into device_info(
 			id,code,name,model,type_id,manufacturer,contact,status,remarks,edit_user_id,edit_datetime,delete_state)
 		values(
-			deviceInfo.id,
-			deviceInfo.code,
-			deviceInfo.name,
-			deviceInfo.model,
-			deviceInfo.type_id,
-			deviceInfo.manufacturerv,
-			deviceInfo.contact,
-			deviceInfo.status,
-			deviceInfo.remarks,
-			deviceInfo.edit_user_id,
-			deviceInfo.edit_datetime,
+			#{deviceInfo.id},
+			#{deviceInfo.code},
+			#{deviceInfo.name},
+			#{deviceInfo.model},
+			#{deviceInfo.typeId},
+			#{deviceInfo.manufacturer},
+			#{deviceInfo.contact},
+			#{deviceInfo.status},
+			#{deviceInfo.remarks},
+			#{deviceInfo.editUserId},
+			#{deviceInfo.editDatetime},
 			1
 		)
 	</insert>
