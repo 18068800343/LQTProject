@@ -21,879 +21,879 @@
 <link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
 <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
 <style lang="">
-body {
-	background: #fff;
-}
+	body {
+		background: #fff;
+	}
 
-.UpperPart {
-	display: flex;
-	justify-content: space-between;
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 12px;
-}
+	.UpperPart {
+		display: flex;
+		justify-content: space-between;
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 12px;
+	}
 
-.selected {
-	background: rgba(247, 161, 3, 0.2);
-}
+	.selected {
+		background: rgba(247, 161, 3, 0.2);
+	}
 
-#mainContent th {
-	cursor: pointer;
-}
+	#mainContent th {
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
 
-	<!-- 面包屑 -->
-	<div class="mianbao">
-		<ul class="breadcrumb">
-			<li>
-				<i class="iconfont icon-knowledgebase"></i>
-			</li>
-			<li>沥青生产监控管理</li>
-			<li class="active">生产计划管理</li>
-		</ul>
-	</div>
+<!-- 面包屑 -->
+<div class="mianbao">
+	<ul class="breadcrumb">
+		<li>
+			<i class="iconfont icon-knowledgebase"></i>
+		</li>
+		<li>沥青生产监控管理</li>
+		<li class="active">生产计划管理</li>
+	</ul>
+</div>
 
-	<div>
-		<!-- Nav tabs -->
-		<ul class="nav nav-tabs" role="tablist" style="background: #fff;">
-			<li role="presentation" class="active">
-				<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">生产计划</a>
-			</li>
-			<li role="presentation">
-				<a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">施工路段偏差</a>
-			</li>
-		</ul>
-		<!-- Tab panes -->
-		<div class="tab-content">
+<div>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist" style="background: #fff;">
+		<li role="presentation" class="active">
+			<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">生产计划</a>
+		</li>
+		<li role="presentation">
+			<a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">施工路段偏差</a>
+		</li>
+	</ul>
+	<!-- Tab panes -->
+	<div class="tab-content">
 
-			<div role="tabpanel" class="tab-pane active" id="profile">
-				<div class="zhuti-content">
-					<div class="UpperPart">
-						<div class="UpperPartL">
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" style="margin: 5PX; float: left;">录入生产计划</button>
-						</div>
-						<div class="UpperPartR">
-							<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
-						</div>
+		<div role="tabpanel" class="tab-pane active" id="profile">
+			<div class="zhuti-content">
+				<div class="UpperPart">
+					<div class="UpperPartL">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" style="margin: 5PX; float: left;">录入生产计划</button>
 					</div>
-					<div class="LowerPart" style="margin-top: 3px;" name="tbVm">
-						<div>
-							<table class="table table-bordered table-condensed " id="mainContent" style="white-space: nowrap;">
-								<thead>
-									<tr>
-										<th>路段编号</th>
-										<th>路段名称</th>
-										<th>配方编号</th>
-										<th>成品需要量（每日）</th>
-										<th>干拌时间</th>
-										<th>湿拌时间</th>
-										<th>油石比</th>
-										<th>成品温度要求</th>
-										<th>到现场温度要求</th>
-										<th>总价</th>
-										<th>日期时间</th>
-										<th>录入人</th>
-										<th>操作</th>
-									</tr>
-								</thead>
-								<tbody>
-									<!--<tr>
-                        <td>
-                            <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg2"></i>
-                            <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change2'></i>
-                            <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                        </td>
-                    </tr> -->
-								</tbody>
-							</table>
-						</div>
+					<div class="UpperPartR">
+						<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
 					</div>
 				</div>
-			</div>
-
-			<div role="tabpanel" class="tab-pane" id="messages">
-				<div class="zhuti-content">
-					<div class="UpperPart">
-						<div class="UpperPartL">
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3" style="margin: 5PX; float: left;">录入施工路段偏差</button>
-						</div>
-						<div class="UpperPartR">
-							<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
-						</div>
-					</div>
-					<div class="LowerPart" style="margin-top: 3px;">
-						<table class="table table-bordered table-condensed" id="mainContent2" style="white-space: nowrap;">
+				<div class="LowerPart" style="margin-top: 3px;" name="tbVm">
+					<div>
+						<table class="table table-bordered table-condensed " id="mainContent" style="white-space: nowrap;">
 							<thead>
-								<tr>
-									<th>偏差编号</th>
-									<th>偏差名称</th>
-									<th>料1偏差量</th>
-									<th>料2偏差量</th>
-									<th>料3偏差量</th>
-									<th>料4偏差量</th>
-									<th>料5偏差量</th>
-									<th>料6偏差量</th>
-									<th>粉偏差量</th>
-									<th>沥青偏差量</th>
-									<th>最高温度偏差量</th>
-									<th>最低温度偏差量</th>
-									<th>干拌用时偏差量</th>
-									<th>湿拌用时偏差量</th>
-									<th>4.75偏差量</th>
-									<th>2.36偏差量</th>
-									<th>0.075偏差量</th>
-									<th style="width: 75px;">操作</th>
-								</tr>
+							<tr>
+								<th>路段编号</th>
+								<th>路段名称</th>
+								<th>配方编号</th>
+								<th>成品需要量（每日）</th>
+								<th>干拌时间</th>
+								<th>湿拌时间</th>
+								<th>油石比</th>
+								<th>成品温度要求</th>
+								<th>到现场温度要求</th>
+								<th>总价</th>
+								<th>日期时间</th>
+								<th>录入人</th>
+								<th>操作</th>
+							</tr>
 							</thead>
 							<tbody>
-
+							<!--<tr>
+                <td>
+                    <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg2"></i>
+                    <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change2'></i>
+                    <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
+                </td>
+            </tr> -->
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- allMsg -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg3">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>所有信息</b>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<form class="form-inline">
-							<table class="table table-bordered table-condensed" style="height: 400PX;">
-								<tr>
-									<td style="width: 20%;">序号</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>路段</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>成品差</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>料1用量</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>料2用量</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>料3用量</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>料4用量</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>料5用量</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>料6用量</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>粉料偏差量</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>沥青偏差量</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>干拌时间</td>
-									<td>2019-10-10 12:00:00</td>
-								</tr>
-								<tr>
-									<td>油石比</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>湿拌时间</td>
-									<td>2019-10-10 12:00:00</td>
-								</tr>
-								<tr>
-									<td>级配</td>
-									<td>1</td>
-								</tr>
-							</table>
 
-						</form>
+		<div role="tabpanel" class="tab-pane" id="messages">
+			<div class="zhuti-content">
+				<div class="UpperPart">
+					<div class="UpperPartL">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3" style="margin: 5PX; float: left;">录入施工路段偏差</button>
+					</div>
+					<div class="UpperPartR">
+						<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- allMsg结束 -->
-	<!-- 修改Modal -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>修改配方信息</b>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<form class="form-inline">
-							<table class="table table-bordered table-condensed" style="height: 400PX;">
-								<tr>
-									<td style="width: 20%;">序号</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>配方名称</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料1用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料2用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料3用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料4用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料5用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料6用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>粉料用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>沥青用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>附属材料</td>
-									<td><select name="" style="width: 100%; height: 100%; border: none;">
-											<option value="">请选择</option>
-											<option value="">木质纤维</option>
-											<option value="">玄武岩纤维</option>
-											<option value="">抗车辙剂</option>
-											<option value="">聚酯纤维</option>
-											<option value="">高粘剂</option>
-											<option value="">相变材料</option>
-											<option value="">复合高模量剂</option>
-										</select></td>
-								</tr>
-							</table>
-						</form>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-success">保存</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 修改model结束 -->
-	<!-- Modal -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>录入配方信息</b>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<form class="form-inline">
-							<table class="table table-bordered table-condensed" style="height: 400PX;">
-								<tr>
-									<td style="width: 20%;">序号</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>配方名称</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料1用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料2用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料3用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料4用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料5用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料6用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>粉料用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>沥青用量</td>
-									<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>附属材料</td>
-									<td><select name="" style="width: 100%; height: 100%; border: none;">
-											<option value="">请选择</option>
-											<option value="">木质纤维</option>
-											<option value="">玄武岩纤维</option>
-											<option value="">抗车辙剂</option>
-											<option value="">聚酯纤维</option>
-											<option value="">高粘剂</option>
-											<option value="">相变材料</option>
-											<option value="">复合高模量剂</option>
-										</select></td>
-								</tr>
-							</table>
-						</form>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-default">保存</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- model结束 -->
-	<!-- allMsg -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg">
-		<div class="modal-dialog modal-lg" role="document" >
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>关联偏差</b>
-					</h4>
-				</div>
-				<div class="modal-body">
-						<div>
-                   <form class="form-inline">
-                       <div class="input-group" id="glpianchaVm">
-							            <span class="input-group-addon">关联偏差:</span>
-							            <input type="text" class="form-control" v-model="pianchaname" placeholder="" >
- 			 						  	 </div>
+				<div class="LowerPart" style="margin-top: 3px;">
+					<table class="table table-bordered table-condensed" id="mainContent2" style="white-space: nowrap;">
+						<thead>
+						<tr>
+							<th>偏差编号</th>
+							<th>偏差名称</th>
+							<th>料1偏差量</th>
+							<th>料2偏差量</th>
+							<th>料3偏差量</th>
+							<th>料4偏差量</th>
+							<th>料5偏差量</th>
+							<th>料6偏差量</th>
+							<th>粉偏差量</th>
+							<th>沥青偏差量</th>
+							<th>最高温度偏差量</th>
+							<th>最低温度偏差量</th>
+							<th>干拌用时偏差量</th>
+							<th>湿拌用时偏差量</th>
+							<th>4.75偏差量</th>
+							<th>2.36偏差量</th>
+							<th>0.075偏差量</th>
+							<th style="width: 75px;">操作</th>
+						</tr>
+						</thead>
+						<tbody>
 
-                       <table class="table table-bordered table-condensed" id="mainContent3" style="width:100%;white-space: nowrap;">
-													<thead>
-														<tr>
-													  	<th style="width: 75px;">操作</th>
-															<th>偏差编号</th>
-															<th>偏差名称</th>
-															<th>料1偏差量</th>
-															<th>料2偏差量</th>
-															<th>料3偏差量</th>
-															<th>料4偏差量</th>
-															<th>料5偏差量</th>
-															<th>料6偏差量</th>
-															<th>粉偏差量</th>
-															<th>沥青偏差量</th>
-															<th>最高温度偏差量</th>
-															<th>最低温度偏差量</th>
-															<th>干拌用时偏差量</th>
-															<th>湿拌用时偏差量</th>
-															<th>4.75偏差量</th>
-															<th>2.36偏差量</th>
-															<th>0.075偏差量</th>
-														</tr>
-													</thead>
-													<tbody>
-						
-													</tbody>
-                       </table> 
-                   </form> 
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- allMsg结束 -->
-	<!-- Modal -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal2">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content" id="NewShengChanJiHua">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>录入生产计划数据</b>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<form class="form-inline">
-							<table class="table table-bordered table-condensed" style="height: auto;">
-								<tr>
-									<td>生产计划编号</td>
-									<td><input type="text" v-model="planno" id="planno" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-									<td>路段</td>
-									<td><select class="form-control" style="width: 100%;" v-model="roadid = roadSelected" id="roadid">
-											<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
-										</select></td>
-								</tr>
-								<tr>
-									<td>配方</td>
-									<td><select class="form-control" style="width: 100%;" v-model="recipeid = recipeSelected" id="recipeid">
-											<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
-										</select></td>
-									<td>成品需要量</td>
-									<td><input type="text" @blur="reg(pdneed,'xiaoshu','pdneed')" v-model="pdneed" id="pdneed" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>干拌时间</td>
-									<td><input type="text" readonly="true" v-model="drymixingtime" id="drymixingtime" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>湿拌时间</td>
-									<td><input type="text" readonly="true" v-model="wetmixingtime" id="wetmixingtime" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>油石比</td>
-									<td><input type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" id="radio" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>成品温度要求</td>
-									<td><input type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" id="pdtemp" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>到现场温度要求</td>
-									<td><input type="text" @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp" id="arrivetemp" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>单价</td>
-									<td><input type="text" @blur="reg(price,'xiaoshu','price')" v-model="price" id="price" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-							</table>
-						</form>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+</div>
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg3">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<b>所有信息</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height: 400PX;">
+							<tr>
+								<td style="width: 20%;">序号</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>路段</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>成品差</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>料1用量</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>料2用量</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>料3用量</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>料4用量</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>料5用量</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>料6用量</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>粉料偏差量</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>沥青偏差量</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>干拌时间</td>
+								<td>2019-10-10 12:00:00</td>
+							</tr>
+							<tr>
+								<td>油石比</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>湿拌时间</td>
+								<td>2019-10-10 12:00:00</td>
+							</tr>
+							<tr>
+								<td>级配</td>
+								<td>1</td>
+							</tr>
+						</table>
 
-					<button type="button" class="btn btn-default" v-on:click="save" id="saveShengChanJiHua">保存</button>
+					</form>
 				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 			</div>
 		</div>
 	</div>
-	<!-- model结束 -->
-	<!-- allMsg -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg2">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content" id="linkPianChaDetailVm">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>所有信息</b>
-					</h4>
+</div>
+<!-- allMsg结束 -->
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<b>修改配方信息</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height: 400PX;">
+							<tr>
+								<td style="width: 20%;">序号</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>配方名称</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料1用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料2用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料3用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料4用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料5用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料6用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>粉料用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>沥青用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>附属材料</td>
+								<td><select name="" style="width: 100%; height: 100%; border: none;">
+									<option value="">请选择</option>
+									<option value="">木质纤维</option>
+									<option value="">玄武岩纤维</option>
+									<option value="">抗车辙剂</option>
+									<option value="">聚酯纤维</option>
+									<option value="">高粘剂</option>
+									<option value="">相变材料</option>
+									<option value="">复合高模量剂</option>
+								</select></td>
+							</tr>
+						</table>
+					</form>
 				</div>
-				<div class="modal-body">
-					<div>
-						<form class="form-inline">
-							<table class="table table-bordered table-condensed" style="height: auto;">
-								<tr>
-									<td style="width: 20%;">偏差编号</td>
-									<td>{{pianchano}}</td>
-									<td>偏差名称</td>
-									<td>{{pianchaname}}</td>
-								</tr>
-								<tr>
-									<td>料1用量</td>
-									<td>{{Materialdeviation1}}</td>
-									<td>料2用量</td>
-									<td>{{Materialdeviation2}}</td>
-								</tr>
-								<tr>
-									<td>料3用量</td>
-									<td>{{Materialdeviation3}}</td>
-									<td>料4用量</td>
-									<td>{{Materialdeviation4}}</td>
-								</tr>
-								<tr>
-									<td>料5用量</td>
-									<td>{{Materialdeviation5}}</td>
-									<td>料6用量</td>
-									<td>{{Materialdeviation6}}</td>
-								</tr>
-								<tr>
-									<td>粉料偏差量</td>
-									<td>{{Boneflourdeviation}}</td>
-									<td>沥青偏差量</td>
-									<td>{{pitchdeviation}}</td>
-								</tr>
-								<tr>
-								</tr>
-								<tr>
-									<td>最高温度</td>
-									<td>{{tempmax}}</td>
-									<td>最低温度</td>
-									<td>{{tempmin}}</td>
-								</tr>
-								<tr>
-									<td>干拌时间偏差</td>
-									<td>{{drymixingtimedeviation}}</td>
-									<td>湿拌时间偏差</td>
-									<td>{{wetmixingtimedeviation}}</td>
-								</tr>
-								<tr>
-									<td>通过率偏差4.75</td>
-									<td>{{pass475}}</td>
-									<td>通过率偏差2.36</td>
-									<td>{{pass236}}</td>
-								</tr>
-								<tr>
-									<td>通过率偏差0.075</td>
-									<td>{{pass0075}}</td>
-									<td></td>
-									<td></td>
-								</tr>
-							</table>
-						</form>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-success">保存</button>
 			</div>
 		</div>
 	</div>
-	<!-- allMsg结束 -->
-	<!-- 修改Modal -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change2">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>修改生产数据计划</b>
-					</h4>
+</div>
+<!-- 修改model结束 -->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<b>录入配方信息</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height: 400PX;">
+							<tr>
+								<td style="width: 20%;">序号</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>配方名称</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料1用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料2用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料3用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料4用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料5用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料6用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>粉料用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>沥青用量</td>
+								<td><input type="text" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>附属材料</td>
+								<td><select name="" style="width: 100%; height: 100%; border: none;">
+									<option value="">请选择</option>
+									<option value="">木质纤维</option>
+									<option value="">玄武岩纤维</option>
+									<option value="">抗车辙剂</option>
+									<option value="">聚酯纤维</option>
+									<option value="">高粘剂</option>
+									<option value="">相变材料</option>
+									<option value="">复合高模量剂</option>
+								</select></td>
+							</tr>
+						</table>
+					</form>
 				</div>
-				<div class="modal-body">
-					<div>
-						<form class="form-inline">
-							<table class="table table-bordered table-condensed" style="height: auto;">
-								<tr>
-									<td>生产计划编号</td>
-									<td><input type="text" v-model="planno" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-									<td>路段</td>
-									<td><select class="form-control" style="width: 100%;" v-model="roadid = roadSelected">
-											<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
-										</select></td>
-								</tr>
-								<tr>
-									<td>配方</td>
-									<td><select class="form-control" style="width: 100%;" v-model="recipeid = recipeSelected">
-											<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
-										</select></td>
-									<td>成品需要量</td>
-									<td><input type="text" @blur="reg(pdneed,'xiaoshu','pdneed')" v-model="pdneed" placeholder="请输入" style="width: 100%; height: 100%; border: none;" /></td>
-								</tr>
-								<tr>
-									<td>干拌时间</td>
-									<td><input type="text" readonly="true" v-model="drymixingtime" placeholder="请输入" id="xgdrymixingtime"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>湿拌时间</td>
-									<td><input type="text" readonly="true" v-model="wetmixingtime" placeholder="请输入" id="xgwetmixingtime"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>油石比</td>
-									<td><input type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-									<td>成品温度要求</td>
-									<td><input type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>到现场温度要求</td>
-									<td><input type="text" @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>单价</td>
-									<td><input type="text" @blur="reg(price,'xiaoshu','price')" v-model="price" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-							</table>
-						</form>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-success" @click="save">保存</button>
-				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-default">保存</button>
 			</div>
 		</div>
 	</div>
-	<!-- 修改model结束 -->
+</div>
+<!-- model结束 -->
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg">
+	<div class="modal-dialog modal-lg" role="document" >
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<b>关联偏差</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<div class="input-group" id="glpianchaVm">
+							<span class="input-group-addon">关联偏差:</span>
+							<input type="text" class="form-control" v-model="pianchaname" placeholder="" >
+						</div>
 
-	<!-- 录入施工路段偏差-->
-	<!-- Modal -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal3">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content" id="addSGPC">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>录入施工路段偏差</b>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<form class="form-inline">
-							<table class="table table-bordered table-condensed" style="height: auto;">
-								<tr>
-									<td style="width: 20%;">偏差编号</td>
-									<td><input type="text" v-model="pianchano" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-									<td>偏差名称</td>
-									<td><input type="text" v-model="pianchaname" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料1用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation1,'xiaoshu','Materialdeviation1')" v-model="Materialdeviation1" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>料2用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation2,'xiaoshu','Materialdeviation2')" v-model="Materialdeviation2" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料3用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation3,'xiaoshu','Materialdeviation3')" v-model="Materialdeviation3" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>料4用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation4,'xiaoshu','Materialdeviation4')" v-model="Materialdeviation4" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料5用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation5,'xiaoshu','Materialdeviation5')" v-model="Materialdeviation5" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>料6用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation6,'xiaoshu','Materialdeviation6')" v-model="Materialdeviation6" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>粉料偏差量</td>
-									<td><input type="text" @blur="reg(Boneflourdeviation,'xiaoshu','Boneflourdeviation')" v-model="Boneflourdeviation" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>沥青偏差量</td>
-									<td><input type="text" @blur="reg(pitchdeviation,'xiaoshu','pitchdeviation')" v-model="pitchdeviation" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-								</tr>
-								<tr>
-									<td>最高温度</td>
-									<td><input type="text" @blur="reg(tempmax,'xiaoshu','tempmax')" v-model="tempmax" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>最低温度</td>
-									<td><input type="text" @blur="reg(tempmin,'xiaoshu','tempmin')" v-model="tempmin" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>干拌时间偏差</td>
-									<td><input type="text" @blur="reg(drymixingtimedeviation,'xiaoshu','drymixingtimedeviation')" v-model="drymixingtimedeviation"
-											id="drymixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-									<td>湿拌时间偏差</td>
-									<td><input type="text" @blur="reg(wetmixingtimedeviation,'xiaoshu','wetmixingtimedeviation')" v-model="wetmixingtimedeviation"
-											id="wetmixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>通过率偏差4.75</td>
-									<td><input type="text" @blur="reg(pass475,'xiaoshu','pass475')" v-model="pass475" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>通过率偏差2.36</td>
-									<td><input type="text" @blur="reg(pass236,'xiaoshu','pass236')" v-model="pass236" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>通过率偏差0.075</td>
-									<td><input type="text" @blur="reg(pass0075,'xiaoshu','pass0075')" v-model="pass0075" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td></td>
-									<td></td>
-								</tr>
-							</table>
-						</form>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-default" @click="save">保存</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- model结束 -->
+						<table class="table table-bordered table-condensed" id="mainContent3" style="width:100%;white-space: nowrap;">
+							<thead>
+							<tr>
+								<th style="width: 75px;">操作</th>
+								<th>偏差编号</th>
+								<th>偏差名称</th>
+								<th>料1偏差量</th>
+								<th>料2偏差量</th>
+								<th>料3偏差量</th>
+								<th>料4偏差量</th>
+								<th>料5偏差量</th>
+								<th>料6偏差量</th>
+								<th>粉偏差量</th>
+								<th>沥青偏差量</th>
+								<th>最高温度偏差量</th>
+								<th>最低温度偏差量</th>
+								<th>干拌用时偏差量</th>
+								<th>湿拌用时偏差量</th>
+								<th>4.75偏差量</th>
+								<th>2.36偏差量</th>
+								<th>0.075偏差量</th>
+							</tr>
+							</thead>
+							<tbody>
 
-	<!-- 修改施工路段偏差-->
-	<!-- Modal -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change3">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content" id="xgSGPC">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						<b>修改施工路段偏差</b>
-					</h4>
+							</tbody>
+						</table>
+					</form>
 				</div>
-				<div class="modal-body">
-					<div>
-						<form class="form-inline">
-							<table class="table table-bordered table-condensed" style="height: auto;">
-								<tr>
-									<td style="width: 20%;">偏差编号</td>
-									<td><input type="text" v-model="pianchano" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-									<td>偏差名称</td>
-									<td><input type="text" v-model="pianchaname" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料1用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation1,'xiaoshu','Materialdeviation1')" v-model="Materialdeviation1" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>料2用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation2,'xiaoshu','Materialdeviation2')" v-model="Materialdeviation2" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料3用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation3,'xiaoshu','Materialdeviation3')" v-model="Materialdeviation3" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>料4用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation4,'xiaoshu','Materialdeviation4')" v-model="Materialdeviation4" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>料5用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation5,'xiaoshu','Materialdeviation5')" v-model="Materialdeviation5" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>料6用量</td>
-									<td><input type="text" @blur="reg(Materialdeviation6,'xiaoshu','Materialdeviation6')" v-model="Materialdeviation6" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>粉料偏差量</td>
-									<td><input type="text" @blur="reg(Boneflourdeviation,'xiaoshu','Boneflourdeviation')" v-model="Boneflourdeviation" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>沥青偏差量</td>
-									<td><input type="text" @blur="reg(pitchdeviation,'xiaoshu','pitchdeviation')" v-model="pitchdeviation" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-								</tr>
-								<tr>
-									<td>最高温度</td>
-									<td><input type="text" @blur="reg(tempmax,'xiaoshu','tempmax')" v-model="tempmax" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>最低温度</td>
-									<td><input type="text" @blur="reg(tempmin,'xiaoshu','tempmin')" v-model="tempmin" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>干拌时间偏差</td>
-									<td><input type="text" @blur="reg(drymixingtimedeviation,'xiaoshu','drymixingtimedeviation')" v-model="drymixingtimedeviation"
-											id="xgdrymixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-									<td>湿拌时间偏差</td>
-									<td><input type="text" @blur="reg(wetmixingtimedeviation,'xiaoshu','wetmixingtimedeviation')" v-model="wetmixingtimedeviation"
-											id="xgwetmixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>通过率偏差4.75</td>
-									<td><input type="text" @blur="reg(pass475,'xiaoshu','pass475')" v-model="pass475" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td>通过率偏差2.36</td>
-									<td><input type="text" @blur="reg(pass236,'xiaoshu','pass236')" v-model="pass236" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-								</tr>
-								<tr>
-									<td>通过率偏差0.075</td>
-									<td><input type="text" @blur="reg(pass0075,'xiaoshu','pass0075')" v-model="pass0075" id="" placeholder="请输入"
-											style="width: 100%; height: 100%; border: none;"></td>
-									<td></td>
-									<td></td>
-								</tr>
-							</table>
-						</form>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" @click="save" class="btn btn-default">保存</button>
-				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 			</div>
 		</div>
 	</div>
-	<!-- model结束 -->
+</div>
+<!-- allMsg结束 -->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal2">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="NewShengChanJiHua">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<b>录入生产计划数据</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height: auto;">
+							<tr>
+								<td>生产计划编号</td>
+								<td><input type="text" v-model="planno" id="planno" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td>路段</td>
+								<td><select class="form-control" style="width: 100%;" v-model="roadid = roadSelected" id="roadid">
+									<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td>配方</td>
+								<td><select class="form-control" style="width: 100%;" v-model="recipeid = recipeSelected" id="recipeid">
+									<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
+								</select></td>
+								<td>成品需要量</td>
+								<td><input type="text" @blur="reg(pdneed,'xiaoshu','pdneed')" v-model="pdneed" id="pdneed" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>干拌时间</td>
+								<td><input type="text" readonly="true" v-model="drymixingtime" id="drymixingtime" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>湿拌时间</td>
+								<td><input type="text" readonly="true" v-model="wetmixingtime" id="wetmixingtime" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>油石比</td>
+								<td><input type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" id="radio" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>成品温度要求</td>
+								<td><input type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" id="pdtemp" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>到现场温度要求</td>
+								<td><input type="text" @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp" id="arrivetemp" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>单价</td>
+								<td><input type="text" @blur="reg(price,'xiaoshu','price')" v-model="price" id="price" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+				<button type="button" class="btn btn-default" v-on:click="save" id="saveShengChanJiHua">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- model结束 -->
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg2">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="linkPianChaDetailVm">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<b>所有信息</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height: auto;">
+							<tr>
+								<td style="width: 20%;">偏差编号</td>
+								<td>{{pianchano}}</td>
+								<td>偏差名称</td>
+								<td>{{pianchaname}}</td>
+							</tr>
+							<tr>
+								<td>料1用量</td>
+								<td>{{Materialdeviation1}}</td>
+								<td>料2用量</td>
+								<td>{{Materialdeviation2}}</td>
+							</tr>
+							<tr>
+								<td>料3用量</td>
+								<td>{{Materialdeviation3}}</td>
+								<td>料4用量</td>
+								<td>{{Materialdeviation4}}</td>
+							</tr>
+							<tr>
+								<td>料5用量</td>
+								<td>{{Materialdeviation5}}</td>
+								<td>料6用量</td>
+								<td>{{Materialdeviation6}}</td>
+							</tr>
+							<tr>
+								<td>粉料偏差量</td>
+								<td>{{Boneflourdeviation}}</td>
+								<td>沥青偏差量</td>
+								<td>{{pitchdeviation}}</td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td>最高温度</td>
+								<td>{{tempmax}}</td>
+								<td>最低温度</td>
+								<td>{{tempmin}}</td>
+							</tr>
+							<tr>
+								<td>干拌时间偏差</td>
+								<td>{{drymixingtimedeviation}}</td>
+								<td>湿拌时间偏差</td>
+								<td>{{wetmixingtimedeviation}}</td>
+							</tr>
+							<tr>
+								<td>通过率偏差4.75</td>
+								<td>{{pass475}}</td>
+								<td>通过率偏差2.36</td>
+								<td>{{pass236}}</td>
+							</tr>
+							<tr>
+								<td>通过率偏差0.075</td>
+								<td>{{pass0075}}</td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- allMsg结束 -->
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change2">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<b>修改生产数据计划</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height: auto;">
+							<tr>
+								<td>生产计划编号</td>
+								<td><input type="text" v-model="planno" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td>路段</td>
+								<td><select class="form-control" style="width: 100%;" v-model="roadid = roadSelected">
+									<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td>配方</td>
+								<td><select class="form-control" style="width: 100%;" v-model="recipeid = recipeSelected">
+									<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
+								</select></td>
+								<td>成品需要量</td>
+								<td><input type="text" @blur="reg(pdneed,'xiaoshu','pdneed')" v-model="pdneed" placeholder="请输入" style="width: 100%; height: 100%; border: none;" /></td>
+							</tr>
+							<tr>
+								<td>干拌时间</td>
+								<td><input type="text" readonly="true" v-model="drymixingtime" placeholder="请输入" id="xgdrymixingtime"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>湿拌时间</td>
+								<td><input type="text" readonly="true" v-model="wetmixingtime" placeholder="请输入" id="xgwetmixingtime"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>油石比</td>
+								<td><input type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td>成品温度要求</td>
+								<td><input type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>到现场温度要求</td>
+								<td><input type="text" @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>单价</td>
+								<td><input type="text" @blur="reg(price,'xiaoshu','price')" v-model="price" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-success" @click="save">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 修改model结束 -->
+
+<!-- 录入施工路段偏差-->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal3">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="addSGPC">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<b>录入施工路段偏差</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height: auto;">
+							<tr>
+								<td style="width: 20%;">偏差编号</td>
+								<td><input type="text" v-model="pianchano" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td>偏差名称</td>
+								<td><input type="text" v-model="pianchaname" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料1用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation1,'xiaoshu','Materialdeviation1')" v-model="Materialdeviation1" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>料2用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation2,'xiaoshu','Materialdeviation2')" v-model="Materialdeviation2" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料3用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation3,'xiaoshu','Materialdeviation3')" v-model="Materialdeviation3" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>料4用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation4,'xiaoshu','Materialdeviation4')" v-model="Materialdeviation4" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料5用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation5,'xiaoshu','Materialdeviation5')" v-model="Materialdeviation5" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>料6用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation6,'xiaoshu','Materialdeviation6')" v-model="Materialdeviation6" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>粉料偏差量</td>
+								<td><input type="text" @blur="reg(Boneflourdeviation,'xiaoshu','Boneflourdeviation')" v-model="Boneflourdeviation" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>沥青偏差量</td>
+								<td><input type="text" @blur="reg(pitchdeviation,'xiaoshu','pitchdeviation')" v-model="pitchdeviation" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td>最高温度</td>
+								<td><input type="text" @blur="reg(tempmax,'xiaoshu','tempmax')" v-model="tempmax" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>最低温度</td>
+								<td><input type="text" @blur="reg(tempmin,'xiaoshu','tempmin')" v-model="tempmin" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>干拌时间偏差</td>
+								<td><input type="text" @blur="reg(drymixingtimedeviation,'xiaoshu','drymixingtimedeviation')" v-model="drymixingtimedeviation"
+										   id="drymixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td>湿拌时间偏差</td>
+								<td><input type="text" @blur="reg(wetmixingtimedeviation,'xiaoshu','wetmixingtimedeviation')" v-model="wetmixingtimedeviation"
+										   id="wetmixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>通过率偏差4.75</td>
+								<td><input type="text" @blur="reg(pass475,'xiaoshu','pass475')" v-model="pass475" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>通过率偏差2.36</td>
+								<td><input type="text" @blur="reg(pass236,'xiaoshu','pass236')" v-model="pass236" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>通过率偏差0.075</td>
+								<td><input type="text" @blur="reg(pass0075,'xiaoshu','pass0075')" v-model="pass0075" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-default" @click="save">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- model结束 -->
+
+<!-- 修改施工路段偏差-->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change3">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="xgSGPC">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<b>修改施工路段偏差</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height: auto;">
+							<tr>
+								<td style="width: 20%;">偏差编号</td>
+								<td><input type="text" v-model="pianchano" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td>偏差名称</td>
+								<td><input type="text" v-model="pianchaname" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料1用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation1,'xiaoshu','Materialdeviation1')" v-model="Materialdeviation1" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>料2用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation2,'xiaoshu','Materialdeviation2')" v-model="Materialdeviation2" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料3用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation3,'xiaoshu','Materialdeviation3')" v-model="Materialdeviation3" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>料4用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation4,'xiaoshu','Materialdeviation4')" v-model="Materialdeviation4" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>料5用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation5,'xiaoshu','Materialdeviation5')" v-model="Materialdeviation5" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>料6用量</td>
+								<td><input type="text" @blur="reg(Materialdeviation6,'xiaoshu','Materialdeviation6')" v-model="Materialdeviation6" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>粉料偏差量</td>
+								<td><input type="text" @blur="reg(Boneflourdeviation,'xiaoshu','Boneflourdeviation')" v-model="Boneflourdeviation" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>沥青偏差量</td>
+								<td><input type="text" @blur="reg(pitchdeviation,'xiaoshu','pitchdeviation')" v-model="pitchdeviation" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td>最高温度</td>
+								<td><input type="text" @blur="reg(tempmax,'xiaoshu','tempmax')" v-model="tempmax" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>最低温度</td>
+								<td><input type="text" @blur="reg(tempmin,'xiaoshu','tempmin')" v-model="tempmin" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>干拌时间偏差</td>
+								<td><input type="text" @blur="reg(drymixingtimedeviation,'xiaoshu','drymixingtimedeviation')" v-model="drymixingtimedeviation"
+										   id="xgdrymixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td>湿拌时间偏差</td>
+								<td><input type="text" @blur="reg(wetmixingtimedeviation,'xiaoshu','wetmixingtimedeviation')" v-model="wetmixingtimedeviation"
+										   id="xgwetmixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>通过率偏差4.75</td>
+								<td><input type="text" @blur="reg(pass475,'xiaoshu','pass475')" v-model="pass475" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td>通过率偏差2.36</td>
+								<td><input type="text" @blur="reg(pass236,'xiaoshu','pass236')" v-model="pass236" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+							</tr>
+							<tr>
+								<td>通过率偏差0.075</td>
+								<td><input type="text" @blur="reg(pass0075,'xiaoshu','pass0075')" v-model="pass0075" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; border: none;"></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" @click="save" class="btn btn-default">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- model结束 -->
 </body>
 <script src="../../js/jquery.js"></script>
 <script src="../../js/common-scripts.js"></script>
@@ -910,488 +910,488 @@ body {
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script>
-    $(document).ready( function () {
-    	$("#channeng").trigger("change");
-    	initTable();
-    	initTablePianCha();
-    });
-    
-    var table=$('#mainContent').DataTable({
-        "deferRender": true,
-        "processing": true,
-        "bDestroy": true,
-        "iDisplayLength": 10,
-        "searching": true,
-        "lengthChange": false,
-        "oLanguage": {
-		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+	$(document).ready( function () {
+		$("#channeng").trigger("change");
+		initTable();
+		initTablePianCha();
+	});
+
+	var table=$('#mainContent').DataTable({
+		"deferRender": true,
+		"processing": true,
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"searching": true,
+		"lengthChange": false,
+		"oLanguage": {
+			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
-        "order": [[11, 'desc']],
+		"order": [[11, 'desc']],
 		"columns": [
-            { "data": "roadno"}, 
-            { "data": "roadname"}, 
-            { "data": "flno"}, 
-            { "data": "pdneed"}, 
-            { "data": "drymixingtime"}, 
-            { "data": "wetmixingtime"}, 
-            { "data": "radio"}, 
-            { "data": "pdtemp"}, 
-            { "data": "arrivetemp"}, 
-            { "data": "price"},
-            { "data": "datetime"},
-            { "data": "uname"},
-            { "data": "planid"},
-        ],
-        "columnDefs": [
-						 {	
-						 	"class": "tcenter",
-						    "targets": 12,
-						    "searchable": true,
-						    "render": function(data, type, full) {
-						    	var guanlian= '<i class="glyphicon glyphicon-random" style="font-size:13px;cursor:pointer;margin-right:3px;" onclick="linkMsg(this)" title="关联偏差"   data-toggle="modal" data-target="#allMsg"></i>'
-						    	var xiangqing= '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看偏差信息" data-id="'+full.pianchaid+'" onclick="lookPianChaMsg(this)"   data-toggle="modal" data-target="#allMsg2"></i>'
-						    	var xiugai='<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+full+'"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change2"></i>'
-						    	
-						    	var qiyong='<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'+data+'" onclick="delMsg(this)" title="删除"></i>'
-						    	if(isNull(full.pianchaid)){
-						    		return guanlian+xiugai+qiyong;
-						    	}else{
-					    			return guanlian+xiangqing+xiugai+qiyong;
-						    	}
-				    	    }
-					    }
-					  ],
+			{ "data": "roadno"},
+			{ "data": "roadname"},
+			{ "data": "flno"},
+			{ "data": "pdneed"},
+			{ "data": "drymixingtime"},
+			{ "data": "wetmixingtime"},
+			{ "data": "radio"},
+			{ "data": "pdtemp"},
+			{ "data": "arrivetemp"},
+			{ "data": "price"},
+			{ "data": "datetime"},
+			{ "data": "uname"},
+			{ "data": "planid"},
+		],
+		"columnDefs": [
+			{
+				"class": "tcenter",
+				"targets": 12,
+				"searchable": true,
+				"render": function(data, type, full) {
+					var guanlian= '<i class="glyphicon glyphicon-random" style="font-size:13px;cursor:pointer;margin-right:3px;" onclick="linkMsg(this)" title="关联偏差"   data-toggle="modal" data-target="#allMsg"></i>'
+					var xiangqing= '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看偏差信息" data-id="'+full.pianchaid+'" onclick="lookPianChaMsg(this)"   data-toggle="modal" data-target="#allMsg2"></i>'
+					var xiugai='<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+full+'"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change2"></i>'
+
+					var qiyong='<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'+data+'" onclick="delMsg(this)" title="删除"></i>'
+					if(isNull(full.pianchaid)){
+						return guanlian+xiugai+qiyong;
+					}else{
+						return guanlian+xiangqing+xiugai+qiyong;
+					}
+				}
+			}
+		],
 		//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
-        "sScrollX":true,
-         // 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
-          //表中的数据自适应 ，表头的宽度固定
-        "bAutoWidth":false,
-        "oLanguage": { //国际化配置
-        "sProcessing": "正在获取数据，请稍后...",
-        "sLengthMenu": "显示 _MENU_ 条",
-        "sZeroRecords": "查询不到相关数据",
-        "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-        "sInfoEmpty": "记录数为0",
-        "sInfoFiltered": "(全部记录数 _MAX_ 条)",
-        "sInfoPostFix": "",
-        "sSearch": "搜索",
-        "sUrl": "",
-        "oPaginate": {
-            "sFirst": "第一页",
-            "sPrevious": "上一页",
-            "sNext": "下一页",
-            "sLast": "最后一页"
-        }},
+		"sScrollX":true,
+		// 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
+		//表中的数据自适应 ，表头的宽度固定
+		"bAutoWidth":false,
+		"oLanguage": { //国际化配置
+			"sProcessing": "正在获取数据，请稍后...",
+			"sLengthMenu": "显示 _MENU_ 条",
+			"sZeroRecords": "查询不到相关数据",
+			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+			"sInfoEmpty": "记录数为0",
+			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+			"sInfoPostFix": "",
+			"sSearch": "搜索",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "第一页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "最后一页"
+			}},
 	});
-    var table2=$('#mainContent2').DataTable({
-        "deferRender": true,
-        "processing": true,
-        "bDestroy": true,
-        "iDisplayLength": 10,
-        "searching": true,
-        "lengthChange": false,
-        "oLanguage": {
-		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+	var table2=$('#mainContent2').DataTable({
+		"deferRender": true,
+		"processing": true,
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"searching": true,
+		"lengthChange": false,
+		"oLanguage": {
+			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
-        "order": [[0, 'asc']],
-				"columns": [
-            { "data": "pianchano"}, 
-            { "data": "pianchaname"}, 
-            { "data": "Materialdeviation1"}, 
-            { "data": "Materialdeviation2"}, 
-            { "data": "Materialdeviation3"}, 
-            { "data": "Materialdeviation4"}, 
-            { "data": "Materialdeviation5"}, 
-            { "data": "Materialdeviation6"}, 
-            { "data": "Boneflourdeviation"}, 
-            { "data": "pitchdeviation"}, 
-            { "data": "tempmax"}, 
-            { "data": "tempmin"}, 
-            { "data": "drymixingtimedeviation"}, 
-            { "data": "wetmixingtimedeviation"}, 
-            { "data": "pass475"},
-            { "data": "pass236"},
-            { "data": "pass0075"},
-            { "data": "id"},
-        ],
-        "columnDefs": [
-			 {	
-			 	"class": "tcenter",
-			    "targets": 17,
-			    "searchable": true,
-			    "render": function(data, type, full) {
-			    	
-			    	//var xiangqing= '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看偏差信息"   data-toggle="modal" data-target="#allMsg3"></i>'
-			    	var xiugai='<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+full+'"   onclick="pcMsg(this)" title="修改" data-toggle="modal" data-target="#change3"></i>'
-			    	
-			    	var qiyong='<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'+data+'" onclick="delpiancha(this)" title="删除"></i>'
-			    	
-		    		return xiugai+qiyong;
-	    	    }
-		    }
-		  ],
-    	  //让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
-        "sScrollX":true,
-         // 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
-          //表中的数据自适应 ，表头的宽度固定
-        "bAutoWidth":false,
-        "oLanguage": { //国际化配置
-        "sProcessing": "正在获取数据，请稍后...",
-        "sLengthMenu": "显示 _MENU_ 条",
-        "sZeroRecords": "查询不到相关数据",
-        "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-        "sInfoEmpty": "记录数为0",
-        "sInfoFiltered": "(全部记录数 _MAX_ 条)",
-        "sInfoPostFix": "",
-        "sSearch": "搜索",
-        "sUrl": "",
-        "oPaginate": {
-            "sFirst": "第一页",
-            "sPrevious": "上一页",
-            "sNext": "下一页",
-            "sLast": "最后一页"
-        }},
-        
+		"order": [[0, 'asc']],
+		"columns": [
+			{ "data": "pianchano"},
+			{ "data": "pianchaname"},
+			{ "data": "Materialdeviation1"},
+			{ "data": "Materialdeviation2"},
+			{ "data": "Materialdeviation3"},
+			{ "data": "Materialdeviation4"},
+			{ "data": "Materialdeviation5"},
+			{ "data": "Materialdeviation6"},
+			{ "data": "Boneflourdeviation"},
+			{ "data": "pitchdeviation"},
+			{ "data": "tempmax"},
+			{ "data": "tempmin"},
+			{ "data": "drymixingtimedeviation"},
+			{ "data": "wetmixingtimedeviation"},
+			{ "data": "pass475"},
+			{ "data": "pass236"},
+			{ "data": "pass0075"},
+			{ "data": "id"},
+		],
+		"columnDefs": [
+			{
+				"class": "tcenter",
+				"targets": 17,
+				"searchable": true,
+				"render": function(data, type, full) {
+
+					//var xiangqing= '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看偏差信息"   data-toggle="modal" data-target="#allMsg3"></i>'
+					var xiugai='<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+full+'"   onclick="pcMsg(this)" title="修改" data-toggle="modal" data-target="#change3"></i>'
+
+					var qiyong='<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'+data+'" onclick="delpiancha(this)" title="删除"></i>'
+
+					return xiugai+qiyong;
+				}
+			}
+		],
+		//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
+		"sScrollX":true,
+		// 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
+		//表中的数据自适应 ，表头的宽度固定
+		"bAutoWidth":false,
+		"oLanguage": { //国际化配置
+			"sProcessing": "正在获取数据，请稍后...",
+			"sLengthMenu": "显示 _MENU_ 条",
+			"sZeroRecords": "查询不到相关数据",
+			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+			"sInfoEmpty": "记录数为0",
+			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+			"sInfoPostFix": "",
+			"sSearch": "搜索",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "第一页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "最后一页"
+			}},
+
 	});
-    
-    var table3=$('#mainContent3').DataTable({
-        "deferRender": true,
-        "processing": true,
-        "bDestroy": true,
-        "iDisplayLength": 10,
-        "searching": true,
-        "lengthChange": false,
-        "oLanguage": {
-		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+
+	var table3=$('#mainContent3').DataTable({
+		"deferRender": true,
+		"processing": true,
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"searching": true,
+		"lengthChange": false,
+		"oLanguage": {
+			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
-        "order": [[0, 'asc']],
-				"columns": [
-				  	{ "data": "id"},
-            { "data": "pianchano"}, 
-            { "data": "pianchaname"}, 
-            { "data": "Materialdeviation1"}, 
-            { "data": "Materialdeviation2"}, 
-            { "data": "Materialdeviation3"}, 
-            { "data": "Materialdeviation4"}, 
-            { "data": "Materialdeviation5"}, 
-            { "data": "Materialdeviation6"}, 
-            { "data": "Boneflourdeviation"}, 
-            { "data": "pitchdeviation"}, 
-            { "data": "tempmax"}, 
-            { "data": "tempmin"}, 
-            { "data": "drymixingtimedeviation"}, 
-            { "data": "wetmixingtimedeviation"}, 
-            { "data": "pass475"},
-            { "data": "pass236"},
-            { "data": "pass0075"},
-        ],
-        "columnDefs": [
-			 {	
-			 	"class": "tcenter",
-			    "targets": 0,
-			    "searchable": true,
-			    "render": function(data, type, full) {
-			    	var xiugai='<i class="glyphicon glyphicon-random" style="font-size:13px;cursor:pointer;" data-id="'+data+'"   onclick="linkPianCha(this)" title="关联" data-toggle="modal"></i>'
-		    		return xiugai;
-	    	    }
-		    }
-		  ],
-    	  //让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
-        "sScrollX":true,
-         // 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
-          //表中的数据自适应 ，表头的宽度固定
-        "bAutoWidth":false,
-        "oLanguage": { //国际化配置
-        "sProcessing": "正在获取数据，请稍后...",
-        "sLengthMenu": "显示 _MENU_ 条",
-        "sZeroRecords": "查询不到相关数据",
-        "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-        "sInfoEmpty": "记录数为0",
-        "sInfoFiltered": "(全部记录数 _MAX_ 条)",
-        "sInfoPostFix": "",
-        "sSearch": "搜索",
-        "sUrl": "",
-        "oPaginate": {
-            "sFirst": "第一页",
-            "sPrevious": "上一页",
-            "sNext": "下一页",
-            "sLast": "最后一页"
-        }},
-        
+		"order": [[0, 'asc']],
+		"columns": [
+			{ "data": "id"},
+			{ "data": "pianchano"},
+			{ "data": "pianchaname"},
+			{ "data": "Materialdeviation1"},
+			{ "data": "Materialdeviation2"},
+			{ "data": "Materialdeviation3"},
+			{ "data": "Materialdeviation4"},
+			{ "data": "Materialdeviation5"},
+			{ "data": "Materialdeviation6"},
+			{ "data": "Boneflourdeviation"},
+			{ "data": "pitchdeviation"},
+			{ "data": "tempmax"},
+			{ "data": "tempmin"},
+			{ "data": "drymixingtimedeviation"},
+			{ "data": "wetmixingtimedeviation"},
+			{ "data": "pass475"},
+			{ "data": "pass236"},
+			{ "data": "pass0075"},
+		],
+		"columnDefs": [
+			{
+				"class": "tcenter",
+				"targets": 0,
+				"searchable": true,
+				"render": function(data, type, full) {
+					var xiugai='<i class="glyphicon glyphicon-random" style="font-size:13px;cursor:pointer;" data-id="'+data+'"   onclick="linkPianCha(this)" title="关联" data-toggle="modal"></i>'
+					return xiugai;
+				}
+			}
+		],
+		//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
+		"sScrollX":true,
+		// 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
+		//表中的数据自适应 ，表头的宽度固定
+		"bAutoWidth":false,
+		"oLanguage": { //国际化配置
+			"sProcessing": "正在获取数据，请稍后...",
+			"sLengthMenu": "显示 _MENU_ 条",
+			"sZeroRecords": "查询不到相关数据",
+			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+			"sInfoEmpty": "记录数为0",
+			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+			"sInfoPostFix": "",
+			"sSearch": "搜索",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "第一页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "最后一页"
+			}},
+
 	});
-	
+
 	//全局正则KV集合
 	var regMap = {
-			xiaoshu: '^[0-9]+\.?[0-9]*$'
+		xiaoshu: '^[0-9]+\.?[0-9]*$'
 	}
 	//全局错误提示
 	var errMsg = {
-			radio:'油石比输入错误，请输入纯数字',
-			pdtemp:'成品温度要求输入错误，请输入纯数字',
-			arrivetemp:'到现场温度要求输入错误，请输入纯数字',
-			price:'单价输入错误，请输入纯数字',
-			pdneed:'成品需要量输入错误，请输入纯数字',
-			
-			Materialdeviation1:'料1偏差量输入错误，请输入纯数字',
-			Materialdeviation2:'料2偏差量输入错误，请输入纯数字',
-			Materialdeviation3:'料3偏差量输入错误，请输入纯数字',
-			Materialdeviation4:'料4偏差量输入错误，请输入纯数字',
-			Materialdeviation5:'料5偏差量输入错误，请输入纯数字',
-			Materialdeviation6:'料6偏差量输入错误，请输入纯数字',
-			
-			Boneflourdeviation:'粉料偏差量输入错误，请输入纯数字',
-			pitchdeviation:'沥青偏差量输入错误，请输入纯数字',
-			tempmax:'最高温度输入错误，请输入纯数字',
-			tempmin:'最低温度输入错误，请输入纯数字',
-			drymixingtimedeviation:'干拌时间偏差输入错误，请输入纯数字',
-		  wetmixingtimedeviation:'成品需要量输入错误，请输入纯数字',
-		  pass475:'成品需要量输入错误，请输入纯数字',
-		  pass236:'成品需要量输入错误，请输入纯数字',
-		  pass0075:'成品需要量输入错误，请输入纯数字',
+		radio:'油石比输入错误，请输入纯数字',
+		pdtemp:'成品温度要求输入错误，请输入纯数字',
+		arrivetemp:'到现场温度要求输入错误，请输入纯数字',
+		price:'单价输入错误，请输入纯数字',
+		pdneed:'成品需要量输入错误，请输入纯数字',
+
+		Materialdeviation1:'料1偏差量输入错误，请输入纯数字',
+		Materialdeviation2:'料2偏差量输入错误，请输入纯数字',
+		Materialdeviation3:'料3偏差量输入错误，请输入纯数字',
+		Materialdeviation4:'料4偏差量输入错误，请输入纯数字',
+		Materialdeviation5:'料5偏差量输入错误，请输入纯数字',
+		Materialdeviation6:'料6偏差量输入错误，请输入纯数字',
+
+		Boneflourdeviation:'粉料偏差量输入错误，请输入纯数字',
+		pitchdeviation:'沥青偏差量输入错误，请输入纯数字',
+		tempmax:'最高温度输入错误，请输入纯数字',
+		tempmin:'最低温度输入错误，请输入纯数字',
+		drymixingtimedeviation:'干拌时间偏差输入错误，请输入纯数字',
+		wetmixingtimedeviation:'成品需要量输入错误，请输入纯数字',
+		pass475:'成品需要量输入错误，请输入纯数字',
+		pass236:'成品需要量输入错误，请输入纯数字',
+		pass0075:'成品需要量输入错误，请输入纯数字',
 	}
 	//新建生产计划
 	var app5 = new Vue({
-	  el: '#NewShengChanJiHua',
-	  //表单数据
-	  data: {
-		  planno:"",
-		  roadid:"",
-		  /* roadnumber:"", */
-		  //成品需要量
-		  pdneed:"",
-		  drymixingtime:"",
-		  wetmixingtime:"",
-		  //油石比
-		  radio:"",
-		  //成品温度要求
-		  pdtemp:"",
- 		  //到现场温度要求
-		  arrivetemp:"",
-		  //单价
-		  price:"",
-		  // 配方编号
-		  recipeid:"",
-		  roadList:'',
-   	  roadSelected:'',
-   		recipeList:'',
-   		recipeSelected:'',
-	  },
-	  methods: {
-		//新建生产计划保存按钮事件
-	    save: function () {
-            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-            this.$http.post('/ShengChanJiHua/addShengChanJiHua',JSON.stringify(this._data),{}).then((res)=>{
-            	var resMsg = res.body;
-            	if(resMsg.daoMsg>0){
-            		/* $('#mainContent').DataTable().row.add(resMsg.obj).draw(); */
-            		$("#myModal2").modal("hide");
-            		initTable();
-            		toastr.success(resMsg.resultMsg);
-            	}else{
-            		toastr.error(resMsg.resultMsg);
-            	}
-            },(res)=>{
-            	
-            });
-	    },
-	    reg:function(value,regType,id){
-	    	var re = new RegExp(regMap[regType]);
-	    	var flag;
-    		flag = reg(parseFloat(value),re);
-    		if(null!=value&&''!=value){
-		    	if(!flag){
-		    		app5[id]="";
-		    		toastr.error(errMsg[id]);
-    		    }
-    		}
-	    },
-        roadPost:function(){
-            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-            this.$http.post('/SysRoadMgnController/getAllSysRoadMgn',{},{emulateJSON:true}).then((res)=>{
-            	this.roadList=res.body;
-            	this.roadSelected=app5.roadList[0].roadid;
-            },(res)=>{
-                console.log(res.status);
-            });
-        },
-        recipePost:function(){
-        	
-       	 	this.$http.post('/SysFormulationManagement/selectAllSysFormulationManagement',{'roadid':this.roadSelected},{emulateJSON:true}).then((res)=>{
-		       	 	this.recipeList=res.body;
-		        	this.recipeSelected=this.recipeList[0].flId;
-            },(res)=>{
-                console.log(res.status);
-            });
-        }
-	  }
+		el: '#NewShengChanJiHua',
+		//表单数据
+		data: {
+			planno:"",
+			roadid:"",
+			/* roadnumber:"", */
+			//成品需要量
+			pdneed:"",
+			drymixingtime:"",
+			wetmixingtime:"",
+			//油石比
+			radio:"",
+			//成品温度要求
+			pdtemp:"",
+			//到现场温度要求
+			arrivetemp:"",
+			//单价
+			price:"",
+			// 配方编号
+			recipeid:"",
+			roadList:'',
+			roadSelected:'',
+			recipeList:'',
+			recipeSelected:'',
+		},
+		methods: {
+			//新建生产计划保存按钮事件
+			save: function () {
+				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+				this.$http.post('/ShengChanJiHua/addShengChanJiHua',JSON.stringify(this._data),{}).then((res)=>{
+					var resMsg = res.body;
+				if(resMsg.daoMsg>0){
+					/* $('#mainContent').DataTable().row.add(resMsg.obj).draw(); */
+					$("#myModal2").modal("hide");
+					initTable();
+					toastr.success(resMsg.resultMsg);
+				}else{
+					toastr.error(resMsg.resultMsg);
+				}
+			},(res)=>{
+
+				});
+			},
+			reg:function(value,regType,id){
+				var re = new RegExp(regMap[regType]);
+				var flag;
+				flag = reg(parseFloat(value),re);
+				if(null!=value&&''!=value){
+					if(!flag){
+						app5[id]="";
+						toastr.error(errMsg[id]);
+					}
+				}
+			},
+			roadPost:function(){
+				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+				this.$http.post('/SysRoadMgnController/getAllSysRoadMgn',{},{emulateJSON:true}).then((res)=>{
+					this.roadList=res.body;
+				this.roadSelected=app5.roadList[0].roadid;
+			},(res)=>{
+					console.log(res.status);
+				});
+			},
+			recipePost:function(){
+
+				this.$http.post('/SysFormulationManagement/selectAllSysFormulationManagement',{'roadid':this.roadSelected},{emulateJSON:true}).then((res)=>{
+					this.recipeList=res.body;
+				this.recipeSelected=this.recipeList[0].flId;
+			},(res)=>{
+					console.log(res.status);
+				});
+			}
+		}
 	})
 	//初始化下拉框路段
 	app5.roadPost();
 	app5.recipePost();
-	
+
 	function udMsg(obj){
 		var tr=$(obj).parents("tr");
-  	var data=$("#mainContent").DataTable().row(tr).data();
-  	xgSCVm.planid = data.planid;
-  	xgSCVm.planno = data.planno;
-  	xgSCVm.roadid = data.roadid;
-  	xgSCVm.pdneed = data.pdneed;
-  	xgSCVm.datetime = data.datetime;
-  	xgSCVm.drymixingtime = data.drymixingtime;
-  	xgSCVm.wetmixingtime = data.wetmixingtime;
-  	xgSCVm.radio = data.radio;
-  	xgSCVm.pdtemp = data.pdtemp;
-  	xgSCVm.arrivetemp = data.arrivetemp;
-  	xgSCVm.price = data.price;
-  	xgSCVm.recipeid = data.recipeid;
-  	xgSCVm.price = data.price;
-  	xgSCVm.roadSelected = data.roadid;
-  	xgSCVm.recipeSelected = data.recipeid;
-  	console.log(data);
+		var data=$("#mainContent").DataTable().row(tr).data();
+		xgSCVm.planid = data.planid;
+		xgSCVm.planno = data.planno;
+		xgSCVm.roadid = data.roadid;
+		xgSCVm.pdneed = data.pdneed;
+		xgSCVm.datetime = data.datetime;
+		xgSCVm.drymixingtime = data.drymixingtime;
+		xgSCVm.wetmixingtime = data.wetmixingtime;
+		xgSCVm.radio = data.radio;
+		xgSCVm.pdtemp = data.pdtemp;
+		xgSCVm.arrivetemp = data.arrivetemp;
+		xgSCVm.price = data.price;
+		xgSCVm.recipeid = data.recipeid;
+		xgSCVm.price = data.price;
+		xgSCVm.roadSelected = data.roadid;
+		xgSCVm.recipeSelected = data.recipeid;
+		console.log(data);
 	}
 	function pcMsg(obj){
 		var tr=$(obj).parents("tr");
-  	var data=$("#mainContent2").DataTable().row(tr).data();
-  	xgSGPC.id=data.id;
-  	xgSGPC.pianchano=data.pianchano;
-  	xgSGPC.pianchaname=data.pianchaname;
-  	xgSGPC.Materialdeviation1=data.Materialdeviation1;
-  	xgSGPC.Materialdeviation2=data.Materialdeviation2;
-  	xgSGPC.Materialdeviation3=data.Materialdeviation3;
-  	xgSGPC.Materialdeviation4=data.Materialdeviation4;
-  	xgSGPC.Materialdeviation5=data.Materialdeviation5;
-  	xgSGPC.Materialdeviation6=data.Materialdeviation6
-	  xgSGPC.Boneflourdeviation=data.Boneflourdeviation
-	  xgSGPC.pitchdeviation=data.pitchdeviation
-	  xgSGPC.tempmax=data.tempmax
-	  xgSGPC.tempmin=data.tempmin
-	  xgSGPC.drymixingtimedeviation=data.drymixingtimedeviation
-	  xgSGPC.wetmixingtimedeviation=data.wetmixingtimedeviation
-	  xgSGPC.pass475=data.pass475
-	  xgSGPC.pass236=data.pass236
-	  xgSGPC.pass0075=data.pass0075
+		var data=$("#mainContent2").DataTable().row(tr).data();
+		xgSGPC.id=data.id;
+		xgSGPC.pianchano=data.pianchano;
+		xgSGPC.pianchaname=data.pianchaname;
+		xgSGPC.Materialdeviation1=data.Materialdeviation1;
+		xgSGPC.Materialdeviation2=data.Materialdeviation2;
+		xgSGPC.Materialdeviation3=data.Materialdeviation3;
+		xgSGPC.Materialdeviation4=data.Materialdeviation4;
+		xgSGPC.Materialdeviation5=data.Materialdeviation5;
+		xgSGPC.Materialdeviation6=data.Materialdeviation6
+		xgSGPC.Boneflourdeviation=data.Boneflourdeviation
+		xgSGPC.pitchdeviation=data.pitchdeviation
+		xgSGPC.tempmax=data.tempmax
+		xgSGPC.tempmin=data.tempmin
+		xgSGPC.drymixingtimedeviation=data.drymixingtimedeviation
+		xgSGPC.wetmixingtimedeviation=data.wetmixingtimedeviation
+		xgSGPC.pass475=data.pass475
+		xgSGPC.pass236=data.pass236
+		xgSGPC.pass0075=data.pass0075
 	}
-	
+
 	//修改生产计划
 	var xgSCVm = new Vue({
-	  el: '#change2',
-	  //表单数据
-	  data: {
-		  planid:"",
-		  planno:"",
-		  roadid:"",
-		  roadnumber:"",
-		  datetime:"",
-		  //成品需要量
-		  pdneed:"",
-		  drymixingtime:"",
-		  wetmixingtime:"",
-		  //油石比
-		  radio:"",
-		  //成品温度要求
-		  pdtemp:"",
- 		  //到现场温度要求
-		  arrivetemp:"",
-		  //单价
-		  price:"",
-		  // 配方编号
-		  recipeid:"",
-		  roadList:'',
-   	  roadSelected:'',
-	   	recipeList:'',
+		el: '#change2',
+		//表单数据
+		data: {
+			planid:"",
+			planno:"",
+			roadid:"",
+			roadnumber:"",
+			datetime:"",
+			//成品需要量
+			pdneed:"",
+			drymixingtime:"",
+			wetmixingtime:"",
+			//油石比
+			radio:"",
+			//成品温度要求
+			pdtemp:"",
+			//到现场温度要求
+			arrivetemp:"",
+			//单价
+			price:"",
+			// 配方编号
+			recipeid:"",
+			roadList:'',
+			roadSelected:'',
+			recipeList:'',
 			recipeSelected:'',
-	  },
-	  methods: {
-		//新建生产计划保存按钮事件
-	    save: function () {
-            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-            this.$http.post('/ShengChanJiHua/updateShengChanJiHua',JSON.stringify(this._data),{}).then((res)=>{
-            	var resMsg = res.body;
-            	if(resMsg.daoMsg>0){
-            		$("#change2").modal("hide");
-            		initTable();
-            		toastr.success(resMsg.resultMsg);
-            	}else{
-            		toastr.error(resMsg.resultMsg);
-            	}
-            },(res)=>{
-            	
-            });
-	    },
-	    reg:function(value,regType,id){
-	    	var re = new RegExp(regMap[regType]);
-	    	var flag;
-    		flag = reg(parseFloat(value),re);
-    		if(null!=value&&''!=value){
-		    	if(!flag){
-		    		this._data[id]="";
-		    		toastr.error(errMsg[id]);
-    		    }
-    		}
-	    },
-        roadPost:function(){
-            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-            this.$http.post('/SysRoadMgnController/getAllSysRoadMgn',{},{emulateJSON:true}).then((res)=>{
-            	this.roadList=res.body;
-            	this.roadSelected=app5.roadList[0].roadid;
-            },(res)=>{
-                console.log(res.status);
-            });
-        },
-        recipePost:function(){
-        	
-       	 	this.$http.post('/SysFormulationManagement/selectAllSysFormulationManagement',{'roadid':this.roadSelected},{emulateJSON:true}).then((res)=>{
-		       	 	this.recipeList=res.body;
-		        	this.recipeId=this.recipeSelected;
-            },(res)=>{
-                console.log(res.status);
-            });
-        }
-	  }
+		},
+		methods: {
+			//新建生产计划保存按钮事件
+			save: function () {
+				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+				this.$http.post('/ShengChanJiHua/updateShengChanJiHua',JSON.stringify(this._data),{}).then((res)=>{
+					var resMsg = res.body;
+				if(resMsg.daoMsg>0){
+					$("#change2").modal("hide");
+					initTable();
+					toastr.success(resMsg.resultMsg);
+				}else{
+					toastr.error(resMsg.resultMsg);
+				}
+			},(res)=>{
+
+				});
+			},
+			reg:function(value,regType,id){
+				var re = new RegExp(regMap[regType]);
+				var flag;
+				flag = reg(parseFloat(value),re);
+				if(null!=value&&''!=value){
+					if(!flag){
+						this._data[id]="";
+						toastr.error(errMsg[id]);
+					}
+				}
+			},
+			roadPost:function(){
+				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+				this.$http.post('/SysRoadMgnController/getAllSysRoadMgn',{},{emulateJSON:true}).then((res)=>{
+					this.roadList=res.body;
+				this.roadSelected=app5.roadList[0].roadid;
+			},(res)=>{
+					console.log(res.status);
+				});
+			},
+			recipePost:function(){
+
+				this.$http.post('/SysFormulationManagement/selectAllSysFormulationManagement',{'roadid':this.roadSelected},{emulateJSON:true}).then((res)=>{
+					this.recipeList=res.body;
+				this.recipeId=this.recipeSelected;
+			},(res)=>{
+					console.log(res.status);
+				});
+			}
+		}
 	})
-	
+
 	//初始化下拉框路段
 	xgSCVm.roadPost();
 	xgSCVm.recipePost();
-	
+
 	function initTable(){
-        $.ajax({
-            type: 'POST',
-            url: '/ShengChanJiHua/getAllShengChanJiHua',
-            dataType: 'json',
-            data: {
-            },
-            error: function (msg) {
-                errMessage("请求UserController失败");
-            },
-            success: function (json) {
-                $("#mainContent").dataTable().fnClearTable();
-                $("#mainContent").DataTable().rows.add(json).draw(false);
-                /* initTbVm(); */
-            }
-        });
-    }
-	
+		$.ajax({
+			type: 'POST',
+			url: '/ShengChanJiHua/getAllShengChanJiHua',
+			dataType: 'json',
+			data: {
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				$("#mainContent").dataTable().fnClearTable();
+				$("#mainContent").DataTable().rows.add(json).draw(false);
+				/* initTbVm(); */
+			}
+		});
+	}
+
 	function initTablePianCha(){
-        $.ajax({
-            type: 'POST',
-            url: '/ShengChanJiHua/getAllShiGongPianCha',
-            dataType: 'json',
-            data: {
-            },
-            error: function (msg) {
-                errMessage("请求UserController失败");
-            },
-            success: function (json) {
-                $("#mainContent2").dataTable().fnClearTable();
-                $("#mainContent2").DataTable().rows.add(json).draw(false);
-                $("#mainContent3").dataTable().fnClearTable();
-                $("#mainContent3").DataTable().rows.add(json).draw(false);
-                /* initTbVm(); */
-            }
-        });
-    }
-	
+		$.ajax({
+			type: 'POST',
+			url: '/ShengChanJiHua/getAllShiGongPianCha',
+			dataType: 'json',
+			data: {
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				$("#mainContent2").dataTable().fnClearTable();
+				$("#mainContent2").DataTable().rows.add(json).draw(false);
+				$("#mainContent3").dataTable().fnClearTable();
+				$("#mainContent3").DataTable().rows.add(json).draw(false);
+				/* initTbVm(); */
+			}
+		});
+	}
+
 	function reg(str,re){
 		if (re.test(str)) {
 			return true;
@@ -1404,320 +1404,320 @@ body {
 		var tr = $(e).parents("tr");
 		var msg = "确定要删除吗？\n\n请确认！";
 		if (confirm(msg) == true) {
-	        $.ajax({
-	            type: 'POST',
-	            url: '/ShengChanJiHua/delShengChanJiHuaById',
-	            dataType: 'json',
-	            data: {
-	            	planid:$(e).attr("data-id")
-	            },
-	            error: function (msg) {
-	                errMessage("请求UserController失败");
-	            },
-	            success: function (json) {
-	            	if(json>0){
-	            		toastr.success("删除成功");
-	                $('#mainContent').DataTable().row(tr).remove().draw(false); //删除行立即显示
-	            	}else{
-	            	  toastr.error("删除失败");
-	            	}
-	            }
-	        });
+			$.ajax({
+				type: 'POST',
+				url: '/ShengChanJiHua/delShengChanJiHuaById',
+				dataType: 'json',
+				data: {
+					planid:$(e).attr("data-id")
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					if(json>0){
+						toastr.success("删除成功");
+						$('#mainContent').DataTable().row(tr).remove().draw(false); //删除行立即显示
+					}else{
+						toastr.error("删除失败");
+					}
+				}
+			});
 		}else{
 			return false;
 		}
-	  console.log(msg);
+		console.log(msg);
 	}
-	
-	
+
+
 	//箭头函数，内部this永远指向父级
 	var delpiancha = (e)=>{
 		var tr = $(e).parents("tr");
 		var msg = "确定要删除吗？\n\n请确认！";
 		if (confirm(msg) == true) {
-	        $.ajax({
-	            type: 'POST',
-	            url: '/ShengChanJiHua/delShiGongPianChaById',
-	            dataType: 'json',
-	            data: {
-	            	id:$(e).attr("data-id")
-	            },
-	            error: function (msg) {
-	                errMessage("请求UserController失败");
-	            },
-	            success: function (json) {
-	            	if(json>0){
-	            		toastr.success("删除成功");
-	                $('#mainContent2').DataTable().row(tr).remove().draw(false); //删除行立即显示
-	            	}else{
-	            	  toastr.error("删除失败");
-	            	}
-	            }
-	        });
+			$.ajax({
+				type: 'POST',
+				url: '/ShengChanJiHua/delShiGongPianChaById',
+				dataType: 'json',
+				data: {
+					id:$(e).attr("data-id")
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					if(json>0){
+						toastr.success("删除成功");
+						$('#mainContent2').DataTable().row(tr).remove().draw(false); //删除行立即显示
+					}else{
+						toastr.error("删除失败");
+					}
+				}
+			});
 		}else{
 			return false;
 		}
-	  console.log(msg);
+		console.log(msg);
 	}
-	
-	
+
+
 	//新建施工偏差
 	var addSGPC = new Vue({
-	  el: '#addSGPC',
-	  //表单数据
-	  data: {
-		  pianchano:"",
-		  pianchaname:"",
-		  Materialdeviation1:"",
-		  Materialdeviation2:"",
-		  Materialdeviation3:"",
-		  Materialdeviation4:"",
-		  Materialdeviation5:"",
-		  Materialdeviation6:"",
-		  //粉料偏差量
-		  Boneflourdeviation:"",
-		  //沥青偏差量
-		  pitchdeviation:"",
-		  tempmax:"",
-		  tempmin:"",
-		  //干拌
-		  drymixingtimedeviation:'',
-		  //湿拌
-		  wetmixingtimedeviation:'',
-		  pass475:'',
-		  pass236:'',
-		  pass0075:'',
-	  },
-	  methods: {
-		//新建生产计划保存按钮事件
-	    save: function () {
-            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-            this.$http.post('/ShengChanJiHua/addShiGongPianCha',JSON.stringify(this._data),{}).then((res)=>{
-            	var resMsg = res.body;
-            	if(resMsg.daoMsg>0){
-            		/* $('#mainContent').DataTable().row.add(resMsg.obj).draw(); */
-            		$("#myModal3").modal("hide");
-            		initTablePianCha();
-            		toastr.success(resMsg.resultMsg);
-            	}else{
-            		toastr.error(resMsg.resultMsg);
-            	}
-            },(res)=>{
-            	
-            });
-	    },
-	    reg:function(value,regType,id){
-	    	var re = new RegExp(regMap[regType]);
-	    	var flag;
-    		flag = reg(parseFloat(value),re);
-    		if(null!=value&&''!=value){
-		    	if(!flag){
-		    		addSGPC[id]="";
-		    		toastr.error(errMsg[id]);
-    		    }
-    		}
-	    }
-	  }
+		el: '#addSGPC',
+		//表单数据
+		data: {
+			pianchano:"",
+			pianchaname:"",
+			Materialdeviation1:"",
+			Materialdeviation2:"",
+			Materialdeviation3:"",
+			Materialdeviation4:"",
+			Materialdeviation5:"",
+			Materialdeviation6:"",
+			//粉料偏差量
+			Boneflourdeviation:"",
+			//沥青偏差量
+			pitchdeviation:"",
+			tempmax:"",
+			tempmin:"",
+			//干拌
+			drymixingtimedeviation:'',
+			//湿拌
+			wetmixingtimedeviation:'',
+			pass475:'',
+			pass236:'',
+			pass0075:'',
+		},
+		methods: {
+			//新建生产计划保存按钮事件
+			save: function () {
+				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+				this.$http.post('/ShengChanJiHua/addShiGongPianCha',JSON.stringify(this._data),{}).then((res)=>{
+					var resMsg = res.body;
+				if(resMsg.daoMsg>0){
+					/* $('#mainContent').DataTable().row.add(resMsg.obj).draw(); */
+					$("#myModal3").modal("hide");
+					initTablePianCha();
+					toastr.success(resMsg.resultMsg);
+				}else{
+					toastr.error(resMsg.resultMsg);
+				}
+			},(res)=>{
+
+				});
+			},
+			reg:function(value,regType,id){
+				var re = new RegExp(regMap[regType]);
+				var flag;
+				flag = reg(parseFloat(value),re);
+				if(null!=value&&''!=value){
+					if(!flag){
+						addSGPC[id]="";
+						toastr.error(errMsg[id]);
+					}
+				}
+			}
+		}
 	})
-	
+
 	//修改施工偏差
 	var xgSGPC = new Vue({
-	  el: '#xgSGPC',
-	  //表单数据
-	  data: {
-		  id:"",
-		  pianchano:"",
-		  pianchaname:"",
-		  Materialdeviation1:"",
-		  Materialdeviation2:"",
-		  Materialdeviation3:"",
-		  Materialdeviation4:"",
-		  Materialdeviation5:"",
-		  Materialdeviation6:"",
-		  //粉料偏差量
-		  Boneflourdeviation:"",
-		  //沥青偏差量
-		  pitchdeviation:"",
-		  tempmax:"",
-		  tempmin:"",
-		  //干拌
-		  drymixingtimedeviation:'',
-		  //湿拌
-		  wetmixingtimedeviation:'',
-		  pass475:'',
-		  pass236:'',
-		  pass0075:'',
-	  },
-	  methods: {
-		//新建生产计划保存按钮事件
-	    save: function () {
-            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-            this.$http.post('/ShengChanJiHua/updateShiGongPianCha',JSON.stringify(this._data),{}).then((res)=>{
-            	var resMsg = res.body;
-            	if(resMsg.daoMsg>0){
-            		/* $('#mainContent').DataTable().row.add(resMsg.obj).draw(); */
-            		$("#change3").modal("hide");
-            		initTablePianCha();
-            		toastr.success(resMsg.resultMsg);
-            	}else{
-            		toastr.error(resMsg.resultMsg);
-            	}
-            },(res)=>{
-            	
-            });
-	    },
-	    reg:function(value,regType,id){
-	    	var re = new RegExp(regMap[regType]);
-	    	var flag;
-    		flag = reg(parseFloat(value),re);
-    		if(null!=value&&''!=value){
-		    	if(!flag){
-		    		xgSGPC[id]="";
-		    		toastr.error(errMsg[id]);
-    		    }
-    		}
-	    },
-        recipePost:function(){
-        	
-       	 	this.$http.post('/SysFormulationManagement/selectAllSysFormulationManagement',{'roadid':this.roadSelected},{emulateJSON:true}).then((res)=>{
-		       	 	this.recipeList=res.body;
-		        	this.recipeSelected=this.recipeList[0].flId;
-            },(res)=>{
-                console.log(res.status);
-            });
-        }
-	  }
+		el: '#xgSGPC',
+		//表单数据
+		data: {
+			id:"",
+			pianchano:"",
+			pianchaname:"",
+			Materialdeviation1:"",
+			Materialdeviation2:"",
+			Materialdeviation3:"",
+			Materialdeviation4:"",
+			Materialdeviation5:"",
+			Materialdeviation6:"",
+			//粉料偏差量
+			Boneflourdeviation:"",
+			//沥青偏差量
+			pitchdeviation:"",
+			tempmax:"",
+			tempmin:"",
+			//干拌
+			drymixingtimedeviation:'',
+			//湿拌
+			wetmixingtimedeviation:'',
+			pass475:'',
+			pass236:'',
+			pass0075:'',
+		},
+		methods: {
+			//新建生产计划保存按钮事件
+			save: function () {
+				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+				this.$http.post('/ShengChanJiHua/updateShiGongPianCha',JSON.stringify(this._data),{}).then((res)=>{
+					var resMsg = res.body;
+				if(resMsg.daoMsg>0){
+					/* $('#mainContent').DataTable().row.add(resMsg.obj).draw(); */
+					$("#change3").modal("hide");
+					initTablePianCha();
+					toastr.success(resMsg.resultMsg);
+				}else{
+					toastr.error(resMsg.resultMsg);
+				}
+			},(res)=>{
+
+				});
+			},
+			reg:function(value,regType,id){
+				var re = new RegExp(regMap[regType]);
+				var flag;
+				flag = reg(parseFloat(value),re);
+				if(null!=value&&''!=value){
+					if(!flag){
+						xgSGPC[id]="";
+						toastr.error(errMsg[id]);
+					}
+				}
+			},
+			recipePost:function(){
+
+				this.$http.post('/SysFormulationManagement/selectAllSysFormulationManagement',{'roadid':this.roadSelected},{emulateJSON:true}).then((res)=>{
+					this.recipeList=res.body;
+				this.recipeSelected=this.recipeList[0].flId;
+			},(res)=>{
+					console.log(res.status);
+				});
+			}
+		}
 	})
-	
+
 	var linkPianChaDetailVm = new Vue({
-	  el: '#linkPianChaDetailVm',
-	  //表单数据
-	  data: {
-		  id:"",
-		  pianchano:"",
-		  pianchaname:"",
-		  Materialdeviation1:"",
-		  Materialdeviation2:"",
-		  Materialdeviation3:"",
-		  Materialdeviation4:"",
-		  Materialdeviation5:"",
-		  Materialdeviation6:"",
-		  //粉料偏差量
-		  Boneflourdeviation:"",
-		  //沥青偏差量
-		  pitchdeviation:"",
-		  tempmax:"",
-		  tempmin:"",
-		  //干拌
-		  drymixingtimedeviation:'',
-		  //湿拌
-		  wetmixingtimedeviation:'',
-		  pass475:'',
-		  pass236:'',
-		  pass0075:'',
-	  },
-	  methods: {
-	  }
+		el: '#linkPianChaDetailVm',
+		//表单数据
+		data: {
+			id:"",
+			pianchano:"",
+			pianchaname:"",
+			Materialdeviation1:"",
+			Materialdeviation2:"",
+			Materialdeviation3:"",
+			Materialdeviation4:"",
+			Materialdeviation5:"",
+			Materialdeviation6:"",
+			//粉料偏差量
+			Boneflourdeviation:"",
+			//沥青偏差量
+			pitchdeviation:"",
+			tempmax:"",
+			tempmin:"",
+			//干拌
+			drymixingtimedeviation:'',
+			//湿拌
+			wetmixingtimedeviation:'',
+			pass475:'',
+			pass236:'',
+			pass0075:'',
+		},
+		methods: {
+		}
 	})
-	
-	
+
+
 	//修改施工偏差
 	var glpianchaVm = new Vue({
-	  el: '#glpianchaVm',
-	  //表单数据
-	  data: {
-		  planid:"",
-		  pianchaid:"",
-		  pianchaname:"",
-	  },
-	  methods: {
-		//新建生产计划保存按钮事件
-	    save: function (msg) {
-	    	    var param = {
-	    	    		planid:this.planid,
-	    	    		pianchaid:this.pianchaid
-	    	    		};
-            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-            this.$http.post('/ShengChanJiHua/linkShiGongPianCha',param,{emulateJSON:true}).then((res)=>{
-            	
-            	var resMsg = res.body;
-            	if(resMsg>0){
-            		glpianchaVm.pianchaname = msg;
-            		toastr.success("关联成功");
-            	}else{
-            		toastr.error("关联失败");
-            	}
-            },(res)=>{
-            	
-            });
-	    },
-	  }
+		el: '#glpianchaVm',
+		//表单数据
+		data: {
+			planid:"",
+			pianchaid:"",
+			pianchaname:"",
+		},
+		methods: {
+			//新建生产计划保存按钮事件
+			save: function (msg) {
+				var param = {
+					planid:this.planid,
+					pianchaid:this.pianchaid
+				};
+				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+				this.$http.post('/ShengChanJiHua/linkShiGongPianCha',param,{emulateJSON:true}).then((res)=>{
+
+					var resMsg = res.body;
+				if(resMsg>0){
+					glpianchaVm.pianchaname = msg;
+					toastr.success("关联成功");
+				}else{
+					toastr.error("关联失败");
+				}
+			},(res)=>{
+
+				});
+			},
+		}
 	})
-	
-	
+
+
 	laydate.render({
-        elem: '#drymixingtime', //指定元素
-	    type: 'time',
+		elem: '#drymixingtime', //指定元素
+		type: 'time',
 		done: function(value, date){
 			app5.drymixingtime=value;
-	    }
-    });
-	
+		}
+	});
+
 	laydate.render({
-        elem: '#wetmixingtime', //指定元素
-        type: 'time',
+		elem: '#wetmixingtime', //指定元素
+		type: 'time',
 		done: function(value, date){
 			app5.wetmixingtime=value;
-	    }
-    });
+		}
+	});
 	laydate.render({
-        elem: '#xgdrymixingtime', //指定元素
-	    type: 'time',
+		elem: '#xgdrymixingtime', //指定元素
+		type: 'time',
 		done: function(value, date){
 			app5.drymixingtime=value;
-	    }
-    });
+		}
+	});
 	laydate.render({
-      elem: '#drymixingtimedeviation', //指定元素
-	    type: 'time',
+		elem: '#drymixingtimedeviation', //指定元素
+		type: 'time',
 		done: function(value, date){
 			addSGPC.drymixingtimedeviation=value;
-	    }
-    });
-	
+		}
+	});
+
 	laydate.render({
-        elem: '#wetmixingtimedeviation', //指定元素
-        type: 'time',
+		elem: '#wetmixingtimedeviation', //指定元素
+		type: 'time',
 		done: function(value, date){
 			addSGPC.wetmixingtimedeviation=value;
-	    }
-    });
+		}
+	});
 	laydate.render({
-        elem: '#xgdrymixingtimedeviation', //指定元素
-	    type: 'time',
+		elem: '#xgdrymixingtimedeviation', //指定元素
+		type: 'time',
 		done: function(value, date){
 			xgSGPC.drymixingtimedeviation=value;
-	    }
-  });
-	
+		}
+	});
+
 	laydate.render({
-        elem: '#xgwetmixingtimedeviation', //指定元素
-        type: 'time',
+		elem: '#xgwetmixingtimedeviation', //指定元素
+		type: 'time',
 		done: function(value, date){
 			xgSGPC.wetmixingtimedeviation=value;
-	    }
-  });
-	
+		}
+	});
+
 	var isNull = (e) =>{
 		if(e!=''&&e!=null&&e!=undefined)
 			return false;
-			return true;
+		return true;
 	}
-	
+
 	var linkPianCha = (e)=>{
 		var tr=$(e).parents("tr");
-  	var data=$("#mainContent3").DataTable().row(tr).data();
-  	var msg = "确定要关联该偏差吗？\n\n请确认！";
+		var data=$("#mainContent3").DataTable().row(tr).data();
+		var msg = "确定要关联该偏差吗？\n\n请确认！";
 		if (confirm(msg) == true) {
 			glpianchaVm.pianchaid=data.id;
 			glpianchaVm.save(data.pianchaname);
@@ -1725,10 +1725,10 @@ body {
 			return false;
 		}
 	}
-	
+
 	var linkMsg = (e)=>{
 		var tr=$(e).parents("tr");
-  	var data=$("#mainContent").DataTable().row(tr).data();
+		var data=$("#mainContent").DataTable().row(tr).data();
 		glpianchaVm.planid = data.planid;
 		if(!isNull(data.pianchaid)){
 			glpianchaVm.pianchaname = data.pianchaname;
@@ -1736,44 +1736,44 @@ body {
 			glpianchaVm.pianchaname ="";
 		}
 	}
-	
-	
+
+
 	var lookPianChaMsg = (e)=>{
-        $.ajax({
-            type: 'POST',
-            url: '/ShengChanJiHua/getPianChaById',
-            dataType: 'json',
-            data: {
-            	id:$(e).attr("data-id")
-            },
-            error: function (msg) {
-                errMessage("请求UserController失败");
-            },
-            success: function (json) {
-            	bindLinkPianCha(json);
-            }
-        });
+		$.ajax({
+			type: 'POST',
+			url: '/ShengChanJiHua/getPianChaById',
+			dataType: 'json',
+			data: {
+				id:$(e).attr("data-id")
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				bindLinkPianCha(json);
+			}
+		});
 	}
-	
+
 	var bindLinkPianCha = (data) =>{
-			linkPianChaDetailVm.id=data.id;
-	  	linkPianChaDetailVm.pianchano=data.pianchano;
-	  	linkPianChaDetailVm.pianchaname=data.pianchaname;
-	  	linkPianChaDetailVm.Materialdeviation1=data.Materialdeviation1;
-	  	linkPianChaDetailVm.Materialdeviation2=data.Materialdeviation2;
-	  	linkPianChaDetailVm.Materialdeviation3=data.Materialdeviation3;
-	  	linkPianChaDetailVm.Materialdeviation4=data.Materialdeviation4;
-	  	linkPianChaDetailVm.Materialdeviation5=data.Materialdeviation5;
-	  	linkPianChaDetailVm.Materialdeviation6=data.Materialdeviation6
-	  	linkPianChaDetailVm.Boneflourdeviation=data.Boneflourdeviation
-	  	linkPianChaDetailVm.pitchdeviation=data.pitchdeviation
-	  	linkPianChaDetailVm.tempmax=data.tempmax
-	  	linkPianChaDetailVm.tempmin=data.tempmin
-	  	linkPianChaDetailVm.drymixingtimedeviation=data.drymixingtimedeviation
-	  	linkPianChaDetailVm.wetmixingtimedeviation=data.wetmixingtimedeviation
-	  	linkPianChaDetailVm.pass475=data.pass475
-	  	linkPianChaDetailVm.pass236=data.pass236
-	  	linkPianChaDetailVm.pass0075=data.pass0075
+		linkPianChaDetailVm.id=data.id;
+		linkPianChaDetailVm.pianchano=data.pianchano;
+		linkPianChaDetailVm.pianchaname=data.pianchaname;
+		linkPianChaDetailVm.Materialdeviation1=data.Materialdeviation1;
+		linkPianChaDetailVm.Materialdeviation2=data.Materialdeviation2;
+		linkPianChaDetailVm.Materialdeviation3=data.Materialdeviation3;
+		linkPianChaDetailVm.Materialdeviation4=data.Materialdeviation4;
+		linkPianChaDetailVm.Materialdeviation5=data.Materialdeviation5;
+		linkPianChaDetailVm.Materialdeviation6=data.Materialdeviation6
+		linkPianChaDetailVm.Boneflourdeviation=data.Boneflourdeviation
+		linkPianChaDetailVm.pitchdeviation=data.pitchdeviation
+		linkPianChaDetailVm.tempmax=data.tempmax
+		linkPianChaDetailVm.tempmin=data.tempmin
+		linkPianChaDetailVm.drymixingtimedeviation=data.drymixingtimedeviation
+		linkPianChaDetailVm.wetmixingtimedeviation=data.wetmixingtimedeviation
+		linkPianChaDetailVm.pass475=data.pass475
+		linkPianChaDetailVm.pass236=data.pass236
+		linkPianChaDetailVm.pass0075=data.pass0075
 	}
 </script>
 </html>
