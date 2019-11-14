@@ -10,9 +10,8 @@ public class SiteRoadMileage {
 
     public String siteId;//地点_id
 
-    public String roadNo;//路段编号
 
-    public float length;//摊铺里程
+	public float length;//摊铺里程
 
     public String datetime;//日期时间
 
@@ -39,13 +38,6 @@ public class SiteRoadMileage {
 		this.siteId = siteId;
 	}
 
-	public String getRoadNo() {
-		return roadNo;
-	}
-
-	public void setRoadNo(String roadNo) {
-		this.roadNo = roadNo;
-	}
 
 	public float getLength() {
 		return length;

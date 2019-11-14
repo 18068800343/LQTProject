@@ -3,7 +3,7 @@
 <mapper namespace="com.ldxx.dao.SiteRoadMileageDao" >
 
 	<select id="selectAllSiteRoadMileage" resultType="SiteRoadMileage">
-		select id,site_id,road_no,length,datetime,edit_user_id2,edit_datetime2,delete_state from site_road_mileage where delete_state=1
+		select id,site_id,length,datetime,edit_user_id2,edit_datetime2,delete_state from site_road_mileage where delete_state=1
 	</select>
 	
 	<update id="updSiteRoadMileage" parameterType="SiteRoadMileage">

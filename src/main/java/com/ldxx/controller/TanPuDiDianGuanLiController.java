@@ -93,4 +93,17 @@ public class TanPuDiDianGuanLiController {
 		return service.getBiaoDuanByLuDuan(map);
 	}
 
+	/**
+	 * 通过路段roadId获取标段信息
+	 * @param roadId
+	 * @return
+	 */
+	@RequestMapping("/getByLuDuanId")
+	@ResponseBody
+	public List<SiteConstruction> getByLuDuanId(String roadId) {
+		Map<String, String> map = new HashMap<>();
+		map.put("roadId", roadId);
+		return service.getByLuDuanId(map);
+	}
+
 }

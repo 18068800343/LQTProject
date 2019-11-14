@@ -37,4 +37,9 @@ public class TanPuDiDianGuanLiServiceImpl implements TanPuDiDianGuanLiService{
 		return dao.getBiaoDuanByLuDuan(map);
 	}
 
+	@Override
+	public List<SiteConstruction> getByLuDuanId(Map<String, String> map) {
+		return dao.getByLuDuanId(map);
+	}
+
 }

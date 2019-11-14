@@ -71,5 +71,9 @@
 	<select id="selectUserById" parameterType="String" resultType="user">
 		select * from u_user where user_id=#{userId}
 	</select>
-	
+
+
+	<select id="getByLuDuanId" resultType="siteConstruction" parameterType="map">
+		select * from site_construction where  road_id=#{roadId} and delete_state = 1
+	</select>
 </mapper>

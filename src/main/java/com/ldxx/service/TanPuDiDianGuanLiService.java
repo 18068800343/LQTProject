@@ -10,4 +10,6 @@ public interface TanPuDiDianGuanLiService {
 	List<SiteConstruction> getDistinctTanPuDiDian();
 	
 	List<SiteConstruction> getBiaoDuanByLuDuan(Map<String, String> map);
+
+    List<SiteConstruction> getByLuDuanId(Map<String, String> map);
 }
