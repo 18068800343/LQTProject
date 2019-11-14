@@ -661,20 +661,20 @@
 		<!--<script src="/view/toastr/toastr.js"></script>
 		<script src="/view/js/quanxian.js"></script>-->
 
-		<script type="text/javascript">
-			$(document).ready(function() {
-					//caidandianji();
-			})
-			//easyui单击菜单可以打开关闭
-			$('#caidandianjibangding').tree( {
-        		animate: true,
-				onClick: function(node){
-					$('#caidandianjibangding').tree(node.state === 'closed' ? 'expand' : 'collapse', node.target);  
-				}
-			});
+<script type="text/javascript">
+	$(document).ready(function() {
+			
+	})
+	//easyui单击菜单可以打开关闭
+	$('#caidandianjibangding').tree( {
+		animate: true,
+		onClick: function(node){
+			$('#caidandianjibangding').tree(node.state === 'closed' ? 'expand' : 'collapse', node.target);  
+		}
+	});
 
 
-		</script>
+</script>
 <!--			var user;
 			$(document).ready(function() {
 
