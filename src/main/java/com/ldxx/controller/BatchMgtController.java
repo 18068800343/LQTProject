@@ -41,7 +41,7 @@ public class BatchMgtController {
 	@RequestMapping("/updBatchMgt")
 	public Map<String,Object> updBatchMgt(BatchMgt bm){
 		bm.setEditDatetime(GetThisTimeUtils.getDateTime());
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String formatStr =formatter.format(bm.getDatetimeOut());
 		String sj = formatStr.replace(":", "").replace("-", "").replace(" ", "");
 		bm.setBatch(bm.getLicencePlate()+sj);
