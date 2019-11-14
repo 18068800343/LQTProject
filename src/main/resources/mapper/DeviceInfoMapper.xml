@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.DeviceInfoDao" >
+	<select id="selectAllDeviceInfo" resultType="DeviceInfo">
+		select 
+			id,code,name,model,type_id,manufacturer,contact,status,remarks,edit_user_id,edit_datetime,delete_state
+		from
+			device_info
+		where delete_state=1
+	</select>
+	<select id="selectByIdDeviceInfo" resultType="DeviceInfo">
+		select id,code,name,model,type_id,manufacturer,contact,status,remarks,edit_user_id,edit_datetime
+		from device_info
+		where id=#{id} and delete_state
+	</select>
+	<insert id="addDeviceInfo" parameterType="deviceInfo">
+		insert into device_info(
+			id,code,name,model,type_id,manufacturer,contact,status,remarks,edit_user_id,edit_datetime,delete_state)
+		values(
+			deviceInfo.id,
+			deviceInfo.code,
+			deviceInfo.name,
+			deviceInfo.model,
+			deviceInfo.type_id,
+			deviceInfo.manufacturerv,
+			deviceInfo.contact,
+			deviceInfo.status,
+			deviceInfo.remarks,
+			deviceInfo.edit_user_id,
+			deviceInfo.edit_datetime,
+			1
+		)
+	</insert>
+	
+	<update id="updateDeviceInfo" parameterType="deviceInfo">
+		update device_info
+		set
+			id=#{deviceInfo.id},
+			code=#{deviceInfo.code},
+			name=#{deviceInfo.name},
+			model=#{deviceInfo.model},
+			type_id=#{deviceInfo.type_id},
+			manufacturer=#{deviceInfo.manufacturerv},
+			contact=#{deviceInfo.contact},
+			status=#{deviceInfo.status},
+			remarks=#{deviceInfo.remarks},
+			edit_user_id=#{deviceInfo.edit_user_id},
+			edit_datetime=#{deviceInfo.edit_datetime}
+		where delete_state=1
+	</update>
+	<update id="deleteDeviceInfo" >
+		update device_info 
+		set
+			delete_state=0
+		where id=#{id}
+	</update>
+</mapper>
+
