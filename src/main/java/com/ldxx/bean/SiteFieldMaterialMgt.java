@@ -6,8 +6,6 @@ public class SiteFieldMaterialMgt {
 	
     private String id;
 
-    private String siteid;
-
     private String batchid;
 
     private BigDecimal temp;
@@ -28,14 +26,6 @@ public class SiteFieldMaterialMgt {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getSiteid() {
-		return siteid;
-	}
-
-	public void setSiteid(String siteid) {
-		this.siteid = siteid;
 	}
 
 	public String getBatchid() {

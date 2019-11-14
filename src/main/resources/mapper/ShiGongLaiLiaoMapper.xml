@@ -3,18 +3,18 @@
 <mapper namespace="com.ldxx.dao.ShiGongLaiLiaoDao" >
 	<insert id="addShiGongLaiLiao" parameterType="siteFieldMaterialMgtVo">
 		insert into site_field_material_mgt 
-			(id,road_id,site_number,lng,lat,stake_mark,lane,remarks,delete_state)
-			values(#{id},#{roadid},#{sitenumber},#{lng},#{lat},#{stakemark},
-			#{lane},#{remarks},#{deletestate})
+			(id,batch_id,temp,weight,datetime,edit_user_id,edit_datetime,delete_state)
+			values(#{id},#{batchid},#{temp},#{weight},#{datetime},#{edituserid},
+			#{editdatetime},#{deletestate})
 	</insert>
 	
 	<update id="updateShiGongLaiLiao" parameterType="siteFieldMaterialMgtVo">
 		update site_field_material_mgt 
-			set road_id=#{roadid},
-			site_number=#{sitenumber},
-			lng=#{lng},lat=#{lat},
-			stake_mark=#{stakemark},
-			lane=#{lane},remarks=#{remarks} where id=#{id}
+			set batch_id=#{batchid},
+			temp=#{temp},
+			weight=#{weight},datetime=#{datetime},
+			edit_user_id=#{edituserid},
+			edit_datetime=#{editdatetime} where id=#{id}
 	</update>
 	
 	<update id="delShiGongLaiLiao" parameterType="String">

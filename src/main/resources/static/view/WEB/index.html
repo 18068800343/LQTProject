@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>沥青质量信息管理一体化平台</title>
 		<link href="/view/favicon.ico" rel="shortcut icon">
 		<link href="/view/style/bootstrap.min.css" rel="stylesheet">
 		<link href="/view/style/style.css" rel="stylesheet">
@@ -406,7 +406,7 @@
 								<!-- <span style="margin-left:10px;font-size:18px;" class="Pa" ><i class="iconfont icon-yonghuguanli" style="font-size:18px;"></i>个人任务</span><br> -->
 								<div style="text-align:left;background-color:  #f2f6fb;">
 									<div class="easyui-panel" style="background-color:#022141;overflow:hidden;border:none;">
-										<ul class="easyui-tree">
+										<ul class="easyui-tree" id="caidandianjibangding">
 											<li>
 												<span><a href="home.html"   target="view_frame"  class="yijicaidan Pab" >首页</a></span>
 											</li>
@@ -508,7 +508,7 @@
 												</ul>
 											</li>
 											<li data-options="state:'closed'">
-												<span><a href="./gerenRenwu/BusinessReminder.html"  target="view_frame" class="yijicaidan Pac">道路施工质量管理</a></span>
+												<span><a href="javascript:;"  target="view_frame" class="yijicaidan Pac">道路施工质量管理</a></span>
 												<ul>
 													<li data-options="state:'closed'">
 														<span><a href="javascript:;"  target="view_frame" class="yijicaidan Peca" >沥青砼摊铺监控管理</a></span>
@@ -541,8 +541,9 @@
 																<a href="./shengchanGuanli/UndertakeContract.html" target="view_frame" class="yijicaidan Pecgc">视频管理</a>
 															</li>-->
 														</ul>
-														<li data-options="state:'closed'">
-															<span><a href="javascript:;"  target="view_frame" class="yijicaidan Peca" >沥青砼压实监控管理</a></span>
+													</li>
+													<li data-options="state:'closed'">
+														<span><a href="javascript:;"  target="view_frame" class="yijicaidan Peca" >沥青砼压实监控管理</a></span>
 															<ul>
 																<li>
 																	<a href="daolushigongzhiliangguanli/nianyacishu.html" target="view_frame" class="yijicaidan Pecgc">碾压次数管理</a>
@@ -557,6 +558,7 @@
 																	<a href="javascript:;" target="view_frame" class="yijicaidan Pecbxb">压实度管·理</a>
 																</li>-->
 															</ul>
+													</li>
 												</ul>
 												<li data-options="state:'closed'">
 													<span><a href="javascript:;"   target="view_frame" class="yijicaidan Paa" >综合统计分析</a></span>
@@ -631,7 +633,7 @@
 														</li>
 													</ul>
 												</li>-->
-
+											</li>
 										</ul>
 									</div>
 								</div>
@@ -659,8 +661,21 @@
 		<!--<script src="/view/toastr/toastr.js"></script>
 		<script src="/view/js/quanxian.js"></script>-->
 
-<!--		<script type="text/javascript">
-			var user;
+<script type="text/javascript">
+	$(document).ready(function() {
+			
+	})
+	//easyui单击菜单可以打开关闭
+	$('#caidandianjibangding').tree( {
+		animate: true,
+		onClick: function(node){
+			$('#caidandianjibangding').tree(node.state === 'closed' ? 'expand' : 'collapse', node.target);  
+		}
+	});
+
+
+</script>
+<!--			var user;
 			$(document).ready(function() {
 
 				$.ajax({

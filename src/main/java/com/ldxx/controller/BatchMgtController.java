@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ldxx.bean.BatchMgt;
+import com.ldxx.dao.BatchMgtDao;
 import com.ldxx.service.BatchMgtService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
+import com.ldxx.vo.BatchMgtVo;
 /**
  * 批次管理
  * @author hp
@@ -26,6 +26,9 @@ public class BatchMgtController {
 	@Autowired
 	private BatchMgtService service;
 	
+	@Autowired
+	private BatchMgtDao dao;
+	
 	private Map<String,Object> map=new HashMap<>();
 	
 	@RequestMapping("/getAllBatchMgt")
@@ -36,6 +39,11 @@ public class BatchMgtController {
 	@RequestMapping("/getBatchMgtById")
 	public BatchMgt getBatchMgtById(String id){
 		return service.getBatchMgtById(id);
+	}
+	
+	@RequestMapping("/getBatchMgtVoById")
+	public BatchMgtVo getBatchMgtVoById(String id){
+		return dao.getBatchMgtVoById(id);
 	}
 	
 	@RequestMapping("/updBatchMgt")

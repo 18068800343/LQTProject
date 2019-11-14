@@ -16,6 +16,17 @@
 		from batch_mgt where id=#{id}
 	</select>
 	
+	<select id="getBatchMgtVoById" resultType="batchMgtVo">
+		SELECT
+		bm.*,(bm.loading_weight-bm.unloaded_weight) yuguweight,srm.road_name,srm.road_no,sfm.fl_name
+		FROM
+			batch_mgt bm
+		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id
+		AND srm.delete_state = 1
+		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = bm.pitch_type and sfm.delete_state = 1
+		where bm.delete_state = 1 and id=#{id}
+	</select>
+	
 	<update id="updBatchMgt" parameterType="BatchMgt">
 		update batch_mgt set
 		road_id=#{bm.roadId},

@@ -10,6 +10,7 @@
 <link href="../../style/style.css" rel="stylesheet">
 <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+<link href="../../toastr/toastr.css" rel="stylesheet">
 <style lang="">
 .UpperPart {
 	display: flex;
@@ -142,11 +143,11 @@
 								<tr>
 									<td style="width: 20%;">批次</td>
 									<td style="width: 30%;">
-										<select  class="form-control" @change="getBatchVoById" v-model="batchid" style="width: 70%;">
+										<select  class="form-control" @change="getBatchVoById" v-model="batchid" style="width: 100%;">
 											<option :value="item.id" v-for="item in batchList">{{item.batch}}</option>
 										</select></td>
-									<td style="width: 20%;">车牌</td>
-									<td style="width: 30%;">{{licenceplate}}</td>
+									<td style="height: 100%;">车牌</td>
+									<td style="height: 100%;">{{licenceplate}}</td>
 								</tr>
 								<tr>
 									<td>路段</td>
@@ -158,11 +159,11 @@
 									<td>空车重量</td>
 									<td>{{unloadedweight}}</td>
 									<td>来料重量</td>
-									<td><input type="text" class="form-control" v-model="weight = yuguweight" style="width: 70%;" /></td>
+									<td><input type="text" class="form-control" @blur="reg(yuguweight,'xiaoshu','yuguweight')" v-model="weight = yuguweight" style="width: 100%;" /></td>
 								</tr>
 								<tr>
 									<td>来料温度</td>
-									<td><input type="text" class="form-control" v-model="temp" style="width: 70%;" /></td>
+									<td><input type="text" class="form-control" @blur="reg(temp,'xiaoshu','temp')" v-model="temp" style="width: 100%;" /></td>
 									<td></td>
 									<td></td>
 								</tr>
@@ -172,7 +173,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-success">保存</button>
+					<button type="button" class="btn btn-success" @click="save">保存</button>
 				</div>
 			</div>
 		</div>
@@ -182,7 +183,7 @@
 	<!-- 修改Modal -->
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
 		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
+			<div class="modal-content" id="xgLaiLiaoVm">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -196,36 +197,31 @@
 						<form class="form-inline">
 							<table class="table table-bordered">
 								<tr>
-									<td style="width: 20%;">路段编号</td>
-									<td style="width: 30%;"><select class="form-inline" id="" style="width: 70%;">
-											<option>11</option>
-											<option>22</option>
-											<option>33</option>
+									<td style="width: 20%;">批次</td>
+									<td style="width: 30%;">
+										<select  class="form-control" @change="getBatchVoById" v-model="batchid" style="width: 100%;">
+											<option :value="item.id" v-for="item in batchList">{{item.batch}}</option>
 										</select></td>
-									<td style="width: 20%;">车牌</td>
-									<td style="width: 30%;"><select class="form-inline" id="xgchepai" style="width: 70%;">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-										</select></td>
+									<td style="height: 100%;">车牌</td>
+									<td style="height: 100%;">{{licenceplate}}</td>
 								</tr>
 								<tr>
-									<td>批次</td>
-									<td><input type="text" id="xgpici" style="width: 70%;" /></td>
+									<td>路段</td>
+									<td>{{roadname}}</td>
 									<td>来料类型</td>
-									<td><input type="text" id="xglailiaoleixing" style="width: 70%;" /></td>
+									<td>{{flname}}</td>
 								</tr>
 								<tr>
 									<td>空车重量</td>
-									<td><input type="text" id="xgkongchezhongliang" style="width: 70%;" /></td>
+									<td>{{unloadedweight}}</td>
 									<td>来料重量</td>
-									<td><input type="text" id="xglailiaozhongliang" style="width: 70%;" /></td>
+									<td><input type="text" class="form-control" @blur="reg(yuguweight,'xiaoshu','yuguweight')" v-model="weight = yuguweight" style="width: 100%;" /></td>
 								</tr>
 								<tr>
 									<td>来料温度</td>
-									<td><input type="text" id="xglailiaowendu" style="width: 70%;" /></td>
-									<td>来料时间</td>
-									<td><input type="date" style="width: 70%;" /></td>
+									<td><input type="text" class="form-control" @blur="reg(temp,'xiaoshu','temp')" v-model="temp" style="width: 100%;" /></td>
+									<td></td>
+									<td></td>
 								</tr>
 							</table>
 						</form>
@@ -233,7 +229,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-success">保存</button>
+					<button type="button" class="btn btn-success" @click="save">保存</button>
 				</div>
 			</div>
 		</div>
@@ -244,6 +240,7 @@
 <script src="../../js/common-scripts.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../toastr/toastr.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script>
@@ -298,11 +295,8 @@
 										+ data
 										+ '" onclick="delMsg(this)" title="删除"></i>';
 
-								var marker = '<i class="glyphicon glyphicon-map-marker" style="font-size:14px;cursor:pointer;" data-id="'
-										+ data
-										+ '" onclick="markPoint(this)" title="定位"></i>';
 
-								return xiugai + qiyong + marker;
+								return xiugai + qiyong ;
 							}
 						} ],
 						"oLanguage" : { //国际化配置
@@ -345,26 +339,34 @@
 	  el: '#addLaiLiaoVm',
 	  //表单数据
 	  data: {
+		  //批次id
 		  batchid:"",
+		  batch:"",
+		  //车牌
 		  licenceplate:"",
 		  roadname:"",
+		  roadno:"",
+		  //来料类型
 		  flname:"",
+		  //空车重量
 		  unloadedweight:"",
+		  //预估净重
 		  yuguweight:"",
+		  //净重
 		  weight:"",
 		  temp:"",
+		  loadingTemperature:"",
 		  batchList:'',
 	  },
 	  methods: {
 		//新建生产计划保存按钮事件
 	    save: function () {
             //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-            this.$http.post('/ShengChanJiHua/addShengChanJiHua',JSON.stringify(this._data),{}).then((res)=>{
+            this.$http.post('/ShiGongLaiLiaoGuanLi/addShiGongLaiLiao',JSON.stringify(this._data),{}).then((res)=>{
             	var resMsg = res.body;
             	if(resMsg.daoMsg>0){
-            		/* $('#mainContent').DataTable().row.add(resMsg.obj).draw(); */
-            		$("#myModal2").modal("hide");
-            		initTable();
+           		  $('#mainContent').DataTable().row.add(resMsg.obj).draw(); 
+            		$("#myModal").modal("hide");
             		toastr.success(resMsg.resultMsg);
             	}else{
             		toastr.error(resMsg.resultMsg);
@@ -379,7 +381,94 @@
     		flag = reg(parseFloat(value),re);
     		if(null!=value&&''!=value){
 		    	if(!flag){
-		    		app5[id]="";
+		    		this._data[id]="";
+		    		toastr.error(errMsg[id]);
+    		    }
+    		}
+	    },
+        batchPost:function(){
+            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+            this.$http.post('/BatchMgt/getAllBatchMgt',{},{}).then((res)=>{
+            	this.batchList=res.body;
+            	this.batchid=this.batchList[0].id;
+            	this.getBatchVoById();
+            },(res)=>{
+                console.log(res.status);
+            });
+        },
+        getBatchVoById:function(){
+        	
+       	 	this.$http.post('/BatchMgt/getBatchMgtVoById',{'id':this.batchid},{emulateJSON:true}).then((res)=>{
+		       	 	var batchVo = res.body;
+		        	this.licenceplate = batchVo.licencePlate;
+		        	this.roadname = batchVo.roadname;
+		        	this.flname = batchVo.flname;
+		        	this.unloadedweight = batchVo.unloadedWeight;
+		        	this.yuguweight = batchVo.yuguweight;
+		        	this.temp = batchVo.loadingTemperature;
+		        	this.batch = batchVo.batch;
+		        	this.roadno = batchVo.roadno;
+            },(res)=>{
+                console.log(res.status);
+            });
+        }
+	  }
+	})
+	//初始化下拉框路段
+	addLaiLiaoVm.batchPost();
+	
+	
+	
+	//新建生产计划
+	var xgLaiLiaoVm = new Vue({
+	  el: '#xgLaiLiaoVm',
+	  //表单数据
+	  data: {
+		  //来料id
+		  id:"",
+		  //批次id
+		  batchid:"",
+		  batch:"",
+		  //车牌
+		  licenceplate:"",
+		  roadname:"",
+		  roadno:"",
+		  //来料类型
+		  flname:"",
+		  //空车重量
+		  unloadedweight:"",
+		  //预估净重
+		  yuguweight:"",
+		  //净重
+		  weight:"",
+		  temp:"",
+		  loadingTemperature:"",
+		  batchList:'',
+	  },
+	  methods: {
+		//新建生产计划保存按钮事件
+	    save: function () {
+            //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+            this.$http.post('/ShiGongLaiLiaoGuanLi/updateShiGongLaiLiao',JSON.stringify(this._data),{}).then((res)=>{
+            	var resMsg = res.body;
+            	if(resMsg.daoMsg>0){
+            		$('#mainContent').DataTable().row(page_tr).data(resMsg.obj);//修改行立即显示 */
+            		$("#change").modal("hide");
+            		toastr.success(resMsg.resultMsg);
+            	}else{
+            		toastr.error(resMsg.resultMsg);
+            	}
+            },(res)=>{
+            	
+            });
+	    },
+	    reg:function(value,regType,id){
+	    	var re = new RegExp(regMap[regType]);
+	    	var flag;
+    		flag = reg(parseFloat(value),re);
+    		if(null!=value&&''!=value){
+		    	if(!flag){
+		    		this._data[id]="";
 		    		toastr.error(errMsg[id]);
     		    }
     		}
@@ -395,9 +484,16 @@
         },
         getBatchVoById:function(){
         	
-       	 	this.$http.post('/SysFormulationManagement/selectAllSysFormulationManagement',{'roadid':this.roadSelected},{emulateJSON:true}).then((res)=>{
-		       	 	this.recipeList=res.body;
-		        	this.recipeSelected=this.recipeList[0].flId;
+       	 	this.$http.post('/BatchMgt/getBatchMgtVoById',{'id':this.batchid},{emulateJSON:true}).then((res)=>{
+		       	 	var batchVo = res.body;
+		        	this.licenceplate = batchVo.licencePlate;
+		        	this.roadname = batchVo.roadname;
+		        	this.flname = batchVo.flname;
+		        	this.unloadedweight = batchVo.unloadedWeight;
+		        	this.yuguweight = batchVo.yuguweight;
+		        	this.temp = batchVo.loadingTemperature;
+		        	this.batch = batchVo.batch;
+		        	this.roadno = batchVo.roadno;
             },(res)=>{
                 console.log(res.status);
             });
@@ -405,7 +501,79 @@
 	  }
 	})
 	//初始化下拉框路段
-	addLaiLiaoVm.batchPost();
-	addLaiLiaoVm.recipePost();
+	xgLaiLiaoVm.batchPost();
+	
+	var page_tr;
+	
+	var udMsg = (e)=>{
+		var tr=$(e).parents("tr");
+		page_tr = tr;
+  	var data=$("#mainContent").DataTable().row(tr).data();
+  	xgLaiLiaoVm.batchid = data.batchid;
+  	xgLaiLiaoVm.batch = data.batch;
+	  //车牌
+	  xgLaiLiaoVm.licenceplate = data.licenceplate;
+	  xgLaiLiaoVm.roadname = data.roadname;
+	  xgLaiLiaoVm.roadno = data.roadno;
+	  xgLaiLiaoVm.id = data.id;
+	  //来料类型
+	  xgLaiLiaoVm.flname = data.flname;
+	  //空车重量
+	  xgLaiLiaoVm.unloadedweight = data.unloadedweight;
+	  //预估净重
+	  xgLaiLiaoVm.yuguweight = data.weight;
+	  //净重
+	  xgLaiLiaoVm.weight = data.weight;
+	  xgLaiLiaoVm.temp = data.temp;
+	  xgLaiLiaoVm.loadingTemperature = data.loadingTemperature;
+	}
+	
+	//箭头函数，内部this永远指向父级
+	var delMsg = (e)=>{
+		var tr = $(e).parents("tr");
+		var data=$("#mainContent").DataTable().row(tr).data();
+		var msg = "确定要删除吗？\n\n请确认！";
+		if (confirm(msg) == true) {
+	        $.ajax({
+	            type: 'POST',
+	            url: '/ShiGongLaiLiaoGuanLi/delShiGongLaiLiao',
+	            dataType: 'json',
+	            data: {
+	            	id:data.id
+	            },
+	            error: function (msg) {
+	                errMessage("请求UserController失败");
+	            },
+	            success: function (json) {
+	            	if(json>0){
+	            		toastr.success("删除成功");
+	                $('#mainContent').DataTable().row(tr).remove().draw(false); //删除行立即显示
+	            	}else{
+	            	  toastr.error("删除失败");
+	            	}
+	            }
+	        });
+		}else{
+			return false;
+		}
+	  console.log(msg);
+	}
+//全局正则KV集合
+var regMap = {
+		xiaoshu: '^[0-9]+\.?[0-9]*$'
+}
+
+function reg(str,re){
+	if (re.test(str)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+//全局错误提示
+var errMsg = {
+		yuguweight:'重量错误，请输入纯数字',
+	  temp:'温度输入错误，请输入纯数字',
+}
 </script>
 </html>
