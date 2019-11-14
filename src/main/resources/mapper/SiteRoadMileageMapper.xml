@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.SiteRoadMileageDao" >
+
+	<select id="selectAllSiteRoadMileage" resultType="SiteRoadMileage">
+		select id,site_id,road_no,length,datetime,edit_user_id2,edit_datetime2,delete_state from site_road_mileage where delete_state=1
+	</select>
+	
+	<update id="updSiteRoadMileage" parameterType="SiteRoadMileage">
+		update site_road_mileage set 
+		 site_id=#{srm.siteId},
+		 road_no=#{srm.roadNo},
+		 length=#{srm.length},
+		 datetime=#{srm.datetime},
+		 edit_user_id2=#{srm.editUserId2},
+		 edit_datetime2=#{srm.editDatetime2}
+		 where id=#{srm.id}
+	</update>
+	
+	<update id="delSiteRoadMileage">
+		update site_road_mileage set delete_state=0 where id=#{id}
+	</update>
+	
+	<insert id="insertSiteRoadMileage" parameterType="SiteRoadMileage">
+		insert into 
+		site_road_mileage(id,site_id,road_no,length,datetime,edit_user_id2,edit_datetime2,delete_state) 
+		value(#{srm.id},#{srm.siteId},#{srm.roadNo},#{srm.length},#{srm.datetime},#{srm.editUserId2},#{srm.editDatetime2},1)
+	</insert>
+
+</mapper>
