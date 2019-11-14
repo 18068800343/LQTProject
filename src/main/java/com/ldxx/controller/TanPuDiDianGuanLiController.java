@@ -105,5 +105,14 @@ public class TanPuDiDianGuanLiController {
 		map.put("roadId", roadId);
 		return service.getByLuDuanId(map);
 	}
+	/**
+	 * 通获取所有路段（去重）
+	 * @return
+	 */
+	@RequestMapping("/getIDisroadName")
+	@ResponseBody
+	public List<SiteConstructionVo> getIDisroadName() {
+		return dao.getIDisroadName();
+	}
 
 }

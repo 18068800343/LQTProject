@@ -9,7 +9,9 @@ public class SiteRoadMileage {
 	public String id;
 
     public String siteId;//地点_id
-
+	public String siteNumber;//标段
+	public String roadName;//路段
+	public String roadId;
 
 	public float length;//摊铺里程
 
@@ -20,7 +22,30 @@ public class SiteRoadMileage {
     public String editDatetime2;//最后录入日期
 
     public int deleteState;//逻辑删除1存在；0删除
-    
+
+	public String getRoadId() {
+		return roadId;
+	}
+
+	public void setRoadId(String roadId) {
+		this.roadId = roadId;
+	}
+
+	public String getSiteNumber() {
+		return siteNumber;
+	}
+
+	public void setSiteNumber(String siteNumber) {
+		this.siteNumber = siteNumber;
+	}
+
+	public String getRoadName() {
+		return roadName;
+	}
+
+	public void setRoadName(String roadName) {
+		this.roadName = roadName;
+	}
 
 	public String getId() {
 		return id;
@@ -37,7 +62,6 @@ public class SiteRoadMileage {
 	public void setSiteId(String siteId) {
 		this.siteId = siteId;
 	}
-
 
 	public float getLength() {
 		return length;

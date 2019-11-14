@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONObject;
+import com.ldxx.util.MsgFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,19 +29,20 @@ public class SiteRoadMileageController {
 	@Autowired
 	private SiteRoadMileageService service;
 	
-	private Map<String,Object> map=new HashMap<>();
-	
 	@RequestMapping("/selectAllSiteRoadMileage")
 	public List<SiteRoadMileage> selectAllSiteRoadMileage(){
 		return service.selectAllSiteRoadMileage();
 	}
 	
 	@RequestMapping("/updSiteRoadMileage")
-	public Map<String,Object> updSiteRoadMileage(SiteRoadMileage srm){
+	public String updSiteRoadMileage(@RequestBody SiteRoadMileage srm){
+		JSONObject jsonObject = new JSONObject();
 		int i= service.updSiteRoadMileage(srm);
-		map.put("result", i);
-		map.put("obj", srm);
-		return map;
+		String daoMsg = MsgFormatUtils.getMsgByResult(i, "修改");
+		jsonObject.put("resultMsg",daoMsg);
+		jsonObject.put("daoMsg",i);
+		jsonObject.put("obj",srm);
+		return jsonObject.toJSONString();
 	}
 	
 	@RequestMapping("/delSiteRoadMileage")
@@ -48,13 +52,16 @@ public class SiteRoadMileageController {
 	}
 	
 	@RequestMapping("/insertSiteRoadMileage")
-	public Map<String,Object> insertSiteRoadMileage(SiteRoadMileage srm){
+	public String insertSiteRoadMileage(@RequestBody SiteRoadMileage srm){
+		JSONObject jsonObject = new JSONObject();
 		srm.setId(LDXXUtils.getUUID12());
 		srm.setEditDatetime2(GetThisTimeUtils.getDateTime());
 		int i= service.insertSiteRoadMileage(srm);
-		map.put("result", i);
-		map.put("obj", srm);
-		return map;
+		String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
+		jsonObject.put("resultMsg",daoMsg);
+		jsonObject.put("daoMsg",i);
+		jsonObject.put("obj",srm);
+		return jsonObject.toJSONString();
 	}
 
 }

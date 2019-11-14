@@ -3,13 +3,16 @@
 <mapper namespace="com.ldxx.dao.SiteRoadMileageDao" >
 
 	<select id="selectAllSiteRoadMileage" resultType="SiteRoadMileage">
-		select id,site_id,length,datetime,edit_user_id2,edit_datetime2,delete_state from site_road_mileage where delete_state=1
+		select a.id,a.site_id,a.length,a.datetime,a.edit_user_id2,a.edit_datetime2,a.delete_state,b.site_number,c.road_name,c.road_id
+		from site_road_mileage as a
+		left join site_construction as b on a.site_id=b.id
+		left join sys_road_mgn as c on c.road_id=b.road_id
+		where a.delete_state=1
 	</select>
 	
 	<update id="updSiteRoadMileage" parameterType="SiteRoadMileage">
 		update site_road_mileage set 
 		 site_id=#{srm.siteId},
-		 road_no=#{srm.roadNo},
 		 length=#{srm.length},
 		 datetime=#{srm.datetime},
 		 edit_user_id2=#{srm.editUserId2},
@@ -23,8 +26,8 @@
 	
 	<insert id="insertSiteRoadMileage" parameterType="SiteRoadMileage">
 		insert into 
-		site_road_mileage(id,site_id,road_no,length,datetime,edit_user_id2,edit_datetime2,delete_state) 
-		value(#{srm.id},#{srm.siteId},#{srm.roadNo},#{srm.length},#{srm.datetime},#{srm.editUserId2},#{srm.editDatetime2},1)
+		site_road_mileage(id,site_id,length,datetime,edit_user_id2,edit_datetime2,delete_state)
+		values(#{srm.id},#{srm.siteId},#{srm.length},#{srm.datetime},#{srm.editUserId2},#{srm.editDatetime2},1)
 	</insert>
 
 </mapper>
