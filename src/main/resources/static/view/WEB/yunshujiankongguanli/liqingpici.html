@@ -391,13 +391,12 @@
             data: {
             },
             success: function (json) {
-            	console.log(json)
             	$("#luduanbianhao").html('');
 	        	$("#xg_luduanbianhao").html('');
 	        	 for(var i=0;i<json.length;i++){
-	        		$("#luduanbianhao").append( "<option value='" + json[i].roadno + "'>"
+	        		$("#luduanbianhao").append( "<option value='" + json[i].roadid + "'>"
 			                    + json[i].roadname + "</option>")
-		            $("#xg_luduanbianhao").append( "<option value='" + json[i].roadno + "'>"
+		            $("#xg_luduanbianhao").append( "<option value='" + json[i].roadid + "'>"
 		                    + json[i].roadname + "</option>")
 	        	} 
             }
@@ -527,7 +526,7 @@
 	
 	
 	$("#baocun").click(function(){
-		var roadNo=$("#luduanbianhao").val();
+		var roadId=$("#luduanbianhao").val();
 		var licencePlate=$("#chepai").val();
 		var unloadedWeight=$("#kongchezhongliang").val();
 		var loadingWeight=$("#zhuangzaihouzhongliang").val();
@@ -543,7 +542,7 @@
             dataType: 'json',
             data: {
             	id:luru_id,
-            	roadNo:roadNo,
+            	roadId:roadId,
             	licencePlate:licencePlate,
             	unloadedWeight:unloadedWeight,
             	loadingWeight:loadingWeight,
@@ -606,7 +605,7 @@
 		tr = $(this).closest('tr');
 		var data=$('#mainContent').DataTable().row(dom).data();
 		xgId=data.id
-		$("#xg_luduanbianhao").val(data.roadNo);
+		$("#xg_luduanbianhao").val(data.roadId);
 		$("#xg_chepai").val(data.licencePlate);
 		$("#xg_kongchezhongliang").val(data.unloadedWeight);
 		$("#xg_zhuangzaihouzhongliang").val(data.loadingWeight);
@@ -619,7 +618,7 @@
 	
 	
 	$("#xg_baocun").click(function(){
-		var roadNo=$("#xg_luduanbianhao").val();
+		var roadId=$("#xg_luduanbianhao").val();
 		var licencePlate=$("#xg_chepai").val();
 		var unloadedWeight=$("#xg_kongchezhongliang").val();
 		var loadingWeight=$("#xg_zhuangzaihouzhongliang").val();
@@ -635,7 +634,7 @@
             dataType: 'json',
             data: {
             	id:xgId,
-            	roadNo:roadNo,
+            	roadId:roadId,
             	licencePlate:licencePlate,
             	unloadedWeight:unloadedWeight,
             	loadingWeight:loadingWeight,

@@ -3,22 +3,22 @@
 <mapper namespace="com.ldxx.dao.BatchMgtDao" >
 
 	<select id="getAllBatchMgt" resultType="BatchMgt">
-		select a.id,a.road_no,a.batch,a.licence_plate,a.unloaded_weight,a.loading_weight,a.loading_temperature,a.pitch_type,a.datetime_in,
+		select a.id,a.road_id,a.batch,a.licence_plate,a.unloaded_weight,a.loading_weight,a.loading_temperature,a.pitch_type,a.datetime_in,
 		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,b.fl_name as pitchTypeName,c.road_name
 		from batch_mgt a
 		left join sys_formulation_management b on a.pitch_type=b.fl_id
-		left join sys_road_mgn c on a.road_no=c.road_no
+		left join sys_road_mgn c on a.road_id=c.road_id
 		 where a.delete_state=1
 	</select>
 	
 	<select id="getBatchMgtById" resultType="BatchMgt">
-		select id,road_no,batch,licence_plate,unloaded_weight,loading_weight,loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state
+		select id,road_id,batch,licence_plate,unloaded_weight,loading_weight,loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state
 		from batch_mgt where id=#{id}
 	</select>
 	
 	<update id="updBatchMgt" parameterType="BatchMgt">
 		update batch_mgt set
-		road_no=#{bm.roadNo},
+		road_id=#{bm.roadId},
 		batch=#{bm.batch},
 		licence_plate=#{bm.licencePlate},
 		unloaded_weight=#{bm.unloadedWeight},
@@ -37,9 +37,9 @@
 	</update>
 	
 	<insert id="insertBatchMgt" parameterType="BatchMgt">
-		insert into batch_mgt(id,road_no,batch,licence_plate,unloaded_weight,loading_weight,
+		insert into batch_mgt(id,road_id,batch,licence_plate,unloaded_weight,loading_weight,
 		loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state)
-		values(#{bm.id},#{bm.roadNo},#{bm.batch},#{bm.licencePlate},#{bm.unloadedWeight},#{bm.loadingWeight},
+		values(#{bm.id},#{bm.roadId},#{bm.batch},#{bm.licencePlate},#{bm.unloadedWeight},#{bm.loadingWeight},
 		#{bm.loadingTemperature},#{bm.pitchType},#{bm.datetimeIn},#{bm.datetimeOut},#{bm.editUserId},#{bm.editDatetime},1)
 	</insert>
 

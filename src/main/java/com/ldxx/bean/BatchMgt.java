@@ -16,7 +16,7 @@ public class BatchMgt {
 	
 	public String id;
 
-    public String roadNo;//路段编号
+    public String roadId;//路段编号
     public String roadName;
 
     public String batch;//批次
@@ -71,12 +71,12 @@ public class BatchMgt {
 		this.id = id;
 	}
 
-	public String getRoadNo() {
-		return roadNo;
+	public String getRoadId() {
+		return roadId;
 	}
 
-	public void setRoadNo(String roadNo) {
-		this.roadNo = roadNo;
+	public void setRoadId(String roadId) {
+		this.roadId = roadId;
 	}
 
 	public String getBatch() {
