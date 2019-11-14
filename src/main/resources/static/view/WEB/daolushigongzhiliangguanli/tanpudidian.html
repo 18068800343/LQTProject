@@ -165,19 +165,19 @@ body, html {
 											<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
 										</select></td>
 									<td style="width: 20%;">标段</td>
-									<td style="width: 30%;"><input type="text" v-model="sitenumber" id="sitenumber" /></td>
+									<td style="width: 30%;"><input type="text" style="width: 100%;" class="form-control" v-model="sitenumber" id="sitenumber" /></td>
 								</tr>
 								<tr>
 									<td>经度</td>
-									<td><input type="text" @blur="reg(lng,'xiaoshu','lng')" v-model="lng" id="lng" /></td>
+									<td><input type="text" class="form-control" style="width: 100%;" @blur="reg(lng,'xiaoshu','lng')" v-model="lng" id="lng" /></td>
 									<td>纬度</td>
-									<td><input type="text" @blur="reg(lat,'xiaoshu','lat')" v-model="lat" id="lat" /></td>
+									<td><input type="text" class="form-control" style="width: 100%;" @blur="reg(lat,'xiaoshu','lat')" v-model="lat" id="lat" /></td>
 								</tr>
 								<tr>
 									<td>桩号</td>
-									<td><input type="text" v-model="stakemark" id="stakemark" /></td>
+									<td><input type="text" class="form-control" style="width: 100%;" v-model="stakemark" id="stakemark" /></td>
 									<td>车道</td>
-									<td><input type="text" v-model="lane" id="lane" /></td>
+									<td><input type="text" class="form-control" style="width: 100%;" v-model="lane" id="lane" /></td>
 								</tr>
 							</table>
 						</form>
@@ -216,19 +216,19 @@ body, html {
 											<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
 										</select></td>
 									<td style="width: 20%;">标段</td>
-									<td style="width: 30%;"><input type="text" v-model="sitenumber" id="sitenumber" /></td>
+									<td style="width: 30%;"><input type="text" style="width: 100%;" class="form-control" v-model="sitenumber" id="sitenumber" /></td>
 								</tr>
 								<tr>
 									<td>经度</td>
-									<td><input type="text" @blur="reg(lng,'xiaoshu','lng')" v-model="lng" id="lng" /></td>
+									<td><input type="text" class="form-control" style="width: 100%;" @blur="reg(lng,'xiaoshu','lng')" v-model="lng" id="lng" /></td>
 									<td>纬度</td>
-									<td><input type="text" @blur="reg(lat,'xiaoshu','lat')" v-model="lat" id="lat" /></td>
+									<td><input type="text" class="form-control" style="width: 100%;" @blur="reg(lat,'xiaoshu','lat')" v-model="lat" id="lat" /></td>
 								</tr>
 								<tr>
 									<td>桩号</td>
-									<td><input type="text" v-model="stakemark" id="stakemark" /></td>
+									<td><input type="text" class="form-control" style="width: 100%;" v-model="stakemark" id="stakemark" /></td>
 									<td>车道</td>
-									<td><input type="text" v-model="lane" id="lane" /></td>
+									<td><input type="text" class="form-control" style="width: 100%;" v-model="lane" id="lane" /></td>
 								</tr>
 							</table>
 						</form>
@@ -301,6 +301,7 @@ body, html {
           "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>" + data.roadname + "</h4>" +"<br/>"+
           "";
       var infoWindow = new BMap.InfoWindow(sContent);
+      marker.setAnimation(BMAP_ANIMATION_BOUNCE);
       marker.addEventListener("click", function () {
           this.openInfoWindow(infoWindow);
       });
@@ -353,7 +354,7 @@ body, html {
 										
 								var marker = '<i class="glyphicon glyphicon-map-marker" style="font-size:14px;cursor:pointer;" data-id="'
 									+ data
-									+ '" onclick="markPoint(this)" title="删除"></i>';
+									+ '" onclick="markPoint(this)" title="定位"></i>';
 										
 								return   xiugai + qiyong + marker;
 							}
