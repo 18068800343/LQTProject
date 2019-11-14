@@ -19,6 +19,7 @@ public class MybatisTest {
 	private UserService service;
 	
 	private User user=new User();
+
 	@Test
 	public void mybatisMethod(){
 		user.setUserId("11");
