@@ -1,9 +1,9 @@
 package com.ldxx.controller;
 
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ldxx.bean.SiteConstruction;
+import com.ldxx.Constant.DateConstant;
+import com.ldxx.bean.User;
 import com.ldxx.dao.ShiGongLaiLiaoDao;
-import com.ldxx.dao.TanPuDiDianGuanLiDao;
-import com.ldxx.service.TanPuDiDianGuanLiService;
+import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
-import com.ldxx.vo.SiteConstructionVo;
 import com.ldxx.vo.SiteFieldMaterialMgtVo;
 
 @Controller
@@ -43,10 +42,18 @@ public class ShiGongLaiLiaoGuanLiController {
 	
 	@RequestMapping("/addShiGongLaiLiao")
 	@ResponseBody
-	public String addShiGongLaiLiao(@RequestBody SiteFieldMaterialMgtVo siteFieldMaterialMgtVo) {
+	public String addShiGongLaiLiao(@RequestBody SiteFieldMaterialMgtVo siteFieldMaterialMgtVo,HttpSession session) {
 		JSONObject jsonObject = new JSONObject();
 		siteFieldMaterialMgtVo.setId(LDXXUtils.getUUID12());
 		siteFieldMaterialMgtVo.setDeletestate(1);
+		String nowDateStr = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		siteFieldMaterialMgtVo.setDatetime(nowDateStr);
+		siteFieldMaterialMgtVo.setEditdatetime(nowDateStr);
+		User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			siteFieldMaterialMgtVo.setEdituserid(user.getUserId());
+			siteFieldMaterialMgtVo.setUname(user.getuName());
+		}
 		int i = 0;
 		try {
 			i = dao.addShiGongLaiLiao(siteFieldMaterialMgtVo);
@@ -61,10 +68,18 @@ public class ShiGongLaiLiaoGuanLiController {
 		return jsonObject.toString();
 	}
 	
-	@RequestMapping("/updateTanPuDiDian")
+	@RequestMapping("/updateShiGongLaiLiao")
 	@ResponseBody
-	public String updateTanPuDiDian(@RequestBody SiteFieldMaterialMgtVo siteFieldMaterialMgtVo) {
+	public String updateShiGongLaiLiao(@RequestBody SiteFieldMaterialMgtVo siteFieldMaterialMgtVo,HttpSession session) {
 		JSONObject jsonObject = new JSONObject();
+		String nowDateStr = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		siteFieldMaterialMgtVo.setDatetime(nowDateStr);
+		siteFieldMaterialMgtVo.setEditdatetime(nowDateStr);
+		User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			siteFieldMaterialMgtVo.setEdituserid(user.getUserId());
+			siteFieldMaterialMgtVo.setUname(user.getuName());
+		}
 		int i = 0;
 		try {
 			i = dao.updateShiGongLaiLiao(siteFieldMaterialMgtVo);
