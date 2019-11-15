@@ -1,16 +1,5 @@
 package com.ldxx.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.bean.SiteConstruction;
 import com.ldxx.dao.TanPuDiDianGuanLiDao;
@@ -18,6 +7,15 @@ import com.ldxx.service.TanPuDiDianGuanLiService;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
 import com.ldxx.vo.SiteConstructionVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/TanPuDiDianGuanLi")
@@ -28,7 +26,7 @@ public class TanPuDiDianGuanLiController {
 	
 	@Autowired
 	private TanPuDiDianGuanLiDao dao;
-	
+
 	@RequestMapping("/getDistinctTanPuDiDian")
 	@ResponseBody
     public List<SiteConstruction> getDistinctTanPuDiDian() {
