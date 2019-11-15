@@ -44,6 +44,7 @@ public class ShengChanJiHuaController {
 	@RequestMapping("/getAllShengChanJiHua")
 	@ResponseBody
     public List<PlanProductionCollectionVo> getAllShengChanJiHua() {
+
         return service.getShengChanJiHuaListByCondition();
     }
 	
