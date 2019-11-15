@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class ShengChanJiHuaController {
 	
 	@Autowired
 	private ShengChanJiHuaService service;
-	@Autowired
+	@Resource
 	private ShengChanJiHuaDao dao;
 	
 	@RequestMapping("/getAllShengChanJiHua")
@@ -55,6 +56,7 @@ public class ShengChanJiHuaController {
 	@ResponseBody
 	public int linkShiGongPianCha(String planid, String pianchaid) {
  		int i = dao.linkShiGongPianCha(planid,pianchaid);
+
 		return i;
 	}
 	
