@@ -48,10 +48,12 @@ public class DeviceInfoController {
 	
 	@RequestMapping("/updateDeviceInfo")
 	@ResponseBody
-	public Map<String,Object> updateDeviceInfo(DeviceInfo deviceInfo){
+	public Map<String,Object> updateDeviceInfo(@RequestBody DeviceInfo deviceInfo){
 		Map<String, Object> map = new HashMap<String, Object>();
-	//	map.put("result",state);
-	//	map.put("DicDeviceType", dicDeviceType);
+		int state =0;
+		state=diservice.updateDeviceInfo(deviceInfo);
+		map.put("result",state);
+		map.put("deviceInfo", deviceInfo);
 		return map;
 	};
 	
@@ -59,8 +61,9 @@ public class DeviceInfoController {
 	@ResponseBody
 	public Map<String,Object> deleteDeviceInfo(String id){
 		Map<String, Object> map = new HashMap<String, Object>();
-	//	map.put("result",state);
-	//	map.put("DicDeviceType", dicDeviceType);
+		int state =0;
+		state=diservice.deleteDeviceInfo(id);
+		map.put("result",state);
 		return map;
 	};
 }

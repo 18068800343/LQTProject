@@ -35,18 +35,17 @@
 	<update id="updateDeviceInfo" parameterType="deviceInfo">
 		update device_info
 		set
-			id=#{deviceInfo.id},
 			code=#{deviceInfo.code},
 			name=#{deviceInfo.name},
 			model=#{deviceInfo.model},
-			type_id=#{deviceInfo.type_id},
-			manufacturer=#{deviceInfo.manufacturerv},
+			type_id=#{deviceInfo.typeId},
+			manufacturer=#{deviceInfo.manufacturer},
 			contact=#{deviceInfo.contact},
 			status=#{deviceInfo.status},
 			remarks=#{deviceInfo.remarks},
-			edit_user_id=#{deviceInfo.edit_user_id},
-			edit_datetime=#{deviceInfo.edit_datetime}
-		where delete_state=1
+			edit_user_id=#{deviceInfo.editUserId},
+			edit_datetime=#{deviceInfo.editDatetime}
+		where delete_state=1 and id=#{deviceInfo.id}
 	</update>
 	<update id="deleteDeviceInfo" >
 		update device_info 
