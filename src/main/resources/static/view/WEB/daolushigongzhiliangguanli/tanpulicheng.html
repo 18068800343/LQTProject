@@ -148,7 +148,7 @@
                                     </select></td>
                                 <td>路段号</td>
                                 <td>
-                                    <select class="form-control" style="width: 100%;" v-model="roadSelected2"  id="roadnumber">
+                                    <select class="form-control" style="width: 100%;" v-model="siteId=roadSelected2"  id="roadnumber">
                                         <option :value="road.id" v-for="road in roadList2">{{road.sitenumber}}</option>
                                     </select>
                                 </td>
@@ -197,7 +197,7 @@
 								</select></td>
 							<td>路段号</td>
 							<td>
-								<select class="form-control" style="width: 100%;" v-model="roadSelected2"  id="roadnumber">
+								<select class="form-control" style="width: 100%;" v-model="siteId=roadSelected2"  id="roadnumber">
 									<option :value="road.id" v-for="road in roadList2">{{road.sitenumber}}</option>
 								</select>
 							</td>
@@ -206,7 +206,7 @@
 						<tr>
 							<td>施工时间</td>
 							<td>
-								<input type="text" readonly="true" v-model="datetime" id="datetime" placeholder="请输入"style="width: 100%; height: 100%; border: none;">
+								<input type="text" readonly="true" v-model="datetime" id="xgdatetime" placeholder="请输入"style="width: 100%; height: 100%; border: none;">
 							</td>
 							<td>摊铺里程</td>
 							<td>
@@ -249,6 +249,13 @@
 			type: 'datetime',
 			done: function(value, date){
 				Tanpulicheng.datetime=value;
+			}
+		});
+		laydate.render({
+			elem: '#xgdatetime', //指定元素
+			type: 'datetime',
+			done: function(value, date){
+				xg_Tanpulicheng.datetime=value;
 			}
 		});
 		initTable();

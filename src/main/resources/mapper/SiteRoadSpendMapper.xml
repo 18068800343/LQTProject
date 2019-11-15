@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.SiteRoadSpendDao" >
+
+    <select id="selectAllSiteRoadSpend" resultType="SiteRoadSpend">
+		select a.id,a.site_id,a.speed,a.datetime,a.edit_user_id2,a.edit_datetime2,a.delete_state,b.site_number,c.road_name,c.road_id
+		from site_road_spend as a
+		left join site_construction as b on a.site_id=b.id
+		left join sys_road_mgn as c on c.road_id=b.road_id
+		where a.delete_state=1
+	</select>
+
+    <update id="updSiteRoadSpend" parameterType="SiteRoadSpend">
+		update site_road_spend set
+		 site_id=#{srs.siteId},
+		 speed=#{srs.speed},
+		 datetime=#{srs.datetime},
+		 edit_user_id2=#{srs.editUserId2},
+		 edit_datetime2=#{srs.editDatetime2}
+		 where id=#{srs.id}
+	</update>
+
+    <update id="delSiteRoadSpend">
+		update site_road_spend set delete_state=0 where id=#{id}
+	</update>
+
+    <insert id="insertSiteRoadSpend" parameterType="SiteRoadSpend">
+		insert into
+		site_road_spend(id,site_id,speed,datetime,edit_user_id2,edit_datetime2,delete_state)
+		values(#{srs.id},#{srs.siteId},#{srs.speed},#{srs.datetime},#{srs.editUserId2},#{srs.editDatetime2},1)
+	</insert>
+
+</mapper>

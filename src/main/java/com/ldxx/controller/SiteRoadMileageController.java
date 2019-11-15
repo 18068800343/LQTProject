@@ -37,6 +37,7 @@ public class SiteRoadMileageController {
 	@RequestMapping("/updSiteRoadMileage")
 	public String updSiteRoadMileage(@RequestBody SiteRoadMileage srm){
 		JSONObject jsonObject = new JSONObject();
+        srm.setEditDatetime2(GetThisTimeUtils.getDateTime());
 		int i= service.updSiteRoadMileage(srm);
 		String daoMsg = MsgFormatUtils.getMsgByResult(i, "修改");
 		jsonObject.put("resultMsg",daoMsg);
