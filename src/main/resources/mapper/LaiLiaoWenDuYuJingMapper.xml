@@ -10,7 +10,7 @@
 
 	<update id="updateLaiLiaoWenDu" parameterType="SiteIncomingMaterialTempWarningVo">
 		update site_incoming_material_temp_warning
-			set fie_id=#{fieid},warning_type=#{warningtype},warning_content=#{warningcontent},
+			set warning_type=#{warningtype},warning_content=#{warningcontent},
 			edit_user_id=#{edituserid},edit_datetime=#{editdatetime} where id=#{id}
 	</update>
 
