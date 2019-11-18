@@ -9,11 +9,12 @@ public interface  LaiLiaoWenDuYuJingDao {
 	
 	
 	List<SiteIncomingMaterialTempWarningVo> getAllLaiLiaoWenDuYu();
+
 	
-	int addShiGongLaiLiao(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo);
+	int addLaiLiaoWenDuYu(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo);
+
+	int delLaiLiaoWenDuYu(String id);
 	
-	int delShiGongLaiLiao(String id);
-	
-	int updateShiGongLaiLiao(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo);
+	int updateLaiLiaoWenDuYu(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo);
 	
 }
