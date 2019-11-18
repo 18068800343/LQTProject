@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ldxx.dao.LaiLiaoWenDuYuJingDao" >
-	<insert id="addShiGongLaiLiao" parameterType="siteFieldMaterialMgtVo">
-		insert into site_field_material_mgt 
-			(id,batch_id,temp,weight,datetime,edit_user_id,edit_datetime,delete_state)
-			values(#{id},#{batchid},#{temp},#{weight},#{datetime},#{edituserid},
-			#{editdatetime},#{deletestate})
+	<insert id="addLaiLiaoWenDu" parameterType="SiteIncomingMaterialTempWarningVo">
+		insert into site_incoming_material_temp_warning
+			(id,fie_id,datetime,warning_type,warning_content,warning_state,edit_user_id,edit_datetime,delete_state)
+			values(#{id},#{fieid},#{datetime},#{warningtype},#{warningcontent},#{warningstate},#{edituserid},#{editdatetime},
+			#{deletestate})
 	</insert>
-	
-	<update id="updateShiGongLaiLiao" parameterType="siteFieldMaterialMgtVo">
-		update site_field_material_mgt 
-			set batch_id=#{batchid},
-			temp=#{temp},
-			weight=#{weight},datetime=#{datetime},
-			edit_user_id=#{edituserid},
-			edit_datetime=#{editdatetime} where id=#{id}
+
+	<update id="updateLaiLiaoWenDu" parameterType="SiteIncomingMaterialTempWarningVo">
+		update site_incoming_material_temp_warning
+			set fie_id=#{fieid},warning_type=#{warningtype},warning_content=#{warningcontent},
+			edit_user_id=#{edituserid},edit_datetime=#{editdatetime} where id=#{id}
 	</update>
-	
-	<update id="delShiGongLaiLiao" parameterType="String">
-		update site_field_material_mgt set delete_state=0 where id=#{id}
+
+	<update id="delLaiLiaoWenDu" parameterType="string">
+		update site_incoming_material_temp_warning set delete_state=0 where id=#{id}
 	</update>
-	
-	<select id="getAllLaiLiaoWenDuYu" parameterType="String" resultType="siteFieldMaterialMgtVo">
+
+	<select id="getAllLaiLiaoWenDu" parameterType="string" resultType="SiteIncomingMaterialTempWarningVo">
 		SELECT
-			sfmm.*,bm.licence_plate,bm.batch,bm.unloaded_weight,sfm.fl_name,srm.road_no,srm.road_name,
-		uu.u_name,(bm.loading_weight-bm.unloaded_weight) as yuguweight
+			simtw.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name
 		FROM
-			site_field_material_mgt sfmm
-		LEFT JOIN batch_mgt bm ON sfmm.batch_id = bm.id
-		AND bm.delete_state = 1
-		LEFT JOIN sys_formulation_management sfm ON bm.pitch_type = sfm.fl_id
-		AND sfm.delete_state = 1
-		LEFT JOIN u_user uu ON sfmm.edit_user_id = uu.user_id
-		AND uu.delete_state = 1
-		LEFT JOIN sys_road_mgn srm on bm.road_id = srm.road_id and srm.delete_state = 1
-		where sfmm.delete_state = 1 ORDER BY sfmm.datetime desc
+			site_incoming_material_temp_warning simtw
+		LEFT JOIN site_field_material_mgt sfmm ON simtw.fie_id = sfmm.id and sfmm.delete_state = 1
+		LEFT JOIN batch_mgt bm ON sfmm.batch_id = bm.id and bm.delete_state = 1
+		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id and srm.delete_state = 1
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state = 1
+		LEFT JOIN u_user uu ON uu.user_id= simtw.edit_user_id and uu.delete_state = 1
+		where simtw.delete_state=1 ORDER BY simtw.datetime desc
 	</select>
-	
+
 </mapper>
