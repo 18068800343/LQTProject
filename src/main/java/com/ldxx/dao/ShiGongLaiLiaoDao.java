@@ -1,9 +1,11 @@
 package com.ldxx.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 import com.ldxx.bean.SiteConstruction;
+import com.ldxx.vo.PianChaLiangVo;
 import com.ldxx.vo.SiteConstructionVo;
 import com.ldxx.vo.SiteFieldMaterialMgtVo;
 
@@ -17,5 +19,7 @@ public interface  ShiGongLaiLiaoDao {
 	int delShiGongLaiLiao(String id);
 	
 	int updateShiGongLaiLiao(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo);
+
+	PianChaLiangVo getPiancha(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo);
 	
 }

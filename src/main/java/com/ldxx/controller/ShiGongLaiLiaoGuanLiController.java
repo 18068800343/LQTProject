@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.ldxx.service.ShiGongLaiLiaoGuanLiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,18 +27,18 @@ public class ShiGongLaiLiaoGuanLiController {
 	
 	
 	@Autowired
-	private ShiGongLaiLiaoDao dao;
+	private ShiGongLaiLiaoGuanLiService service;
 	
 	@RequestMapping("/getAllShiGongLaiLiao")
 	@ResponseBody
     public List<SiteFieldMaterialMgtVo> getDistinctTanPuDiDian() {
-        return dao.getAllShiGongLaiLiao();
+        return service.getAllShiGongLaiLiao();
     }
 	
 	@RequestMapping("/delShiGongLaiLiao")
 	@ResponseBody
 	public int delTanPuDiDian(String id) {
-		return dao.delShiGongLaiLiao(id);
+		return service.delShiGongLaiLiao(id);
 	}
 	
 	@RequestMapping("/addShiGongLaiLiao")
@@ -56,7 +57,7 @@ public class ShiGongLaiLiaoGuanLiController {
 		}
 		int i = 0;
 		try {
-			i = dao.addShiGongLaiLiao(siteFieldMaterialMgtVo);
+			i = service.addShiGongLaiLiao(siteFieldMaterialMgtVo, session);
 		} catch (Exception e) {
 			e.printStackTrace();
 			jsonObject.put("errMsg","数据库插入出错,请检查经纬度输入格式");
@@ -82,7 +83,7 @@ public class ShiGongLaiLiaoGuanLiController {
 		}
 		int i = 0;
 		try {
-			i = dao.updateShiGongLaiLiao(siteFieldMaterialMgtVo);
+			i = service.updateShiGongLaiLiao(siteFieldMaterialMgtVo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			jsonObject.put("errMsg","数据库插入出错,请检查经纬度输入格式");
