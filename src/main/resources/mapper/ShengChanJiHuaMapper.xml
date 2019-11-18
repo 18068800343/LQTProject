@@ -123,4 +123,8 @@
 		select * from plan_construction_deviation where id=#{id} and delete_state=1
 	</select>
 	
+	<insert id="addPlanProductionCount" parameterType="planProductionCount">
+		insert into plan_production_count(id,plan_id,batch_id,pd_need_inc_or_dec,pd_need_source)
+		values(#{id},#{planId},#{batchId},#{pdNeedIncOrDec},#{pdNeedSource})
+	</insert>
 </mapper>

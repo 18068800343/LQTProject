@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ldxx.bean.PlanConstructionDeviation;
 import com.ldxx.bean.PlanProductionCollection;
+import com.ldxx.bean.PlanProductionCount;
 import com.ldxx.vo.PlanConstructionDeviationVo;
 import com.ldxx.vo.PlanProductionCollectionVo;
 
@@ -29,4 +30,5 @@ public interface  ShengChanJiHuaDao {
 	
 	int linkShiGongPianCha(String planid,String pianchaid);
 	
+	int addPlanProductionCount(PlanProductionCount planProductionCount);
 }
