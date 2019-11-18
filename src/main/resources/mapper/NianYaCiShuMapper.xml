@@ -22,13 +22,14 @@
 
 	<select id="getAllNianYaCiShu" parameterType="string" resultType="SiteCompactionNumVo">
 		SELECT
-			scn.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name
+			scn.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name,sc.site_number
 		FROM
 			site_compaction_num scn
 		LEFT JOIN batch_mgt bm ON scn.batch_id = bm.id and bm.delete_state = 1
 		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id and srm.delete_state = 1
 		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state = 1
 		LEFT JOIN u_user uu ON uu.user_id= scn.edit_user_id and uu.delete_state = 1
+    	LEFT JOIN site_construction sc on sc.id = scn.site_id and sc.delete_state = 1
 		where scn.delete_state=1 ORDER BY scn.datetime desc
 	</select>
 

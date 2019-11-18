@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/NianYaCiShu")
+@RequestMapping("/NianYaCiShuController")
 public class NianYaCiShuController {
 
 
@@ -45,7 +45,6 @@ public class NianYaCiShuController {
 		siteCompactionNumVo.setId(LDXXUtils.getUUID12());
 		siteCompactionNumVo.setDeletestate(1);
 		String nowDateStr = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
-		siteCompactionNumVo.setDatetime(nowDateStr);
 		siteCompactionNumVo.setEditdatetime(nowDateStr);
 		User user = (User) session.getAttribute("user");
 		if(null!=user) {

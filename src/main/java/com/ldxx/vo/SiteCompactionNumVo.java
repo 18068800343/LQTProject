@@ -8,6 +8,15 @@ public class SiteCompactionNumVo extends SiteCompactionNum{
     private String roadid;
     private String uname;
     private String batch;
+    private String sitenumber;
+
+    public String getSitenumber() {
+        return sitenumber;
+    }
+
+    public void setSitenumber(String sitenumber) {
+        this.sitenumber = sitenumber;
+    }
 
     public String getRoadname() {
         return roadname;
