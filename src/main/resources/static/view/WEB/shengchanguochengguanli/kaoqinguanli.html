@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="LowerPart" style="margin-top:3px;">
-            <table class="table table-bordered table-condensed" id="mainContent2">
+            <table class="table table-bordered table-condensed" id="mainContent">
                 <thead>
                     <tr>
                        <th>姓名</th>
@@ -69,11 +69,11 @@
                        <th>日期</th>
                        <th>签到时间</th>
                        <th>离开时间</th>
-                        <th style="width:75px;">操作</th>
+                        <!-- <th style="width:75px;">操作</th> -->
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td>张三</td>
                         <td>SC201901</td>
                         <td>2019-10-30</td>
@@ -84,7 +84,7 @@
                             <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change2'></i>
                             <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
                         </td>
-                    </tr>
+                    </tr> -->
                 </tbody>   
             </table>
         </div>
@@ -283,10 +283,7 @@
 
 <script>
     $(document).ready( function () {
-    	$("#channeng").trigger("change");
-        laydate.render({
-            elem: '#xgstartTime' //指定元素
-        });
+    	initTable();
 	});
     var table=$('#mainContent').dataTable({
         "deferRender": true,
@@ -298,6 +295,13 @@
         "oLanguage": {
 		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
+		"columns": [
+		            { "data": "name"}, 
+		            { "data": "workNo"},
+		            { "data": "date"},
+		            { "data": "timeIn"},
+		            { "data": "timeOut"}
+		        ],
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
         "sProcessing": "正在获取数据，请稍后...",
