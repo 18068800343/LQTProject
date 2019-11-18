@@ -22,7 +22,7 @@
 
 	<select id="getAllNianYaCiShu" parameterType="string" resultType="SiteCompactionNumVo">
 		SELECT
-			scn.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name,sc.site_number
+			scn.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name,sc.site_number,srm.road_id
 		FROM
 			site_compaction_num scn
 		LEFT JOIN batch_mgt bm ON scn.batch_id = bm.id and bm.delete_state = 1
