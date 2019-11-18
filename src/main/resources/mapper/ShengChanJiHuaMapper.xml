@@ -24,7 +24,7 @@
 			#{Materialdeviation3},#{Materialdeviation4},
 			#{Materialdeviation5},#{Materialdeviation6},
 			#{Boneflourdeviation},#{pitchdeviation},
-			#{tempmax},#{tempmin},#{drymixingtimedeviation},#{wetmixingtimedeviation},#{pass475},
+			#{pdTempOffset},#{arriveTempOffset},#{drymixingtimedeviation},#{wetmixingtimedeviation},#{pass475},
 			#{pass236},#{pass0075},
 			#{datetime},#{deletestate},#{pianchaname},#{pianchano})
 	</insert>
@@ -35,7 +35,7 @@
 			Material_deviation_3=#{Materialdeviation3},Material_deviation_4=#{Materialdeviation4},
 			Material_deviation_5=#{Materialdeviation5},Material_deviation_6=#{Materialdeviation6},
 			Bone_flour_deviation=#{Boneflourdeviation},pitch_deviation=#{pitchdeviation},
-			temp_max=#{tempmax},temp_min=#{tempmin},
+			temp_max=#{pdTempOffset},temp_min=#{arriveTempOffset},
 			dry_mixing_time_deviation=#{drymixingtimedeviation},wet_mixing_time_deviation=#{wetmixingtimedeviation},
 			pass_475=#{pass475},pass_236=#{pass236},pass_0075=#{pass0075},datetime=#{datetime},
 			delete_state=#{deletestate},piancha_name=#{pianchaname},piancha_no=#{pianchano}

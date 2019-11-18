@@ -136,8 +136,8 @@
 							<th>料6偏差量</th>
 							<th>粉偏差量</th>
 							<th>沥青偏差量</th>
-							<th>最高温度偏差量</th>
-							<th>最低温度偏差量</th>
+							<th>成品温度偏差量</th>
+							<th>到场温度偏差量</th>
 							<th>干拌用时偏差量</th>
 							<th>湿拌用时偏差量</th>
 							<th>4.75偏差量</th>
@@ -588,9 +588,9 @@
 							</tr>
 							<tr>
 								<td>最高温度</td>
-								<td>{{tempmax}}</td>
+								<td>{{pdTempOffset}}</td>
 								<td>最低温度</td>
-								<td>{{tempmin}}</td>
+								<td>{{arriveTempOffset}}</td>
 							</tr>
 							<tr>
 								<td>干拌时间偏差</td>
@@ -752,10 +752,10 @@
 							</tr>
 							<tr>
 								<td>最高温度</td>
-								<td><input type="text" @blur="reg(tempmax,'xiaoshu','tempmax')" v-model="tempmax" id="" placeholder="请输入"
+								<td><input type="text" @blur="reg(pdTempOffset,'xiaoshu','pdTempOffset')" v-model="pdTempOffset" id="" placeholder="请输入"
 										   style="width: 100%; height: 100%; border: none;"></td>
 								<td>最低温度</td>
-								<td><input type="text" @blur="reg(tempmin,'xiaoshu','tempmin')" v-model="tempmin" id="" placeholder="请输入"
+								<td><input type="text" @blur="reg(arriveTempOffset,'xiaoshu','arriveTempOffset')" v-model="arriveTempOffset" id="" placeholder="请输入"
 										   style="width: 100%; height: 100%; border: none;"></td>
 							</tr>
 							<tr>
@@ -853,10 +853,10 @@
 							</tr>
 							<tr>
 								<td>最高温度</td>
-								<td><input type="text" @blur="reg(tempmax,'xiaoshu','tempmax')" v-model="tempmax" id="" placeholder="请输入"
+								<td><input type="text" @blur="reg(pdTempOffset,'xiaoshu','pdTempOffset')" v-model="pdTempOffset" id="" placeholder="请输入"
 										   style="width: 100%; height: 100%; border: none;"></td>
 								<td>最低温度</td>
-								<td><input type="text" @blur="reg(tempmin,'xiaoshu','tempmin')" v-model="tempmin" id="" placeholder="请输入"
+								<td><input type="text" @blur="reg(arriveTempOffset,'xiaoshu','arriveTempOffset')" v-model="arriveTempOffset" id="" placeholder="请输入"
 										   style="width: 100%; height: 100%; border: none;"></td>
 							</tr>
 							<tr>
@@ -1005,8 +1005,8 @@
 			{ "data": "Materialdeviation6"},
 			{ "data": "Boneflourdeviation"},
 			{ "data": "pitchdeviation"},
-			{ "data": "tempmax"},
-			{ "data": "tempmin"},
+			{ "data": "pdTempOffset"},
+			{ "data": "arriveTempOffset"},
 			{ "data": "drymixingtimedeviation"},
 			{ "data": "wetmixingtimedeviation"},
 			{ "data": "pass475"},
@@ -1077,8 +1077,8 @@
 			{ "data": "Materialdeviation6"},
 			{ "data": "Boneflourdeviation"},
 			{ "data": "pitchdeviation"},
-			{ "data": "tempmax"},
-			{ "data": "tempmin"},
+			{ "data": "pdTempOffset"},
+			{ "data": "arriveTempOffset"},
 			{ "data": "drymixingtimedeviation"},
 			{ "data": "wetmixingtimedeviation"},
 			{ "data": "pass475"},
@@ -1141,8 +1141,8 @@
 
 		Boneflourdeviation:'粉料偏差量输入错误，请输入纯数字',
 		pitchdeviation:'沥青偏差量输入错误，请输入纯数字',
-		tempmax:'最高温度输入错误，请输入纯数字',
-		tempmin:'最低温度输入错误，请输入纯数字',
+		pdTempOffset:'最高温度输入错误，请输入纯数字',
+		arriveTempOffset:'最低温度输入错误，请输入纯数字',
 		drymixingtimedeviation:'干拌时间偏差输入错误，请输入纯数字',
 		wetmixingtimedeviation:'成品需要量输入错误，请输入纯数字',
 		pass475:'成品需要量输入错误，请输入纯数字',
@@ -1263,8 +1263,8 @@
 		xgSGPC.Materialdeviation6=data.Materialdeviation6
 		xgSGPC.Boneflourdeviation=data.Boneflourdeviation
 		xgSGPC.pitchdeviation=data.pitchdeviation
-		xgSGPC.tempmax=data.tempmax
-		xgSGPC.tempmin=data.tempmin
+		xgSGPC.pdTempOffset=data.pdTempOffset
+		xgSGPC.arriveTempOffset=data.arriveTempOffset
 		xgSGPC.drymixingtimedeviation=data.drymixingtimedeviation
 		xgSGPC.wetmixingtimedeviation=data.wetmixingtimedeviation
 		xgSGPC.pass475=data.pass475
@@ -1478,8 +1478,8 @@
 			Boneflourdeviation:"",
 			//沥青偏差量
 			pitchdeviation:"",
-			tempmax:"",
-			tempmin:"",
+			pdTempOffset:"",
+			arriveTempOffset:"",
 			//干拌
 			drymixingtimedeviation:'',
 			//湿拌
@@ -1538,8 +1538,8 @@
 			Boneflourdeviation:"",
 			//沥青偏差量
 			pitchdeviation:"",
-			tempmax:"",
-			tempmin:"",
+			pdTempOffset:"",
+			arriveTempOffset:"",
 			//干拌
 			drymixingtimedeviation:'',
 			//湿拌
@@ -1606,8 +1606,8 @@
 			Boneflourdeviation:"",
 			//沥青偏差量
 			pitchdeviation:"",
-			tempmax:"",
-			tempmin:"",
+			pdTempOffset:"",
+			arriveTempOffset:"",
 			//干拌
 			drymixingtimedeviation:'',
 			//湿拌
@@ -1767,8 +1767,8 @@
 		linkPianChaDetailVm.Materialdeviation6=data.Materialdeviation6
 		linkPianChaDetailVm.Boneflourdeviation=data.Boneflourdeviation
 		linkPianChaDetailVm.pitchdeviation=data.pitchdeviation
-		linkPianChaDetailVm.tempmax=data.tempmax
-		linkPianChaDetailVm.tempmin=data.tempmin
+		linkPianChaDetailVm.pdTempOffset=data.pdTempOffset
+		linkPianChaDetailVm.arriveTempOffset=data.arriveTempOffset
 		linkPianChaDetailVm.drymixingtimedeviation=data.drymixingtimedeviation
 		linkPianChaDetailVm.wetmixingtimedeviation=data.wetmixingtimedeviation
 		linkPianChaDetailVm.pass475=data.pass475

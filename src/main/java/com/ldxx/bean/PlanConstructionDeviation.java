@@ -33,9 +33,9 @@ public class PlanConstructionDeviation
 
     public BigDecimal pitchdeviation;
 
-    public BigDecimal tempmax;
+    public BigDecimal pdTempOffset;
 
-    public BigDecimal tempmin;
+    public BigDecimal arriveTempOffset;
     @DateTimeFormat(pattern = "hh-mm-ss")
     public Time drymixingtimedeviation;
     @DateTimeFormat(pattern = "hh-mm-ss")
@@ -139,22 +139,6 @@ public class PlanConstructionDeviation
 		this.pitchdeviation = pitchdeviation;
 	}
 
-	public BigDecimal getTempmax() {
-		return tempmax;
-	}
-
-	public void setTempmax(BigDecimal tempmax) {
-		this.tempmax = tempmax;
-	}
-
-	public BigDecimal getTempmin() {
-		return tempmin;
-	}
-
-	public void setTempmin(BigDecimal tempmin) {
-		this.tempmin = tempmin;
-	}
-
 	public Time getDrymixingtimedeviation() {
 		return drymixingtimedeviation;
 	}
@@ -226,5 +210,22 @@ public class PlanConstructionDeviation
 	public void setPianchano(String pianchano) {
 		this.pianchano = pianchano;
 	}
+
+	public BigDecimal getPdTempOffset() {
+		return pdTempOffset;
+	}
+
+	public void setPdTempOffset(BigDecimal pdTempOffset) {
+		this.pdTempOffset = pdTempOffset;
+	}
+
+	public BigDecimal getArriveTempOffset() {
+		return arriveTempOffset;
+	}
+
+	public void setArriveTempOffset(BigDecimal arriveTempOffset) {
+		this.arriveTempOffset = arriveTempOffset;
+	}
+	
 	
 }
