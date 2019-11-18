@@ -1,36 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ldxx.dao.LaiLiaoWenDuYuJingDao" >
-	<insert id="addLaiLiaoWenDuYu" parameterType="SiteIncomingMaterialTempWarningVo">
+	<insert id="addLaiLiaoWenDu" parameterType="SiteIncomingMaterialTempWarningVo">
 		insert into site_incoming_material_temp_warning
-			(id,fie_id,datetime,warning_type,warning_content,warning_state,delete_state)
-			values(#{id},#{fieid},#{datetime},#{warningtype},#{warningcontent},#{warningstate},
+			(id,fie_id,datetime,warning_type,warning_content,warning_state,edit_user_id,edit_datetime,delete_state)
+			values(#{id},#{fieid},#{datetime},#{warningtype},#{warningcontent},#{warningstate},#{edituserid},#{editdatetime},
 			#{deletestate})
 	</insert>
-	
-	<update id="updateLaiLiaoWenDuYu" parameterType="SiteIncomingMaterialTempWarningVo">
+
+	<update id="updateLaiLiaoWenDu" parameterType="SiteIncomingMaterialTempWarningVo">
 		update site_incoming_material_temp_warning
-			set batch_id=#{batchid},
-			temp=#{temp},
-			weight=#{weight},datetime=#{datetime},
-			edit_user_id=#{edituserid},
-			edit_datetime=#{editdatetime} where id=#{id}
+			set warning_type=#{warningtype},warning_content=#{warningcontent},
+			edit_user_id=#{edituserid},edit_datetime=#{editdatetime} where id=#{id}
 	</update>
-	
-	<update id="delLaiLiaoWenDuYu" parameterType="string">
+
+	<update id="delLaiLiaoWenDu" parameterType="string">
 		update site_incoming_material_temp_warning set delete_state=0 where id=#{id}
 	</update>
-	
-	<select id="getAllLaiLiaoWenDuYu" parameterType="string" resultType="SiteIncomingMaterialTempWarningVo">
+
+	<select id="getAllLaiLiaoWenDu" parameterType="string" resultType="SiteIncomingMaterialTempWarningVo">
 		SELECT
-			simtw.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no
+			simtw.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name
 		FROM
 			site_incoming_material_temp_warning simtw
 		LEFT JOIN site_field_material_mgt sfmm ON simtw.fie_id = sfmm.id and sfmm.delete_state = 1
 		LEFT JOIN batch_mgt bm ON sfmm.batch_id = bm.id and bm.delete_state = 1
 		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id and srm.delete_state = 1
 		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state = 1
+		LEFT JOIN u_user uu ON uu.user_id= simtw.edit_user_id and uu.delete_state = 1
 		where simtw.delete_state=1 ORDER BY simtw.datetime desc
 	</select>
-	
+
 </mapper>
