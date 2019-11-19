@@ -31,4 +31,7 @@
 		where simtw.delete_state=1 ORDER BY simtw.datetime desc
 	</select>
 
+    <update id="updWarningstate">
+        update site_incoming_material_temp_warning set warning_state=#{warningstate} where id=#{id}
+    </update>
 </mapper>

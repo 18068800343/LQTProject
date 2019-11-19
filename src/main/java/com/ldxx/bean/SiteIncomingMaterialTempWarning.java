@@ -1,5 +1,8 @@
 package com.ldxx.bean;
 
+/**
+ * 来料温度预警列表
+ */
 public class SiteIncomingMaterialTempWarning {
     private String id;
 
@@ -11,6 +14,7 @@ public class SiteIncomingMaterialTempWarning {
 
     private String warningcontent;
 
+    //预警状态（0:未操作；1:已取消;2:以废料）
     private int warningstate;
 
     private String edituserid;

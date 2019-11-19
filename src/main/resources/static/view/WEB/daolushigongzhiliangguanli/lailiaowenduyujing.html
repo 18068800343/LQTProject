@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
     <link href="../../toastr/toastr.css" rel="stylesheet">
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
+    <!-- SmartAdmin RTL Support  -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
     <style lang="">
         .UpperPart{
             display: flex;
@@ -44,7 +51,7 @@
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入来料温度预警</button> -->
         </div>
         <div class="UpperPartR">
-            <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
+            <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
         </div>
         <!-- Modal -->
         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
@@ -218,6 +225,8 @@
 <script src="../../toastr/toastr.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="../../js/SmartNotification.min.js"></script>
+<script src="../../js/myTool.js"></script>
 <script>
     $(document).ready( function () {
         initTable();
@@ -251,22 +260,39 @@
             "data" : "id"
         }],
         "columnDefs" : [ {
-            "class" : "tcenter",
-            "targets" : 7,
-            "searchable" : true,
-            "render" : function(data, type, full) {
-                var xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'
-                    + full
-                    + '"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>';
+                            "class" : "tcenter",
+                            "targets" : 7,
+                            "searchable" : true,
+                            "render" : function(data, type, full) {
+                                //var xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+ full+ '"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>';
+                                //var qiyong = '<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="delMsg(this)" title="删除"></i>';
+                                var quxiao='<i class="glyphicon glyphicon-share-alt" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="quxaio(this)" title="取消"></i>';
+                                var feiliao='<i class="glyphicon glyphicon-floppy-remove" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="feiliao(this)" title="废料"></i>'
+                                if(full.warningstate=="0"){
+                                    return quxiao+feiliao;;
+                                }else if(full.warningstate=="1"){
+                                    return '';
+                                }else{
+                                    return '';
+                                }
+                            }
+                        },{
+                            "class" : "tcenter",
+                            "targets" : 4,
+                            "searchable" : true,
+                            "render" : function(data, type, full) {
+                                if(data=='0'){
+                                    return '<span class="label label-success state">未操作</span>';
+                                }else if(data=='1'){
+                                    return '<span class="label label-info state">已取消</span>';
+                                }
+                                else if(data=='2'){
+                                    return '<span class="label label-danger state">以废料</span>';
+                                }
+                            }
+                        }
 
-                var qiyong = '<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'
-                    + data
-                    + '" onclick="delMsg(this)" title="删除"></i>';
-
-
-                return xiugai + qiyong ;
-            }
-        } ],
+                ],
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
             "sLengthMenu": "显示 _MENU_ 条",
@@ -296,6 +322,7 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
+                console.log(json)
                 $('#mainContent').dataTable().fnClearTable();
                 $('#mainContent').DataTable().rows.add(json).draw(false);
             }
@@ -385,6 +412,72 @@
         xgLaiLiaoVm.warningstate = data.warningstate;
     }
 
+
+    var quxaio=(e)=>{
+        var tr=$(e).parents("tr");
+        var data=$("#mainContent").DataTable().row(tr).data();
+        $.SmartMessageBox({
+            title: "取消提示",
+            content: "确认取消？",
+            buttons: '[取消][确定]'
+        }, function (ButtonPressed) {
+            if (ButtonPressed === "确定") {
+                myTool.mask.show('取消中...');
+                $.ajax({
+                    type: 'POST',
+                    url:'/LaiLiaoWenDuYuJing/updWarningstate',
+                    dataType: 'json',
+                    data: {
+                        id:data.id,
+                        warningstate:1,
+                    },
+                    success: function (json) {
+                        myTool.mask.hide();
+                        if(json!=0){
+                            data.warningstate=1;
+                            $('#mainContent').DataTable().row(tr).data(data);
+                            toastr.success('取消成功');
+                        }else{
+                            toastr.error('取消失败');
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function feiliao(obj){
+        var tr=$(obj).parents("tr");
+        var data=$("#mainContent").DataTable().row(tr).data();
+        $.SmartMessageBox({
+            title: "废料提示",
+            content: "确认废料？",
+            buttons: '[取消][确定]'
+        }, function (ButtonPressed) {
+            if (ButtonPressed === "确定") {
+                myTool.mask.show('废料中...');
+                $.ajax({
+                    type: 'POST',
+                    url:'/LaiLiaoWenDuYuJing/updWarningstate',
+                    dataType: 'json',
+                    data: {
+                        id:data.id,
+                        warningstate:2,
+                    },
+                    success: function (json) {
+                        myTool.mask.hide();
+                        if(json!=0){
+                            data.warningstate=2;
+                            $('#mainContent').DataTable().row(tr).data(data);
+                            toastr.success('废料成功');
+                        }else{
+                            toastr.error('废料失败');
+                        }
+                    }
+                });
+            }
+        });
+    }
 
 </script>
 </html>
