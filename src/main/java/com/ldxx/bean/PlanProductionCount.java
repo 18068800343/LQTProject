@@ -3,41 +3,63 @@ package com.ldxx.bean;
 import java.math.BigDecimal;
 
 public class PlanProductionCount {
-
 	private String id;
-	private String planId;
-	private String batchId;
-	private BigDecimal pdNeedIncOrDec;
-	private String pdNeedSource;
+
+	private String planid;
+
+	private String batchid;
+
+	private BigDecimal pdneedincordec;
+
+	private int pdneedsourcestate;
+
+	private String datetime;
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPlanId() {
-		return planId;
+
+	public String getPlanid() {
+		return planid;
 	}
-	public void setPlanId(String planId) {
-		this.planId = planId;
+
+	public void setPlanid(String planid) {
+		this.planid = planid;
 	}
-	public String getBatchId() {
-		return batchId;
+
+	public String getBatchid() {
+		return batchid;
 	}
-	public void setBatchId(String batchId) {
-		this.batchId = batchId;
+
+	public void setBatchid(String batchid) {
+		this.batchid = batchid;
 	}
-	public BigDecimal getPdNeedIncOrDec() {
-		return pdNeedIncOrDec;
+
+	public BigDecimal getPdneedincordec() {
+		return pdneedincordec;
 	}
-	public void setPdNeedIncOrDec(BigDecimal pdNeedIncOrDec) {
-		this.pdNeedIncOrDec = pdNeedIncOrDec;
+
+	public void setPdneedincordec(BigDecimal pdneedincordec) {
+		this.pdneedincordec = pdneedincordec;
 	}
-	public String getPdNeedSource() {
-		return pdNeedSource;
+
+	public int getPdneedsourcestate() {
+		return pdneedsourcestate;
 	}
-	public void setPdNeedSource(String pdNeedSource) {
-		this.pdNeedSource = pdNeedSource;
+
+	public void setPdneedsourcestate(int pdneedsourcestate) {
+		this.pdneedsourcestate = pdneedsourcestate;
 	}
-	
+
+	public String getDatetime() {
+		return datetime;
+	}
+
+	public void setDatetime(String datetime) {
+		this.datetime = datetime;
+	}
 }
