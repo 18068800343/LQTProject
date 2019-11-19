@@ -30,8 +30,8 @@ public class DeviceInfoController {
 	@ResponseBody
 	public Map<String,Object> selectByIdDeviceInfo(String id){
 		Map<String, Object> map = new HashMap<String, Object>();
-	//	map.put("result",state);
-	//	map.put("DicDeviceType", dicDeviceType);
+		DeviceInfo deviceInfo = diservice.selectByIdDeviceInfo(id);
+		map.put("deviceInfo", deviceInfo);
 		return map;
 	};
 	

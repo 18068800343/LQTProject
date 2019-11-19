@@ -3,78 +3,78 @@ package com.ldxx.bean;
 import java.math.BigDecimal;
 
 public class SysRoadMgn {
-    private String roadid;
+    private String roadId;
 
-    private String roadno;
+    private String roadNo;
 
-    private String roadname;
+    private String roadName;
 
-    private BigDecimal startlng;
+    private BigDecimal startLng;
 
-    private BigDecimal startlat;
+    private BigDecimal startLat;
 
-    private BigDecimal endlng;
+    private BigDecimal endLng;
 
-    private BigDecimal endlat;
+    private BigDecimal endLat;
 
     private String remarks;
 
-    private int deletestate;
+    private int deleteState;
 
-	public String getRoadid() {
-		return roadid;
+	public String getRoadId() {
+		return roadId;
 	}
 
-	public void setRoadid(String roadid) {
-		this.roadid = roadid;
+	public void setRoadId(String roadId) {
+		this.roadId = roadId;
 	}
 
-	public String getRoadno() {
-		return roadno;
+	public String getRoadNo() {
+		return roadNo;
 	}
 
-	public void setRoadno(String roadno) {
-		this.roadno = roadno;
+	public void setRoadNo(String roadNo) {
+		this.roadNo = roadNo;
 	}
 
-	public String getRoadname() {
-		return roadname;
+	public String getRoadName() {
+		return roadName;
 	}
 
-	public void setRoadname(String roadname) {
-		this.roadname = roadname;
+	public void setRoadName(String roadName) {
+		this.roadName = roadName;
 	}
 
-	public BigDecimal getStartlng() {
-		return startlng;
+	public BigDecimal getStartLng() {
+		return startLng;
 	}
 
-	public void setStartlng(BigDecimal startlng) {
-		this.startlng = startlng;
+	public void setStartLng(BigDecimal startLng) {
+		this.startLng = startLng;
 	}
 
-	public BigDecimal getStartlat() {
-		return startlat;
+	public BigDecimal getStartLat() {
+		return startLat;
 	}
 
-	public void setStartlat(BigDecimal startlat) {
-		this.startlat = startlat;
+	public void setStartLat(BigDecimal startLat) {
+		this.startLat = startLat;
 	}
 
-	public BigDecimal getEndlng() {
-		return endlng;
+	public BigDecimal getEndLng() {
+		return endLng;
 	}
 
-	public void setEndlng(BigDecimal endlng) {
-		this.endlng = endlng;
+	public void setEndLng(BigDecimal endLng) {
+		this.endLng = endLng;
 	}
 
-	public BigDecimal getEndlat() {
-		return endlat;
+	public BigDecimal getEndLat() {
+		return endLat;
 	}
 
-	public void setEndlat(BigDecimal endlat) {
-		this.endlat = endlat;
+	public void setEndLat(BigDecimal endLat) {
+		this.endLat = endLat;
 	}
 
 	public String getRemarks() {
@@ -85,12 +85,14 @@ public class SysRoadMgn {
 		this.remarks = remarks;
 	}
 
-	public int getDeletestate() {
-		return deletestate;
+	public int getDeleteState() {
+		return deleteState;
 	}
 
-	public void setDeletestate(int deletestate) {
-		this.deletestate = deletestate;
+	public void setDeleteState(int deleteState) {
+		this.deleteState = deleteState;
 	}
+
+	
     
 }

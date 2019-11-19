@@ -9,12 +9,13 @@ import com.ldxx.bean.SysWarningSet;
 
 public interface SysRoadMgnDao {
 	
-	int addSysRoadMgn(SysRoadMgn sysRoadMgn);
+	public int addSysRoadMgn(@Param("sysRoadMgn")SysRoadMgn sysRoadMgn);
 	
-	int updateSysRoadMgnById(SysRoadMgn sysRoadMgn);
+	public int updateSysRoadMgnById(@Param("sysRoadMgn")SysRoadMgn sysRoadMgn);
 	
-	List<SysRoadMgn> getAllSysRoadMgn();
+	public List<SysRoadMgn> getAllSysRoadMgn();
 	
-	int delSysRoadMgn(@Param("id") String id);
-
+	public int delSysRoadMgn(@Param("id") String id);
+	
+	public int getByIdSysRoadMgn(@Param("id") String id);
 }
