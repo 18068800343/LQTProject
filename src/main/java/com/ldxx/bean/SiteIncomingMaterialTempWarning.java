@@ -1,5 +1,8 @@
 package com.ldxx.bean;
 
+/**
+ * 来料温度预警列表
+ */
 public class SiteIncomingMaterialTempWarning {
     private String id;
 

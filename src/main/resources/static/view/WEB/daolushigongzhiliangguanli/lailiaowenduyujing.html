@@ -268,7 +268,13 @@
                                 //var qiyong = '<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="delMsg(this)" title="删除"></i>';
                                 var quxiao='<i class="glyphicon glyphicon-share-alt" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="quxaio(this)" title="取消"></i>';
                                 var feiliao='<i class="glyphicon glyphicon-floppy-remove" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="feiliao(this)" title="废料"></i>'
-                                return quxiao+feiliao;
+                                if(full.warningstate=="0"){
+                                    return quxiao+feiliao;;
+                                }else if(full.warningstate=="1"){
+                                    return '';
+                                }else{
+                                    return '';
+                                }
                             }
                         },{
                             "class" : "tcenter",
@@ -423,12 +429,12 @@
                     dataType: 'json',
                     data: {
                         id:data.id,
-                        warningstate:2,
+                        warningstate:1,
                     },
                     success: function (json) {
                         myTool.mask.hide();
                         if(json!=0){
-                            data.warningstate=2;
+                            data.warningstate=1;
                             $('#mainContent').DataTable().row(tr).data(data);
                             toastr.success('取消成功');
                         }else{
@@ -441,15 +447,15 @@
     }
 
     function feiliao(obj){
-        var tr=$(e).parents("tr");
+        var tr=$(obj).parents("tr");
         var data=$("#mainContent").DataTable().row(tr).data();
         $.SmartMessageBox({
-            title: "取消提示",
-            content: "确认取消？",
+            title: "废料提示",
+            content: "确认废料？",
             buttons: '[取消][确定]'
         }, function (ButtonPressed) {
             if (ButtonPressed === "确定") {
-                myTool.mask.show('取消中...');
+                myTool.mask.show('废料中...');
                 $.ajax({
                     type: 'POST',
                     url:'/LaiLiaoWenDuYuJing/updWarningstate',
@@ -463,9 +469,9 @@
                         if(json!=0){
                             data.warningstate=2;
                             $('#mainContent').DataTable().row(tr).data(data);
-                            toastr.success('取消成功');
+                            toastr.success('废料成功');
                         }else{
-                            toastr.error('取消失败');
+                            toastr.error('废料失败');
                         }
                     }
                 });

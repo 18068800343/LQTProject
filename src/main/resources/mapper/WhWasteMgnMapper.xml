@@ -13,7 +13,8 @@
 
     <insert id="insertWhWasteMgn" parameterType="WhWasteMgn">
         insert into wh_waste_mgn(id,waste_no,plan_id,batch_id,pitch_weight,pitch_type,unit_price,reason,warning_state,deal_user_id,deal_time,delete_state)
-        values(#{id},#{wasteNo},#{planId},#{batchId},#{pitchWeight},#{pitchType},#{unitPrice},#{reason},#{warningState},#{dealUserId},#{dealTime},#{deleteState})
+        values(#{WhWasteMgn.id},#{WhWasteMgn.wasteNo},#{WhWasteMgn.planId},#{WhWasteMgn.batchId},#{WhWasteMgn.pitchWeight},#{WhWasteMgn.pitchType},#{WhWasteMgn.unitPrice},
+        #{WhWasteMgn.reason},#{WhWasteMgn.warningState},#{WhWasteMgn.dealUserId},#{WhWasteMgn.dealTime},1)
     </insert>
 
 </mapper>

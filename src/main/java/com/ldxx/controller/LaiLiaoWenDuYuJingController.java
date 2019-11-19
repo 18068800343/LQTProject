@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.User;
 import com.ldxx.dao.LaiLiaoWenDuYuJingDao;
+import com.ldxx.service.LaiLiaoWenDuYuJingService;
 import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
 import com.ldxx.vo.SiteIncomingMaterialTempWarningVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,19 +25,19 @@ import java.util.List;
 public class LaiLiaoWenDuYuJingController {
 
 
-    @Resource
-    private LaiLiaoWenDuYuJingDao dao;
+    @Autowired
+    private LaiLiaoWenDuYuJingService service;
 
     @RequestMapping("/getAllLaiLiaoWenDu")
     @ResponseBody
     public List<SiteIncomingMaterialTempWarningVo> getAllLaiLiaoWenDu() {
-        return dao.getAllLaiLiaoWenDu();
+        return service.getAllLaiLiaoWenDu();
     }
 
     @RequestMapping("/delLaiLiaoWenDu")
     @ResponseBody
     public int delLaiLiaoWenDu(String id) {
-        return dao.delLaiLiaoWenDu(id);
+        return service.delLaiLiaoWenDu(id);
     }
 
     @RequestMapping("/addLaiLiaoWenDu")
@@ -54,7 +56,7 @@ public class LaiLiaoWenDuYuJingController {
         }
         int i = 0;
         try {
-            i = dao.addLaiLiaoWenDu(siteIncomingMaterialTempWarningVo);
+            i = service.addLaiLiaoWenDu(siteIncomingMaterialTempWarningVo);
         } catch (Exception e) {
             e.printStackTrace();
             jsonObject.put("errMsg","数据库插入出错,请检查经纬度输入格式");
@@ -80,7 +82,7 @@ public class LaiLiaoWenDuYuJingController {
         }
         int i = 0;
         try {
-            i = dao.updateLaiLiaoWenDu(siteIncomingMaterialTempWarningVo);
+            i = service.updateLaiLiaoWenDu(siteIncomingMaterialTempWarningVo);
         } catch (Exception e) {
             e.printStackTrace();
             jsonObject.put("errMsg","数据库插入出错,请检查经纬度输入格式");
@@ -100,7 +102,7 @@ public class LaiLiaoWenDuYuJingController {
     @RequestMapping("/updWarningstate")
     @ResponseBody
     public int updWarningstate(String id,int warningstate) {
-        int i= dao.updWarningstate(id,warningstate);
+        int i= service.updWarningstate(id,warningstate);
         return i;
     }
 }

@@ -66,7 +66,7 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
                 sv.setEdituserid(user.getUserId());
                 sv.setUname(user.getuName());
             }
-            int k = laidao.addLaiLiaoWenDu(sv);
+            i = laidao.addLaiLiaoWenDu(sv);
         }
         return i;
     }
