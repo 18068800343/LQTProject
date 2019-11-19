@@ -25,7 +25,14 @@ public class DicMaterialsServiceImpl implements DicMaterialsService{
 
 	@Override
 	public int addDicMaterials(DicMaterials dicMaterials) {
-		int state = dicmDao.addDicMaterials(dicMaterials);
+		int state=0;
+		DicMaterials d = dicmDao.selectByName(dicMaterials.getMaterialName());
+		if(null!=d&&null!=d.getMaterialName())
+		{
+			state=-1;
+		}else {
+			state = dicmDao.addDicMaterials(dicMaterials);
+		}
 		return state;
 	}
 
@@ -37,7 +44,14 @@ public class DicMaterialsServiceImpl implements DicMaterialsService{
 
 	@Override
 	public int updateDicMaterials(DicMaterials dicMaterials) {
-		int state = dicmDao.updateDicMaterials(dicMaterials);
+		int state=0;
+		DicMaterials d = dicmDao.selectByName(dicMaterials.getMaterialName());
+		if(null!=d&&null!=d.getMaterialName())
+		{
+			state=-1;
+		}else {
+			state = dicmDao.updateDicMaterials(dicMaterials);
+		}
 		return state;
 	}
 

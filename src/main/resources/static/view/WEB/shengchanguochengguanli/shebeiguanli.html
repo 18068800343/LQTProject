@@ -184,7 +184,7 @@
                         		<td style="width: 20%;">生产厂家</td>
                         		<td><input type="text" class="form-control" placeholder="请输入" v-model="manufacturer" style="width: 100%;height: 100%;"></td>
                         		<td style="width: 20%;">联系方式</td>
-                        		<td><input type="text" class="form-control" placeholder="请输入" v-model="contact" style="width: 100%;height: 100%;"></td>
+                        		<td><input type="text" class="form-control" placeholder="请输入" v-model="contact" @input="checknum('contact')" style="width: 100%;height: 100%;"></td>
                         	</tr>
                         	<tr>
                         		<td style="width: 20%;">完好情况</td>
@@ -243,7 +243,7 @@
                         		<td style="width: 20%;">生产厂家</td>
                         		<td><input type="text" class="form-control" placeholder="请输入" v-model="manufacturer" style="width: 100%;height: 100%;"></td>
                         		<td style="width: 20%;">联系方式</td>
-                        		<td><input type="text" class="form-control" placeholder="请输入" v-model="contact" style="width: 100%;height: 100%;"></td>
+                        		<td><input type="text" class="form-control" placeholder="请输入" v-model="contact" @input="checknum('contact')" style="width: 100%;height: 100%;"></td>
                         	</tr>
                         	<tr>
                         		<td style="width: 20%;">完好情况</td>
@@ -279,8 +279,8 @@
 <script src="../../js/SmartNotification.min.js"></script>
 <script src="../../js/main.js"></script>
 <script src="../../js/myTool.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="../../js/vue.js"></script>
+
 <script>
     $(document).ready( function () {
     	initTable();
@@ -373,11 +373,18 @@
             remarks:""
         },
         methods: {
+            checknum(msg){           
+                this._data[msg]=this._data[msg].replace(/[^\d]/g,'');
+                var str = this._data[msg].split('.');
+                if(str.length>2)
+                {this._data[msg]=this._data[msg].substr(0,this._data[msg].length-1);}
+            },
             saveshebei:function(){
                 var dicDeviceType={
                     id:this.typeId,
                     typeName:$("#typeId").find("option:selected").text()
                 };
+                if(this.code==""||this.name==""){toastr.error("请填入设备编号或设备名称");return;}
                 this.$http.post('/DeviceInfo/addDeviceInfo',JSON.stringify(this._data),{}).then((res)=>{
                     var resMsg = res.body;
                     resMsg.deviceInfo.dicDeviceType=dicDeviceType;
@@ -445,12 +452,18 @@ var xgshebei=new Vue({
                 typeName:""}
         },
         methods: {
+            checknum(msg){           
+                this._data[msg]=this._data[msg].replace(/[^\d]/g,'');
+                var str = this._data[msg].split('.');
+                if(str.length>2)
+                {this._data[msg]=this._data[msg].substr(0,this._data[msg].length-1);}
+            },
             xgsaveshebei:function(){
                 var dicDeviceType={
                     id:this.typeId,
                     typeName:$("#xgtypeId").find("option:selected").text()
                 };
-                
+                if(this.code==""||this.name==""){toastr.error("请填入设备编号或设备名称");return;}
                 this.$http.post('/DeviceInfo/updateDeviceInfo',JSON.stringify(this._data),{}).then((res)=>{
                     var resMsg = res.body;
                     resMsg.deviceInfo.dicDeviceType=dicDeviceType;

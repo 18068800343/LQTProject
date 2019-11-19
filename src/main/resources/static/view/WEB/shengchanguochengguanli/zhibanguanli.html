@@ -390,7 +390,12 @@
 		var userId=$("#gonghao").attr("data-id");
 		var kaishishijian=$("#kaishishijian").val();
 		var jieshushijian=$("#jieshushijian").val();
-		var beizhu=$("#beizhu").val();
+        var beizhu=$("#beizhu").val();
+        if(workId==""){toastr.error("请选择值班人员");return ;}
+        if(uName==""){toastr.error("请选择值班人员");return ;}
+        if(kaishishijian==""){toastr.error("请选择开始时间");return ;}
+        if(jieshushijian==""){toastr.error("请选择结束时间");return ;}
+
 		$.ajax({
             type: 'POST',
             url: '/UDutySchedule/insertUDutySchedule',
@@ -439,7 +444,11 @@
 		var userId=$("#xg_gonghao").attr("data-id");
 		var kaishishijian=$("#xg_kaishishijian").val();
 		var jieshushijian=$("#xg_jieshushijian").val();
-		var beizhu=$("#xg_beizhu").val();
+        var beizhu=$("#xg_beizhu").val();
+        if(workId==""){toastr.error("请选择值班人员");return ;}
+        if(uName==""){toastr.error("请选择值班人员");return ;}
+        if(kaishishijian==""){toastr.error("请选择开始时间");return ;}
+        if(jieshushijian==""){toastr.error("请选择结束时间");return ;}
 		$.ajax({
             type: 'POST',
             url: '/UDutySchedule/updUDutySchedule',

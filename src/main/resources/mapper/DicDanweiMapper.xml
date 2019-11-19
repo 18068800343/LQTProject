@@ -17,5 +17,9 @@
 	<insert id="insertDicDanwei" parameterType="DicDanwei">
 		insert into dic_danwei(id,danwei_name,delete_state) values(#{dw.id},#{dw.danweiName},1)
 	</insert>
+	
+	<select id="selectByName" resultType="DicDanwei">
+		select id,danwei_name from dic_danwei where delete_state=1 and danwei_name=#{name}
+	</select>
 
 </mapper>

@@ -37,7 +37,15 @@ public class DicZhiwuController {
 	@RequestMapping("/updDicZhiwu")
 	@ResponseBody
 	public Map<String,Object> updDicZhiwu(DicZhiwu zw){
-		int i= dao.updDicZhiwu(zw);
+		int i=0;
+		DicZhiwu d = dao.selectByName(zw.getZhiwuName());
+		if(null!=d &&null!= d.getZhiwuName())
+		{
+			i=-1;
+		}else {
+			i= dao.updDicZhiwu(zw);
+		}
+		
 		map.put("result", i);
 		map.put("zw", zw);
 		return map;
@@ -53,7 +61,14 @@ public class DicZhiwuController {
 	@ResponseBody
 	public Map<String,Object> insertDicZhiwu(DicZhiwu zw){
 		zw.setId(LDXXUtils.getUUID12());
-		int i= dao.insertDicZhiwu(zw);
+		int i=0;
+		DicZhiwu d = dao.selectByName(zw.getZhiwuName());
+		if(null!=d &&null!= d.getZhiwuName())
+		{
+			i=-1;
+		}else {
+			i= dao.insertDicZhiwu(zw);
+		}
 		map.put("result", i);
 		map.put("zw", zw);
 		return map;

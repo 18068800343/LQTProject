@@ -38,7 +38,14 @@ public class DicDanweiController {
 	@ResponseBody
 	public Map<String,Object> insertDicDanwei(DicDanwei dw){
 		dw.setId(LDXXUtils.getUUID12());
-		int i= dao.insertDicDanwei(dw);
+		int i=0;
+		DicDanwei d = dao.selectByName(dw.getDanweiName());
+		if(null!=d&&null!=d.getDanweiName())
+		{
+			i=-1;
+		}else {
+			i= dao.insertDicDanwei(dw);
+		}
 		map.put("result", i);
 		map.put("dw", dw);
 		return map;
@@ -47,7 +54,14 @@ public class DicDanweiController {
 	@RequestMapping("/updDicDanwei")
 	@ResponseBody
 	public Map<String,Object> updDicDanwei(DicDanwei dw){
-		int i= dao.updDicDanwei(dw);
+		int i=0;
+		DicDanwei d = dao.selectByName(dw.getDanweiName());
+		if(null!=d&&null!=d.getDanweiName())
+		{
+			i=-1;
+		}else {
+			i= dao.updDicDanwei(dw);
+		}
 		map.put("result", i);
 		map.put("dw", dw);
 		return map;

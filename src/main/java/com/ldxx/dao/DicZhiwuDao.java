@@ -14,6 +14,8 @@ public interface DicZhiwuDao {
 	
 	int delDicZhiwu(@Param("id")String id);
 	
-	int insertDicZhiwu(@Param("zw")DicZhiwu zw);
+	int insertDicZhiwu(@Param("zw")DicZhiwu zw); 
+	
+	public DicZhiwu selectByName(String name);
 
 }

@@ -31,5 +31,11 @@
 	where id=#{id}
 </update>
 
-	
+<select id="selectByName" resultType="DicMaterials">
+	select 
+		id,material_name,delete_state 
+	from dic_materials
+	where delete_state=1 and material_name=#{name}
+</select>
+
 </mapper>

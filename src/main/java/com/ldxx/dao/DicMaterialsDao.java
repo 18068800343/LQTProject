@@ -16,4 +16,6 @@ public interface DicMaterialsDao {
 	
 	public int updateDicMaterials(@Param("dicMaterials")DicMaterials dicMaterials);
 	
+	public DicMaterials selectByName(String name);
+	
 }

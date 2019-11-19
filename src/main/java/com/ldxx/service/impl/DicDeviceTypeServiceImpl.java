@@ -19,22 +19,26 @@ public class DicDeviceTypeServiceImpl implements DicDeviceTypeService{
 	@Override
 	public int addDicDeviceType(DicDeviceType dicDeviceType) {
 		int state;
-	/*	DicDeviceType d = ddtDao.selectByTypeName(dicDeviceType.getTypeName());
+		DicDeviceType d = ddtDao.selectByTypeName(dicDeviceType.getTypeName());
 		if(null!=d&&null!=d.getTypeName())
-		{*/
-			state = ddtDao.addDicDeviceType(dicDeviceType);
-		/* }else state =-1; */
+		{
+			state =-1; 
+		}else{
+			 state = ddtDao.addDicDeviceType(dicDeviceType);
+		}
 		return state;
 	}
 
 	@Override
 	public int updateDicDeviceType(DicDeviceType dicDeviceType) {
 		int state;
-	/*	DicDeviceType d = ddtDao.selectByTypeName(dicDeviceType.getTypeName());
+		DicDeviceType d = ddtDao.selectByTypeName(dicDeviceType.getTypeName());
 		if(null!=d&&null!=d.getTypeName())
-		{*/
-			state  = ddtDao.updateDicDeviceType(dicDeviceType);
-		/* }else state =-1; */
+		{
+			state =-1; 
+		}else{
+			 state = ddtDao.updateDicDeviceType(dicDeviceType);
+		}
 		return state;
 	}
 

@@ -17,5 +17,7 @@
 	<insert id="insertDicZhiwu" parameterType="DicZhiwu">
 		insert into dic_zhiwu(id,zhiwu_name,delete_state) values(#{zw.id},#{zw.zhiwuName},1)
 	</insert>
-
+<select id="selectByName" resultType="DicZhiwu">
+		select id,zhiwu_name from dic_zhiwu where delete_state=1 and zhiwu_name=#{name}
+	</select>
 </mapper>

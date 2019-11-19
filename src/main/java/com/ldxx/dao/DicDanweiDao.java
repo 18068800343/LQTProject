@@ -15,5 +15,7 @@ public interface DicDanweiDao {
 	int delDicDanwei(@Param("id")String id);
 	
 	int insertDicDanwei(@Param("dw")DicDanwei dw);
+	
+	public DicDanwei selectByName(String name);
 
 }
