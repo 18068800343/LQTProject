@@ -16,4 +16,5 @@ public interface  LaiLiaoWenDuYuJingDao {
 
 	int updateLaiLiaoWenDu(SiteIncomingMaterialTempWarningVo siteIncomingMaterialTempWarningVo);
 
+    int updWarningstate(String id,int warningstate);
 }

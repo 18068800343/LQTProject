@@ -57,6 +57,7 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
             sv.setEditdatetime(nowDateStr);
             sv.setFieid(siteFieldMaterialMgtVo.getId());
             sv.setWarningcontent("大于施工偏差要求的到场温度"+piancha1.subtract(piancha2)+"度");
+            sv.setWarningstate(1);
             User user = (User) session.getAttribute("user");
             if(null!=user) {
                 sv.setEdituserid(user.getUserId());

@@ -92,4 +92,14 @@ public class LaiLiaoWenDuYuJingController {
         return jsonObject.toString();
     }
 
+    /**
+     * 修改预警状态
+     * @param id
+     * @return
+     */
+    @RequestMapping("/updWarningstate")
+    @ResponseBody
+    public int updWarningstate(String id,int warningstate) {
+        return dao.updWarningstate(id,warningstate);
+    }
 }
