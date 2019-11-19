@@ -266,7 +266,7 @@
                             "render" : function(data, type, full) {
                                 //var xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+ full+ '"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>';
                                 //var qiyong = '<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="delMsg(this)" title="删除"></i>';
-                                var quxiao='<i class="glyphicon glyphicon-share-alt" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="quxaio(this)" title="取消"></i>';
+                                var quxiao='<i class="glyphicon glyphicon-share-alt" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="quxaio(this)" title="取消"></i> &nbsp';
                                 var feiliao='<i class="glyphicon glyphicon-floppy-remove" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="feiliao(this)" title="废料"></i>'
                                 if(full.warningstate=="0"){
                                     return quxiao+feiliao;;
@@ -322,7 +322,6 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                console.log(json)
                 $('#mainContent').dataTable().fnClearTable();
                 $('#mainContent').DataTable().rows.add(json).draw(false);
             }

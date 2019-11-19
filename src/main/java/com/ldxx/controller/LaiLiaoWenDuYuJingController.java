@@ -101,8 +101,8 @@ public class LaiLiaoWenDuYuJingController {
      */
     @RequestMapping("/updWarningstate")
     @ResponseBody
-    public int updWarningstate(String id,int warningstate) {
-        int i= service.updWarningstate(id,warningstate);
+    public int updWarningstate(String id,int warningstate, HttpSession session) {
+        int i= service.updWarningstate(id,warningstate,session);
         return i;
     }
 }

@@ -1,5 +1,7 @@
 package com.ldxx.service.impl;
 
+import com.ldxx.bean.PlanProductionCollection;
+import com.ldxx.bean.User;
 import com.ldxx.bean.WhWasteMgn;
 import com.ldxx.dao.LaiLiaoWenDuYuJingDao;
 import com.ldxx.dao.WhWasteMgnDao;
@@ -7,11 +9,13 @@ import com.ldxx.service.LaiLiaoWenDuYuJingService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.vo.SiteIncomingMaterialTempWarningVo;
+import com.ldxx.vo.WhWasteMgnVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -21,7 +25,7 @@ public class LaiLiaoWenDuYuJingServiceImpl implements LaiLiaoWenDuYuJingService 
     @Autowired
     private LaiLiaoWenDuYuJingDao dao;
     @Autowired
-    private WhWasteMgnDao whWasteMgnDao;
+    private WhWasteMgnDao wmdao;
 
     @Override
     public List<SiteIncomingMaterialTempWarningVo> getAllLaiLiaoWenDu() {
@@ -44,14 +48,33 @@ public class LaiLiaoWenDuYuJingServiceImpl implements LaiLiaoWenDuYuJingService 
     }
 
     @Override
-    public int updWarningstate(String id, int warningstate) {
+    public int updWarningstate(String id, int warningstate, HttpSession session) {
         int i = dao.updWarningstate(id,warningstate);
-        if(warningstate==2){
+        if(warningstate==2 && i>0){
             //做废料时要新增一条废料管理
-            WhWasteMgn WhWasteMgn=new WhWasteMgn();
+            //获取生产计划的id和单价
+            PlanProductionCollection shengchanjihua = dao.getshengchanjihua(id);
+            //获取批次的id
+            SiteIncomingMaterialTempWarningVo siteIncomingMaterialTempWarningVo = dao.getPiciId(id);
+            //获取预警内容(报废原因)、报废重量、报废类型、
+            WhWasteMgnVo wm= dao.getWeightandType(id);
+            WhWasteMgnVo WhWasteMgn=new WhWasteMgnVo();
             WhWasteMgn.setId(LDXXUtils.getUUID12());
-            WhWasteMgn.setWasteNo("FK"+ GetThisTimeUtils.getDateTime().replace(" ","").replace(":","").replace("-",""));
-
+            WhWasteMgn.setWasteNo("FL"+ GetThisTimeUtils.getDateTime().replace(" ","").replace(":","").replace("-",""));
+            WhWasteMgn.setPlanId(shengchanjihua.getPlanid());
+            WhWasteMgn.setUnitPrice(shengchanjihua.getPrice());
+            WhWasteMgn.setBatchId(siteIncomingMaterialTempWarningVo.getBatchId());
+            WhWasteMgn.setReason(wm.getReason());
+            WhWasteMgn.setPitchWeight(wm.getPitchWeight());
+            WhWasteMgn.setPitchType(wm.getPitchType());
+            WhWasteMgn.setWarningState(0);
+            WhWasteMgn.setDealTime(GetThisTimeUtils.getDateTime());
+            User user = (User) session.getAttribute("user");
+            if(null!=user) {
+                WhWasteMgn.setDealUserId(user.getUserId());
+                WhWasteMgn.setUname(user.getuName());
+            }
+            i=wmdao.insertWhWasteMgn(WhWasteMgn);
         }
         return i;
     }

@@ -30,7 +30,7 @@ public class WhWasteMgn {
     //报废原因
     public String reason;
 
-    //0未操作1完全废弃2调度走
+    //0未操作1完全废弃2调度走;3取消状态
     public int warningState;
 
     //报废用户id

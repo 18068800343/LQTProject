@@ -12,7 +12,17 @@ public class SiteIncomingMaterialTempWarningVo extends SiteIncomingMaterialTempW
 
     private String batch;
 
+    private String batchId;
+
     private String uname;
+
+    public String getBatchId() {
+        return batchId;
+    }
+
+    public void setBatchId(String batchId) {
+        this.batchId = batchId;
+    }
 
     public String getUname() {
         return uname;

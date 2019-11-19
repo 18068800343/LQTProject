@@ -34,4 +34,42 @@
     <update id="updWarningstate">
         update site_incoming_material_temp_warning set warning_state=#{warningstate} where id=#{id}
     </update>
+
+	<update id="updWarningstateBybatchId">
+		UPDATE site_incoming_material_temp_warning set warning_state=#{warningState} where fie_id=(SELECT id from site_field_material_mgt where batch_id=#{id}) and  delete_state=1
+	</update>
+
+
+	<select id="getshengchanjihua" resultType="PlanProductionCollection">
+        SELECT
+            TOP 1a.*
+        FROM
+            plan_production_collection a
+        LEFT JOIN plan_construction_deviation b ON b.id = a.piancha_id
+        WHERE
+            a.road_id = (
+                SELECT
+                    road_id
+                FROM
+                    batch_mgt
+        WHERE id =(SELECT batch_id from site_field_material_mgt WHERE id=(SELECT fie_id from site_incoming_material_temp_warning where id=#{id}) )
+            )
+        AND a.delete_state = 1
+        ORDER BY
+            a.datetime DESC
+    </select>
+	
+	<select id="getPiciId" resultType="SiteIncomingMaterialTempWarningVo">
+		SELECT batch_id as batchId from site_field_material_mgt WHERE id=(SELECT fie_id from site_incoming_material_temp_warning where id=#{id})
+	</select>
+
+	<select id="getWeightandType" resultType="WhWasteMgnVo">
+		select a.warning_content as reason,b.weight as pitch_weight,c.pitch_type,c.loading_weight,d.fl_name
+		from site_incoming_material_temp_warning  as a
+		LEFT JOIN site_field_material_mgt as b on a.fie_id=b.id AND b.delete_state=1
+		LEFT JOIN batch_mgt c on c.id=b.batch_id AND c.delete_state=1
+		LEFT JOIN sys_formulation_management d ON d.fl_id= c.pitch_type and d.delete_state = 1
+		WHERE a.id=#{id}
+	</select>
+
 </mapper>

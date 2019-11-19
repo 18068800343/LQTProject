@@ -2,9 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ldxx.dao.WhWasteMgnDao" >
 
-    <select id="getAllWhWasteMgn" resultType="WhWasteMgn">
-        select id,waste_no,plan_id,batch_id,pitch_weight,pitch_type,unit_price,reason,warning_state,deal_user_id,deal_time,delete_state
-            from wh_waste_mgn where delete_state=1
+    <select id="getAllWhWasteMgn" resultType="WhWasteMgnVo">
+        select a.*,srm.road_name,srm.road_no,c.fl_name,bm.batch
+         from wh_waste_mgn a
+        LEFT JOIN plan_production_collection b ON a.plan_id=b.plan_id
+        LEFT JOIN sys_formulation_management c ON c.fl_id= b.recipe_id and c.delete_state = 1
+        LEFT JOIN sys_road_mgn srm on b.road_id = srm.road_id and srm.delete_state = 1
+        LEFT JOIN batch_mgt bm on a.batch_id=bm.id AND bm.delete_state=1
+        where a.delete_state=1
     </select>
 
     <update id="updwarningState">
