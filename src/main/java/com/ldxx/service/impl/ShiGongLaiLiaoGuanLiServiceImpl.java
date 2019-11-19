@@ -3,6 +3,7 @@ package com.ldxx.service.impl;
 import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.User;
 import com.ldxx.dao.LaiLiaoWenDuYuJingDao;
+import com.ldxx.dao.ShengChanJiHuaDao;
 import com.ldxx.dao.ShiGongLaiLiaoDao;
 import com.ldxx.service.ShiGongLaiLiaoGuanLiService;
 import com.ldxx.util.DateUtil;
@@ -27,6 +28,8 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
     private ShiGongLaiLiaoDao dao;
     @Autowired
     private LaiLiaoWenDuYuJingDao laidao;
+    @Autowired
+    private ShengChanJiHuaDao shengChanJiHuaDao;
 
     @Override
     public List<SiteFieldMaterialMgtVo> getAllShiGongLaiLiao() {
@@ -42,7 +45,7 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
     public int addShiGongLaiLiao(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo, HttpSession session) {
         int i = dao.addShiGongLaiLiao(siteFieldMaterialMgtVo);
         //PianChaLiangVo piancha = dao.getPiancha(siteFieldMaterialMgtVo.getBatchid(),siteFieldMaterialMgtVo.getTemp());
-        PianChaLiangVo piancha = dao.getPiancha(siteFieldMaterialMgtVo);
+        PianChaLiangVo piancha = shengChanJiHuaDao.getPiancha(siteFieldMaterialMgtVo);
         //piancha1=来料温度-生产计划的到场温度要求
         BigDecimal piancha1 = piancha.getPianCha();
         //施工偏差的到场温度要求
@@ -57,7 +60,7 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
             sv.setEditdatetime(nowDateStr);
             sv.setFieid(siteFieldMaterialMgtVo.getId());
             sv.setWarningcontent("大于施工偏差要求的到场温度"+piancha1.subtract(piancha2)+"度");
-            sv.setWarningstate(1);
+            sv.setWarningstate(0);
             User user = (User) session.getAttribute("user");
             if(null!=user) {
                 sv.setEdituserid(user.getUserId());

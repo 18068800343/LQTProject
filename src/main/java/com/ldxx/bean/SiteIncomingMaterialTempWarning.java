@@ -11,7 +11,7 @@ public class SiteIncomingMaterialTempWarning {
 
     private String warningcontent;
 
-    //预警状态（1:未操作；2:已取消;3:以废料）
+    //预警状态（0:未操作；1:已取消;2:以废料）
     private int warningstate;
 
     private String edituserid;

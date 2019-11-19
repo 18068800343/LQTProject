@@ -100,6 +100,7 @@ public class LaiLiaoWenDuYuJingController {
     @RequestMapping("/updWarningstate")
     @ResponseBody
     public int updWarningstate(String id,int warningstate) {
-        return dao.updWarningstate(id,warningstate);
+        int i= dao.updWarningstate(id,warningstate);
+        return i;
     }
 }

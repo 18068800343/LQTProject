@@ -20,6 +20,4 @@ public interface  ShiGongLaiLiaoDao {
 	
 	int updateShiGongLaiLiao(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo);
 
-	PianChaLiangVo getPiancha(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo);
-	
 }

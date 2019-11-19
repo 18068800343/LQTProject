@@ -127,4 +127,11 @@
 		insert into plan_production_count(id,plan_id,batch_id,pd_need_inc_or_dec,pd_need_source)
 		values(#{id},#{planId},#{batchId},#{pdNeedIncOrDec},#{pdNeedSource})
 	</insert>
+
+
+	<select id="getPiancha" parameterType="siteFieldMaterialMgtVo" resultType="PianChaLiangVo">
+        SELECT top 1a.arrive_temp as arrivetemp,b.arrive_temp_offset as arriveTempOffset,(#{temp}-a.arrive_temp) as PianCha from plan_production_collection a
+        LEFT JOIN plan_construction_deviation b ON b.id=a.piancha_id
+        where a.road_id=(SELECT road_id from batch_mgt where id=#{batchid}) AND a.delete_state=1 ORDER BY a.datetime DESC
+	</select>
 </mapper>
