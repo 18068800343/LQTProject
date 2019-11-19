@@ -86,6 +86,7 @@
 								<th>路段名称</th>
 								<th>配方编号</th>
 								<th>成品需要量（每日）</th>
+								<th>待生产量</th>
 								<th>干拌时间</th>
 								<th>湿拌时间</th>
 								<th>油石比</th>
@@ -932,6 +933,7 @@
 			{ "data": "roadname"},
 			{ "data": "flno"},
 			{ "data": "pdneed"},
+			{ "data": "sumneed"},
 			{ "data": "drymixingtime"},
 			{ "data": "wetmixingtime"},
 			{ "data": "radio"},
@@ -945,7 +947,7 @@
 		"columnDefs": [
 			{
 				"class": "tcenter",
-				"targets": 12,
+				"targets": 13,
 				"searchable": true,
 				"render": function(data, type, full) {
 					var guanlian= '<i class="glyphicon glyphicon-random" style="font-size:13px;cursor:pointer;margin-right:3px;" onclick="linkMsg(this)" title="关联偏差"   data-toggle="modal" data-target="#allMsg"></i>'

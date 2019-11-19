@@ -15,7 +15,17 @@ public class PlanProductionCollectionVo extends PlanProductionCollection
 	private String pianchano;
 	
 	private String pianchaname;
-	
+
+	private String sumneed;
+
+	public String getSumneed() {
+		return sumneed;
+	}
+
+	public void setSumneed(String sumneed) {
+		this.sumneed = sumneed;
+	}
+
 	public String getPianchano() {
 		return pianchano;
 	}
