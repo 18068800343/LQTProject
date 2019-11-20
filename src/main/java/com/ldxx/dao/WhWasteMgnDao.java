@@ -15,4 +15,6 @@ public interface WhWasteMgnDao {
 
     int insertWhWasteMgn(@Param("WhWasteMgn") WhWasteMgn WhWasteMgn);
 
+    WhWasteMgn getWhWasteMgnById(String id);
+
 }

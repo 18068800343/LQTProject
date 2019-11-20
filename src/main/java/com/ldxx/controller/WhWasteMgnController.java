@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -29,12 +30,11 @@ public class WhWasteMgnController {
      *
      * @param id 废料id
      * @param warningState 废料状态
-     * @param batchId 批次id
      * @return
      */
     @RequestMapping("/updwarningState")
-    public int updwarningState(String id, int warningState,String batchId) {
-        return service.updwarningState(id,warningState,batchId);
+    public int updwarningState(String id, int warningState, HttpSession session) {
+        return service.updwarningState(id,warningState,session);
     }
 
     @RequestMapping("/insertWhWasteMgn")

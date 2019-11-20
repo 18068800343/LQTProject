@@ -53,124 +53,25 @@
         <div class="UpperPartR">
             <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
         </div>
-        <!-- Modal -->
-        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><b>录入来料温度预警</b></h4>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <form class="form-inline">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <td style="width: 20%;">序号</td>
-                                        <td style="width: 30%;"><input type="text" /></td>
-                                        <td style="width: 20%;">时间</td>
-                                        <td style="width: 30%;"><input type="date" /></td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>路段编号</td>
-                                        <td><input type="text" /></td>
-                                        <td>沥青砼批次</td>
-                                        <td><input type="text" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>沥青砼类型</td>
-                                        <td><input type="text" /></td>
-                                        <td>预警内容</td>
-                                        <td><input type="text" /></td>
-                                    </tr>
-                                </table>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-success" >保存</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- model结束 -->
-
-        <!-- 修改Modal -->
-        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content" id="xgLaiLiaoVm">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><b>修改来料温度预警</b></h4>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <form class="form-inline">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <td style="width: 20%;">沥青砼批次</td>
-                                        <td style="width: 30%;"><label>{{batch}}</label></td>
-                                        <td style="width: 20%;">路段编号</td>
-                                        <td style="width: 30%;"><label>{{roadno}}</label></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>沥青砼类型</td>
-                                        <td><label>{{flname}}</label></td>
-                                        <td>预警内容</td>
-                                        <td><label><input class="form-control" v-model="warningcontent" type="text" /></label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>预警状态</td>
-                                        <td><label>{{warningstate}}</label></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </table>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="button" @click="save" class="btn btn-success">保存</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 修改model结束 -->
 
     </div>
     <div class="LowerPart" style="margin-top:3px;">
         <table class="table table-bordered table-condensed" id="mainContent">
             <thead>
             <tr>
-                <th>沥青砼批次</th>
-                <th>路段编号</th>
-                <th>沥青砼类型</th>
-                <th>预警内容</th>
-                <th>处理状态</th>
-                <th>时间</th>
-                <th>操作人</th>
-                <th style="width:70px;">操作</th>
+                <th style="width: 15%;">沥青砼批次</th>
+                <th style="width: 10%;">路段编号</th>
+                <th style="width: 10%;">沥青砼类型</th>
+                <th style="width: 20%;">预警内容</th>
+                <th style="width: 10%;">处理状态</th>
+                <th style="width: 15%;">时间</th>
+                <th style="width: 10%;">操作人</th>
+                <th style="width:5%;">操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>2019-10-23 11:23:22</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>
-                    <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
-                    <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
-                    <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                </td>
-            </tr>
+
             </tbody>
         </table>
     </div>
@@ -216,6 +117,94 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>录入来料温度预警</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td style="width: 20%;">序号</td>
+                                <td style="width: 30%;"><input type="text" /></td>
+                                <td style="width: 20%;">时间</td>
+                                <td style="width: 30%;"><input type="date" /></td>
+
+                            </tr>
+                            <tr>
+                                <td>路段编号</td>
+                                <td><input type="text" /></td>
+                                <td>沥青砼批次</td>
+                                <td><input type="text" /></td>
+                            </tr>
+                            <tr>
+                                <td>沥青砼类型</td>
+                                <td><input type="text" /></td>
+                                <td>预警内容</td>
+                                <td><input type="text" /></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" >保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- model结束 -->
+
+<!-- 修改Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="xgLaiLiaoVm">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><b>修改来料温度预警</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td style="width: 20%;">沥青砼批次</td>
+                                <td style="width: 30%;"><label>{{batch}}</label></td>
+                                <td style="width: 20%;">路段编号</td>
+                                <td style="width: 30%;"><label>{{roadno}}</label></td>
+
+                            </tr>
+                            <tr>
+                                <td>沥青砼类型</td>
+                                <td><label>{{flname}}</label></td>
+                                <td>预警内容</td>
+                                <td><label><input class="form-control" v-model="warningcontent" type="text" /></label></td>
+                            </tr>
+                            <tr>
+                                <td>预警状态</td>
+                                <td><label>{{warningstate}}</label></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" @click="save" class="btn btn-success">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改model结束 -->
 <!-- allMsg结束 -->
 </body>
 <script src="../../js/jquery.js"></script>

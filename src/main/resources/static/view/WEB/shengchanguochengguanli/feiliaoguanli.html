@@ -179,7 +179,7 @@
 				//var qiyong = '<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="delMsg(this)" title="删除"></i>';
 				var quxiao='<i class="glyphicon glyphicon-share-alt" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="quxaio(this)" title="取消"></i> &nbsp';
 				var feiqi='<i class="glyphicon glyphicon-floppy-remove" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="feiqi(this)" title="废弃"></i> &nbsp'
-				var diaodu='<i class="glyphicon glyphicon-log-out" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="feiliao(this)" title="调度"></i>'
+				var diaodu='<i class="glyphicon glyphicon-log-out" style="font-size:18px;cursor:pointer;" data-id="'+ data+ '" onclick="diaodu(this)" title="调度"></i>'
 				if(full.warningState=="0"){
 					return quxiao+feiqi+diaodu;
 				}else if(full.warningState=="1"){
@@ -343,7 +343,6 @@
 					data: {
 						id:data.id,
 						warningState:3,
-						batchId:data.batchId,
 					},
 					success: function (json) {
 						myTool.mask.hide();
@@ -377,7 +376,6 @@
 					data: {
 						id:data.id,
 						warningState:1,
-						batchId:data.batchId,
 					},
 					success: function (json) {
 						myTool.mask.hide();
@@ -393,6 +391,39 @@
 			}
 		});
 	}
+
+	function diaodu(obj){
+        var tr=$(obj).parents("tr");
+        var data=$("#mainContent").DataTable().row(tr).data();
+        $.SmartMessageBox({
+            title: "调度提示",
+            content: "确认调度？",
+            buttons: '[取消][确定]'
+        }, function (ButtonPressed) {
+            if (ButtonPressed === "确定") {
+                myTool.mask.show('调度中...');
+                $.ajax({
+                    type: 'POST',
+                    url:'/WhWasteMgn/updwarningState',
+                    dataType: 'json',
+                    data: {
+                        id:data.id,
+                        warningState:2,
+                    },
+                    success: function (json) {
+                        myTool.mask.hide();
+                        if(json!=0){
+                            data.warningstate=2;
+                            $('#mainContent').DataTable().row(tr).data(data);
+                            toastr.success('调度成功');
+                        }else{
+                            toastr.error('调度失败');
+                        }
+                    }
+                });
+            }
+        });
+    }
 
 </script>
 </html>

@@ -149,13 +149,13 @@
                     <form class="form-inline">
                         <table class="table table-bordered">
                             <tr>
-                                <td>序号</td>
+                                <td>路段编号</td>
                                 <td>
 									<select class="form-control" @change="roadChange" v-model="roadSelected" style="width: 100%;" id="roadid">
 										<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
 									</select>
 								</td>
-                                <td>路段编号</td>
+                                <td>标段号</td>
                                 <td>
 									<select class="form-control" style="width: 100%;" v-model="siteId=roadSelected2"  id="roadnumber">
 										<option :value="road.id" v-for="road in roadList2">{{road.sitenumber}}</option>
@@ -195,13 +195,13 @@
                     <form class="form-inline">
                         <table class="table table-bordered">
 							<tr>
-								<td>序号</td>
+								<td>路段编号</td>
 								<td>
 									<select class="form-control" @change="roadChange" v-model="roadSelected" style="width: 100%;" id="roadid">
 										<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
 									</select>
 								</td>
-								<td>路段编号</td>
+								<td>标段号</td>
 								<td>
 									<select class="form-control" style="width: 100%;" v-model="siteId = roadSelected2"  id="roadnumber">
 										<option :value="road.id" v-for="road in roadList2">{{road.sitenumber}}</option>
