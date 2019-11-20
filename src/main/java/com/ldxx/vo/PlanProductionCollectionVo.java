@@ -18,6 +18,16 @@ public class PlanProductionCollectionVo extends PlanProductionCollection
 
 	private String sumneed;
 
+	private String planstatecn;
+
+	public String getPlanstatecn() {
+		return planstatecn;
+	}
+
+	public void setPlanstatecn(String planstatecn) {
+		this.planstatecn = planstatecn;
+	}
+
 	public String getSumneed() {
 		return sumneed;
 	}

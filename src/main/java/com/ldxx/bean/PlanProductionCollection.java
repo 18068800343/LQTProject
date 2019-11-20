@@ -1,9 +1,9 @@
 package com.ldxx.bean;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.sql.Time;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class PlanProductionCollection
 {
@@ -41,7 +41,17 @@ public class PlanProductionCollection
     private int deletestate;
     
     private String pianchaid;
-    
+
+    private String planstate;
+
+	public String getPlanstate() {
+		return planstate;
+	}
+
+	public void setPlanstate(String planstate) {
+		this.planstate = planstate;
+	}
+
 	public String getPianchaid() {
 		return pianchaid;
 	}

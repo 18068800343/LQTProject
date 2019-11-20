@@ -99,10 +99,15 @@
 	
 	<select id="getShengChanJiHuaListByCondition" resultType="planProductionCollectionVo">
 		SELECT
-			round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,srm.road_name,srm.road_no,
-      		pcd.piancha_name,pcd.piancha_no,pniod.sumneed
+		 case  a.plan_state
+		 when 0 then '未完成'
+		 when 1 then '未完成'
+		 else '已完成'
+		 end as planstatecn,
+		 round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,srm.road_name,srm.road_no,
+		 pcd.piancha_name,pcd.piancha_no,pniod.sumneed
 		FROM
-			plan_production_collection AS a
+		 plan_production_collection AS a
 		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
 		LEFT JOIN sys_road_mgn srm on a.road_id = srm.road_id and srm.delete_state = 1
 		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = a.recipe_id and sfm.delete_state = 1

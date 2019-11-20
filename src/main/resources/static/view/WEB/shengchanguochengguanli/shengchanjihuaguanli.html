@@ -95,6 +95,7 @@
 								<th>总价</th>
 								<th>日期时间</th>
 								<th>录入人</th>
+								<th>状态</th>
 								<th>操作</th>
 							</tr>
 							</thead>
@@ -942,12 +943,13 @@
 			{ "data": "price"},
 			{ "data": "datetime"},
 			{ "data": "uname"},
+			{ "data": "planstatecn"},
 			{ "data": "planid"},
 		],
 		"columnDefs": [
 			{
 				"class": "tcenter",
-				"targets": 13,
+				"targets": 14,
 				"searchable": true,
 				"render": function(data, type, full) {
 					var guanlian= '<i class="glyphicon glyphicon-random" style="font-size:13px;cursor:pointer;margin-right:3px;" onclick="linkMsg(this)" title="关联偏差"   data-toggle="modal" data-target="#allMsg"></i>'
