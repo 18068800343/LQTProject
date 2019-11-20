@@ -1,11 +1,10 @@
 package com.ldxx.dao;
 
-import java.util.List;
-
+import com.ldxx.bean.SysRoadMgn;
+import com.ldxx.bean.SysRoadMgnLowcase;
 import org.apache.ibatis.annotations.Param;
 
-import com.ldxx.bean.SysRoadMgn;
-import com.ldxx.bean.SysWarningSet;
+import java.util.List;
 
 public interface SysRoadMgnDao {
 	
@@ -14,7 +13,9 @@ public interface SysRoadMgnDao {
 	public int updateSysRoadMgnById(@Param("sysRoadMgn")SysRoadMgn sysRoadMgn);
 	
 	public List<SysRoadMgn> getAllSysRoadMgn();
-	
+
+	public List<SysRoadMgnLowcase> getAllSysRoadMgnLowcase();
+
 	public int delSysRoadMgn(@Param("id") String id);
 	
 	public int getByIdSysRoadMgn(@Param("id") String id);
