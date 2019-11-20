@@ -2,10 +2,11 @@ package com.ldxx.service;
 
 import java.util.List;
 import com.ldxx.bean.BatchMgt;
+import com.ldxx.vo.BatchMgtVo;
 
 public interface BatchMgtService {
 	
-	List<BatchMgt> getAllBatchMgt();
+	List<BatchMgtVo> getAllBatchMgt();
 	
 	BatchMgt getBatchMgtById(String id);
 	

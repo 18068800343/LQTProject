@@ -9,7 +9,7 @@ import com.ldxx.vo.BatchMgtVo;
 
 public interface BatchMgtDao {
 	
-	List<BatchMgt> getAllBatchMgt();
+	List<BatchMgtVo> getAllBatchMgt();
 	
 	BatchMgt getBatchMgtById(@Param("id")String id);
 	

@@ -202,12 +202,12 @@
 								<td>出场时间</td>
 								<td><input type="text" id="chuchangshijian" style="width: 70%;"/></td>
 							</tr>
-							<tr>
+							<!--<tr>
 								<td>录入人</td>
 								<td><input type="text" id="lururen" style="width: 70%;"/></td>
 								<td></td>
 								<td></td>
-							</tr>
+							</tr>-->
                         </table>
                     </form> 
                 </div>
@@ -263,12 +263,12 @@
 								<td>出场时间</td>
 								<td><input type="text" id="xg_chuchangshijian" style="width: 70%;"/></td>
 							</tr>
-							<tr>
+							<!--<tr>
 								<td>录入人</td>
 								<td><input type="text" id="xg_lururen" style="width: 70%;"/></td>
 								<td></td>
 								<td></td>
-							</tr>
+							</tr>-->
                     </table>
                 </form>  
             </div>
@@ -324,7 +324,7 @@
 		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
 		"columns": [
-            { "data": "roadName"}, 
+            { "data": "roadName"},
              { "data": "batch"}, 
             { "data": "licencePlate"},
             { "data": "unloadedWeight"},
@@ -333,7 +333,7 @@
             { "data": "pitchTypeName"},
             { "data": "datetimeIn"},
             { "data": "datetimeOut"},
-            { "data": "editUserId"},
+            { "data": "uName"},
             { "data": null},
         ],
         "columnDefs": [{	
@@ -534,7 +534,7 @@
 		var pitchType=$("#liqingleixing").val();
 		var datetimeIn=$("#ruchangshijian").val();
 		var datetimeOut=$("#chuchangshijian").val();
-		var editUserId=$("#lururen").val();
+		//var editUserId=$("#lururen").val();
 		
 		$.ajax({
             type: 'POST',
@@ -550,7 +550,7 @@
             	pitchType:pitchType,
             	datetimeIn:datetimeIn,
             	datetimeOut:datetimeOut,
-            	editUserId:editUserId,
+            	//editUserId:editUserId,
             },
             success: function (json) {
             	if(json.result>0){
@@ -613,7 +613,7 @@
 		$("#xg_liqingleixing").val(data.pitchType);
 		$("#xg_ruchangshijian").val(data.datetimeIn);
 		$("#xg_chuchangshijian").val(data.datetimeOut);
-		$("#xg_lururen").val(data.editUserId);
+		//$("#xg_lururen").val(data.editUserId);
 	})
 	
 	
@@ -626,7 +626,7 @@
 		var pitchType=$("#xg_liqingleixing").val();
 		var datetimeIn=$("#xg_ruchangshijian").val();
 		var datetimeOut=$("#xg_chuchangshijian").val();
-		var editUserId=$("#xg_lururen").val();
+		//var editUserId=$("#xg_lururen").val();
 		
 		$.ajax({
             type: 'POST',
@@ -642,7 +642,7 @@
             	pitchType:pitchType,
             	datetimeIn:datetimeIn,
             	datetimeOut:datetimeOut,
-            	editUserId:editUserId,
+            	//editUserId:editUserId,
             },
             success: function (json) {
             	if(json.result>0){

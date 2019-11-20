@@ -2,12 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ldxx.dao.BatchMgtDao" >
 
-	<select id="getAllBatchMgt" resultType="BatchMgt">
+	<select id="getAllBatchMgt" resultType="BatchMgtVo">
 		select a.id,a.road_id,a.batch,a.licence_plate,a.unloaded_weight,a.loading_weight,a.loading_temperature,a.pitch_type,a.datetime_in,
-		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,b.fl_name as pitchTypeName,c.road_name
+		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,b.fl_name as pitchTypeName,c.road_name,usr.u_name
 		from batch_mgt a
 		left join sys_formulation_management b on a.pitch_type=b.fl_id
 		left join sys_road_mgn c on a.road_id=c.road_id
+		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
 		 where a.delete_state=1
 	</select>
 	

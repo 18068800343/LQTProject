@@ -4,36 +4,38 @@ import com.ldxx.bean.BatchMgt;
 
 public class BatchMgtVo extends BatchMgt {
 
-	private String roadname;
+	private String roadName;
 
-	private String roadno;
+	private String roadNo;
 	
-	private String flname;
+	private String flName;
 	
 	private String yuguweight;
 
-	public String getRoadname() {
-		return roadname;
+	private String uName;
+
+	public String getRoadName() {
+		return roadName;
 	}
 
-	public void setRoadname(String roadname) {
-		this.roadname = roadname;
+	public void setRoadName(String roadName) {
+		this.roadName = roadName;
 	}
 
-	public String getRoadno() {
-		return roadno;
+	public String getRoadNo() {
+		return roadNo;
 	}
 
-	public void setRoadno(String roadno) {
-		this.roadno = roadno;
+	public void setRoadNo(String roadNo) {
+		this.roadNo = roadNo;
 	}
 
-	public String getFlname() {
-		return flname;
+	public String getFlName() {
+		return flName;
 	}
 
-	public void setFlname(String flname) {
-		this.flname = flname;
+	public void setFlName(String flName) {
+		this.flName = flName;
 	}
 
 	public String getYuguweight() {
@@ -44,4 +46,11 @@ public class BatchMgtVo extends BatchMgt {
 		this.yuguweight = yuguweight;
 	}
 
+	public String getuName() {
+		return uName;
+	}
+
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
 }

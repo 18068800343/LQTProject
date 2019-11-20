@@ -2,6 +2,7 @@ package com.ldxx.service.impl;
 
 import java.util.List;
 
+import com.ldxx.vo.BatchMgtVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,7 @@ public class BatchMgtServiceImpl implements BatchMgtService {
 	private BatchMgtDao dao;
 	
 	@Override
-	public List<BatchMgt> getAllBatchMgt() {
+	public List<BatchMgtVo> getAllBatchMgt() {
 		// TODO Auto-generated method stub
 		return dao.getAllBatchMgt();
 	}

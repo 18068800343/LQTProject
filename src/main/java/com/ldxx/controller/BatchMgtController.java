@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ldxx.bean.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,9 @@ import com.ldxx.service.BatchMgtService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.vo.BatchMgtVo;
+
+import javax.servlet.http.HttpSession;
+
 /**
  * 批次管理
  * @author hp
@@ -32,7 +36,7 @@ public class BatchMgtController {
 	private Map<String,Object> map=new HashMap<>();
 	
 	@RequestMapping("/getAllBatchMgt")
-	public List<BatchMgt> getAllBatchMgt(){
+	public List<BatchMgtVo> getAllBatchMgt(){
 		return service.getAllBatchMgt();
 	}
 	
@@ -47,12 +51,16 @@ public class BatchMgtController {
 	}
 	
 	@RequestMapping("/updBatchMgt")
-	public Map<String,Object> updBatchMgt(BatchMgt bm){
+	public Map<String,Object> updBatchMgt(BatchMgt bm, HttpSession session){
 		bm.setEditDatetime(GetThisTimeUtils.getDateTime());
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String formatStr =formatter.format(bm.getDatetimeOut());
 		String sj = formatStr.replace(":", "").replace("-", "").replace(" ", "");
 		bm.setBatch(bm.getLicencePlate()+sj);
+		User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			bm.setEditUserId(user.getUserId());;
+		}
 		int i= service.updBatchMgt(bm);
 		map.put("result", i);
 		map.put("BatchMgt", bm);
@@ -65,9 +73,13 @@ public class BatchMgtController {
 	}
 
 	@RequestMapping("/insertBatchMgt")
-	public Map<String,Object> insertBatchMgt(BatchMgt bm){
+	public Map<String,Object> insertBatchMgt(BatchMgt bm, HttpSession session){
 		bm.setId(LDXXUtils.getUUID12());
 		bm.setEditDatetime(GetThisTimeUtils.getDateTime());
+		User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			bm.setEditUserId(user.getUserId());;
+		}
 		int i= service.insertBatchMgt(bm);
 		map.put("result", i);
 		map.put("BatchMgt", bm);
