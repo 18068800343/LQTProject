@@ -10,7 +10,7 @@
         LEFT JOIN sys_road_mgn srm on b.road_id = srm.road_id and srm.delete_state = 1
         LEFT JOIN batch_mgt bm on a.batch_id=bm.id AND bm.delete_state=1
         LEFT JOIN sys_formulation_management sfm on bm.pitch_type=sfm.fl_id AND sfm.delete_state = 1
-        LEFT JOIN wh_waste_mgn wwm on a.batch_id=wwm.batch_id AND a.plan_id=wwm.plan_id AND wwm.delete_state = 1
+        LEFT JOIN wh_waste_mgn wwm on a.batch_id=wwm.batch_id  AND wwm.delete_state = 1
         where a.delete_state=1
     </select>
 
