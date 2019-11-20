@@ -120,6 +120,37 @@
 	</div>
 </div>
 <!-- allMsg结束 -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="diaodu">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" ><b>调度</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered">
+							<tr>
+								<td>生产计划编号</td>
+								<td>
+									<select  class="form-control"  v-model="planId" style="width: 100%;">
+										<option :value="item.planid" v-for="item in planList">{{item.planno}}</option>
+									</select>
+								</td>
+							</tr>
+
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" data-dismiss="modal" @click="save">保存</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 <script src="../../js/jquery.js"></script>
 <script src="../../js/common-scripts.js"></script>
@@ -235,7 +266,6 @@
 				errMessage("请求UserController失败");
 			},
 			success: function (json) {
-				console.log(json)
 				$('#mainContent').dataTable().fnClearTable();
 				$('#mainContent').DataTable().rows.add(json).draw(false);
 			}
@@ -272,58 +302,56 @@
 		}
 		console.log(msg);
 	}
-	//新建生产计划
-	var xgLaiLiaoVm = new Vue({
-		el: '#xgLaiLiaoVm',
+
+	function diaodu(obj){
+		var tr=$(obj).parents("tr");
+		var data=$("#mainContent").DataTable().row(tr).data();
+		Newdiaodu.planSelect(data.planId);
+		Newdiaodu.batchId=data.batchId;
+		Newdiaodu.feiliaoId=data.id;
+		$("#diaodu").modal('show')
+	}
+
+	var Newdiaodu = new Vue({
+		el: '#diaodu',
 		//表单数据
 		data: {
-			//来料id
 			id:"",
-			//批次id
-			batch:"",
-			roadname:"",
-			roadno:"",
-			//来料类型
-			flname:"",
-			warningcontent:"",
-			warningstate:"",
-			warningtype:"",
+			batchId:"",
+			planList:"",
+			planId:"",
+			feiliaoId:"",
 		},
 		methods: {
 			//新建生产计划保存按钮事件
 			save: function () {
 				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-				this.$http.post('/LaiLiaoWenDuYuJing/updateLaiLiaoWenDu',JSON.stringify(this._data),{}).then((res)=>{
+				this.$http.post('/ProductDispatch/insertProductDispatch',JSON.stringify(this._data),{}).then((res)=>{
 					var resMsg = res.body;
-					if(resMsg.daoMsg>0){
-						$('#mainContent').DataTable().row(page_tr).data(resMsg.obj);//修改行立即显示 */
-						$("#change").modal("hide");
-						toastr.success(resMsg.resultMsg);
+					if(resMsg.result>0){
+						initTable();
+						$("#diaodu").modal("hide");
+						toastr.success(resMsg.msg);
 					}else{
-						toastr.error(resMsg.resultMsg);
+						toastr.error(resMsg.msg);
 					}
 				},(res)=>{
 
+				});
+			},
+			planSelect:function(obj){
+				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+				this.$http.post('/ShengChanJiHua/getAllShengChanJiHua',{},{}).then((res)=>{
+					this.planList=res.body;
+					//this.planId=this.planList[0].planid;
+					this.planId=obj;
+				},(res)=>{
+					console.log(res.status);
 				});
 			}
 		}
 	})
 
-	var udMsg = (e)=>{
-		var tr=$(e).parents("tr");
-		page_tr = tr;
-		var data=$("#mainContent").DataTable().row(tr).data();
-		xgLaiLiaoVm.id = data.id;
-		xgLaiLiaoVm.batch = data.batch;
-		//车牌
-		xgLaiLiaoVm.roadname = data.roadname;
-		xgLaiLiaoVm.roadno = data.roadno;
-		//来料类型
-		xgLaiLiaoVm.flname = data.flname;
-		//净重
-		xgLaiLiaoVm.warningcontent = data.warningcontent;
-		xgLaiLiaoVm.warningstate = data.warningstate;
-	}
 
 
 	var quxaio=(e)=>{
@@ -392,38 +420,7 @@
 		});
 	}
 
-	function diaodu(obj){
-        var tr=$(obj).parents("tr");
-        var data=$("#mainContent").DataTable().row(tr).data();
-        $.SmartMessageBox({
-            title: "调度提示",
-            content: "确认调度？",
-            buttons: '[取消][确定]'
-        }, function (ButtonPressed) {
-            if (ButtonPressed === "确定") {
-                myTool.mask.show('调度中...');
-                $.ajax({
-                    type: 'POST',
-                    url:'/WhWasteMgn/updwarningState',
-                    dataType: 'json',
-                    data: {
-                        id:data.id,
-                        warningState:2,
-                    },
-                    success: function (json) {
-                        myTool.mask.hide();
-                        if(json!=0){
-                            data.warningstate=2;
-                            $('#mainContent').DataTable().row(tr).data(data);
-                            toastr.success('调度成功');
-                        }else{
-                            toastr.error('调度失败');
-                        }
-                    }
-                });
-            }
-        });
-    }
+
 
 </script>
 </html>

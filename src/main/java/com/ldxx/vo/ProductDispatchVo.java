@@ -22,6 +22,16 @@ public class ProductDispatchVo extends ProductDispatch {
     //单价
     private BigDecimal price;
 
+    private String feiliaoId;
+
+    public String getFeiliaoId() {
+        return feiliaoId;
+    }
+
+    public void setFeiliaoId(String feiliaoId) {
+        this.feiliaoId = feiliaoId;
+    }
+
     public String getuName() {
         return uName;
     }

@@ -26,8 +26,6 @@ public class WhWasteMgnServiceImpl implements WhWasteMgnService {
     private WhWasteMgnDao dao;
     @Autowired
     private LaiLiaoWenDuYuJingDao laidao;
-    @Autowired
-    private ProductDispatchDao pddao;
 
     @Override
     public List<WhWasteMgnVo> getAllWhWasteMgn() {
@@ -42,18 +40,6 @@ public class WhWasteMgnServiceImpl implements WhWasteMgnService {
             //完全废弃
         }else if(warningState==2 && i>0){
             //调度,新增成品砼调度
-            ProductDispatchVo pd=new ProductDispatchVo();
-            pd.setId(LDXXUtils.getUUID12());
-            pd.setBatchId(whWasteMgn.getBatchId());
-            pd.setPlanId(whWasteMgn.getPlanId());
-            pd.setDispatchTime(GetThisTimeUtils.getDateTime());
-            pd.setEditDatetime(GetThisTimeUtils.getDateTime());
-            User user = (User) session.getAttribute("user");
-            if(null!=user) {
-                pd.setEditUserId(user.getUserId());
-                pd.setuName(user.getuName());
-            }
-            i=pddao.insertProductDispatch(pd);
         }else if(warningState==3 && i>0){
             //取消，修改来料温度预警状态为取消(0:未操作；1:已取消;2:以废料
             i=laidao.updWarningstateBybatchId(whWasteMgn.getBatchId(),1);
