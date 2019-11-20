@@ -129,6 +129,9 @@
 	<select id="getPianChaById" parameterType="String" resultType="planConstructionDeviationVo">
 		select * from plan_construction_deviation where id=#{id} and delete_state=1
 	</select>
+	<select id="getShengChanJiHuaById" parameterType="string" resultType="planProductionCollection">
+		select * from plan_production_collection where plan_id=#{id} and delete_state=1
+	</select>
 	
 	<insert id="addPlanProductionCount" parameterType="planProductionCount">
 		insert into plan_production_count(id,plan_id,batch_id,pd_need_inc_or_dec,pd_need_source)

@@ -478,7 +478,7 @@ body, html {
 	    },
       roadPost:function(){
           //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-          this.$http.post('/SysRoadMgnController/getAllSysRoadMgn',{},{emulateJSON:true}).then((res)=>{
+          this.$http.post('/SysRoadMgnController/getAllSysRoadMgnLowcase',{},{emulateJSON:true}).then((res)=>{
           	this.roadList=res.body;
           	this.roadid=this.roadList[0].roadid;
           },(res)=>{
@@ -539,7 +539,7 @@ body, html {
 	    },
       roadPost:function(){
           //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-          this.$http.post('/SysRoadMgnController/getAllSysRoadMgn',{},{emulateJSON:true}).then((res)=>{
+          this.$http.post('/SysRoadMgnController/getAllSysRoadMgnLowcase',{},{emulateJSON:true}).then((res)=>{
           	this.roadList=res.body;
           	this.roadid=this.roadList[0].roadid;
           },(res)=>{
