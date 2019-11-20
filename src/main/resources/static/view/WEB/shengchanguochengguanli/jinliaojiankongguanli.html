@@ -251,8 +251,8 @@
 										 <tr>
 											<td>料仓编号</td>
 											<td><input type="text" id="liaocangbianhao" placeholder="请输入" style="width: 70%;"/></td>
-											<td>录入人</td>
-											<td><input type="text" id="lururen" placeholder="请输入" style="width: 70%;"/></td>
+											<!--<td>录入人</td>
+											<td><input type="text" id="lururen" placeholder="请输入" style="width: 70%;"/></td>-->
 										</tr>
 										<tr>
 											<td>备注</td>
@@ -309,12 +309,12 @@
 											<td>料仓编号</td>
 											<td><input type="text" id="xg_liaocangbianhao" placeholder="请输入" style="width: 70%;"/></td>
 										</tr>
-										 <tr>
+										 <!--<tr>
 											<td>录入人</td>
 											<td><input type="text" id="xg_lururen" placeholder="请输入" style="width: 70%;"/></td>
 											<td></td>
 											<td></td>
-										</tr>
+										</tr>-->
 										<tr>
 											<td>备注</td>
 											<td colspan="3"><textarea id="xg_beizhu" rows="4" cols="90"></textarea></td>
@@ -383,7 +383,7 @@
 	            { "data": null},
 	            { "data": "storNo"},
 	            { "data": "meminfo"},
-	            { "data": "editUserId"},
+	            { "data": "uName"},
 	            { "data": null},
 	        ],
 	        "columnDefs": [{
@@ -521,7 +521,7 @@
 			var laihuodanwei=$("#laihuodanwei").val();
 			var danjia=$("#danjia").val();
 			var liaocangbianhao=$("#liaocangbianhao").val();
-			var lururen=$("#lururen").val();
+			//var lururen=$("#lururen").val();
 			var beizhu=$("#beizhu").val();
 			
 			$.ajax({
@@ -538,7 +538,7 @@
 	            	price:danjia,
 	            	storNo:liaocangbianhao,
 	            	meminfo:beizhu,
-	            	editUserId:lururen,
+	            	//editUserId:lururen,
 	            },
 	            error: function (msg) {
 	                errMessage("请求UserController失败");
@@ -605,7 +605,7 @@
 		$("#xg_laihuodanwei").val(data.companyId);
 		$("#xg_danjia").val(data.price);
 		$("#xg_liaocangbianhao").val(data.storNo);
-		$("#xg_lururen").val(data.editUserId);
+		//$("#xg_lururen").val(data.editUserId);
 		$("#xg_beizhu").val(data.meminfo);
 	})
 	
@@ -618,7 +618,7 @@
 		var laihuodanwei=$("#xg_laihuodanwei").val();
 		var danjia=$("#xg_danjia").val();
 		var liaocangbianhao=$("#xg_liaocangbianhao").val();
-		var lururen=$("#xg_lururen").val();
+		//var lururen=$("#xg_lururen").val();
 		var beizhu=$("#xg_beizhu").val();
 		
 		$.ajax({
@@ -636,7 +636,7 @@
             	price:danjia,
             	storNo:liaocangbianhao,
             	meminfo:beizhu,
-            	editUserId:lururen,
+            	//editUserId:lururen,
             },
             success: function (json) {
             	if(json.result>0){

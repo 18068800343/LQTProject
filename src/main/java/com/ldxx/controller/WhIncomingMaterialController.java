@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ldxx.bean.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ldxx.bean.WhIncomingMaterial;
 import com.ldxx.service.WhIncomingMaterialService;
 import com.ldxx.util.LDXXUtils;
+
+import javax.servlet.http.HttpSession;
+
 /**
  * 进料监控报表
  * @author hp
@@ -40,7 +44,11 @@ public class WhIncomingMaterialController {
 	
 	@RequestMapping("/updWhIncomingMaterialById")
 	@ResponseBody
-	public Map<String,Object> updWhIncomingMaterialById(WhIncomingMaterial wm){
+	public Map<String,Object> updWhIncomingMaterialById(WhIncomingMaterial wm, HttpSession session){
+		User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			wm.setEditUserId(user.getUserId());;
+		}
 		int i= service.updWhIncomingMaterialById(wm);
 		map.put("result", i);
 		map.put("WhIncomingMaterial", wm);
@@ -55,8 +63,12 @@ public class WhIncomingMaterialController {
 	
 	@RequestMapping("/insertWhIncomingMaterial")
 	@ResponseBody
-	public Map<String,Object> insertWhIncomingMaterial(WhIncomingMaterial wm){
+	public Map<String,Object> insertWhIncomingMaterial(WhIncomingMaterial wm, HttpSession session){
 		wm.setId(LDXXUtils.getUUID12());
+		User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			wm.setEditUserId(user.getUserId());;
+		}
 		int i= service.insertWhIncomingMaterial(wm);
 		map.put("result", i);
 		map.put("WhIncomingMaterial", wm);

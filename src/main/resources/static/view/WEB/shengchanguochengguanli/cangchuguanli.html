@@ -180,12 +180,12 @@
 												</select>
 											</td>
 										</tr>
-										<tr>
+										<!--<tr>
 											<td>录入人</td>
 											<td><input type="text" id="lururen" style="width: 70%;" /></td>
 											<td></td>
 											<td></td>
-										</tr>
+										</tr>-->
 										<tr>
 											<td>备注</td>
 											<td colspan="3"><textarea id="beizhu" rows="3" style="width: 90%;"/></textarea></td>
@@ -230,12 +230,12 @@
 												</select>
 											</td>
 										</tr>
-										<tr>
+										<!--<tr>
 											<td>录入人</td>
 											<td><input type="text" id="xg_lururen" style="width: 70%;" /></td>
 											<td></td>
 											<td></td>
-										</tr>
+										</tr>-->
 										<tr>
 											<td>备注</td>
 											<td colspan="3"><textarea id="xg_beizhu" rows="3" style="width: 90%;"/></textarea></td>
@@ -300,7 +300,7 @@
             { "data": "weight"},
             { "data": "materialsName"},
             { "data": "meminfo"},
-            { "data": "editUserId2"},
+            { "data": "uName"},
             { "data": "editDatetime2"},
             { "data": null},
         ],
@@ -556,7 +556,7 @@
         	var shijian=$("#shijian").val();
         	var zhongliang=$("#zhongliang").val();
         	var cailiao=$("#cailiao").val();
-        	var lururen=$("#lururen").val();
+        	//var lururen=$("#lururen").val();
         	var beizhu=$("#beizhu").val();
         	
         	$.ajax({
@@ -569,7 +569,7 @@
 	            	weight:zhongliang,
 	            	materials:cailiao,
 	            	meminfo:beizhu,
-	            	editUserId2:lururen,
+	            	//editUserId2:lururen,
 	            },
 	            error: function (msg) {
 	                errMessage("请求UserController失败");
@@ -633,7 +633,7 @@
     	$("#xg_shijian").val(data.datetime);
     	$("#xg_zhongliang").val(data.weight);
     	$("#xg_cailiao").val(data.materials);
-    	$("#xg_lururen").val(data.editUserId2);
+    	//$("#xg_lururen").val(data.editUserId2);
     	$("#xg_beizhu").val(data.meminfo);
 	})
 	
@@ -642,7 +642,7 @@
     	var shijian=$("#xg_shijian").val();
     	var zhongliang=$("#xg_zhongliang").val();
     	var cailiao=$("#xg_cailiao").val();
-    	var lururen=$("#xg_lururen").val();
+    	//var lururen=$("#xg_lururen").val();
     	var beizhu=$("#xg_beizhu").val();
     	
 		$.ajax({
@@ -656,7 +656,7 @@
             	weight:zhongliang,
             	materials:cailiao,
             	meminfo:beizhu,
-            	editUserId2:lururen,
+            	//editUserId2:lururen,
             },
             success: function (json) {
             	if(json.result>0){

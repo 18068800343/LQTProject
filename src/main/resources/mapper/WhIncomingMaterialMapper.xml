@@ -3,9 +3,10 @@
 <mapper namespace="com.ldxx.dao.WhIncomingMaterialDao" >
 
 	<select id="getAllWhIncomingMaterial" resultType="WhIncomingMaterial">
-		select a.id,a.no,a.datetime,a.weight,a.materials,a.water_content,a.company_id,a.price,a.stor_no,a.meminfo,a.edit_user_id,a.delete_state,b.material_name as materialsName
+		select a.id,a.no,a.datetime,a.weight,a.materials,a.water_content,a.company_id,a.price,a.stor_no,a.meminfo,a.edit_user_id,a.delete_state,b.material_name as materialsName,usr.u_name
 		from wh_incoming_material as a
-		left join dic_materials b on a.materials=b.id 
+		left join dic_materials b on a.materials=b.id
+		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
 		 where a.delete_state=1
 	</select>
 	

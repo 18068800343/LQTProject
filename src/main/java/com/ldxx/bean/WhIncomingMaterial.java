@@ -29,9 +29,17 @@ public class WhIncomingMaterial {
     public String meminfo;//备注
 
     public String editUserId;//录入人
+	private String uName;
 
     public int deleteState;//逻辑删除 1:存在；0删除
-    
+
+	public String getuName() {
+		return uName;
+	}
+
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
 
 	public String getMaterialsName() {
 		return materialsName;

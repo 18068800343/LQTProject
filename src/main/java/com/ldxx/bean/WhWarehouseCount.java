@@ -31,10 +31,19 @@ public class WhWarehouseCount {
     public String meminfo;//备注
 
     public String editUserId2;//最后录入用户
+	private String uName;
 
     public String editDatetime2;//最后录入日期
 
     public int deleteState;//逻辑删除 0:删除；1存在
+
+	public String getuName() {
+		return uName;
+	}
+
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
 
 	public String getId() {
 		return id;
