@@ -31,4 +31,6 @@ public interface UserService {
 	int iscountWorkIdEdit(String workId,String userId);
 	
 	int iscountUNameEdit(String uName,String userId);
+	
+	User selectUserByUsername(String username);
 }

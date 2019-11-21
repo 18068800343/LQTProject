@@ -279,7 +279,8 @@
 <script src="../../js/SmartNotification.min.js"></script>
 <script src="../../js/main.js"></script>
 <script src="../../js/myTool.js"></script>
-<script src="../../js/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 
 <script>
     $(document).ready( function () {
@@ -394,10 +395,10 @@
                         toastr.success("添加成功");
                     }else{
                         toastr.error("添加失败");
-            	}
-            },(res)=>{
-            	toastr.error("发生错误");
-            });
+            	    }
+                },(res)=>{
+                    toastr.error("发生错误");
+                });
             },
             DDTPost:function(){
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数

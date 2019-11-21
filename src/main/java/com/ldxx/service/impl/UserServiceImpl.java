@@ -82,5 +82,10 @@ public class UserServiceImpl implements UserService {
 		return dao.iscountUNameEdit(uName, userId);
 	}
 
+	@Override
+	public User selectUserByUsername(String username) {
+		return dao.selectUserByUsername(username);
+	}
+
 
 }
