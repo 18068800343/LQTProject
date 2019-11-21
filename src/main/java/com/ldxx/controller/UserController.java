@@ -112,4 +112,22 @@ public class UserController {
 
 	}
 	
+	@SuppressWarnings("unused")
+	@RequestMapping("/updatePasswordById")
+	@ResponseBody
+	public int updatePasswordById(String userId,String password){
+		String old_password = password.split(",")[0];
+		String new_password = password.split(",")[1];
+		User user = service.selectUserById(userId);
+		int i=0;
+		if(!user.getPassword().equals(old_password)){
+			i=-1;
+		}else if(user.getPassword().equals(new_password)){
+			i=-2;
+		}else{
+			i=service.updatePasswordById(userId,new_password);
+		}
+		return i;
+	}
+	
 }

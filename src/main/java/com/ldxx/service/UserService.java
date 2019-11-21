@@ -36,4 +36,6 @@ public interface UserService {
 	User selectUserByUsername(String username);
 
     List<UserVo> selectUserAndRoles();
+    
+    int updatePasswordById(String userId, String new_password);
 }

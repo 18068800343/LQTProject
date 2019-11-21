@@ -74,5 +74,8 @@
 	<select id="selectUserByUsername" parameterType="String" resultType="user">
 		select * from u_user where username=#{username} and delete_state=1
 	</select>
+	<update id="updatePasswordById">
+		update u_user set password=#{new_password} where user_id=#{userId}
+	</update>
 
 </mapper>
