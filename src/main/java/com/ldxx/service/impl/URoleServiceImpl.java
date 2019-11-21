@@ -49,7 +49,6 @@ public class URoleServiceImpl implements URoleService {
             codeBasic = id.toString();
             if(codeBasic.length()==1){
                 codeBasic="0"+codeBasic;
-                key=1;
             }
         }else{
             codeBasic="01";
