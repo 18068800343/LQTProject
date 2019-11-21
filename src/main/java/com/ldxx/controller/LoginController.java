@@ -29,7 +29,7 @@ public class LoginController {
     
     @RequestMapping("/login")
     public String login(){ 
-        return "WEB/index";
+        return "redirect:../view/WEB/login.html";
     }
     
     @RequestMapping(value="/userlogin",method=RequestMethod.POST)
@@ -54,6 +54,13 @@ public class LoginController {
 		map.put("result", state);
 		map.put("user", loginUser);
 		return map;
+    }
+    
+    @RequestMapping("/getUser")
+    @ResponseBody
+    public User getUser(HttpServletRequest request){
+    	User user=(User) request.getSession().getAttribute("user");
+    	return user;
     }
     
 }

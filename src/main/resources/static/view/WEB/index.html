@@ -344,11 +344,9 @@
 						<a class="logo" style="padding-bottom:4px;margin-left:12px;color:white;font-size:28px;">沥青质量信息管理一体化平台</a>
 					</div>
 				    	<div class="dl" style="width: 1350px;color:white;float:right;position:fixed;width:100%;right:1%;">
-						 <a href="" style="float
-						 : right;margin-left: 40px;margin-top: 8px; color:white;font-size:16px">退出</a>
-						 <div class="s" style="width:2px;height:20px;background-color:white;float:right;position:relative;left:20px;top:10px;"></div>
-						 <p style="float: right;display: inline-block;margin-top: 10px;margin-left: 10px;font-size: 18	px;">admin</p>
-					</div>
+						 	<div  id="uName" onclick="tanchulai()" class="lodingmsg"></div>&nbsp;&nbsp;&nbsp;
+            				<div onclick="exit()" id="tuichu" class="lodingmsg"></div>&nbsp;&nbsp;
+						</div>
 				</div>
 			</header>
 			<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
@@ -665,8 +663,23 @@
 		<script src="/view/js/quanxian.js"></script>-->
 
 <script type="text/javascript">
+	var user;
 	$(document).ready(function() {
-			
+		$.ajax({
+				type: "post",
+				url: "/login/getUser",
+				data: {},
+				success: function(json) {
+					user = json;
+					if(json != null && json != "") {
+						$("#uName").text(json.uName)
+						$("#tuichu").text("退出")
+
+					} else {
+						$("#tuichu").text("登录")
+					}
+				}
+			});
 	})
 	//easyui单击菜单可以打开关闭
 	$('#caidandianjibangding').tree( {
@@ -677,51 +690,6 @@
 	});
 
 
-</script>
-<!--			var user;
-			$(document).ready(function() {
-
-				$.ajax({
-					type: "post",
-					url: getContextPath() + "/login/getUser",
-					data: {},
-					success: function(json) {
-						user = json;
-						if(json != null && json != "") {
-							$("#omName").text(json.omName)
-							$("#uName").text(json.uName)
-							$("#tuichu").text("退出")
-
-						} else {
-							$("#tuichu").text("登录")
-						}
-						getHDSpace();
-					}
-				})
-
-			})
-
-			function getHDSpace() {
-				$.ajax({
-					type: "post",
-					url: getContextPath() + "/user/getHDSpace",
-					data: {
-						pan: "D",
-					},
-					success: function(json) {
-						$("#totalSpace").append(json.totalSpace);
-						$("#usableSpace").append(json.usableSpace);
-						if(user.uName == 'shiro' || user.uName == '王军') {
-							n
-							$("#totalSpace").show();
-							$("#usableSpace").show();
-						} else {
-							$("#totalSpace").hide();
-							$("#usableSpace").hide();
-						}
-					}
-				})
-			}
 			$(function() {
 				var nowHeight = $(window).height();
 				$('.mian_iframe').height(nowHeight - 65);
@@ -755,55 +723,7 @@
 
 			});
 
-			/* var flagcj = true;
-			$(".w_nav4cj").slideUp();
-			$('#chengjiehetongguanli').click(function () {
-			    if (flagcj==true) {
-			        $(".w_nav4cj").slideDown();
-			        $(".w_nav4fb").slideUp();
-			        
-			        $(".w_nav4cg").slideUp();
-			        
-			        flagcj = false;
-			    } else {
-			        $(".w_nav4cj").slideUp();
-			        flagcj = true;
-			    }
-			})
-        
-        
-			var flagfb = true;
-			$(".w_nav4fb").slideUp();
-			$('#fenbaohetongguanli').click(function () {
-			    if (flagfb==true) {
-			        $(".w_nav4fb").slideDown();
-			        $(".w_nav4cj").slideUp();
-			        
-			        $(".w_nav4cg").slideUp();
-			        
-			        flagfb = false;
-			    } else {
-			        $(".w_nav4fb").slideUp();
-			        flagfb = true;
-			    }
-			})
-        
-        
-			var flagcg = true;
-			$(".w_nav4cg").slideUp();
-			$('#caigouhetongguanli').click(function () {
-			    if (flagcg==true) {
-			        $(".w_nav4cg").slideDown();
-			        $(".w_nav4fb").slideUp();
-			        
-			        $(".w_nav4cj").slideUp();
-			        
-			        flagcg = false;
-			    } else {
-			        $(".w_nav4cg").slideUp();
-			        flagcg = true;
-			    }
-			}) */
+
 			var flag2 = true;
 			$(".w_nav4a").slideUp();
 			$('#hetongLvyue2').click(function() {
@@ -827,7 +747,7 @@
 				}
 			});
 
-			$('.a').click(function() {
+			/* $('.a').click(function() {
 				if($(this).siblings('ul').css('display') == 'none') {
 					$(this).siblings('ul').slideDown(300).children('li');
 					if($(this).parents('li').siblings('li').children('ul').css('display') == 'block') {
@@ -857,13 +777,13 @@
 
 			function cjhtglClick() {
 				$("#cjhtgl").trigger("click");
-			}
+			} */
 
 			//退出
 			function exit() {
 				$.ajax({
 					type: "post",
-					url: getContextPath() + "/login/exit",
+					url: "/login/exit",
 					async: false,
 					data: {},
 					success: function(json) {
@@ -892,7 +812,7 @@
 				var password = old_password + "," + new_password
 				$.ajax({
 					type: "post",
-					url: getContextPath() + "/user/updatePasswordById",
+					url: "/user/updatePasswordById",
 					data: {
 						userId: user.userId,
 						password: password
@@ -909,7 +829,7 @@
 					}
 				})
 			}
-		</script>-->
+		</script>
 	</body>
 
 </html>
