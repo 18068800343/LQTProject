@@ -335,7 +335,7 @@
             },
             success: function (json) {
                 $('#mainContent').dataTable().fnClearTable();
-                $('#mainContent').DataTable().rows.add(json).draw(false);
+                $('#mainContent').DataTable().rows.add(json.list).draw(false);
             }
         });
     }
