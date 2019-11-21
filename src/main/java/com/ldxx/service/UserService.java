@@ -3,6 +3,7 @@ package com.ldxx.service;
 import java.util.List;
 
 import com.ldxx.bean.User;
+import com.ldxx.vo.UserVo;
 
 public interface UserService {
 	
@@ -12,7 +13,7 @@ public interface UserService {
 	
 	int updateUser(User user);
 	
-	List<User> selectAllUser();
+	List<UserVo> selectAllUser();
 	
 	User selectUserById(String userId);
 	
@@ -31,6 +32,8 @@ public interface UserService {
 	int iscountWorkIdEdit(String workId,String userId);
 	
 	int iscountUNameEdit(String uName,String userId);
-	
+
 	User selectUserByUsername(String username);
+
+    List<UserVo> selectUserAndRoles();
 }

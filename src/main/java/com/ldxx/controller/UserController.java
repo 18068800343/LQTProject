@@ -1,9 +1,11 @@
 package com.ldxx.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ldxx.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,7 +75,7 @@ public class UserController {
 	
 	@RequestMapping("/selectAllUser")
 	@ResponseBody
-	public List<User> selectAllUser(){
+	public List<UserVo> selectAllUser(){
 		return service.selectAllUser();
 	}
 	
@@ -100,6 +102,14 @@ public class UserController {
 	@ResponseBody
 	public User getuNameByWorkId(String workId){
 		return service.getuNameByWorkId(workId);
+	}
+
+	@RequestMapping("/selectUserAndRoles")
+	@ResponseBody
+	public List<UserVo> selectUserAndRoles(){
+		List<UserVo> list =service.selectUserAndRoles();
+		return list;
+
 	}
 	
 }

@@ -2,6 +2,9 @@ package com.ldxx.service.impl;
 
 import java.util.List;
 
+import com.ldxx.dao.URoleDao;
+import com.ldxx.vo.URoleVo;
+import com.ldxx.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +19,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserDao dao;
+	@Autowired
+	private URoleDao uRoleDao;
 
 	@Override
 	public int addUser(User user) {
@@ -33,7 +38,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> selectAllUser() {
+	public List<UserVo> selectAllUser() {
 		return dao.selectAllUser();
 	}
 
@@ -85,6 +90,32 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User selectUserByUsername(String username) {
 		return dao.selectUserByUsername(username);
+	}
+
+	@Override
+	public List<UserVo> selectUserAndRoles() {
+		List<UserVo> users = dao.selectAllUser();
+
+		for(UserVo user:users){
+			String userRoleNames = "";
+			String userRole = user.getUserRole();
+			if(null!=userRole&&!"".equals(userRole)){
+				String[] userRoles = userRole.split("_");
+
+				for(String roleCode:userRoles){
+					List<URoleVo> roles = uRoleDao.selectRoleByRoleCode(roleCode);
+					if(roles.size()>0){
+						userRoleNames=userRoleNames+","+roles.get(0).getRoleName();
+					}
+				}
+
+			}
+			if(userRoleNames.length()>1){
+				userRoleNames = userRoleNames.substring(1, userRoleNames.length());
+				user.setUserRoleNames(userRoleNames);
+			}
+		}
+		return users;
 	}
 
 

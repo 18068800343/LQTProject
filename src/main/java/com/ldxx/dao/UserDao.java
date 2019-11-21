@@ -2,6 +2,7 @@ package com.ldxx.dao;
 
 import java.util.List;
 
+import com.ldxx.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 
 import com.ldxx.bean.User;
@@ -14,7 +15,7 @@ public interface  UserDao {
 	
 	int updateUser(@Param("user")User user);
 	
-	List<User> selectAllUser();
+	List<UserVo> selectAllUser();
 	
 	User selectUserById(@Param("userId")String userId);
 	
