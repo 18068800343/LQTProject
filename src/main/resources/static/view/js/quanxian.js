@@ -1,7 +1,7 @@
 (function(window){
 	$.ajax({
 		type:"post",
-		url:getContextPath()+"/login/getUser",//用户权限数组
+		url:"/login/getUser",//用户权限数组
 		
 		data:{
 		},
