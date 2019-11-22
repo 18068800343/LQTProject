@@ -1,7 +1,9 @@
 package com.ldxx.controller;
 
+import com.ldxx.bean.User;
 import com.ldxx.bean.WhWasteMgn;
 import com.ldxx.service.WhWasteMgnService;
+import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.vo.WhWasteMgnVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +40,12 @@ public class WhWasteMgnController {
     }
 
     @RequestMapping("/insertWhWasteMgn")
-    public int insertWhWasteMgn(WhWasteMgn WhWasteMgn) {
-        return service.insertWhWasteMgn(WhWasteMgn);
+    public int insertWhWasteMgn(WhWasteMgn whWasteMgn,HttpSession session) {
+    	User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			whWasteMgn.setDealUserId(user.getUserId());
+			whWasteMgn.setDealTime(GetThisTimeUtils.getDateTime());
+		}
+        return service.insertWhWasteMgn(whWasteMgn);
     }
 }

@@ -41,8 +41,13 @@ public class UDutyScheduleController {
 	
 	@RequestMapping("/updUDutySchedule")
 	@ResponseBody
-	public Map<String,Object> updUDutySchedule(UDutySchedule us){
+	public Map<String,Object> updUDutySchedule(UDutySchedule us,HttpSession session){
 		us.setEditDatetime(GetThisTimeUtils.getDateTime());
+		User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			us.setEditUserId(user.getUserId());
+			us.setEditDatetime(GetThisTimeUtils.getDateTime());
+		}
 		int i=service.updUDutySchedule(us);
 		map.put("result", i);
 		map.put("obj", us);
@@ -57,9 +62,14 @@ public class UDutyScheduleController {
 	
 	@RequestMapping("/insertUDutySchedule")
 	@ResponseBody
-	public Map<String,Object> insertUDutySchedule(UDutySchedule us){
+	public Map<String,Object> insertUDutySchedule(UDutySchedule us,HttpSession session){
 		us.setId(LDXXUtils.getUUID12());
 		us.setEditDatetime(GetThisTimeUtils.getDateTime());
+		User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			us.setEditUserId(user.getUserId());
+			us.setEditDatetime(GetThisTimeUtils.getDateTime());
+		}
 		int i=service.insertUDutySchedule(us);
 		map.put("result", i);
 		map.put("obj", us);
