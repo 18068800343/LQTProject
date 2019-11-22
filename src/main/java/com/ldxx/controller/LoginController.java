@@ -63,4 +63,10 @@ public class LoginController {
     	return user;
     }
     
+    @RequestMapping("/exit")//退出
+	@ResponseBody
+	public void exit(HttpServletRequest request){
+		request.getSession().removeAttribute("user");
+	}
+    
 }
