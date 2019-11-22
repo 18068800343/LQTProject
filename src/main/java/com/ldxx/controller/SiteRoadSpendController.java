@@ -2,6 +2,7 @@ package com.ldxx.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.bean.SiteRoadSpend;
+import com.ldxx.bean.User;
 import com.ldxx.service.SiteRoadSpendService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * 摊铺速度
@@ -30,9 +33,13 @@ public class SiteRoadSpendController {
     }
 
     @RequestMapping("/updSiteRoadSpend")
-    public String updSiteRoadSpend(@RequestBody SiteRoadSpend srs){
+    public String updSiteRoadSpend(@RequestBody SiteRoadSpend srs,HttpSession session){
         JSONObject jsonObject=new JSONObject();
         srs.setEditDatetime2(GetThisTimeUtils.getDateTime());
+        User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			srs.setEditUserId2(user.getUserId());
+		}
         int i= service.updSiteRoadSpend(srs);
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "修改");
         jsonObject.put("resultMsg",daoMsg);
@@ -47,10 +54,14 @@ public class SiteRoadSpendController {
     }
 
     @RequestMapping("/insertSiteRoadSpend")
-    public String insertSiteRoadSpend(@RequestBody SiteRoadSpend srs){
+    public String insertSiteRoadSpend(@RequestBody SiteRoadSpend srs,HttpSession session){
         JSONObject jsonObject=new JSONObject();
         srs.setId(LDXXUtils.getUUID12());
         srs.setEditDatetime2(GetThisTimeUtils.getDateTime());
+        User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			srs.setEditUserId2(user.getUserId());
+		}
         int i= service.insertSiteRoadSpend(srs);
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
         jsonObject.put("resultMsg",daoMsg);

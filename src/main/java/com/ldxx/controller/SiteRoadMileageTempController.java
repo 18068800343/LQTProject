@@ -3,6 +3,7 @@ package com.ldxx.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.bean.SiteRoadMileageTemp;
+import com.ldxx.bean.User;
 import com.ldxx.service.SiteRoadMileageTempService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * 摊铺温度
@@ -31,9 +34,13 @@ public class SiteRoadMileageTempController {
     }
 
     @RequestMapping("/updSiteRoadMileageTemp")
-    public String updSiteRoadMileageTemp(@RequestBody SiteRoadMileageTemp srm){
+    public String updSiteRoadMileageTemp(@RequestBody SiteRoadMileageTemp srm,HttpSession session){
         JSONObject json=new JSONObject();
         srm.setEditDatetime(GetThisTimeUtils.getDateTime());
+        User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			srm.setEditUserId(user.getUserId());
+		}
         int i= service.updSiteRoadMileageTemp(srm);
         String msg = MsgFormatUtils.getMsgByResult(i, "修改");
         json.put("msg",msg);
@@ -48,10 +55,14 @@ public class SiteRoadMileageTempController {
     }
 
     @RequestMapping("/insertSiteRoadMileageTemp")
-    public String insertSiteRoadMileageTemp(@RequestBody SiteRoadMileageTemp srm){
+    public String insertSiteRoadMileageTemp(@RequestBody SiteRoadMileageTemp srm,HttpSession session){
         JSONObject json=new JSONObject();
         srm.setId(LDXXUtils.getUUID12());
         srm.setEditDatetime(GetThisTimeUtils.getDateTime());
+        User user = (User) session.getAttribute("user");
+		if(null!=user) {
+			srm.setEditUserId(user.getUserId());
+		}
         int i= service.insertSiteRoadMileageTemp(srm);
         String msg = MsgFormatUtils.getMsgByResult(i, "新增");
         json.put("msg",msg);
