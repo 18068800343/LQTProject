@@ -54,6 +54,7 @@ public class URoleController {
         return aString;
     }
 
+    //获取所有的角色信息
     @RequestMapping("/selectRolesSort")
     public List<URoleVo> selectRolesSort(){
         List<URoleVo> roles = uRoleService.selectRolesSort();

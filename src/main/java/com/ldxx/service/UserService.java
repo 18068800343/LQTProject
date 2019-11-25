@@ -33,7 +33,7 @@ public interface UserService {
 	
 	int iscountUNameEdit(String uName,String userId);
 
-	User selectUserByUsername(String username);
+	UserVo selectUserByUsername(String username);
 
     List<UserVo> selectUserAndRoles();
     

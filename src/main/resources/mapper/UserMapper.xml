@@ -71,7 +71,7 @@
 		select user_id,work_id,u_name from u_user where delete_state=1 and work_id=#{workId}
 	</select>
 
-	<select id="selectUserByUsername" parameterType="String" resultType="user">
+	<select id="selectUserByUsername" parameterType="String" resultType="UserVo">
 		select * from u_user where username=#{username} and delete_state=1
 	</select>
 	<update id="updatePasswordById">

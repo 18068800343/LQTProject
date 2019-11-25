@@ -2,22 +2,21 @@
 	$.ajax({
 		type:"post",
 		url:"/login/getUser",//用户权限数组
-		
 		data:{
 		},
 		success:function(json){
+			console.log(json)
 			if(json!=null &&json!=""){
 			var arr = json.uPermissions.split(',');
-			console.log(arr);
 				$.ajax({
 					type:"post",
-					url:getContextPath()+"/permissions/getAllPermissions",
+					url:"/UPermissionsRole/getAllUPermissionsRole",
 					data:{
 					},
 				success:function(json2){
 					var arr2 =[];
-					for(var a=0;a<json2.list.length;a++){
-						arr2.push(json2.list[a].coding)
+					for(var a=0;a<json2.length;a++){
+						arr2.push(json2[a].coding)
 					}
 					for(var i=0;i<arr.length;i++){
 						userbm=arr[i];
@@ -31,7 +30,7 @@
 						}
 					}
 						//要删除的集合
-					console.log(arr2)	
+						console.log(arr2)
 						for(var j=0;j<arr2.length;j++){
 						
 									var arr4 = arr2[j].replace("+","");

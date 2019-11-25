@@ -34,8 +34,8 @@ public interface  UserDao {
 	int iscountWorkIdEdit(@Param("workId")String workId,@Param("userId")String userId);
 	
 	int iscountUNameEdit(@Param("uName")String uName,@Param("userId")String userId);
-	
-	User selectUserByUsername(@Param("username")String username);
+
+	UserVo selectUserByUsername(@Param("username")String username);
 	
 	int updatePasswordById(@Param("userId")String userId,@Param("new_password") String new_password);
 }

@@ -88,8 +88,26 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User selectUserByUsername(String username) {
-		return dao.selectUserByUsername(username);
+	public UserVo selectUserByUsername(String username) {
+        UserVo user = dao.selectUserByUsername(username);
+        String uPermissions = "";
+        String userRole = user.getUserRole();
+        if(null!=userRole&&!"".equals(userRole)){
+            String[] userRoles = userRole.split("_");
+
+            for(String roleCode:userRoles){
+                List<URoleVo> roles = uRoleDao.selectRoleByRoleCode(roleCode);
+                if(roles.size()>0){
+                    uPermissions=uPermissions+","+roles.get(0).getuPersmissionCoding();
+                }
+            }
+
+        }
+        if(uPermissions.length()>1){
+            uPermissions = uPermissions.substring(1, uPermissions.length());
+            user.setuPermissions(uPermissions);
+        }
+        return user;
 	}
 
 	@Override

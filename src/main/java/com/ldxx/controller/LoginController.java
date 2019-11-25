@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.ldxx.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +37,7 @@ public class LoginController {
 	@ResponseBody
 	public Map<String,Object> userlogin(User user,HttpServletRequest request){
     	int state=0;
-    	User loginUser=null;
+		UserVo loginUser=null;
     	Map<String,Object> map=new HashMap<>();
 		HttpSession session = request.getSession();
 		if(null!=user&&null!=user.getUsername()&&null!=user.getPassword()&&!"".equals(user.getUsername())&&!"".equals(user.getPassword())) {
