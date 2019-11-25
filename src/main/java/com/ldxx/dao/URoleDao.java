@@ -10,7 +10,7 @@ public interface URoleDao {
 
     int addRole(URoleVo uRole);
 
-    int updatePersonRole(String personRoles, String personId);
+    int updatePersonRole(String personId, String personRoles);
 
     List<URoleVo> selectRoleOneByCodeLength(Integer length);
 
@@ -25,4 +25,8 @@ public interface URoleDao {
     URoleVo selectRoleById(String id);
 
     List<URoleVo> selectRoleByRoleName(String name);
+
+    int updURoleVoById(URoleVo uRole);
+
+    int upduPersmissionCoding(URole uRole);
 }

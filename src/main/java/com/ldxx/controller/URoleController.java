@@ -1,5 +1,6 @@
 package com.ldxx.controller;
 
+import com.ldxx.bean.URole;
 import com.ldxx.service.URoleService;
 import com.ldxx.vo.URoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +34,6 @@ public class URoleController {
     }
     @RequestMapping("/updateParentRole")
     public int  updateParentRole(String personId,String personRoles){
-        if("".equals(personRoles.trim())){
-            personRoles="";
-        }else{
-            personRoles = personRoles.substring(0,personRoles.length()-1);
-        }
         int i = uRoleService.updatePersonRole(personId, personRoles);
         return i;
     }
@@ -62,6 +58,16 @@ public class URoleController {
     public List<URoleVo> selectRolesSort(){
         List<URoleVo> roles = uRoleService.selectRolesSort();
         return roles;
+    }
+
+    @RequestMapping("/updURoleVoById")
+    public int updURoleVoById(URoleVo uRole) {
+        return uRoleService.updURoleVoById(uRole);
+    }
+
+    @RequestMapping("/upduPersmissionCoding")
+    public int upduPersmissionCoding(URole uRole){
+        return  uRoleService.upduPersmissionCoding(uRole);
     }
 
 }

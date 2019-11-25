@@ -1,5 +1,6 @@
 package com.ldxx.service;
 
+import com.ldxx.bean.URole;
 import com.ldxx.vo.URoleVo;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface URoleService {
     int updatePersonRole(String personId, String personRoles);
 
     List<URoleVo> selectRolesSort();
+
+    int updURoleVoById(URoleVo uRole);
+
+    int upduPersmissionCoding(URole uRole);
 }

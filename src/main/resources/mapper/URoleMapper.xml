@@ -6,6 +6,9 @@
   		insert into u_role(id,role_code,role_name,role_sort)
   		values(#{id},#{roleCode},#{roleName},#{roleSort})
   	</insert>
+	<update id="updURoleVoById" parameterType="URoleVo">
+		update u_role set role_name=#{roleName} where id=#{id}
+	</update>
     <update id="updatePersonRole" parameterType="string">
   		update u_user set user_role = #{personRoles} where user_id=#{personId}
   	</update>
@@ -25,9 +28,14 @@
   		select *,role_name text from u_role where role_code = #{roleCode}
   	</select>
     <select id="selectRoleById" resultType="URoleVo">
-  		select id,role_code,role_name,role_sort from u_role where id = #{id}
+  		select id,role_code,role_name,role_sort,u_persmission_coding from u_role where id = #{id}
   	</select>
     <select id="selectRoleByRoleName" resultType="URoleVo">
-  		select id,role_code,role_name,role_sort from u_role where role_name = #{name}
+  		select id,role_code,role_name,role_sort,u_persmission_coding from u_role where role_name = #{name}
   	</select>
+
+    <update id="upduPersmissionCoding" parameterType="URole">
+        update u_role set u_persmission_coding=#{uPersmissionCoding} WHERE id = #{id}
+    </update>
+
 </mapper>

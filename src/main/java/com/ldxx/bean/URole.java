@@ -7,7 +7,7 @@ public class URole {
 
     public int id;
 
-    //角色编码
+    //权限编码
     public String roleCode;
 
     //角色名称
@@ -15,6 +15,17 @@ public class URole {
 
     //排序
     public String roleSort;
+
+    //权限编码
+    private String uPersmissionCoding;
+
+    public String getuPersmissionCoding() {
+        return uPersmissionCoding;
+    }
+
+    public void setuPersmissionCoding(String uPersmissionCoding) {
+        this.uPersmissionCoding = uPersmissionCoding;
+    }
 
     public int getId() {
         return id;
