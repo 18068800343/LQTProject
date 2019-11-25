@@ -3,6 +3,7 @@ package com.ldxx.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.User;
+import com.ldxx.dao.StateRoleLinkDao;
 import com.ldxx.dao.ZhiLiangYuJingDao;
 import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
@@ -15,10 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/ZhiLiangYuJingController")
@@ -27,6 +25,8 @@ public class ZhiLiangYuJingController {
 
 	@Resource
 	private ZhiLiangYuJingDao dao;
+	@Resource
+	private StateRoleLinkDao roleLinkDao;
 
 	@RequestMapping("/getAllZhiLiangYuJing")
 	@ResponseBody
@@ -38,16 +38,41 @@ public class ZhiLiangYuJingController {
 		map.put("list",dao.getAllZhiLiangYuJing());
 		Optional.ofNullable(user)
 				.ifPresent(u->{
+                    String userId = user.getUserId();
+					List roleList = roleLinkDao.getStateRoleByUserId(userId);
 					map.put("user",u);
+					map.put("stateList",roleList);
 				});
 
 		return map;
 	}
 
-	@RequestMapping("/delZhiLiangYuJing")
+	@RequestMapping("/submitYuJing")
 	@ResponseBody
-	public int delZhiLiangYuJing(String id) {
-		return dao.delZhiLiangYuJing(id);
+	public int submitYuJing(@RequestBody PlanProductionWarningVo planProductionWarningVo,HttpSession session) {
+         System.out.println(planProductionWarningVo);
+         User user = (User) session.getAttribute("user");
+
+         String id = planProductionWarningVo.getId();
+         Integer status = planProductionWarningVo.getSendstatus();
+         Integer nextStatus = 0;
+         switch(status){
+            case 1:
+				nextStatus = status+1;
+                  break;
+			case 2:
+				nextStatus = status+1;
+
+                  break;
+		    case 3:
+				nextStatus = status+1;
+                  break;
+		    default:
+		    	break;
+         }
+		 planProductionWarningVo.setSendstatus(nextStatus);
+		 dao.updateZhiLiangYuJing(planProductionWarningVo);
+         return 1;
 	}
 
 	@RequestMapping("/addZhiLiangYuJing")
