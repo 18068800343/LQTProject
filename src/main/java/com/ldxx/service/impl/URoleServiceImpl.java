@@ -1,5 +1,6 @@
 package com.ldxx.service.impl;
 
+import com.ldxx.bean.URole;
 import com.ldxx.dao.URoleDao;
 import com.ldxx.service.URoleService;
 import com.ldxx.vo.URoleVo;
@@ -56,7 +57,7 @@ public class URoleServiceImpl implements URoleService {
         //parentRole 为0 则表明本次新建角色无父级角色  1有父角色
         //ifCouXiang 为0 则表明本次新建角色是抽象角色 1不是抽象角色
 
-        if(ifCouXiang.equals("0")){
+        /*if(ifCouXiang.equals("0")){
             URoleVo role = new URoleVo();
             if("0".equals(parentRole)){
                 role.setId(key);
@@ -84,7 +85,13 @@ public class URoleServiceImpl implements URoleService {
                 role.setRoleName(inputRoleName);
             }
             result = uRoleDao.addRole(role);
-        }
+        }*/
+        URoleVo role = new URoleVo();
+        role.setId(key);
+        role.setRoleCode("r"+codeBasic+"*.");
+        role.setRoleSort(codeBasic);
+        role.setRoleName(inputRoleName);
+        result = uRoleDao.addRole(role);
         return result+"";
     }
 
@@ -106,13 +113,23 @@ public class URoleServiceImpl implements URoleService {
     }
 
     @Override
-    public int updatePersonRole(String personRoles, String personId) {
-        return uRoleDao.updatePersonRole(personRoles,personId);
+    public int updatePersonRole(String personId, String personRoles) {
+        return uRoleDao.updatePersonRole(personId,personRoles);
     }
 
     @Override
     public List<URoleVo> selectRolesSort() {
         return uRoleDao.selectRolesSort();
+    }
+
+    @Override
+    public int updURoleVoById(URoleVo uRole) {
+        return uRoleDao.updURoleVoById(uRole);
+    }
+
+    @Override
+    public int upduPersmissionCoding(URole uRole) {
+        return uRoleDao.upduPersmissionCoding(uRole);
     }
 
 
