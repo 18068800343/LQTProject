@@ -8,22 +8,24 @@ public class UDutySchedule {
 
 	public String id;
 
-	public String userId;//user_id
+	private String userId;//user_id
 	private String workId;//工号
 	private String uName;//姓名
 	
-	public String datetimeStart;//开始日期时间
+	private String datetimeStart;//开始日期时间
 
-	public String datetimeEnd;//结束日期时间
+	private String datetimeEnd;//结束日期时间
 
-	public String remarks;//备注
+	private String remarks;//备注
 
-	public int deleteState;//删除状态0：删除。1：存在
+	private int deleteState;//删除状态0：删除。1：存在
 
-	public String editUserId;
+	private String editUserId;
 
-	public String editDatetime;
-
+	private String editDatetime;
+	
+	private String userName;
+	
 	public String getId() {
 		return id;
 	}
@@ -107,6 +109,16 @@ public class UDutySchedule {
 
 	public void setEditDatetime(String editDatetime) {
 		this.editDatetime = editDatetime;
+	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	

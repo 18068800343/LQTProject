@@ -3,9 +3,10 @@
 <mapper namespace="com.ldxx.dao.UDutyScheduleDao" >
 
 	<select id="getAllUDutySchedule" resultType="UDutySchedule">
-		select a.id,a.user_id,a.datetime_start,a.datetime_end,a.remarks,a.delete_state,a.edit_user_id,a.edit_datetime,b.work_id,b.u_name
+		select a.id,a.user_id,a.datetime_start,a.datetime_end,a.remarks,a.delete_state,a.edit_user_id,a.edit_datetime,b.work_id,b.u_name,c.u_name as userName
 		from u_duty_schedule a
 		left join u_user b on a.user_id=b.user_id
+		left join u_user c on a.edit_user_id=c.user_id
 		where a.delete_state=1
 	</select>
 	

@@ -167,7 +167,11 @@
 							localStorage.setItem("obj", JSON.stringify(obj))
 						} 
 						location.href = "index.html"
-					} else {
+					} else if(json.result == -1){
+						toastr.error("用户名或密码为空");
+					}else if(json.result == -2){
+						toastr.error("该用户不存在");
+					}else{
 						toastr.error("用户名或密码错误");
 					}
 

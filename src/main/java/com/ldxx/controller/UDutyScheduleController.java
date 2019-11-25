@@ -47,6 +47,7 @@ public class UDutyScheduleController {
 		if(null!=user) {
 			us.setEditUserId(user.getUserId());
 			us.setEditDatetime(GetThisTimeUtils.getDateTime());
+			us.setUserName(user.getuName());
 		}
 		int i=service.updUDutySchedule(us);
 		map.put("result", i);
@@ -69,6 +70,7 @@ public class UDutyScheduleController {
 		if(null!=user) {
 			us.setEditUserId(user.getUserId());
 			us.setEditDatetime(GetThisTimeUtils.getDateTime());
+			us.setUserName(user.getuName());
 		}
 		int i=service.insertUDutySchedule(us);
 		map.put("result", i);
