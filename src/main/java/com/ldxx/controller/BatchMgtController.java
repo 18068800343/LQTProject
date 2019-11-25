@@ -61,6 +61,7 @@ public class BatchMgtController {
 		if(null!=user) {
 			bm.setEditUserId(user.getUserId());;
 		}
+		bm.setuName(user.getuName());
 		int i= service.updBatchMgt(bm);
 		map.put("result", i);
 		map.put("BatchMgt", bm);
@@ -78,8 +79,9 @@ public class BatchMgtController {
 		bm.setEditDatetime(GetThisTimeUtils.getDateTime());
 		User user = (User) session.getAttribute("user");
 		if(null!=user) {
-			bm.setEditUserId(user.getUserId());;
+			bm.setEditUserId(user.getUserId());
 		}
+		bm.setuName(user.getuName());
 		int i= service.insertBatchMgt(bm);
 		map.put("result", i);
 		map.put("BatchMgt", bm);

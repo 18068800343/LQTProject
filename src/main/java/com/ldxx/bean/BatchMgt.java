@@ -14,22 +14,26 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 public class BatchMgt {
 	
-	public String id;
+	private String id;
 
-    public String roadId;//路段编号
+	private String roadId;//路段编号
 
-    public String batch;//批次
+	private String batch;//批次
 
-    public String licencePlate;//车牌
+	private String licencePlate;//车牌
 
-    public BigDecimal unloadedWeight;//空车重量
+	private BigDecimal unloadedWeight;//空车重量
 
-    public BigDecimal loadingWeight;//装料后重量
+	private BigDecimal loadingWeight;//装料后重量
 
-    public BigDecimal loadingTemperature;//装料温度
+	private BigDecimal loadingTemperature;//装料温度
 
-    public String pitchType;//成品沥青类型
-    public String pitchTypeName;
+	private String pitchType;//成品沥青类型
+	private String pitchTypeName;
+	
+	private String uName;
+	
+	private String roadName;//路段编号，暂时防止显示报错用 19.11.25
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -157,6 +161,22 @@ public class BatchMgt {
 		this.deleteState = deleteState;
 	}
 
+	public String getuName() {
+		return uName;
+	}
+
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+
+	public String getRoadName() {
+		return roadName;
+	}
+
+	public void setRoadName(String roadName) {
+		this.roadName = roadName;
+	}
+	
     
     
 }

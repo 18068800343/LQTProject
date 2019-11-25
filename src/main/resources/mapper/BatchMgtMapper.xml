@@ -56,8 +56,8 @@
 	</insert>
 
 	<select id="getBatchMgtByPlate" resultType="BatchMgt">
-		select id,licence_plate,unloaded_weight,datetime_in
-		from batch_mgt where licence_plate=#{licencePlate} and loading_weight is null and delete_state=1
+		select top 1 id,licence_plate,unloaded_weight,datetime_in
+		from batch_mgt where licence_plate=#{licencePlate} and loading_weight is null and delete_state=1 order by datetime_in desc
 	</select>
 
 </mapper>
