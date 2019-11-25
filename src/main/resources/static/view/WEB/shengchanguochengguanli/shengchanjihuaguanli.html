@@ -82,6 +82,7 @@
 						<table class="table table-bordered table-condensed " id="mainContent" style="white-space: nowrap;">
 							<thead>
 							<tr>
+								<th>生产计划编号</th>
 								<th>路段编号</th>
 								<th>路段名称</th>
 								<th>配方编号</th>
@@ -930,6 +931,7 @@
 		},
 		"order": [[11, 'desc']],
 		"columns": [
+			{ "data": "planno"},
 			{ "data": "roadno"},
 			{ "data": "roadname"},
 			{ "data": "flno"},
@@ -949,7 +951,7 @@
 		"columnDefs": [
 			{
 				"class": "tcenter",
-				"targets": 14,
+				"targets": 15,
 				"searchable": true,
 				"render": function(data, type, full) {
 					var guanlian= '<i class="glyphicon glyphicon-random" style="font-size:13px;cursor:pointer;margin-right:3px;" onclick="linkMsg(this)" title="关联偏差"   data-toggle="modal" data-target="#allMsg"></i>'
