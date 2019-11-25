@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../font2/iconfont.css">
 	<link href="../../style/bootstrap.min.css" rel="stylesheet">
     <link href="../../style/style.css" rel="stylesheet">
+    <link href="../../toastr/toastr.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
     <style lang="">
         .UpperPart{
@@ -190,6 +191,9 @@
 <script src="../../js/common-scripts.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../toastr/toastr.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script>
     $(document).ready( function () {
         initTable();
@@ -231,16 +235,30 @@
             "targets" : 9,
             "searchable" : true,
             "render" : function(data, type, full) {
-                var xiugai = '<i class="glyphicon glyphicon-share-alt" style="font-size:16px;cursor:pointer;" data-f="'
+
+                let stateList = pageVariable.stateList;
+
+
+                let tijiao = '<i class="glyphicon glyphicon-share-alt" style="font-size:16px;cursor:pointer;" data-f="'
                     + full
-                    + '"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>';
+                    + '"   onclick="udMsg(this)" title="提交" data-toggle="modal" data-target="#change"></i>';
 
-                var qiyong = '<i class="glyphicon glyphicon-log-out" style="font-size:16px;cursor:pointer;" data-id="'
+                let quxiao = '<i class="glyphicon glyphicon-log-out" style="font-size:16px;cursor:pointer;" data-id="'
                     + data
-                    + '" onclick="delMsg(this)" title="删除"></i>';
+                    + '" onclick="delMsg(this)" title="取消"></i>';
 
-
-                return xiugai + qiyong ;
+                if(full.warningstate==0 || full.warningstate==2){
+                     return '';
+                }else{
+                    for (let i in stateList){
+                        if(full.sendstatus == i){
+                         return tijiao + quxiao ;
+                        }else{
+                            continue;
+                        }
+                    }
+                        return '';
+                }
             }
         }, {
             "class" : "tcenter",
@@ -313,7 +331,7 @@
         
 	});
 
-    var pageVariable={};
+    let pageVariable={};
 
 	function initTable(){
         $.ajax({
@@ -326,31 +344,38 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
+                pageVariable.user = json.user;
+                pageVariable.stateList = json.stateList;
                 $('#mainContent').dataTable().fnClearTable();
                 $('#mainContent').DataTable().rows.add(json.list).draw(false);
-                pageVariable.user = json.user;
             }
         });
     }
 
-    function getCreat(bb){
-        var EnterpriseRating= $(bb).parent().prev().text();
-        var Remarks= $(bb).parent().prev().prev().text();
-        var ContactPhone1= $(bb).parent().prev().prev().prev().text();
-        var Contacts= $(bb).parent().prev().prev().prev().prev().text();
-        var address= $(bb).parent().prev().prev().prev().prev().prev().text();
-        var ProprietorUnit= $(bb).parent().prev().prev().prev().prev().prev().prev().text();
-        var Code= $(bb).parent().prev().prev().prev().prev().prev().prev().prev().text();
-        $("#CEnterprise-rating").val(EnterpriseRating);
-        $("#CRemarks").val(Remarks);
-        $("#CContact-phone1").val(ContactPhone1);
-        $("#CContacts").val(Contacts);
-        $("#Caddress").val(address);
-        $("#CProprietor-unit").val(ProprietorUnit);
-        $("#CCode").val(Code);
-        rowIndex = bb.parentNode.parentNode.rowIndex; 
+    let page_tr;
+    let udMsg = (e) => {
+        let tr=$(e).parents("tr");
+        page_tr=tr;
+        let data=$("#mainContent").DataTable().row(tr).data();
+        var msg = "确定要删除吗？\n\n请确认！";
+        if (confirm(msg) == true) {
+            $.ajax({
+                type: 'POST',
+                url: '/ZhiLiangYuJingController/submitYuJing',
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                error: function (msg) {
+                    errMessage("请求UserController失败");
+                },
+                success: function (json) {
+
+                }
+            });
+        }else{
+            return false;
+        }
     }
 
-    
 </script>
 </html>
