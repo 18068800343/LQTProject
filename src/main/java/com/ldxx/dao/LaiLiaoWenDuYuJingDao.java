@@ -28,4 +28,6 @@ public interface  LaiLiaoWenDuYuJingDao {
 	WhWasteMgnVo getWeightandType(String id);
 
 	int updWarningstateBybatchId(String id,int warningState);
+	
+	SiteIncomingMaterialTempWarningVo getLaiLiaoWenDuByBatch(String batch);
 }

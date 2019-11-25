@@ -78,4 +78,9 @@ public class LaiLiaoWenDuYuJingServiceImpl implements LaiLiaoWenDuYuJingService 
         }
         return i;
     }
+
+	@Override
+	public SiteIncomingMaterialTempWarningVo getLaiLiaoWenDuByBatch(String batch) {
+		return dao.getLaiLiaoWenDuByBatch(batch);
+	}
 }

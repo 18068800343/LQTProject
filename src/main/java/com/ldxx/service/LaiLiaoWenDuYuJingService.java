@@ -16,4 +16,6 @@ public interface LaiLiaoWenDuYuJingService {
     int updateLaiLiaoWenDu(SiteIncomingMaterialTempWarningVo siteIncomingMaterialTempWarningVo);
 
     int updWarningstate(String id,int warningstate,HttpSession session);
+    
+    SiteIncomingMaterialTempWarningVo getLaiLiaoWenDuByBatch(String batch);
 }

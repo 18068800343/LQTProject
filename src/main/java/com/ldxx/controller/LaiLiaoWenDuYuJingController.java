@@ -105,4 +105,11 @@ public class LaiLiaoWenDuYuJingController {
         int i= service.updWarningstate(id,warningstate,session);
         return i;
     }
+    
+    @RequestMapping("/getLaiLiaoWenDuByBatch")
+    @ResponseBody
+    public SiteIncomingMaterialTempWarningVo getLaiLiaoWenDuByBatch(String batch) {
+    	
+    	return service.getLaiLiaoWenDuByBatch(batch);
+    }
 }
