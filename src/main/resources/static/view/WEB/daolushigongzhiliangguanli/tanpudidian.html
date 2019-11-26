@@ -108,7 +108,7 @@ body, html {
 		<div class="zhuti-content">
 			<div class="UpperPart">
 				<div class="UpperPartL">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入摊铺地点管理</button>
+					<button type="button" class="btn btn-primary Peaaa" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入摊铺地点管理</button>
 				</div>
 				<div class="UpperPartR">
 					<!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
@@ -260,6 +260,7 @@ body, html {
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../js/quanxian.js"></script>
 <script>
 	$(document).ready(function() {
 		initMap();
@@ -344,21 +345,50 @@ body, html {
 							"targets" : 7,
 							"searchable" : true,
 							"render" : function(data, type, full) {
-								var xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'
+								var xiugai = '<i class="iconfont icon-xiugai Peaab" style="font-size:18px;cursor:pointer;display:none;" data-f="'
 										+ full
 										+ '"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>';
 
-								var qiyong = '<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" data-id="'
+								var qiyong = '<i class="iconfont icon-shanchu Peaad" style="font-size:18px;cursor:pointer;display:none;" data-id="'
 										+ data
 										+ '" onclick="delMsg(this)" title="删除"></i>';
 										
-								var marker = '<i class="glyphicon glyphicon-map-marker" style="font-size:14px;cursor:pointer;" data-id="'
+								var marker = '<i class="glyphicon glyphicon-map-marker Peaac" style="font-size:14px;cursor:pointer;display:none;" data-id="'
 									+ data
 									+ '" onclick="markPoint(this)" title="定位"></i>';
 										
 								return   xiugai + qiyong + marker;
 							}
 						} ],
+						"fnDrawCallback" : function() {
+							$.ajax({
+								type:"post",
+								url:"/login/getUser",
+								async:false,
+								data:{
+								},
+								success:function(json){
+									if(json!=null &&json!=""){
+										var arr = json.uPermissions.split(',');
+										for(var i=0;i<arr.length;i++){
+											var arr2 = arr[i].replace("+","");
+											if(arr[i].indexOf("Peaab") >= 0 ){
+												$(".Peaab").show();
+											}
+											if(arr[i].indexOf("Peaad") >= 0 ){
+												$(".Peaad").show();
+											}
+											if(arr[i].indexOf("Peaac") >= 0 ){
+												$(".Peaac").show();
+											}
+
+										}
+
+									}
+
+								}
+							});
+						},
 						//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
 						"sScrollX" : true,
 						// 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
