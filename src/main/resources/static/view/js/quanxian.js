@@ -5,7 +5,6 @@
 		data:{
 		},
 		success:function(json){
-			console.log(json)
 			if(json!=null &&json!=""){
 			var arr = json.uPermissions.split(',');
 				$.ajax({
@@ -30,15 +29,14 @@
 						}
 					}
 						//要删除的集合
-						console.log(arr2)
+						//console.log(arr2)
 						for(var j=0;j<arr2.length;j++){
-						
-									var arr4 = arr2[j].replace("+","");
-									if(arr4=="Pab"){
-										console.log(arr4)
-									}
-									$("."+arr4+"").hide();
-									$("."+arr4+"").closest("li").remove();//通过编码 点 remove
+								var arr4 = arr2[j].replace("+","");
+								if(arr4=="Pab"){
+									console.log(arr4)
+								}
+								$("."+arr4+"").hide();
+								$("."+arr4+"").closest("li").remove();//通过编码 点 remove
 									
 						}
 					}
