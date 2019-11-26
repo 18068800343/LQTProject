@@ -5,7 +5,7 @@ import com.ldxx.bean.WhWarehouseCount;
 
 public interface WhWarehouseCountService {
 	
-	List<WhWarehouseCount> getAllWhWarehouseCount();
+	public List<WhWarehouseCount> getAllWhWarehouseCount();
 	
 	WhWarehouseCount getWhWarehouseCountById(String id);
 	
@@ -15,4 +15,5 @@ public interface WhWarehouseCountService {
 	
 	int insertWhWarehouseCount(WhWarehouseCount wwc);
 
+	WhWarehouseCount getWhWarehouseCountByStorNo(String storNo);
 }

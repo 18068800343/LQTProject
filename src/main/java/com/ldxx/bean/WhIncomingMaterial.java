@@ -7,28 +7,31 @@ package com.ldxx.bean;
  */
 public class WhIncomingMaterial {
 	
-	public String id;
+	private String id;
 
-    public String no;//编号
+	private String no;//编号
 
-    public String datetime;//时间
+    private String datetime;//时间
 
-    public Double weight;//重量
+    private Double weight;//重量
 
-    public String materials;//材料id
-    public String materialsName;//材料名
+    private String materials;//材料id
+    private String materialsName;//材料名
 
-    public String waterContent;//含水量
+    private String waterContent;//含水量
 
-    public String companyId;//来货单位
+    private String companyId;//来货单位
 
-    public Double price;//价格
+    private Double price;//价格
 
-    public String storNo;//料仓编号
+    private String storNo;//料仓编号
 
-    public String meminfo;//备注
+    private String meminfo;//备注
 
-    public String editUserId;//录入人
+    private String editUserId;//录入人
+    
+    private String editDatetime;
+    
 	private String uName;
 
     public int deleteState;//逻辑删除 1:存在；0删除
@@ -143,6 +146,14 @@ public class WhIncomingMaterial {
 
 	public void setDeleteState(int deleteState) {
 		this.deleteState = deleteState;
+	}
+
+	public String getEditDatetime() {
+		return editDatetime;
+	}
+
+	public void setEditDatetime(String editDatetime) {
+		this.editDatetime = editDatetime;
 	}
     
     

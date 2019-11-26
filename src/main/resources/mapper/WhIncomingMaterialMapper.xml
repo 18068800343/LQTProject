@@ -14,7 +14,7 @@
 		select a.id,a.no,a.datetime,a.weight,a.materials,a.water_content,a.company_id,a.price,a.stor_no,a.meminfo,a.edit_user_id,a.delete_state,b.material_name as materialsName
 		from wh_incoming_material as a
 		left join dic_materials b on a.materials=b.id
-		 where id=#{id}
+		 where id=#{id} and a.delete_state=1
 	</select>
 	
 	<update id="updWhIncomingMaterialById" parameterType="WhIncomingMaterial">

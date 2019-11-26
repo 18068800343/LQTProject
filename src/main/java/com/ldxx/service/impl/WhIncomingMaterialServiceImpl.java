@@ -41,6 +41,7 @@ public class WhIncomingMaterialServiceImpl implements WhIncomingMaterialService 
 	@Transactional
 	@Override
 	public int insertWhIncomingMaterial(WhIncomingMaterial wm) {
+		
 		return dao.insertWhIncomingMaterial(wm);
 	}
 

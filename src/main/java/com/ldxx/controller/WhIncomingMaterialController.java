@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ldxx.bean.WhIncomingMaterial;
 import com.ldxx.service.WhIncomingMaterialService;
+import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
 
 import javax.servlet.http.HttpSession;
@@ -47,7 +48,9 @@ public class WhIncomingMaterialController {
 	public Map<String,Object> updWhIncomingMaterialById(WhIncomingMaterial wm, HttpSession session){
 		User user = (User) session.getAttribute("user");
 		if(null!=user) {
-			wm.setEditUserId(user.getUserId());;
+			wm.setEditUserId(user.getUserId());
+			wm.setEditDatetime(GetThisTimeUtils.getDateTime());
+			wm.setuName(user.getuName());
 		}
 		int i= service.updWhIncomingMaterialById(wm);
 		map.put("result", i);
@@ -67,7 +70,9 @@ public class WhIncomingMaterialController {
 		wm.setId(LDXXUtils.getUUID12());
 		User user = (User) session.getAttribute("user");
 		if(null!=user) {
-			wm.setEditUserId(user.getUserId());;
+			wm.setEditUserId(user.getUserId());
+			wm.setEditDatetime(GetThisTimeUtils.getDateTime());
+			wm.setuName(user.getuName());
 		}
 		int i= service.insertWhIncomingMaterial(wm);
 		map.put("result", i);

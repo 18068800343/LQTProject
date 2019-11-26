@@ -45,4 +45,12 @@ public class WhWarehouseCountServiceImpl implements WhWarehouseCountService {
 		return dao.insertWhWarehouseCount(wwc);
 	}
 
+	@Override
+	public WhWarehouseCount getWhWarehouseCountByStorNo(String storNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
 }

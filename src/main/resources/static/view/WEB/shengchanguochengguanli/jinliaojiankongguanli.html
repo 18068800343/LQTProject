@@ -125,10 +125,10 @@
 				                    		<td><input type="text" class="form-control"></td>
 				                        </tr>
 				                    	<tr>
+											<td>材料:</td>
+				                    		<td><input type="text" class="form-control"></td>
 				                    	    <td>重量:</td>
 				                    	    <td><input type="text" class="form-control"></td>
-				                    		<td>材料:</td>
-				                    		<td><input type="text" class="form-control"></td>
 				                    	</tr>
 				                    	<tr>
 				                    	    <td>含水量:</td>
@@ -227,36 +227,37 @@
                                 <form class="form-inline">
                                     <table class="table table-bordered table-condensed" >
                                     	<tr>
-											<td>编号</td>
-											<td><input type="text"  id="bianhao" style="width: 70%;"/></td>
-											<td>时间</td>
-											<td><input type="text"  id="shijian" placeholder="请选择"style="width: 70%;" /></td>
+											<td style="width: 15%;">编号</td>
+											<td><input type="text" class="form-control"  id="bianhao" style="width: 70%;"/></td>
+											<td style="width: 15%;">时间</td>
+											<td><input type="text"  class="form-control" id="shijian" placeholder="请选择"style="width: 70%;" /></td>
 										</tr>
 										 <tr>
-											<!-- <td>重量</td>
-											<td><input type="text" id="zhongliang" placeholder="请输入" style="width: 70%;"/></td> -->
-											<td>材料</td>
-											<td><select id="cailiao" style="width: 70%;">
+											 <td>材料</td>
+											 <td><select id="cailiao" class="form-control" style="width: 70%;">
 												</select>
 											</td>
+											<td>重量</td>
+											<td><input type="text" class="form-control" id="zhongliang" placeholder="请输入" style="width: 70%;"/></td>
+										</tr>
+										 <tr>
 											<td>含水量</td>
-											<td><input type="text"  id="hanshuiliang" style="width: 70%;"/></td>
-										</tr>
-										 <tr>
+											<td><input type="text" class="form-control" id="hanshuiliang" style="width: 70%;"/></td>
 											<td>来货单位</td>
-											<td><input type="text" id="laihuodanwei" placeholder="请输入" style="width: 70%;"/></td>
-											<td>单价</td>
-											<td><input type="text" id="danjia" placeholder="请输入" style="width: 70%;"/></td>
+											<td><input type="text" class="form-control" id="laihuodanwei" placeholder="请输入" style="width: 70%;"/></td>
 										</tr>
 										 <tr>
+											<td>单价（元/千克）</td>
+											<td><input type="text" class="form-control" id="danjia" placeholder="请输入" style="width: 70%;"/></td>
 											<td>料仓编号</td>
-											<td><input type="text" id="liaocangbianhao" placeholder="请输入" style="width: 70%;"/></td>
-											<!--<td>录入人</td>
-											<td><input type="text" id="lururen" placeholder="请输入" style="width: 70%;"/></td>-->
+											<td><input type="text" class="form-control" id="liaocangbianhao" placeholder="请输入" style="width: 70%;"/></td>
 										</tr>
 										<tr>
+											<!--<td>录入人</td>
+											<td><input type="text" id="lururen" placeholder="请输入" style="width: 70%;"/></td>-->
 											<td>备注</td>
-											<td colspan="3"><textarea id="beizhu" rows="4" cols="90"></textarea></td>
+											<td colspan="3"><textarea class="form-control" style="width:100%;border: none;" id="beizhu" rows="4" cols="90"></textarea></td>
+											
 										</tr>
                                     </table>
                                 </form>  
@@ -283,31 +284,28 @@
                                 <form class="form-inline">
                                     <table class="table table-bordered table-condensed" >
                                     	<tr>
-											<td>编号</td>
-											<td><input type="text"  id="xg_bianhao" style="width: 70%;"/></td>
-											<td>时间</td>
-											<td><input type="text"  id="xg_shijian" placeholder="请选择"style="width: 70%;" /></td>
+											<td style="width: 15%;">编号</td>
+											<td><input type="text"  class="form-control" id="xg_bianhao" style="width: 70%;"/></td>
+											<td style="width: 15%;">时间</td>
+											<td><input type="text"  class="form-control" id="xg_shijian" placeholder="请选择"style="width: 70%;" /></td>
 										</tr>
 										 <tr>
-											<td>重量</td>
-											<td><input type="text" id="xg_zhongliang" placeholder="请输入" style="width: 70%;"/></td>
-											<td>材料</td>
-											<td><select id="xg_cailiao" style="width: 70%;">
-													
-												</select>
-											</td>
-										</tr>
+											 <td>材料</td>
+											 <td><select class="form-control" id="xg_cailiao" style="width: 70%;"></select></td>
+											 <td>重量</td>
+											 <td><input type="text" class="form-control" id="xg_zhongliang" placeholder="请输入" style="width: 70%;"/></td>
+											</tr>
 										 <tr>
 											<td>含水量</td>
-											<td><input type="text"  id="xg_hanshuiliang" style="width: 70%;"/></td>
+											<td><input type="text" class="form-control" id="xg_hanshuiliang" style="width: 70%;"/></td>
 											<td>来货单位</td>
-											<td><input type="text" id="xg_laihuodanwei" placeholder="请输入" style="width: 70%;"/></td>
+											<td><input type="text" class="form-control" id="xg_laihuodanwei" placeholder="请输入" style="width: 70%;"/></td>
 										</tr>
 										 <tr>
-											<td>单价</td>
-											<td><input type="text" id="xg_danjia" placeholder="请输入" style="width: 70%;"/></td>
+											<td>单价（元/千克）</td>
+											<td><input type="text" class="form-control" id="xg_danjia" placeholder="请输入" style="width: 70%;"/></td>
 											<td>料仓编号</td>
-											<td><input type="text" id="xg_liaocangbianhao" placeholder="请输入" style="width: 70%;"/></td>
+											<td><input type="text" class="form-control" id="xg_liaocangbianhao" placeholder="请输入" style="width: 70%;"/></td>
 										</tr>
 										 <!--<tr>
 											<td>录入人</td>
@@ -317,7 +315,7 @@
 										</tr>-->
 										<tr>
 											<td>备注</td>
-											<td colspan="3"><textarea id="xg_beizhu" rows="4" cols="90"></textarea></td>
+											<td colspan="3"><textarea class="form-control" style="width:100%;border: none;" id="xg_beizhu" rows="4" cols="90"></textarea></td>
 										</tr>
                                     </table>
                                 </form>  
@@ -514,8 +512,8 @@
 		$("#baocun").click(function(){
 			var bianhao=$("#bianhao").val();
 			var shijiian=$("#shijian").val();
-			//var zhongliang=$("#zhongliang").val();
-			var zhongliang="";
+			var zhongliang=$("#zhongliang").val();
+			//var zhongliang="";
 			var cailiao=$("#cailiao").val();
 			var hanshuiliang=$("#hanshuiliang").val();
 			var laihuodanwei=$("#laihuodanwei").val();
