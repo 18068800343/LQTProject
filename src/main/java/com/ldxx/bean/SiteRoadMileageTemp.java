@@ -7,24 +7,36 @@ import java.math.BigDecimal;
  */
 public class SiteRoadMileageTemp {
 
-    public String id;
+	private String id;
 
-    public String siteId;//地点_id
-    public String siteNumber;//标段
-    public String roadName;//路段
-    public String roadId;
+	private String siteId;//地点_id
+	private String siteNumber;//标段
+	private String roadName;//路段
+	private String roadId;
 
-    public BigDecimal temp;//摊铺温度
+	private BigDecimal temp;//摊铺温度
 
-    public String datetime;//最后录入日期
+	private String datetime;//最后录入日期
 
-    public String editUserId;//最后录入用户
+	private String editUserId;//最后录入用户
+    
+	private String editDatetime;//施工时间
+    
+    private String editUName;
 
-    public String editDatetime;//施工时间
+    private int deleteState;
+    
+    
 
-    public int deleteState;
+    public String getEditUName() {
+		return editUName;
+	}
 
-    public String getSiteNumber() {
+	public void setEditUName(String editUName) {
+		this.editUName = editUName;
+	}
+
+	public String getSiteNumber() {
         return siteNumber;
     }
 

@@ -18,9 +18,20 @@ public class SiteRoadSpend {
     public String editUserId2;//最后录入用户
 
     public String editDatetime2;//最后录入日期
-
+    
+    private String editUName;
+    
     public int deleteState;//删除状态
 
+    
+    public String getEditUName() {
+		return editUName;
+	}
+
+	public void setEditUName(String editUName) {
+		this.editUName = editUName;
+	}
+	
     public String getId() {
         return id;
     }
