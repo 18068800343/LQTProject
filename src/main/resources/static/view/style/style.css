@@ -395,7 +395,7 @@ footer{
 
 .header {
     z-index: 1002;
-    min-height: 70px;
+    min-height: 60px;
     background-color: #003D79;
 
 }
