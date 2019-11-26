@@ -90,12 +90,12 @@ public class ZhiLiangYuJingServiceImpl implements ZhiLiangYuJingService {
 		planProductionCount.setPdneedsourcestate(1);
 		int i = 0;
 		int j = 0;
-		int k = 0;
+		//int k = 0;
 		try {
 			i = dao.updateZhiLiangYuJingStatus(planProductionWarningVo);
 		    j = whWasteMgnDao.insertWhWasteMgn(whWasteMgn);
-		    k = jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
-		    if(i>0&&j>0&&k>0){
+		    //k = jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
+		    if(i>0&&j>0){
 		    	//return i;
 			}else{
 		    	i=-1;
