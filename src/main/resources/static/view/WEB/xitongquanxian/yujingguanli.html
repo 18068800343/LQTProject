@@ -213,11 +213,14 @@
 					    "searchable": true,
 					    "render": function(data, type, full) {
 					  	  		return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" id="look" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>'
-	                            +'<i class="iconfont icon-xiugai Phfb" style="font-size:18px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
-	                            +'<i class="iconfont icon-shanchu Phfc" style="font-size:18px;cursor:pointer;" id="del"  title="删除"></i>'
+	                            +'<i class="iconfont icon-xiugai Phfb" style="font-size:18px;cursor:pointer;display:none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
+	                            +'<i class="iconfont icon-shanchu Phfc" style="font-size:18px;cursor:pointer;display:none;" id="del"  title="删除"></i>'
 					        }
 					  }
 			],"fnDrawCallback" : function() {
+                this.api().column(0).nodes().each(function(cell, i) {
+                    cell.innerHTML =  i + 1;
+                });
                 $.ajax({
                     type:"post",
                     url:"/login/getUser",
@@ -259,11 +262,7 @@
             "sLast": "最后一页"
         }},
         
-        "fnDrawCallback"  : function(){
-	          　　this.api().column(0).nodes().each(function(cell, i) {
-	          　　　　cell.innerHTML =  i + 1;
-	          　  　});
-        }
+
 	});
 	function initTable(){
         $.ajax({
