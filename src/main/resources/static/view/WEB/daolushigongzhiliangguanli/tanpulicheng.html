@@ -142,7 +142,7 @@
 					<form class="form-inline">
 						<table class="table table-bordered">
 							<tr>
-								<td>路段编号</td>
+								<td>路段名称</td>
 								<td>
                                     <select class="form-control" @change="roadChange" v-model="roadSelected" style="width: 100%;" id="roadid">
                                         <option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
@@ -191,7 +191,7 @@
 				<form class="form-inline">
 					<table class="table table-bordered">
 						<tr>
-							<td>路段编号</td>
+							<td>路段名称</td>
 							<td>
 								<select class="form-control" @change="roadChange" v-model="roadSelected" style="width: 100%;" id="roadid">
 									<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
