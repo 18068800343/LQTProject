@@ -6,22 +6,33 @@ package com.ldxx.bean;
  */
 public class SiteRoadMileage {
 	
-	public String id;
+	private String id;
 
-    public String siteId;//地点_id
-	public String siteNumber;//标段
-	public String roadName;//路段
-	public String roadId;
+	private String siteId;//地点_id
+	private String siteNumber;//标段
+	private String roadName;//路段
+	private String roadId;
 
-	public float length;//摊铺里程
+	private float length;//摊铺里程
 
-    public String datetime;//日期时间
+	private String datetime;//日期时间
 
-    public String editUserId2;//最后录入用户
+	private String editUserId2;//最后录入用户
+    
+    private String editUName;//最后录入用户姓名
+    
+    private String editDatetime2;//最后录入日期
 
-    public String editDatetime2;//最后录入日期
+    private int deleteState;//逻辑删除1存在；0删除
 
-    public int deleteState;//逻辑删除1存在；0删除
+    
+	public String getEditUName() {
+		return editUName;
+	}
+
+	public void setEditUName(String editUName) {
+		this.editUName = editUName;
+	}
 
 	public String getRoadId() {
 		return roadId;

@@ -3,10 +3,12 @@
 <mapper namespace="com.ldxx.dao.SiteRoadMileageDao" >
 
 	<select id="selectAllSiteRoadMileage" resultType="SiteRoadMileage">
-		select a.id,a.site_id,a.length,a.datetime,a.edit_user_id2,a.edit_datetime2,a.delete_state,b.site_number,c.road_name,c.road_id
+		select a.id,a.site_id,a.length,a.datetime,a.edit_user_id2,a.edit_datetime2,
+			a.delete_state,b.site_number,c.road_name,c.road_id,u.u_name as editUName
 		from site_road_mileage as a
 		left join site_construction as b on a.site_id=b.id
 		left join sys_road_mgn as c on c.road_id=b.road_id
+		left join u_user as u on a.edit_user_id2=u.user_id
 		where a.delete_state=1
 	</select>
 	
