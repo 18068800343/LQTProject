@@ -16,4 +16,6 @@ public interface ZhiLiangYuJingDao {
 
 	int updateZhiLiangYuJing(PlanProductionWarningVo planProductionWarningVo);
 
+	int updateZhiLiangYuJingStatus(PlanProductionWarningVo planProductionWarningVo);
+
 }
