@@ -5,11 +5,21 @@ package com.ldxx.bean;
  */
 public class UPermissionsRole {
 
-    public int id;
+    private int id;
 
-    public String name;
+    private String name;
 
-    public String coding;
+    private String coding;
+
+    private int deleteState;
+
+    public int getDeleteState() {
+        return deleteState;
+    }
+
+    public void setDeleteState(int deleteState) {
+        this.deleteState = deleteState;
+    }
 
     public int getId() {
         return id;

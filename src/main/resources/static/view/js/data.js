@@ -1,8 +1,7 @@
 var zNodes =[
-
-	{id: "Pb+", pId: 0, name: "沥青砼生产过程管理", open:false},
+	/*{id: "Pb+", pId: 0, name: "沥青砼生产过程管理", open:false},
 		{id: "Pba+", pId: "Pb+", name: "考勤管理"},
-			/*{id: "Pbaa+", pId: "Pba+", name: "录入考勤统计"},*/
+			/!*{id: "Pbaa+", pId: "Pba+", name: "录入考勤统计"},*!/
 		{id: "Pbb+", pId: "Pb+", name: "值班管理"},
 			{id: "Pbba+", pId: "Pbb+", name: "录入值班信息"},
 			{id: "Pbbb+", pId: "Pbb+", name: "修改值班信息"},
@@ -16,8 +15,8 @@ var zNodes =[
 				{id: "Pbdaa+", pId: "Pbda+", name: "录入来料信息"},
 				{id: "Pbdab+", pId: "Pbda+", name: "修改来料信息"},
 				{id: "Pbdac+", pId: "Pbda+", name: "删除来料信息"},
-				/*{id: "Pbdad+", pId: "Pbda+", name: "修改来料报表"},
-				{id: "Pbdae+", pId: "Pbda+", name: "删除来料报表"},*/
+				/!*{id: "Pbdad+", pId: "Pbda+", name: "修改来料报表"},
+				{id: "Pbdae+", pId: "Pbda+", name: "删除来料报表"},*!/
 			{id: "Pbdb+", pId: "Pbd+", name: "仓储管理"},
 				{id: "Pbdba+", pId: "Pbdb+", name: "录入仓储管理"},
 				{id: "Pbdbb+", pId: "Pbdb+", name: "修改仓储管理"},
@@ -81,9 +80,9 @@ var zNodes =[
                 {id: "Peafb+", pId: "Peaf+", name: "修改摊铺温度管理"},
                 {id: "Peafc+", pId: "Peaf+", name: "删除摊铺温度管理"},
 			{id: "Peag+", pId: "Pea+", name: "摊铺温度离析度"},
-			    /*{id: "Peaga+", pId: "Peag+", name: "录入摊铺温度离析度"},
+			    /!*{id: "Peaga+", pId: "Peag+", name: "录入摊铺温度离析度"},
 			    {id: "Peagb+", pId: "Peag+", name: "修改摊铺温度离析度"},
-			    {id: "Peagc+", pId: "Peag+", name: "删除摊铺温度离析度"},*/
+			    {id: "Peagc+", pId: "Peag+", name: "删除摊铺温度离析度"},*!/
 		{id: "Peb+", pId: "Pe+", name: "沥青砼压实监控管理"},
 			{id: "Peba+", pId: "Peb+", name: "碾压次数管理"},
 			    {id: "Pebaa+", pId: "Peba+", name: "录入碾压次数"},
@@ -142,8 +141,7 @@ var zNodes =[
 		    {id: "Phgi+", pId: "Phg+", name: "删除单位"},
 		    {id: "Phgj+", pId: "Phg+", name: "录入职务"},
 		    {id: "Phgk+", pId: "Phg+", name: "修改职务"},
-		    {id: "Phgl+", pId: "Phg+", name: "删除职务"},
-
+		    {id: "Phgl+", pId: "Phg+", name: "删除职务"},*/
 ];
 
 var zNodes2 =[];

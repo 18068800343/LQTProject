@@ -14,8 +14,8 @@
 					},
 				success:function(json2){
 					var arr2 =[];
-					for(var a=0;a<json2.length;a++){
-						arr2.push(json2[a].coding)
+					for(var a=0;a<json2.list.length;a++){
+						arr2.push(json2.list[a].coding)
 					}
 					for(var i=0;i<arr.length;i++){
 						userbm=arr[i];

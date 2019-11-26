@@ -487,35 +487,135 @@
 
     var jiaoseId;
     function updateQuanxian(obj){
-        var dom=$(obj).parents("tr");
-        var data=$("#mainContent2").DataTable().row(dom).data();
-        jiaoseId=data.id;
-        var roleCode=data.uPersmissionCoding;
-        var zTree = $.fn.zTree.getZTreeObj("checkboxTree");//treeDemo界面中加载ztree的div
-        zTree.cancelSelectedNode();//先取消所有的选中状态
-        if(roleCode!=null&&roleCode!=''){
-            var arr=roleCode.split(',');
-            for(var i=0;i<arr.length;i++){
-                zTree.checkAllNodes(false);
-                var id = arr[i];
-                var node = zTree.getNodeByParam("id",id);
-                if(node!=null){
-                    zTree.checkNode(node,false);//将指定ID的节点取消选中
+
+        $.ajax({
+            type: 'POST',
+            url: '/UPermissionsRole/getAllUPermissionsRole',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                alert("请求失败");
+            },
+            success: function (json) {
+                zNodes=[];
+                var arr1 = json.list1;
+                var pId1=[];
+                if(arr1!=null&&arr1.length>0){
+                    for(var i in arr1){
+                        pId1[i]=arr1[i].coding;
+                        var a  = {};
+                        a.id=arr1[i].coding;
+                        a.pId = 0;
+                        a.name=arr1[i].name;
+                        a.open=false
+                        zNodes.push(a);
+                    }
+                }
+                var arr2 = json.list2;
+                var pId2=[];
+                for(var j in pId1){
+                    if(arr2!=null&&arr2.length>0){
+                        for(var k in arr2){
+                            if(arr2[k].coding.substr(0,2)==pId1[j].substr(0,2)){
+                                pId2[k]=arr2[k].coding;
+                                var b  = {};
+                                b.id=arr2[k].coding;
+                                b.pId = pId1[j];
+                                b.name=arr2[k].name;
+                                zNodes.push(b);
+
+                            }
+                        }
+                    }
+                }
+                var arr3 = json.list3;
+                var pId3=[];
+                for(var n in pId2){
+                    if(arr3!=null&&arr3.length>0){
+                        for(var m in arr3){
+                            var cal=arr3[m].coding;
+                            if(cal.substr(0,3)==pId2[n].substr(0,3)){
+                                pId3[m]=arr3[m].coding;
+                                var c  = {};
+                                c.id=arr3[m].coding;
+                                c.pId = pId2[n];
+                                c.name=arr3[m].name;
+                                zNodes.push(c);
+                            }
+                        }
+
+                    }
+                }
+                var arr4 = json.list4;
+                var pId4=[];
+                for(var ii in pId3){
+                    if(arr4!=null&&arr4.length>0){
+                        for(var jj in arr4){
+                            var val=arr4[jj].coding
+                            if(val.substr(0,4)==pId3[ii].substr(0,4)){
+                                pId4[jj]=arr4[jj].coding;
+                                var d = {};
+                                d.id=arr4[jj].coding;
+                                d.pId = pId3[ii];
+                                d.name=arr4[jj].name;
+                                zNodes.push(d);
+
+                            }
+                        }
+                    }
+                }
+                var arr5 = json.list5;
+                var pId5=[];
+                for(var mm in pId4){
+                    if(arr5!=null&&arr5.length>0){
+                        for(var nn in arr5){
+                            if(arr5[nn].coding.substr(0,5)==pId4[mm].substr(0,5)){
+                                pId5[nn]=arr5[nn].coding;
+                                var e = {};
+                                e.id=arr5[nn].coding;
+                                e.pId = pId4[mm];
+                                e.name=arr5[nn].name;
+                                zNodes.push(e);
+
+                            }
+                        }
+                    }
+                }
+                $.fn.zTree.init($("#checkboxTree"),setting, zNodes);
+
+                var dom=$(obj).parents("tr");
+                var data=$("#mainContent2").DataTable().row(dom).data();
+                jiaoseId=data.id;
+                var roleCode=data.uPersmissionCoding;
+                var zTree = $.fn.zTree.getZTreeObj("checkboxTree");//treeDemo界面中加载ztree的div
+                zTree.cancelSelectedNode();//先取消所有的选中状态
+                if(roleCode!=null&&roleCode!=''){
+                    var arr=roleCode.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        zTree.checkAllNodes(false);
+                        var id = arr[i];
+                        var node = zTree.getNodeByParam("id",id);
+                        if(node!=null){
+                            zTree.checkNode(node,false);//将指定ID的节点取消选中
+                        }
+                    }
+                    for(var i=0;i<arr.length;i++){
+                        var id = arr[i];
+                        var node = zTree.getNodeByParam("id",id);
+                        if(node!=null){
+                            zTree.checkNode(node,true);//将指定ID的节点选中
+                        }
+                        //zTree.expandNode(node, true, false);//将指定ID节点展开
+
+                    }
+
+                }else{
+                    zTree.checkAllNodes(false);
                 }
             }
-            for(var i=0;i<arr.length;i++){
-                var id = arr[i];
-                var node = zTree.getNodeByParam("id",id);
-                if(node!=null){
-                    zTree.checkNode(node,true);//将指定ID的节点选中
-                }
-                //zTree.expandNode(node, true, false);//将指定ID节点展开
+        });
 
-            }
-
-        }else{
-            zTree.checkAllNodes(false);
-        }
     }
 
     var roleCode;
@@ -651,9 +751,7 @@
         });
     })
 
-    function updateParentRole(personRoles){
 
-    }
 
     /*function initParentRole(){
         $.ajax({
