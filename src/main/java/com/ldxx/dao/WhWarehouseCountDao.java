@@ -17,5 +17,7 @@ public interface WhWarehouseCountDao {
 	int delWhWarehouseCountById(@Param("id")String id);
 	
 	int insertWhWarehouseCount(@Param("wwc")WhWarehouseCount wwc);
+	
+	WhWarehouseCount getWhWarehouseCountByStorNo(@Param("storNo")String storNo);
 
 }

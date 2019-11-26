@@ -547,8 +547,10 @@
 	            	   json.WhIncomingMaterial.materialsName=$("#cailiao").find("option:selected").text();
 	            	   $('#mainContent').DataTable().row.add(json.WhIncomingMaterial).draw(false);     //新增行立即显示
 	            	   $("#myModal").modal('hide');
-	               }else{
-	            	   toastr.error("添加失败");
+	               }else if(json.result=-3){
+						toastr.error("添加失败，料仓编号和料仓材料类型不对应");
+				   }else{
+	            	    toastr.error("添加失败");
 	               }
 	            }
 	        });

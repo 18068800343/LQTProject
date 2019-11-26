@@ -37,5 +37,11 @@
 		insert into wh_warehouse_count(id,stor_no,datetime,weight,materials,meminfo,edit_user_id2,edit_datetime2,delete_state)
 		values(#{wwc.id},#{wwc.storNo},#{wwc.datetime},#{wwc.weight},#{wwc.materials},#{wwc.meminfo},#{wwc.editUserId2},#{wwc.editDatetime2},1)
 	</insert>
-
+	<select id="getWhWarehouseCountByStorNo" resultType="WhWarehouseCount">
+		select top 1 a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state,b.material_name as materialsName,usr.u_name
+		from wh_warehouse_count as a
+		left join dic_materials b on a.materials=b.id
+		LEFT JOIN u_user usr ON a.edit_user_id2 = usr.user_id and usr.delete_state = 1
+		where a.delete_state=1 and a.stor_no=#{storNo}
+	</select>
 </mapper>
