@@ -10,13 +10,20 @@
 	</insert>
 
     <update id="updateZhiLiangYuJing" parameterType="PlanProductionWarningVo">
-		update site_compaction_num
+		update plan_production_warning
 			set site_id=#{siteid},batch_id=#{batchid},
 			road_roller_name=#{roadrollername},edit_user_id=#{edituserid},
 			edit_datetime=#{editdatetime},
 			compaction_num=#{compactionnum} where id=#{id}
 	</update>
 
+	<update id="updateZhiLiangYuJingStatus" parameterType="PlanProductionWarningVo">
+		update plan_production_warning
+			set warning_state=#{warningstate},
+			send_status=#{sendstatus},send_time=#{sendtime},
+			send_user_id=#{senduserid}
+			 where id=#{id}
+	</update>
     <update id="delZhiLiangYuJing" parameterType="string">
 		update site_compaction_num set delete_state=0 where id=#{id}
 	</update>

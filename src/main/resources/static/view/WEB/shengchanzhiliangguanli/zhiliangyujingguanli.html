@@ -146,41 +146,22 @@
 
 <!-- 修改Modal -->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document" id="changeVm">
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>修改预警信息</b></h4>
+            <h4 class="modal-title" id="myModalLabel"><b>预警处理</b></h4>
         </div>
         <div class="modal-body">
-            <div>     
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height:auto;">
-                        	<tr>
-                        		<td style="width: 20%;">序号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">路段编号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">预警类型</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">预警内容</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;"></td>
-                        		<td></td>
-                        	</tr>
-                        </table>
-                    </form> 
+            <div>
+                <h4>您正在进行预警提交操作,请确认您的操作</h4>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success">保存</button>
+            <button type="button" :style="disp" @click="submitY" class="btn btn-success">提交</button>
+            <button type="button" :style="dispF" @click="feiliaoY" class="btn btn-success">废料</button>
+            <button type="button" :style="dispC" @click="chexiaoY" class="btn btn-success">撤销预警</button>
+            <button type="button"  class="btn btn-default" data-dismiss="modal">取消</button>
         </div>
         </div>
     </div>
@@ -238,10 +219,13 @@
 
                 let stateList = pageVariable.stateList;
 
+                /*if(full.uname=="shiro"){
+                    alert("--");
+                }*/
 
                 let tijiao = '<i class="glyphicon glyphicon-share-alt" style="font-size:16px;cursor:pointer;" data-f="'
                     + full
-                    + '"   onclick="udMsg(this)" title="提交" data-toggle="modal" data-target="#change"></i>';
+                    + '"  onclick="udMsg(this)"  title="提交" data-toggle="modal" data-target="#change"></i>';
 
                 let quxiao = '<i class="glyphicon glyphicon-log-out" style="font-size:16px;cursor:pointer;" data-id="'
                     + data
@@ -251,7 +235,7 @@
                      return '';
                 }else{
                     for (let i in stateList){
-                        if(full.sendstatus == i){
+                        if(full.sendstatus == stateList[i]){
                          return tijiao + quxiao ;
                         }else{
                             continue;
@@ -309,6 +293,9 @@
                       case 3:
                           return '决策人员待处理';
                           break;
+                      case 4:
+                          return '决策人员已处理';
+                          break;
                   }
             }
         }],
@@ -357,25 +344,120 @@
         let tr=$(e).parents("tr");
         page_tr=tr;
         let data=$("#mainContent").DataTable().row(tr).data();
-        var msg = "确定要删除吗？\n\n请确认！";
+        if(data.sendstatus==3){
+            changeVm.disp="display:none";
+            changeVm.dispF="";
+            changeVm.dispC="";
+        }else{
+            changeVm.disp="";
+            changeVm.dispF="display:none";
+            changeVm.dispC="display:none";
+        }
+    }
+
+    let changeVm = new Vue({
+        el: '#changeVm',
+        //表单数据
+        data: {
+            disp:"",
+            dispF:"display:none",
+            dispC:"display:none",
+        },
+        methods: {
+            //新建生产计划保存按钮事件
+            submitY: function () {
+                    let data=$("#mainContent").DataTable().row(page_tr).data();
+
+                    //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+                    this.$http.post('/ZhiLiangYuJingController/submitYuJing',JSON.stringify(data),{}).then((res)=>{
+                        var resMsg = res.body;
+                        if(resMsg>0){
+                        toastr.success("提交成功");
+                        }else{
+                            toastr.success("提交失败");
+                        }
+                        $("#change").modal("hide");
+                        initTable();
+
+                    },(res)=>{
+                    });
+            },
+            feiliaoY: function () {
+                var msg = "确定要废料吗？\n\n请确认！";
+                if (confirm(msg) == true) {
+                    let data=$("#mainContent").DataTable().row(page_tr).data();
+                     data.warningstate=2;
+                    //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+                    this.$http.post('/ZhiLiangYuJingController/feiliao',JSON.stringify(data),{}).then((res)=>{
+                        var resMsg = res.body;
+                        if(resMsg>0){
+                        toastr.success("提交成功");
+                        }else{
+                            toastr.success("提交失败");
+                        }
+                        $("#change").modal("hide");
+                        initTable();
+
+                    },(res)=>{
+                    });
+                }else{
+                    return false;
+                }
+            },
+            chexiaoY: function () {
+                var msg = "确定要撤销吗？\n\n请确认！";
+                if (confirm(msg) == true) {
+                    let data = $("#mainContent").DataTable().row(page_tr).data();
+                    //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+                    data.warningstate = 0;
+                    this.$http.post('/ZhiLiangYuJingController/submitYuJing', JSON.stringify(data), {}).then((res) => {
+                        var resMsg = res.body;
+                        if (resMsg > 0) {
+                            toastr.success("提交成功");
+                        } else {
+                            toastr.success("提交失败");
+                        }
+                        $("#change").modal("hide");
+                        initTable();
+
+                    }, (res) => {
+                    });
+                }else{
+                    return false;
+                }
+            },
+        }
+    });
+
+    //箭头函数，内部this永远指向父级
+    let delMsg = (e)=>{
+        let tr = $(e).parents("tr");
+        let data = $("#mainContent").DataTable().row(tr).data();
+        data.warningstate = 0;
+        let msg = "确定要撤销预警吗？\n\n请确认！";
         if (confirm(msg) == true) {
             $.ajax({
                 type: 'POST',
                 url: '/ZhiLiangYuJingController/submitYuJing',
                 dataType: 'json',
-                contentType: "application/json",
+                contentType:'application/JSON',
                 data: JSON.stringify(data),
                 error: function (msg) {
                     errMessage("请求UserController失败");
                 },
                 success: function (json) {
-
+                    if(json>0){
+                        toastr.success("撤销成功");
+                        initTable();
+                    }else{
+                        toastr.error("撤销失败");
+                    }
                 }
             });
         }else{
             return false;
         }
+        console.log(msg);
     }
-
 </script>
 </html>

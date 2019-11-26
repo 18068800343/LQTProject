@@ -5,6 +5,7 @@ import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.User;
 import com.ldxx.dao.StateRoleLinkDao;
 import com.ldxx.dao.ZhiLiangYuJingDao;
+import com.ldxx.service.ZhiLiangYuJingService;
 import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
@@ -27,6 +28,8 @@ public class ZhiLiangYuJingController {
 	private ZhiLiangYuJingDao dao;
 	@Resource
 	private StateRoleLinkDao roleLinkDao;
+	@Resource
+	private ZhiLiangYuJingService service;
 
 	@RequestMapping("/getAllZhiLiangYuJing")
 	@ResponseBody
@@ -50,9 +53,13 @@ public class ZhiLiangYuJingController {
 	@RequestMapping("/submitYuJing")
 	@ResponseBody
 	public int submitYuJing(@RequestBody PlanProductionWarningVo planProductionWarningVo,HttpSession session) {
-         System.out.println(planProductionWarningVo);
          User user = (User) session.getAttribute("user");
-
+		 Optional.ofNullable(user)
+				.ifPresent(u->{
+					planProductionWarningVo.setSenduserid(user.getUserId());
+				});
+	  	 String nowDateStr = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		 planProductionWarningVo.setSendtime(nowDateStr);
          String id = planProductionWarningVo.getId();
          Integer status = planProductionWarningVo.getSendstatus();
          Integer nextStatus = 0;
@@ -71,8 +78,14 @@ public class ZhiLiangYuJingController {
 		    	break;
          }
 		 planProductionWarningVo.setSendstatus(nextStatus);
-		 dao.updateZhiLiangYuJing(planProductionWarningVo);
-         return 1;
+		 int i =  dao.updateZhiLiangYuJingStatus(planProductionWarningVo);
+         return i;
+	}
+
+	@RequestMapping("/feiliao")
+	@ResponseBody
+	public int feiliao(@RequestBody PlanProductionWarningVo planProductionWarningVo,HttpSession session) {
+		return service.updateZhiLiangYuJingStatusService(planProductionWarningVo,session);
 	}
 
 	@RequestMapping("/addZhiLiangYuJing")
