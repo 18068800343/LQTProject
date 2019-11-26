@@ -2,15 +2,47 @@ package com.ldxx.vo;
 
 import com.ldxx.bean.PlanProductionWarning;
 
+import java.math.BigDecimal;
+
 public class PlanProductionWarningVo extends PlanProductionWarning {
 
     private String planno;
+
+    private String recipeid;
 
     private String roadname;
 
     private String roadno;
 
     private String uname;
+
+    private BigDecimal pitchweight;
+
+    private BigDecimal price;
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPitchweight() {
+        return pitchweight;
+    }
+
+    public void setPitchweight(BigDecimal pitchweight) {
+        this.pitchweight = pitchweight;
+    }
+
+    public String getRecipeid() {
+        return recipeid;
+    }
+
+    public void setRecipeid(String recipeid) {
+        this.recipeid = recipeid;
+    }
 
     public String getRoadno() {
         return roadno;

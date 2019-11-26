@@ -154,7 +154,15 @@
         </div>
         <div class="modal-body">
             <div>
-                <h4>您正在进行预警提交操作,请确认您的操作</h4>
+                <form class='form-horizontal'>
+                    <fieldset>
+                        <h3>您正在进行预警处理操作！</h3>
+                        <div class="input-group input-group-lg col-sm-5" :style="dispW">
+                            <span class="input-group-addon">请输入重量</span>
+                            <input type="text" v-model="pitchweight"  @input="checknum('pitchweight')" class="form-control">
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
         <div class="modal-footer">
@@ -348,10 +356,12 @@
             changeVm.disp="display:none";
             changeVm.dispF="";
             changeVm.dispC="";
+            changeVm.dispW="";
         }else{
             changeVm.disp="";
             changeVm.dispF="display:none";
             changeVm.dispC="display:none";
+            changeVm.dispW="display:none";
         }
     }
 
@@ -362,8 +372,16 @@
             disp:"",
             dispF:"display:none",
             dispC:"display:none",
+            dispW:"display:none",
+            pitchweight:"",
         },
         methods: {
+            checknum(msg){
+                this._data[msg]=this._data[msg].replace(/[^\d.]/g,'');
+                let str = this._data[msg].split('.');
+                if(str.length>2)
+                {this._data[msg]=this._data[msg].substr(0,this._data[msg].length-1);}
+            },
             //新建生产计划保存按钮事件
             submitY: function () {
                     let data=$("#mainContent").DataTable().row(page_tr).data();
@@ -383,10 +401,17 @@
                     });
             },
             feiliaoY: function () {
+                if(this.pitchweight==""){
+                    toastr.error("废料重量未输入,请输入！")
+                    return;
+                }else{
+
+                }
                 var msg = "确定要废料吗？\n\n请确认！";
                 if (confirm(msg) == true) {
                     let data=$("#mainContent").DataTable().row(page_tr).data();
                      data.warningstate=2;
+                     data.pitchweight = this.pitchweight;
                     //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
                     this.$http.post('/ZhiLiangYuJingController/feiliao',JSON.stringify(data),{}).then((res)=>{
                         var resMsg = res.body;

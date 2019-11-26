@@ -30,7 +30,7 @@
 
     <select id="getAllZhiLiangYuJing" parameterType="string" resultType="PlanProductionWarningVo">
 		SELECT
-			ppw.*,ppc.plan_no,uu.u_name,srm.road_name,srm.road_no
+			ppw.*,ppc.plan_no,ppc.price,ppc.recipe_id,uu.u_name,srm.road_name,srm.road_no
 		FROM
 			plan_production_warning ppw
 		LEFT JOIN plan_production_collection ppc ON ppw.plan_id = ppc.plan_id
