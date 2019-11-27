@@ -358,28 +358,7 @@
 								        }
 							},
 						],"fnDrawCallback" : function() {
-								$.ajax({
-									type:"post",
-									url:"/login/getUser",
-									async:false,
-									data:{
-									},
-									success:function(json){
-										if(json!=null &&json!=""){
-											var arr = json.uPermissions.split(',');
-											for(var i=0;i<arr.length;i++){
-												var arr2 = arr[i].replace("+","");
-												if(arr[i].indexOf("Pheb") >= 0 ){
-													$(".Pheb").show();
-												}if(arr[i].indexOf("Phec") >= 0 ){
-													$(".Phec").show();
-												}
-											}
-
-										}
-
-									}
-								});
+								initTableQuanxian()
 							},
         "order": [[1, 'asc']],
         "oLanguage": { //国际化配置
@@ -399,6 +378,32 @@
             "sLast": "最后一页"
         }},  
 	});
+
+	function initTableQuanxian(){
+		$.ajax({
+			type:"post",
+			url:"/login/getUser",
+			async:false,
+			data:{
+			},
+			success:function(json){
+				if(json!=null &&json!=""){
+					var arr = json.uPermissions.split(',');
+					for(var i=0;i<arr.length;i++){
+						var arr2 = arr[i].replace("+","");
+						if(arr[i].indexOf("Pheb") >= 0 ){
+							$(".Pheb").show();
+						}if(arr[i].indexOf("Phec") >= 0 ){
+							$(".Phec").show();
+						}
+					}
+
+				}
+
+			}
+		});
+	}
+
 	function initTable(){
         $.ajax({
             type: 'POST',
@@ -699,7 +704,7 @@
 	        		$("#pbchange").modal("hide");
 		        	toastr.success('保存成功');
 		        	$('#mainContent').DataTable().row(trr3).data(json.SysFormulationManagement);//修改行立即显示 */
-	            	
+					initTableQuanxian()
 		        }
 	        },
             error:function(json){

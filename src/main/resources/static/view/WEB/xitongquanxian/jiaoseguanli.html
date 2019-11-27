@@ -317,26 +317,7 @@
                 }
             }
         ],"fnDrawCallback" : function() {
-            $.ajax({
-                type:"post",
-                url:"/login/getUser",
-                async:false,
-                data:{
-                },
-                success:function(json){
-                    if(json!=null &&json!=""){
-                        var arr = json.uPermissions.split(',');
-                        for(var i=0;i<arr.length;i++){
-                            var arr2 = arr[i].replace("+","");
-                            if(arr[i].indexOf("Phba") >= 0 ){
-                                $(".Phba").show();
-                            }
-                        }
-
-                    }
-
-                }
-            });
+            initTableQuanxian()
         },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -383,29 +364,7 @@
                 }
             }
         ],"fnDrawCallback" : function() {
-            $.ajax({
-                type:"post",
-                url:"/login/getUser",
-                async:false,
-                data:{
-                },
-                success:function(json){
-                    if(json!=null &&json!=""){
-                        var arr = json.uPermissions.split(',');
-                        for(var i=0;i<arr.length;i++){
-                            var arr2 = arr[i].replace("+","");
-                            if(arr[i].indexOf("Phbc") >= 0 ){
-                                $(".Phbc").show();
-                            }
-                            if(arr[i].indexOf("Phbd") >= 0 ){
-                                $(".Phbd").show();
-                            }
-                        }
-
-                    }
-
-                }
-            });
+            initTableQuanxian()
         },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -426,6 +385,36 @@
             }},
 
     });
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Phba") >= 0 ){
+                            $(".Phba").show();
+                        }
+                        if(arr[i].indexOf("Phbc") >= 0 ){
+                            $(".Phbc").show();
+                        }
+                        if(arr[i].indexOf("Phbd") >= 0 ){
+                            $(".Phbd").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
+
     function initTable(){
         //var base64 = new Base64();
         $.ajax({
@@ -478,6 +467,7 @@
             success: function (json) {
                 $("#change2").modal('hide');
                 initTable2();
+                initTableQuanxian()
             }
         });
     })
@@ -658,6 +648,7 @@
                     toastr.success("修改成功");
                     $("#change").modal("hide")
                     initTable2();
+                    initTableQuanxian()
                 }else{
                     toastr.error("修改失败")
                 }

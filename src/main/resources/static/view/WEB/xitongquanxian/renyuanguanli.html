@@ -339,35 +339,7 @@
 							        }
 							  }
                     ],"fnDrawCallback" : function() {
-                    $.ajax({
-                        type:"post",
-                        url:"/login/getUser",
-                        async:false,
-                        data:{
-                        },
-                        success:function(json){
-                            if(json!=null &&json!=""){
-                                var arr = json.uPermissions.split(',');
-                                for(var i=0;i<arr.length;i++){
-                                    var arr2 = arr[i].replace("+","");
-                                    if(arr[i].indexOf("Phab") >= 0 ){
-                                        $(".Phab").show();
-                                    }
-                                    if(arr[i].indexOf("Phac") >= 0 ){
-                                        $(".Phac").show();
-                                    }
-                                    if(arr[i].indexOf("Phad") >= 0 ){
-                                        $(".Phad").show();
-                                    }
-                                    if(arr[i].indexOf("Phae") >= 0 ){
-                                        $(".Phae").show();
-                                    }
-                                }
-
-                            }
-
-                        }
-                    });
+                        initTableQuanxian()
                 },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -388,8 +360,38 @@
         }},
         
 	});
-    
-	
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Phab") >= 0 ){
+                            $(".Phab").show();
+                        }
+                        if(arr[i].indexOf("Phac") >= 0 ){
+                            $(".Phac").show();
+                        }
+                        if(arr[i].indexOf("Phad") >= 0 ){
+                            $(".Phad").show();
+                        }
+                        if(arr[i].indexOf("Phae") >= 0 ){
+                            $(".Phae").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
 	
 	function initTable(){
         $.ajax({
@@ -606,6 +608,7 @@
             	   toastr.success("修改成功");
             	   $('#mainContent').DataTable().row(tr).data(json.user);//修改行立即显示 */
             	   $("#change").modal('hide');
+                   initTableQuanxian()
                }else if(json.result==-1){
             	   toastr.error("工号重复");
                }else if(json.result==-2){

@@ -453,28 +453,7 @@
                             this.api().column(0).nodes().each(function(cell, i){
                                 cell.innerHTML=i+1;
                             });
-                            $.ajax({
-                                type:"post",
-                                url:"/login/getUser",
-                                async:false,
-                                data:{
-                                },
-                                success:function(json){
-                                    if(json!=null &&json!=""){
-                                        var arr = json.uPermissions.split(',');
-                                        for(var i=0;i<arr.length;i++){
-                                            var arr2 = arr[i].replace("+","");
-                                            if(arr[i].indexOf("Phgb") >= 0 ){
-                                                $(".Phgb").show();
-                                            }if(arr[i].indexOf("Phgc") >= 0 ){
-                                                $(".Phgc").show();
-                                            }
-                                        }
-
-                                    }
-
-                                }
-                            });
+                            initTableQuanxian();
                         },
 	        "order": [[0, 'asc']],
 	        "oLanguage": { //国际化配置
@@ -527,28 +506,8 @@
                                     this.api().column(0).nodes().each(function(cell, i){
                                         cell.innerHTML=i+1;
                                     });
-                                    $.ajax({
-                                        type:"post",
-                                        url:"/login/getUser",
-                                        async:false,
-                                        data:{
-                                        },
-                                        success:function(json){
-                                            if(json!=null &&json!=""){
-                                                var arr = json.uPermissions.split(',');
-                                                for(var i=0;i<arr.length;i++){
-                                                    var arr2 = arr[i].replace("+","");
-                                                    if(arr[i].indexOf("Phge") >= 0 ){
-                                                        $(".Phge").show();
-                                                    }if(arr[i].indexOf("Phgf") >= 0 ){
-                                                        $(".Phgf").show();
-                                                    }
-                                                }
+                                    initTableQuanxian();
 
-                                            }
-
-                                        }
-                                    });
                                 },
 
 	        "order": [[0, 'asc']],
@@ -602,28 +561,7 @@
                                     this.api().column(0).nodes().each(function(cell, i){
                                         cell.innerHTML=i+1;
                                     });
-                                    $.ajax({
-                                        type:"post",
-                                        url:"/login/getUser",
-                                        async:false,
-                                        data:{
-                                        },
-                                        success:function(json){
-                                            if(json!=null &&json!=""){
-                                                var arr = json.uPermissions.split(',');
-                                                for(var i=0;i<arr.length;i++){
-                                                    var arr2 = arr[i].replace("+","");
-                                                    if(arr[i].indexOf("Phgh") >= 0 ){
-                                                        $(".Phgh").show();
-                                                    }if(arr[i].indexOf("Phgi") >= 0 ){
-                                                        $(".Phgi").show();
-                                                    }
-                                                }
-
-                                            }
-
-                                        }
-                                    });
+                                    initTableQuanxian();
                                 },
 
 	        "order": [[0, 'asc']],
@@ -677,28 +615,8 @@
                 this.api().column(0).nodes().each(function(cell, i){
                     cell.innerHTML=i+1;
                 });
-                $.ajax({
-                    type:"post",
-                    url:"/login/getUser",
-                    async:false,
-                    data:{
-                    },
-                    success:function(json){
-                        if(json!=null &&json!=""){
-                            var arr = json.uPermissions.split(',');
-                            for(var i=0;i<arr.length;i++){
-                                var arr2 = arr[i].replace("+","");
-                                if(arr[i].indexOf("Phgk") >= 0 ){
-                                    $(".Phgk").show();
-                                }if(arr[i].indexOf("Phgl") >= 0 ){
-                                    $(".Phgl").show();
-                                }
-                            }
+                initTableQuanxian();
 
-                        }
-
-                    }
-                });
             },
 	        "order": [[0, 'asc']],
 	        "oLanguage": { //国际化配置
@@ -719,6 +637,47 @@
 	        }},
 
 		});
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Phgb") >= 0 ){
+                            $(".Phgb").show();
+                        }if(arr[i].indexOf("Phgc") >= 0 ){
+                            $(".Phgc").show();
+                        }
+                        if(arr[i].indexOf("Phge") >= 0 ){
+                            $(".Phge").show();
+                        }if(arr[i].indexOf("Phgf") >= 0 ){
+                            $(".Phgf").show();
+                        }
+                        if(arr[i].indexOf("Phgh") >= 0 ){
+                            $(".Phgh").show();
+                        }if(arr[i].indexOf("Phgi") >= 0 ){
+                            $(".Phgi").show();
+                        }
+                        if(arr[i].indexOf("Phgk") >= 0 ){
+                            $(".Phgk").show();
+                        }if(arr[i].indexOf("Phgl") >= 0 ){
+                            $(".Phgl").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
+
 		//设备类型表格初始化
 		function initTable(){
 	        $.ajax({
@@ -736,6 +695,8 @@
 	            }
 	        });
 	    }
+
+
 		//材料类型表格初始化
 		function initTable2(){
 	        $.ajax({
@@ -857,7 +818,8 @@
 			        	$("#change").modal("hide");
 		            	$('#mainContent').DataTable().row(trr).data(json.DicDeviceType);//修改行立即显示 */
 		            	$(trr.children()[0]).text(oldNum);
-			        	  }
+                        initTableQuanxian();
+                        }
 		        	},
                 error:function(json){
                 	toastr.error("保存失败"+json);
@@ -963,6 +925,7 @@
 			        	$("#change2").modal("hide");
 		            	$('#mainContent2').DataTable().row(trr).data(json.DicMaterials);//修改行立即显示 */
 		            	$(trr.children()[0]).text(oldNum);
+                        initTableQuanxian();
 			        	  }
 		        	},
                 error:function(json){
@@ -1068,6 +1031,7 @@
 						toastr.success('修改成功');
 						$('#mainContent3').DataTable().row(trr3).data(json.dw);//修改行立即显示 */
 						$(trr3.children()[0]).text(oldNum);
+                        initTableQuanxian();
 					}
 				}
 			});
@@ -1096,6 +1060,8 @@
 							if (json != 0) {
 								$('#mainContent3').DataTable().row(dom).remove().draw(false); //删除行立即显示
 								toastr.success('删除成功');
+                                $(".Phgh").show();
+                                $(".Phgi").show();
 							} else {
 								toastr.error('删除失败');
 							}
@@ -1165,6 +1131,7 @@
 						toastr.success('修改成功');
 						$('#mainContent4').DataTable().row(trr4).data(json.zw);//修改行立即显示 */
 						$(trr4.children()[0]).text(oldNum);
+                        initTableQuanxian();
 					}
 				}
 			});

@@ -221,28 +221,7 @@
                 this.api().column(0).nodes().each(function(cell, i) {
                     cell.innerHTML =  i + 1;
                 });
-                $.ajax({
-                    type:"post",
-                    url:"/login/getUser",
-                    async:false,
-                    data:{
-                    },
-                    success:function(json){
-                        if(json!=null &&json!=""){
-                            var arr = json.uPermissions.split(',');
-                            for(var i=0;i<arr.length;i++){
-                                var arr2 = arr[i].replace("+","");
-                                if(arr[i].indexOf("Phfb") >= 0 ){
-                                    $(".Phfb").show();
-                                }if(arr[i].indexOf("Phfc") >= 0 ){
-                                    $(".Phfc").show();
-                                }
-                            }
-
-                        }
-
-                    }
-                });
+            initTableQuanxian()
             },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -264,6 +243,33 @@
         
 
 	});
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Phfb") >= 0 ){
+                            $(".Phfb").show();
+                        }if(arr[i].indexOf("Phfc") >= 0 ){
+                            $(".Phfc").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
+
+
 	function initTable(){
         $.ajax({
             type: 'POST',
@@ -373,6 +379,7 @@
             	   $('#mainContent').DataTable().row(tr).data(json.SysWarningSet);//修改行立即显示 */
             	   $(tr.children()[0]).text(oldNum);
             	   $("#change").modal('hide');
+                    initTableQuanxian()
                }else{
             	   toastr.error("修改失败");
                }

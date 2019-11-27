@@ -182,26 +182,7 @@
 										  } */
         ],
         "fnDrawCallback" : function() {
-            $.ajax({
-                type:"post",
-                url:"/login/getUser",
-                async:false,
-                data:{
-                },
-                success:function(json){
-                    if(json!=null &&json!=""){
-                        var arr = json.uPermissions.split(',');
-                        for(var i=0;i<arr.length;i++){
-                            var arr2 = arr[i].replace("+","");
-                            if(arr[i].indexOf("Phca") >= 0 ){
-                                $(".Phca").show();
-                            }
-                        }
-
-                    }
-
-                }
-            });
+            initTableQuanxian()
         },
         "order": [[1, 'asc']],
         "oLanguage": { //国际化配置
@@ -221,6 +202,29 @@
                 "sLast": "最后一页"
             }},
     });
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Phca") >= 0 ){
+                            $(".Phca").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
 
     function initTable(){
         //var base64 = new Base64();
@@ -342,6 +346,7 @@
                     toastr.success("修改成功");
                     $("#change").modal("hide")
                     initTable();
+                    initTableQuanxian()
                 }else{
                     toastr.error("修改失败")
                 }

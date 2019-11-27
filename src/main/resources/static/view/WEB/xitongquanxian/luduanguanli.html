@@ -272,28 +272,7 @@
 								        }
 							},
 						], "fnDrawCallback" : function() {
-                                $.ajax({
-                                    type:"post",
-                                    url:"/login/getUser",
-                                    async:false,
-                                    data:{
-                                    },
-                                    success:function(json){
-                                        if(json!=null &&json!=""){
-                                            var arr = json.uPermissions.split(',');
-                                            for(var i=0;i<arr.length;i++){
-                                                var arr2 = arr[i].replace("+","");
-                                                if(arr[i].indexOf("Phdb") >= 0 ){
-                                                    $(".Phdb").show();
-                                                }if(arr[i].indexOf("Phdc") >= 0 ){
-                                                    $(".Phdc").show();
-                                                }
-                                            }
-
-                                        }
-
-                                    }
-                                });
+                                initTableQuanxian()
                             },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -314,7 +293,30 @@
         }},  
 	});
 
-    
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Phdb") >= 0 ){
+                            $(".Phdb").show();
+                        }if(arr[i].indexOf("Phdc") >= 0 ){
+                            $(".Phdc").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
     
 	function initTable(){
         $.ajax({
@@ -411,8 +413,9 @@ function xghxshebei(obj){
                     var resMsg = res.body;
                     if(resMsg.result>0){
                         $('#mainContent').DataTable().row(trr).data(resMsg.sysRoadMgn);
-                        $("#myModal").modal("hide");
+                        $("#changeLuDuan").modal("hide");
                         toastr.success("修改成功");
+                        initTableQuanxian()
                     }else{
                         toastr.error("修改失败");
             	    }
