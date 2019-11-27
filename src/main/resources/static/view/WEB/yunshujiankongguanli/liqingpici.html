@@ -348,26 +348,7 @@
 					  }
 					  
 			],"fnDrawCallback" : function() {
-                $.ajax({
-                    type:"post",
-                    url:"/login/getUser",
-                    async:false,
-                    data:{
-                    },
-                    success:function(json){
-                        if(json!=null &&json!=""){
-                            var arr = json.uPermissions.split(',');
-                            for(var i=0;i<arr.length;i++){
-                                var arr2 = arr[i].replace("+","");
-                                if(arr[i].indexOf("Pdbc") >= 0 ){
-                                    $(".Pdbc").show();
-                                }
-                            }
-
-                        }
-
-                    }
-                });
+                initTableQuanxian()
             },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -388,6 +369,31 @@
         }},
         
 	});
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Pdbc") >= 0 ){
+                            $(".Pdbc").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
+
+
 	function initTable(){
         $.ajax({
             type: 'POST',
@@ -673,6 +679,7 @@
             	   json.BatchMgt.roadName=$("#xg_luduanbianhao").find("option:selected").text();
             	   $('#mainContent').DataTable().row(tr).data(json.BatchMgt);//修改行立即显示 */
             	   $("#change").modal('hide');
+                    initTableQuanxian()
                }else{
             	   toastr.error("修改失败");
                }

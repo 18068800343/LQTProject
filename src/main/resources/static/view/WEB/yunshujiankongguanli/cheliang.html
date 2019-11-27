@@ -249,30 +249,7 @@
 					  }
 					  
 			],"fnDrawCallback" : function() {
-                $.ajax({
-                    type:"post",
-                    url:"/login/getUser",
-                    async:false,
-                    data:{
-                    },
-                    success:function(json){
-                        if(json!=null &&json!=""){
-                            var arr = json.uPermissions.split(',');
-                            for(var i=0;i<arr.length;i++){
-                                var arr2 = arr[i].replace("+","");
-                                if(arr[i].indexOf("Pdab") >= 0 ){
-                                    $(".Pdab").show();
-                                }
-                                if(arr[i].indexOf("Pdac") >= 0 ){
-                                    $(".Pdac").show();
-                                }
-
-                            }
-
-                        }
-
-                    }
-                });
+                initTableQuanxian()
             },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -291,8 +268,35 @@
             "sNext": "下一页",
             "sLast": "最后一页"
         }},
-        
 	});
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Pdab") >= 0 ){
+                            $(".Pdab").show();
+                        }
+                        if(arr[i].indexOf("Pdac") >= 0 ){
+                            $(".Pdac").show();
+                        }
+
+                    }
+
+                }
+
+            }
+        });
+    }
+
 	function initTable(){
         $.ajax({
             type: 'POST',
@@ -461,6 +465,7 @@
             	   toastr.success("修改成功");
             	   $('#mainContent').DataTable().row(tr).data(json.TruckInfo);//修改行立即显示 */
             	   $("#change").modal('hide');
+                   initTableQuanxian()
                }else{
             	   toastr.error("添加失败");
                }
