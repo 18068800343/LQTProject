@@ -25,7 +25,8 @@
 			materials=#{wwc.materials},
 			meminfo=#{wwc.meminfo},
 			edit_user_id2=#{wwc.editUserId2},
-			edit_datetime2=#{wwc.editDatetime2}
+			edit_datetime2=#{wwc.editDatetime2},
+			max_weight=#{wwc.maxWeight}
 		where id=#{wwc.id}
 	</update>
 	
@@ -34,8 +35,8 @@
 	</update>
 	
 	<insert id="insertWhWarehouseCount" parameterType="WhWarehouseCount">
-		insert into wh_warehouse_count(id,stor_no,datetime,weight,materials,meminfo,edit_user_id2,edit_datetime2,delete_state)
-		values(#{wwc.id},#{wwc.storNo},#{wwc.datetime},#{wwc.weight},#{wwc.materials},#{wwc.meminfo},#{wwc.editUserId2},#{wwc.editDatetime2},1)
+		insert into wh_warehouse_count(id,stor_no,datetime,weight,materials,meminfo,edit_user_id2,edit_datetime2,delete_state,max_weight)
+		values(#{wwc.id},#{wwc.storNo},#{wwc.datetime},#{wwc.weight},#{wwc.materials},#{wwc.meminfo},#{wwc.editUserId2},#{wwc.editDatetime2},1,#{wwc.maxWeight})
 	</insert>
 	<select id="getWhWarehouseCountByStorNo" resultType="WhWarehouseCount">
 		select top 1 a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state,b.material_name as materialsName,usr.u_name
