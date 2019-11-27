@@ -129,5 +129,16 @@ public class UserController {
 		}
 		return i;
 	}
+
+	/**
+	 * 通过用户名查询用户信息
+	 * @param username
+	 * @return
+	 */
+	@RequestMapping("/selectUserByUsername")
+	@ResponseBody
+	public UserVo selectUserByUsername(String username){
+		return service.selectUserByUsername(username);
+	}
 	
 }
