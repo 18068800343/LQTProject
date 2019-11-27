@@ -293,30 +293,7 @@
 				}
 			}
 		],"fnDrawCallback" : function() {
-            $.ajax({
-                type:"post",
-                url:"/login/getUser",
-                async:false,
-                data:{
-                },
-                success:function(json){
-                    if(json!=null &&json!=""){
-                        var arr = json.uPermissions.split(',');
-                        for(var i=0;i<arr.length;i++){
-                            var arr2 = arr[i].replace("+","");
-                            if(arr[i].indexOf("Peaeb") >= 0 ){
-                                $(".Peaeb").show();
-                            }
-                            if(arr[i].indexOf("Peaec") >= 0 ){
-                                $(".Peaec").show();
-                            }
-
-                        }
-
-                    }
-
-                }
-            });
+            initTableQuanxian()
         },
 		"order": [[0, 'asc']],
 		"oLanguage": { //国际化配置
@@ -338,6 +315,33 @@
 		},
 
 	});
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Peaeb") >= 0 ){
+                            $(".Peaeb").show();
+                        }
+                        if(arr[i].indexOf("Peaec") >= 0 ){
+                            $(".Peaec").show();
+                        }
+
+                    }
+
+                }
+
+            }
+        });
+    }
 
 	function initTable() {
 		$.ajax({
@@ -449,6 +453,7 @@
 						$("#change").modal("hide");
 						initTable();
 						toastr.success(resMsg.resultMsg);
+                        initTableQuanxian()
 					}else{
 						toastr.error(resMsg.resultMsg);
 					}

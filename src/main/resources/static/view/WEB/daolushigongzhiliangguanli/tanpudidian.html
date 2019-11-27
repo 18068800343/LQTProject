@@ -369,33 +369,7 @@ body, html {
 							}
 						} ],
 						"fnDrawCallback" : function() {
-							$.ajax({
-								type:"post",
-								url:"/login/getUser",
-								async:false,
-								data:{
-								},
-								success:function(json){
-									if(json!=null &&json!=""){
-										var arr = json.uPermissions.split(',');
-										for(var i=0;i<arr.length;i++){
-											var arr2 = arr[i].replace("+","");
-											if(arr[i].indexOf("Peaab") >= 0 ){
-												$(".Peaab").show();
-											}
-											if(arr[i].indexOf("Peaad") >= 0 ){
-												$(".Peaad").show();
-											}
-											if(arr[i].indexOf("Peaac") >= 0 ){
-												$(".Peaac").show();
-											}
-
-										}
-
-									}
-
-								}
-							});
+							initTableQuanxian()
 						},
 						//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
 						"sScrollX" : true,
@@ -420,6 +394,36 @@ body, html {
 							}
 						},
 					});
+
+	function initTableQuanxian(){
+		$.ajax({
+			type:"post",
+			url:"/login/getUser",
+			async:false,
+			data:{
+			},
+			success:function(json){
+				if(json!=null &&json!=""){
+					var arr = json.uPermissions.split(',');
+					for(var i=0;i<arr.length;i++){
+						var arr2 = arr[i].replace("+","");
+						if(arr[i].indexOf("Peaab") >= 0 ){
+							$(".Peaab").show();
+						}
+						if(arr[i].indexOf("Peaad") >= 0 ){
+							$(".Peaad").show();
+						}
+						if(arr[i].indexOf("Peaac") >= 0 ){
+							$(".Peaac").show();
+						}
+
+					}
+
+				}
+
+			}
+		});
+	}
 	
 	function initTable() {
 		$.ajax({
@@ -556,6 +560,7 @@ body, html {
 	            		$("#change").modal("hide");
 	            		$('#mainContent').DataTable().row(page_tr).data(resMsg.obj);     //新增行立即显示
 	            		toastr.success(resMsg.resultMsg);
+						initTableQuanxian()
 	            	}else{
 	            		toastr.error(resMsg.errMsg);
 	            	}

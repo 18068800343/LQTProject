@@ -319,29 +319,7 @@
                             }
                         }
                         ],"fnDrawCallback" : function() {
-							$.ajax({
-								type:"post",
-								url:"/login/getUser",
-								async:false,
-								data:{
-								},
-								success:function(json){
-									if(json!=null &&json!=""){
-										var arr = json.uPermissions.split(',');
-										for(var i=0;i<arr.length;i++){
-											var arr2 = arr[i].replace("+","");
-											if(arr[i].indexOf("Peabb") >= 0 ){
-												$(".Peabb").show();
-											}
-											if(arr[i].indexOf("Peabc") >= 0 ){
-												$(".Peabc").show();
-											}
-										}
-
-									}
-
-								}
-							});
+							initTableQuanxian()
 						},
 						"oLanguage" : { //国际化配置
 							"sProcessing" : "正在获取数据，请稍后...",
@@ -362,6 +340,33 @@
 						},
 
 					});
+
+	function initTableQuanxian(){
+		$.ajax({
+			type:"post",
+			url:"/login/getUser",
+			async:false,
+			data:{
+			},
+			success:function(json){
+				if(json!=null &&json!=""){
+					var arr = json.uPermissions.split(',');
+					for(var i=0;i<arr.length;i++){
+						var arr2 = arr[i].replace("+","");
+						if(arr[i].indexOf("Peabb") >= 0 ){
+							$(".Peabb").show();
+						}
+						if(arr[i].indexOf("Peabc") >= 0 ){
+							$(".Peabc").show();
+						}
+					}
+
+				}
+
+			}
+		});
+	}
+
 	function initTable() {
 		$.ajax({
 			type : 'POST',
@@ -499,6 +504,7 @@
             		$('#mainContent').DataTable().row(page_tr).data(resMsg.obj);//修改行立即显示 */
             		$("#change").modal("hide");
             		toastr.success(resMsg.resultMsg);
+					initTableQuanxian()
             	}else{
             		toastr.error(resMsg.resultMsg);
             	}

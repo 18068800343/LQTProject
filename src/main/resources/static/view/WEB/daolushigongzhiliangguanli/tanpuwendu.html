@@ -268,30 +268,7 @@
                 }
             }
         ],"fnDrawCallback" : function() {
-            $.ajax({
-                type:"post",
-                url:"/login/getUser",
-                async:false,
-                data:{
-                },
-                success:function(json){
-                    if(json!=null &&json!=""){
-                        var arr = json.uPermissions.split(',');
-                        for(var i=0;i<arr.length;i++){
-                            var arr2 = arr[i].replace("+","");
-                            if(arr[i].indexOf("Peafb") >= 0 ){
-                                $(".Peafb").show();
-                            }
-                            if(arr[i].indexOf("Peafc") >= 0 ){
-                                $(".Peafc").show();
-                            }
-
-                        }
-
-                    }
-
-                }
-            });
+            initTableQuanxian()
         },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -313,6 +290,33 @@
         },
 
     });
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Peafb") >= 0 ){
+                            $(".Peafb").show();
+                        }
+                        if(arr[i].indexOf("Peafc") >= 0 ){
+                            $(".Peafc").show();
+                        }
+
+                    }
+
+                }
+
+            }
+        });
+    }
 
     function initTable() {
         $.ajax({
@@ -447,6 +451,7 @@
                         $("#myModal").modal("hide");
                         initTable();
                         toastr.success(resMsg.msg);
+                        initTableQuanxian()
                     }else{
                         toastr.error(resMsg.msg);
                     }

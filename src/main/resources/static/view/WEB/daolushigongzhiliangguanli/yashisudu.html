@@ -492,29 +492,7 @@
             }
         } ],
         "fnDrawCallback" : function() {
-            $.ajax({
-                type:"post",
-                url:"/login/getUser",
-                async:false,
-                data:{
-                },
-                success:function(json){
-                    if(json!=null &&json!=""){
-                        var arr = json.uPermissions.split(',');
-                        for(var i=0;i<arr.length;i++){
-                            var arr2 = arr[i].replace("+","");
-                            if(arr[i].indexOf("Pebbb") >= 0 ){
-                                $(".Pebbb").show();
-                            }
-                            if(arr[i].indexOf("Pebbc") >= 0 ){
-                                $(".Pebbc").show();
-                            }
-                        }
-
-                    }
-
-                }
-            });
+            initTableQuanxian()
         },
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
@@ -534,6 +512,33 @@
             }},
 
     });
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Pebbb") >= 0 ){
+                            $(".Pebbb").show();
+                        }
+                        if(arr[i].indexOf("Pebbc") >= 0 ){
+                            $(".Pebbc").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
+
     function initTable(){
         $.ajax({
             type: 'POST',
@@ -679,6 +684,7 @@
                         $("#change").modal("hide");
                         $('#mainContent').DataTable().row(page_tr).data(resMsg.obj);     //新增行立即显示
                         toastr.success(resMsg.resultMsg);
+                        initTableQuanxian()
                     }else{
                         toastr.error(resMsg.errMsg);
                     }

@@ -294,29 +294,7 @@
 				}
 			}
 		],"fnDrawCallback" : function() {
-			$.ajax({
-				type:"post",
-				url:"/login/getUser",
-				async:false,
-				data:{
-				},
-				success:function(json){
-					if(json!=null &&json!=""){
-						var arr = json.uPermissions.split(',');
-						for(var i=0;i<arr.length;i++){
-							var arr2 = arr[i].replace("+","");
-							if(arr[i].indexOf("Peadb") >= 0 ){
-								$(".Peadb").show();
-							}
-							if(arr[i].indexOf("Peadc") >= 0 ){
-								$(".Peadc").show();
-							}
-						}
-
-					}
-
-				}
-			});
+			initTableQuanxian()
 		},
 		"order": [[0, 'asc']],
 		"oLanguage": { //国际化配置
@@ -337,7 +315,34 @@
 			}},
 
 	});
-	var initTableData;
+
+	function initTableQuanxian(){
+		$.ajax({
+			type:"post",
+			url:"/login/getUser",
+			async:false,
+			data:{
+			},
+			success:function(json){
+				if(json!=null &&json!=""){
+					var arr = json.uPermissions.split(',');
+					for(var i=0;i<arr.length;i++){
+						var arr2 = arr[i].replace("+","");
+						if(arr[i].indexOf("Peadb") >= 0 ){
+							$(".Peadb").show();
+						}
+						if(arr[i].indexOf("Peadc") >= 0 ){
+							$(".Peadc").show();
+						}
+					}
+
+				}
+
+			}
+		});
+	}
+
+
 	function initTable(){
 		$.ajax({
 			type: 'POST',
@@ -349,7 +354,6 @@
 				errMessage("请求UserController失败");
 			},
 			success: function (json) {
-				initTableData=json;
 				$('#mainContent').dataTable().fnClearTable();
 				$('#mainContent').DataTable().rows.add(json).draw(false);
 			}
@@ -448,6 +452,7 @@
 					$("#change").modal("hide");
 					initTable();
 					toastr.success(resMsg.resultMsg);
+					initTableQuanxian()
 				}else{
 					toastr.error(resMsg.resultMsg);
 				}

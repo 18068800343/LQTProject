@@ -283,29 +283,7 @@
                         }
 
                 ],"fnDrawCallback" : function() {
-                    $.ajax({
-                        type:"post",
-                        url:"/login/getUser",
-                        async:false,
-                        data:{
-                        },
-                        success:function(json){
-                            if(json!=null &&json!=""){
-                                var arr = json.uPermissions.split(',');
-                                for(var i=0;i<arr.length;i++){
-                                    var arr2 = arr[i].replace("+","");
-                                    if(arr[i].indexOf("Peaca") >= 0 ){
-                                        $(".Peaca").show();
-                                    }
-                                    if(arr[i].indexOf("Peacb") >= 0 ){
-                                        $(".Peacb").show();
-                                    }
-                                }
-
-                            }
-
-                        }
-                    });
+                        initTableQuanxian()
                 },
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
@@ -325,6 +303,34 @@
             }},
 
     });
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Peaca") >= 0 ){
+                            $(".Peaca").show();
+                        }
+                        if(arr[i].indexOf("Peacb") >= 0 ){
+                            $(".Peacb").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
+
+
+
     function initTable(){
         $.ajax({
             type: 'POST',
