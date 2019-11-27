@@ -1,43 +1,3 @@
-let cangChuPosList = [
-	'left', 'right', 'top', 'bottom',
-	'inside',
-	'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
-	'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
-];
-
-function setCangChuConfigParameters(echartsDom){
-	echartsDom.configParameters = {
-		rotate: {
-			min: -90,
-			max: 90
-		},
-		align: {
-			options: {
-				left: 'left',
-				center: 'center',
-				right: 'right'
-			}
-		},
-		verticalAlign: {
-			options: {
-				top: 'top',
-				middle: 'middle',
-				bottom: 'bottom'
-			}
-		},
-		position: {
-			options: echarts.util.reduce(cangChuPosList, function (map, pos) {
-				map[pos] = pos;
-				return map;
-			}, {})
-		},
-		distance: {
-			min: 0,
-			max: 100
-		}
-	};
-
-}
 
 function setCangChuEchartsConfig(echartsDom){
 	echartsDom.config = {
@@ -82,10 +42,10 @@ function setLableOption(echartsDom){
 			verticalAlign: echartsDom.config.verticalAlign,
 			rotate: echartsDom.config.rotate,
 			formatter: '{c}  {name|{a}}',
-			fontSize: 16,
+			fontSize: 30,
 			rich: {
 				name: {
-					textBorderColor: '#fff'
+					textBorderColor: '#fffdfc'
 				}
 			}
 		}

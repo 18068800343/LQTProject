@@ -135,7 +135,7 @@
             <div role="tabpanel" class="tab-pane" id="profile">
     			<div class="LowerPart" style="margin-top:3px;">
 					<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-					<div id="main" style="width: 900px;height:400px;">
+					<div id="main" style="width: 1000px;height:600px;">
 					</div>  
 				</div>
             </div>
@@ -375,7 +375,6 @@
     let myChart = echarts.init(document.getElementById('main'));
     let option;
     let initOption = ()=>{
-        setCangChuConfigParameters(myChart);
         setCangChuEchartsConfig(myChart);
         setLableOption(myChart);
         option = setCangChuOption(pageVariable);
