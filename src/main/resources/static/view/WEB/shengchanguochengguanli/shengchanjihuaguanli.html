@@ -976,32 +976,7 @@
 			}
 		],
 		"fnDrawCallback" : function() {
-			$.ajax({
-				type:"post",
-				url:"/login/getUser",
-				async:false,
-				data:{
-				},
-				success:function(json){
-					if(json!=null &&json!=""){
-						var arr = json.uPermissions.split(',');
-						for(var i=0;i<arr.length;i++){
-							var arr2 = arr[i].replace("+","");
-							if(arr[i].indexOf("Pbed") >= 0 ){
-								$(".Pbed").show();
-							}
-							if(arr[i].indexOf("Pbeb") >= 0 ){
-								$(".Pbeb").show();
-							}
-							if(arr[i].indexOf("Pbec") >= 0 ){
-								$(".Pbec").show();
-							}
-						}
-
-					}
-
-				}
-			});
+			initTableQuanxian()
 		},
 		//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
 		"sScrollX":true,
@@ -1073,29 +1048,7 @@
 			}
 		],
 		"fnDrawCallback" : function() {
-			$.ajax({
-				type:"post",
-				url:"/login/getUser",
-				async:false,
-				data:{
-				},
-				success:function(json){
-					if(json!=null &&json!=""){
-						var arr = json.uPermissions.split(',');
-						for(var i=0;i<arr.length;i++){
-							var arr2 = arr[i].replace("+","");
-							if(arr[i].indexOf("Pbef") >= 0 ){
-								$(".Pbef").show();
-							}
-							if(arr[i].indexOf("Pbeg") >= 0 ){
-								$(".Pbeg").show();
-							}
-						}
-
-					}
-
-				}
-			});
+			initTableQuanxian()
 		},
 		//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
 		"sScrollX":true,
@@ -1186,6 +1139,41 @@
 			}},
 
 	});
+
+	function initTableQuanxian(){
+		$.ajax({
+			type:"post",
+			url:"/login/getUser",
+			async:false,
+			data:{
+			},
+			success:function(json){
+				if(json!=null &&json!=""){
+					var arr = json.uPermissions.split(',');
+					for(var i=0;i<arr.length;i++){
+						var arr2 = arr[i].replace("+","");
+						if(arr[i].indexOf("Pbed") >= 0 ){
+							$(".Pbed").show();
+						}
+						if(arr[i].indexOf("Pbeb") >= 0 ){
+							$(".Pbeb").show();
+						}
+						if(arr[i].indexOf("Pbec") >= 0 ){
+							$(".Pbec").show();
+						}
+						if(arr[i].indexOf("Pbef") >= 0 ){
+							$(".Pbef").show();
+						}
+						if(arr[i].indexOf("Pbeg") >= 0 ){
+							$(".Pbeg").show();
+						}
+					}
+
+				}
+
+			}
+		});
+	}
 
 	//全局正则KV集合
 	var regMap = {
@@ -1377,6 +1365,7 @@
 				if(resMsg.daoMsg>0){
 					$("#change2").modal("hide");
 					initTable();
+					initTableQuanxian()
 					toastr.success(resMsg.resultMsg);
 				}else{
 					toastr.error(resMsg.resultMsg);
@@ -1625,6 +1614,7 @@
 					/* $('#mainContent').DataTable().row.add(resMsg.obj).draw(); */
 					$("#change3").modal("hide");
 					initTablePianCha();
+					initTableQuanxian()
 					toastr.success(resMsg.resultMsg);
 				}else{
 					toastr.error(resMsg.resultMsg);

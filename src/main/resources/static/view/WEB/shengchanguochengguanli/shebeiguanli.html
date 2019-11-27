@@ -307,29 +307,7 @@
 					},
 				],
         "fnDrawCallback" : function() {
-            $.ajax({
-                type:"post",
-                url:"/login/getUser",
-                async:false,
-                data:{
-                },
-                success:function(json){
-                    if(json!=null &&json!=""){
-                        var arr = json.uPermissions.split(',');
-                        for(var i=0;i<arr.length;i++){
-                            var arr2 = arr[i].replace("+","");
-                            if(arr[i].indexOf("Pbcb") >= 0 ){
-                                $(".Pbcb").show();
-                            }
-                            if(arr[i].indexOf("Pbcc") >= 0 ){
-                                $(".Pbcc").show();
-                            }
-                        }
-
-                    }
-
-                }
-            });
+            initTableQuanxian()
         },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -350,6 +328,33 @@
         }},
         
 	});
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Pbcb") >= 0 ){
+                            $(".Pbcb").show();
+                        }
+                        if(arr[i].indexOf("Pbcc") >= 0 ){
+                            $(".Pbcc").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
+
 	function initTable(){
         $.ajax({
             type: 'POST',
@@ -486,6 +491,7 @@ var xgshebei=new Vue({
 //                      $('#mainContent').DataTable().row.add(resMsg.deviceInfo).draw();
                         $("#change").modal("hide");
                         toastr.success("修改成功");
+                        initTableQuanxian()
                     }else{
                         toastr.error("修改失败");
             	}
