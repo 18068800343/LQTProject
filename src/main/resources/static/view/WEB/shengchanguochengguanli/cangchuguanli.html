@@ -258,6 +258,7 @@
 <script src="../../js/SmartNotification.min.js"></script>
 <script src="../../js/myTool.js"></script>
 <script src="../../js/quanxian.js"></script>
+<script src="../../js/myEcharts.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 	<script>
@@ -371,49 +372,13 @@
     })
     roadVm.roadPost();
      // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
-    var option;
+    let myChart = echarts.init(document.getElementById('main'));
+    let option;
     let initOption = ()=>{
-            option = {
-                    title: {
-                            text: '重量(KG)',
-                        },
-                    color: ['#3398DB'],
-                    tooltip : {
-                        trigger: 'axis',
-                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis : [
-                        {
-                            type : 'category',
-                            data : pageVariable.xList,
-                            axisTick: {
-                                alignWithLabel: true
-                            }
-                        }
-                    ],
-                    yAxis : [
-                        {
-                            type : 'value'
-                        }
-                    ],
-                    series : [
-                        {
-                            name:'仓库重量',
-                            type:'bar',
-                            barWidth: '20%',
-                            data:pageVariable.yList
-                        }
-                    ]
-                };
+        setCangChuConfigParameters(myChart);
+        setCangChuEchartsConfig(myChart);
+        setLableOption(myChart);
+        option = setCangChuOption(pageVariable);
          // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     }
@@ -424,13 +389,16 @@
 
     function getXYList(list){
         let xList = [];
-        let yList = [];
+        let aList = [];
+        let bList = [];
         for (let i in list){
             xList[i] = list[i].storNo;
-            yList[i] = list[i].weight;
+            aList[i] = list[i].weight;
+            bList[i] = list[i].maxWeight;
         }
         pageVariable.xList = xList;
-        pageVariable.yList = yList;
+        pageVariable.aList = aList;
+        pageVariable.bList = bList;
     }
 
         function initTable(){
