@@ -68,7 +68,7 @@
 					<thead>
 						<tr>
 							<th>路段名称</th>
-							<th>标段号</th>
+							<th>摊铺地点</th>
 							<th>摊铺里程</th>
 							<th>施工时间</th>
 							<th>操作人员</th>
@@ -147,7 +147,7 @@
                                     <select class="form-control" @change="roadChange" v-model="roadSelected" style="width: 100%;" id="roadid">
                                         <option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
                                     </select></td>
-                                <td>路段号</td>
+                                <td>摊铺地点</td>
                                 <td>
                                     <select class="form-control" style="width: 100%;" v-model="siteId=roadSelected2"  id="roadnumber">
                                         <option :value="road.id" v-for="road in roadList2">{{road.sitenumber}}</option>
@@ -196,7 +196,7 @@
 								<select class="form-control" @change="roadChange" v-model="roadSelected" style="width: 100%;" id="roadid">
 									<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
 								</select></td>
-							<td>路段号</td>
+							<td>摊铺地点</td>
 							<td>
 								<select class="form-control" style="width: 100%;" v-model="siteId=roadSelected2"  id="roadnumber">
 									<option :value="road.id" v-for="road in roadList2">{{road.sitenumber}}</option>

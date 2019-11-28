@@ -116,7 +116,7 @@ body, html {
 		<div class="zhuti-content">
 			<div class="UpperPart">
 				<div class="UpperPartL">
-					<button type="button" class="btn btn-primary Peaaa" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入摊铺地点管理</button>
+					<button type="button" class="btn btn-primary Peaaa" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入摊铺地点信息</button>
 				</div>
 				<div class="UpperPartR">
 					<!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
@@ -128,7 +128,7 @@ body, html {
 								<tr >
 									<th>路段编号</th>
 									<th>路段名称</th>
-									<th>标段号</th>
+									<th>摊铺地点</th>
 									<th>经度</th>
 									<th>纬度</th>
 									<th>桩号</th>
@@ -158,7 +158,7 @@ body, html {
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						<b>录入摊铺地点</b>
+						<b>录入摊铺地点信息</b>
 					</h4>
 				</div>
 				<div class="modal-body">
@@ -172,7 +172,7 @@ body, html {
 											class="form-control" style="width: 100%;" v-model="roadid" id="roadid">
 											<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
 										</select></td>
-									<td style="width: 20%;">标段</td>
+									<td style="width: 20%;">摊铺地点</td>
 									<td style="width: 30%;"><input type="text" style="width: 100%;" class="form-control" v-model="sitenumber" id="sitenumber" /></td>
 								</tr>
 								<tr>
@@ -209,7 +209,7 @@ body, html {
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						<b>修改摊铺地点管理</b>
+						<b>修改摊铺地点信息</b>
 					</h4>
 				</div>
 				<div class="modal-body">
@@ -223,7 +223,7 @@ body, html {
 											class="form-control" style="width: 100%;" v-model="roadid" id="roadid">
 											<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
 										</select></td>
-									<td style="width: 20%;">标段</td>
+									<td style="width: 20%;">摊铺地点</td>
 									<td style="width: 30%;"><input type="text" style="width: 100%;" class="form-control" v-model="sitenumber" id="sitenumber" /></td>
 								</tr>
 								<tr>
