@@ -72,12 +72,13 @@
                         <table class="table table-bordered table-condensed" id="mainContent">
                             <thead>
                                 <tr>
-                                    <td>路段编号</td>
-                                    <td>路段名称</td>
-                                    <td>起经度</td>
-                                    <td>起纬度</td>
-                                    <td>止经度</td>
-                                    <td>止纬度</td>
+                                    <th>路段编号</th>
+                                    <th>路段名称</th>
+                                    <th>起经度</th>
+                                    <th>起纬度</th>
+                                    <th>止经度</th>
+                                    <th>止纬度</th>
+                                    <th>施工状态</th>
                                     <th style="width:75px;">操作</th>
                                 </tr>
                             </thead>
@@ -259,12 +260,27 @@
 		            { "data": "startLat"},
 		            { "data": "endLng"},
                     { "data": "endLat"},
-                    { "data": null}
+                    { "data": "deleteState"},
+                    { "data": "deleteState"}
                 ],
          "columnDefs": [
 							{
 							"class": "tcenter",
 							"targets": 6,
+							"searchable": false,
+							"render": function(data, type, full) {
+                                        if(data=="1")
+                                        {return '<span class="label label-success state">正在施工</span>' }
+                                        else if(data=="2")
+                                        {return '<span class="label label-info state">施工完成</span>'}
+								    	/* return  '<i class="iconfont icon-xiugai Phdb" style="font-size:18px;cursor:pointer;display:none;" title="修改" data-toggle="modal" data-target="#changeLuDuan" onclick="xghxshebei(this)"></i>'
+			                            +'<i class="iconfont icon-shanchu Phdc" style="font-size:18px;cursor:pointer;display:none;" title="删除" onclick="deleteyige(this)"></i>';
+                                        */
+                                    }
+                            },
+                            {
+							"class": "tcenter",
+							"targets": 7,
 							"searchable": false,
 							"render": function(data, type, full) {
 								    	return  '<i class="iconfont icon-xiugai Phdb" style="font-size:18px;cursor:pointer;display:none;" title="修改" data-toggle="modal" data-target="#changeLuDuan" onclick="xghxshebei(this)"></i>'
