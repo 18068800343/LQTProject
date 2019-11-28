@@ -16,6 +16,8 @@ public class SiteRoadMileageTemp {
 
 	private BigDecimal temp;//摊铺温度
 
+	private BigDecimal temp2;//摊铺温度
+	
 	private String datetime;//最后录入日期
 
 	private String editUserId;//最后录入用户
@@ -28,7 +30,15 @@ public class SiteRoadMileageTemp {
     
     
 
-    public String getEditUName() {
+    public BigDecimal getTemp2() {
+		return temp2;
+	}
+
+	public void setTemp2(BigDecimal temp2) {
+		this.temp2 = temp2;
+	}
+
+	public String getEditUName() {
 		return editUName;
 	}
 
