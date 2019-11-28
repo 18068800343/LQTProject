@@ -1,10 +1,11 @@
 package com.ldxx.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.sql.Time;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * 逐盘拌合生产数据实时监控
@@ -42,6 +43,8 @@ public class QualityByPlateRealTimeProdocutionData {
     public Time  dryTime;//干拌用时
 
     public Time  wetTime;//湿拌用时
+
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 
     public Date productionTime;//生产时间
 

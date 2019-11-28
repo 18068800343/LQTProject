@@ -7,7 +7,6 @@
 		<link href="../../favicon.ico" rel="shortcut icon">
 		<link href="../../style/bootstrap.min.css" rel="stylesheet">
 		<link href="../../style/style.css" rel="stylesheet">
-		<link href="../../toastr/toastr.css" rel="stylesheet">
 		<link rel="stylesheet" href="../../font2/iconfont.css">
 		<link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
 		<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
@@ -19,6 +18,7 @@
 		<link rel="stylesheet" type="text/css" href="../../css/code.css" />
 		<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+		<link href="../../toastr/toastr.css" rel="stylesheet">
 
 
 	</head>
@@ -71,7 +71,23 @@
 					</div>
 				</div>
 				<!-- 三结束 -->
-					<div class="layui-tab-item weadmin-body">        
+
+					<div class="layui-tab-item weadmin-body">
+						<div class="">
+							<div class="pull-left col-xs-2.5">
+								<input type="text" style="width:132px;margin-left: 15px;" class="form-control" placeholder="起始时间" id="reservation" onclick="">
+							</div>
+							<span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
+							<div class="pull-left col-xs-2.5">
+								<input type="text" style="width:120px" class="form-control" placeholder="结束时间" id="reservationEnd" onclick=""><br/>
+							</div>
+							<div class="pull-left col-sm-1">
+								<a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
+							</div>
+						</div>
+						<br>
+						<br>
+						<br>
 						<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
 						<div id="two" style="width: 1000px;height:600px;"></div>
 					</div>
@@ -116,110 +132,94 @@
 <script src="../../js/jquery.js"></script>
 <script src="../../easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
 <script src="../../js/main.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
-<script src="../../js/echartsCopy.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+
 <script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../toastr/toastr.js"></script>
 <script>
 	$(document).ready( function () {
-		initTable()
+		initTable();
+		initPeiBiEcharts();
 	});
- 
-	let myChart = echarts.init(document.getElementById('two'));
-
-	let option = {
-		title: {
-			text: '折线图堆叠'
-		},
-		legend: {
-			data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
-		},
-		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '3%',
-			containLabel: true
-		},
-		toolbox: {
-			feature: {
-				dataZoom: {
-					yAxisIndex: 'none'
-				},
-				restore: {},
-				saveAsImage: {},
-				dataView:{}
+	function initPeiBiEcharts(startTime,endTime) {
+		$.ajax({
+			type: 'POST',
+			url: '/QualityByPlateRealTimeProdocutionData/getPeiBiVoListByTime',
+			dataType: 'json',
+			data: {
+				beginTime:startTime,
+				endTime:endTime
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				initMychart(json);
 			}
-		},
-		tooltip : {
-			trigger: 'axis',
-			axisPointer: {
-				type: 'cross',
-				animation: false,
-				label: {
-					backgroundColor: '#505765'
-				}
+		});
+	}
+	let startTime = {
+		elem: '#reservation',
+		type: 'datetime',
+		trigger: 'click',
+		done: function(date) {
+			let beginDate=date;
+			let endDate=$("#reservationEnd").val();
+			let d1 = beginDate;
+			let d2 = endDate;
+			if(beginDate!=""&&endDate!=""&&d1 >d2)
+			{
+				toastr.error("开始时间不能大于结束时间！");
+				$("#reservation").val('');
+				return false;
 			}
-		},
-		dataZoom: [
-			{
-				show: true,
-				realtime: true,
-				start: 0,
-				end: 100
-			},
-			{
-				type: 'inside',
-				realtime: true,
-				start: 0,
-				end: 100
-			}
-		],
-		xAxis: {
-			type: 'category',
-			boundaryGap: false,
-			data: ['周一','周二','周三','周四','周五','周六','周日','周一','周二','周三','周四','周五','周六','周日','周一','周二','周三','周四','周五','周六','周日','周一','周二','周三','周四','周五','周六','周日']
-		},
-		yAxis: {
-			type: 'value'
-		},
-		series: [
-			{
-				name:'邮件营销',
-				type:'line',
-				stack: '总量',
-				data:[120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210]
-			},
-			{
-				name:'联盟广告',
-				type:'line',
-				stack: '总量',
-				data:[220, 182, 191, 234, 290, 330, 310,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210]
-			},
-			{
-				name:'视频广告',
-				type:'line',
-				stack: '总量',
-				data:[220, 182, 191, 234, 290, 330, 310,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210]
-			},
-			{
-				name:'直接访问',
-				type:'line',
-				stack: '总量',
-				data:[220, 182, 191, 234, 290, 330, 310,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210]
-			},
-			{
-				name:'搜索引擎',
-				type:'line',
-				stack: '总量',
-				data:[220, 182, 191, 234, 290, 330, 310,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90, 230, 210]
-			}
-		]
+		}
 	};
+	// 结束时间
+	let endTime = {
+		elem: '#reservationEnd',
+		type: 'datetime',
+		trigger: 'click',
+		done: function(date) {
+			let beginDate=$("#reservation").val();
+			let endDate=date;
+			let d1 = beginDate;
+			let d2 = endDate;
+			if(beginDate!=""&&endDate!=""&&d1 >d2)
+			{
+				toastr.error("开始时间不能大于结束时间！");
+				$("#reservationEnd").val('');
+				return false;
+			}
+		}
+	};
+	laydate.render(startTime);
+	laydate.render(endTime);
 
+	function searchBydate() {
+		let begin=$('#reservation').val();
+		let start=begin.replace(/年|月/g,'-').replace('日','');
+		let end=$('#reservationEnd').val().replace(/年|月/g,'-').replace('日','');
+		initPeiBiEcharts(start,end);
+		console.log(start);
 
-	// 使用刚指定的配置项和数据显示图表。
-	myChart.setOption(option);
+	}
+	function myTrim(x) {
+		return x.replace(/^\s+|\s+$/gm,'');
+	}
+
+	function initMychart(list){
+		let myChart = echarts.init(document.getElementById('two'));
+		// 使用刚指定的配置项和数据显示图表。
+		let peibiOption = setPeibiOption(list);
+		myChart.setOption(peibiOption);
+	}
+
 		
 	    var table=$('#mainContent').dataTable({
 	        "deferRender": true,
