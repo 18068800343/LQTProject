@@ -73,8 +73,10 @@
 	</select>
 
 
-	<select id="getByLuDuanId" resultType="siteConstruction" parameterType="map">
-		select * from site_construction where  road_id=#{roadId} and delete_state = 1
+	<select id="getByLuDuanId" resultType="SiteConstructionVo" parameterType="map">
+		select sc.*,srm.road_no,srm.road_name  from site_construction sc
+		LEFT JOIN sys_road_mgn srm on sc.road_id = srm.road_id and srm.delete_state = 1
+		 where  sc.road_id=#{roadId} and sc.delete_state = 1
 	</select>
 
 	<select id="getIDisroadName" resultType="siteConstructionVo">

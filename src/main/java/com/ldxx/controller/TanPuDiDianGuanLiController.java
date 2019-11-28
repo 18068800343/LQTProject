@@ -98,7 +98,7 @@ public class TanPuDiDianGuanLiController {
 	 */
 	@RequestMapping("/getByLuDuanId")
 	@ResponseBody
-	public List<SiteConstruction> getByLuDuanId(String roadId) {
+	public List<SiteConstructionVo> getByLuDuanId(String roadId) {
 		Map<String, String> map = new HashMap<>();
 		map.put("roadId", roadId);
 		return service.getByLuDuanId(map);

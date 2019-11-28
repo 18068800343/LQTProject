@@ -1,22 +1,15 @@
 package com.ldxx.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
+import com.ldxx.bean.SiteConstruction;
+import com.ldxx.dao.TanPuDiDianGuanLiDao;
+import com.ldxx.service.TanPuDiDianGuanLiService;
+import com.ldxx.vo.SiteConstructionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ldxx.bean.PlanProductionCollection;
-import com.ldxx.bean.SiteConstruction;
-import com.ldxx.bean.User;
-import com.ldxx.dao.ShengChanJiHuaDao;
-import com.ldxx.dao.TanPuDiDianGuanLiDao;
-import com.ldxx.dao.UserDao;
-import com.ldxx.service.ShengChanJiHuaService;
-import com.ldxx.service.TanPuDiDianGuanLiService;
-import com.ldxx.service.UserService;
-import com.ldxx.vo.PlanProductionCollectionVo;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -38,7 +31,7 @@ public class TanPuDiDianGuanLiServiceImpl implements TanPuDiDianGuanLiService{
 	}
 
 	@Override
-	public List<SiteConstruction> getByLuDuanId(Map<String, String> map) {
+	public List<SiteConstructionVo> getByLuDuanId(Map<String, String> map) {
 		return dao.getByLuDuanId(map);
 	}
 
