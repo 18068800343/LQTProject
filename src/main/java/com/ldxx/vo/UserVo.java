@@ -8,6 +8,16 @@ public class UserVo extends User {
 
     private String userRoleNames;
 
+    private String luduanquanxianName;//路段权限名称
+
+    public String getLuduanquanxianName() {
+        return luduanquanxianName;
+    }
+
+    public void setLuduanquanxianName(String luduanquanxianName) {
+        this.luduanquanxianName = luduanquanxianName;
+    }
+
     public String getuPermissions() {
         return uPermissions;
     }

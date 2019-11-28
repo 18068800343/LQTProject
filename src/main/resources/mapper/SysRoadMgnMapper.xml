@@ -52,4 +52,8 @@
 	    from sys_road_mgn 
 	    where delete_state=1 and road_id=#{id}
 	</select>
+
+	<select id="selectSysRoadMgnById" resultType="SysRoadMgn">
+		select * from sys_road_mgn where road_id=#{luduan}
+	</select>
 </mapper>

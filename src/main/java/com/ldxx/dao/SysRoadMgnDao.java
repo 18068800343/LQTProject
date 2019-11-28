@@ -19,4 +19,6 @@ public interface SysRoadMgnDao {
 	public int delSysRoadMgn(@Param("id") String id);
 	
 	public int getByIdSysRoadMgn(@Param("id") String id);
+
+	SysRoadMgn selectSysRoadMgnById(String luduan);
 }

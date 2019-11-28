@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../../font2/iconfont.css">
 	<link href="../../style/bootstrap.min.css" rel="stylesheet">
+    <link href="../../font3/bootstrap-select.css" rel="stylesheet">
     <link href="../../style/style.css" rel="stylesheet">
      <link href="../../toastr/toastr.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
@@ -125,8 +126,8 @@
 	                        		<select class="form-control" id="suoshudanwei" style="width:80%;">
 	                                </select>
                                 </td>
-                        		<td></td>
-                        		<td></td>
+                                <td id="luduan-td"></td>
+                                <td id="luduan-td2"></td>
                         	</tr>
                         </table> 
                     </form>  
@@ -185,8 +186,8 @@
 	                        		<select class="form-control" id="xg_suoshudanwei" style="width:80%;">
 	                                </select>
                                 </td>
-                        		<td></td>
-                        		<td></td>
+                                <td id="xg_luduan-td"></td>
+                                <td id="xg_luduan-td2"></td>
                         	</tr>
                         </table>
                     </form>  
@@ -268,6 +269,7 @@
 <script src="../../js/jquery.dataTables.min.js"></script>
 <script src="../../js/quanxian.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/bootstrap-select.js"></script>
 <script src="../../js/jquery-editable-select.js"></script>
 <script src="../../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/laydate/laydate.js"></script>
@@ -448,14 +450,65 @@
 	                	 $("#suoshudanwei").html('');
 	                	 $("#xg_suoshudanwei").html('');
 	                     for(var i=0;i<json.length;i++){
-	                    	 $("#suoshudanwei").append("<option value='"+json[i].danweiName+"'>"+json[i].danweiName+"</option>");
-	                    	 $("#xg_suoshudanwei").append("<option value='"+json[i].danweiName+"'>"+json[i].danweiName+"</option>");
+	                    	 $("#suoshudanwei").append("<option data-id='"+json[i].id+"' value='"+json[i].danweiName+"'>"+json[i].danweiName+"</option>");
+	                    	 $("#xg_suoshudanwei").append("<option data-id='"+json[i].id+"' value='"+json[i].danweiName+"'>"+json[i].danweiName+"</option>");
 	                     }
+                        $("#suoshudanwei").trigger('change');
+                        $("#xg_suoshudanwei").trigger('change');
 	                }
 	            }
 	        });
 	}
-	
+
+    $("#suoshudanwei").change(function(){
+        var dataid=$("#suoshudanwei").find("option:selected").attr("data-id")
+        if(dataid==2){
+            $("#luduan-td").html("路段权限")
+            $("#luduan-td2").html("<select  class=\"form-control selectpicker\" multiple data-max-options=\"2\"  data-live-search=\"true\" id=\"luduanquanxian\" style=\"width:80%;\"></select>")
+            initluduan()
+        }else{
+            $("#luduan-td").html("")
+            $("#luduan-td2").html("")
+        }
+    })
+    $("#xg_suoshudanwei").change(function(){
+        var dataid=$("#xg_suoshudanwei").find("option:selected").attr("data-id")
+        if(dataid==2){
+            $("#xg_luduan-td").html("路段权限")
+            $("#xg_luduan-td2").html("<select  class=\"form-control selectpicker\" multiple data-max-options=\"2\"  data-live-search=\"true\" id=\"xg_luduanquanxian\" style=\"width:80%;\"></select>")
+            initluduan()
+        }else{
+            $("#xg_luduan-td").html("")
+            $("#xg_luduan-td2").html("")
+        }
+    })
+
+    function initluduan(){
+        $.ajax({
+            type: 'POST',
+            url: '/SysRoadMgnController/getAllSysRoadMgn',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json!=null){
+                    $("#luduanquanxian").html('');
+                    $("#xg_luduanquanxian").html('');
+                    for(var i=0;i<json.length;i++){
+                        $("#luduanquanxian").append("<option value='"+json[i].roadId+"'>"+json[i].roadName+"</option>");
+                        $("#xg_luduanquanxian").append("<option value='"+json[i].roadId+"'>"+json[i].roadName+"</option>");
+                    }
+                    $(".selectpicker").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                }
+            }
+        });
+    }
+
 
 	$("#baocun").click(function(){
 		var gonghao=$("#gonghao").val();
@@ -465,6 +518,14 @@
 		var lianxifangshi=$("#lianxifangshi").val();
 		var zhiwu=$("#zhiwu").val();
 		var danwei=$("#suoshudanwei").val();
+        var dataid=$("#suoshudanwei").find("option:selected").attr("data-id")
+        var luduanId;
+        if(dataid==2){
+             luduanId=$("#luduanquanxian").val().toString();
+            var luduanName=$("#luduanquanxian").parent("td").find("button").attr("title");
+        }else{
+            luduanId=""
+        }
 		if(gonghao==""){
 			toastr.error("工号不能为空");
 			return fasle;
@@ -493,6 +554,7 @@
             	phoneNo:lianxifangshi,
             	zhiwu:zhiwu,
             	danwei:danwei,
+                luduanquanxian:luduanId,
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
@@ -560,8 +622,49 @@
 		$("#xg_lianxifangshi").val(data.phoneNo);
 		$("#xg_zhiwu").val(data.zhiwu);
 		$("#xg_suoshudanwei").val(data.danwei);
-	})
-	
+
+        var dataid=$("#xg_suoshudanwei").find("option:selected").attr("data-id")
+        if(dataid==2){
+            var contractNameJiaArray = data.luduanquanxian.split(",");
+            $("#xg_luduan-td").html("路段权限")
+            $("#xg_luduan-td2").html("<select  class=\"form-control selectpicker\" multiple data-max-options=\"2\"  data-live-search=\"true\" id=\"xg_luduanquanxian\" style=\"width:80%;\"></select>")
+            xg_initluduan(contractNameJiaArray)
+        }else{
+            $("#xg_luduan-td").html("")
+            $("#xg_luduan-td2").html("")
+        }
+
+
+    })
+
+    function xg_initluduan(obj){
+        $.ajax({
+            type: 'POST',
+            url: '/SysRoadMgnController/getAllSysRoadMgn',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                if(json!=null){
+                    $("#xg_luduanquanxian").html('');
+                    for(var i=0;i<json.length;i++){
+                        $("#xg_luduanquanxian").append("<option value='"+json[i].roadId+"'>"+json[i].roadName+"</option>");
+                    }
+                    $(".selectpicker").selectpicker({
+                        noneSelectedText: '请选择',
+                    });
+                    $("#xg_luduanquanxian").val(obj);
+                    $('#xg_luduanquanxian').selectpicker('val', obj);
+                    $("#xg_luduanquanxian").selectpicker("refresh");
+                    $('#xg_luduanquanxian').selectpicker('render');
+                }
+            }
+        });
+    }
+
 	$("#xg_baocun").click(function(){
 		var gonghao=$("#xg_gonghao").val();
 		var xingming=$("#xg_xingming").val();
@@ -570,6 +673,19 @@
 		var lianxifangshi=$("#xg_lianxifangshi").val();
 		var zhiwu=$("#xg_zhiwu").val();
 		var danwei=$("#xg_suoshudanwei").val();
+        var dataid=$("#xg_suoshudanwei").find("option:selected").attr("data-id")
+        var luduanId;
+        if(dataid==2){
+            if($("#xg_luduanquanxian").val()==""||$("#xg_luduanquanxian").val()==null||$("#xg_luduanquanxian").val()==undefined){
+                toastr.error("路段权限不能为空");
+                return;
+            }
+            luduanId=$("#xg_luduanquanxian").val().toString();
+            var luduanName=$("#xg_luduanquanxian").parent("td").find("button").attr("title");
+        }else{
+            luduanId=""
+        }
+
 		if(gonghao==""){
 			toastr.error("工号不能为空");
 			return fasle;
@@ -586,6 +702,7 @@
 			toastr.error("联系方式不能为空");
 			return fasle;
 		}
+
 		$.ajax({
             type: 'POST',
             url: '/user/updateUser',
@@ -599,6 +716,7 @@
             	phoneNo:lianxifangshi,
             	zhiwu:zhiwu,
             	danwei:danwei,
+                luduanquanxian:luduanId,
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
@@ -608,7 +726,8 @@
             	   toastr.success("修改成功");
             	   $('#mainContent').DataTable().row(tr).data(json.user);//修改行立即显示 */
             	   $("#change").modal('hide');
-                   initTableQuanxian()
+                   initTable()
+                   //initTableQuanxian()
                }else if(json.result==-1){
             	   toastr.error("工号重复");
                }else if(json.result==-2){

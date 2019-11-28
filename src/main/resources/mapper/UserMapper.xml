@@ -3,10 +3,10 @@
 <mapper namespace="com.ldxx.dao.UserDao" >
 	<insert id="addUser" parameterType="user">
 		insert into u_user 
-			(user_Id,work_id,u_name,sex,card_id,phone_no,delete_state,zhiwu,danwei)
+			(user_Id,work_id,u_name,sex,card_id,phone_no,delete_state,zhiwu,danwei,luduanquanxian)
 		values(#{user.userId,jdbcType=VARCHAR},#{user.workId,jdbcType=VARCHAR},
 			#{user.uName,jdbcType=VARCHAR},#{user.sex,jdbcType=VARCHAR},#{user.cardId,jdbcType=VARCHAR},
-			#{user.phoneNo,jdbcType=VARCHAR},1,#{user.zhiwu,jdbcType=VARCHAR},#{user.danwei,jdbcType=VARCHAR})
+			#{user.phoneNo,jdbcType=VARCHAR},1,#{user.zhiwu,jdbcType=VARCHAR},#{user.danwei,jdbcType=VARCHAR},#{user.luduanquanxian,jdbcType=VARCHAR})
 	</insert>
 
 	<update id="deleteUser" parameterType="String">
@@ -22,7 +22,8 @@
 	    card_id = #{user.cardId,jdbcType=VARCHAR},
 	    phone_no = #{user.phoneNo,jdbcType=VARCHAR},
 	    zhiwu=#{user.zhiwu,jdbcType=VARCHAR},
-	    danwei=#{user.danwei,jdbcType=VARCHAR}
+	    danwei=#{user.danwei,jdbcType=VARCHAR},
+	    luduanquanxian=#{user.luduanquanxian,jdbcType=VARCHAR}
 	  where user_id = #{user.userId,jdbcType=VARCHAR}
 	</update>
 	

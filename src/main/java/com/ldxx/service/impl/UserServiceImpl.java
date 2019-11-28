@@ -1,17 +1,18 @@
 package com.ldxx.service.impl;
 
-import java.util.List;
-
+import com.ldxx.bean.SysRoadMgn;
+import com.ldxx.bean.User;
+import com.ldxx.dao.SysRoadMgnDao;
 import com.ldxx.dao.URoleDao;
+import com.ldxx.dao.UserDao;
+import com.ldxx.service.UserService;
 import com.ldxx.vo.URoleVo;
 import com.ldxx.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ldxx.bean.User;
-import com.ldxx.dao.UserDao;
-import com.ldxx.service.UserService;
+import java.util.List;
 
 @Service
 @Transactional
@@ -21,6 +22,8 @@ public class UserServiceImpl implements UserService {
 	private UserDao dao;
 	@Autowired
 	private URoleDao uRoleDao;
+	@Autowired
+	private SysRoadMgnDao srmDao;
 
 	@Override
 	public int addUser(User user) {
@@ -90,6 +93,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVo selectUserByUsername(String username) {
         UserVo user = dao.selectUserByUsername(username);
+        //查询编码名称
         String uPermissions = "";
         String userRole = user.getUserRole();
         if(null!=userRole&&!"".equals(userRole)){
@@ -107,7 +111,23 @@ public class UserServiceImpl implements UserService {
             uPermissions = uPermissions.substring(1, uPermissions.length());
             user.setuPermissions(uPermissions);
         }
-        return user;
+        //查询路段权限名称
+		String luduanquanxian = user.getLuduanquanxian();
+        String luduanquanxianName="";
+		if(null!=luduanquanxian && !"".equals(luduanquanxian)){
+			String[] ldquanxian = luduanquanxian.split(",");
+			for (String luduan:ldquanxian){
+				SysRoadMgn byIdSysRoadMgn = srmDao.selectSysRoadMgnById(luduan);
+				if(byIdSysRoadMgn!=null){
+					luduanquanxianName=luduanquanxianName+","+byIdSysRoadMgn.getRoadName();
+				}
+			}
+		}
+		if(luduanquanxianName.length()>0){
+			luduanquanxianName=luduanquanxianName.substring(1,luduanquanxianName.length());
+			user.setLuduanquanxianName(luduanquanxianName);
+		}
+		return user;
 	}
 
 	@Override
