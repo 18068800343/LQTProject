@@ -7,5 +7,21 @@
 			bone_flour_use,pitch_use,min_temperature,max_temperature,dry_time,wet_time,production_time 
 		from quality_by_plate_real_time_prodocution_data
 	</select>
+
+	<select id="getPeiBiVoListByTime" resultType="QualityByPlateRealTimeProdocutionData">
+		SELECT
+          *
+		FROM
+		quality_by_plate_real_time_prodocution_data qba
+		<where>
+			<if test="beginTime !=null and beginTime!=''">
+				qba.production_time &gt; #{beginTime}
+			</if>
+			<if test="endTime !=null and endTime!=''">
+				and qba.production_time &lt;  #{endTime}
+			</if>
+		</where>
+		order by qba.production_time asc
+	</select>
 	
 </mapper>
