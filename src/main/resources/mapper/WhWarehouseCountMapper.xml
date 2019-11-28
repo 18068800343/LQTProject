@@ -3,7 +3,7 @@
 <mapper namespace="com.ldxx.dao.WhWarehouseCountDao" >
 	
 	<select id="getAllWhWarehouseCount" resultType="WhWarehouseCount">
-		select a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state,b.material_name as materialsName,usr.u_name
+		select a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state,a.max_weight,b.material_name as materialsName,usr.u_name
 		from wh_warehouse_count as a
 		left join dic_materials b on a.materials=b.id
 		LEFT JOIN u_user usr ON a.edit_user_id2 = usr.user_id and usr.delete_state = 1

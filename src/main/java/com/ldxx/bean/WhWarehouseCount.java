@@ -1,12 +1,10 @@
 package com.ldxx.bean;
 
-import java.math.BigDecimal;
-import java.sql.Time;
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 仓储管理
@@ -36,6 +34,16 @@ public class WhWarehouseCount {
     public String editDatetime2;//最后录入日期
 
     public int deleteState;//逻辑删除 0:删除；1存在
+
+	private BigDecimal maxWeight;
+
+	public BigDecimal getMaxWeight() {
+		return maxWeight;
+	}
+
+	public void setMaxWeight(BigDecimal maxWeight) {
+		this.maxWeight = maxWeight;
+	}
 
 	public String getuName() {
 		return uName;
