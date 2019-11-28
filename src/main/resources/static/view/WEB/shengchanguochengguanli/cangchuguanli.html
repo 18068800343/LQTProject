@@ -308,29 +308,7 @@
 					  }
 					  
 			],"fnDrawCallback" : function() {
-                $.ajax({
-                    type:"post",
-                    url:"/login/getUser",
-                    async:false,
-                    data:{
-                    },
-                    success:function(json){
-                        if(json!=null &&json!=""){
-                            var arr = json.uPermissions.split(',');
-                            for(var i=0;i<arr.length;i++){
-                                var arr2 = arr[i].replace("+","");
-                                if(arr[i].indexOf("Pbdbb") >= 0 ){
-                                    $(".Pbdbb").show();
-                                }
-                                if(arr[i].indexOf("Pbdbc") >= 0 ){
-                                    $(".Pbdbc").show();
-                                }
-                            }
-
-                        }
-
-                    }
-                });
+                initTableQuanxian()
             },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
@@ -351,6 +329,32 @@
         }},
         
 	});
+
+    function initTableQuanxian(){
+        $.ajax({
+            type:"post",
+            url:"/login/getUser",
+            async:false,
+            data:{
+            },
+            success:function(json){
+                if(json!=null &&json!=""){
+                    var arr = json.uPermissions.split(',');
+                    for(var i=0;i<arr.length;i++){
+                        var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Pbdbb") >= 0 ){
+                            $(".Pbdbb").show();
+                        }
+                        if(arr[i].indexOf("Pbdbc") >= 0 ){
+                            $(".Pbdbc").show();
+                        }
+                    }
+
+                }
+
+            }
+        });
+    }
 
     var roadVm = new Vue({
         el:"#profile",
@@ -550,6 +554,7 @@
             	   json.WhWarehouseCount.materialsName=$("#xg_cailiao").find("option:selected").text();
             	   $('#mainContent').DataTable().row(tr).data(json.WhWarehouseCount);//修改行立即显示 */
             	   $("#change").modal('hide');
+                    initTableQuanxian()
                }else{
             	   toastr.error("修改失败");
                }
