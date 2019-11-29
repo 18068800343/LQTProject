@@ -10,6 +10,13 @@
     <link href="../../style/style.css" rel="stylesheet">
     <link href="../../toastr/toastr.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
+    	<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
+     <!-- SmartAdmin RTL Support  -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
     <style lang="">
         .UpperPart{
             display: flex;
@@ -46,10 +53,13 @@
             </div>
         </div>
         <div class="LowerPart" style="margin-top:3px;">
-            <table class="table table-bordered table-condensed" id="mainContent">
+<!--             <div class="table-responsive"> -->
+            <table class="table table-bordered table-condensed table-hover" id="mainContent">
+            <!--  <table class="easyui-datagrid" id="mainContent"> -->
+                
                 <thead>
                     <tr>
-                        <th>生产计划</th>
+                        <th >生产计划</th>
                         <th style="width:140px;">时间</th>
                         <th>路段名称</th>
 						<th>预警类型</th>
@@ -64,6 +74,7 @@
                 <tbody>
                 </tbody>
             </table>
+         
         </div>
     </div>
 <!-- allMsg -->
@@ -181,6 +192,7 @@
 <script src="../../js/bootstrap.min.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
 <script src="../../toastr/toastr.js"></script>
+<!-- <script type="text/javascript" src="../../easyUI/jquery.easyui.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script>
