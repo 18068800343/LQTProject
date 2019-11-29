@@ -5,10 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="../../font2/iconfont.css">
+	<link href="../../favicon.ico" rel="shortcut icon">
 	<link href="../../style/bootstrap.min.css" rel="stylesheet">
-    <link href="../../style/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
+	<link href="../../style/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../font2/iconfont.css">
+	<link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/layui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/code.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
+	<link href="../../toastr/toastr.css" rel="stylesheet">
     <style lang="">
         .UpperPart{
             display: flex;
@@ -25,7 +36,7 @@
     </style>
 </head>
 <body>
-   
+
     <!-- 面包屑 -->
 	<div class="mianbao">
     	<ul class="breadcrumb">
@@ -35,233 +46,93 @@
 			<li class="active">逐盘生产偏差分析</li>
 		</ul>
     </div>
+<div class="layui-tab layui-tab-card">
+	<ul class="layui-tab-title">
+		<li class="layui-this">逐盘生产偏差分析</li>
+		<li>偏差分析折线图</li>
+	</ul>
+	<div class="layui-tab-content">
+		<div class="layui-tab-item layui-show">
+		<div class="zhuti-content">
+			<div class="UpperPart">
+				<div class="UpperPartL">
+				  <!--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入生产偏差</button> -->
+				</div>
+				<div class="UpperPartR">
+					<!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
+				</div>
+			</div>
+			<div class="LowerPart" style="margin-top:3px;">
+				<table class="table table-bordered table-condensed" id="mainContent">
+					<thead>
+						<tr>
+							<th>路段编号</th>
+							<th>料1偏差</th>
+							<th>料2偏差</th>
+							<th>料3偏差</th>
+							<th>料4偏差</th>
+							<th>料5偏差</th>
+							<th>料6偏差</th>
+							<th>粉偏差</th>
+							<th>沥青偏差</th>
+							<th>最低温度</th>
+							<th>最高温度</th>
+							<th>干拌偏差</th>
+							<th>湿拌偏差</th>
+							<th>通过率偏差4.75</th>
+							<th>通过率偏差2.36</th>
+							<th>通过率偏差0.075</th>
+							<th>生产时间</th>
+						</tr>
+					</thead>
+					<tbody>
 
-    <div class="zhuti-content">
-        <div class="UpperPart">
-            <div class="UpperPartL">
-              <!--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入生产偏差</button> -->
-            </div>
-            <div class="UpperPartR">
-                <!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
-            </div>
-        </div>
-        <div class="LowerPart" style="margin-top:3px;">
-            <table class="table table-bordered table-condensed" id="mainContent">
-                <thead>
-                    <tr>
-                        <th>路段编号</th>
-                        <th>料1偏差</th>
-						<th>料2偏差</th>
-						<th>料3偏差</th>
-						<th>料4偏差</th>
-						<th>料5偏差</th>
-						<th>料6偏差</th>
-						<th>粉偏差</th>
-						<th>沥青偏差</th>
-						<th>最低温度</th>
-						<th>最高温度</th>
-						<th>干拌偏差</th>
-						<th>湿拌偏差</th>
-						<th>通过率偏差4.75</th>
-						<th>通过率偏差2.36</th>
-						<th>通过率偏差0.075</th>
-						<th>生产时间</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>   
-            </table>
-        </div>
-    </div>
-<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>所有信息</b></h4>
-        </div>
-        <div class="modal-body">
-            <div>     
-                <form class="form-inline">
-                    <table class="table table-bordered">
-                        <tr>
-                        	<td style="width: 20%;">备用</td>
-                        	<td style="width: 30%;">1</td>
-                        	<td style="width: 20%;">备用</td>
-                        	<td style="width: 30%;">1</td>
-                        </tr>
-                        <tr>
-                        	<td>备用</td>
-                        	<td>1</td>
-                        	<td>用料量</td>
-                        	<td>1</td>
-                        </tr>
-                    </table>
-                </form>  
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        </div>
-        </div>
-    </div>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		</div>
+		<div class="layui-tab-item weadmin-body">
+			<div class="">
+				<div class="pull-left col-xs-2.5">
+					<input type="text" style="width:132px;margin-left: 15px;" class="form-control" placeholder="起始时间"
+						   id="reservation" onclick="">
+				</div>
+				<span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
+				<div class="pull-left col-xs-2.5">
+					<input type="text" style="width:120px" class="form-control" placeholder="结束时间" id="reservationEnd"
+						   onclick=""><br/>
+				</div>
+				<div class="pull-left col-sm-1">
+					<a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+			<div id="two" style="width: 1000px;height:600px;"></div>
+		</div>
+	</div>
+	</div>
 </div>
-<!-- allMsg结束 -->
-<!-- Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>录入生产偏差</b></h4>
-        </div>
-        <div class="modal-body">
-                <div>     
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height:auto;">
-                        	<tr>
-                        		<td style="width: 20%;">序号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">路段编号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">料1偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">料2偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">料3偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">料4偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">料5偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">料6偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">粉偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">沥青偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">最低温度</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">最高温度</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">干拌偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">湿拌偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">生产时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td></td>
-                        		<td></td>
-                        	</tr>
-                        </table>
-                    </form> 
-                </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success" >保存</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- model结束 -->
-
-<!-- 修改Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>修改设备信息</b></h4>
-        </div>
-        <div class="modal-body">
-            <div>     
-                    <form class="form-inline">
-                        <table class="table table-bordered table-condensed" style="height:auto;">
-                        	<tr>
-                        		<td style="width: 20%;">序号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">路段编号</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">料1偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">料2偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">料3偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">料4偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">料5偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">料6偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">粉偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">沥青偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">最低温度</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">最高温度</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">干拌偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td style="width: 20%;">湿拌偏差</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        	</tr>
-                        	<tr>
-                        		<td style="width: 20%;">生产时间</td>
-                        		<td><input type="text" id="" placeholder="请输入" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td></td>
-                        		<td></td>
-                        	</tr>
-                        </table>
-                    </form> 
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success">保存</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- 修改model结束 -->
 </body>
 <script src="../../js/jquery.js"></script>
-<script src="../../js/common-scripts.js"></script>
-<script src="../../js/bootstrap.min.js"></script>
+<script src="../../easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../toastr/toastr.js"></script>
 <script>
     $(document).ready( function () {
     	initTable()
+		initPeiBiEcharts();
 	});
     var table=$('#mainContent').dataTable({
         "deferRender": true,
@@ -275,7 +146,7 @@
 		},
 		"columns": [
             { "data": "planNo"},
-            { "data": "MaterialDeviation1"}, 
+            { "data": "MaterialDeviation1"},
             { "data": "MaterialDeviation2"},
             { "data": "MaterialDeviation3"},
             { "data": "MaterialDeviation4"},
@@ -309,7 +180,7 @@
             "sNext": "下一页",
             "sLast": "最后一页"
         }},
-        
+
 	});
 	function initTable(){
         $.ajax({
@@ -328,24 +199,79 @@
         });
     }
 
-    function getCreat(bb){
-        var EnterpriseRating= $(bb).parent().prev().text();
-        var Remarks= $(bb).parent().prev().prev().text();
-        var ContactPhone1= $(bb).parent().prev().prev().prev().text();
-        var Contacts= $(bb).parent().prev().prev().prev().prev().text();
-        var address= $(bb).parent().prev().prev().prev().prev().prev().text();
-        var ProprietorUnit= $(bb).parent().prev().prev().prev().prev().prev().prev().text();
-        var Code= $(bb).parent().prev().prev().prev().prev().prev().prev().prev().text();
-        $("#CEnterprise-rating").val(EnterpriseRating);
-        $("#CRemarks").val(Remarks);
-        $("#CContact-phone1").val(ContactPhone1);
-        $("#CContacts").val(Contacts);
-        $("#Caddress").val(address);
-        $("#CProprietor-unit").val(ProprietorUnit);
-        $("#CCode").val(Code);
-        rowIndex = bb.parentNode.parentNode.rowIndex; 
-    }
+	function initPeiBiEcharts(startTime, endTime) {
+		$.ajax({
+			type: 'POST',
+			url: '/QualityByPlateRealTimeProdocutionData/getPeiBiVoListByTime',
+			dataType: 'json',
+			data: {
+				beginTime: startTime,
+				endTime: endTime
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				initMychart(json);
+			}
+		});
+	}
 
-    
+	let startTime = {
+		elem: '#reservation',
+		type: 'datetime',
+		trigger: 'click',
+		done: function (date) {
+			let beginDate = date;
+			let endDate = $("#reservationEnd").val();
+			let d1 = beginDate;
+			let d2 = endDate;
+			if (beginDate != "" && endDate != "" && d1 > d2) {
+				toastr.error("开始时间不能大于结束时间！");
+				$("#reservation").val('');
+				return false;
+			}
+		}
+	};
+	// 结束时间
+	let endTime = {
+		elem: '#reservationEnd',
+		type: 'datetime',
+		trigger: 'click',
+		done: function (date) {
+			let beginDate = $("#reservation").val();
+			let endDate = date;
+			let d1 = beginDate;
+			let d2 = endDate;
+			if (beginDate != "" && endDate != "" && d1 > d2) {
+				toastr.error("开始时间不能大于结束时间！");
+				$("#reservationEnd").val('');
+				return false;
+			}
+		}
+	};
+	laydate.render(startTime);
+	laydate.render(endTime);
+
+	function searchBydate() {
+		let begin = $('#reservation').val();
+		let start = begin.replace(/年|月/g, '-').replace('日', '');
+		let end = $('#reservationEnd').val().replace(/年|月/g, '-').replace('日', '');
+		initPeiBiEcharts(start, end);
+		console.log(start);
+
+	}
+
+	function myTrim(x) {
+		return x.replace(/^\s+|\s+$/gm, '');
+	}
+
+	function initMychart(list) {
+		let myChart = echarts.init(document.getElementById('two'));
+		// 使用刚指定的配置项和数据显示图表。
+		let peibiOption = setPeibiOption(list);
+		myChart.setOption(peibiOption);
+	}
+
 </script>
 </html>

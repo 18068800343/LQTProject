@@ -1,129 +1,133 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title>tbale</title>
-		<link href="../../favicon.ico" rel="shortcut icon">
-		<link href="../../style/bootstrap.min.css" rel="stylesheet">
-		<link href="../../style/style.css" rel="stylesheet">
-		<link rel="stylesheet" href="../../font2/iconfont.css">
-		<link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
-		<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
-		<link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css" />
-		<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/code.css" />
-		<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
-		<link href="../../toastr/toastr.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>tbale</title>
+    <link href="../../favicon.ico" rel="shortcut icon">
+    <link href="../../style/bootstrap.min.css" rel="stylesheet">
+    <link href="../../style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../font2/iconfont.css">
+    <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/code.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
+    <link href="../../toastr/toastr.css" rel="stylesheet">
 
 
-	</head>
+</head>
 
-	<body>
-	 <!-- 面包屑 -->
-	<div class="mianbao">
-    	<ul class="breadcrumb">
-    		<li><i class="iconfont icon-knowledgebase"></i></li>
-			<li>沥青砼生产质量管理</li>
-			<li>拌和生产质量监控</li>
-			<li class="active">逐盘拌合生产数据实时监控</li>
-		</ul>
-    </div>
+<body>
+<!-- 面包屑 -->
+<div class="mianbao">
+    <ul class="breadcrumb">
+        <li><i class="iconfont icon-knowledgebase"></i></li>
+        <li>沥青砼生产质量管理</li>
+        <li>拌和生产质量监控</li>
+        <li class="active">逐盘拌合生产数据实时监控</li>
+    </ul>
+</div>
 
-		<div class="UpperPartR">
-		</div>
-		<div class="layui-tab layui-tab-card">
-			<ul class="layui-tab-title">
-				<li class="layui-this">逐盘拌合生产数据实时监控</li>
-				<li>实时生产热料配比</li>
-			</ul>
-			<div class="layui-tab-content" >
-				<div class="layui-tab-item layui-show">
-					<div class="bottom">
-            <table class="table table-bordered table-condensed" id="mainContent">
-                <thead>
+<div class="UpperPartR">
+</div>
+<div class="layui-tab layui-tab-card">
+    <ul class="layui-tab-title">
+        <li class="layui-this">逐盘拌合生产数据实时监控</li>
+        <li>实时生产热料配比</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <div class="bottom">
+                <table class="table table-bordered table-condensed" id="mainContent">
+                    <thead>
                     <tr>
                         <th>路段编号</th>
                         <th>料1用量</th>
-						<th>料2用量</th>
-						<th>料3用量</th>
-						<th>料4用量</th>
-						<th>料5用量</th>
-						<th>料6用量</th>
-						<th>粉用量</th>
-						<th>沥青用量</th>
-						<th>最低温度</th>
-						<th>最高温度</th>
-						<th>干拌用时</th>
-						<th>湿拌用时</th>
-						<th>生产时间</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>   
-            </table>
-					</div>
-				</div>
-				<!-- 三结束 -->
+                        <th>料2用量</th>
+                        <th>料3用量</th>
+                        <th>料4用量</th>
+                        <th>料5用量</th>
+                        <th>料6用量</th>
+                        <th>粉用量</th>
+                        <th>沥青用量</th>
+                        <th>最低温度</th>
+                        <th>最高温度</th>
+                        <th>干拌用时</th>
+                        <th>湿拌用时</th>
+                        <th>生产时间</th>
 
-					<div class="layui-tab-item weadmin-body">
-						<div class="">
-							<div class="pull-left col-xs-2.5">
-								<input type="text" style="width:132px;margin-left: 15px;" class="form-control" placeholder="起始时间" id="reservation" onclick="">
-							</div>
-							<span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
-							<div class="pull-left col-xs-2.5">
-								<input type="text" style="width:120px" class="form-control" placeholder="结束时间" id="reservationEnd" onclick=""><br/>
-							</div>
-							<div class="pull-left col-sm-1">
-								<a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
-							</div>
-						</div>
-						<br>
-						<br>
-						<br>
-						<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-						<div id="two" style="width: 1000px;height:600px;"></div>
-					</div>
-				</div>
-			</div>
-			<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>所有信息</b></h4>
-        </div>
-        <div class="modal-body">
-            <div>     
-                <form class="form-inline">
-                    <table class="table table-bordered">
-                        <tr>
-                        	<td style="width: 20%;">批次</td>
-                        	<td style="width: 30%;">1</td>
-                        	<td style="width: 20%;">路段</td>
-                        	<td style="width: 30%;">1</td>
-                        </tr>
-                        <tr>
-                        	<td>用料名称</td>
-                        	<td>1</td>
-                        	<td>用料量</td>
-                        	<td>1</td>
-                        </tr>
-                    </table>
-                </form>  
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <!-- 三结束 -->
+
+        <div class="layui-tab-item weadmin-body">
+            <div class="">
+                <div class="pull-left col-xs-2.5">
+                    <input type="text" style="width:132px;margin-left: 15px;" class="form-control" placeholder="起始时间"
+                           id="reservation" onclick="">
+                </div>
+                <span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
+                <div class="pull-left col-xs-2.5">
+                    <input type="text" style="width:120px" class="form-control" placeholder="结束时间" id="reservationEnd"
+                           onclick=""><br/>
+                </div>
+                <div class="pull-left col-sm-1">
+                    <a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+            <div id="two" style="width: 1000px;height:600px;"></div>
         </div>
+    </div>
+</div>
+<!-- allMsg -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     id="allMsg1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><b>所有信息</b></h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-inline">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td style="width: 20%;">批次</td>
+                                <td style="width: 30%;">1</td>
+                                <td style="width: 20%;">路段</td>
+                                <td style="width: 30%;">1</td>
+                            </tr>
+                            <tr>
+                                <td>用料名称</td>
+                                <td>1</td>
+                                <td>用料量</td>
+                                <td>1</td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
         </div>
     </div>
 </div>
@@ -142,147 +146,148 @@
 <script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../toastr/toastr.js"></script>
 <script>
-	$(document).ready( function () {
-		initTable();
-		initPeiBiEcharts();
-	});
-	function initPeiBiEcharts(startTime,endTime) {
-		$.ajax({
-			type: 'POST',
-			url: '/QualityByPlateRealTimeProdocutionData/getPeiBiVoListByTime',
-			dataType: 'json',
-			data: {
-				beginTime:startTime,
-				endTime:endTime
-			},
-			error: function (msg) {
-				errMessage("请求UserController失败");
-			},
-			success: function (json) {
-				initMychart(json);
-			}
-		});
-	}
-	let startTime = {
-		elem: '#reservation',
-		type: 'datetime',
-		trigger: 'click',
-		done: function(date) {
-			let beginDate=date;
-			let endDate=$("#reservationEnd").val();
-			let d1 = beginDate;
-			let d2 = endDate;
-			if(beginDate!=""&&endDate!=""&&d1 >d2)
-			{
-				toastr.error("开始时间不能大于结束时间！");
-				$("#reservation").val('');
-				return false;
-			}
-		}
-	};
-	// 结束时间
-	let endTime = {
-		elem: '#reservationEnd',
-		type: 'datetime',
-		trigger: 'click',
-		done: function(date) {
-			let beginDate=$("#reservation").val();
-			let endDate=date;
-			let d1 = beginDate;
-			let d2 = endDate;
-			if(beginDate!=""&&endDate!=""&&d1 >d2)
-			{
-				toastr.error("开始时间不能大于结束时间！");
-				$("#reservationEnd").val('');
-				return false;
-			}
-		}
-	};
-	laydate.render(startTime);
-	laydate.render(endTime);
+    $(document).ready(function () {
+        initTable();
+        initPeiBiEcharts();
+    });
 
-	function searchBydate() {
-		let begin=$('#reservation').val();
-		let start=begin.replace(/年|月/g,'-').replace('日','');
-		let end=$('#reservationEnd').val().replace(/年|月/g,'-').replace('日','');
-		initPeiBiEcharts(start,end);
-		console.log(start);
+    function initPeiBiEcharts(startTime, endTime) {
+        $.ajax({
+            type: 'POST',
+            url: '/QualityByPlateRealTimeProdocutionData/getPeiBiVoListByTime',
+            dataType: 'json',
+            data: {
+                beginTime: startTime,
+                endTime: endTime
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                initMychart(json);
+            }
+        });
+    }
 
-	}
-	function myTrim(x) {
-		return x.replace(/^\s+|\s+$/gm,'');
-	}
+    let startTime = {
+        elem: '#reservation',
+        type: 'datetime',
+        trigger: 'click',
+        done: function (date) {
+            let beginDate = date;
+            let endDate = $("#reservationEnd").val();
+            let d1 = beginDate;
+            let d2 = endDate;
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                toastr.error("开始时间不能大于结束时间！");
+                $("#reservation").val('');
+                return false;
+            }
+        }
+    };
+    // 结束时间
+    let endTime = {
+        elem: '#reservationEnd',
+        type: 'datetime',
+        trigger: 'click',
+        done: function (date) {
+            let beginDate = $("#reservation").val();
+            let endDate = date;
+            let d1 = beginDate;
+            let d2 = endDate;
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                toastr.error("开始时间不能大于结束时间！");
+                $("#reservationEnd").val('');
+                return false;
+            }
+        }
+    };
+    laydate.render(startTime);
+    laydate.render(endTime);
 
-	function initMychart(list){
-		let myChart = echarts.init(document.getElementById('two'));
-		// 使用刚指定的配置项和数据显示图表。
-		let peibiOption = setPeibiOption(list);
-		myChart.setOption(peibiOption);
-	}
+    function searchBydate() {
+        let begin = $('#reservation').val();
+        let start = begin.replace(/年|月/g, '-').replace('日', '');
+        let end = $('#reservationEnd').val().replace(/年|月/g, '-').replace('日', '');
+        initPeiBiEcharts(start, end);
+        console.log(start);
 
-		
-	    var table=$('#mainContent').dataTable({
-	        "deferRender": true,
-	        "processing": true,
-	        "bDestroy": true,
-	        "iDisplayLength": 10,
-	        "searching": true,
-	        "lengthChange": false,
-	        "oLanguage": {
-			    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-			},
-			"columns": [
-	            { "data": "planNo"},
-	            { "data": "materialsUse1"}, 
-	            { "data": "materialsUse2"},
-	            { "data": "materialsUse3"},
-	            { "data": "materialsUse4"},
-	            { "data": "materialsUse5"},
-	            { "data": "materialsUse6"},
-	            { "data": "boneFlourUse"},
-	            { "data": "pitchUse"},
-	            { "data": "minTemperature"},
-	            { "data": "maxTemperature"},
-	            { "data": "dryTime"},
-	            { "data": "wetTime"},
-	            { "data": "productionTime"},
-	        ],
-	        "order": [[0, 'asc']],
-	        "oLanguage": { //国际化配置
-	        "sProcessing": "正在获取数据，请稍后...",
-	        "sLengthMenu": "显示 _MENU_ 条",
-	        "sZeroRecords": "查询不到相关数据",
-	        "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-	        "sInfoEmpty": "记录数为0",
-	        "sInfoFiltered": "(全部记录数 _MAX_ 条)",
-	        "sInfoPostFix": "",
-	        "sSearch": "搜索",
-	        "sUrl": "",
-	        "oPaginate": {
-	            "sFirst": "第一页",
-	            "sPrevious": "上一页",
-	            "sNext": "下一页",
-	            "sLast": "最后一页"
-	        }},
-		});
-	    
-	    function initTable(){
-	        $.ajax({
-	            type: 'POST',
-	            url: '/QualityByPlateRealTimeProdocutionData/getAllQualityByPlateRealTimeProdocutionData',
-	            dataType: 'json',
-	            data: {
-	            },
-	            error: function (msg) {
-	                errMessage("请求UserController失败");
-	            },
-	            success: function (json) {
-	                $('#mainContent').dataTable().fnClearTable();
-	                $('#mainContent').DataTable().rows.add(json).draw(false);
-	            }
-	        });
-	    }
-	    
-	</script>
+    }
+
+    function myTrim(x) {
+        return x.replace(/^\s+|\s+$/gm, '');
+    }
+
+    function initMychart(list) {
+        let myChart = echarts.init(document.getElementById('two'));
+        // 使用刚指定的配置项和数据显示图表。
+        let peibiOption = setPeibiOption(list);
+        myChart.setOption(peibiOption);
+    }
+
+
+    var table = $('#mainContent').dataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            {"data": "planNo"},
+            {"data": "materialsUse1"},
+            {"data": "materialsUse2"},
+            {"data": "materialsUse3"},
+            {"data": "materialsUse4"},
+            {"data": "materialsUse5"},
+            {"data": "materialsUse6"},
+            {"data": "boneFlourUse"},
+            {"data": "pitchUse"},
+            {"data": "minTemperature"},
+            {"data": "maxTemperature"},
+            {"data": "dryTime"},
+            {"data": "wetTime"},
+            {"data": "productionTime"},
+        ],
+        "order": [[0, 'asc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }
+        },
+    });
+
+    function initTable() {
+        $.ajax({
+            type: 'POST',
+            url: '/QualityByPlateRealTimeProdocutionData/getAllQualityByPlateRealTimeProdocutionData',
+            dataType: 'json',
+            data: {},
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $('#mainContent').dataTable().fnClearTable();
+                $('#mainContent').DataTable().rows.add(json).draw(false);
+            }
+        });
+    }
+
+</script>
 
 </html>
