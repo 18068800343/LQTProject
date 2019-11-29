@@ -283,9 +283,14 @@
 							"targets": 7,
 							"searchable": false,
 							"render": function(data, type, full) {
-								    	return  '<i class="iconfont icon-xiugai Phdb" style="font-size:18px;cursor:pointer;display:none;" title="修改" data-toggle="modal" data-target="#changeLuDuan" onclick="xghxshebei(this)"></i>'
-			                            +'<i class="iconfont icon-shanchu Phdc" style="font-size:18px;cursor:pointer;display:none;" title="删除" onclick="deleteyige(this)"></i>';
-								        }
+                                        if(data=="1"){
+                                            return  '<i class="iconfont icon-xiugai Phdb" style="font-size:18px;cursor:pointer;display:none;" title="修改" data-toggle="modal" data-target="#changeLuDuan" onclick="xghxshebei(this)"></i>'
+                                            +'&nbsp&nbsp<i class="iconfont icon-tuichu Phdc" style="font-size:18px;cursor:pointer;display:none;" title="施工完成" onclick=""></i>'
+                                            +'<i class="iconfont icon-shanchu Phdc" style="font-size:18px;cursor:pointer;display:none;" title="删除" onclick="deleteyige(this)"></i>';
+                                        }else{
+                                            return '';
+                                        }
+                                    }
 							},
 						], "fnDrawCallback" : function() {
                                 initTableQuanxian()
