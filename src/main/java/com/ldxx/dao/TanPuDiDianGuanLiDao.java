@@ -10,11 +10,11 @@ public interface  TanPuDiDianGuanLiDao {
 	
 	List<SiteConstruction> getDistinctTanPuDiDian();
 	
-	List<SiteConstructionVo> getAllTanPuDiDian();
+	List<SiteConstructionVo> getAllTanPuDiDian(String luduanquanxian);
 	
 	int addTanPuDiDian(SiteConstructionVo siteConstructionVo);
 	
-	int delTanPuDiDian(String id);
+	int delTanPuDiDian(String id,String status);
 	
 	int updateTanPuDiDian(SiteConstructionVo siteConstructionVo);
 	
@@ -22,5 +22,5 @@ public interface  TanPuDiDianGuanLiDao {
 
     List<SiteConstructionVo> getByLuDuanId(Map<String, String> map);
 
-    List<SiteConstructionVo> getIDisroadName();
+    List<SiteConstructionVo> getIDisroadName(String luduanquanxian);
 }

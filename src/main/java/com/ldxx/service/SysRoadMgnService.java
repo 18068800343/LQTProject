@@ -1,12 +1,12 @@
 package com.ldxx.service;
 
-import java.util.List;
-
 import com.ldxx.bean.SysRoadMgn;
+
+import java.util.List;
 
 public interface SysRoadMgnService {
 
-	public List<SysRoadMgn> getAllSysRoadMgn();
+	public List<SysRoadMgn> getAllSysRoadMgn(String luduanquanxian);
 	
 	public int addSysRoadMgn(SysRoadMgn sysRoadMgn);
 	

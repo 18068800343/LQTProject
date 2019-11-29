@@ -31,8 +31,21 @@
 	
 	<select id="getAllSysRoadMgn" resultType="SysRoadMgn">
 		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state
-	    from sys_road_mgn 
-	    where delete_state!=0
+	    from sys_road_mgn
+		<where>
+			<if test="luduanquanxian != null and luduanquanxian != ''">
+				<if test="luduanquanxian.indexOf(',') != -1 ">
+					road_id in
+					<foreach collection="luduanquanxian.split(',')" item="item" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+				<if test="luduanquanxian.indexOf(',') == -1">
+					road_id=#{luduanquanxian}
+				</if>
+			</if>
+			and delete_state != 0
+		</where>
 	</select>
 
 	<select id="getAllSysRoadMgnLowcase" resultType="SysRoadMgnLowcase">
