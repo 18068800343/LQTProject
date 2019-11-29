@@ -16,7 +16,7 @@
         update site_road_mileage_temp set
         site_id=#{srm.siteId},
         temp=#{srm.temp},
-        temp2=#{srm.temp2}
+        temp2=#{srm.temp2},
         edit_user_id=#{srm.editUserId},
         edit_datetime=#{srm.editDatetime},
         datetime=#{srm.datetime}

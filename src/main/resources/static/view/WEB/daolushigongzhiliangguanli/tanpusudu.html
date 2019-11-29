@@ -376,6 +376,8 @@
 			roadList2:'',
 			sitenumber:'',
 			siteId:'',
+            roadSelected:'',
+            roadSelected2:'',
 		},
 		methods:{
 			//新建保存按钮事件
@@ -442,6 +444,8 @@
 			roadList2:'',
 			sitenumber:'',
 			siteId:'',
+            roadSelected:'',
+            roadSelected2:'',
 		},
 		methods:{
 			//新建保存按钮事件
@@ -474,7 +478,7 @@
 			roadChange:function(){
 				this.$http.post('/TanPuDiDianGuanLi/getByLuDuanId',{'roadId':this.roadSelected},{emulateJSON:true}).then((res)=>{
 					this.roadList2=res.body;
-					//this.roadSelected2=xg_Tanpusudu.roadList2[0].id;
+					this.roadSelected2=xg_Tanpusudu.roadList2[0].id;
 					this.siteId=this.roadSelected2
 				},(res)=>{
 					console.log("初始化失败");

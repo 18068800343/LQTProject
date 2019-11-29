@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../font2/iconfont.css">
     <link href="../../style/bootstrap.min.css" rel="stylesheet">
     <link href="../../style/style.css" rel="stylesheet">
+    <link href="../../toastr/toastr.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../../style/jquery-editable-select.css">
     <link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
@@ -355,6 +356,7 @@
             biaoduanhao:'',
             sitenumber:'',
             siteId:'',
+            roadBiaoduanhao:'',
         },
         methods:{
             save:function(){
@@ -438,12 +440,14 @@
         xg_tanpuwendu.xg_roadBianhaoChange(data.siteId)
         xg_tanpuwendu.datetime=data.datetime;
         xg_tanpuwendu.temp=data.temp;
+        xg_tanpuwendu.temp2=data.temp2;
     }
 
     var xg_tanpuwendu=new Vue({
         el: '#change',
         //表单数据
         data: {
+            id:'',
             roadid:"",
             datetime:"",
             temp:"",
@@ -452,14 +456,15 @@
             biaoduanhao:'',
             sitenumber:'',
             siteId:'',
+            roadBiaoduanhao:'',
         },
         methods:{
             save:function(){
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-                this.$http.post('/SiteRoadMileageTemp/insertSiteRoadMileageTemp',JSON.stringify(this._data),{}).then((res)=>{
+                this.$http.post('/SiteRoadMileageTemp/updSiteRoadMileageTemp',JSON.stringify(this._data),{}).then((res)=>{
                     var resMsg = res.body;
                     if(resMsg.result>0){
-                        $("#myModal").modal("hide");
+                        $("#change").modal("hide");
                         initTable();
                         toastr.success(resMsg.msg);
                         initTableQuanxian()
