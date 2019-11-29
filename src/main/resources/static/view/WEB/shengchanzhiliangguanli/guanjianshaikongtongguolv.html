@@ -188,7 +188,7 @@
     function initPeiBiEcharts(startTime, endTime) {
         $.ajax({
             type: 'POST',
-            url: '/QualityByPlateRealTimeProdocutionData/getPeiBiVoListByTime',
+            url: '/QualityKeyMeshPassRate/getTongGuoLvVoListByTime',
             dataType: 'json',
             data: {
                 beginTime: startTime,
@@ -255,8 +255,8 @@
     function initMychart(list) {
         let myChart = echarts.init(document.getElementById('two'));
         // 使用刚指定的配置项和数据显示图表。
-        let peibiOption = setPeibiOption(list);
-        myChart.setOption(peibiOption);
+        let tongGuoOption = setTongGuoVoOption(list);
+        myChart.setOption(tongGuoOption);
     }
 </script>
 </html>

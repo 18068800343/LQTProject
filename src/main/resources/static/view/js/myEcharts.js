@@ -212,3 +212,81 @@ function setPeibiOption(list){
 	};
 	return peibiOption;
 }
+
+
+function setTongGuoVoOption(list){
+	let tongGuoOption = {
+		title: {
+			text: '折线图堆叠'
+		},
+		legend: {
+			data:['料1','料2','料3','料4','料5','料6','粉用量','沥青用量']
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		toolbox: {
+			feature: {
+				dataZoom: {
+					yAxisIndex: 'none'
+				},
+				restore: {},
+				saveAsImage: {},
+				dataView:{}
+			}
+		},
+		tooltip : {
+			trigger: 'axis',
+			axisPointer: {
+				type: 'cross',
+				animation: false,
+				label: {
+					backgroundColor: '#505765'
+				}
+			}
+		},
+		dataZoom: [
+			{
+				show: true,
+				realtime: true,
+				start: 0,
+				end: 100
+			},
+			{
+				type: 'inside',
+				realtime: true,
+				start: 0,
+				end: 100
+			}
+		],
+		xAxis: {
+			type: 'category',
+			boundaryGap: false,
+			data: list.xList
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [
+			{
+				name:'料1',
+				type:'line',
+				data:list.yList1
+			},
+			{
+				name:'料2',
+				type:'line',
+				data:list.yList2
+			},
+			{
+				name:'料3',
+				type:'line',
+				data:list.yList3
+			}
+		]
+	};
+	return tongGuoOption;
+}
