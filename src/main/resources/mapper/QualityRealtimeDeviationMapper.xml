@@ -7,5 +7,20 @@
 		Bone_flour_deviation,pitch_deviation,min_temperature,max_temperature,dry_mixing_deviation,wet_mixing_deviation,pass_475,pass_236,pass_0075,datetime
 		from quality_realtime_deviation
 	</select>
-	
+
+	<select id="getPianChaVoListByTime" resultType="QualityRealtimeDeviation">
+		SELECT
+		*
+		FROM
+		quality_realtime_deviation qkr
+		<where>
+			<if test="beginTime !=null and beginTime!=''">
+				qkr.datetime &gt; #{beginTime}
+			</if>
+			<if test="endTime !=null and endTime!=''">
+				and qkr.datetime &lt;  #{endTime}
+			</if>
+		</where>
+		order by qkr.datetime asc
+	</select>
 </mapper>

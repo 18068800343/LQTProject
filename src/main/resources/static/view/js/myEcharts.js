@@ -290,3 +290,122 @@ function setTongGuoVoOption(list){
 	};
 	return tongGuoOption;
 }
+
+
+
+function setPianChaVoOption(list){
+	let pianChaOption = {
+		title: {
+			text: '折线图堆叠'
+		},
+		legend: {
+			data:['料1偏差','料2偏差','料3偏差','料4偏差','料5偏差','料6偏差','粉偏差','沥青偏差','通过率偏差4.75','通过率偏差2.36','通过率偏差0.075']
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		toolbox: {
+			feature: {
+				dataZoom: {
+					yAxisIndex: 'none'
+				},
+				restore: {},
+				saveAsImage: {},
+				dataView:{}
+			}
+		},
+		tooltip : {
+			trigger: 'axis',
+			axisPointer: {
+				type: 'cross',
+				animation: false,
+				label: {
+					backgroundColor: '#505765'
+				}
+			}
+		},
+		dataZoom: [
+			{
+				show: true,
+				realtime: true,
+				start: 0,
+				end: 100
+			},
+			{
+				type: 'inside',
+				realtime: true,
+				start: 0,
+				end: 100
+			}
+		],
+		xAxis: {
+			type: 'category',
+			boundaryGap: false,
+			data: list.xList
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [
+			{
+				name:'料1偏差',
+				type:'line',
+				data:list.yList1
+			},
+			{
+				name:'料2偏差',
+				type:'line',
+				data:list.yList2
+			},
+			{
+				name:'料3偏差',
+				type:'line',
+				data:list.yList3
+			},
+			{
+				name:'料4偏差',
+				type:'line',
+				data:list.yList4
+			},
+			{
+				name:'料5偏差',
+				type:'line',
+				data:list.yList5
+			},
+			{
+				name:'料6偏差',
+				type:'line',
+				data:list.yList6
+			},
+			{
+				name:'粉偏差',
+				type:'line',
+				data:list.yList7
+			},
+			{
+				name:'沥青偏差',
+				type:'line',
+				data:list.yList8
+			},
+			{
+				name:'通过率偏差4.75',
+				type:'line',
+				data:list.yList9
+			},
+			{
+				name:'通过率偏差2.36',
+				type:'line',
+				data:list.yList10
+			},
+			{
+				name:'通过率偏差0.075',
+				type:'line',
+				data:list.yList11
+			}
+		]
+	};
+	return pianChaOption;
+}

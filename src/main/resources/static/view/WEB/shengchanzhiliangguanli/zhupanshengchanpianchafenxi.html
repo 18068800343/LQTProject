@@ -202,7 +202,7 @@
 	function initPeiBiEcharts(startTime, endTime) {
 		$.ajax({
 			type: 'POST',
-			url: '/QualityByPlateRealTimeProdocutionData/getPeiBiVoListByTime',
+			url: '/QualityRealtimeDeviation/getPianChaVoListByTime',
 			dataType: 'json',
 			data: {
 				beginTime: startTime,
@@ -269,8 +269,8 @@
 	function initMychart(list) {
 		let myChart = echarts.init(document.getElementById('two'));
 		// 使用刚指定的配置项和数据显示图表。
-		let peibiOption = setPeibiOption(list);
-		myChart.setOption(peibiOption);
+		let pianchaOption = setPianChaVoOption(list);
+		myChart.setOption(pianchaOption);
 	}
 
 </script>
