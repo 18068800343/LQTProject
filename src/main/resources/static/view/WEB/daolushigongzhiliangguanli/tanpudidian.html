@@ -371,8 +371,11 @@ body, html {
 								var marker = '<i class="glyphicon glyphicon-map-marker Peaac" style="font-size:14px;cursor:pointer;display:none;" data-id="'
 									+ data
 									+ '" onclick="markPoint(this)" title="定位"></i>';
+								var wanjie = '<i class="glyphicon glyphicon-ok Peaad" style="font-size:18px;cursor:pointer;display:none;" data-id="'
+										+ data
+										+ '" onclick="wanjieMsg(this)" title="完结"></i>';
 										
-								return   xiugai + qiyong + marker;
+								return   xiugai + qiyong + marker+wanjie;
 							}
 						} , {
                             "class" : "tcenter",
@@ -424,6 +427,7 @@ body, html {
 			data:{
 			},
 			success:function(json){
+				console.log(json)
 				if(json!=null &&json!=""){
 					var arr = json.uPermissions.split(',');
 					for(var i=0;i<arr.length;i++){
@@ -436,6 +440,9 @@ body, html {
 						}
 						if(arr[i].indexOf("Peaac") >= 0 ){
 							$(".Peaac").show();
+						}
+						if(arr[i].indexOf("Peaad") >= 0 ){
+							$(".Peaad").show();
 						}
 
 					}
@@ -704,7 +711,8 @@ body, html {
 	            url: '/TanPuDiDianGuanLi/delTanPuDiDian',
 	            dataType: 'json',
 	            data: {
-	            	id:data.id
+	            	id:data.id,
+					status:0,
 	            },
 	            error: function (msg) {
 	                errMessage("请求UserController失败");
@@ -723,5 +731,40 @@ body, html {
 		}
 	  console.log(msg);
 	}
+
+	//箭头函数，内部this永远指向父级
+	var wanjieMsg = (e)=>{
+		var tr = $(e).parents("tr");
+		var data=$("#mainContent").DataTable().row(tr).data();
+		var msg = "确定已完结吗？\n\n请确认！";
+		if (confirm(msg) == true) {
+			$.ajax({
+				type: 'POST',
+				url: '/TanPuDiDianGuanLi/delTanPuDiDian',
+				dataType: 'json',
+				data: {
+					id:data.id,
+					status:2,
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					if(json>0){
+						toastr.success("完结成功");
+						data.deletestate=2;
+						$('#mainContent').DataTable().row(tr).data(data);     //新增行立即显示
+						initTableQuanxian()
+					}else{
+						toastr.error("完结失败");
+					}
+				}
+			});
+		}else{
+			return false;
+		}
+		console.log(msg);
+	}
+
 </script>
 </html>

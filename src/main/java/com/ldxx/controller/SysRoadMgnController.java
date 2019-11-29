@@ -2,6 +2,7 @@ package com.ldxx.controller;
 
 import com.ldxx.bean.SysRoadMgn;
 import com.ldxx.bean.SysRoadMgnLowcase;
+import com.ldxx.bean.User;
 import com.ldxx.dao.SysRoadMgnDao;
 import com.ldxx.service.SysRoadMgnService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +28,10 @@ public class SysRoadMgnController {
 	private SysRoadMgnDao dao;
     @RequestMapping("/getAllSysRoadMgn")
     @ResponseBody
-    public List<SysRoadMgn> getAllSysRoadMgn(){ 
-        return srmService.getAllSysRoadMgn();
+    public List<SysRoadMgn> getAllSysRoadMgn(HttpSession session){
+		User user = (User) session.getAttribute("user");
+		String luduanquanxian = user.getLuduanquanxian();
+        return srmService.getAllSysRoadMgn(luduanquanxian);
     }
 
     @RequestMapping("/getAllSysRoadMgnLowcase")

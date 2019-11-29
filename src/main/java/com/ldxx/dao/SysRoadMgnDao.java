@@ -12,7 +12,7 @@ public interface SysRoadMgnDao {
 	
 	public int updateSysRoadMgnById(@Param("sysRoadMgn")SysRoadMgn sysRoadMgn);
 	
-	public List<SysRoadMgn> getAllSysRoadMgn();
+	public List<SysRoadMgn> getAllSysRoadMgn(String luduanquanxian);
 
 	public List<SysRoadMgnLowcase> getAllSysRoadMgnLowcase();
 

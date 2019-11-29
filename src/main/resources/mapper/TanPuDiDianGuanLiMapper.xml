@@ -19,7 +19,7 @@
 	
 
 	<update id="delTanPuDiDian" parameterType="String">
-		update site_construction set delete_state=0 where id=#{id}
+		update site_construction set delete_state=#{status} where id=#{id}
 	</update>
 
 	<update id="updateUser" parameterType="user" >
@@ -53,19 +53,37 @@
 	    position=#{user.position,jdbcType=VARCHAR}
 	  where user_id = #{user.userId,jdbcType=VARCHAR}
 	</update>
+
+	<sql id="luduanquanxian_sql">
+		<if test="luduanquanxian != null and luduanquanxian != ''">
+			<if test="luduanquanxian.indexOf(',') != -1 ">
+				sc.road_id in
+				<foreach collection="luduanquanxian.split(',')" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="luduanquanxian.indexOf(',') == -1">
+				sc.road_id=#{luduanquanxian}
+			</if>
+		</if>
+	</sql>
 	
 	
 	<select id="getDistinctTanPuDiDian" resultType="siteConstruction">
-		select DISTINCT road_no,site_name from site_construction where delete_state = 1
+		select DISTINCT road_no,site_name from site_construction where sc.delete_state != 0
 	</select>
 	
 	<select id="getAllTanPuDiDian" resultType="siteConstructionVo">
-		select sc.*,srm.road_no,srm.road_name from site_construction sc LEFT JOIN sys_road_mgn srm on sc.road_id = srm.road_id and srm.delete_state = 1
-		where sc.delete_state = 1
+		select sc.*,srm.road_no,srm.road_name from site_construction sc 
+		LEFT JOIN sys_road_mgn srm on sc.road_id = srm.road_id and srm.delete_state != 0
+		<where>
+			<include refid="luduanquanxian_sql"></include>
+			and sc.delete_state != 0
+        </where>
 	</select>
 	
 	<select id="getBiaoDuanByLuDuan" resultType="siteConstruction" parameterType="map">
-		select * from site_construction where  road_no=#{roadno} and delete_state = 1
+		select * from site_construction where  road_no=#{roadno} and delete_state != 0
 	</select>
 	
 	<select id="selectUserById" parameterType="String" resultType="user">
@@ -75,8 +93,8 @@
 
 	<select id="getByLuDuanId" resultType="SiteConstructionVo" parameterType="map">
 		select sc.*,srm.road_no,srm.road_name  from site_construction sc
-		LEFT JOIN sys_road_mgn srm on sc.road_id = srm.road_id and srm.delete_state = 1
-		 where  sc.road_id=#{roadId} and sc.delete_state = 1
+		LEFT JOIN sys_road_mgn srm on sc.road_id = srm.road_id and srm.delete_state != 0
+		 where  sc.road_id=#{roadId} and sc.delete_state != 0
 	</select>
 
 	<select id="getIDisroadName" resultType="siteConstructionVo">
@@ -86,9 +104,12 @@
 		FROM
 			site_construction sc
 		LEFT JOIN sys_road_mgn srm ON sc.road_id = srm.road_id
-		AND srm.delete_state = 1
-		WHERE
-			sc.delete_state = 1
+		AND srm.delete_state != 0
+        <where>
+            <include refid="luduanquanxian_sql"></include>
+            and sc.delete_state != 0
+        </where>
 	</select>
+
 
 </mapper>

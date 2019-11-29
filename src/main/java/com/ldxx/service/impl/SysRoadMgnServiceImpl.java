@@ -1,15 +1,14 @@
 package com.ldxx.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.ldxx.bean.SysRoadMgn;
 import com.ldxx.dao.SysRoadMgnDao;
 import com.ldxx.service.SysRoadMgnService;
 import com.ldxx.util.LDXXUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -18,8 +17,8 @@ public class SysRoadMgnServiceImpl implements SysRoadMgnService{
 	@Autowired
 	SysRoadMgnDao srmDao;
 	@Override
-	public List<SysRoadMgn> getAllSysRoadMgn() {
-		List<SysRoadMgn> list = srmDao.getAllSysRoadMgn();
+	public List<SysRoadMgn> getAllSysRoadMgn(String luduanquanxian) {
+		List<SysRoadMgn> list = srmDao.getAllSysRoadMgn(luduanquanxian);
 		return list;
 	}
 

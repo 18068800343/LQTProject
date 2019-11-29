@@ -2,6 +2,7 @@ package com.ldxx.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.bean.SiteConstruction;
+import com.ldxx.bean.User;
 import com.ldxx.dao.TanPuDiDianGuanLiDao;
 import com.ldxx.service.TanPuDiDianGuanLiService;
 import com.ldxx.util.LDXXUtils;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,14 +37,16 @@ public class TanPuDiDianGuanLiController {
 	
 	@RequestMapping("/getAllTanPuDiDian")
 	@ResponseBody
-	public List<SiteConstructionVo> getAllTanPuDiDian() {
-		return dao.getAllTanPuDiDian();
+	public List<SiteConstructionVo> getAllTanPuDiDian(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        String luduanquanxian = user.getLuduanquanxian();
+        return dao.getAllTanPuDiDian(luduanquanxian);
 	}
 	
 	@RequestMapping("/delTanPuDiDian")
 	@ResponseBody
-	public int delTanPuDiDian(String id) {
-		return dao.delTanPuDiDian(id);
+	public int delTanPuDiDian(String id,String status) {
+		return dao.delTanPuDiDian(id,status);
 	}
 	
 	@RequestMapping("/addTanPuDiDian")
@@ -109,8 +113,10 @@ public class TanPuDiDianGuanLiController {
 	 */
 	@RequestMapping("/getIDisroadName")
 	@ResponseBody
-	public List<SiteConstructionVo> getIDisroadName() {
-		return dao.getIDisroadName();
+	public List<SiteConstructionVo> getIDisroadName(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        String luduanquanxian = user.getLuduanquanxian();
+		return dao.getIDisroadName(luduanquanxian);
 	}
 
 }
