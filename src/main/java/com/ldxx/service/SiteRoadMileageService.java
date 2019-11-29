@@ -1,12 +1,12 @@
 package com.ldxx.service;
 
-import java.util.List;
-
 import com.ldxx.bean.SiteRoadMileage;
+
+import java.util.List;
 
 public interface SiteRoadMileageService {
 
-	List<SiteRoadMileage> selectAllSiteRoadMileage();
+	List<SiteRoadMileage> selectAllSiteRoadMileage(String luduanquanxian);
 	
 	int updSiteRoadMileage(SiteRoadMileage srm);
 	
@@ -14,4 +14,5 @@ public interface SiteRoadMileageService {
 	
 	int insertSiteRoadMileage(SiteRoadMileage srm);
 
+	List<SiteRoadMileage> getByLuDuanId(String roadId);
 }

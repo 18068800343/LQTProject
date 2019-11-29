@@ -1,19 +1,20 @@
 package com.ldxx.dao;
 
-import java.util.List;
-
+import com.ldxx.bean.SiteRoadMileage;
 import org.apache.ibatis.annotations.Param;
 
-import com.ldxx.bean.SiteRoadMileage;
+import java.util.List;
 
 public interface SiteRoadMileageDao {
 	
-	List<SiteRoadMileage> selectAllSiteRoadMileage();
+	List<SiteRoadMileage> selectAllSiteRoadMileage(String luduanquanxian);
 	
 	int updSiteRoadMileage(@Param("srm")SiteRoadMileage srm);
 	
 	int delSiteRoadMileage(@Param("id")String id);
 	
 	int insertSiteRoadMileage(@Param("srm")SiteRoadMileage srm);
+
+	List<SiteRoadMileage>  getByLuDuanId(String roadId);
 
 }

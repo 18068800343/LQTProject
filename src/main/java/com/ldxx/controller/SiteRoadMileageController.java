@@ -1,23 +1,19 @@
 package com.ldxx.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
 import com.alibaba.fastjson.JSONObject;
+import com.ldxx.bean.SiteRoadMileage;
+import com.ldxx.bean.User;
+import com.ldxx.service.SiteRoadMileageService;
+import com.ldxx.util.GetThisTimeUtils;
+import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ldxx.bean.SiteRoadMileage;
-import com.ldxx.bean.User;
-import com.ldxx.service.SiteRoadMileageService;
-import com.ldxx.util.GetThisTimeUtils;
-import com.ldxx.util.LDXXUtils;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * 摊铺里程
@@ -33,8 +29,10 @@ public class SiteRoadMileageController {
 	private SiteRoadMileageService service;
 	
 	@RequestMapping("/selectAllSiteRoadMileage")
-	public List<SiteRoadMileage> selectAllSiteRoadMileage(){
-		return service.selectAllSiteRoadMileage();
+	public List<SiteRoadMileage> selectAllSiteRoadMileage(HttpSession session){
+		User user = (User) session.getAttribute("user");
+		String luduanquanxian = user.getLuduanquanxian();
+		return service.selectAllSiteRoadMileage(luduanquanxian);
 	}
 	
 	@RequestMapping("/updSiteRoadMileage")
@@ -76,6 +74,16 @@ public class SiteRoadMileageController {
 		jsonObject.put("daoMsg",i);
 		jsonObject.put("obj",srm);
 		return jsonObject.toJSONString();
+	}
+
+	/**
+	 * 通过路段roadId获取信息
+	 * @param roadId
+	 * @return
+	 */
+	@RequestMapping("/getByLuDuanId")
+	public List<SiteRoadMileage> getByLuDuanId(String roadId) {
+		return service.getByLuDuanId(roadId);
 	}
 
 }
