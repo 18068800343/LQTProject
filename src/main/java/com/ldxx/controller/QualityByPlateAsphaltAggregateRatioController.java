@@ -1,14 +1,16 @@
 package com.ldxx.controller;
 
-import java.util.List;
-
+import com.ldxx.bean.QualityByPlateAsphaltAggregateRatio;
+import com.ldxx.dao.QualityByPlateAsphaltAggregateRatioDao;
+import com.ldxx.service.QualityByPlateAsphaltAggregateRatioService;
+import com.ldxx.vo.YouShiBiVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ldxx.bean.QualityByPlateAsphaltAggregateRatio;
-import com.ldxx.service.QualityByPlateAsphaltAggregateRatioService;
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 逐盘油石比
@@ -22,12 +24,24 @@ public class QualityByPlateAsphaltAggregateRatioController {
 	
 	@Autowired
 	private QualityByPlateAsphaltAggregateRatioService service;
+
+	@Resource
+	private QualityByPlateAsphaltAggregateRatioDao dao;
 	
 	
 	@RequestMapping("/getAllQualityByPlateAsphaltAggregateRatio")
 	@ResponseBody
 	public List<QualityByPlateAsphaltAggregateRatio> getAllQualityByPlateAsphaltAggregateRatio(){
-		return service.getAllQualityByPlateAsphaltAggregateRatio();
+		List list =  service.getAllQualityByPlateAsphaltAggregateRatio();
+		return list;
 	}
 
+	@RequestMapping("/getYouShiBiVoListByTime")
+	@ResponseBody
+	public YouShiBiVo getYouShiBiVoListByTime(String beginTime, String endTime){
+		List<QualityByPlateAsphaltAggregateRatio> list = dao.getYouShiBiVoListByTime(beginTime,endTime);
+		YouShiBiVo youShiBiVo = new YouShiBiVo();
+		youShiBiVo  = youShiBiVo.getYouShiBiVoByPeiBiVoList(list);
+		return youShiBiVo;
+	}
 }

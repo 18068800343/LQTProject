@@ -7,22 +7,19 @@
 		<link href="../../favicon.ico" rel="shortcut icon">
 		<link href="../../style/bootstrap.min.css" rel="stylesheet">
 		<link href="../../style/style.css" rel="stylesheet">
-		<link href="../../toastr/toastr.css" rel="stylesheet">
 		<link rel="stylesheet" href="../../font2/iconfont.css">
 		<link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
-		<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
-		<link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css" />
-		<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/code.css" />
-		<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
-
-
+		<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css"/>
+		<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/code.css"/>
+		<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
+		<link href="../../toastr/toastr.css" rel="stylesheet">
 	</head>
-
 	<body>
 	<div class="mianbao">
     	<ul class="breadcrumb">
@@ -47,7 +44,6 @@
                 <thead>
                     <tr>
                         <th>计划编号</th>
-                        <th>日期</th>
                         <th>时间</th>
 						<th>油石比</th>
                     </tr>
@@ -58,8 +54,26 @@
 					</div>
 				</div>
 				<!-- 三结束 -->
-					<div class="layui-tab-item weadmin-body">        
-							<div id="seven" style="width: 1000px;height:400px;"></div>
+					<div class="layui-tab-item weadmin-body">
+						<div class="">
+							<div class="pull-left col-xs-2.5">
+								<input type="text" style="width:132px;margin-left: 15px;" class="form-control" placeholder="起始时间"
+									   id="reservation" onclick="">
+							</div>
+							<span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
+							<div class="pull-left col-xs-2.5">
+								<input type="text" style="width:120px" class="form-control" placeholder="结束时间" id="reservationEnd"
+									   onclick=""><br/>
+							</div>
+							<div class="pull-left col-sm-1">
+								<a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
+							</div>
+						</div>
+						<br>
+						<br>
+						<br>
+						<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+						<div id="two" style="width: 1000px;height:600px;"></div>
 					</div>
 				</div>
 			</div>
@@ -137,63 +151,21 @@
 </body>
 <script src="../../js/jquery.js"></script>
 <script src="../../easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../js/common-scripts.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
 <script src="../../js/main.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../toastr/toastr.js"></script>
 <script>
 	$(document).ready( function () {
-		initTable()
+		initTable();
+		initPeiBiEcharts();
 	});
 
-	layui.use('element', function() {
-		var $ = layui.jquery,
-			element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
-
-		//触发事件
-		var active = {
-			tabAdd: function() {
-				//新增一个Tab项
-				element.tabAdd('demo', {
-					title: '新选项' + (Math.random() * 1000 | 0) //用于演示
-						,
-					content: '内容' + (Math.random() * 1000 | 0),
-					id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
-				})
-			},
-			tabDelete: function(othis) {
-				//删除指定Tab项
-				element.tabDelete('demo', '44'); //删除：“商品管理”
-
-
-				othis.addClass('layui-btn-disabled');
-			},
-			tabChange: function() {
-				//切换到指定Tab项
-				element.tabChange('demo', '22'); //切换到：用户管理
-			}
-		};
-
-		$('.site-demo-active').on('click', function() {
-			var othis = $(this),
-				type = othis.data('type');
-			active[type] ? active[type].call(this, othis) : '';
-		});
-
-		//Hash地址的定位
-		var layid = location.hash.replace(/^#test=/, '');
-		element.tabChange('test', layid);
-
-		element.on('tab(test)', function(elem) {
-			location.hash = 'test=' + $(this).attr('lay-id');
-		});
-
-	});
-		
 	    var table=$('#mainContent').dataTable({
 	        "deferRender": true,
 	        "processing": true,
@@ -206,8 +178,7 @@
 			},
 			"columns": [
 	            { "data": "planNo"},
-	            { "data": "date"}, 
-	            { "data": "time"},
+	            { "data": "nowTime"},
 	            { "data": "asphaltAggregateRatio"},
 	        ],
 	        "order": [[0, 'asc']],
@@ -229,26 +200,6 @@
 	        }},
 	        
 		});
-	    
-		var myChart = echarts.init(document.getElementById('seven'));
-				
-				var option = {
-		    xAxis: {
-		        type: 'category',
-		        data: ['12:03', '12:03', '12:03', '12:03', '12:03', '12:03', '12:03', '12:03']
-		    },
-		    yAxis: {
-		        type: 'value'
-		    },
-		    series: [{
-		        data: [9,9,10,11,11,11,11,11,11,11],
-		        type: 'line'
-		    }]
-		};
-
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
-		
 		
 		function initTable(){
 	        $.ajax({
@@ -266,5 +217,82 @@
 	            }
 	        });
 	    }
+
+
+	function initPeiBiEcharts(startTime, endTime) {
+		$.ajax({
+			type: 'POST',
+			url: '/QualityByPlateAsphaltAggregateRatio/getYouShiBiVoListByTime',
+			dataType: 'json',
+			data: {
+				beginTime: startTime,
+				endTime: endTime
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				initMychart(json);
+			}
+		});
+	}
+
+	let startTime = {
+		elem: '#reservation',
+		type: 'datetime',
+		trigger: 'click',
+		done: function (date) {
+			let beginDate = date;
+			let endDate = $("#reservationEnd").val();
+			let d1 = beginDate;
+			let d2 = endDate;
+			if (beginDate != "" && endDate != "" && d1 > d2) {
+				toastr.error("开始时间不能大于结束时间！");
+				$("#reservation").val('');
+				return false;
+			}
+		}
+	};
+	// 结束时间
+	let endTime = {
+		elem: '#reservationEnd',
+		type: 'datetime',
+		trigger: 'click',
+		done: function (date) {
+			let beginDate = $("#reservation").val();
+			let endDate = date;
+			let d1 = beginDate;
+			let d2 = endDate;
+			if (beginDate != "" && endDate != "" && d1 > d2) {
+				toastr.error("开始时间不能大于结束时间！");
+				$("#reservationEnd").val('');
+				return false;
+			}
+		}
+	};
+	laydate.render(startTime);
+	laydate.render(endTime);
+
+	function searchBydate() {
+		let begin = $('#reservation').val();
+		let start = begin.replace(/年|月/g, '-').replace('日', '');
+		let end = $('#reservationEnd').val().replace(/年|月/g, '-').replace('日', '');
+		initPeiBiEcharts(start, end);
+		console.log(start);
+
+	}
+
+	function myTrim(x) {
+		return x.replace(/^\s+|\s+$/gm, '');
+	}
+
+	function initMychart(list) {
+		let myChart = echarts.init(document.getElementById('two'));
+		// 使用刚指定的配置项和数据显示图表。
+		let peibiOption = setYouShiBiOption(list);
+		myChart.setOption(peibiOption);
+	}
+
+
 </script>
 </html>

@@ -1,9 +1,10 @@
 package com.ldxx.bean;
 
-import java.sql.Time;
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 逐盘油石比
@@ -18,11 +19,20 @@ public class QualityByPlateAsphaltAggregateRatio {
 
     public String planNo;//计划编号
 
-    public Date date;//日期
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    public Date nowTime;//日期
 
-    public Time time;//时间
+    public BigDecimal asphaltAggregateRatio;//油石比
 
-    public String asphaltAggregateRatio;//油石比
+
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	public Date getNowTime() {
+		return nowTime;
+	}
+
+	public void setNowTime(Date nowTime) {
+		this.nowTime = nowTime;
+	}
 
 	public String getId() {
 		return id;
@@ -47,29 +57,13 @@ public class QualityByPlateAsphaltAggregateRatio {
 	public void setPlanNo(String planNo) {
 		this.planNo = planNo;
 	}
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	public Date getDate() {
-		return date;
-	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
 
-	public Time getTime() {
-		return time;
-	}
-
-	public void setTime(Time time) {
-		this.time = time;
-	}
-
-	public String getAsphaltAggregateRatio() {
+	public BigDecimal getAsphaltAggregateRatio() {
 		return asphaltAggregateRatio;
 	}
 
-	public void setAsphaltAggregateRatio(String asphaltAggregateRatio) {
+	public void setAsphaltAggregateRatio(BigDecimal asphaltAggregateRatio) {
 		this.asphaltAggregateRatio = asphaltAggregateRatio;
 	}
     
