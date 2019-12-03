@@ -82,7 +82,8 @@
 	</update>
 
 	<select id="selectUserByRoadId" parameterType="String" resultType="User">
-		select * from u_user as a
+		select *,b.danwei_name from u_user as a
+		left join dic_danwei as d on a.danwei=b.id
 		where a.delete_state=1
 			and a.luduanquanxian like #{roadId}
 	</select>

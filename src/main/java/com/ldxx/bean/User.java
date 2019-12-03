@@ -66,8 +66,16 @@ public class User {
     private String zhiwu;//职务
     private String danwei;//单位
 
+    private String danweiName;
     private String luduanquanxian;//路段ID
 
+    public String getDanweiName() {
+        return danweiName;
+    }
+
+    public void setDanweiName(String danweiName) {
+        this.danweiName = danweiName;
+    }
 
     public String getLuduanquanxian() {
         return luduanquanxian;
