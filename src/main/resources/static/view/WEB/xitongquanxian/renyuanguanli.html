@@ -308,7 +308,7 @@
             { "data": "cardId"}, 
             { "data": "phoneNo"}, 
             { "data": "zhiwu"}, 
-            { "data": "danwei"}, 
+            { "data": "danweiName"},
             { "data": "username"}, 
             { "data": null},
         ],
@@ -450,11 +450,11 @@
 	                	 $("#suoshudanwei").html('');
 	                	 $("#xg_suoshudanwei").html('');
 	                     for(var i=0;i<json.length;i++){
-	                    	 $("#suoshudanwei").append("<option data-id='"+json[i].id+"' value='"+json[i].danweiName+"'>"+json[i].danweiName+"</option>");
-	                    	 $("#xg_suoshudanwei").append("<option data-id='"+json[i].id+"' value='"+json[i].danweiName+"'>"+json[i].danweiName+"</option>");
-	                     }
-                        $("#suoshudanwei").trigger('change');
-                        $("#xg_suoshudanwei").trigger('change');
+	                    	 $("#suoshudanwei").append("<option data-id='"+json[i].id+"' value='"+json[i].id+"'>"+json[i].danweiName+"</option>");
+	                    	 $("#xg_suoshudanwei").append("<option data-id='"+json[i].id+"' value='"+json[i].id+"'>"+json[i].danweiName+"</option>");
+                    }
+                    $("#suoshudanwei").trigger('change');
+                    $("#xg_suoshudanwei").trigger('change');
 	                }
 	            }
 	        });

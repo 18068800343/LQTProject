@@ -14,12 +14,12 @@
 			site_number=#{sitenumber},
 			lng=#{lng},lat=#{lat},
 			stake_mark=#{stakemark},
-			lane=#{lane},remarks=#{remarks} where id=#{id}
+			lane=#{lane},remarks=#{remarks} where id=#{id} and delete_state=1
 	</update>
 	
 
 	<update id="delTanPuDiDian" parameterType="String">
-		update site_construction set delete_state=#{status} where id=#{id}
+		update site_construction set delete_state=#{status} where id=#{id} and delete_state=1
 	</update>
 
 	<update id="updateUser" parameterType="user" >
@@ -51,7 +51,7 @@
 	    certificate = #{user.certificate,jdbcType=VARCHAR},
 	    certificate_grade=#{user.certificateGrade,jdbcType=VARCHAR},
 	    position=#{user.position,jdbcType=VARCHAR}
-	  where user_id = #{user.userId,jdbcType=VARCHAR}
+	  where user_id = #{user.userId,jdbcType=VARCHAR} and delete_state=1
 	</update>
 
 	<sql id="luduanquanxian_sql">
@@ -111,5 +111,9 @@
         </where>
 	</select>
 
+
+	<update id="finishSiteConstructionByRoadId" parameterType="String">
+		update site_construction set delete_state=2 where road_id=#{roadId} and delete_state=1
+	</update>
 
 </mapper>

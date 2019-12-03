@@ -221,6 +221,35 @@
         </div>
     </div>
 </div>
+
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="finish">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><b>完成路段施工</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <select multiple class="form-control" id="finishUser">
+                            <option :value="user.userId" v-for="user in userList">{{user.uName}}</option>
+                        </select>
+                        <div>
+                            <span>以上用户只拥有该路段权限，确定完成后将停用该用户的账户。</span><br/>
+                            <span>相关摊铺地点也将全部完成，请确认是否完成。</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-default" @click="finishButton">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- model结束 -->
 <!-- allMsg结束 -->
 </body>
 <script src="../../js/jquery.js"></script>
@@ -254,7 +283,7 @@
 		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
         },
         "columns": [
-		            { "data": "roadNo"}, 
+		            { "data": "roadNo"},
 		            { "data": "roadName"},
 		            { "data": "startLng"},
 		            { "data": "startLat"},
@@ -285,7 +314,7 @@
 							"render": function(data, type, full) {
                                         if(data=="1"){
                                             return  '<i class="iconfont icon-xiugai Phdb" style="font-size:18px;cursor:pointer;display:none;" title="修改" data-toggle="modal" data-target="#changeLuDuan" onclick="xghxshebei(this)"></i>'
-                                            +'&nbsp&nbsp<i class="iconfont icon-tuichu Phdc" style="font-size:18px;cursor:pointer;display:none;" title="施工完成" onclick=""></i>'
+                                            +'&nbsp&nbsp<i class="iconfont icon-tuichu Phdc" style="font-size:18px;cursor:pointer;display:none;" title="施工完成" data-toggle="modal" data-target="#finish" onclick="finishGetUser(this)"></i>'
                                             +'<i class="iconfont icon-shanchu Phdc" style="font-size:18px;cursor:pointer;display:none;" title="删除" onclick="deleteyige(this)"></i>';
                                         }else{
                                             return '';
@@ -478,5 +507,55 @@ function xghxshebei(obj){
 	        	}
 	        });
 	}
+
+	var finish=new Vue({
+        el:"#finish",
+        data:{
+            roadId:"",
+            userList:""
+        },
+        methods:{
+
+            finishButton:function(){
+                //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+                this.$http.post('/SysRoadMgnController/finishRoad',{'roadId':this.roadId},{emulateJSON:true}).then((res)=>{
+                    var resMsg = res.body;
+                    if(resMsg.result>0){
+                        $('#mainContent').DataTable().row(trr).data(resMsg.sysRoadMgn);
+                        toastr.success('项目已完成');
+                        $("#finish").modal("hide");
+                    }else{
+                        toastr.error('项目完成失败');
+                        $("#finish").modal("hide");
+                    }
+                },(res)=>{
+                    toastr.error('项目完成失败');
+                    $("#finish").modal("hide");
+                    console.log(res.status);
+                });
+
+
+            },
+            getRoadUser:function(){
+                //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+                this.$http.post('/user/selectUserByRoadIdIsOne',{'roadId':this.roadId},{emulateJSON:true}).then((res)=>{
+                    this.userList=res.body;
+                },(res)=>{
+                    console.log(res.status);
+                });
+
+            }
+        }
+    });
+
+    function finishGetUser(obj){
+        var tr=$(obj).parents("tr");
+        var data=$("#mainContent").DataTable().row(tr).data();
+        trr=$(obj).closest('tr');
+        finish.roadId=data.roadId;
+        finish.getRoadUser();
+        $("#finish").show();
+    }
+
 </script>
 </html>

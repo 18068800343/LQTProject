@@ -38,4 +38,10 @@ public interface  UserDao {
 	UserVo selectUserByUsername(@Param("username")String username);
 	
 	int updatePasswordById(@Param("userId")String userId,@Param("new_password") String new_password);
+
+	List<User> selectUserByRoadId(@Param("roadId")String roadId);
+
+	int finishUserRoadIdIsOne(@Param("user")User user);
+
+	int finishUserRoadIdIsMany(@Param("user")User user);
 }

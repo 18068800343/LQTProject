@@ -23,4 +23,6 @@ public interface  TanPuDiDianGuanLiDao {
     List<SiteConstructionVo> getByLuDuanId(Map<String, String> map);
 
     List<SiteConstructionVo> getIDisroadName(String luduanquanxian);
+
+    int finishSiteConstructionByRoadId(String roadId);
 }

@@ -37,7 +37,9 @@
 	
 	
 	<select id="selectAllUser" resultType="UserVo">
-		select * from u_user as a where a.delete_state=1
+		select *,b.danwei_name from u_user as a
+		 left join dic_danwei as b on a.danwei=b.id
+		 where a.delete_state=1
 	</select>
 	
 	<select id="selectUserById" parameterType="String" resultType="user">
@@ -79,4 +81,17 @@
 		update u_user set password=#{new_password} where user_id=#{userId}
 	</update>
 
+	<select id="selectUserByRoadId" parameterType="String" resultType="User">
+		select * from u_user as a
+		where a.delete_state=1
+			and a.luduanquanxian like #{roadId}
+	</select>
+
+	<update id="finishUserRoadIdIsOne" >
+		update u_user set delete_state=2,luduanquanxian=#{user.luduanquanxian} where user_id=#{user.userId} and delete_state=1
+	</update>
+
+	<update id="finishUserRoadIdIsMany"  >
+		update u_user set luduanquanxian=#{user.luduanquanxian} where user_id=#{user.userId} and delete_state=1
+	</update>
 </mapper>

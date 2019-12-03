@@ -1,6 +1,7 @@
 package com.ldxx.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ldxx.bean.User;
 import com.ldxx.vo.UserVo;
@@ -38,4 +39,11 @@ public interface UserService {
     List<UserVo> selectUserAndRoles();
     
     int updatePasswordById(String userId, String new_password);
+
+	/**
+	 *
+	 * @param roadId
+	 * @return uList1拥有唯一的路段的用户,uList2拥有不是唯一的路段的用户
+	 */
+	Map<String,List> selectUserByRoadId(String roadId);
 }

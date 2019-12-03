@@ -45,7 +45,7 @@ public class SysRoadMgnController {
     public Map<String,Object> addSysRoadMgn(@RequestBody SysRoadMgn sysRoadMgn) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int state = srmService.addSysRoadMgn(sysRoadMgn);
-		
+		sysRoadMgn.setDeleteState(1);
 		map.put("result",state);
 		map.put("sysRoadMgn", sysRoadMgn);
 		return map;
@@ -76,9 +76,20 @@ public class SysRoadMgnController {
     @ResponseBody
 	public Map<String,Object> getByIdSysRoadMgn(String id) {
     	Map<String, Object> map = new HashMap<String, Object>();
-		int state = srmService.getByIdSysRoadMgn(id);
+		SysRoadMgn s= srmService.getByIdSysRoadMgn(id);
 		
-		map.put("result",state);
+		map.put("sysRoadMgn",s);
 		return map;
     }
+	@RequestMapping("/finishRoad")
+	@ResponseBody
+	public Map<String, Object> finishRoad(String roadId){
+		Map<String, Object> map = new HashMap<String, Object>();
+    	int state=0;
+    	state = srmService.finishRoad(roadId);
+		SysRoadMgn sysRoadMgn = srmService.getByIdSysRoadMgn(roadId);
+    	map.put("result",state);
+    	map.put("sysRoadMgn",sysRoadMgn);
+    	return map;
+	}
 }

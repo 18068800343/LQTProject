@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -158,6 +161,33 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int updatePasswordById(String userId, String new_password) {
 		return dao.updatePasswordById(userId,new_password);
+	}
+
+	@Override
+	//uList1 拥有唯一路段 uList 拥有其他路段
+	public Map<String,List> selectUserByRoadId(String roadId) {
+		Map<String,List> map = new HashMap<>();
+		roadId=roadId.replace(" ","");
+		List<User> uList= dao.selectUserByRoadId("%"+roadId+"%");
+		List<User> uList1=new ArrayList<User>();
+		List<User> uList2=new ArrayList<User>();
+		for(User u :uList)     //查找只有拥有该路段的用户，替换掉空格，逗号和该路段id，如果长度等于0，说明没有其他路段了。
+		{
+			int length = u.getLuduanquanxian()
+					.replace(roadId,"")
+					.replace(",","")
+					.replace(" ","").length();
+			if(length==0)
+			{
+				uList1.add(u);
+			}else{
+				uList2.add(u);
+			}
+
+		}
+		map.put("uList1",uList1);
+		map.put("uList2",uList2);
+		return map;
 	}
 
 }

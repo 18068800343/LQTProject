@@ -38,6 +38,7 @@ public class UserController {
 			user.setUserId(LDXXUtils.getUUID12());
 			i= service.addUser( user );
 		}
+		service.selectUserById(user.getUserId());
         map.put("result", i);
         map.put("user", user);
         return map;
@@ -62,6 +63,7 @@ public class UserController {
 		}else{
 			i= service.updateUser(user);
 		}
+		service.selectUserById(user.getUserId());
         map.put("result",i);
         map.put("user",user);
         return map;
@@ -140,5 +142,17 @@ public class UserController {
 	public UserVo selectUserByUsername(String username){
 		return service.selectUserByUsername(username);
 	}
-	
+
+	/**
+	 * 通过路段Id查询拥有唯一该路段id的用户
+	 * @param username
+	 * @return
+	 */
+	@RequestMapping("/selectUserByRoadIdIsOne")
+	@ResponseBody
+	public List<User> selectUserByRoadId(String roadId){
+		List<User> uList1 = service.selectUserByRoadId(roadId).get("uList1");
+		return uList1;
+	}
+
 }

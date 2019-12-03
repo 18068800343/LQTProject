@@ -10,6 +10,8 @@ public class UserVo extends User {
 
     private String luduanquanxianName;//路段权限名称
 
+    private String danweiName;
+
     public String getLuduanquanxianName() {
         return luduanquanxianName;
     }
@@ -32,5 +34,13 @@ public class UserVo extends User {
 
     public void setUserRoleNames(String userRoleNames) {
         this.userRoleNames = userRoleNames;
+    }
+
+    public String getDanweiName() {
+        return danweiName;
+    }
+
+    public void setDanweiName(String danweiName) {
+        this.danweiName = danweiName;
     }
 }

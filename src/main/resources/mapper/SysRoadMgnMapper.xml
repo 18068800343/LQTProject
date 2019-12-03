@@ -69,4 +69,10 @@
 	<select id="selectSysRoadMgnById" resultType="SysRoadMgn">
 		select * from sys_road_mgn where road_id=#{luduan}
 	</select>
+	<update id="finishRoad">
+		update sys_road_mgn set
+		delete_state =2
+		where road_id=#{id} and delete_state=1
+	</update>
+
 </mapper>

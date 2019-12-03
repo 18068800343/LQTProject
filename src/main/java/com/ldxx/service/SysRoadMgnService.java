@@ -14,5 +14,7 @@ public interface SysRoadMgnService {
 	
 	public int delSysRoadMgn(String id);
 	
-	public int getByIdSysRoadMgn(String id);
+	public SysRoadMgn getByIdSysRoadMgn(String id);
+
+	public int finishRoad(String id);
 }
