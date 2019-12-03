@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface LaiLiaoWenDuYuJingService {
 
-    List<SiteIncomingMaterialTempWarningVo> getAllLaiLiaoWenDu();
+    List<SiteIncomingMaterialTempWarningVo> getAllLaiLiaoWenDu(String luduanquanxian);
 
     int addLaiLiaoWenDu(SiteIncomingMaterialTempWarningVo siteIncomingMaterialTempWarningVo);
 

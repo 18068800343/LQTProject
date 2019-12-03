@@ -28,8 +28,10 @@ public class LaiLiaoWenDuYuJingController {
 
     @RequestMapping("/getAllLaiLiaoWenDu")
     @ResponseBody
-    public List<SiteIncomingMaterialTempWarningVo> getAllLaiLiaoWenDu() {
-        return service.getAllLaiLiaoWenDu();
+    public List<SiteIncomingMaterialTempWarningVo> getAllLaiLiaoWenDu(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        String luduanquanxian = user.getLuduanquanxian();
+        return service.getAllLaiLiaoWenDu(luduanquanxian);
     }
 
     @RequestMapping("/delLaiLiaoWenDu")

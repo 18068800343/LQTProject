@@ -26,8 +26,8 @@ public class LaiLiaoWenDuYuJingServiceImpl implements LaiLiaoWenDuYuJingService 
     private WhWasteMgnDao wmdao;
 
     @Override
-    public List<SiteIncomingMaterialTempWarningVo> getAllLaiLiaoWenDu() {
-        return dao.getAllLaiLiaoWenDu();
+    public List<SiteIncomingMaterialTempWarningVo> getAllLaiLiaoWenDu(String luduanquanxian) {
+        return dao.getAllLaiLiaoWenDu(luduanquanxian);
     }
 
     @Override
