@@ -18,4 +18,6 @@ public interface LaiLiaoWenDuYuJingService {
     int updWarningstate(String id,int warningstate,HttpSession session);
     
     SiteIncomingMaterialTempWarningVo getLaiLiaoWenDuByBatch(String batch);
+
+    List<SiteIncomingMaterialTempWarningVo> getByLuDuanId(String roadId);
 }

@@ -3,7 +3,6 @@ package com.ldxx.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.User;
-import com.ldxx.dao.LaiLiaoWenDuYuJingDao;
 import com.ldxx.service.LaiLiaoWenDuYuJingService;
 import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -109,7 +107,12 @@ public class LaiLiaoWenDuYuJingController {
     @RequestMapping("/getLaiLiaoWenDuByBatch")
     @ResponseBody
     public SiteIncomingMaterialTempWarningVo getLaiLiaoWenDuByBatch(String batch) {
-    	
-    	return service.getLaiLiaoWenDuByBatch(batch);
+        return service.getLaiLiaoWenDuByBatch(batch);
+    }
+
+    @RequestMapping("/getByLuDuanId")
+    @ResponseBody
+    public List<SiteIncomingMaterialTempWarningVo> getByLuDuanId(String roadId) {
+        return service.getByLuDuanId(roadId);
     }
 }

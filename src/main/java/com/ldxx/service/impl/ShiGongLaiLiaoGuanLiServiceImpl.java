@@ -32,8 +32,8 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
     private ShengChanJiHuaDao shengChanJiHuaDao;
 
     @Override
-    public List<SiteFieldMaterialMgtVo> getAllShiGongLaiLiao() {
-        return dao.getAllShiGongLaiLiao();
+    public List<SiteFieldMaterialMgtVo> getAllShiGongLaiLiao(String luduanquanxian) {
+        return dao.getAllShiGongLaiLiao(luduanquanxian);
     }
 
     @Override

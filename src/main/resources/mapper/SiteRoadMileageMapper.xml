@@ -54,7 +54,7 @@
 		left join site_construction as b on a.site_id=b.id AND b.delete_state!=0
 		left join sys_road_mgn as c on c.road_id=b.road_id
 		left join u_user as u on a.edit_user_id2=u.user_id
-		where a.delete_state=1 AND a.site_id in (SELECT id  from site_construction  WHERE road_id=#{roadId} and delete_state!=0)
+		where a.delete_state!=0 AND a.site_id in (SELECT id  from site_construction  WHERE road_id=#{roadId} and delete_state!=0)
 	</select>
 	<select id="getTanPuLiChengVoListByTime" resultType="SiteRoadMileage">
 		SELECT

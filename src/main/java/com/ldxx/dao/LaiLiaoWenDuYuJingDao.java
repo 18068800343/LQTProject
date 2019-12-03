@@ -1,7 +1,6 @@
 package com.ldxx.dao;
 
 import com.ldxx.bean.PlanProductionCollection;
-import com.ldxx.bean.WhWasteMgn;
 import com.ldxx.vo.SiteIncomingMaterialTempWarningVo;
 import com.ldxx.vo.WhWasteMgnVo;
 
@@ -30,4 +29,6 @@ public interface  LaiLiaoWenDuYuJingDao {
 	int updWarningstateBybatchId(String id,int warningState);
 	
 	SiteIncomingMaterialTempWarningVo getLaiLiaoWenDuByBatch(String batch);
+
+    List<SiteIncomingMaterialTempWarningVo> getByLuDuanId(String roadId);
 }

@@ -28,8 +28,10 @@ public class ShiGongLaiLiaoGuanLiController {
 	
 	@RequestMapping("/getAllShiGongLaiLiao")
 	@ResponseBody
-    public List<SiteFieldMaterialMgtVo> getDistinctTanPuDiDian() {
-        return service.getAllShiGongLaiLiao();
+    public List<SiteFieldMaterialMgtVo> getDistinctTanPuDiDian(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		String luduanquanxian = user.getLuduanquanxian();
+        return service.getAllShiGongLaiLiao(luduanquanxian);
     }
 	
 	@RequestMapping("/delShiGongLaiLiao")

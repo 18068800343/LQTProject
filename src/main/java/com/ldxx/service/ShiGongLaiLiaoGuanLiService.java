@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ShiGongLaiLiaoGuanLiService {
 
-    public List<SiteFieldMaterialMgtVo> getAllShiGongLaiLiao();
+    public List<SiteFieldMaterialMgtVo> getAllShiGongLaiLiao(String luduanquanxian);
 
     public int delShiGongLaiLiao(String id);
 

@@ -47,8 +47,13 @@
 
 <div class="zhuti-content">
     <div class="UpperPart">
-        <div class="UpperPartL">
+        <div class="UpperPartL" style="width:50%;">
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入来料温度预警</button> -->
+            <div class="form-inline">
+                <label>路段筛选：</label>
+                <select class="form-control" id="luduan" style="width:30%;">
+                </select>
+            </div>
         </div>
         <div class="UpperPartR">
             <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
@@ -61,12 +66,13 @@
             <thead>
             <tr>
                 <th style="width: 15%;">沥青砼批次</th>
-                <th style="width: 10%;">路段编号</th>
+                <th style="width: 8%;">路段编号</th>
+                <th style="width: 10%;">路段名称</th>
                 <th style="width: 10%;">沥青砼类型</th>
                 <th style="width: 20%;">预警内容</th>
                 <th style="width: 10%;">处理状态</th>
-                <th style="width: 15%;">时间</th>
-                <th style="width: 10%;">操作人</th>
+                <th style="width: 12%;">时间</th>
+                <th style="width: 5%;">操作人</th>
                 <th style="width:5%;">操作</th>
             </tr>
             </thead>
@@ -219,7 +225,7 @@
 <script src="../../js/myTool.js"></script>
 <script>
     $(document).ready( function () {
-        initTable();
+        initRoad();
     });
     var table=$('#mainContent').dataTable({
         "deferRender": true,
@@ -236,6 +242,8 @@
             "data" : "batch"
         }, {
             "data" : "roadno"
+        },{
+            "data" : "roadname"
         }, {
             "data" : "flname"
         }, {
@@ -251,7 +259,7 @@
         }],
         "columnDefs" : [ {
                             "class" : "tcenter",
-                            "targets" : 7,
+                            "targets" : 8,
                             "searchable" : true,
                             "render" : function(data, type, full) {
                                 //var xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+ full+ '"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>';
@@ -268,7 +276,7 @@
                             }
                         },{
                             "class" : "tcenter",
-                            "targets" : 4,
+                            "targets" : 5,
                             "searchable" : true,
                             "render" : function(data, type, full) {
                                 if(data=='0'){
@@ -329,7 +337,42 @@
         });
     }
 
-
+    function initRoad() {
+        $.ajax({
+            type : 'POST',
+            url :'/SysRoadMgnController/getAllSysRoadMgn',
+            dataType : 'json',
+            data : {},
+            success : function(json) {
+                $("#luduan").append("<option value='%'>全部</option>")
+                for (var i = 0; i < json.length; i++) {
+                    $("#luduan").append(
+                        "<option value="+json[i].roadId+">"
+                        + json[i].roadName + "</option>")
+                }
+                $("#luduan").trigger("change");
+            }
+        });
+    }
+    $("#luduan").on("change", function() {
+        var luduan=$("#luduan").val();
+        if(luduan=="%"){
+            initTable()
+        }else{
+            $.ajax({
+                type : 'POST',
+                url : '/LaiLiaoWenDuYuJing/getByLuDuanId',
+                dataType : 'json',
+                data : {
+                    roadId : luduan,
+                },
+                success : function(json) {
+                    $('#mainContent').dataTable().fnClearTable();
+                    $('#mainContent').DataTable().rows.add(json).draw(false);
+                }
+            });
+        }
+    })
 
     function initTable(){
         $.ajax({

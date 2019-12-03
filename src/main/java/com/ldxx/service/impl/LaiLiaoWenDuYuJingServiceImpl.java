@@ -2,7 +2,6 @@ package com.ldxx.service.impl;
 
 import com.ldxx.bean.PlanProductionCollection;
 import com.ldxx.bean.User;
-import com.ldxx.bean.WhWasteMgn;
 import com.ldxx.dao.LaiLiaoWenDuYuJingDao;
 import com.ldxx.dao.WhWasteMgnDao;
 import com.ldxx.service.LaiLiaoWenDuYuJingService;
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -83,4 +81,9 @@ public class LaiLiaoWenDuYuJingServiceImpl implements LaiLiaoWenDuYuJingService 
 	public SiteIncomingMaterialTempWarningVo getLaiLiaoWenDuByBatch(String batch) {
 		return dao.getLaiLiaoWenDuByBatch(batch);
 	}
+
+    @Override
+    public List<SiteIncomingMaterialTempWarningVo> getByLuDuanId(String roadId) {
+        return dao.getByLuDuanId(roadId);
+    }
 }

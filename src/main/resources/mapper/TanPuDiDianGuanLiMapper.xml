@@ -108,7 +108,7 @@
 		AND srm.delete_state != 0
         <where>
             <include refid="luduanquanxian_sql"></include>
-            and sc.delete_state != 0
+             sc.delete_state != 0
         </where>
 	</select>
 

@@ -24,7 +24,7 @@
         left join (SELECT *  from site_construction sc WHERE <include refid="luduanquanxian_sql"></include>  sc.delete_state!=0) as b on a.site_id=b.id
         left join sys_road_mgn as c on c.road_id=b.road_id
         left join u_user as u on a.edit_user_id=u.user_id
-        where a.delete_state=1 AND a.site_id =b.id
+        where a.delete_state!=0 AND a.site_id =b.id
     </select>
 
     <update id="updSiteRoadMileageTemp" parameterType="SiteRoadMileageTemp">
@@ -54,7 +54,7 @@
 		left join site_construction as b on a.site_id=b.id AND b.delete_state!=0
 		left join sys_road_mgn as c on c.road_id=b.road_id
 		left join u_user as u on a.edit_user_id=u.user_id
-		where a.delete_state=1 AND a.site_id in (SELECT id  from site_construction  WHERE road_id=#{roadId} and delete_state!=0)
+		where a.delete_state!=0 AND a.site_id in (SELECT id  from site_construction  WHERE road_id=#{roadId} and delete_state!=0)
 	</select>
 
 </mapper>
