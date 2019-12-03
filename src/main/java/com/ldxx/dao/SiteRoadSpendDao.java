@@ -7,11 +7,13 @@ import java.util.List;
 
 public interface SiteRoadSpendDao {
 
-    List<SiteRoadSpend> selectAllSiteRoadSpend();
+    List<SiteRoadSpend> selectAllSiteRoadSpend(String luduanquanxian);
 
     int updSiteRoadSpend(@Param("srs") SiteRoadSpend srs);
 
     int delSiteRoadSpend(@Param("id")String id);
 
     int insertSiteRoadSpend(@Param("srs")SiteRoadSpend srs);
+
+    List<SiteRoadSpend> getByLuDuanId(String roadId);
 }

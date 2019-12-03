@@ -2,14 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ldxx.dao.SiteRoadMileageTempDao" >
 
+    <sql id="luduanquanxian_sql">
+        <if test="luduanquanxian != null and luduanquanxian != ''">
+            <if test="luduanquanxian.indexOf(',') != -1 ">
+                sc.road_id in
+                <foreach collection="luduanquanxian.split(',')" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="luduanquanxian.indexOf(',') == -1">
+                sc.road_id=#{luduanquanxian}
+            </if>
+        </if>
+    </sql>
+
     <select id="getAllSiteRoadMileageTemp" resultType="SiteRoadMileageTemp">
         select a.id,a.site_id,a.temp,a.temp2,a.edit_user_id,a.edit_datetime,
         a.datetime,a.delete_state,b.site_number,c.road_name,c.road_id,u.u_name as editUName
         from site_road_mileage_temp a
-        left join site_construction as b on a.site_id=b.id
-		left join sys_road_mgn as c on c.road_id=b.road_id
-		left join u_user as u on a.edit_user_id=u.user_id
-        where a.delete_state=1
+        left join (SELECT *  from site_construction sc WHERE <include refid="luduanquanxian_sql"></include> and sc.delete_state!=0) as b on a.site_id=b.id
+        left join sys_road_mgn as c on c.road_id=b.road_id
+        left join u_user as u on a.edit_user_id=u.user_id
+        where a.delete_state=1 AND a.site_id =b.id
     </select>
 
     <update id="updSiteRoadMileageTemp" parameterType="SiteRoadMileageTemp">
@@ -32,5 +46,14 @@
         values (#{srm.id},#{srm.siteId},#{srm.temp},#{srm.temp2},#{srm.editUserId},#{srm.editDatetime},#{srm.datetime},1)
     </insert>
 
+    <select id="getByLuDuanId" resultType="SiteRoadMileageTemp">
+		select a.id,a.site_id,a.temp,a.temp2,a.edit_datetime,a.edit_user_id,a.datetime,
+			a.delete_state,b.site_number,c.road_name,c.road_id,u.u_name as editUName
+		from site_road_mileage_temp as a
+		left join site_construction as b on a.site_id=b.id AND b.delete_state!=0
+		left join sys_road_mgn as c on c.road_id=b.road_id
+		left join u_user as u on a.edit_user_id=u.user_id
+		where a.delete_state=1 AND a.site_id in (SELECT id  from site_construction  WHERE road_id=#{roadId} and delete_state!=0)
+	</select>
 
 </mapper>

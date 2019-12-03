@@ -69,7 +69,7 @@
 			</div>
 			<div class="bottom">
 				<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入</button>-->
-				<table class="table table-bordered table-condensed" id="mainContent">
+				<table class="table table-bordered table-condensed table-hover" id="mainContent">
 					<thead>
 						<tr>
 							<th>路段名称</th>
@@ -354,7 +354,6 @@
 			dataType : 'json',
 			data : {},
 			success : function(json) {
-				console.log(json)
 				$("#luduan").append("<option value='%'>全部</option>")
 				for (var i = 0; i < json.length; i++) {
 					$("#luduan").append(

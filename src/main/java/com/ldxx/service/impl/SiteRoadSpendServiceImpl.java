@@ -17,8 +17,8 @@ public class SiteRoadSpendServiceImpl implements SiteRoadSpendService {
     private SiteRoadSpendDao sdao;
 
     @Override
-    public List<SiteRoadSpend> selectAllSiteRoadSpend() {
-        return sdao.selectAllSiteRoadSpend();
+    public List<SiteRoadSpend> selectAllSiteRoadSpend(String luduanquanxian) {
+        return sdao.selectAllSiteRoadSpend(luduanquanxian);
     }
 
     @Override
@@ -34,5 +34,10 @@ public class SiteRoadSpendServiceImpl implements SiteRoadSpendService {
     @Override
     public int insertSiteRoadSpend(SiteRoadSpend srs) {
         return sdao.insertSiteRoadSpend(srs);
+    }
+
+    @Override
+    public List<SiteRoadSpend> getByLuDuanId(String roadId) {
+        return sdao.getByLuDuanId(roadId);
     }
 }

@@ -75,4 +75,9 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
     public int updateShiGongLaiLiao(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo) {
         return dao.updateShiGongLaiLiao(siteFieldMaterialMgtVo);
     }
+
+    @Override
+    public List<SiteFieldMaterialMgtVo> getByLuDuanId(String roadId) {
+        return dao.getByLuDuanId(roadId);
+    }
 }

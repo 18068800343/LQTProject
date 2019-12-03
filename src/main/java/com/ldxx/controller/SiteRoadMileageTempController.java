@@ -1,6 +1,5 @@
 package com.ldxx.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.bean.SiteRoadMileageTemp;
 import com.ldxx.bean.User;
@@ -13,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * 摊铺温度
@@ -29,8 +27,10 @@ public class SiteRoadMileageTempController {
     private SiteRoadMileageTempService service;
 
     @RequestMapping("/getAllSiteRoadMileageTemp")
-    public List<SiteRoadMileageTemp> getAllSiteRoadMileageTemp(){
-        return service.getAllSiteRoadMileageTemp();
+    public List<SiteRoadMileageTemp> getAllSiteRoadMileageTemp(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        String luduanquanxian = user.getLuduanquanxian();
+        return service.getAllSiteRoadMileageTemp(luduanquanxian);
     }
 
     @RequestMapping("/updSiteRoadMileageTemp")
@@ -69,6 +69,16 @@ public class SiteRoadMileageTempController {
         json.put("result",i);
         json.put("obj",srm);
         return json.toJSONString();
+    }
+
+    /**
+     * 通过路段ID筛选查询
+     * @param roadId
+     * @return
+     */
+    @RequestMapping("/getByLuDuanId")
+    public List<SiteRoadMileageTemp> getByLuDuanId(String roadId) {
+        return service.getByLuDuanId(roadId);
     }
 
 }

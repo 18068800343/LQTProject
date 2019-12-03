@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * 摊铺速度
@@ -28,8 +27,10 @@ public class SiteRoadSpendController {
     private SiteRoadSpendService service;
 
     @RequestMapping("/selectAllSiteRoadSpend")
-    public List<SiteRoadSpend> selectAllSiteRoadSpend(){
-        return service.selectAllSiteRoadSpend();
+    public List<SiteRoadSpend> selectAllSiteRoadSpend(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        String luduanquanxian = user.getLuduanquanxian();
+        return service.selectAllSiteRoadSpend(luduanquanxian);
     }
 
     @RequestMapping("/updSiteRoadSpend")
@@ -68,5 +69,15 @@ public class SiteRoadSpendController {
         jsonObject.put("daoMsg",i);
         jsonObject.put("obj",srs);
         return  jsonObject.toJSONString();
+    }
+
+    /**
+     * 通过路段id筛选查询
+     * @param roadId
+     * @return
+     */
+    @RequestMapping("/getByLuDuanId")
+    public List<SiteRoadSpend> getByLuDuanId(String roadId){
+        return service.getByLuDuanId(roadId);
     }
 }

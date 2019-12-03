@@ -1,25 +1,22 @@
 package com.ldxx.controller;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
+import com.alibaba.fastjson.JSONObject;
+import com.ldxx.Constant.DateConstant;
+import com.ldxx.bean.User;
 import com.ldxx.service.ShiGongLaiLiaoGuanLiService;
+import com.ldxx.util.DateUtil;
+import com.ldxx.util.LDXXUtils;
+import com.ldxx.util.MsgFormatUtils;
+import com.ldxx.vo.SiteFieldMaterialMgtVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONObject;
-import com.ldxx.Constant.DateConstant;
-import com.ldxx.bean.User;
-import com.ldxx.dao.ShiGongLaiLiaoDao;
-import com.ldxx.util.DateUtil;
-import com.ldxx.util.LDXXUtils;
-import com.ldxx.util.MsgFormatUtils;
-import com.ldxx.vo.SiteFieldMaterialMgtVo;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/ShiGongLaiLiaoGuanLi")
@@ -93,6 +90,17 @@ public class ShiGongLaiLiaoGuanLiController {
 		jsonObject.put("daoMsg",i);
 		jsonObject.put("obj",siteFieldMaterialMgtVo);
 		return jsonObject.toString();
+	}
+
+	/**
+	 * 通过路段id筛选查询
+	 * @param roadId
+	 * @return
+	 */
+	@RequestMapping("/getByLuDuanId")
+	@ResponseBody
+	public List<SiteFieldMaterialMgtVo> getByLuDuanId(String roadId) {
+		return service.getByLuDuanId(roadId);
 	}
 
 }

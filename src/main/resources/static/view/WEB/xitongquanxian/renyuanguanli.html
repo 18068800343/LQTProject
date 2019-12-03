@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="LowerPart" style="margin-top:3px;">
-                        <table class="table table-bordered table-condensed" id="mainContent">
+                        <table class="table table-bordered table-condensed table-hover" id="mainContent">
                             <thead>
                                 <tr>
                                     <th>工号</th>
@@ -486,7 +486,7 @@
     function initluduan(){
         $.ajax({
             type: 'POST',
-            url: '/SysRoadMgnController/getAllSysRoadMgn',
+            url: '/SysRoadMgnController/getAllSysRoadMgnLowcase',
             dataType: 'json',
             data: {
             },
@@ -498,8 +498,8 @@
                     $("#luduanquanxian").html('');
                     $("#xg_luduanquanxian").html('');
                     for(var i=0;i<json.length;i++){
-                        $("#luduanquanxian").append("<option value='"+json[i].roadId+"'>"+json[i].roadName+"</option>");
-                        $("#xg_luduanquanxian").append("<option value='"+json[i].roadId+"'>"+json[i].roadName+"</option>");
+                        $("#luduanquanxian").append("<option value='"+json[i].roadid+"'>"+json[i].roadname+"</option>");
+                        $("#xg_luduanquanxian").append("<option value='"+json[i].roadid+"'>"+json[i].roadname+"</option>");
                     }
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',
@@ -640,7 +640,7 @@
     function xg_initluduan(obj){
         $.ajax({
             type: 'POST',
-            url: '/SysRoadMgnController/getAllSysRoadMgn',
+            url: '/SysRoadMgnController/getAllSysRoadMgnLowcase',
             dataType: 'json',
             data: {
             },
@@ -651,7 +651,7 @@
                 if(json!=null){
                     $("#xg_luduanquanxian").html('');
                     for(var i=0;i<json.length;i++){
-                        $("#xg_luduanquanxian").append("<option value='"+json[i].roadId+"'>"+json[i].roadName+"</option>");
+                        $("#xg_luduanquanxian").append("<option value='"+json[i].roadid+"'>"+json[i].roadname+"</option>");
                     }
                     $(".selectpicker").selectpicker({
                         noneSelectedText: '请选择',

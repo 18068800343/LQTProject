@@ -55,10 +55,15 @@
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
             <div class="UpperPart">
-                <div class="UpperPartL">
+                <div class="UpperPartL" style="width:50%;">
                     <button type="button" class="btn btn-primary Peaea" data-toggle="modal" data-target="#myModal"
                             style="margin: 5PX;">录入摊铺速度
                     </button>
+                    <div class="form-inline">
+                        <label>路段筛选：</label>
+                        <select class="form-control" id="luduan" style="width:30%;">
+                        </select>
+                    </div>
                 </div>
                 <div class="UpperPartR">
                     <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
@@ -66,7 +71,7 @@
             </div>
             <div class="bottom">
                 <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入</button>-->
-                <table class="table table-bordered table-condensed" id="mainContent">
+                <table class="table table-bordered table-condensed table-hover" id="mainContent">
                     <thead>
                     <tr>
                         <th>路段名称</th>
@@ -260,8 +265,8 @@
 				xg_Tanpusudu.datetime=value;
 			}
 		});
-		initTable();
-	});
+        initRoad()
+    });
 
 	var table = $('#mainContent').dataTable({
 		"deferRender": true,
@@ -342,6 +347,43 @@
             }
         });
     }
+
+    function initRoad() {
+        $.ajax({
+            type : 'POST',
+            url :'/SysRoadMgnController/getAllSysRoadMgn',
+            dataType : 'json',
+            data : {},
+            success : function(json) {
+                $("#luduan").append("<option value='%'>全部</option>")
+                for (var i = 0; i < json.length; i++) {
+                    $("#luduan").append(
+                        "<option value="+json[i].roadId+">"
+                        + json[i].roadName + "</option>")
+                }
+                $("#luduan").trigger("change");
+            }
+        });
+    }
+    $("#luduan").on("change", function() {
+        var luduan=$("#luduan").val();
+        if(luduan=="%"){
+            initTable()
+        }else{
+            $.ajax({
+                type : 'POST',
+                url : '/SiteRoadSpend/getByLuDuanId',
+                dataType : 'json',
+                data : {
+                    roadId : luduan,
+                },
+                success : function(json) {
+                    $('#mainContent').dataTable().fnClearTable();
+                    $('#mainContent').DataTable().rows.add(json).draw(false);
+                }
+            });
+        }
+    })
 
 	function initTable() {
 		$.ajax({
