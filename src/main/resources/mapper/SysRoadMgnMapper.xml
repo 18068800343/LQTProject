@@ -51,7 +51,7 @@
 	<select id="getAllSysRoadMgnLowcase" resultType="SysRoadMgnLowcase">
 		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state
 	    from sys_road_mgn
-	    where delete_state!=0
+	    where delete_state=1
 	</select>
 	
 	<update id="delSysRoadMgn">
