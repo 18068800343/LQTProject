@@ -17,4 +17,6 @@ public interface SiteRoadMileageDao {
 
 	List<SiteRoadMileage>  getByLuDuanId(String roadId);
 
+	List<SiteRoadMileage> getTanPuLiChengVoListByTime(String beginTime, String endTime,String roadId);
+
 }

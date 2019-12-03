@@ -3,15 +3,19 @@ package com.ldxx.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.bean.SiteRoadMileage;
 import com.ldxx.bean.User;
+import com.ldxx.dao.SiteRoadMileageDao;
 import com.ldxx.service.SiteRoadMileageService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
+import com.ldxx.vo.TanPuLiChengVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -27,6 +31,9 @@ public class SiteRoadMileageController {
 	
 	@Autowired
 	private SiteRoadMileageService service;
+
+	@Resource
+	private SiteRoadMileageDao dao;
 	
 	@RequestMapping("/selectAllSiteRoadMileage")
 	public List<SiteRoadMileage> selectAllSiteRoadMileage(HttpSession session){
@@ -34,7 +41,16 @@ public class SiteRoadMileageController {
 		String luduanquanxian = user.getLuduanquanxian();
 		return service.selectAllSiteRoadMileage(luduanquanxian);
 	}
-	
+
+	@RequestMapping("/getTanPuLiChengVoListByTime")
+	@ResponseBody
+	public TanPuLiChengVo getTanPuLiChengVoListByTime(String beginTime, String endTime,String roadId){
+		List<SiteRoadMileage> list = dao.getTanPuLiChengVoListByTime(beginTime,endTime,roadId);
+		TanPuLiChengVo tanPuLiChengVo = new TanPuLiChengVo();
+		tanPuLiChengVo  = tanPuLiChengVo.getTanPuLiChengVoByPeiBiVoList(list);
+		return tanPuLiChengVo;
+	}
+
 	@RequestMapping("/updSiteRoadMileage")
 	public String updSiteRoadMileage(@RequestBody SiteRoadMileage srm ,HttpSession session){
 		JSONObject jsonObject = new JSONObject();
