@@ -354,7 +354,10 @@ body, html {
 							"data" : "lane"
 						}, {
 							"data" : "deletestate"
-						} ],
+						},{
+							"data" : "deletestate"}
+
+					],
 						"columnDefs" : [ {
 							"class" : "tcenter",
 							"targets" : 8,
@@ -374,8 +377,15 @@ body, html {
 								var wanjie = '<i class="glyphicon glyphicon-ok Peaad" style="font-size:18px;cursor:pointer;display:none;" data-id="'
 										+ data
 										+ '" onclick="wanjieMsg(this)" title="完结"></i>';
-										
-								return   xiugai + qiyong + marker+wanjie;
+								if(data==1)
+								{
+									return   xiugai + qiyong + marker+wanjie;
+								}
+								if(data==2)
+								{
+									return   marker;
+								}
+
 							}
 						} , {
                             "class" : "tcenter",

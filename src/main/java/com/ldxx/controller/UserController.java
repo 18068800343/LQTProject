@@ -15,6 +15,9 @@ import com.ldxx.bean.User;
 import com.ldxx.service.UserService;
 import com.ldxx.util.LDXXUtils;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -52,7 +55,7 @@ public class UserController {
 	
 	@RequestMapping("/updateUser")
 	@ResponseBody
-    public Map<String,Object> updateUser(User user) {
+    public Map<String,Object> updateUser(User user,HttpServletRequest request) {
 		int i=0;
 		int iscountWorkIdEdit = service.iscountWorkIdEdit(user.getWorkId(),user.getUserId());
 		int iscountUNameEdit = service.iscountUNameEdit(user.getuName(),user.getUserId());
@@ -62,8 +65,16 @@ public class UserController {
 			i=-2;
 		}else{
 			i= service.updateUser(user);
+			HttpSession session = request.getSession();
+			user = service.selectUserById(user.getUserId());
+			User suser = (User)session.getAttribute("user");
+			if(suser!=null&&suser.getUserId().equals(user.getUserId()))
+			{
+				session.setAttribute("user",user);
+			}
 		}
-		service.selectUserById(user.getUserId());
+
+
         map.put("result",i);
         map.put("user",user);
         return map;
