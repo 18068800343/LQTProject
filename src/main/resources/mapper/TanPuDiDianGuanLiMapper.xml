@@ -65,6 +65,7 @@
 			<if test="luduanquanxian.indexOf(',') == -1">
 				sc.road_id=#{luduanquanxian}
 			</if>
+			and
 		</if>
 	</sql>
 	
@@ -78,7 +79,7 @@
 		LEFT JOIN sys_road_mgn srm on sc.road_id = srm.road_id and srm.delete_state != 0
 		<where>
 			<include refid="luduanquanxian_sql"></include>
-			and sc.delete_state != 0
+			 sc.delete_state != 0
         </where>
 	</select>
 	
