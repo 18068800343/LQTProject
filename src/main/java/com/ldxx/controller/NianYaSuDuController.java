@@ -28,8 +28,10 @@ public class NianYaSuDuController {
 
 	@RequestMapping("/getAllNianYaSuDu")
 	@ResponseBody
-	public List<SiteCompactionSpeedVo> getAllNianYaSuDu() {
-		return dao.getAllNianYaSuDu();
+	public List<SiteCompactionSpeedVo> getAllNianYaSuDu(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		String luduanquanxian = user.getLuduanquanxian();
+		return dao.getAllNianYaSuDu(luduanquanxian);
 	}
 
 	@RequestMapping("/delNianYaSuDu")
@@ -89,6 +91,12 @@ public class NianYaSuDuController {
 		jsonObject.put("daoMsg",i);
 		jsonObject.put("obj",siteCompactionSpeedVo);
 		return jsonObject.toString();
+	}
+
+	@RequestMapping("/getByLuDuanId")
+	@ResponseBody
+	public List<SiteCompactionSpeedVo> getByLuDuanId(String roadId) {
+		return dao.getByLuDuanId(roadId);
 	}
 
 }
