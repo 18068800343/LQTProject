@@ -28,8 +28,10 @@ public class NianYaCiShuController {
 
 	@RequestMapping("/getAllNianYaCiShu")
 	@ResponseBody
-	public List<SiteCompactionNumVo> getAllNianYaCiShu() {
-		return dao.getAllNianYaCiShu();
+	public List<SiteCompactionNumVo> getAllNianYaCiShu(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		String luduanquanxian = user.getLuduanquanxian();
+		return dao.getAllNianYaCiShu(luduanquanxian);
 	}
 
 	@RequestMapping("/delNianYaCiShu")
@@ -89,6 +91,12 @@ public class NianYaCiShuController {
 		jsonObject.put("daoMsg",i);
 		jsonObject.put("obj",siteCompactionNumVo);
 		return jsonObject.toString();
+	}
+
+	@RequestMapping("/getByLuDuanId")
+	@ResponseBody
+	public List<SiteCompactionNumVo> getByLuDuanId(String roadId) {
+		return dao.getByLuDuanId(roadId);
 	}
 
 }

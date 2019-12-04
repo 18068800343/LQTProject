@@ -23,4 +23,6 @@ public interface SysRoadMgnDao {
 	SysRoadMgn selectSysRoadMgnById(String luduan);
 
 	public int finishRoad(String id);
+
+    List<SysRoadMgnLowcase> getAllSysRoadMgn2(@Param("luduanquanxian")String luduanquanxian);
 }

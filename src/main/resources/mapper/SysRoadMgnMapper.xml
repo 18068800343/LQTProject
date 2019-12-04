@@ -28,23 +28,38 @@
 		remarks=#{sysRoadMgn.remarks}
 		where road_id=#{sysRoadMgn.roadId} and delete_state=1
 	</update>
+
+	<sql id="luduanquanxian">
+		<if test="luduanquanxian != null and luduanquanxian != ''">
+			<if test="luduanquanxian.indexOf(',') != -1 ">
+				srm.road_id in
+				<foreach collection="luduanquanxian.split(',')" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="luduanquanxian.indexOf(',') == -1">
+				srm.road_id=#{luduanquanxian}
+			</if>
+			and
+		</if>
+
+	</sql>
 	
 	<select id="getAllSysRoadMgn" resultType="SysRoadMgn">
 		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state
-	    from sys_road_mgn
+	    from sys_road_mgn srm
 		<where>
-			<if test="luduanquanxian != null and luduanquanxian != ''">
-				<if test="luduanquanxian.indexOf(',') != -1 ">
-					road_id in
-					<foreach collection="luduanquanxian.split(',')" item="item" open="(" separator="," close=")">
-						#{item}
-					</foreach>
-				</if>
-				<if test="luduanquanxian.indexOf(',') == -1">
-					road_id=#{luduanquanxian}
-				</if>
-			</if>
-			and delete_state != 0
+			<include refid="luduanquanxian"></include>
+			srm.delete_state != 0
+		</where>
+	</select>
+
+	<select id="getAllSysRoadMgn2" resultType="SysRoadMgnLowcase">
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state
+		from sys_road_mgn srm
+		<where>
+			<include refid="luduanquanxian"></include>
+			srm.delete_state != 0
 		</where>
 	</select>
 
