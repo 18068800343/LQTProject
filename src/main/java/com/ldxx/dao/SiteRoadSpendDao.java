@@ -16,4 +16,6 @@ public interface SiteRoadSpendDao {
     int insertSiteRoadSpend(@Param("srs")SiteRoadSpend srs);
 
     List<SiteRoadSpend> getByLuDuanId(String roadId);
+
+    List<SiteRoadSpend> getTanPuSuDuVoListByTime(String beginTime, String endTime, String roadId);
 }

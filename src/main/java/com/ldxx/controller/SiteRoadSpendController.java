@@ -3,15 +3,19 @@ package com.ldxx.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.bean.SiteRoadSpend;
 import com.ldxx.bean.User;
+import com.ldxx.dao.SiteRoadSpendDao;
 import com.ldxx.service.SiteRoadSpendService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
+import com.ldxx.vo.TanPuSuDuVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -25,6 +29,9 @@ public class SiteRoadSpendController {
 
     @Autowired
     private SiteRoadSpendService service;
+
+    @Resource
+    private SiteRoadSpendDao dao;
 
     @RequestMapping("/selectAllSiteRoadSpend")
     public List<SiteRoadSpend> selectAllSiteRoadSpend(HttpSession session){
@@ -80,4 +87,14 @@ public class SiteRoadSpendController {
     public List<SiteRoadSpend> getByLuDuanId(String roadId){
         return service.getByLuDuanId(roadId);
     }
+
+    @RequestMapping("/getTanPuSuDuVoListByTime")
+    @ResponseBody
+    public TanPuSuDuVo getTanPuSuDuVoListByTime(String beginTime, String endTime, String roadId){
+        List<SiteRoadSpend> list = dao.getTanPuSuDuVoListByTime(beginTime,endTime,roadId);
+        TanPuSuDuVo tanPuSuDuVo = new TanPuSuDuVo();
+        tanPuSuDuVo  = tanPuSuDuVo.getTanPuSuDuVoByPeiBiVoList(list);
+        return tanPuSuDuVo;
+    }
+
 }
