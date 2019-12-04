@@ -26,7 +26,22 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
     <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
+    <style lang="">
+        .UpperPart {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 12px;
+        }
 
+        .selected {
+            background: rgba(247, 161, 3, 0.2);
+        }
+
+        #mainContent th {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,20 +54,31 @@
         <li class="active">逐盘拌合生产数据实时监控</li>
     </ul>
 </div>
+<div>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist" style="background: #fff;">
+    <li role="presentation" class="active">
+        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">逐盘拌合生产数据实时监控</a>
+    </li>
+    <li role="presentation">
+        <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">实时生产热料配比</a>
+    </li>
+</ul>
+<div class="tab-content">
 
-<div class="UpperPartR">
-</div>
-<div class="layui-tab layui-tab-card">
-    <ul class="layui-tab-title">
-        <li class="layui-this">逐盘拌合生产数据实时监控</li>
-        <li>实时生产热料配比</li>
-    </ul>
-    <div class="layui-tab-content">
-        <div class="layui-tab-item layui-show">
-            <div class="bottom">
+    <div role="tabpanel" class="tab-pane active" id="profile">
+        <div class="zhuti-content">
+            <div class="UpperPart">
+                <div class="UpperPartL">
+                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入关键筛孔通过率</button> -->
+                </div>
+                <div class="UpperPartR">
+                    <!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
+                </div>
+            </div>
+            <div class="LowerPart" style="margin-top:3px;">
                 <table class="table table-bordered table-condensed table-hover" id="mainContent">
                     <thead>
-                    <tr>
                         <th>路段编号</th>
                         <th>料1用量</th>
                         <th>料2用量</th>
@@ -67,77 +93,46 @@
                         <th>干拌用时</th>
                         <th>湿拌用时</th>
                         <th>生产时间</th>
-
-                    </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                 </table>
             </div>
         </div>
-        <!-- 三结束 -->
+    </div>
 
-        <div class="layui-tab-item weadmin-body">
-            <div class="">
-                <div class="pull-left col-xs-2.5">
-                    <input type="text" style="width:132px;margin-left: 15px;" class="form-control" placeholder="起始时间"
-                           id="reservation" onclick="">
+    <div role="tabpanel" class="tab-pane" id="messages">
+        <!--<div class="layui-tab-item weadmin-body">-->
+        <div class="zhuti-content">
+            <div class="UpperPart">
+                <div class="UpperPartL">
+                    <div class="form-inline" style="margin: 5PX;">
+                        <div class="form-group">
+                            <input type="text" style="width:200px;margin-left: 15px;" class="form-control" placeholder="起始时间"
+                                   id="reservation" onclick="">
+                        </div>
+                        <span class="form-group" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
+                        <div class="form-group">
+                            <input type="text" style="width:200px" class="form-control" placeholder="结束时间" id="reservationEnd"
+                                   onclick=""><br/>
+                        </div>
+                        <div class="form-group">
+                            <a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
+                        </div>
+                    </div>
                 </div>
-                <span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
-                <div class="pull-left col-xs-2.5">
-                    <input type="text" style="width:120px" class="form-control" placeholder="结束时间" id="reservationEnd"
-                           onclick=""><br/>
-                </div>
-                <div class="pull-left col-sm-1">
-                    <a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
+                <div class="UpperPartR">
+
                 </div>
             </div>
-            <br>
-            <br>
-            <br>
+        </div>
+        <div class="LowerPart" style="  background-color: #ffffff">
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-            <div id="two" style="width: 1000px;height:600px;"></div>
+            <div id="two" style="width: 1000px;height:600px; margin-left: 5px;" ></div>
         </div>
     </div>
 </div>
-<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-     id="allMsg1">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel"><b>所有信息</b></h4>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <form class="form-inline">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td style="width: 20%;">批次</td>
-                                <td style="width: 30%;">1</td>
-                                <td style="width: 20%;">路段</td>
-                                <td style="width: 30%;">1</td>
-                            </tr>
-                            <tr>
-                                <td>用料名称</td>
-                                <td>1</td>
-                                <td>用料量</td>
-                                <td>1</td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-    </div>
 </div>
-<!-- allMsg结束 -->
 </body>
 <script src="../../js/jquery.js"></script>
 <script src="../../easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
