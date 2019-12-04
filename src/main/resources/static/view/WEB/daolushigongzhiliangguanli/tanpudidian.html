@@ -29,70 +29,82 @@
 	<!-- SmartAdmin RTL Support  -->
 <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
 <style lang="">
-* {
-	margin: 0;
-	padding: 0;
-}
+	* {
+		margin: 0;
+		padding: 0;
+	}
 
-a {
-	text-decoration: none;
-}
+	a {
+		text-decoration: none;
+	}
 
-ul {
-	list-style: none;
-}
+	ul {
+		list-style: none;
+	}
 
-body, html {
-	height: 100%;
-	font-family: "微软雅黑";
-}
+	body, html {
+		height: 100%;
+		font-family: "微软雅黑";
+	}
 
-.box {
-	width: 100%;
-	height: 600px;
-	margin: 40px 0;
-}
+	.box {
+		width: 100%;
+		height: 600px;
+		margin: 40px 0;
+	}
 
-#container1, #container2 {
-	width: 100%;
-	height: 100%;
-}
+	#container1, #container2 {
+		width: 100%;
+		height: 100%;
+	}
 
-#container3 {
-	width: 80%;
-	height: 100%;
-}
+	#container3 {
+		width: 80%;
+		height: 100%;
+	}
 
-.list {
-	width: 20%;
-	height: 100%;
-	background: #eee;
-}
+	.list {
+		width: 20%;
+		height: 100%;
+		background: #eee;
+	}
 
-.list li {
-	height: 34px;
-	line-height: 34px;
-	padding-left: 20px;
-}
+	.list li {
+		height: 34px;
+		line-height: 34px;
+		padding-left: 20px;
+	}
 
-.list li.active a {
-	color: red;
-}
+	.list li.active a {
+		color: red;
+	}
 
-.title {
-	font-size: 14px;
-	font-weight: bold;
-	color: #cc5522;
-}
+	.title {
+		font-size: 14px;
+		font-weight: bold;
+		color: #cc5522;
+	}
 
-.content {
-	font-size: 13px;
-	color: #333;
-	margin-top: 6px;
-}
+	.content {
+		font-size: 13px;
+		color: #333;
+		margin-top: 6px;
+	}
 
-.fl {
-	float: left;
+	.fl {
+		float: left;
+	}
+.UpperPart{
+	display: flex;
+	justify-content:space-between;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 12px;
+}
+.selected{
+	background: rgba(247, 161, 3,0.2);
+}
+#mainContent th{
+	cursor: pointer;
 }
 </style>
 </head>
@@ -110,22 +122,22 @@ body, html {
 		</ul>
 	</div>
 	<!-- Nav tabs -->
+	<div class="tab-content">
 	<div role="tabpanel" class="tab-pane active" id="profile">
-	</div>
-	<div role="tabpanel" class="tab-pane" id="messages">
 		<div class="zhuti-content">
 			<div class="UpperPart">
-				<div class="UpperPartL">
-					<button type="button" class="btn btn-primary Peaaa" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入摊铺地点信息</button>
-					<div class="form-inline">
+				<div class="UpperPartL form-inline">
+					<button type="button" class="btn btn-primary form-group Peaaa" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入摊铺地点信息</button>
+					<div class="form-group" style="margin-left:20px; width:280px;">
 						<label>路段筛选：</label>
-						<select class="form-control" id="luduan" style="width:20%;">
+						<select class="form-control" id="luduan" style="width:200px">
 						</select>
 					</div>
 				</div>
 				<div class="UpperPartR">
 					<!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
 				</div>
+			</div>
 				<div class="LowerPart">
 					<div>
 						<table class="table table-bordered table-condensed " id="mainContent" >
@@ -147,14 +159,15 @@ body, html {
 						</table>
 					</div>
 				</div>
-			</div>
-			<div class="LowerPart" style="margin-top: 3px;">
-				<div class="box">
-					<div id="container1"></div>
-				</div>
+					<div class="LowerPart center-block" style="margin-top:3px; margin-bottom:30px; width:80%;" >
+						<div class="box center-block">
+							<div id="container1" style="border:1px solid #000"></div>
+						</div>
+					</div>
+					<div style="margin-top:80px;">&nbsp</div>
 		</div>
 	</div>
-	</div>
+</div>
 	<!-- Modal -->
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
 		<div class="modal-dialog modal-lg" role="document">

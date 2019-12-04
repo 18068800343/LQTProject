@@ -53,26 +53,30 @@
 			<li class="active">逐盘生产偏差分析</li>
 		</ul>
     </div>
-<div class="layui-tab layui-tab-card">
-	<ul class="layui-tab-title">
-		<li class="layui-this">逐盘生产偏差分析</li>
-		<li>偏差分析折线图</li>
+<div>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist" style="background: #fff;">
+		<li role="presentation" class="active">
+			<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">逐盘生产偏差分析</a>
+		</li>
+		<li role="presentation">
+			<a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">偏差分析折线图</a>
+		</li>
 	</ul>
-	<div class="layui-tab-content">
-		<div class="layui-tab-item layui-show">
-		<div class="zhuti-content">
-			<div class="UpperPart">
-				<div class="UpperPartL">
-				  <!--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入生产偏差</button> -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="profile">
+			<div class="zhuti-content">
+				<div class="UpperPart">
+					<div class="UpperPartL">
+						<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入关键筛孔通过率</button> -->
+					</div>
+					<div class="UpperPartR">
+						<!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
+					</div>
 				</div>
-				<div class="UpperPartR">
-					<!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
-				</div>
-			</div>
-			<div class="LowerPart" style="margin-top:3px;">
-				<table class="table table-bordered table-condensed table-hover" id="mainContent">
-					<thead>
-						<tr>
+				<div class="LowerPart" style="margin-top:3px;">
+					<table class="table table-bordered table-condensed table-hover" id="mainContent">
+						<thead>
 							<th>路段编号</th>
 							<th>料1偏差</th>
 							<th>料2偏差</th>
@@ -90,39 +94,47 @@
 							<th>通过率偏差2.36</th>
 							<th>通过率偏差0.075</th>
 							<th>生产时间</th>
-						</tr>
-					</thead>
-					<tbody>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 
-					</tbody>
-				</table>
+		<div role="tabpanel" class="tab-pane" id="messages">
+			<!--<div class="layui-tab-item weadmin-body">-->
+			<div class="zhuti-content">
+				<div class="UpperPart">
+					<div class="UpperPartL">
+						<div class="form-inline" style="margin: 5PX;">
+							<div class="form-group">
+								<input type="text" style="width:200px;margin-left: 15px;" class="form-control" placeholder="起始时间"
+									   id="reservation" onclick="">
+							</div>
+							<span class="form-group" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
+							<div class="form-group">
+								<input type="text" style="width:200px" class="form-control" placeholder="结束时间" id="reservationEnd"
+									   onclick=""><br/>
+							</div>
+							<div class="form-group">
+								<a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
+							</div>
+						</div>
+					</div>
+					<div class="UpperPartR">
+
+					</div>
+				</div>
 			</div>
-		</div>
-		</div>
-		<div class="layui-tab-item weadmin-body">
-			<div class="">
-				<div class="pull-left col-xs-2.5">
-					<input type="text" style="width:132px;margin-left: 15px;" class="form-control" placeholder="起始时间"
-						   id="reservation" onclick="">
-				</div>
-				<span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
-				<div class="pull-left col-xs-2.5">
-					<input type="text" style="width:120px" class="form-control" placeholder="结束时间" id="reservationEnd"
-						   onclick=""><br/>
-				</div>
-				<div class="pull-left col-sm-1">
-					<a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
-				</div>
+			<div class="LowerPart" style="  background-color: #ffffff">
+				<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+				<div id="two" style="width: 1000px;height:600px; margin-left: 5px;" ></div>
 			</div>
-			<br>
-			<br>
-			<br>
-			<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-			<div id="two" style="width: 1000px;height:600px;"></div>
 		</div>
 	</div>
 	</div>
-</div>
+
 </body>
 <script src="../../js/jquery.js"></script>
 <script src="../../easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
