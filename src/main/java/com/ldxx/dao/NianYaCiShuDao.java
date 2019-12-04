@@ -7,7 +7,7 @@ import java.util.List;
 public interface NianYaCiShuDao {
 
 
-	List<SiteCompactionNumVo> getAllNianYaCiShu();
+	List<SiteCompactionNumVo> getAllNianYaCiShu(String luduanquanxian);
 
 
 	int addNianYaCiShu(SiteCompactionNumVo siteCompactionNumVo);
@@ -16,4 +16,5 @@ public interface NianYaCiShuDao {
 
 	int updateNianYaCiShu(SiteCompactionNumVo siteCompactionNumVo);
 
+    List<SiteCompactionNumVo> getByLuDuanId(String roadId);
 }

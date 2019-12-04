@@ -26,16 +26,23 @@ public class SysRoadMgnController {
 
 	@Resource
 	private SysRoadMgnDao dao;
-    @RequestMapping("/getAllSysRoadMgn")
-    @ResponseBody
+
+    @RequestMapping("/getAllSysRoadMgn")//通过权限初始化路段（大写）
     public List<SysRoadMgn> getAllSysRoadMgn(HttpSession session){
 		User user = (User) session.getAttribute("user");
 		String luduanquanxian = user.getLuduanquanxian();
         return srmService.getAllSysRoadMgn(luduanquanxian);
     }
 
+	@RequestMapping("/getAllSysRoadMgnLowcase2")//通过权限初始化路段（小写）
+	public List<SysRoadMgnLowcase> getAllSysRoadMgnLowcase2(HttpSession session){
+		User user = (User) session.getAttribute("user");
+		String luduanquanxian = user.getLuduanquanxian();
+		List<SysRoadMgnLowcase> list = dao.getAllSysRoadMgn2(luduanquanxian);
+		return list;
+	}
+
     @RequestMapping("/getAllSysRoadMgnLowcase")
-    @ResponseBody
     public List<SysRoadMgnLowcase> getAllSysRoadMgnLowcase(){
         return dao.getAllSysRoadMgnLowcase();
     }
@@ -63,7 +70,6 @@ public class SysRoadMgnController {
     }
     
     @RequestMapping("/delSysRoadMgn")
-    @ResponseBody
 	public Map<String,Object> delSysRoadMgn(String id) {
     	Map<String, Object> map = new HashMap<String, Object>();
 		int state = srmService.delSysRoadMgn(id);
@@ -73,7 +79,6 @@ public class SysRoadMgnController {
     }
     
     @RequestMapping("/getByIdSysRoadMgn")
-    @ResponseBody
 	public Map<String,Object> getByIdSysRoadMgn(String id) {
     	Map<String, Object> map = new HashMap<String, Object>();
 		SysRoadMgn s= srmService.getByIdSysRoadMgn(id);
@@ -82,7 +87,6 @@ public class SysRoadMgnController {
 		return map;
     }
 	@RequestMapping("/finishRoad")
-	@ResponseBody
 	public Map<String, Object> finishRoad(String roadId){
 		Map<String, Object> map = new HashMap<String, Object>();
     	int state=0;
