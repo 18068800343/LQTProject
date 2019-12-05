@@ -3,15 +3,19 @@ package com.ldxx.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.bean.SiteRoadMileageTemp;
 import com.ldxx.bean.User;
+import com.ldxx.dao.SiteRoadMileageTempDao;
 import com.ldxx.service.SiteRoadMileageTempService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
+import com.ldxx.vo.TanPuWenDuVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -25,6 +29,9 @@ public class SiteRoadMileageTempController {
 
     @Autowired
     private SiteRoadMileageTempService service;
+
+    @Resource
+    private SiteRoadMileageTempDao dao;
 
     @RequestMapping("/getAllSiteRoadMileageTemp")
     public List<SiteRoadMileageTemp> getAllSiteRoadMileageTemp(HttpSession session){
@@ -81,4 +88,12 @@ public class SiteRoadMileageTempController {
         return service.getByLuDuanId(roadId);
     }
 
+    @RequestMapping("/getTanPuWenDuVoListByTime")
+    @ResponseBody
+    public TanPuWenDuVo getTanPuWenDuVoListByTime(String beginTime, String endTime, String roadId){
+        List<SiteRoadMileageTemp> list = dao.getTanPuWenDuVoListByTime(beginTime,endTime,roadId);
+        TanPuWenDuVo TanPuWenDuVo = new TanPuWenDuVo();
+        TanPuWenDuVo  = TanPuWenDuVo.getTanPuWenDuVoByPeiBiVoList(list);
+        return TanPuWenDuVo;
+    }
 }

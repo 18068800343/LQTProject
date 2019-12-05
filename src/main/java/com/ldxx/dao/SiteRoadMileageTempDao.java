@@ -16,4 +16,6 @@ public interface SiteRoadMileageTempDao {
     int insertSiteRoadMileageTemp(@Param("srm") SiteRoadMileageTemp srm);
 
     List<SiteRoadMileageTemp> getByLuDuanId(String roadId);
+
+    List<SiteRoadMileageTemp> getTanPuWenDuVoListByTime(String beginTime, String endTime, String roadId);
 }

@@ -347,6 +347,78 @@ function setTanPuLiChengOption(list){
 	return tanPuLiChengOption;
 }
 
+function setTanPuWenDuOption(list){
+	let tanPuWenDuOption = {
+		title: {
+			text: '折线图堆叠'
+		},
+		legend: {
+			data:['温度1','温度2']
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		toolbox: {
+			feature: {
+				dataZoom: {
+					yAxisIndex: 'none'
+				},
+				restore: {},
+				saveAsImage: {},
+				dataView:{}
+			}
+		},
+		tooltip : {
+			trigger: 'axis',
+			axisPointer: {
+				type: 'cross',
+				animation: false,
+				label: {
+					backgroundColor: '#505765'
+				}
+			}
+		},
+		dataZoom: [
+			{
+				show: true,
+				realtime: true,
+				start: 0,
+				end: 100
+			},
+			{
+				type: 'inside',
+				realtime: true,
+				start: 0,
+				end: 100
+			}
+		],
+		xAxis: {
+			type: 'category',
+			boundaryGap: false,
+			data: list.xList
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [
+			{
+				name:'温度1',
+				type:'line',
+				data:list.yList1
+			},
+			{
+				name:'温度2',
+				type:'line',
+				data:list.yList2
+			}
+		]
+	};
+	return tanPuWenDuOption;
+}
+
 
 function setTongGuoVoOption(list){
 	let tongGuoOption = {

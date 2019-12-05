@@ -57,4 +57,22 @@
 		where a.delete_state!=0 AND a.site_id in (SELECT id  from site_construction  WHERE road_id=#{roadId} and delete_state!=0)
 	</select>
 
+    <select id="getTanPuWenDuVoListByTime" resultType="SiteRoadMileageTemp">
+        SELECT
+        qba.*,sc.road_id
+        FROM
+        site_road_mileage_temp qba LEFT JOIN site_construction sc on qba.site_id = sc.id
+        <where>
+            <if test="beginTime !=null and beginTime!=''">
+                qba.datetime &gt; #{beginTime}
+            </if>
+            <if test="endTime !=null and endTime!=''">
+                and qba.datetime &lt;  #{endTime}
+            </if>
+            <if test="roadId !=null and roadId!=''">
+                and sc.road_id = #{roadId}
+            </if>
+        </where>
+        order by qba.datetime asc
+    </select>
 </mapper>
