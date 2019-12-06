@@ -44,9 +44,19 @@ public class QualityByPlateRealTimeProdocutionData {
 
     public Time  wetTime;//湿拌用时
 
+	private BigDecimal weight;
+
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 
     public Date productionTime;//生产时间
+
+	public BigDecimal getWeight() {
+		return weight;
+	}
+
+	public void setWeight(BigDecimal weight) {
+		this.weight = weight;
+	}
 
 	public String getID() {
 		return ID;
