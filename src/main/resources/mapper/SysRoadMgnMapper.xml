@@ -4,10 +4,11 @@
 	
 	<insert id="addSysRoadMgn" parameterType="sysRoadMgn">
 		insert into 
-			sys_road_mgn(road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state) 
+			sys_road_mgn(road_id,road_no,road_name,expressway_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state)
 		values(#{sysRoadMgn.roadId},
 			   #{sysRoadMgn.roadNo},
 			   #{sysRoadMgn.roadName},
+			   #{sysRoadMgn.expresswayName},
 			   #{sysRoadMgn.startLng},
 			   #{sysRoadMgn.startLat},
 			   #{sysRoadMgn.endLng},
@@ -21,6 +22,7 @@
 		update sys_road_mgn set 
 		road_no=#{sysRoadMgn.roadNo},
 		road_name=#{sysRoadMgn.roadName},
+		expressway_name=#{sysRoadMgn.expresswayName},
 		start_lng=#{sysRoadMgn.startLng},
 		start_lat=#{sysRoadMgn.startLat},
 		end_lng=#{sysRoadMgn.endLng},
@@ -46,7 +48,7 @@
 	</sql>
 	
 	<select id="getAllSysRoadMgn" resultType="SysRoadMgn">
-		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name
 	    from sys_road_mgn srm
 		<where>
 			<include refid="luduanquanxian"></include>
@@ -55,7 +57,7 @@
 	</select>
 
 	<select id="getAllSysRoadMgn2" resultType="SysRoadMgnLowcase">
-		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name
 		from sys_road_mgn srm
 		<where>
 			<include refid="luduanquanxian"></include>
@@ -64,7 +66,7 @@
 	</select>
 
 	<select id="getAllSysRoadMgnLowcase" resultType="SysRoadMgnLowcase">
-		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name
 	    from sys_road_mgn
 	    where delete_state=1
 	</select>
@@ -76,7 +78,7 @@
 	</update>
 	
 	<select id="getByIdSysRoadMgn" resultType="SysRoadMgn">
-		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name
 	    from sys_road_mgn 
 	    where delete_state!=0 and road_id=#{id}
 	</select>

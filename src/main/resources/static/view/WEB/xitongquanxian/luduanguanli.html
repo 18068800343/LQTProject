@@ -74,6 +74,7 @@
                                 <tr>
                                     <th>路段编号</th>
                                     <th>路段名称</th>
+                                    <th>所属高速</th>
                                     <th>起经度</th>
                                     <th>起纬度</th>
                                     <th>止经度</th>
@@ -104,24 +105,31 @@
                         <table class="table table-bordered table-condensed" style="height: auto;">
                         	<tr>
                         		<td style="width: 20%;">路段编号</td>
-                        		<td><input type="text" class="form-control" id="" v-model="roadNo" placeholder="请输入" style="width: 100%;height: 100%;"></td>
+                        		<td><input type="text" class="form-control" id="roadNo" v-model="roadNo" placeholder="请输入" style="width: 100%;height: 100%;"></td>
                         		<td>路段名称</td>
-                        		<td><input type="text" class="form-control" id="" v-model="roadName" placeholder="请输入" style="width: 100%;height: 100%;"></td>
+                        		<td><input type="text" class="form-control" id="roadName" v-model="roadName" placeholder="请输入" style="width: 100%;height: 100%;"></td>
                         	</tr>
+                            <tr>
+                                <td>所属高速</td>
+                                <td><input type="text" class="form-control" id="" v-model="expresswayName" placeholder="请输入" style="width: 100%;height: 100%;"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         	<tr>
                         		<td style="width: 20%;">起经度</td>
-                        		<td><input type="text" class="form-control" id="" v-model="startLng" @input="checknum('startLng')"  placeholder="请输入" style="width: 100%;height: 100%;"></td>
+                        		<td><input type="text" class="form-control" id="startLng" v-model="startLng" @input="checknum('startLng')"  placeholder="请输入" style="width: 100%;height: 100%;"></td>
                         		<td>起纬度</td>
-                        		<td><input type="text" class="form-control" id="" v-model="startLat" @input="checknum('startLat')" placeholder="请输入" style="width: 100%;height: 100%;"></td>
+                        		<td><input type="text" class="form-control" id="startLat" v-model="startLat" @input="checknum('startLat')" placeholder="请输入" style="width: 100%;height: 100%;"></td>
                         	</tr>
                         	<tr>
                         		<td style="width: 20%;">止经度</td>
-                        		<td><input type="text" class="form-control" id="" v-model="endLng" @input="checknum('endLng')" placeholder="请输入" style="width: 100%;height: 100%;"></td>
+                        		<td><input type="text" class="form-control" id="endLng" v-model="endLng" @input="checknum('endLng')" placeholder="请输入" style="width: 100%;height: 100%;"></td>
                         		<td>止纬度</td>
-                        		<td><input type="text" class="form-control" id="" v-model="endLat" @input="checknum('endLat')" placeholder="请输入" style="width: 100%;height: 100%;"></td>
+                        		<td><input type="text" class="form-control" id="endLat" v-model="endLat" @input="checknum('endLat')" placeholder="请输入" style="width: 100%;height: 100%;"></td>
                         	</tr>
+
                         </table>
-                    </form>  
+                    </form>
                 </div>
         </div>
         <div class="modal-footer">
@@ -151,9 +159,15 @@
                         		<td>路段名称</td>
                         		<td><input type="text" class="form-control" id="" v-model="roadName" placeholder="请输入" style="width: 100%;height: 100%;"></td>
                         	</tr>
+                            <tr>
+                                <td>所属高速</td>
+                                <td><input type="text" class="form-control" id="" v-model="expresswayName" placeholder="请输入" style="width: 100%;height: 100%;"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         	<tr>
-                        		<td style="width: 20%;">起经度</td>
-                        		<td><input type="text" class="form-control" id="" v-model="startLng" @input="checknum('startLng')"  placeholder="请输入" style="width: 100%;height: 100%;"></td>
+                                <td><input type="text" class="form-control" id="" v-model="startLng" @input="checknum('startLng')"  placeholder="请输入" style="width: 100%;height: 100%;"></td>
+                                <td style="width: 20%;">起经度</td>
                         		<td>起纬度</td>
                         		<td><input type="text" class="form-control" id="" v-model="startLat" @input="checknum('startLat')" placeholder="请输入" style="width: 100%;height: 100%;"></td>
                         	</tr>
@@ -163,6 +177,7 @@
                         		<td>止纬度</td>
                         		<td><input type="text" class="form-control" id="" v-model="endLat" @input="checknum('endLat')" placeholder="请输入" style="width: 100%;height: 100%;"></td>
                         	</tr>
+
                         </table>
                     </form>  
                 </div>
@@ -174,53 +189,7 @@
         </div>
     </div>
 </div>
-<!-- 修改model结束 --> 
-<!-- allMsg -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>所有信息</b></h4>
-        </div>
-        <div class="modal-body">
-            <div>     
-                <form class="form-inline">
-                    <table class="table table-bordered table-condensed" style="height: auto;">
-                    	<tr>
-                    		<td style="width: 20%;">账户</td>
-                    		<td>gaoq</td>
-                    		<td style="width: 20%;">密码</td>
-                    		<td>123</td>
-                    	</tr>
-                    	<tr>
-                    		<td style="width: 20%;">邮箱</td>
-                    		<td>893522105@qq.com</td>
-                    		<td style="width: 20%;">学历</td>
-                    		<td>本科</td>
-                    	</tr>
-                    	<tr>
-                    		<td style="width: 20%;">住址</td>
-                    		<td>保密</td>
-                    		<td style="width: 20%;">婚姻状况</td>
-                    		<td>未婚</td>
-                    	</tr>
-                    	<tr>
-                    		<td style="width: 20%;">备用</td>
-                    		<td>1</td>
-                    		<td style="width: 20%;">备用</td>
-                    		<td>1</td>
-                    	</tr>
-                    </table>
-                </form>  
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        </div>
-        </div>
-    </div>
-</div>
+<!-- 修改model结束 -->
 
     <!-- Modal -->
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="finish">
@@ -285,6 +254,7 @@
         "columns": [
 		            { "data": "roadNo"},
 		            { "data": "roadName"},
+                    { "data": "expresswayName"},
 		            { "data": "startLng"},
 		            { "data": "startLat"},
 		            { "data": "endLng"},
@@ -295,7 +265,7 @@
          "columnDefs": [
 							{
 							"class": "tcenter",
-							"targets": 6,
+							"targets": 7,
 							"searchable": false,
 							"render": function(data, type, full) {
                                         if(data=="1")
@@ -309,7 +279,7 @@
                             },
                             {
 							"class": "tcenter",
-							"targets": 7,
+							"targets": 8,
 							"searchable": false,
 							"render": function(data, type, full) {
                                         if(data=="1"){
@@ -391,6 +361,7 @@
             roadId:"",
             roadNo:"",
             roadName:"",
+            expresswayName:"",
             startLng:"",
             startLat:"",
             endLng:"",
@@ -444,6 +415,7 @@ function xghxshebei(obj){
             roadId:"",
             roadNo:"",
             roadName:"",
+            expresswayName:"",
             startLng:"",
             startLat:"",
             endLng:"",

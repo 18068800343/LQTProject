@@ -21,6 +21,16 @@ public class SysRoadMgn {
 
     private int deleteState;
 
+    private String expresswayName;
+
+	public String getExpresswayName() {
+		return expresswayName;
+	}
+
+	public void setExpresswayName(String expresswayName) {
+		this.expresswayName = expresswayName;
+	}
+
 	public String getRoadId() {
 		return roadId;
 	}
