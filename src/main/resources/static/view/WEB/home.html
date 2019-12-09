@@ -105,7 +105,7 @@
     </style>
 </head>
 <body>
-<div class="left" style="width:1000px;">
+<div class="left" style="width:1000px;" id="hsMap">
     <div style="width: 80%;min-height: 99%;overflow: hidden;margin: 0;position: absolute;top:1px;"
          id="dituContent"></div>
     <div class="center_text">
@@ -160,6 +160,7 @@
         page_map.centerAndZoom("江苏", 7);
         page_map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
         var sy = new BMap.Symbol(BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW, {});
+
     }
 
     let luduanVm = new Vue({
@@ -191,6 +192,7 @@
             },
             initMap:function(){
                let rdList = this.roadList;
+                page_map.setViewport('enableAnimation',false);
                for(let i in rdList){
                    /*let pois = [
                        new BMap.Point(rdList[i].startLng,rdList[i].startLat),
@@ -206,9 +208,10 @@
                    page_map.addOverlay(polyline);*/
                    let p1 = new BMap.Point(rdList[i].startLng,rdList[i].startLat);
                    let p2 = new BMap.Point(rdList[i].endLng,rdList[i].endLat);
-                   let driving = new BMap.DrivingRoute(page_map, {renderOptions:{map: page_map, autoViewport: true}});
+                   let driving = new BMap.DrivingRoute(page_map, {renderOptions:{map: page_map, autoViewport: false}});
                    driving.search(p1, p2);
                }
+                page_map.setViewport('enableAnimation',true);
             },
             dwMap:function(){
 
