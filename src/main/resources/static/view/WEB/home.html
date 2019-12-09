@@ -3,6 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>OA</title>
+	<meta name="keywords" content="百度地图,百度地图API，百度地图自定义工具，百度地图所见即所得工具" />
+	<meta name="description" content="百度地图API自定义地图，帮助用户在可视化操作下生成百度地图" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 	<link href="../style/bootstrap.min.css" rel="stylesheet">
 	<link href="../style/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="../font2/iconfont.css">
@@ -16,6 +19,7 @@
     <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-rtl.min.css">
 	<link href="./../toastr/toastr.css" rel="stylesheet">
+	<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
 	<style>
 		
 		#titles{
@@ -78,427 +82,14 @@
 	</style>
 </head>
 <body>
-	
-	<div class="home-content" style="background:#fff;width:100%;height:100%;position:absolute; padding: 5px;padding-left: 10px;"">
-		<div class="home-import">
-			<div class="unfinish mission">
-				<table id="tb1" class="tb1 table table-hover">
-					<tr class="tb1-unfinish">
-                        <th>
-                        	<div class="yihang2">
-                        		<div>沥青砼生产过程管理(<span>0</span>)</div>
-                        		<div><span style="cursor: pointer;" class="Paa"><a href="./gerenRenwu/JobManagement.html">查看更多</a></span></div>
-                        	
-                        	</div>
-                        	
-                        </th>
-					</tr>
-				</table>
-				<ul class="gundong" >
-						<li><span data-toggle="modal"  style="cursor: pointer;" class="lianjieColor">人员管理</span></li>
-				</ul>
-				<ul class="gundong" >
-						<li><span data-toggle="modal"  style="cursor: pointer;" class="lianjieColor">人员管理</span></li>
-				</ul>
-			</div>
-
-				<div class="management-notifications mission" style="margin-left:6px;float:left;width:67% !important;">
-					<table id="tb3" class="tb3 table table-hover">
-						<tr class="tb3-management">
-							<th colspan="4">
-								<div class="yihang2">
-	                        		<div>沥青砼生产质量管理(<span>0</span>)</div>
-	                        		<div><span style="cursor: pointer;" class="Pad"><a href="./gerenRenwu/BusinessNotice.html">查看更多</a></span></div>
-	                        	</div>
-                            </th>
-						</tr>
-					</table>
-				</div>
-
-<!-- 				<div id="scrollDiv" class="mission">
-					<div class="task">
-						<div class="yihang2">
-                       		<div >通知公告(<span>10</span>)</div>
-                       		<div><span style="cursor: pointer;" class="Pba"><a href="./xingzhengShiwu/NoticeBulletin.html">查看更多</a></span></div>
-                       	</div>
-                    </div>
-					<ul class="gundong" id="gundong">
-						<li><span data-toggle="modal" data-target="#tzgg" style="cursor: pointer;" class="lianjieColor">张三出差细节通知1</span></li>
-					</ul>
-				</div> -->
-<!-- Modal -->
-    <div class="modal fade" id="tzgg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">通知公告</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-inline" id="tzgg1">
-                       <table class="table table-bordered table-condensed" >
-                           <tr>
-                               <td style="width:100px;">标题  </td>
-                               <td id="look_title_all"></td>
-                               <td style="width:100px;">类型</td>
-                               <td id="look_type_all"></td>
-                           </tr>
-                           <tr>
-                               <td>重要程度</td>
-                               <td id="look_importance_all"></td>
-                               <td>发布部门</td>
-                               <td id="lookfabubumen" ></td>
-                           </tr>
-                           <tr>
-                               <td>发布人</td>
-                               <td id="look_user_all"></td>
-                               <td></td>
-                               <td></td>
-                           </tr>
-                           <tr>
-                               <td>内容  </td>
-                               <td colspan="3" id=""><textarea style="width:100%;" rows="4" class="form-control" id="look_info_all"></textarea></td>
-                           </tr>
-                       </table>
-                       <br/>
-                       <table class="table table-bordered table-condensed"  id="look_all_table">
-                       		
-                       </table> 
-                   </form> 
-                   
-                   
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            </div>
-            </div>
-        </div>
-    </div>
-<!-- Modal结束 -->
-		</div>
-		<div class="home-other" id="shipei">
-
-			<div class="notice-bulletin mission">
-				<div class="finished">
-					<table id="tb2" class="tb2 table table-hover">
-						<tr class="tb2-finished">
-							<th>
-								<div class="yihang2">
-		                       		<div>沥青砼运输监控管理(<span>0</span>)</div>
-		                       		<div><span style="cursor: pointer;" class="Pab"><a href="./gerenRenwu/RunMatters.html">查看更多</a></span></div>
-		                       	</div>
-                            </th>
-						</tr>
-					</table>
-                </div>
-                
-			</div>
-				<div id="scrollDiv" class="mission">
-					<div class="task">
-						 <div class="yihang2">
-	                      		<div >道路施工质量管理(<span>10</span>)</div>
-	                      		<div><span style="cursor: pointer;" class="Pba"><a href="./xingzhengShiwu/NoticeBulletin.html">查看更多</a></span></div>
-	                      	</div>
-	                   </div>
-					<ul class="gundong" id="gundong">
-					</ul> 
-				</div>
-<!-- 			<div class="management-notifications mission">
-				<table class="tb4 table table-hover">
-					<tr class="tb4-offen">
-						<th><i class="iconfont icon-changyong-" style="font-size:18px;"></i>常用功能</th>
-					</tr>
-					<tr>
-						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/TaskManagement.html" class="lianjieColor">任务单管理</a></span></td>
-					</tr>
-					<tr>
-						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/BudgetManagement.html" class="lianjieColor">预算单管理</a></span></td>
-					</tr>
-					<tr>
-						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/ContractManagement.html" class="lianjieColor">承接合同管理</a></span></td>
-					</tr>
-					<tr>
-						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/SubcontractManagement.html" class="lianjieColor">分包合同管理</a></span></td>
-					</tr>
-					<tr>
-						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/ProcurementContract.html" class="lianjieColor">采购合同管理</a></span></td>
-					</tr>
-					<tr>
-						<td><span style="cursor: pointer;"><a href="./shengchanGuanli/ProgressManagement.html" class="lianjieColor">进度管理</a></span></td>
-                    </tr>
-                    <tr>
-						<td><span style="cursor: pointer;"><a href="./xitongGuanli/PersonneManagement.html" class="lianjieColor">人员管理</a></span></td>
-					</tr>
-				</table>
-			</div> -->
-
-			<div class="notice-bulletin mission">
-				<div class="finished">
-					<table class="tb5 table table-hover" id="tb5">
-						
-						<tr class="tb5-finished">
-							<th>
-								<div class="yihang2">
-		                       		<div>回收站(<span>10</span>)</div>
-		                       		<div><span data-toggle="modal" data-target="#myModal4" style="cursor: pointer;">查看更多</span></div>
-		                       	</div>
-                            </th>
-						</tr>
-						<tbody id="tb5T">
-						<tr>
-							<td>无</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- Modal -->
-				<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel"><i class="iconfont icon-huishouzhan" style="font-size:18px;"></i>回收站</h4>
-						</div>
-						<div class="modal-body">
-							<table class="tb6 table table-hover" id="tb6">
-							   <thead>
-	                   			  <tr>
-	                              <th>title</th>
-	                              <th>操作人</th>
-	                              <th>意见</th>
-	                              <th>操作类型</th>
-	                       		  </tr>
-			                   	</thead>
-		                        <tbody id="tb6T">
-		                       		<tr>
-									  <td>废弃1</td>
-									  <td>废弃1</td>
-									  <td>废弃1</td>
-									  <td>废弃1</td>
-									</tr>
-		                        </tbody>
-							</table>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-							<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-						</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-
+	<div class="left" style="width:1000px;">
+	<div style="width:1000px;height:850px;border:#ccc solid 1px;margin-top: 20px;border-radius: 10px;" id="dituContent"></div>
+				<div class="center_text">
 	</div>
-
-<!-- frame modal -->
-<div class="modal fade bs-example-modal-lg dada" id="tjModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg" role="document" style="width:85%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">处理业务</h4>
-            </div>
-            <div class="modal-body">
-                <iframe name="view_frame" id="rightMain" src="" frameborder="false" scrolling="auto" style="border: none;" width="100%" height=700 allowtransparency="true"></iframe>
-                
-                <div id="topBox" hidden="true">
-                    <div id="titles">流程备注</div>
-                    <div id="srcontent">
-                        <textarea cols="30" rows="4" class="form-control" id="viewTop" placeholder="" disabled></textarea>
-                    </div>
-                </div>
-                <div id="NodeBox">
-                    <div class="yihang"><b>审批流程:</b><div id="nodeRole"></div></div>
-                </div>                
-                <div id="nextBox" hidden="true">
-                    <!-- <div id="titles">上一步操作人:<lable id="lastPerson"></lable>&nbsp;&nbsp;意见：↓</div>
-                    <div id="srcontent">
-                        <textarea cols="30" rows="2" class="form-control" id="viewNext" placeholder="" disabled></textarea>
-                    </div> -->
-                    <table class="table table-bordered table-condensed" id="message_table">
-                    	<thead>
-                    		<tr>
-                    			<th style="width:15%;">操作人</th>
-                    			<th style="width:15%;">部门</th>
-                    			<th style="width:15%;">操作步骤</th>
-                    			<th style="width:40%;">意见</th>
-                    			<th style="width:15%;">操作时间</th>
-                    		</tr>
-                    	</thead>
-                    	<tbody></tbody>
-                    </table>
-                </div>
-                <div id="midBox">
-                    <div id="titles">意见</div>
-                    <div id="srcontent">
-                        <textarea cols="30" rows="8" class="form-control" id="view" placeholder="请输入内容"></textarea>
-                    </div>
-                </div> 
-            </div>
-            <div class="modal-footer">
-              <div id="tjButtons" >
-                <div  style="text-align:center" >
-                  <button type="button" id="getReceiver" onclick="getReceive()" class="btn btn-success"  >同意</button>
-                  <button type="button" id="tuiHui"  onclick="tuiHui()" class="btn btn-default" data-dismiss="modal">退回修改</button>
-                  <button type="button" id="baoCun" class="btn btn-default" onclick="baoCun()">保存</button>
-                  <button type="button" id="shanChuFlow" class="btn btn-default" onclick="shanChuFlow()">删除</button>
-                  <button type="button" id="boHui" class="btn btn-default" onclick="boHui()">废止</button>
-                </div>
-              </div>
-              <div id="shanchu" hidden="true" style="text-align:center">
-                <button type="button" class="btn btn-default" onclick="yidu()">已读</button>
-                <button type="button" class="btn btn-default" onclick="shanchu()">删除</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-              </div>
-            </div>
-        </div>
+	</div>
+	 <div class="left_line" style="border:1PX #DEDEDE solid;witdh:300px;float:right;display:inline-block;position:absolute;top:0px;left:1000px;margin-top:20px;width:40%;height:70%">
+    12211
     </div>
-</div>
-<!-- frame modal结束 -->
-<!-- 提交 modal -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="tijiaogei">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">提交给</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-inline">
-                    <table class="table table-bordered table-condensed" id="tijiaoren">
-	                   	<thead>
-	                   			<tr>
-	                         	<th></th>
-	                             <th>部门</th>
-	                             <th>职务</th>
-	                             <th>审批人</th>
-	                         </tr>
-	                   	</thead>
-                       <tbody>
-                       	
-                       </tbody>
-                   </table>
-                </form>
-                <form id="zabzy" hidden="true" class="form-inline">
-                    <div class="table table-bordered table-condensed" >
-                      <b>质安部提交注意事项:</b><p>
-                                                                    工建一部二部为生产部门的,选<b>王军</b><p>
-                                                                    检测部为生产部门的,选<b>杜高明</b><p>
-                                                                    其他部门为生产部门的,选<b>王继林</b>
-                   </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="tijiaorenwudan2()">提交</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 提交 modal结束 -->
-<!-- frame modalyb -->
-<div class="modal fade bs-example-modal-lg dadayb" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg" role="document" style="width:80%;">
-        <div class="modal-content">
-	            <div class="modal-header">
-	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	                <h4 class="modal-title" id="gridSystemModalLabel">业务</h4>
-	            </div>
-	            <div class="modal-body">
-	                <iframe name="view_frame" id="rightMainyb" src="" frameborder="false" scrolling="auto" style="border: none;" width="100%" height=700 allowtransparency="true"></iframe>
-	            </div>
-	            <div id="dy_html">
-	            	<table class="table table-bordered table-condensed" id="message_table2">
-	                   	<thead>
-	                   		<tr>
-	                   			<th style="width:15%;">操作人</th>
-	                   			<th style="width:15%;">部门</th>
-	                   			<th style="width:15%;">操作步骤</th>
-	                   			<th style="width:40%;">意见</th>
-	                   			<th style="width:15%;">操作时间</th>
-	                   		</tr>
-	                   	</thead>
-	                   	<tbody></tbody>
-	                </table>
-	            </div>
-            <div class="modal-footer">
-            	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="day()">打印页面</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- frame modalyb结束 -->
-<!--  modal结束 -->
-<!-- 提交 modal -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="tuihuigei">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">退回至</h4>
-            </div>
-            <div class="modal-body">
-                <table class="table table-bordered table-condensed" id="tijiaoren">
-	                   	<thead>
-	                   			<tr>
-	                         	<th></th>
-	                             <th>步骤</th>
-	                             <th>操作人</th>
-	                             <th>内容</th>
-	                         </tr>
-	                   	</thead>
-                       <tbody>
-                       	
-                       </tbody>
-                   </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="tuihuisubmit()">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 提交 modal结束 -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="look_modal">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-       
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>查看审批进度</b></h4>
-        </div>
-        <div class="modal-body">
-                <div>     
-                    <form class="form-inline" >
-                    	<table class="table table-bordered table-condensed" id="d_table">
-                    		<thead>
-                    			<tr>
-                    				<th style="width:30%;">业务名称</th>
-                    				<th style="width:12%;">操作人</th>
-                    				<th style="width:23%;">意见</th>
-                    				<th style="width:12%;">操作类型</th>
-                    				<th style="width:23%;">操作时间</th>
-                    			</tr>
-                    		</thead>
-                    		<tbody></tbody>
-                    	</table>
-                    </form>  
-                </div>
-        </div>
-        <div id="NodeBox" style="margin-left:15px;">
-            <div class="yihang"><b>审批流程:</b><div id="nodeRole3"></div></div>
-        </div> 
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        </div>
-        </div>
-    </div>
-</div> 
 </body>
 <script src="../js/jquery.js"></script>
 <script src="../js/main.js"></script>
@@ -512,7 +103,6 @@
 <script src="../js/quanxian.js"></script>
 <script src="../js/SmartNotification.min.js"></script>
 <script src="../js/myTool.js"></script>
-<!-- 
 <script type="text/javascript">  
 	$(document).ready( function () {
     	initTable1();
@@ -1681,53 +1271,131 @@
 		    var bdhtml = window.document.body.innerHTML;
 		    //设置打印开始区域
 		    //var startStr = '<!--startprint-->';
-		    // 设置打印结束区域
-		    //var endStr = '<!--endprint-->';
-		    //从标记里获取需要打印的页面
-		    //var printHtml = bdhtml.substring(bdhtml.indexOf(startStr) + startStr.length, bdhtml.indexOf(endStr));
-		    //隐藏不必要的按钮和样式
-		    var iframe = document.getElementById('rightMainyb');
-		    var iframeHtml=iframe.contentWindow.document.body;
-		    $(iframeHtml).find("a").each(function(){
-		    	var fileName=$(this).text();
-		    	var qq=$(this).parent("td");
-		    	qq.empty();
-		    	qq.append("<span>"+fileName+"</span>");
-		    })
-		    var iframeHtml2=iframeHtml.innerHTML;
-		    var printHtml = document.getElementById('dy_html').innerHTML;
-		    var allHtml=iframeHtml2+printHtml;
-		    
-		    
-		   /*  iframe.contentWindow.focus();
-		    iframe.contentWindow.print(); */
-		    
-		 	// 通过id获取需要打印的页面
-		    
-		    window.document.body.innerHTML = allHtml;
-		    if (!!window.ActiveXObject || "ActiveXObject" in window) { //是否ie
-		        remove_ie_header_and_footer();
-		     }
-		    remove_ie_header_and_footer();
-		    window.print();
-		    // 还原界面
-		    window.document.body.innerHTML = allHtml;
-		    window.location.reload();
-	  }
+		 
+</script>
+	<script type="text/javascript">
+		//创建和初始化地图函数：
+		function initMap() {
+			createMap(); //创建地图
+			setMapEvent(); //设置地图事件
+			addMapControl(); //向地图添加控件
+			addMarker(); //向地图中添加marker
+		}
 
-	  
+		//创建地图函数：
+		function createMap() {
+			var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
+			var point = new BMap.Point(118.064214, 36.811252); //定义一个中心点坐标
+			map.centerAndZoom(point, 18); //设定地图的中心点和坐标并将地图显示在地图容器中
+			window.map = map; //将map变量存储在全局
+		}
 
-	//去掉页眉、页脚
-	function remove_ie_header_and_footer() {
-	    var hkey_path;
-	    hkey_path = "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
-	    try {
-	       var RegWsh = new ActiveXObject("WScript.Shell");
-	       RegWsh.RegWrite(hkey_path + "header", "");
-	       RegWsh.RegWrite(hkey_path + "footer", "");
-	    } catch (e) {
-	    }
+		//地图事件设置函数：
+		function setMapEvent() {
+			map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
+			map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
+			map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
+			map.enableKeyboard(); //启用键盘上下左右键移动地图
+		}
 
-	}
-</script>  -->
+		//地图控件添加函数：
+		function addMapControl() {
+			//向地图中添加缩放控件
+			var ctrl_nav = new BMap.NavigationControl({
+				anchor: BMAP_ANCHOR_TOP_LEFT,
+				type: BMAP_NAVIGATION_CONTROL_LARGE
+			});
+			map.addControl(ctrl_nav);
+			//向地图中添加缩略图控件
+			var ctrl_ove = new BMap.OverviewMapControl({
+				anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+				isOpen: 1
+			});
+			map.addControl(ctrl_ove);
+			//向地图中添加比例尺控件
+			var ctrl_sca = new BMap.ScaleControl({
+				anchor: BMAP_ANCHOR_BOTTOM_LEFT
+			});
+			map.addControl(ctrl_sca);
+		}
+
+		//标注点数组
+		var markerArr = [{
+			//			title: "淄博汉企",
+			//			content: "0533-3113118",
+			//			point: "118.063086|36.811338",
+			isOpen: 0,
+			icon: {
+				w: 21,
+				h: 21,
+				l: 0,
+				t: 0,
+				x: 6,
+				lb: 5
+			}
+		}];
+		//创建marker
+		function addMarker() {
+			for(var i = 0; i < markerArr.length; i++) {
+				var json = markerArr[i];
+				var p0 = json.point.split("|")[0];
+				var p1 = json.point.split("|")[1];
+				var point = new BMap.Point(p0, p1);
+				var iconImg = createIcon(json.icon);
+				var marker = new BMap.Marker(point, {
+					icon: iconImg
+				});
+				var iw = createInfoWindow(i);
+				var label = new BMap.Label(json.title, {
+					"offset": new BMap.Size(json.icon.lb - json.icon.x + 10, -20)
+				});
+				marker.setLabel(label);
+				map.addOverlay(marker);
+				label.setStyle({
+					borderColor: "#808080",
+					color: "#333",
+					cursor: "pointer"
+				});
+
+				(function() {
+					var index = i;
+					var _iw = createInfoWindow(i);
+					var _marker = marker;
+					_marker.addEventListener("click", function() {
+						this.openInfoWindow(_iw);
+					});
+					_iw.addEventListener("open", function() {
+						_marker.getLabel().hide();
+					})
+					_iw.addEventListener("close", function() {
+						_marker.getLabel().show();
+					})
+					label.addEventListener("click", function() {
+						_marker.openInfoWindow(_iw);
+					})
+					if(!!json.isOpen) {
+						label.hide();
+						_marker.openInfoWindow(_iw);
+					}
+				})()
+			}
+		}
+		//创建InfoWindow
+		function createInfoWindow(i) {
+			var json = markerArr[i];
+			var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>" + json.content + "</div>");
+			return iw;
+		}
+		//创建一个Icon
+		function createIcon(json) {
+			var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w, json.h), {
+				imageOffset: new BMap.Size(-json.l, -json.t),
+				infoWindowOffset: new BMap.Size(json.lb + 5, 1),
+				offset: new BMap.Size(json.x, json.h)
+			})
+			return icon;
+		}
+
+		initMap(); //创建和初始化地图
+	</script>
 </html>
