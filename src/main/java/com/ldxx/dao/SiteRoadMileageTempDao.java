@@ -18,4 +18,6 @@ public interface SiteRoadMileageTempDao {
     List<SiteRoadMileageTemp> getByLuDuanId(String roadId);
 
     List<SiteRoadMileageTemp> getTanPuWenDuVoListByTime(String beginTime, String endTime, String roadId);
+
+    List<SiteRoadMileageTemp> getTanPuLiXiDuVoListByTime(String beginTime, String endTime, String roadId);
 }

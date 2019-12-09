@@ -8,6 +8,7 @@ import com.ldxx.service.SiteRoadMileageTempService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
+import com.ldxx.vo.TanPuLiXiDuVo;
 import com.ldxx.vo.TanPuWenDuVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -95,5 +96,14 @@ public class SiteRoadMileageTempController {
         TanPuWenDuVo TanPuWenDuVo = new TanPuWenDuVo();
         TanPuWenDuVo  = TanPuWenDuVo.getTanPuWenDuVoByPeiBiVoList(list);
         return TanPuWenDuVo;
+    }
+
+    @RequestMapping("/getTanPuLiXiDuVoListByTime")
+    @ResponseBody
+    public TanPuLiXiDuVo getTanPuLiXiDuVoListByTime(String beginTime, String endTime, String roadId){
+        List<SiteRoadMileageTemp> list = dao.getTanPuLiXiDuVoListByTime(beginTime,endTime,roadId);
+        TanPuLiXiDuVo tanPuLiXiDuVo = new TanPuLiXiDuVo();
+        tanPuLiXiDuVo  = tanPuLiXiDuVo.getTanPuLiXiDuVoByPeiBiVoList(list);
+        return tanPuLiXiDuVo;
     }
 }

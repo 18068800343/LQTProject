@@ -61,6 +61,7 @@
     <ul class="layui-tab-title">
         <li class="layui-this">摊铺温度管理</li>
         <li>摊铺温度管理分析</li>
+        <li>摊铺温度离析度分析</li>
     </ul>
     <!-- Tab panes -->
     <div class="layui-tab-content">
@@ -126,6 +127,33 @@
             <br>
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
             <div id="two" style="width: 1000px;height:500px;"></div>
+        </div>
+        <div class="layui-tab-item weadmin-body">
+            <div class="">
+                <span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择路段:</span>
+                <div class="pull-left col-xs-2.5">
+                    <select class="form-control" style="width:132px;margin-left: 15px;" id="luduanB2" style="width:30%;">
+                    </select>
+                </div>
+                <span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">&nbsp;</span>
+                <div class="pull-left col-xs-2.5">
+                    <input type="text" style="width:132px;margin-left: 15px;" class="form-control" placeholder="起始时间"
+                           id="reservation2" onclick="">
+                </div>
+                <span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
+                <div class="pull-left col-xs-2.5">
+                    <input type="text" style="width:120px" class="form-control" placeholder="结束时间" id="reservationEnd2"
+                           onclick=""><br/>
+                </div>
+                <div class="pull-left col-sm-1">
+                    <a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+            <div id="three" style="width: 1000px;height:500px;"></div>
         </div>
     </div>
 </div>
@@ -265,6 +293,7 @@
         });
         initRoad()
         $("#luduanB").trigger("change");
+        $("#luduanB2").trigger("change");
     });
 
     var table = $('#mainContent').dataTable({
@@ -363,9 +392,13 @@
                     $("#luduanB").append(
                         "<option value="+json[i].roadId+">"
                         + json[i].roadName + "</option>")
+                    $("#luduanB2").append(
+                        "<option value="+json[i].roadId+">"
+                        + json[i].roadName + "</option>")
                 }
                 $("#luduan").trigger("change");
                 $("#luduanB").trigger("change");
+                $("#luduanB2").trigger("change");
             }
         });
     }
@@ -407,6 +440,28 @@
             },
             success : function(json) {
                 initMychart(json);
+            }
+        });
+
+    })
+    $("#luduanB2").on("change", function() {
+        let luduanB2=$("#luduanB2").val();
+
+        let begin = $('#reservation2').val();
+        let start = begin.replace(/年|月/g, '-').replace('日', '');
+        let end = $('#reservationEnd2').val().replace(/年|月/g, '-').replace('日', '');
+
+        $.ajax({
+            type : 'POST',
+            url : '/SiteRoadMileageTemp/getTanPuLiXiDuVoListByTime',
+            dataType : 'json',
+            data : {
+                roadId : luduanB2,
+                beginTime: startTime,
+                endTime: endTime
+            },
+            success : function(json) {
+                initMychart2(json);
             }
         });
 
@@ -667,6 +722,13 @@
         let myChart = echarts.init(document.getElementById('two'));
         // 使用刚指定的配置项和数据显示图表。
         let peibiOption = setTanPuWenDuOption(list);
+        myChart.setOption(peibiOption);
+    }
+
+    function initMychart2(list) {
+        let myChart = echarts.init(document.getElementById('three'));
+        // 使用刚指定的配置项和数据显示图表。
+        let peibiOption = setTanPuLiXiDuOption(list);
         myChart.setOption(peibiOption);
     }
 </script>

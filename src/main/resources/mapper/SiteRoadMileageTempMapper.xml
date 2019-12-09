@@ -75,4 +75,22 @@
         </where>
         order by qba.datetime asc
     </select>
+    <select id="getTanPuLiXiDuVoListByTime" resultType="SiteRoadMileageTemp">
+        SELECT
+        ABS(qba.temp-qba.temp2) as lixidu,qba.*,sc.road_id
+        FROM
+        site_road_mileage_temp qba LEFT JOIN site_construction sc on qba.site_id = sc.id
+        <where>
+            <if test="beginTime !=null and beginTime!=''">
+                qba.datetime &gt; #{beginTime}
+            </if>
+            <if test="endTime !=null and endTime!=''">
+                and qba.datetime &lt;  #{endTime}
+            </if>
+            <if test="roadId !=null and roadId!=''">
+                and sc.road_id = #{roadId}
+            </if>
+        </where>
+        order by qba.datetime asc
+    </select>
 </mapper>
