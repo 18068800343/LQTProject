@@ -192,7 +192,7 @@
             initMap:function(){
                let rdList = this.roadList;
                for(let i in rdList){
-                   let pois = [
+                   /*let pois = [
                        new BMap.Point(rdList[i].startLng,rdList[i].startLat),
                        new BMap.Point(rdList[i].endLng,rdList[i].endLat),
                    ];
@@ -203,7 +203,11 @@
                        strokeOpacity: 0.8,//折线的透明度，取值范围0 - 1
                        strokeColor:getRandomColor() //折线颜色
                    });
-                   page_map.addOverlay(polyline);
+                   page_map.addOverlay(polyline);*/
+                   let p1 = new BMap.Point(rdList[i].startLng,rdList[i].startLat);
+                   let p2 = new BMap.Point(rdList[i].endLng,rdList[i].endLat);
+                   let driving = new BMap.DrivingRoute(page_map, {renderOptions:{map: page_map, autoViewport: true}});
+                   driving.search(p1, p2);
                }
             },
             dwMap:function(){
