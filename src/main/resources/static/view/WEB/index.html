@@ -408,8 +408,8 @@
 								<div style="text-align:left;background-color:  #f2f6fb;">
 									<div class="easyui-panel" style="background-color:#022141;overflow:hidden;border:none;">
 										<ul class="easyui-tree" id="caidandianjibangding">
-											<li>
-												<span><a href="home.html"   target="view_frame"  class="yijicaidan" >首页</a></span>
+											<li id="syLi">
+												<span><a href="home.html" target="view_frame"  class="yijicaidan" ><lable id="syAId">首页</lable></a></span>
 											</li>
 											<li data-options="state:'closed'">
 												<span><a href="javascript:;"   target="view_frame" class="yijicaidan Pb" >沥青砼生产过程管理</a></span>
@@ -696,6 +696,8 @@
 			$(function() {
 				var nowHeight = $(window).height();
 				$('.mian_iframe').height(nowHeight - 65);
+
+
 			});
 
 			var flag = true;
@@ -832,6 +834,10 @@
 					}
 				})
 			}
+
+			let node = $('#caidandianjibangding').tree('find', 'syLi');
+			$('#caidandianjibangding').tree('select', node.target);
+			$("#syAId").trigger('click');
 		</script>
 
 
