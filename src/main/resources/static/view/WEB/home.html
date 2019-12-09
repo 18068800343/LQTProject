@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>OA</title>
-	<meta name="keywords" content="百度地图,百度地图API，百度地图自定义工具，百度地图所见即所得工具" />
-	<meta name="description" content="百度地图API自定义地图，帮助用户在可视化操作下生成百度地图" />
+    <meta charset="UTF-8">
+    <title>OA</title>
+    <meta name="keywords" content="百度地图,百度地图API，百度地图自定义工具，百度地图所见即所得工具"/>
+    <meta name="description" content="百度地图API自定义地图，帮助用户在可视化操作下生成百度地图"/>
     <link rel="stylesheet" href="../font2/iconfont.css">
     <link href="../style/bootstrap.min.css" rel="stylesheet">
     <link href="../style/style.css" rel="stylesheet">
     <link href="../toastr/toastr.css" rel="stylesheet">
     <link rel="stylesheet" href="../style/jquery-editable-select.css">
-    <link rel="stylesheet" type="text/css" href="../easyUI/themes/default/easyui.css" />
-    <link rel="stylesheet" type="text/css" href="../easyUI/themes/icon.css" />
-    <link rel="stylesheet" type="text/css" href="../easyUI/demo/demo.css" />
-    <link rel="stylesheet" type="text/css" href="../css/layui.css" />
-    <link rel="stylesheet" type="text/css" href="../css/layui.mobile.css" />
-    <link rel="stylesheet" type="text/css" href="../css/laydate.css" />
-    <link rel="stylesheet" type="text/css" href="../css/code.css" />
-    <link rel="stylesheet" type="text/css" href="../../js/skin/default/layer.css" />
-    <link rel="stylesheet" type="text/css" href="../css/laydate.css" />
+    <link rel="stylesheet" type="text/css" href="../easyUI/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="../easyUI/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="../easyUI/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/layui.mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/laydate.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/code.css"/>
+    <link rel="stylesheet" type="text/css" href="../../js/skin/default/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/laydate.css"/>
     <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link href="../toastr/toastr.css" rel="stylesheet">
     <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
@@ -28,130 +28,102 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../css/font.css">
     <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-rtl.min.css">
-	<style>
-		
-		#titles{
-            width:100%;
-            height:60px;
-            text-indent:16px;
-            padding-top:6px;
-            background:#eee;
+    <style>
+
+        #titles {
+            width: 100%;
+            height: 60px;
+            text-indent: 16px;
+            padding-top: 6px;
+            background: #eee;
         }
-        #srcontent{
-            width:100%;
+
+
+        .divBo{
+            border:2px solid #a1a1a1;
+            padding:10px 40px;
+            background:#dddddd;
+            width:300px;
+            border-radius:5px;
         }
-        #BTon{
-            text-align:right;
-            margin-top:18px;
-            margin-right:36px;
+
+        #srcontent {
+            width: 100%;
         }
-        .lianjieColor{
+
+        #BTon {
+            text-align: right;
+            margin-top: 18px;
+            margin-right: 36px;
+        }
+
+        .lianjieColor {
             color: #3d7dd5;
-        } 
-        
-       @media screen and (max-height:1080px) {
-		    .home-content{
-		        margin-bottom:50px !important;
-		    }
-		}
-		/* 1080px */
+        }
+
+        @media screen and (max-height: 1080px) {
+            .home-content {
+                margin-bottom: 50px !important;
+            }
+        }
+
+        /* 1080px */
         @media screen and (max-height: 1050px) {
-		    .home-content{
-		        margin-bottom:170px !important;
-		    }
-		}
-		/* 1050px */
-		@media screen and (max-height: 900px) {
-		    .home-content{
-		        margin-bottom:120px !important;
-		    }
-		}
-		/* 900px */
-		@media screen and (max-height: 768px) {
-		    .home-content{
-		        margin-bottom:120px !important;
-		    }
-		}
-		
-		/* @media screen and (max-width: 1920px) {
-		    .dada{
-		        margin-bottom:170px !important;
-		    }
-		}
-		@media screen and (max-width: 1920px) {
-		    .dadayb{
-		        margin-bottom:170px !important;
-		    }
-		} */
-    @page {
-        size: auto; ‘
-        margin: 0mm;
-    }
-	</style>
+            .home-content {
+                margin-bottom: 170px !important;
+            }
+        }
+
+        /* 1050px */
+        @media screen and (max-height: 900px) {
+            .home-content {
+                margin-bottom: 120px !important;
+            }
+        }
+
+        /* 900px */
+        @media screen and (max-height: 768px) {
+            .home-content {
+                margin-bottom: 120px !important;
+            }
+        }
+
+        /* @media screen and (max-width: 1920px) {
+            .dada{
+                margin-bottom:170px !important;
+            }
+        }
+        @media screen and (max-width: 1920px) {
+            .dadayb{
+                margin-bottom:170px !important;
+            }
+        } */
+        @page {
+            size: auto;
+            ‘ margin: 0mm;
+        }
+    </style>
 </head>
 <body>
-	<div class="left" style="width:1000px;">
-	<div style="width: 80%;min-height: 99%;overflow: hidden;margin: 0;position: absolute;top:1px;" id="dituContent"></div>
-				<div class="center_text">
-	</div>
-	</div>
-	 <div class="left_line" style="border:1PX #DEDEDE solid;overflow:auto;float:right;display:inline-block;position:absolute;top:1px;left:80%;width:20%;height:99%">
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p> 
-       <p>1112211</p>
-       <p>1112211</p> 
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>           
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p> 
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p> 
-       <p>1112211</p> 
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
-       <p>1112211</p>
+<div class="left" style="width:1000px;">
+    <div style="width: 80%;min-height: 99%;overflow: hidden;margin: 0;position: absolute;top:1px;"
+         id="dituContent"></div>
+    <div class="center_text">
     </div>
+</div>
+<div class="left_line" id="luduan"
+     style="border:1PX #DEDEDE solid;overflow:auto;float:right;display:inline-block;position:absolute;top:1px;left:80%;width:20%;height:99%">
+    <div class="divBo" v-for="road in roadList">
+        <p><a @click="dwMap"><label style="color:#496788">路段名称:{{road.roadName}}</label></a></p>
+        <p>所属高速:{{road.expresswayName}}</p>
+        <p>起始经度:{{road.startLng}}</p>
+        <p>起始纬度:{{road.startLat}}</p>
+        <p>截止经度:{{road.endLng}}</p>
+        <p>截止纬度:{{road.endLat}}</p>
+        <p>总需求量:{{road.allXuQiu}}</p>
+        <p>总供应量:{{road.allGongYing}}</p>
+    </div>
+</div>
 </body>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BmTwezCvWyGaH3KNYkc5P6uq"></script>
 <script src="../js/jquery.js"></script>
@@ -170,30 +142,80 @@
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/quanxian.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         initMap();
     });
 
-    var points = [ {
-        id : 1,
-        lng : 118.096525,
-        lat : 24.462602,
-        title : "工地名称：厦门中山公园",
-        content : [ "经度：118.096525;纬度：24.462602", "桩号：010 ; 车道：010" ]
+    var points = [{
+        id: 1,
+        lng: 118.096525,
+        lat: 24.462602,
+        title: "工地名称：厦门中山公园",
+        content: ["经度：118.096525;纬度：24.462602", "桩号：010 ; 车道：010"]
     }];
     var page_map;
-    var initMap = ()=>{
+    var initMap = () => {
         page_map = new BMap.Map("dituContent");
-        //添加地图类型控件
-        page_map.addControl(new BMap.MapTypeControl({
-            mapTypes:[
-                BMAP_NORMAL_MAP,
-                BMAP_HYBRID_MAP
-            ]}));
         // 创建点坐标
         page_map.centerAndZoom("江苏", 7);
         page_map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+        var sy = new BMap.Symbol(BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW, {});
+    }
 
+    let luduanVm = new Vue({
+        el: '#luduan',
+        //表单数据
+        data: {
+            roadId:"",
+            roadNo:"",
+            roadName:"",
+            startLng:"",
+            startLat:"",
+            endLng:"",
+            endLat:"",
+            remarks:"",
+            expresswayName:"",
+            allXuQiu:'',
+            allGongYing:'',
+            roadList:'',
+        },
+        methods: {
+            roadPost:function(){
+                //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+                this.$http.post('/SysRoadMgnController/getAllSysRoadMgnVoHomePage',{},{emulateJSON:true}).then((res)=>{
+                    this.roadList=res.body;
+                    this.initMap();
+                },(res)=>{
+                    console.log(res.status);
+                });
+            },
+            initMap:function(){
+               let rdList = this.roadList;
+               for(let i in rdList){
+                   let pois = [
+                       new BMap.Point(rdList[i].startLng,rdList[i].startLat),
+                       new BMap.Point(rdList[i].endLng,rdList[i].endLat),
+                   ];
+                   let polyline =new BMap.Polyline(pois, {
+                       enableEditing: false,//是否启用线编辑，默认为false
+                       enableClicking: true,//是否响应点击事件，默认为true
+                       strokeWeight:'8',//折线的宽度，以像素为单位
+                       strokeOpacity: 0.8,//折线的透明度，取值范围0 - 1
+                       strokeColor:getRandomColor() //折线颜色
+                   });
+                   page_map.addOverlay(polyline);
+               }
+            },
+            dwMap:function(){
+
+            },
+        }
+    })
+    luduanVm.roadPost();
+
+
+    let getRandomColor = function(){
+        return '#'+Math.floor(Math.random()*16777215).toString(16);
     }
 </script>
 </html>
