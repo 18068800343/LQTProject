@@ -3,31 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>OA</title>
-    <meta name="keywords" content="百度地图,百度地图API，百度地图自定义工具，百度地图所见即所得工具"/>
-    <meta name="description" content="百度地图API自定义地图，帮助用户在可视化操作下生成百度地图"/>
     <link rel="stylesheet" href="../font2/iconfont.css">
     <link href="../style/bootstrap.min.css" rel="stylesheet">
-    <link href="../style/style.css" rel="stylesheet">
-    <link href="../toastr/toastr.css" rel="stylesheet">
-    <link rel="stylesheet" href="../style/jquery-editable-select.css">
     <link rel="stylesheet" type="text/css" href="../easyUI/themes/default/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="../easyUI/themes/icon.css"/>
     <link rel="stylesheet" type="text/css" href="../easyUI/demo/demo.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/layui.mobile.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/laydate.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/code.css"/>
-    <link rel="stylesheet" type="text/css" href="../../js/skin/default/layer.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/laydate.css"/>
-    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
-    <link href="../toastr/toastr.css" rel="stylesheet">
-    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-production-plugins.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-production.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-skins.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/font.css">
-    <!-- SmartAdmin RTL Support  -->
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-rtl.min.css">
     <style>
 
         #titles {
@@ -100,13 +80,13 @@
         } */
         @page {
             size: auto;
-            ‘ margin: 0mm;
+            margin: 0mm;
         }
     </style>
 </head>
 <body>
 <div class="left" style="width:1000px;" id="hsMap">
-    <div style="width: 80%;min-height: 99%;overflow: hidden;margin: 0;position: absolute;top:1px;"
+    <div style="width: 80%;min-height: 99%;overflow: hidden;margin:0;position: absolute;top:1px;"
          id="dituContent"></div>
     <div class="center_text">
     </div>
@@ -125,43 +105,30 @@
     </div>
 </div>
 </body>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BmTwezCvWyGaH3KNYkc5P6uq"></script>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/common-scripts.js"></script>
-<script src="../toastr/toastr.js"></script>
-<script src="../js/jquery-editable-select.js"></script>
-<script src="../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/main.js"></script>
-<script src="../js/laydate/laydate.js"></script>
-<script src="../js/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/element.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
-<script src="../js/jquery.dataTables.min.js"></script>
-<script src="../js/quanxian.js"></script>
+<script src="../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=BmTwezCvWyGaH3KNYkc5P6uq"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        initMap();
+
     });
 
-    var points = [{
+    let points = [{
         id: 1,
         lng: 118.096525,
         lat: 24.462602,
         title: "工地名称：厦门中山公园",
         content: ["经度：118.096525;纬度：24.462602", "桩号：010 ; 车道：010"]
     }];
-    var page_map;
-    var initMap = () => {
-        page_map = new BMap.Map("dituContent");
-        // 创建点坐标
-        page_map.centerAndZoom("江苏", 7);
-        page_map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
-        var sy = new BMap.Symbol(BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW, {});
+    let page_map;
+    page_map = new BMap.Map("dituContent");
+    // 创建点坐标
+    page_map.centerAndZoom("江苏", 7);
+    page_map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
 
-    }
 
     let luduanVm = new Vue({
         el: '#luduan',
@@ -192,27 +159,14 @@
             },
             initMap:function(){
                let rdList = this.roadList;
-                page_map.setViewport('enableAnimation',false);
                for(let i in rdList){
-                   /*let pois = [
-                       new BMap.Point(rdList[i].startLng,rdList[i].startLat),
-                       new BMap.Point(rdList[i].endLng,rdList[i].endLat),
-                   ];
-                   let polyline =new BMap.Polyline(pois, {
-                       enableEditing: false,//是否启用线编辑，默认为false
-                       enableClicking: true,//是否响应点击事件，默认为true
-                       strokeWeight:'8',//折线的宽度，以像素为单位
-                       strokeOpacity: 0.8,//折线的透明度，取值范围0 - 1
-                       strokeColor:getRandomColor() //折线颜色
-                   });
-                   page_map.addOverlay(polyline);*/
                    let p1 = new BMap.Point(rdList[i].startLng,rdList[i].startLat);
                    let p2 = new BMap.Point(rdList[i].endLng,rdList[i].endLat);
                    let driving = new BMap.DrivingRoute(page_map, {renderOptions:{map: page_map, autoViewport: false}});
                    driving.search(p1, p2);
                }
-                page_map.setViewport('enableAnimation',true);
-                page_map.centerAndZoom("江苏", 7);
+                //page_map.centerAndZoom("江苏", 7);
+               /* page_map.panTo(new BMap.Point(120.5195950,31.9281190));*/
 
             },
             dwMap:function(){
