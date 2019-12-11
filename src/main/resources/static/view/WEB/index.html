@@ -404,7 +404,7 @@
 															<li>
 																<a href="shengchanzhiliangguanli/zhupanshengchanpianchafenxi.html" target="view_frame" class="yijicaidan Pcac">逐盘生产偏差分析</a>
 															</li>
-															<li>3
+															<li>
 																<a href="shengchanzhiliangguanli/shishishengchanjipeitongji.html" target="view_frame" class="yijicaidan Pcad">实时生产级配统计</a>
 															</li>
 															<li>
@@ -761,9 +761,19 @@
 			let node = $('#caidandianjibangding').tree('find', 'syLi');
 			$('#caidandianjibangding').tree('select', node.target);
 			$("#syAId").trigger('click');
+
+	/*登录时保持session不会消失*/
+	var keepSession = setInterval(function () {
+		$.ajax({
+			type:"POST",
+			url:"/login/keepSession",
+			success:function(result){
+				if(result==1){
+					console.log("保持session状态不消失");
+				}
+			},
+		})
+	},300000);
 		</script>
-
-
 	</body>
-
 </html>

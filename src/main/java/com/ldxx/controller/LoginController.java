@@ -69,5 +69,10 @@ public class LoginController {
 	public void exit(HttpServletRequest request){
 		request.getSession().removeAttribute("user");
 	}
-    
+
+	@RequestMapping("/keepSession")//退出
+	@ResponseBody
+	public int keepSession(){
+		return 1;
+	}
 }
