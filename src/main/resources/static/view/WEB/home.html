@@ -93,8 +93,8 @@
 </div>
 <div class="left_line" id="luduan"
      style="border:1PX #DEDEDE solid;overflow:auto;float:right;display:inline-block;position:absolute;top:1px;left:80%;width:20%;height:99%">
-    <div class="divBo" v-for="road in roadList">
-        <p><a @click="dwMap"><label style="color:#496788">路段名称:{{road.roadName}}</label></a></p>
+    <div class="divBo" v-for="(road,index) in roadList">
+        <p><a @click="dwMap(road,index)"><label style="color:#496788">路段名称:{{road.roadName}}</label></a></p>
         <p>所属高速:{{road.expresswayName}}</p>
         <p>起始经度:{{road.startLng}}</p>
         <p>起始纬度:{{road.startLat}}</p>
@@ -163,18 +163,33 @@
                    let p1 = new BMap.Point(rdList[i].startLng,rdList[i].startLat);
                    let p2 = new BMap.Point(rdList[i].endLng,rdList[i].endLat);
                    let driving = new BMap.DrivingRoute(page_map, {renderOptions:{map: page_map, autoViewport: false}});
+                   pageDom.arr[i] = driving;
                    driving.search(p1, p2);
                }
                 //page_map.centerAndZoom("江苏", 7);
                /* page_map.panTo(new BMap.Point(120.5195950,31.9281190));*/
 
             },
-            dwMap:function(){
-
+            dwMap:function(e,index){
+                clearResult(pageDom.arr);
+                let p1 = new BMap.Point(e.startLng,e.startLat);
+                let p2 = new BMap.Point(e.endLng,e.endLat);
+                let driving1 = new BMap.DrivingRoute(page_map, {renderOptions:{map: page_map, autoViewport: false}});
+                pageDom.arr.push(driving1);
+                driving1.search(p1, p2);
             },
         }
     })
     luduanVm.roadPost();
+    let pageDom = {};
+    pageDom.arr = [];
+
+    function clearResult(arr){
+        for(let i in arr){
+            let driveIndex = arr[i];
+            driveIndex.clearResults();
+        }
+    }
 
 
     let getRandomColor = function(){
