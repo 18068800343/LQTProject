@@ -34,9 +34,14 @@ public class SiteRoadSpendController {
     private SiteRoadSpendDao dao;
 
     @RequestMapping("/selectAllSiteRoadSpend")
-    public List<SiteRoadSpend> selectAllSiteRoadSpend(HttpSession session){
-        User user = (User) session.getAttribute("user");
-        String luduanquanxian = user.getLuduanquanxian();
+    public List<SiteRoadSpend> selectAllSiteRoadSpend(HttpSession session,String  roadquanxain){
+    	String luduanquanxian="";
+		if(roadquanxain!=null){
+			luduanquanxian=roadquanxain;
+		}else{
+			User user = (User) session.getAttribute("user");
+	        luduanquanxian = user.getLuduanquanxian();
+		}
         return service.selectAllSiteRoadSpend(luduanquanxian);
     }
 

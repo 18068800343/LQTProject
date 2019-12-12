@@ -119,9 +119,15 @@ public class TanPuDiDianGuanLiController {
 	 */
 	@RequestMapping("/getIDisroadName")
 	@ResponseBody
-	public List<SiteConstructionVo> getIDisroadName(HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		String luduanquanxian = user.getLuduanquanxian();
+	public List<SiteConstructionVo> getIDisroadName(HttpSession session,String  roadquanxain) {
+		String luduanquanxian="";
+		if(roadquanxain!=null){
+			luduanquanxian=roadquanxain;
+		}else{
+			User user = (User) session.getAttribute("user");
+			luduanquanxian = user.getLuduanquanxian();
+		}
+		
 		return dao.getIDisroadName(luduanquanxian);
 	}
 

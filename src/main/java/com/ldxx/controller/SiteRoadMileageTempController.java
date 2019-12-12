@@ -35,9 +35,14 @@ public class SiteRoadMileageTempController {
     private SiteRoadMileageTempDao dao;
 
     @RequestMapping("/getAllSiteRoadMileageTemp")
-    public List<SiteRoadMileageTemp> getAllSiteRoadMileageTemp(HttpSession session){
-        User user = (User) session.getAttribute("user");
-        String luduanquanxian = user.getLuduanquanxian();
+    public List<SiteRoadMileageTemp> getAllSiteRoadMileageTemp(HttpSession session,String  roadquanxain){
+    	String luduanquanxian="";
+		if(roadquanxain!=null){
+			luduanquanxian=roadquanxain;
+		}else{
+			User user = (User) session.getAttribute("user");
+	        luduanquanxian = user.getLuduanquanxian();
+		}
         return service.getAllSiteRoadMileageTemp(luduanquanxian);
     }
 

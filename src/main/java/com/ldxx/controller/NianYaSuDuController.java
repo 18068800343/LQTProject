@@ -28,9 +28,14 @@ public class NianYaSuDuController {
 
 	@RequestMapping("/getAllNianYaSuDu")
 	@ResponseBody
-	public List<SiteCompactionSpeedVo> getAllNianYaSuDu(HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		String luduanquanxian = user.getLuduanquanxian();
+	public List<SiteCompactionSpeedVo> getAllNianYaSuDu(HttpSession session,String  roadquanxain) {
+		String luduanquanxian="";
+		if(roadquanxain!=null){
+			luduanquanxian=roadquanxain;
+		}else{
+			User user = (User) session.getAttribute("user");
+			luduanquanxian = user.getLuduanquanxian();
+		}
 		return dao.getAllNianYaSuDu(luduanquanxian);
 	}
 
