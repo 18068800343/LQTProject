@@ -31,7 +31,7 @@ public class SysRoadMgnController {
     @RequestMapping("/getAllSysRoadMgn")//通过权限初始化路段（大写）
     public List<SysRoadMgn> getAllSysRoadMgn(HttpSession session,String  roadquanxain){
 		String luduanquanxian="";
-		if(roadquanxain!=""&&roadquanxain!=null){
+		if(roadquanxain!=null){
 			luduanquanxian=roadquanxain;
 		}else{
 			User user = (User) session.getAttribute("user");
