@@ -29,9 +29,14 @@ public class SysRoadMgnController {
 	private SysRoadMgnDao dao;
 
     @RequestMapping("/getAllSysRoadMgn")//通过权限初始化路段（大写）
-    public List<SysRoadMgn> getAllSysRoadMgn(HttpSession session){
+    public List<SysRoadMgn> getAllSysRoadMgn(HttpSession session,String  roadquanxain){
 		User user = (User) session.getAttribute("user");
-		String luduanquanxian = user.getLuduanquanxian();
+		String luduanquanxian="";
+		if(roadquanxain!=""&&roadquanxain!=null){
+			luduanquanxian=roadquanxain;
+		}else{
+			luduanquanxian = user.getLuduanquanxian();
+		}
         return srmService.getAllSysRoadMgn(luduanquanxian);
     }
 
