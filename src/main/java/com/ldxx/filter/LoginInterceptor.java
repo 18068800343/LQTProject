@@ -20,7 +20,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		User user = (User)session.getAttribute("user");
 		if(null==user)
 		{
-			response.sendRedirect("/login/login");
+			response.sendRedirect("/view/WEB/login.html");
 			return false;
 		}
 		return true;

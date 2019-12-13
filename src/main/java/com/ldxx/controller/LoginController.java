@@ -25,12 +25,12 @@ public class LoginController {
 	
     @RequestMapping("/index")
     public String test(){ 
-        return "WEB/index";
+    	return "redirect:/view/WEB/login.html";
     }
     
     @RequestMapping("/login")
     public String login(){ 
-        return "redirect:../view/WEB/login.html";
+        return "redirect:/view/WEB/login.html";
     }
     
     @RequestMapping(value="/userlogin",method=RequestMethod.POST)
