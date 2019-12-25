@@ -21,12 +21,13 @@
     <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
     <link href="../../toastr/toastr.css" rel="stylesheet">
 	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+   <!--  <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css"> -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
      <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/all.css">
     <style lang="">
         body{
             background: #fff;
@@ -43,6 +44,12 @@
         #mainContent th{
             cursor: pointer;
         }
+        .breadcrumb{
+            line-height:40px;
+        }
+       .UpperPart{
+            display:none;
+       }
     </style>
 </head>
 <body>
@@ -69,9 +76,14 @@
             </div>
         </div>
         <div class="LowerPart" style="margin-top:3px;">
-            <table class="table table-bordered table-condensed table-hover" id="mainContent">
-                <thead>
-                    <tr>
+            <table class="layui-table" lay-skin="line" id="mainContent" >
+			   <colgroup >
+			    <col width="150 !important">
+			    <col width="200">
+			    <col>
+			  </colgroup>
+                <thead >
+                    <tr style="background-color:#EBF4FF;border-bottom:none;">
                        <th>姓名</th>
                        <th>工号</th>
                        <th>日期</th>

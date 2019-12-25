@@ -1,0 +1,15 @@
+ .layui-table{
+     border-bottom:none !important;
+}
+.layui-table tr{
+	height:40px;
+}
+td{
+	border:0px;
+}
+#mainContent_filter input{
+	margin:5px;
+	height:30px;
+	border-radius:10px;
+	border:1px solid #dedede;
+}
