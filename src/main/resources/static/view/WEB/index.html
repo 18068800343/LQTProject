@@ -263,69 +263,12 @@
 		    .tree-collapsed{
 		       background:url(../images/查看更多.png) no-repeat 0px 0px;
 		    }
-		    #_easyui_tree_1 .tree-icon{
-		       background:url(../images/首页.png) no-repeat 0px 0px;
-		       height:30px;
-		       width:30px;
-		       margin-right:8px;
-		       margin-bottom:10px;
-		    }
-		    #_easyui_tree_2 .tree-icon{
-		       background:url(../images/沥青生产过程管理.png) no-repeat 0px 0px;
-		       height:30px;
-		       width:30px;
-		       margin-right:8px;
-		       margin-bottom:10px;
-		    }
-		     #_easyui_tree_12 .tree-icon{
-		       background:url(../images/沥青生产质量管理.png) no-repeat 0px 0px;
-		       height:30px;
-		       width:30px;
-		       margin-right:8px;
-		       margin-bottom:10px;
-		    }
-		     #_easyui_tree_21 .tree-icon{
-		       background:url(../images/沥青运输监控管理.png) no-repeat 0px 0px;
-		       height:30px;
-		       width:30px;
-		       margin-right:8px;
-		       margin-bottom:10px;
-		    }
-		     #_easyui_tree_25 .tree-icon{
-		       background:url(../images/道路施工质量管理.png) no-repeat 0px 0px;
-		       height:30px;
-		       width:30px;
-		       margin-right:8px;
-		       margin-bottom:10px;
-		    }
-		     #_easyui_tree_25 .tree-icon{
-		       background:url(../images/道路施工质量管理.png) no-repeat 0px 0px;
-		       height:30px;
-		       width:30px;
-		       margin-right:8px;
-		       margin-bottom:10px;
-		    }
-		     #_easyui_tree_37 .tree-icon{
-		       background:url(../images/综合统计分析.png) no-repeat 0px 0px;
-		       height:30px;
-		       width:30px;
-		       margin-right:8px;
-		       margin-bottom:10px;
-		    }
-		     #_easyui_tree_41 .tree-icon{
-		       background:url(../images/视频监控.png) no-repeat 0px 0px;
-		       height:30px;
-		       width:30px;
-		       margin-right:8px;
-		       margin-bottom:10px;
-		    }
-		      #_easyui_tree_48 .tree-icon{
-		       background:url(../images/系统管理.png) no-repeat 0px 0px;
-		       height:30px;
-		       width:30px;
-		       margin-right:8px;
-		       margin-bottom:10px;
-		    }
+			.caidantubiao{
+				height:30px;
+				width:30px;
+				margin-right:8px;
+				margin-bottom:10px;
+			}
 		    .tree-file{
 		       background:url(../images/白色圆点.png) no-repeat 0px 0px;
 		    }
@@ -410,7 +353,7 @@
 									<div class="easyui-panel" style="background-color:#022141;overflow:hidden;border:none;">
 										<ul class="easyui-tree" id="caidandianjibangding">
 											<li id="syLi">
-												<span><a href="home.html" target="view_frame"  class="yijicaidan" ><lable id="syAId">首页</lable></a></span>
+												<span><a href="home.html" target="view_frame"  class="yijicaidan Pa" ><lable id="syAId">首页</lable></a></span>
 											</li>
 											<li data-options="state:'closed'">
 												<span><a href="javascript:;"   target="view_frame" class="yijicaidan Pb" >沥青砼生产过程管理</a></span>
@@ -461,7 +404,7 @@
 															<li>
 																<a href="shengchanzhiliangguanli/zhupanshengchanpianchafenxi.html" target="view_frame" class="yijicaidan Pcac">逐盘生产偏差分析</a>
 															</li>
-															<li>3
+															<li>
 																<a href="shengchanzhiliangguanli/shishishengchanjipeitongji.html" target="view_frame" class="yijicaidan Pcad">实时生产级配统计</a>
 															</li>
 															<li>
@@ -669,6 +612,7 @@
 <script type="text/javascript">
 	var user;
 	$(document).ready(function() {
+		initTuBiao()
 		$.ajax({
 				type: "post",
 				url: "/login/getUser",
@@ -685,6 +629,16 @@
 				}
 			});
 	})
+	function initTuBiao(){
+		$('.Pa').parent().prev().removeClass("tree-icon").addClass("caidantubiao").css("background","url(../images/首页.png) no-repeat 0px 0px");
+		$('.Pb').parent().prev().removeClass("tree-icon").addClass("caidantubiao").css("background","url(../images/沥青生产过程管理.png) no-repeat 0px 0px");
+		$('.Pc').parent().prev().removeClass("tree-icon").addClass("caidantubiao").css("background","url(../images/沥青生产质量管理.png) no-repeat 0px 0px");
+		$('.Pd').parent().prev().removeClass("tree-icon").addClass("caidantubiao").css("background","url(../images/沥青运输监控管理.png) no-repeat 0px 0px");
+		$('.Pe').parent().prev().removeClass("tree-icon").addClass("caidantubiao").css("background","url(../images/道路施工质量管理.png) no-repeat 0px 0px");
+		$('.Pf').parent().prev().removeClass("tree-icon").addClass("caidantubiao").css("background","url(../images/综合统计分析.png) no-repeat 0px 0px");
+		$('.Pg').parent().prev().removeClass("tree-icon").addClass("caidantubiao").css("background","url(../images/视频监控.png) no-repeat 0px 0px");
+		$('.Ph').parent().prev().removeClass("tree-icon").addClass("caidantubiao").css("background","url(../images/系统管理.png) no-repeat 0px 0px");
+	}
 	//easyui单击菜单可以打开关闭
 	$('#caidandianjibangding').tree( {
 		animate: true,
@@ -839,6 +793,19 @@
 			let node = $('#caidandianjibangding').tree('find', 'syLi');
 			$('#caidandianjibangding').tree('select', node.target);
 			$("#syAId").trigger('click');
+
+	/*登录时保持session不会消失*/
+	var keepSession = setInterval(function () {
+		$.ajax({
+			type:"POST",
+			url:"/login/keepSession",
+			success:function(result){
+				if(result==1){
+					console.log("保持session状态不消失");
+				}
+			},
+		})
+	},300000);
 		</script>
 
 
