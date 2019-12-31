@@ -44,6 +44,8 @@ public class PlanProductionCollection
 
     private String planstate;
 
+    private String finishTime;
+
 	public String getPlanstate() {
 		return planstate;
 	}
@@ -187,5 +189,12 @@ public class PlanProductionCollection
 	public void setPdneed(BigDecimal pdneed) {
 		this.pdneed = pdneed;
 	}
-	
+
+	public String getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(String finishTime) {
+		this.finishTime = finishTime;
+	}
 }

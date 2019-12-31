@@ -125,9 +125,22 @@
     }];
     let page_map;
     page_map = new BMap.Map("dituContent");
+
+    // 百度地图API功能
+    //GPS坐标
+    var x = 119.605720;
+    var y = 32.989924;
+    var ggPoint = new BMap.Point(x,y);
     // 创建点坐标
-    page_map.centerAndZoom("江苏", 7);
+    page_map.centerAndZoom(ggPoint, 8);
     page_map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+    page_map.addControl(new BMap.ScaleControl());
+    page_map.addControl(new BMap.NavigationControl());
+
+/*    var zoomCtrl = new BMap.ZoomControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT, offset: new BMap.Size(20, 20)});
+    page_map.addControl(zoomCtrl);*/
+
+
 
 
     let luduanVm = new Vue({

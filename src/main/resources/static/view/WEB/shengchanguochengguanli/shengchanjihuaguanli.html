@@ -20,6 +20,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/code.css" />
 <link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
 <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+<link href="../../toastr/toastr.css" rel="stylesheet">
 <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
 <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
 <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
@@ -95,6 +96,7 @@
 								<th>配方编号</th>
 								<th>成品需要量（每日）</th>
 								<th>待生产量</th>
+								<th>完成时间</th>
 								<th>干拌时间</th>
 								<th>湿拌时间</th>
 								<th>油石比</th>
@@ -490,7 +492,7 @@
 						<table class="table table-bordered table-condensed" style="height: auto;">
 							<tr>
 								<td>生产计划编号</td>
-								<td><input type="text" v-model="planno" id="planno" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" v-model="planno" id="planno" placeholder="请输入" style="width: 100%; height: 100%; "></td>
 								<td>路段</td>
 								<td><select class="form-control" style="width: 100%;" v-model="roadid = roadSelected" id="roadid">
 									<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
@@ -502,36 +504,37 @@
 									<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
 								</select></td>
 								<td>成品需要量</td>
-								<td><input type="text" @blur="reg(pdneed,'xiaoshu','pdneed')" v-model="pdneed" id="pdneed" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pdneed,'xiaoshu','pdneed')" v-model="pdneed" id="pdneed" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
+								<td>要求完成时间</td>
+								<td><input class="form-control" type="text" readonly="true" v-model="finishTime" id="finishTime" placeholder="请输入"
+								style="width: 100%; height: 100%; "></td>
 								<td>干拌时间</td>
-								<td><input type="text" readonly="true" v-model="drymixingtime" id="drymixingtime" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
-								<td>湿拌时间</td>
-								<td><input type="text" readonly="true" v-model="wetmixingtime" id="wetmixingtime" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" readonly="true" v-model="drymixingtime" id="drymixingtime" placeholder="请输入"
+								style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
+							<td>湿拌时间</td>
+							<td><input class="form-control" type="text" readonly="true" v-model="wetmixingtime" id="wetmixingtime" placeholder="请输入"
+							style="width: 100%; height: 100%;"></td>
 								<td>油石比</td>
-								<td><input type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" id="radio" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" id="radio" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+							</tr>
+							<tr>
 								<td>成品温度要求</td>
-								<td><input type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" id="pdtemp" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" id="pdtemp" placeholder="请输入"
+								style="width: 100%; height: 100%;"></td>
+									<td>到现场温度要求</td>
+									<td><input class="form-control" type="text" @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp" id="arrivetemp" placeholder="请输入"
+											   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
-								<td>到现场温度要求</td>
-								<td><input type="text" @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp" id="arrivetemp" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
 								<td>单价</td>
-								<td><input type="text" @blur="reg(price,'xiaoshu','price')" v-model="price" id="price" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
+								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')" v-model="price" id="price" placeholder="请输入"
+								style="width: 100%; height: 100%; "></td>
 								<td></td>
 								<td></td>
 							</tr>
@@ -649,7 +652,7 @@
 						<table class="table table-bordered table-condensed" style="height: auto;">
 							<tr>
 								<td>生产计划编号</td>
-								<td><input type="text" v-model="planno" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" v-model="planno" placeholder="请输入" style="width: 100%; height: 100%; "></td>
 								<td>路段</td>
 								<td><select class="form-control" style="width: 100%;" v-model="roadid = roadSelected">
 									<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
@@ -661,32 +664,38 @@
 									<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
 								</select></td>
 								<td>成品需要量</td>
-								<td><input type="text" @blur="reg(pdneed,'xiaoshu','pdneed')" v-model="pdneed" placeholder="请输入" style="width: 100%; height: 100%; border: none;" /></td>
+								<td><input class="form-control" type="text" @blur="reg(pdneed,'xiaoshu','pdneed')" v-model="pdneed" placeholder="请输入" style="width: 100%; height: 100%;" /></td>
+
 							</tr>
 							<tr>
+								<td>要求完成时间</td>
+								<td><input class="form-control" type="text" readonly="true" v-model="xgfinishTime" id="xgfinishTime" placeholder="请输入"
+								style="width: 100%; height: 100%; "></td>
 								<td>干拌时间</td>
-								<td><input type="text" readonly="true" v-model="drymixingtime" placeholder="请输入" id="xgdrymixingtime"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" readonly="true" v-model="drymixingtime" placeholder="请输入" id="xgdrymixingtime"
+										   style="width: 100%; height: 100%; "></td>
+							</tr>
+							<tr>
 								<td>湿拌时间</td>
-								<td><input type="text" readonly="true" v-model="wetmixingtime" placeholder="请输入" id="xgwetmixingtime"
-										   style="width: 100%; height: 100%; border: none;"></td>
-							</tr>
-							<tr>
+								<td><input class="form-control" type="text" readonly="true" v-model="wetmixingtime" placeholder="请输入" id="xgwetmixingtime"
+								style="width: 100%; height: 100%;"></td>
 								<td>油石比</td>
-								<td><input type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" placeholder="请输入" style="width: 100%; height: 100%;"></td>
+							</tr>
+							<tr>
 								<td>成品温度要求</td>
-								<td><input type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
-							</tr>
-							<tr>
+								<td><input class="form-control" type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" placeholder="请输入" style="width: 100%; height: 100%;"></td>
 								<td>到现场温度要求</td>
-								<td><input type="text" @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
-								<td>单价</td>
-								<td><input type="text" @blur="reg(price,'xiaoshu','price')" v-model="price" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp" placeholder="请输入"
+								style="width: 100%; height: 100%;"></td>
 							</tr>
 							<tr>
+								<td>单价</td>
+								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')" v-model="price" placeholder="请输入" style="width: 100%; height: 100%;"></td>
 								<td></td>
 								<td></td>
+							</tr>
+							<tr>
 								<td></td>
 								<td></td>
 							</tr>
@@ -722,72 +731,72 @@
 						<table class="table table-bordered table-condensed" style="height: auto;">
 							<tr>
 								<td style="width: 20%;">偏差编号</td>
-								<td><input type="text" v-model="pianchano" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" v-model="pianchano" placeholder="请输入" style="width: 100%; height: 100%;"></td>
 								<td>偏差名称</td>
-								<td><input type="text" v-model="pianchaname" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" v-model="pianchaname" id="" placeholder="请输入" style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
 								<td>料1用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation1,'xiaoshu','Materialdeviation1')" v-model="Materialdeviation1" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation1,'xiaoshu','Materialdeviation1')" v-model="Materialdeviation1" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 								<td>料2用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation2,'xiaoshu','Materialdeviation2')" v-model="Materialdeviation2" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation2,'xiaoshu','Materialdeviation2')" v-model="Materialdeviation2" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
 								<td>料3用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation3,'xiaoshu','Materialdeviation3')" v-model="Materialdeviation3" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation3,'xiaoshu','Materialdeviation3')" v-model="Materialdeviation3" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 								<td>料4用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation4,'xiaoshu','Materialdeviation4')" v-model="Materialdeviation4" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation4,'xiaoshu','Materialdeviation4')" v-model="Materialdeviation4" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
 								<td>料5用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation5,'xiaoshu','Materialdeviation5')" v-model="Materialdeviation5" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation5,'xiaoshu','Materialdeviation5')" v-model="Materialdeviation5" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 								<td>料6用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation6,'xiaoshu','Materialdeviation6')" v-model="Materialdeviation6" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation6,'xiaoshu','Materialdeviation6')" v-model="Materialdeviation6" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
 								<td>粉料偏差量</td>
-								<td><input type="text" @blur="reg(Boneflourdeviation,'xiaoshu','Boneflourdeviation')" v-model="Boneflourdeviation" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Boneflourdeviation,'xiaoshu','Boneflourdeviation')" v-model="Boneflourdeviation" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 								<td>沥青偏差量</td>
-								<td><input type="text" @blur="reg(pitchdeviation,'xiaoshu','pitchdeviation')" v-model="pitchdeviation" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pitchdeviation,'xiaoshu','pitchdeviation')" v-model="pitchdeviation" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 							</tr>
 							<tr>
 							</tr>
 							<tr>
 								<td>最高温度</td>
-								<td><input type="text" @blur="reg(pdTempOffset,'xiaoshu','pdTempOffset')" v-model="pdTempOffset" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pdTempOffset,'xiaoshu','pdTempOffset')" v-model="pdTempOffset" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 								<td>最低温度</td>
-								<td><input type="text" @blur="reg(arriveTempOffset,'xiaoshu','arriveTempOffset')" v-model="arriveTempOffset" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(arriveTempOffset,'xiaoshu','arriveTempOffset')" v-model="arriveTempOffset" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 							</tr>
 							<tr>
 								<td>干拌时间偏差</td>
-								<td><input type="text" @blur="reg(drymixingtimedeviation,'xiaoshu','drymixingtimedeviation')" v-model="drymixingtimedeviation"
-										   id="drymixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(drymixingtimedeviation,'xiaoshu','drymixingtimedeviation')" v-model="drymixingtimedeviation"
+										   id="drymixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; "></td>
 								<td>湿拌时间偏差</td>
-								<td><input type="text" @blur="reg(wetmixingtimedeviation,'xiaoshu','wetmixingtimedeviation')" v-model="wetmixingtimedeviation"
-										   id="wetmixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(wetmixingtimedeviation,'xiaoshu','wetmixingtimedeviation')" v-model="wetmixingtimedeviation"
+										   id="wetmixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
 								<td>通过率偏差4.75</td>
-								<td><input type="text" @blur="reg(pass475,'xiaoshu','pass475')" v-model="pass475" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pass475,'xiaoshu','pass475')" v-model="pass475" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 								<td>通过率偏差2.36</td>
-								<td><input type="text" @blur="reg(pass236,'xiaoshu','pass236')" v-model="pass236" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pass236,'xiaoshu','pass236')" v-model="pass236" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
 								<td>通过率偏差0.075</td>
-								<td><input type="text" @blur="reg(pass0075,'xiaoshu','pass0075')" v-model="pass0075" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pass0075,'xiaoshu','pass0075')" v-model="pass0075" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 								<td></td>
 								<td></td>
 							</tr>
@@ -823,72 +832,72 @@
 						<table class="table table-bordered table-condensed" style="height: auto;">
 							<tr>
 								<td style="width: 20%;">偏差编号</td>
-								<td><input type="text" v-model="pianchano" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" v-model="pianchano" placeholder="请输入" style="width: 100%; height: 100%; "></td>
 								<td>偏差名称</td>
-								<td><input type="text" v-model="pianchaname" id="" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" v-model="pianchaname" id="" placeholder="请输入" style="width: 100%; height: 100%;"></td>
 							</tr>
 							<tr>
 								<td>料1用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation1,'xiaoshu','Materialdeviation1')" v-model="Materialdeviation1" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation1,'xiaoshu','Materialdeviation1')" v-model="Materialdeviation1" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 								<td>料2用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation2,'xiaoshu','Materialdeviation2')" v-model="Materialdeviation2" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation2,'xiaoshu','Materialdeviation2')" v-model="Materialdeviation2" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 							</tr>
 							<tr>
 								<td>料3用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation3,'xiaoshu','Materialdeviation3')" v-model="Materialdeviation3" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation3,'xiaoshu','Materialdeviation3')" v-model="Materialdeviation3" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 								<td>料4用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation4,'xiaoshu','Materialdeviation4')" v-model="Materialdeviation4" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation4,'xiaoshu','Materialdeviation4')" v-model="Materialdeviation4" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 							</tr>
 							<tr>
 								<td>料5用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation5,'xiaoshu','Materialdeviation5')" v-model="Materialdeviation5" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation5,'xiaoshu','Materialdeviation5')" v-model="Materialdeviation5" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 								<td>料6用量</td>
-								<td><input type="text" @blur="reg(Materialdeviation6,'xiaoshu','Materialdeviation6')" v-model="Materialdeviation6" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Materialdeviation6,'xiaoshu','Materialdeviation6')" v-model="Materialdeviation6" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
 								<td>粉料偏差量</td>
-								<td><input type="text" @blur="reg(Boneflourdeviation,'xiaoshu','Boneflourdeviation')" v-model="Boneflourdeviation" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(Boneflourdeviation,'xiaoshu','Boneflourdeviation')" v-model="Boneflourdeviation" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 								<td>沥青偏差量</td>
-								<td><input type="text" @blur="reg(pitchdeviation,'xiaoshu','pitchdeviation')" v-model="pitchdeviation" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pitchdeviation,'xiaoshu','pitchdeviation')" v-model="pitchdeviation" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 							</tr>
 							<tr>
 							</tr>
 							<tr>
 								<td>最高温度</td>
-								<td><input type="text" @blur="reg(pdTempOffset,'xiaoshu','pdTempOffset')" v-model="pdTempOffset" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pdTempOffset,'xiaoshu','pdTempOffset')" v-model="pdTempOffset" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 								<td>最低温度</td>
-								<td><input type="text" @blur="reg(arriveTempOffset,'xiaoshu','arriveTempOffset')" v-model="arriveTempOffset" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(arriveTempOffset,'xiaoshu','arriveTempOffset')" v-model="arriveTempOffset" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 							</tr>
 							<tr>
 								<td>干拌时间偏差</td>
-								<td><input type="text" @blur="reg(drymixingtimedeviation,'xiaoshu','drymixingtimedeviation')" v-model="drymixingtimedeviation"
-										   id="xgdrymixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(drymixingtimedeviation,'xiaoshu','drymixingtimedeviation')" v-model="drymixingtimedeviation"
+										   id="xgdrymixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%;"></td>
 								<td>湿拌时间偏差</td>
-								<td><input type="text" @blur="reg(wetmixingtimedeviation,'xiaoshu','wetmixingtimedeviation')" v-model="wetmixingtimedeviation"
-										   id="xgwetmixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(wetmixingtimedeviation,'xiaoshu','wetmixingtimedeviation')" v-model="wetmixingtimedeviation"
+										   id="xgwetmixingtimedeviation" placeholder="请输入" style="width: 100%; height: 100%;"></td>
 							</tr>
 							<tr>
 								<td>通过率偏差4.75</td>
-								<td><input type="text" @blur="reg(pass475,'xiaoshu','pass475')" v-model="pass475" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pass475,'xiaoshu','pass475')" v-model="pass475" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 								<td>通过率偏差2.36</td>
-								<td><input type="text" @blur="reg(pass236,'xiaoshu','pass236')" v-model="pass236" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pass236,'xiaoshu','pass236')" v-model="pass236" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 							</tr>
 							<tr>
 								<td>通过率偏差0.075</td>
-								<td><input type="text" @blur="reg(pass0075,'xiaoshu','pass0075')" v-model="pass0075" id="" placeholder="请输入"
-										   style="width: 100%; height: 100%; border: none;"></td>
+								<td><input class="form-control" type="text" @blur="reg(pass0075,'xiaoshu','pass0075')" v-model="pass0075" id="" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
 								<td></td>
 								<td></td>
 							</tr>
@@ -945,6 +954,7 @@
 			{ "data": "flno"},
 			{ "data": "pdneed"},
 			{ "data": "sumneed"},
+			{ "data": "finishTime"},
 			{ "data": "drymixingtime"},
 			{ "data": "wetmixingtime"},
 			{ "data": "radio"},
@@ -959,7 +969,7 @@
 		"columnDefs": [
 			{
 				"class": "tcenter",
-				"targets": 15,
+				"targets": 16,
 				"searchable": true,
 				"render": function(data, type, full) {
 					var guanlian= '<i class="glyphicon glyphicon-random Pbed" style="font-size:13px;cursor:pointer;margin-right:3px;display:none;" onclick="linkMsg(this)" title="关联偏差"   data-toggle="modal" data-target="#allMsg"></i>'
@@ -1214,6 +1224,7 @@
 			/* roadnumber:"", */
 			//成品需要量
 			pdneed:"",
+			finishTime:"",
 			drymixingtime:"",
 			wetmixingtime:"",
 			//油石比
@@ -1717,6 +1728,22 @@
 		type: 'time',
 		done: function(value, date){
 			app5.drymixingtime=value;
+		}
+	});
+
+	laydate.render({
+		elem: '#finishTime', //指定元素
+		type: 'time',
+		done: function(value, date){
+			app5.finishTime=value;
+		}
+	});
+
+	laydate.render({
+		elem: '#xgfinishTime', //指定元素
+		type: 'time',
+		done: function(value, date){
+			app5.xgfinishTime=value;
 		}
 	});
 
