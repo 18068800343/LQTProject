@@ -460,8 +460,9 @@
             this.$http.post('/ShiGongLaiLiaoGuanLi/addShiGongLaiLiao',JSON.stringify(this._data),{}).then((res)=>{
             	var resMsg = res.body;
             	if(resMsg.daoMsg>0){
-           		  $('#mainContent').DataTable().row.add(resMsg.obj).draw(); 
+           		  //$('#mainContent').DataTable().row.add(resMsg.obj).draw();
             		$("#myModal").modal("hide");
+					initRoad()
             		toastr.success(resMsg.resultMsg);
             	}else{
             		toastr.error(resMsg.resultMsg);
@@ -496,8 +497,8 @@
        	 	this.$http.post('/BatchMgt/getBatchMgtVoById',{'id':this.batchid},{emulateJSON:true}).then((res)=>{
 		       	 	var batchVo = res.body;
 		        	this.licenceplate = batchVo.licencePlate;
-		        	this.roadname = batchVo.roadname;
-		        	this.flname = batchVo.flname;
+		        	this.roadname = batchVo.roadName;
+		        	this.flname = batchVo.flName;
 		        	this.unloadedweight = batchVo.unloadedWeight;
 		        	this.yuguweight = batchVo.yuguweight;
 		        	this.temp = batchVo.loadingTemperature;
@@ -547,8 +548,9 @@
             this.$http.post('/ShiGongLaiLiaoGuanLi/updateShiGongLaiLiao',JSON.stringify(this._data),{}).then((res)=>{
             	var resMsg = res.body;
             	if(resMsg.daoMsg>0){
-            		$('#mainContent').DataTable().row(page_tr).data(resMsg.obj);//修改行立即显示 */
+            		//$('#mainContent').DataTable().row(page_tr).data(resMsg.obj);//修改行立即显示 */
             		$("#change").modal("hide");
+					initRoad()
             		toastr.success(resMsg.resultMsg);
 					initTableQuanxian()
             	}else{
@@ -583,8 +585,8 @@
        	 	this.$http.post('/BatchMgt/getBatchMgtVoById',{'id':this.batchid},{emulateJSON:true}).then((res)=>{
 		       	 	var batchVo = res.body;
 		        	this.licenceplate = batchVo.licencePlate;
-		        	this.roadname = batchVo.roadname;
-		        	this.flname = batchVo.flname;
+					this.roadname = batchVo.roadName;
+					this.flname = batchVo.flName;
 		        	this.unloadedweight = batchVo.unloadedWeight;
 		        	this.yuguweight = batchVo.yuguweight;
 		        	this.temp = batchVo.loadingTemperature;
