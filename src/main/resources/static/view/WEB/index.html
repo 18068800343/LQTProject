@@ -264,11 +264,11 @@
 		       background:url(../images/查看更多.png) no-repeat 0px 0px;
 		    }
 			.caidantubiao{
-		       height:30px;
-		       width:30px;
-		       margin-right:8px;
-		       margin-bottom:10px;
-		    }
+				height:30px;
+				width:30px;
+				margin-right:8px;
+				margin-bottom:10px;
+			}
 		    .tree-file{
 		       background:url(../images/白色圆点.png) no-repeat 0px 0px;
 		    }
@@ -612,7 +612,7 @@
 <script type="text/javascript">
 	var user;
 	$(document).ready(function() {
-		initTuBiao();
+		initTuBiao()
 		$.ajax({
 				type: "post",
 				url: "/login/getUser",
@@ -707,6 +707,38 @@
 				}
 			});
 
+			/* $('.a').click(function() {
+				if($(this).siblings('ul').css('display') == 'none') {
+					$(this).siblings('ul').slideDown(300).children('li');
+					if($(this).parents('li').siblings('li').children('ul').css('display') == 'block') {
+						$(this).parents('li').siblings('li').children('ul').slideUp(300);
+					}
+				} else {
+					//控制自身菜单下子菜单隐藏
+					$(this).siblings('ul').slideUp(300);
+					//控制自身菜单下子菜单隐藏
+					$(this).siblings('ul').children('li').children('ul').slideUp(300);
+				}
+			});
+
+			$(".yijicaidan").click(function() {
+
+				$(".yijicaidan").removeClass('btn-primary'); // 删除其他兄弟元素的样式
+				//$(".yijicaidan").addClass('yijicaidan');
+				$(this).addClass('btn-primary'); // 添加当前元素的样式
+
+			});
+
+			function htglClick() {
+				$("#htgl").trigger("click");
+
+				setTimeout("cjhtglClick()", 3000);
+			}
+
+			function cjhtglClick() {
+				$("#cjhtgl").trigger("click");
+			} */
+
 			//退出
 			function exit() {
 				$.ajax({
@@ -775,5 +807,8 @@
 		})
 	},300000);
 		</script>
+
+
 	</body>
+
 </html>
