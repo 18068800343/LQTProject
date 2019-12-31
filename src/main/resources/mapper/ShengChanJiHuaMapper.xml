@@ -4,14 +4,14 @@
 	<insert id="addShengChanJiHua" parameterType="planProductionCollection">
 		insert into plan_production_collection 
 			(plan_id,road_id,plan_no,recipe_id,pd_need,dry_mixing_time,wet_mixing_time,radio,pd_temp,
-			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state)
+			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state,finish_time)
 			values(#{planid},#{roadid},#{planno},
 			#{recipeid},#{pdneed},
 			#{drymixingtime},#{wetmixingtime},
 			#{radio},#{pdtemp},
 			#{arrivetemp},#{price},
 			#{datetime},#{edituserid},
-			#{editdatetime},#{deletestate})
+			#{editdatetime},#{deletestate},#{finishTime})
 	</insert>
 	
 	<insert id="addShiGongPianCha" parameterType="planConstructionDeviation">
@@ -48,7 +48,9 @@
 			recipe_id=#{recipeid},pd_need=#{pdneed},dry_mixing_time=#{drymixingtime},
 			wet_mixing_time=#{wetmixingtime},radio=#{radio},pd_temp=#{pdtemp},
 			arrive_temp=#{arrivetemp},price=#{price},datetime=#{datetime},
-			edit_user_id=#{edituserid},edit_datetime=#{editdatetime},delete_state=#{deletestate}
+			edit_user_id=#{edituserid},edit_datetime=#{editdatetime},
+			finish_time=#{finishTime},
+			delete_state=#{deletestate}
 			where plan_id=#{planid}
 	</update>
 
@@ -137,7 +139,6 @@
 		insert into plan_production_count(id,plan_id,batch_id,pd_need_inc_or_dec,pd_need_source)
 		values(#{id},#{planId},#{batchId},#{pdNeedIncOrDec},#{pdNeedSource})
 	</insert>
-
 
 	<select id="getPiancha" parameterType="siteFieldMaterialMgtVo" resultType="PianChaLiangVo">
         SELECT top 1a.arrive_temp as arrivetemp,b.arrive_temp_offset as arriveTempOffset,(#{temp}-a.arrive_temp) as PianCha from plan_production_collection a
