@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-   
+
     <!-- 面包屑 -->
     <div class="mianbao">
     	<ul class="breadcrumb">
@@ -52,12 +52,12 @@
             <h4 class="modal-title" id="myModalLabel"><b>录入出料视频监控</b></h4>
         </div>
         <div class="modal-body">
-                <div>     
+                <div>
                     <form class="form-inline">
                         <table class="table table-bordered">
-                            
+
                         </table>
-                    </form> 
+                    </form>
                 </div>
         </div>
         <div class="modal-footer">
@@ -78,12 +78,12 @@
             <h4 class="modal-title" id="myModalLabel"><b>修改配比</b></h4>
         </div>
         <div class="modal-body">
-            <div>     
+            <div>
                 <form class="form-inline">
                     <table class="table table-bordered">
-                        
+
                     </table>
-                </form>  
+                </form>
             </div>
         </div>
         <div class="modal-footer">
@@ -124,7 +124,7 @@
                             <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
                         </td>
                     </tr>
-                </tbody>   
+                </tbody>
             </table>
         </div>
     </div>
@@ -137,12 +137,12 @@
             <h4 class="modal-title" id="myModalLabel"><b>所有信息</b></h4>
         </div>
         <div class="modal-body">
-            <div>     
+            <div>
                 <form class="form-inline">
                     <table class="table table-bordered">
-                        
+
                     </table>
-                </form>  
+                </form>
             </div>
         </div>
         <div class="modal-footer">
@@ -159,7 +159,7 @@
 <script src="../../js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready( function () {
-    	
+
 	});
     var table=$('#mainContent').dataTable({
         "deferRender": true,
@@ -188,7 +188,7 @@
             "sNext": "下一页",
             "sLast": "最后一页"
         }},
-        
+
 	});
 	function initTable(){
         $.ajax({
@@ -222,9 +222,9 @@
         $("#Caddress").val(address);
         $("#CProprietor-unit").val(ProprietorUnit);
         $("#CCode").val(Code);
-        rowIndex = bb.parentNode.parentNode.rowIndex; 
+        rowIndex = bb.parentNode.parentNode.rowIndex;
     }
 
-    
+
 </script>
 </html>
