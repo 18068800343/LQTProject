@@ -548,8 +548,9 @@
             this.$http.post('/ShiGongLaiLiaoGuanLi/updateShiGongLaiLiao',JSON.stringify(this._data),{}).then((res)=>{
             	var resMsg = res.body;
             	if(resMsg.daoMsg>0){
-            		$('#mainContent').DataTable().row(page_tr).data(resMsg.obj);//修改行立即显示 */
+            		//$('#mainContent').DataTable().row(page_tr).data(resMsg.obj);//修改行立即显示 */
             		$("#change").modal("hide");
+					initRoad()
             		toastr.success(resMsg.resultMsg);
 					initTableQuanxian()
             	}else{
