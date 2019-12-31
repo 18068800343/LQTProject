@@ -497,8 +497,8 @@
        	 	this.$http.post('/BatchMgt/getBatchMgtVoById',{'id':this.batchid},{emulateJSON:true}).then((res)=>{
 		       	 	var batchVo = res.body;
 		        	this.licenceplate = batchVo.licencePlate;
-		        	this.roadname = batchVo.roadname;
-		        	this.flname = batchVo.flname;
+		        	this.roadname = batchVo.roadName;
+		        	this.flname = batchVo.flName;
 		        	this.unloadedweight = batchVo.unloadedWeight;
 		        	this.yuguweight = batchVo.yuguweight;
 		        	this.temp = batchVo.loadingTemperature;
@@ -584,8 +584,8 @@
        	 	this.$http.post('/BatchMgt/getBatchMgtVoById',{'id':this.batchid},{emulateJSON:true}).then((res)=>{
 		       	 	var batchVo = res.body;
 		        	this.licenceplate = batchVo.licencePlate;
-		        	this.roadname = batchVo.roadname;
-		        	this.flname = batchVo.flname;
+					this.roadname = batchVo.roadName;
+					this.flname = batchVo.flName;
 		        	this.unloadedweight = batchVo.unloadedWeight;
 		        	this.yuguweight = batchVo.yuguweight;
 		        	this.temp = batchVo.loadingTemperature;
