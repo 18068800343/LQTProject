@@ -23,6 +23,77 @@ public class SysRoadMgn {
 
     private String expresswayName;
 
+    //路段方向
+    private String direction;
+	//起桩号
+	private String startMark;
+	//止桩号
+	private String endMark;
+	//沥青层次
+	private String storey;
+	//长
+	private double roadLong;
+	//宽
+	private double roadWeight;
+	//深
+	private double roadDeep;
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public String getStartMark() {
+		return startMark;
+	}
+
+	public void setStartMark(String startMark) {
+		this.startMark = startMark;
+	}
+
+	public String getEndMark() {
+		return endMark;
+	}
+
+	public void setEndMark(String endMark) {
+		this.endMark = endMark;
+	}
+
+	public String getStorey() {
+		return storey;
+	}
+
+	public void setStorey(String storey) {
+		this.storey = storey;
+	}
+
+	public double getRoadLong() {
+		return roadLong;
+	}
+
+	public void setRoadLong(double roadLong) {
+		this.roadLong = roadLong;
+	}
+
+	public double getRoadWeight() {
+		return roadWeight;
+	}
+
+	public void setRoadWeight(double roadWeight) {
+		this.roadWeight = roadWeight;
+	}
+
+	public double getRoadDeep() {
+		return roadDeep;
+	}
+
+	public void setRoadDeep(double roadDeep) {
+		this.roadDeep = roadDeep;
+	}
+
 	public String getExpresswayName() {
 		return expresswayName;
 	}

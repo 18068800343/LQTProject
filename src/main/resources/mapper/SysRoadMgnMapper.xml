@@ -4,7 +4,7 @@
 	
 	<insert id="addSysRoadMgn" parameterType="sysRoadMgn">
 		insert into 
-			sys_road_mgn(road_id,road_no,road_name,expressway_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state)
+			sys_road_mgn(road_id,road_no,road_name,expressway_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep)
 		values(#{sysRoadMgn.roadId},
 			   #{sysRoadMgn.roadNo},
 			   #{sysRoadMgn.roadName},
@@ -14,7 +14,14 @@
 			   #{sysRoadMgn.endLng},
 			   #{sysRoadMgn.endLat},
 			   #{sysRoadMgn.remarks},
-			   1
+			   1,
+			   #{sysRoadMgn.direction},
+			   #{sysRoadMgn.startMark},
+			   #{sysRoadMgn.endMark},
+			   #{sysRoadMgn.storey},
+			   #{sysRoadMgn.roadLong},
+			   #{sysRoadMgn.roadWeight},
+			   #{sysRoadMgn.roadDeep}
 			   )
 	</insert>
 	
@@ -27,7 +34,14 @@
 		start_lat=#{sysRoadMgn.startLat},
 		end_lng=#{sysRoadMgn.endLng},
 		end_lat=#{sysRoadMgn.endLat},
-		remarks=#{sysRoadMgn.remarks}
+		remarks=#{sysRoadMgn.remarks},
+		direction=#{sysRoadMgn.direction},
+		start_mark=#{sysRoadMgn.startMark},
+		end_mark=#{sysRoadMgn.endMark},
+		storey=#{sysRoadMgn.storey},
+		road_long=#{sysRoadMgn.roadLong},
+		road_weight=#{sysRoadMgn.roadWeight},
+		road_deep=#{sysRoadMgn.roadDeep}
 		where road_id=#{sysRoadMgn.roadId} and delete_state=1
 	</update>
 
@@ -48,7 +62,7 @@
 	</sql>
 	
 	<select id="getAllSysRoadMgn" resultType="SysRoadMgn">
-		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep
 	    from sys_road_mgn srm
 		<where>
 			<include refid="luduanquanxian"></include>
@@ -67,7 +81,7 @@
 		end_lat,
 		remarks,
 		delete_state,
-		expressway_name,
+		expressway_name,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep,
 		rn.allXuQiu,
 		gy.allGongYing
 		FROM
@@ -114,7 +128,7 @@
 	</select>
 
 	<select id="getAllSysRoadMgn2" resultType="SysRoadMgnLowcase">
-		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep
 		from sys_road_mgn srm
 		<where>
 			<include refid="luduanquanxian"></include>
@@ -123,7 +137,7 @@
 	</select>
 
 	<select id="getAllSysRoadMgnLowcase" resultType="SysRoadMgnLowcase">
-		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep
 	    from sys_road_mgn
 	    where delete_state=1
 	</select>
@@ -135,7 +149,7 @@
 	</update>
 	
 	<select id="getByIdSysRoadMgn" resultType="SysRoadMgn">
-		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name
+		select road_id,road_no,road_name,start_lng,start_lat,end_lng,end_lat,remarks,delete_state,expressway_name,direction,start_mark,end_mark,storey,road_long,road_weight,road_deep
 	    from sys_road_mgn 
 	    where delete_state!=0 and road_id=#{id}
 	</select>
