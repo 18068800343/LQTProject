@@ -33,4 +33,8 @@ public class MybatisTest {
 		System.out.println(date);
 	}
 
+	public static void main(String[] args) {
+		Thread thread = new Thread();
+
+	}
 }
