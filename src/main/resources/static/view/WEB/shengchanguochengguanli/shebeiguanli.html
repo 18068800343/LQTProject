@@ -68,9 +68,9 @@
             </div>
         </div>
         <div class="LowerPart" style="margin-top:3px;">
-            <table class="table table-bordered table-condensed table-hover layui-table" lay-skin="line" id="mainContent">
+            <table class="layui-table" lay-skin="line" id="mainContent">
                 <thead>
-                    <tr>
+                     <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                         <th>设备编号</th>
                         <th>设备名称</th>
                         <th>设备型号</th>
@@ -98,7 +98,7 @@
         <div class="modal-body">
                 <div >     
                     <form class="form-inline" >
-                        <table class="table table-bordered table-condensed" style="height:auto;">
+                        <table class="table table-bordered table-condensed " style="height:auto;">
                         	<tr>
                         		<td style="width: 20%;">设备编号</td>
                         		<td><input type="text" class="form-control"  readonly="readonly" v-model="code" style="width: 100%;height: 100%;border: none;" ></td>
