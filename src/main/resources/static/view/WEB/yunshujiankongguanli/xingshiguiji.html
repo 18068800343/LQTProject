@@ -104,7 +104,7 @@
 
     });
 
-       //启用滚轮放大缩小，默认禁用
+    //启用滚轮放大缩小，默认禁用
 
     var map = new BMap.Map("dituContent");
     map.centerAndZoom(new BMap.Point(120.195224,32.438838), 14);
@@ -118,48 +118,48 @@
     var end = new BMap.Point(120.419756,32.870753);
     driving.search(start, end);
 
-	
-	var point = new BMap.Point(120.195224,32.438838);
-	map.centerAndZoom(point, 15);
-	var opts = {
-	  position : point,    // 指定文本标注所在的地理位置
-	  offset   : new BMap.Size(30, -30)    //设置文本偏移量
-	}
-	var label = new BMap.Label("XX年XX月XX日XX时某批次成品沥青砼由此运出", opts);  // 创建文本标注对象
-		label.setStyle({
-			 color : "red",
-			 fontSize : "12px",
-			 height : "20px",
-			 lineHeight : "20px",
-			 fontFamily:"微软雅黑"
-		 });
-	map.addOverlay(label);   
-	
-	/* 终点文字标注 */
-	var point = new BMap.Point(120.419756,32.870753);
-	map.centerAndZoom(point, 15);
-	var opts = {
-	  position : point,    // 指定文本标注所在的地理位置
-	  offset   : new BMap.Size(30, -30)    //设置文本偏移量
-	}
-	var label = new BMap.Label("XX年XX月XX日XX时某批次成品沥青砼到达此地", opts);  // 创建文本标注对象
-		label.setStyle({
-			 color : "red",
-			 fontSize : "12px",
-			 height : "20px",
-			 lineHeight : "20px",
-			 fontFamily:"微软雅黑"
-		 });
-	map.addOverlay(label);   
- // 百度地图API功能
-	
-     
-    
+
+    var point = new BMap.Point(120.195224,32.438838);
+    map.centerAndZoom(point, 15);
+    var opts = {
+        position : point,    // 指定文本标注所在的地理位置
+        offset   : new BMap.Size(30, -30)    //设置文本偏移量
+    }
+    var label = new BMap.Label("XX年XX月XX日XX时某批次成品沥青砼由此运出", opts);  // 创建文本标注对象
+    label.setStyle({
+        color : "red",
+        fontSize : "12px",
+        height : "20px",
+        lineHeight : "20px",
+        fontFamily:"微软雅黑"
+    });
+    map.addOverlay(label);
+
+    /* 终点文字标注 */
+    var point = new BMap.Point(120.419756,32.870753);
+    map.centerAndZoom(point, 15);
+    var opts = {
+        position : point,    // 指定文本标注所在的地理位置
+        offset   : new BMap.Size(30, -30)    //设置文本偏移量
+    }
+    var label = new BMap.Label("XX年XX月XX日XX时某批次成品沥青砼到达此地", opts);  // 创建文本标注对象
+    label.setStyle({
+        color : "red",
+        fontSize : "12px",
+        height : "20px",
+        lineHeight : "20px",
+        fontFamily:"微软雅黑"
+    });
+    map.addOverlay(label);
+    // 百度地图API功能
+
+
+
 </script>
 <script type="text/javascript">
 
-    
-    
+
+
 </script>
 
 </html>
