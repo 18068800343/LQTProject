@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="../../font2/iconfont.css">
+	   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../font2/iconfont.css">
 	<link href="../../style/bootstrap.min.css" rel="stylesheet">
     <link href="../../style/style.css" rel="stylesheet">
-    <link href="../../toastr/toastr.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../../style/jquery-editable-select.css">
 	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
@@ -17,14 +22,16 @@
 	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
 	<link rel="stylesheet" type="text/css" href="../../css/code.css" />
 	<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
-	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
-	<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+    <link href="../../toastr/toastr.css" rel="stylesheet">
+	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+   <!--  <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css"> -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
      <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/all.css">
 	<style lang="">
 	        body{
 	            background: #fff;
@@ -64,9 +71,9 @@
             <!-- Modal -->
                     </div>
                     <div class="LowerPart" style="margin-top:3px;">
-                        <table class="table table-bordered table-condensed table-hover" style="width:100%;" id="mainContent">
+                        <table class="layui-table" lay-skin="line" style="width:100%;" id="mainContent">
                             <thead>
-                                <tr>
+                               <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                                     <th>编号</th>
 									<th style="width:10%;">时间</th>
 									<th>重量</th>
@@ -213,7 +220,7 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline">
-                                    <table class="table table-bordered table-condensed" >
+                                    <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
 											<td style="width: 15%;">编号</td>
 											<td><input type="text" class="form-control"  id="bianhao" style="width: 70%;"/></td>
@@ -222,7 +229,7 @@
 										</tr>
 										 <tr>
 											 <td>材料</td>
-											 <td><select id="cailiao" class="form-control" style="width: 70%;">
+											 <td><select id="cailiao" class="form-control" style="width: 70%; border:1px solid #DEDEDE;border-radius:5px 5px 5px !important;">
 												</select>
 											</td>
 											<td>重量</td>

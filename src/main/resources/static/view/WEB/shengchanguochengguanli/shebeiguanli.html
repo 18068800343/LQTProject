@@ -38,6 +38,8 @@
             justify-content:space-between;
             border-bottom: 1px solid #ccc;
             padding-bottom: 12px;
+            height:50px;
+            line-height:50px;
         }
         .selected{
             background: rgba(247, 161, 3,0.2);
@@ -155,7 +157,7 @@
         <div class="modal-body">
                 <div >     
                     <form class="form-inline" >
-                        <table class="table table-bordered table-condensed" style="height:auto;">
+                        <table class="layui-table "lay-skin="line" style="height:auto;">
                         	<tr>
                         		<td style="width: 20%;">设备编号</td>
                         		<td><input type="text" class="form-control" placeholder="请输入" v-model="code" style="width: 100%;height: 100%;" ></td>
@@ -167,7 +169,7 @@
                         		<td><input type="text" class="form-control" placeholder="请输入" v-model="model" style="width: 100%;height: 100%;"></td>
                         		<td style="width: 20%;">设备类型</td>
                                 <td>
-                                    <select class="form-control" style="width: 100%;" v-model="typeId=dicDeviceTypeSelected" id="typeId">
+                                    <select class="form-control" style="width: 100%; border:1px solid #DEDEDE;border-radius:5px 5px 5px !important;" v-model="typeId=dicDeviceTypeSelected" id="typeId">
 											<option :value="item.id" v-for="item in dicDeviceTypeList">{{item.typeName}}</option>
 										</select>
                                 </td>

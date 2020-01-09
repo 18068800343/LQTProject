@@ -14,3 +14,20 @@ td{
 	border-radius:10px;
 	border:1px solid #dedede;
 }
+.modal-header{
+	background-color:#3567A2;
+	color:white;
+	font-size:15px;
+}
+.modal-content input{
+	border:1px solid #DEDEDE;
+    border-radius:5px 5px 5px !important;
+}
+.breadcrumb{
+	height:40px;
+	line-height:40px;
+}
+.UpperPart{
+	 height:50px;
+     line-height:50px;
+}
