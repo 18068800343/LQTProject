@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="../../font2/iconfont.css">
+	   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../font2/iconfont.css">
 	<link href="../../style/bootstrap.min.css" rel="stylesheet">
     <link href="../../style/style.css" rel="stylesheet">
-    <link href="../../toastr/toastr.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../../style/jquery-editable-select.css">
 	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
@@ -17,14 +22,16 @@
 	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
 	<link rel="stylesheet" type="text/css" href="../../css/code.css" />
 	<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
-	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
-	<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+    <link href="../../toastr/toastr.css" rel="stylesheet">
+	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+   <!--  <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css"> -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
      <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/all.css">
 	<style lang="">
 	        body{
 	            background: #fff;
@@ -41,23 +48,32 @@
 	        #mainContent th{
 	            cursor: pointer;
 	        }
+	        .modal-content input{
+	            height:35px;
+	            width:100%;
+	            color:#DDD;
+	        }
 	    </style>
 	</head>
 	<body>
 		<div class="mianbao">
-    	<ul class="breadcrumb">
+    	<ul class="breadcrumb" style="border-bottom:none;">
     		<li><i class="iconfont icon-knowledgebase"></i></li>
 			<li>沥青砼生产过程管理</li>
 			<li class="active">物料管理</li>
 			<li class="active">仓储管理</li>
 		</ul>
     </div>
+    <div class="background" style="background-color:#F0F1F1;width:100%;height:40px;">
+    </div>
     <div>
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist" style="background:#fff;">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">仓储管理</a></li>
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title" role="tablist" style="background:#fff;margin-top:-10px;">
+            <li role="presentation" class="active layui-this"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">仓储管理</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">仓储管理分析</a></li>
         </ul>     
+        </div>
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
@@ -72,9 +88,9 @@
             <!-- Modal -->
                     </div>
                     <div class="LowerPart" style="margin-top:3px;">
-                        <table class="table table-bordered table-condensed table-hover" id="mainContent">
+                        <table class="layui-table" lay-skin="line" id="mainContent">
                             <thead>
-                                <tr>
+                                    <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                                     <th>料仓编号</th>
                                     <th style="width:100px;">时间</th>
                                     <th>重量</th>
@@ -155,7 +171,7 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline">
-                                    <table class="table table-bordered table-condensed" >
+                                   <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
 											<td style="width: 20%;">料仓编号</td>
 											<td style="width: 30%;"><input type="text" id="liaocangbianhao" style="width: 70%;" /></td>
@@ -211,7 +227,7 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline">
-                                    <table class="table table-bordered table-condensed" >
+                                    <table class="layui-table "lay-skin="line" style="height:auto;">
                                     	<tr>
 											<td style="width: 20%;">料仓编号</td>
 											<td style="width: 30%;"><input type="text" id="xg_liaocangbianhao" style="width: 70%;" /></td>

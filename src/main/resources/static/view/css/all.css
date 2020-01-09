@@ -14,6 +14,12 @@ td{
 	border-radius:10px;
 	border:1px solid #dedede;
 }
+#mainContent2_filter input{
+	margin:5px;
+	height:30px;
+	border-radius:10px;
+	border:1px solid #dedede;
+}
 .modal-header{
 	background-color:#3567A2;
 	color:white;
@@ -30,4 +36,7 @@ td{
 .UpperPart{
 	 height:50px;
      line-height:50px;
+}
+.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after{
+	border-bottom:2px solid #337AB7;
 }
