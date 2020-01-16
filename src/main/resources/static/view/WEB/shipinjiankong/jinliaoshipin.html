@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
@@ -9,6 +13,25 @@
 	<link href="../../style/bootstrap.min.css" rel="stylesheet">
     <link href="../../style/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../../style/jquery-editable-select.css">
+	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css" />
+	<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/layui.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/code.css" />
+	<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+    <link href="../../toastr/toastr.css" rel="stylesheet">
+	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+   <!--  <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css"> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
+     <!-- SmartAdmin RTL Support  -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/all.css">
     <style lang="">
         .UpperPart{
             display: flex;
@@ -97,9 +120,9 @@
 
         </div>
         <div class="LowerPart" style="margin-top:3px;">
-            <table class="table table-bordered table-condensed" id="mainContent">
+            <table class="layui-table" lay-skin="line" id="mainContent">
                 <thead>
-                    <tr>
+                    <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                         <th>序号</th>
 						<th>进料视频监控</th>
                         <th style="width:50px;">操作</th>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
@@ -18,7 +18,16 @@
 	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
 	<link rel="stylesheet" type="text/css" href="../../css/code.css" />
 	<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
-	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+    <link href="../../toastr/toastr.css" rel="stylesheet">
+	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+   <!--  <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css"> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
+     <!-- SmartAdmin RTL Support  -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/all.css">
     <style lang="">
         body{
             background: #fff;
@@ -50,12 +59,14 @@
 
     <div>
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist" style="background:#fff;">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">配方信息</a></li>
+         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title" role="tablist" style="background:#fff;">
+            <li role="presentation" class="active layui-this"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">配方信息</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">生产计划数据</a></li>
             <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">生产数据监控</a></li>
 			<li role="presentation"><a href="#messages2" aria-controls="messages2" role="tab" data-toggle="tab">拌合站产能分析</a></li>
         </ul>     
+        </div>
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
@@ -225,9 +236,9 @@
 
                     </div>
                     <div class="LowerPart" style="margin-top:3px;">
-                        <table class="table table-bordered table-condensed" id="mainContent">
+                        <table class="layui-table" lay-skin="line" id="mainContent">
                             <thead>
-                                <tr>
+                                <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                                     <td>序号</td>
                                     <td>配方名称</td>
                                     <td>配1用量</td>
@@ -551,9 +562,9 @@
 
         </div>
         <div class="LowerPart" style="margin-top:3px;">
-            <table class="table table-bordered table-condensed" id="mainContent2">
+            <table class="layui-table" lay-skin="line" id="mainContent2">
                 <thead>
-                    <tr>
+                     <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                        <td>序号</td>
                        <td>路段</td>
                        <td>成品量</td>
@@ -910,9 +921,9 @@
 
         </div>
         <div class="LowerPart" style="margin-top:3px;">
-            <table class="table table-bordered table-condensed" id="mainContent3">
+            <table class="layui-table" lay-skin="line" id="mainContent3">
                 <thead>
-                    <tr>
+                    <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                         <th>序号</th>
                         <td>料1偏差量</td>
                         <td>料2偏差量</td>
