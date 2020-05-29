@@ -32,6 +32,15 @@
      <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/all.css">
+
+    <!--引入播放器样式-->
+    <link href="http://vjs.zencdn.net/5.18.4/video-js.min.css" rel="stylesheet">
+    <!--引入播放器js-->
+    <script src="http://vjs.zencdn.net/5.18.4/video.min.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/videojs-flash@2/dist/videojs-flash.min.js"></script>-->
+
+
+
     <style lang="">
         .UpperPart{
             display: flex;
@@ -60,95 +69,22 @@
 
     <div class="zhuti-content">
         <div class="UpperPart">
-            <div class="UpperPartL">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入施工视频监控</button>
-            </div>
-            <div class="UpperPartR">
-                <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>
-            </div>
-<!-- Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>录入施工视频监控</b></h4>
-        </div>
-        <div class="modal-body">
-                <div>     
-                    <form class="form-inline">
-                        <table class="table table-bordered">
-                            
-                        </table>
-                    </form> 
-                </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success" >保存</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- model结束 -->
-
-<!-- 修改Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"><b>修改配比</b></h4>
-        </div>
-        <div class="modal-body">
-            <div>     
-                <form class="form-inline">
-                    <table class="table table-bordered">
-                        
-                    </table>
-                </form>  
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-success">保存</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- 修改model结束 -->
-
         </div>
         <div class="LowerPart" style="margin-top:3px;">
-            <table class="layui-table" lay-skin="line"  id="mainContent">
-                <thead>
-                     <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
-                        <th>序号</th>
-						<th>施工现场视频监控</th>
-                        <th style="width:50px;">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td id="1">1</td>
-                        <td>施工现场视频监控</td>
-                        <td>
-                            <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
-                            <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
-                            <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="2">2</td>
-                        <td>施工现场视频监控</td>
-                        <td>
-                            <i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>
-                            <i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" title="修改" data-toggle='modal' data-target='#change'></i>
-                            <i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" title="删除"></i>
-                        </td>
-                    </tr>
-                </tbody>   
-            </table>
+            <!--vjs-big-play-centered 播放按钮居中-->
+            <!--poster默认的显示界面，就是还没点播放，给你显示的界面-->
+            <!--controls 规定浏览器应该为视频提供播放控件-->
+            <!--preload="auto" 是否提前加载-->
+            <!--autoplay 自动播放-->
+            <!--loop=true 自动循环-->
+            <!--data-setup='{"example_option":true}' 可以把一些属性写到这个里面来，如data-setup={"autoplay":true}-->
+
+            <video id="my-player"  class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" autoplay="autoplay"
+                   poster="//vjs.zencdn.net/v/oceans.png" width="1400" height="700" data-setup='{"fluid":true}'>
+                <!--src: 规定媒体文件的 URL  type:规定媒体资源的类型-->
+<!--                <source src='rtmp://rtmp01open.ys7.com/openlive/0bb5bb8d1e1a457098024003a58ed234' type='rtmp/flv'/>-->
+                <source src='rtmp://58.200.131.2:1935/livetv/hunantv' type='rtmp/flv'/>
+            </video>
         </div>
     </div>
 <!-- allMsg -->
@@ -180,7 +116,21 @@
 <script src="../../js/common-scripts.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
+<!--&lt;!&ndash;引入播放器js&ndash;&gt;-->
+<!--<script src="../../video.min.js"></script>-->
+<!--<script src="../../js/videojs-flash.min.js"></script>-->
 <script>
+
+    // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
+    videojs.options.flash.swf = '/img/video-js.swf';
+    let player = videojs('my-player'); //my-player为页面video元素的id
+    player.play(); //播放
+       // 1. 播放   player.play()
+       // 2. 停止   player.pause()
+       // 3. 暂停   player.pause()
+
+
+
     $(document).ready( function () {
     	
 	});
