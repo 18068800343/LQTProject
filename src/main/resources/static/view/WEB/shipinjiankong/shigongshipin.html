@@ -82,8 +82,8 @@
             <video id="my-player"  class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" autoplay="autoplay"
                    poster="//vjs.zencdn.net/v/oceans.png" width="1400" height="700" data-setup='{"fluid":true}'>
                 <!--src: 规定媒体文件的 URL  type:规定媒体资源的类型-->
-<!--                <source src='rtmp://rtmp01open.ys7.com/openlive/0bb5bb8d1e1a457098024003a58ed234' type='rtmp/flv'/>-->
-                <source src='rtmp://58.200.131.2:1935/livetv/hunantv' type='rtmp/flv'/>
+                <source src='rtmp://rtmp01open.ys7.com/openlive/0bb5bb8d1e1a457098024003a58ed234' type='rtmp/flv'/>
+<!--                <source src='rtmp://58.200.131.2:1935/livetv/hunantv' type='rtmp/flv'/>-->
             </video>
         </div>
     </div>
@@ -122,7 +122,7 @@
 <script>
 
     // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
-    videojs.options.flash.swf = '/img/video-js.swf';
+    videojs.options.flash.swf = '../../img/VideoJS.swf';
     let player = videojs('my-player'); //my-player为页面video元素的id
     player.play(); //播放
        // 1. 播放   player.play()

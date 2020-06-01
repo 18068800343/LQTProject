@@ -108,7 +108,8 @@ vjs.options = {
 // Set CDN Version of swf
 // The added (+) blocks the replace from changing this 4.3 string
 if (vjs.CDN_VERSION !== 'GENERATED'+'_CDN_VSN') {
-  videojs.options['flash']['swf'] = vjs.ACCESS_PROTOCOL + 'vjs.zencdn.net/'+vjs.CDN_VERSION+'/video-js.swf';
+  // videojs.options['flash']['swf'] = vjs.ACCESS_PROTOCOL + 'vjs.zencdn.net/'+vjs.CDN_VERSION+'/video-js.swf';
+  videojs.options['flash']['swf'] = '/img/VideoJS.swf';
 }
 
 /**
