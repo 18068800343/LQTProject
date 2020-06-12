@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.DicDepartmentDao" >
+
+    <select id="getAllDicDepartment" resultType="DicDepartment">
+        select id,department_name,delete_state from dic_department where delete_state=1
+    </select>
+
+    <insert id="insertDicDepartment" parameterType="DicDepartment">
+        insert into dic_department(id,department_name,delete_state) values(#{id},#{departmentName},#{deleteState})
+    </insert>
+
+    <update id="delDicDepartment">
+        update dic_department set delete_state=0 where id=#{id}
+    </update>
+
+    <update id="updateDicDepartmentById" parameterType="DicDepartment">
+        update dic_department set department_name=#{departmentName} where id=#{id}
+    </update>
+
+    <select id="getDicDepartmentById" resultType="DicDepartment">
+        select id,department_name,delete_state from dic_department where id=#{id}
+    </select>
+
+    <select id="getDicDepartmentByName" resultType="DicDepartment">
+        select id,department_name,delete_state from dic_department where department_name=#{departmentName} and delete_state=1
+    </select>
+
+</mapper>
