@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.PlanProductionCollection;
 import com.ldxx.bean.PlanProductionCount;
+import com.ldxx.bean.SiteConstruction;
 import com.ldxx.bean.User;
 import com.ldxx.dao.JiHuaZengJianDao;
 import com.ldxx.dao.ShengChanJiHuaDao;
@@ -68,25 +69,67 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService{
 
 			String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
 			jsonObject.put("resultMsg",daoMsg);
-			jsonObject.put("daoMsg",i);
-			jsonObject.put("obj",planProductionCollection);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String result = jsonObject.toString();
-		return result;
-	}
+            jsonObject.put("daoMsg", i);
+            jsonObject.put("obj", planProductionCollection);
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        String result = jsonObject.toString();
+        return result;
+    }
 
-	@Override
-	public String updateShengChanJiHua(PlanProductionCollection planProductionCollection, HttpSession session) {
-		JSONObject jsonObject = new JSONObject();
-		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
-		planProductionCollection.setEditdatetime(dateTime);
-		planProductionCollection.setDeletestate(1);
-		User user = (User) session.getAttribute("user");
-		if(null!=user) {
-			planProductionCollection.setEdituserid(user.getUserId());;
+    @Override
+    public String addShengChanJiHuaAndSiteConstruction(PlanProductionCollection planProductionCollection, SiteConstruction siteConstruction, HttpSession session) {
+        JSONObject jsonObject = new JSONObject();
+        String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+        String jhDateTime = DateUtil.getDateStrByPattern(DateConstant.DATE14_, new Date());
+        String planno = planProductionCollection.getPlanno();
+        planProductionCollection.setPlanno(planno + jhDateTime);
+        planProductionCollection.setDatetime(dateTime);
+        planProductionCollection.setEditdatetime(dateTime);
+        planProductionCollection.setDeletestate(1);
+        User user = (User) session.getAttribute("user");
+        if (null != user) {
+            planProductionCollection.setEdituserid(user.getUserId());
+            ;
+        }
+        String planId = LDXXUtils.getUUID12();
+        planProductionCollection.setPlanid(planId);
+
+        PlanProductionCount planProductionCount = new PlanProductionCount();
+        planProductionCount.setDatetime(dateTime);
+        planProductionCount.setId(LDXXUtils.getUUID12());
+        planProductionCount.setPlanid(planId);
+        planProductionCount.setPdneedincordec(planProductionCollection.getPdneed());
+        planProductionCount.setPdneedsourcestate(1);
+        try {
+
+            int i = dao.addShengChanJiHua(planProductionCollection);
+            jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
+
+            String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
+            jsonObject.put("resultMsg", daoMsg);
+            jsonObject.put("daoMsg", i);
+            jsonObject.put("obj", planProductionCollection);
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        String result = jsonObject.toString();
+        return result;
+    }
+
+    @Override
+    public String updateShengChanJiHua(PlanProductionCollection planProductionCollection, HttpSession session) {
+        JSONObject jsonObject = new JSONObject();
+        String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+        planProductionCollection.setEditdatetime(dateTime);
+        planProductionCollection.setDeletestate(1);
+        User user = (User) session.getAttribute("user");
+        if (null != user) {
+            planProductionCollection.setEdituserid(user.getUserId());
+            ;
 		}
 		try {
 			PlanProductionCollection ppcOld = dao.getShengChanJiHuaById(planProductionCollection.getPlanid());

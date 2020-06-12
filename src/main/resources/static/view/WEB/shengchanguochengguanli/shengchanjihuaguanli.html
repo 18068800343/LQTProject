@@ -532,16 +532,67 @@
 							</tr>
 							<tr>
 								<td>成品温度要求</td>
-								<td><input class="form-control" type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" id="pdtemp" placeholder="请输入"
-								style="width: 100%; height: 100%;"></td>
-									<td>到现场温度要求</td>
-									<td><input class="form-control" type="text" @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp" id="arrivetemp" placeholder="请输入"
-											   style="width: 100%; height: 100%; "></td>
+								<td><input class="form-control" type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')"
+										   v-model="pdtemp" id="pdtemp" placeholder="请输入"
+										   style="width: 100%; height: 100%;"></td>
+								<td>到现场温度要求</td>
+								<td><input class="form-control" type="text"
+										   @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp"
+										   id="arrivetemp" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
 								<td>单价</td>
-								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')" v-model="price" id="price" placeholder="请输入"
-								style="width: 100%; height: 100%; "></td>
+								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')"
+										   v-model="price" id="price" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+								<td>运输距离</td>
+								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','distance')"
+										   v-model="distance" id="distance" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+							</tr>
+							<tr>
+								<td>规划高速路径</td>
+								<td><input class="form-control" type="text" v-model="pathPlan" id="pathPlan"
+										   placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>路段经度</td>
+								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','lng')"
+										   v-model="lng" id="lng" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+								<td>路段纬度</td>
+								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','lat')"
+										   v-model="lat" id="lat" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+							</tr>
+							<tr>
+								<td>施工桩号</td>
+								<td><input class="form-control" type="text" v-model="stakeMark" id="stakeMark"
+										   placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+								<td>掉头桩号</td>
+								<td><input class="form-control" type="text" v-model="turnRoundStakeMark"
+										   id="turnRoundStakeMark" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+							</tr>
+							<tr>
+								<td>路面施工队</td>
+								<td><input class="form-control" type="text" v-model="team" id="team" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+								<td>路名</td>
+								<td><input class="form-control" type="text" v-model="roadName" id="roadName"
+										   placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+							</tr>
+							<tr>
+								<td>方向<</td>
+								<td><input class="form-control" type="text" v-model="direction" id="direction"
+										   placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 								<td></td>
 								<td></td>
 							</tr>
@@ -1237,15 +1288,23 @@
 			//成品温度要求
 			pdtemp:"",
 			//到现场温度要求
-			arrivetemp:"",
+			arrivetemp: "",
 			//单价
-			price:"",
+			price: "",
 			// 配方编号
-			recipeid:"",
-			roadList:'',
-			roadSelected:'',
-			recipeList:'',
-			recipeSelected:'',
+			recipeid: "",
+			roadList: '',
+			roadSelected: '',
+			recipeList: '',
+			recipeSelected: '',
+			distance: '',
+			pathPlan: '',
+			lng: '',
+			lat: '',
+			stakeMark: '',
+			turnRoundStakeMark: '',
+			team: '',
+			direction: '',
 		},
 		methods: {
 			//新建生产计划保存按钮事件

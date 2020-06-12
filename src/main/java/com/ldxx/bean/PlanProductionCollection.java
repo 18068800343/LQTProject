@@ -36,15 +36,34 @@ public class PlanProductionCollection
 
     private String edituserid;
 
-    private String editdatetime;
+	private String editdatetime;
 
-    private int deletestate;
-    
-    private String pianchaid;
+	private int deletestate;
 
-    private String planstate;
+	private String pianchaid;
 
-    private String finishTime;
+	private String planstate;
+
+	private String finishTime;
+	private String distance;
+	private String pathPlan;
+
+
+	public String getDistance() {
+		return distance;
+	}
+
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
+
+	public String getPathPlan() {
+		return pathPlan;
+	}
+
+	public void setPathPlan(String pathPlan) {
+		this.pathPlan = pathPlan;
+	}
 
 	public String getPlanstate() {
 		return planstate;

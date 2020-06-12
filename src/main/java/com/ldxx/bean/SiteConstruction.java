@@ -12,15 +12,65 @@ public class SiteConstruction {
 
     private BigDecimal lng;
 
-    private BigDecimal lat;
+	private BigDecimal lat;
 
-    private String stakemark;
+	private String stakemark;
 
-    private String lane;
+	private String lane;
 
-    private String remarks;
+	private String remarks;
 
-    private int deletestate;
+	private int deletestate;
+
+	private String stakeMark;
+
+	private String turnRoundStakeMark;
+
+	private String team;
+
+	private String direction;
+
+	private String roadName;
+
+	public String getRoadName() {
+		return roadName;
+	}
+
+	public void setRoadName(String roadName) {
+		this.roadName = roadName;
+	}
+
+	public String getStakeMark() {
+		return stakeMark;
+	}
+
+	public void setStakeMark(String stakeMark) {
+		this.stakeMark = stakeMark;
+	}
+
+	public String getTurnRoundStakeMark() {
+		return turnRoundStakeMark;
+	}
+
+	public void setTurnRoundStakeMark(String turnRoundStakeMark) {
+		this.turnRoundStakeMark = turnRoundStakeMark;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
+	}
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
 
 	public String getId() {
 		return id;

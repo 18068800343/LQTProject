@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.PlanConstructionDeviation;
 import com.ldxx.bean.PlanProductionCollection;
+import com.ldxx.bean.SiteConstruction;
 import com.ldxx.dao.ShengChanJiHuaDao;
 import com.ldxx.service.ShengChanJiHuaService;
 import com.ldxx.util.DateUtil;
@@ -98,15 +99,15 @@ public class ShengChanJiHuaController {
 		jsonObject.put("obj",planConstructionDeviation);
 		return jsonObject.toString();
 	}
-	
-	@RequestMapping("/addShengChanJiHua")
-	@ResponseBody
-	public String addShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection,HttpSession session) {
 
-		String result = service.addShengChanJiHua(planProductionCollection,session);
+    @RequestMapping("/addShengChanJiHua")
+    @ResponseBody
+    public String addShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection, @RequestBody SiteConstruction siteConstruction, HttpSession session) {
 
-		return result;
-	}
+        String result = service.addShengChanJiHua(planProductionCollection, session);
+
+        return result;
+    }
 	
 	@RequestMapping("/updateShengChanJiHua")
 	@ResponseBody
