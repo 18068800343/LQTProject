@@ -3,9 +3,9 @@
 <mapper namespace="com.ldxx.dao.TanPuDiDianGuanLiDao" >
 	<insert id="addTanPuDiDian" parameterType="siteConstructionVo">
 		insert into site_construction 
-			(id,road_id,site_number,lng,lat,stake_mark,lane,remarks,delete_state)
+			(id,road_id,site_number,lng,lat,stake_mark,lane,remarks,delete_state,road_name,direction,team,turn_round_stake_mark)
 			values(#{id},#{roadid},#{sitenumber},#{lng},#{lat},#{stakemark},
-			#{lane},#{remarks},#{deletestate})
+			#{lane},#{remarks},#{deletestate},#{roadName},#{direction},#{team},#{turnRoundStakeMark})
 	</insert>
 	
 	<update id="updateTanPuDiDian" parameterType="siteConstructionVo">
@@ -14,7 +14,7 @@
 			site_number=#{sitenumber},
 			lng=#{lng},lat=#{lat},
 			stake_mark=#{stakemark},
-			lane=#{lane},remarks=#{remarks} where id=#{id} and delete_state=1
+			lane=#{lane},remarks=#{remarks},road_name=#{roadName},direction=#{direction},team=#{team},turn_round_stake_mark=#{turnRoundStakeMark} where id=#{id} and delete_state=1
 	</update>
 	
 

@@ -9,11 +9,13 @@ import com.ldxx.bean.SiteConstruction;
 import com.ldxx.bean.User;
 import com.ldxx.dao.JiHuaZengJianDao;
 import com.ldxx.dao.ShengChanJiHuaDao;
+import com.ldxx.dao.TanPuDiDianGuanLiDao;
 import com.ldxx.service.ShengChanJiHuaService;
 import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
 import com.ldxx.vo.PlanProductionCollectionVo;
+import com.ldxx.vo.SiteConstructionVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,15 +27,19 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService{
-	
+public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
+
 	@Resource
 	private ShengChanJiHuaDao dao;
 
 	@Resource
+	private TanPuDiDianGuanLiDao tanPuDiDianGuanLiDao;
+
+	@Resource
 	private JiHuaZengJianDao jiHuaZengJianDao;
+
 	@Override
-	public List<PlanProductionCollectionVo> getShengChanJiHuaListByCondition(){
+	public List<PlanProductionCollectionVo> getShengChanJiHuaListByCondition() {
 		// TODO Auto-generated method stub
 		return dao.getShengChanJiHuaListByCondition();
 	}
@@ -79,18 +85,18 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService{
         return result;
     }
 
-    @Override
-    public String addShengChanJiHuaAndSiteConstruction(PlanProductionCollection planProductionCollection, SiteConstruction siteConstruction, HttpSession session) {
-        JSONObject jsonObject = new JSONObject();
-        String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
-        String jhDateTime = DateUtil.getDateStrByPattern(DateConstant.DATE14_, new Date());
-        String planno = planProductionCollection.getPlanno();
-        planProductionCollection.setPlanno(planno + jhDateTime);
-        planProductionCollection.setDatetime(dateTime);
-        planProductionCollection.setEditdatetime(dateTime);
-        planProductionCollection.setDeletestate(1);
-        User user = (User) session.getAttribute("user");
-        if (null != user) {
+	@Override
+	public String addShengChanJiHuaAndSiteConstruction(PlanProductionCollection planProductionCollection, SiteConstructionVo siteConstructionVo, HttpSession session) {
+		JSONObject jsonObject = new JSONObject();
+		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		String jhDateTime = DateUtil.getDateStrByPattern(DateConstant.DATE14_, new Date());
+		String planno = planProductionCollection.getPlanno();
+		planProductionCollection.setPlanno(planno + jhDateTime);
+		planProductionCollection.setDatetime(dateTime);
+		planProductionCollection.setEditdatetime(dateTime);
+		planProductionCollection.setDeletestate(1);
+		User user = (User) session.getAttribute("user");
+		if (null != user) {
             planProductionCollection.setEdituserid(user.getUserId());
             ;
         }
@@ -105,14 +111,19 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService{
         planProductionCount.setPdneedsourcestate(1);
         try {
 
-            int i = dao.addShengChanJiHua(planProductionCollection);
-            jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
+			String siteId = LDXXUtils.getUUID12();
+			siteConstructionVo.setId(siteId);
+			siteConstructionVo.setDeletestate(1);
+			tanPuDiDianGuanLiDao.addTanPuDiDian(siteConstructionVo);
 
-            String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
-            jsonObject.put("resultMsg", daoMsg);
-            jsonObject.put("daoMsg", i);
-            jsonObject.put("obj", planProductionCollection);
-        } catch (JSONException e) {
+			int i = dao.addShengChanJiHua(planProductionCollection);
+			jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
+
+			String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
+			jsonObject.put("resultMsg", daoMsg);
+			jsonObject.put("daoMsg", i);
+			jsonObject.put("obj", planProductionCollection);
+		} catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

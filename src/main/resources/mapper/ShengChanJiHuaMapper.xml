@@ -4,14 +4,16 @@
 	<insert id="addShengChanJiHua" parameterType="planProductionCollection">
 		insert into plan_production_collection 
 			(plan_id,road_id,plan_no,recipe_id,pd_need,dry_mixing_time,wet_mixing_time,radio,pd_temp,
-			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state,finish_time)
+			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state,finish_time,site_id,path_plan,distance)
 			values(#{planid},#{roadid},#{planno},
 			#{recipeid},#{pdneed},
 			#{drymixingtime},#{wetmixingtime},
 			#{radio},#{pdtemp},
 			#{arrivetemp},#{price},
 			#{datetime},#{edituserid},
-			#{editdatetime},#{deletestate},#{finishTime})
+			#{editdatetime},#{deletestate},#{finishTime}
+			,#{siteId},#{pathPlan},#{distance}
+			)
 	</insert>
 	
 	<insert id="addShiGongPianCha" parameterType="planConstructionDeviation">

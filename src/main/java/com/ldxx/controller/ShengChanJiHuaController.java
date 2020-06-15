@@ -12,6 +12,7 @@ import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
 import com.ldxx.vo.PlanConstructionDeviationVo;
 import com.ldxx.vo.PlanProductionCollectionVo;
+import com.ldxx.vo.SiteConstructionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -100,14 +101,14 @@ public class ShengChanJiHuaController {
 		return jsonObject.toString();
 	}
 
-    @RequestMapping("/addShengChanJiHua")
-    @ResponseBody
-    public String addShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection, @RequestBody SiteConstruction siteConstruction, HttpSession session) {
+	@RequestMapping("/addShengChanJiHua")
+	@ResponseBody
+	public String addShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection, @RequestBody SiteConstructionVo siteConstructionVo, HttpSession session) {
 
-        String result = service.addShengChanJiHua(planProductionCollection, session);
+		String result = service.addShengChanJiHuaAndSiteConstruction(planProductionCollection, siteConstructionVo, session);
 
-        return result;
-    }
+		return result;
+	}
 	
 	@RequestMapping("/updateShengChanJiHua")
 	@ResponseBody
