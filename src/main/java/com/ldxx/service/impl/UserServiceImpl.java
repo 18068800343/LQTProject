@@ -1,7 +1,9 @@
 package com.ldxx.service.impl;
 
+import com.ldxx.bean.Accessory;
 import com.ldxx.bean.SysRoadMgn;
 import com.ldxx.bean.User;
+import com.ldxx.dao.AccessoryDao;
 import com.ldxx.dao.SysRoadMgnDao;
 import com.ldxx.dao.URoleDao;
 import com.ldxx.dao.UserDao;
@@ -27,10 +29,19 @@ public class UserServiceImpl implements UserService {
 	private URoleDao uRoleDao;
 	@Autowired
 	private SysRoadMgnDao srmDao;
+	@Autowired
+	private AccessoryDao accessoryDao;
 
 	@Override
 	public int addUser(User user) {
-		return dao.addUser(user);
+		int num= dao.addUser(user);
+		if(num>0){
+			List<Accessory> accessory = user.getAccessory();
+			if(accessory!=null&&accessory.size()!=0){
+				accessoryDao.addAccessory(accessory);
+			}
+		}
+		return num;
 	}
 
 	@Override
@@ -40,7 +51,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int updateUser(User user) {
-		return dao.updateUser(user);
+		int num= dao.updateUser(user);
+		if(num>0){
+			List<Accessory> accessory = user.getAccessory();
+			if(accessory!=null&&accessory.size()!=0){
+				accessoryDao.addAccessory(accessory);
+			}
+		}
+		return num;
 	}
 
 	@Override

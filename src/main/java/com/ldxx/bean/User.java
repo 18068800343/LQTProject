@@ -1,5 +1,7 @@
 package com.ldxx.bean;
 
+import java.util.List;
+
 public class User {
     private String userId;
 
@@ -68,6 +70,71 @@ public class User {
 
     private String danweiName;
     private String luduanquanxian;//路段ID
+
+    private List<Accessory> accessory;
+    private String department;//所属部门
+    private String natureEmployment;//合同用工性质
+    private String contractLife;//合同有效期
+    private String dangerousLevels;//人员作业危险级别
+    private String insurancePurchases;//商业保险购买情况
+    private String insuranceDate;//保险有效期
+
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getNatureEmployment() {
+        return natureEmployment;
+    }
+
+    public void setNatureEmployment(String natureEmployment) {
+        this.natureEmployment = natureEmployment;
+    }
+
+    public String getContractLife() {
+        return contractLife;
+    }
+
+    public void setContractLife(String contractLife) {
+        this.contractLife = contractLife;
+    }
+
+    public String getDangerousLevels() {
+        return dangerousLevels;
+    }
+
+    public void setDangerousLevels(String dangerousLevels) {
+        this.dangerousLevels = dangerousLevels;
+    }
+
+    public String getInsurancePurchases() {
+        return insurancePurchases;
+    }
+
+    public void setInsurancePurchases(String insurancePurchases) {
+        this.insurancePurchases = insurancePurchases;
+    }
+
+    public String getInsuranceDate() {
+        return insuranceDate;
+    }
+
+    public void setInsuranceDate(String insuranceDate) {
+        this.insuranceDate = insuranceDate;
+    }
+
+    public List<Accessory> getAccessory() {
+        return accessory;
+    }
+
+    public void setAccessory(List<Accessory> accessory) {
+        this.accessory = accessory;
+    }
 
     public String getDanweiName() {
         return danweiName;
