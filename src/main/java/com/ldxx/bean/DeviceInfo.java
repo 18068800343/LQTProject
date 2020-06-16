@@ -1,5 +1,7 @@
 package com.ldxx.bean;
 
+import java.util.List;
+
 public class DeviceInfo {
 
 	private String id;
@@ -14,7 +16,74 @@ public class DeviceInfo {
 	private String editUserId;
 	private String editDatetime;
 	private int deleteState;
+
 	private DicDeviceType dicDeviceType;
+
+
+	private String serviceCondition;//使用情况
+	private String deviceMaintenanceCycle;//设备维修保养周期
+	private String enterTime;//进场时间
+	private String quitTime;//出场时间
+	private String ownOrLease;//（分自有、租赁）
+	private List<Accessory> accessory;
+
+	private String typeName;
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	public String getServiceCondition() {
+		return serviceCondition;
+	}
+
+	public void setServiceCondition(String serviceCondition) {
+		this.serviceCondition = serviceCondition;
+	}
+
+	public String getDeviceMaintenanceCycle() {
+		return deviceMaintenanceCycle;
+	}
+
+	public void setDeviceMaintenanceCycle(String deviceMaintenanceCycle) {
+		this.deviceMaintenanceCycle = deviceMaintenanceCycle;
+	}
+
+	public String getEnterTime() {
+		return enterTime;
+	}
+
+	public void setEnterTime(String enterTime) {
+		this.enterTime = enterTime;
+	}
+
+	public String getQuitTime() {
+		return quitTime;
+	}
+
+	public void setQuitTime(String quitTime) {
+		this.quitTime = quitTime;
+	}
+
+	public String getOwnOrLease() {
+		return ownOrLease;
+	}
+
+	public void setOwnOrLease(String ownOrLease) {
+		this.ownOrLease = ownOrLease;
+	}
+
+	public List<Accessory> getAccessory() {
+		return accessory;
+	}
+
+	public void setAccessory(List<Accessory> accessory) {
+		this.accessory = accessory;
+	}
 	public String getId() {
 		return id;
 	}

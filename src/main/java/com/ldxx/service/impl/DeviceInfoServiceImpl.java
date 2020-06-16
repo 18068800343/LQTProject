@@ -1,17 +1,17 @@
 package com.ldxx.service.impl;
 
-import java.util.List;
-
+import com.ldxx.bean.Accessory;
+import com.ldxx.bean.DeviceInfo;
+import com.ldxx.bean.DicDeviceType;
+import com.ldxx.dao.AccessoryDao;
+import com.ldxx.dao.DeviceInfoDao;
+import com.ldxx.dao.DicDeviceTypeDao;
+import com.ldxx.service.DeviceInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ldxx.bean.DeviceInfo;
-import com.ldxx.bean.DicDeviceType;
-import com.ldxx.dao.DeviceInfoDao;
-import com.ldxx.dao.DicDeviceTypeDao;
-import com.ldxx.service.DeviceInfoService;
-import com.ldxx.util.LDXXUtils;
+import java.util.List;
 
 @Service
 @Transactional
@@ -21,6 +21,8 @@ public class DeviceInfoServiceImpl implements DeviceInfoService{
 	DeviceInfoDao didao;
 	@Autowired
 	DicDeviceTypeDao ddtdao;
+	@Autowired
+	private AccessoryDao accessoryDao;
 	@Override
 	public List<DeviceInfo> selectAllDeviceInfo() {
 		List<DeviceInfo> list = didao.selectAllDeviceInfo();
@@ -51,8 +53,13 @@ public class DeviceInfoServiceImpl implements DeviceInfoService{
 	@Override
 	public int addDeviceInfo(DeviceInfo deviceInfo) {
 		int state;
-		deviceInfo.setId(LDXXUtils.getUUID12());
 		state = didao.addDeviceInfo(deviceInfo);
+		if(state>0){
+			List<Accessory> accessory = deviceInfo.getAccessory();
+			if(accessory!=null&&accessory.size()!=0){
+				accessoryDao.addAccessory(accessory);
+			}
+		}
 		return state;
 	}
 
@@ -60,6 +67,12 @@ public class DeviceInfoServiceImpl implements DeviceInfoService{
 	public int updateDeviceInfo(DeviceInfo deviceInfo) {
 		int state;
 		state = didao.updateDeviceInfo(deviceInfo);
+		if(state>0){
+			List<Accessory> accessory = deviceInfo.getAccessory();
+			if(accessory!=null&&accessory.size()!=0){
+				accessoryDao.addAccessory(accessory);
+			}
+		}
 		return state;
 	}
 

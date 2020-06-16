@@ -56,7 +56,7 @@ public class UserController {
 					String fileName=file[j].getOriginalFilename();
 					String filePath=path+File.separator+fileName;
 					File f2=new File(filePath);
-					file[i].transferTo(f2);
+					file[j].transferTo(f2);
 					accessory.setaId(id);
 					accessory.setAcName(fileName);
 					accessory.setAcUrl(filePath);
@@ -104,7 +104,7 @@ public class UserController {
 					String fileName=file[j].getOriginalFilename();
 					String filePath=path+File.separator+fileName;
 					File f2=new File(filePath);
-					file[i].transferTo(f2);
+					file[j].transferTo(f2);
 					accessory.setaId(user.getUserId());
 					accessory.setAcName(fileName);
 					accessory.setAcUrl(filePath);

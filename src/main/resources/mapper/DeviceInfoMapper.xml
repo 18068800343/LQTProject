@@ -3,19 +3,22 @@
 <mapper namespace="com.ldxx.dao.DeviceInfoDao" >
 	<select id="selectAllDeviceInfo" resultType="DeviceInfo">
 		select 
-			id,code,name,model,type_id,manufacturer,contact,status,remarks,edit_user_id,edit_datetime,delete_state
+			a.id,a.code,a.name,a.model,a.type_id,a.manufacturer,a.contact,a.status,a.remarks,a.edit_user_id,a.edit_datetime,a.delete_state,
+			a.service_condition,a.device_maintenance_cycle,a.enter_time,a.quit_time,a.own_or_lease,b.type_name
 		from
-			device_info
-		where delete_state=1
+			device_info a
+			left join dic_device_type b on a.type_id=b.id
+		where a.delete_state=1
 	</select>
 	<select id="selectByIdDeviceInfo" resultType="DeviceInfo">
-		select id,code,name,model,type_id,manufacturer,contact,status,remarks,edit_user_id,edit_datetime
+		select id,code,name,model,type_id,manufacturer,contact,status,remarks,edit_user_id,edit_datetime,service_condition,device_maintenance_cycle,enter_time,quit_time,own_or_lease
 		from device_info
 		where id=#{id} and delete_state
 	</select>
 	<insert id="addDeviceInfo" parameterType="deviceInfo">
 		insert into device_info(
-			id,code,name,model,type_id,manufacturer,contact,status,remarks,edit_user_id,edit_datetime,delete_state)
+			id,code,name,model,type_id,manufacturer,contact,status,remarks,edit_user_id,edit_datetime,delete_state,
+			service_condition,device_maintenance_cycle,enter_time,quit_time,own_or_lease)
 		values(
 			#{deviceInfo.id},
 			#{deviceInfo.code},
@@ -28,7 +31,12 @@
 			#{deviceInfo.remarks},
 			#{deviceInfo.editUserId},
 			#{deviceInfo.editDatetime},
-			1
+			1,
+			#{deviceInfo.serviceCondition},
+			#{deviceInfo.deviceMaintenanceCycle},
+			#{deviceInfo.enterTime},
+			#{deviceInfo.quitTime},
+			#{deviceInfo.ownOrLease}
 		)
 	</insert>
 	

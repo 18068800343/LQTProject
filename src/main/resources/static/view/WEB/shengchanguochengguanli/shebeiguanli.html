@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
     <link href="../../toastr/toastr.css" rel="stylesheet">
 	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-   <!--  <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css"> -->
+     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
@@ -103,38 +103,67 @@
                         <table class="table table-bordered table-condensed " style="height:auto;">
                         	<tr>
                         		<td style="width: 20%;">设备编号</td>
-                        		<td><input type="text" class="form-control"  readonly="readonly" v-model="code" style="width: 100%;height: 100%;border: none;" ></td>
+                        		<td>{{code}}</td>
                         		<td style="width: 20%;">设备名称</td>
-                        		<td><input type="text" class="form-control" readonly="readonly" v-model="name" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>{{name}}</td>
                             </tr>
                         	<tr>
                         		<td style="width: 20%;">设备型号</td>
-                        		<td><input type="text" class="form-control" readonly="readonly" v-model="model" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>{{model}}</td>
                         		<td style="width: 20%;">设备类型</td>
                                 <td>
-                                    <select class="form-control" disabled style="width: 100%;" v-model="typeId=dicDeviceTypeSelected" id="xgtypeId">
-											<option :value="item.id" v-for="item in dicDeviceTypeList">{{item.typeName}}</option>
-										</select>
+                                    {{typeName}}
                                 </td>
                         	</tr>
                         	<tr>
                         		<td style="width: 20%;">生产厂家</td>
-                        		<td><input type="text" class="form-control" readonly="readonly" v-model="manufacturer" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>{{manufacturer}}</td>
                         		<td style="width: 20%;">联系方式</td>
-                        		<td><input type="text" class="form-control" readonly="readonly" v-model="contact" style="width: 100%;height: 100%;border: none;"></td>
+                        		<td>{{contact}}</td>
                         	</tr>
                         	<tr>
                         		<td style="width: 20%;">完好情况</td>
-                        		<td><input type="text" class="form-control" readonly="readonly" v-model="status" style="width: 100%;height: 100%;border: none;"></td>
-                        		<td></td>
-                        		<td></td>
+                        		<td>{{status}}</td>
+                                <td>自有/租赁</td>
+                                <td>
+                                    {{ownOrLease}}
+                                </td>
                         	</tr>
+                            <tr>
+                                <td style="width: 20%;">进场时间</td>
+                                <td>{{enterTime}}</td>
+                                <td style="width: 20%;">出场时间</td>
+                                <td>{{quitTime}}</td>
+                            </tr>
+                            <tr>
+                                <td>使用情况</td>
+                                <td colspan="3">
+                                    {{serviceCondition}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>设备维修保养周期</td>
+                                <td colspan="3">
+                                    {{deviceMaintenanceCycle}}
+                                </td>
+                            </tr>
                         	<tr>
                         		<td style="width: 20%;">备注</td>
                         		<td colspan="3">
-                        			<textarea class="form-control" style="width:100%;border: none;"rows="3" readonly="readonly" id="" v-model="remarks"> </textarea>
+                        			{{remarks}}
 								</td>
                         	</tr>
+                        </table>
+                        <table class="table table-bordered table-condensed" id="look_accessory">
+                            <thead>
+                            <tr>
+                                <td style="width:20%;">合同附件:</td>
+                                <td colspan="3"></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot></tfoot>
                         </table>
                     </form> 
                 </div>
@@ -183,15 +212,49 @@
                         	<tr>
                         		<td style="width: 20%;">完好情况</td>
                         		<td><input type="text" class="form-control" placeholder="请输入" v-model="status" style="width: 100%;height: 100%;"></td>
-                        		<td></td>
-                        		<td></td>
+                        		<td>自有/租赁</td>
+                        		<td>
+                                    <select class="form-control" style="width: 100%; border:1px solid #DEDEDE;border-radius:5px 5px 5px !important;" v-model="ownOrLease" id="ownOrLease">
+                                        <option>自有</option>
+                                        <option>租赁</option>
+                                    </select>
+                                </td>
                         	</tr>
+                            <tr>
+                                <td style="width: 20%;">进场时间</td>
+                                <td><input type="text" class="form-control" placeholder="请输入" id="enterTime" v-model="enterTime" style="width: 100%;height: 100%;"></td>
+                                <td style="width: 20%;">出场时间</td>
+                                <td><input type="text" class="form-control" placeholder="请输入" id="quitTime" v-model="quitTime" style="width: 100%;height: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>使用情况</td>
+                                <td colspan="3">
+                                    <textarea class="form-control" style="width:100%;"rows="3"  v-model="serviceCondition"> </textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>设备维修保养周期</td>
+                                <td colspan="3">
+                                    <textarea class="form-control" style="width:100%;"rows="3"  v-model="deviceMaintenanceCycle"> </textarea>
+                                </td>
+                            </tr>
                         	<tr>
                         		<td style="width: 20%;">备注</td>
                         		<td colspan="3">
                         			<textarea class="form-control" style="width:100%;"rows="3" id="" v-model="remarks"> </textarea>
 								</td>
                         	</tr>
+                        </table>
+                        <table class="table table-bordered table-condensed" id="new_accessory">
+                            <thead>
+                            <tr>
+                                <td style="width:20%;">合同附件:</td>
+                                <td colspan="2">
+                                    <button type="button" class="btn btn-primary" @click="new_accessory()">增加附件</button>
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
                         </table>
                     </form> 
                 </div>
@@ -242,15 +305,49 @@
                         	<tr>
                         		<td style="width: 20%;">完好情况</td>
                         		<td><input type="text" class="form-control" placeholder="请输入" v-model="status"  style="width: 100%;height: 100%;" ></td>
-                        		<td></td>
-                        		<td></td>
+                                <td>自有/租赁</td>
+                                <td>
+                                    <select class="form-control" style="width: 100%; border:1px solid #DEDEDE;border-radius:5px 5px 5px !important;" v-model="ownOrLease" id="xg_ownOrLease">
+                                        <option>自有</option>
+                                        <option>租赁</option>
+                                    </select>
+                                </td>
                         	</tr>
+                           <tr>
+                               <td style="width: 20%;">进场时间</td>
+                               <td><input type="text" class="form-control" placeholder="请输入" id="xg_enterTime" v-model="enterTime" style="width: 100%;height: 100%;"></td>
+                               <td style="width: 20%;">出场时间</td>
+                               <td><input type="text" class="form-control" placeholder="请输入" id="xg_quitTime" v-model="quitTime" style="width: 100%;height: 100%;"></td>
+                           </tr>
+                           <tr>
+                               <td>使用情况</td>
+                               <td colspan="3">
+                                   <textarea class="form-control" style="width:100%;"rows="3"  v-model="serviceCondition"> </textarea>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>设备维修保养周期</td>
+                               <td colspan="3">
+                                   <textarea class="form-control" style="width:100%;"rows="3"  v-model="deviceMaintenanceCycle"> </textarea>
+                               </td>
+                           </tr>
                         	<tr>
                         		<td style="width: 20%;">备注</td>
                         		<td colspan="3">
-                        			<textarea class="form-control" style="width:100%;"rows="3" id="" v-model="remarks"> </textarea>
+                        			<textarea class="form-control" style="width:100%;"rows="3"  v-model="remarks"> </textarea>
 								</td>
                         	</tr>
+                        </table>
+                        <table class="table table-bordered table-condensed" id="edit_accessory">
+                            <thead>
+                            <tr>
+                                <td style="width:20%;">合同附件:</td>
+                                <td colspan="3"><button type="button" class="btn btn-primary" @click="editAccessory()">添加附件</button></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot></tfoot>
                         </table>
                     </form> 
                 </div>
@@ -270,6 +367,7 @@
 <script src="../../js/jquery.dataTables.min.js"></script>
 <script src="../../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../toastr/toastr.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
 <script src="../../js/quanxian.js"></script>
 <script src="../../js/SmartNotification.min.js"></script>
 <script src="../../js/main.js"></script>
@@ -307,7 +405,7 @@
 					"targets": 7,
 					"searchable": false,
 					"render": function(data, type, full) {
-						    	return  '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详情"  data-toggle="modal" data-target="#allMsg1" onclick="xqhuixian(this)"></i>'
+						    	return  '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详情"  data-toggle="modal" data-target="#allMsg1" onclick="look(this)"></i>'
 	                            +'<i class="iconfont icon-xiugai Pbcb" style="font-size:18px;cursor:pointer;display:none;" title="修改" data-toggle="modal" data-target="#change" onclick="xghxshebei(this)"></i>'
 	                            +'<i class="iconfont icon-shanchu Pbcc" style="font-size:18px;cursor:pointer;display:none;" title="删除" onclick="deleteyige(this)"></i>';
 						        }
@@ -396,7 +494,13 @@
             manufacturer:"",
             contact:"",
             status:"",
-            remarks:""
+            remarks:"",
+            serviceCondition:"",
+            deviceMaintenanceCycle:"",
+            enterTime:"",
+            quitTime:"",
+            ownOrLease:"",
+            file: []
         },
         methods: {
             checknum(msg){           
@@ -405,19 +509,48 @@
                 if(str.length>2)
                 {this._data[msg]=this._data[msg].substr(0,this._data[msg].length-1);}
             },
-            saveshebei:function(){
+            initTime(){
+                var mountedSelf = this; // 当前的vue对象
+                laydate.render({
+                    elem: '#enterTime', //指定元素 绑定laydate的元素，即id= laydate的那个input
+                    type: 'datetime',
+                    done: function (value) { // value 是laydate选择的日期
+                        mountedSelf.enterTime = value; // vue对象的属性设置为当前的日期
+                    },
+                });
+                laydate.render({
+                    elem: '#quitTime', //指定元素 绑定laydate的元素，即id= laydate的那个input
+                    type: 'datetime',
+                    done: function (value) { // value 是laydate选择的日期
+                        mountedSelf.quitTime = value; // vue对象的属性设置为当前的日期
+                    },
+                });
+            },
+            saveshebei:function(event){
                 var dicDeviceType={
                     id:this.typeId,
                     typeName:$("#typeId").find("option:selected").text()
                 };
+
                 if(this.code==""||this.name==""){toastr.error("请填入设备编号或设备名称");return;}
-                this.$http.post('/DeviceInfo/addDeviceInfo',JSON.stringify(this._data),{}).then((res)=>{
+                let formData = new FormData();
+                formData.append('deviceInfo',JSON.stringify(this._data));
+                this.file.forEach((file) => {
+                    formData.append(`file`,file)
+                })
+                let config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                this.$http.post('/DeviceInfo/addDeviceInfo',formData,config).then((res)=>{
                     var resMsg = res.body;
                     resMsg.deviceInfo.dicDeviceType=dicDeviceType;
                     if(resMsg.result>0){
                         $('#mainContent').DataTable().row.add(resMsg.deviceInfo).draw();
                         $("#myModal").modal("hide");
                         toastr.success("添加成功");
+                        initTable()
                     }else{
                         toastr.error("添加失败");
             	    }
@@ -433,12 +566,50 @@
                 },(res)=>{
                     console.log(res.status);
                 });
+            },
+            new_accessory(){
+                $("#new_accessory tbody").append(
+                    "<tr><td>新附件</td><td><input type='file' onchange='getFile(this)'  name='file' class='form-control'>" +
+                    //"<a target='_blank' style='color:blue;overflow:hidden;' download='下载预览'>预览</a></td>" +
+                    "<td style='width:150px;'><button type='button' class='btn btn-danger' onclick='removeFile(this)'>移除附件</button></td></tr>")
             }
+
         }
     });
 //初始化设备类型
 addshebei.DDTPost();
-    
+addshebei.initTime();
+
+
+    function getFile(data){
+        var file = data.files[0];
+        addshebei.file.push(file)
+    }
+
+
+    function removeFile(obj){
+        var tr=$(obj).parents("tr");
+        $(tr).remove();
+    }
+
+    function showImg(dom) {
+        var file = dom.files[0];//获取文件信息
+        var dom = $(dom);
+        if (window.FileReader)
+        {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件    
+            reader.onloadend = function (e) {
+
+                var url = encodeURI(e.target.result);
+
+                $(dom).next().attr("href",e.target.result);
+                //$(".img").attr("src",e.target.result);
+            };
+        }
+    }
+
 var trr;
 //修改回显
 function xghxshebei(obj){
@@ -457,7 +628,65 @@ function xghxshebei(obj){
     xgshebei.remarks=data.remarks;
     xgshebei.dicDeviceTypeSelected=data.typeId;
     xgshebei._data;
+    xgshebei.serviceCondition=data.serviceCondition;
+    xgshebei.deviceMaintenanceCycle=data.deviceMaintenanceCycle;
+    xgshebei.enterTime=data.enterTime;
+    xgshebei.quitTime=data.quitTime;
+    xgshebei.ownOrLease=data.ownOrLease;
+
+    $.ajax({
+        type:"post",
+        url:"/accessory/selectAccessoryById",
+        dataType:"json",
+        data:{
+            id:data.id
+        },
+        success:function(json){
+            $("#edit_accessory thead").siblings().empty();
+            for(var i=0;i<json.length;i++){
+                $("#edit_accessory tbody").append("<tr>"+
+                    "<td style='width:20%;'>附件</td>"+
+                    "<td><a href='"+getLocalPath()+"/LQTProject_file/shebeiguanli_File/"+json[i].acName+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
+                    "<td style='width:150px;'><button type='button' class='btn btn-danger' data1='"+json[i].acUrl+"' data2='"+json[i].aId+"' data3='"+json[i].acName+"' onclick='delete_file(this)'>移除附件</button></td>"+
+                    "</tr>");
+            }
+        }
+    })
 }
+    function getLocalPath(){
+        var pathArray = window.location.pathname.split('/');
+        var secondLevelLocation = pathArray[1];
+        var loginUrl = window.location.protocol + "//"  + window.location.host ;
+        return loginUrl;
+    }
+
+    function delete_file(obj){
+        var url=$(obj).attr("data1");
+        var id=$(obj).attr("data2");
+        var name=$(obj).attr("data3");
+        var msg = "您真的确定要删除吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            $.ajax({
+                type: 'POST',
+                url: '/accessory/deleteAccessoryByIdAndName',
+                dataType: 'json',
+                data: {
+                    aId:id,
+                    acName:name,
+                    acUrl:url
+                },
+                success: function (json) {
+                    if(json==0){
+                        toastr.error("删除失败");
+                    }else{
+                        toastr.success("删除成功");
+                        $(obj).parent().parent().remove();
+                        //$("#myModal2").modal("hide")
+                    }
+                }
+            });
+        }
+    }
 
 var xgshebei=new Vue({
         el:"#change",
@@ -475,7 +704,13 @@ var xgshebei=new Vue({
             remarks:"",
             dicDeviceType:{
                 id:"",
-                typeName:""}
+                typeName:""},
+            serviceCondition:"",
+            deviceMaintenanceCycle:"",
+            enterTime:"",
+            quitTime:"",
+            ownOrLease:"",
+            file:[],
         },
         methods: {
             checknum(msg){           
@@ -490,7 +725,17 @@ var xgshebei=new Vue({
                     typeName:$("#xgtypeId").find("option:selected").text()
                 };
                 if(this.code==""||this.name==""){toastr.error("请填入设备编号或设备名称");return;}
-                this.$http.post('/DeviceInfo/updateDeviceInfo',JSON.stringify(this._data),{}).then((res)=>{
+                let formData = new FormData();
+                formData.append('deviceInfo',JSON.stringify(this._data));
+                this.file.forEach((file) => {
+                    formData.append(`file`,file)
+                })
+                let config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                this.$http.post('/DeviceInfo/updateDeviceInfo',formData,config).then((res)=>{
                     var resMsg = res.body;
                     resMsg.deviceInfo.dicDeviceType=dicDeviceType;
                     if(resMsg.result>0){
@@ -498,7 +743,9 @@ var xgshebei=new Vue({
 //                      $('#mainContent').DataTable().row.add(resMsg.deviceInfo).draw();
                         $("#change").modal("hide");
                         toastr.success("修改成功");
+                        resMsg.deviceInfo.typeName=$("#xgtypeId").find("option:selected").text();
                         initTableQuanxian()
+                        initTable()
                     }else{
                         toastr.error("修改失败");
             	}
@@ -514,31 +761,83 @@ var xgshebei=new Vue({
                 },(res)=>{
                     console.log(res.status);
                 });
+            },
+            initTime(){
+                var mountedSelf = this; // 当前的vue对象
+                laydate.render({
+                    elem: '#xg_enterTime', //指定元素 绑定laydate的元素，即id= laydate的那个input
+                    type: 'datetime',
+                    done: function (value) { // value 是laydate选择的日期
+                        mountedSelf.enterTime = value; // vue对象的属性设置为当前的日期
+                    },
+                });
+                laydate.render({
+                    elem: '#xg_quitTime', //指定元素 绑定laydate的元素，即id= laydate的那个input
+                    type: 'datetime',
+                    done: function (value) { // value 是laydate选择的日期
+                        mountedSelf.quitTime = value; // vue对象的属性设置为当前的日期
+                    },
+                });
+            },
+            editAccessory(){
+                $("#edit_accessory tfoot").append("<tr><td>新附件</td><td><input type='file' onchange='xg_getFile(this)'  name='file' class='form-control'></td>" +
+                    //"<a target='_blank' style='color:blue;overflow:hidden;' download='下载预览'>预览</a></td><td style='width:150px;'>" +
+                    "<td style='width:150px;'><button type='button' class='btn btn-danger' onclick='removeFile(this)'>移除附件</button></td></tr>")
             }
         }
     });
 //初始化设备类型
 xgshebei.DDTPost();
+xgshebei.initTime();
+
+    function xg_getFile(data){
+        var file = data.files[0];
+        xgshebei.file.push(file)
+    }
 
     //修改回显
-function xqhuixian(obj){
+function look(obj){
     var tr=$(obj).parents("tr");
     var data=$("#mainContent").DataTable().row(tr).data();
     trr=$(obj).closest('tr');
-    xqshebei.id=data.id;
-    xqshebei.code=data.code;
-    xqshebei.name=data.name;
-    xqshebei.model=data.model;
-    xqshebei.typeId=data.typeId;
-    xqshebei.dicDeviceType=data.dicDeviceType;
-    xqshebei.manufacturer=data.manufacturer;
-    xqshebei.contact=data.contact;
-    xqshebei.status=data.status;
-    xqshebei.remarks=data.remarks;
-    xqshebei.dicDeviceTypeSelected=data.typeId;
-    xqshebei._data;
+    lookshebei.id=data.id;
+    lookshebei.code=data.code;
+    lookshebei.name=data.name;
+    lookshebei.model=data.model;
+    lookshebei.typeId=data.typeId;
+    lookshebei.dicDeviceType=data.dicDeviceType;
+    lookshebei.manufacturer=data.manufacturer;
+    lookshebei.contact=data.contact;
+    lookshebei.status=data.status;
+    lookshebei.remarks=data.remarks;
+    lookshebei.dicDeviceTypeSelected=data.typeId;
+    lookshebei._data;
+    lookshebei.serviceCondition=data.serviceCondition;
+    lookshebei.deviceMaintenanceCycle=data.deviceMaintenanceCycle;
+    lookshebei.enterTime=data.enterTime;
+    lookshebei.quitTime=data.quitTime;
+    lookshebei.ownOrLease=data.ownOrLease;
+    lookshebei.typeName=data.typeName;
+
+    $.ajax({
+        type:"post",
+        url:"/accessory/selectAccessoryById",
+        dataType:"json",
+        data:{
+            id:data.id
+        },
+        success:function(json){
+            $("#look_accessory thead").siblings().empty();
+            for(var i=0;i<json.length;i++){
+                $("#look_accessory tbody").append("<tr>"+
+                    "<td style='width:20%;'>附件</td>"+
+                    "<td><a href='"+getLocalPath()+"/LQTProject_file/shebeiguanli_File/"+json[i].acName+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
+                    "</tr>");
+            }
+        }
+    })
 }
-    var xqshebei=new Vue({
+    var lookshebei=new Vue({
         el:"#allMsg1",
         data:{
             id:"",
@@ -554,24 +853,21 @@ function xqhuixian(obj){
             remarks:"",
             dicDeviceType:{
                 id:"",
-                typeName:""}
+                typeName:""},
+            serviceCondition:"",
+            deviceMaintenanceCycle:"",
+            enterTime:"",
+            quitTime:"",
+            ownOrLease:"",
+            typeName:"",
         },
         methods: {
-            DDTPost:function(){
-                //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-                this.$http.post('/DicDeviceType/selectAllDicDeviceType',JSON.stringify(this._data),{}).then((res)=>{
-                    this.dicDeviceTypeList=res.body;
-                    this.dicDeviceTypeSelected=addshebei.dicDeviceTypeList[0].id;
-                },(res)=>{
-                    console.log(res.status);
-                });
-            }
+
         }
     });
 
 
-//初始化设备类型
-xqshebei.DDTPost();
+
 
 
 //配比材料删除
