@@ -3,10 +3,11 @@ package com.ldxx.vo;
 import com.ldxx.bean.SiteConstruction;
 
 public class SiteConstructionVo extends SiteConstruction {
-	
+
 	private String roadno;
-	
+
 	private String roadname;
+
 
 	public String getRoadno() {
 		return roadno;

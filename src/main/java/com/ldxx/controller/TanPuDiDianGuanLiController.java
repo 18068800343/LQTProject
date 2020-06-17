@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -22,40 +23,40 @@ import java.util.Map;
 @Controller
 @RequestMapping("/TanPuDiDianGuanLi")
 public class TanPuDiDianGuanLiController {
-	
-	@Autowired
-	private TanPuDiDianGuanLiService service;
-	
-	@Autowired
-	private TanPuDiDianGuanLiDao dao;
 
-	@RequestMapping("/getDistinctTanPuDiDian")
-	@ResponseBody
+    @Autowired
+    private TanPuDiDianGuanLiService service;
+
+    @Resource
+    private TanPuDiDianGuanLiDao dao;
+
+    @RequestMapping("/getDistinctTanPuDiDian")
+    @ResponseBody
     public List<SiteConstruction> getDistinctTanPuDiDian() {
         return service.getDistinctTanPuDiDian();
     }
-	
-	@RequestMapping("/getAllTanPuDiDian")
-	@ResponseBody
-	public List<SiteConstructionVo> getAllTanPuDiDian(HttpSession session,String  roadquanxain) {
-		String luduanquanxian="";
-		if(roadquanxain!=null){
-			luduanquanxian=roadquanxain;
-		}else{
-			User user = (User) session.getAttribute("user");
-	        luduanquanxian = user.getLuduanquanxian();
-		}
-        
-        return dao.getAllTanPuDiDian(luduanquanxian);
-	}
-	
-	@RequestMapping("/delTanPuDiDian")
+
+    @RequestMapping("/getAllTanPuDiDian")
+    @ResponseBody
+    public List<SiteConstructionVo> getAllTanPuDiDian(HttpSession session, String roadquanxain) {
+        String luduanquanxian = "";
+        if (roadquanxain != null) {
+            luduanquanxian = roadquanxain;
+        } else {
+            User user = (User) session.getAttribute("user");
+            luduanquanxian = user.getLuduanquanxian();
+        }
+
+        return dao.getAllTanPuDiDianVo();
+    }
+
+    @RequestMapping("/delTanPuDiDian")
 	@ResponseBody
 	public int delTanPuDiDian(String id,String status) {
 		return dao.delTanPuDiDian(id,status);
 	}
-	
-	@RequestMapping("/addTanPuDiDian")
+
+    @RequestMapping("/addTanPuDiDian")
 	@ResponseBody
 	public String addTanPuDiDian(@RequestBody SiteConstructionVo siteConstructionVo) {
 		JSONObject jsonObject = new JSONObject();
@@ -74,8 +75,8 @@ public class TanPuDiDianGuanLiController {
 		jsonObject.put("obj",siteConstructionVo);
 		return jsonObject.toString();
 	}
-	
-	@RequestMapping("/updateTanPuDiDian")
+
+    @RequestMapping("/updateTanPuDiDian")
 	@ResponseBody
 	public String updateTanPuDiDian(@RequestBody SiteConstructionVo siteConstructionVo) {
 		JSONObject jsonObject = new JSONObject();
@@ -92,8 +93,8 @@ public class TanPuDiDianGuanLiController {
 		jsonObject.put("obj",siteConstructionVo);
 		return jsonObject.toString();
 	}
-	
-	@RequestMapping("/getBiaoDuanByLuDuan")
+
+    @RequestMapping("/getBiaoDuanByLuDuan")
 	@ResponseBody
 	public List<SiteConstruction> getBiaoDuanByLuDuan(String roadno) {
 		Map<String, String> map = new HashMap<>();
@@ -127,8 +128,8 @@ public class TanPuDiDianGuanLiController {
 			User user = (User) session.getAttribute("user");
 			luduanquanxian = user.getLuduanquanxian();
 		}
-		
-		return dao.getIDisroadName(luduanquanxian);
+
+        return dao.getIDisroadName(luduanquanxian);
 	}
 
 }

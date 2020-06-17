@@ -15,6 +15,7 @@ import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
 import com.ldxx.vo.PlanProductionCollectionVo;
+import com.ldxx.vo.PlanProductionVo;
 import com.ldxx.vo.SiteConstructionVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,73 +75,75 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
 			jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
 
 			String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
-			jsonObject.put("resultMsg",daoMsg);
-            jsonObject.put("daoMsg", i);
-            jsonObject.put("obj", planProductionCollection);
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        String result = jsonObject.toString();
-        return result;
-    }
+			jsonObject.put("resultMsg", daoMsg);
+			jsonObject.put("daoMsg", i);
+			jsonObject.put("obj", planProductionCollection);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String result = jsonObject.toString();
+		return result;
+	}
 
 	@Override
-	public String addShengChanJiHuaAndSiteConstruction(PlanProductionCollection planProductionCollection, SiteConstructionVo siteConstructionVo, HttpSession session) {
+	public String addShengChanJiHuaAndSiteConstruction(PlanProductionVo planProductionVo, HttpSession session) {
 		JSONObject jsonObject = new JSONObject();
 		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
 		String jhDateTime = DateUtil.getDateStrByPattern(DateConstant.DATE14_, new Date());
-		String planno = planProductionCollection.getPlanno();
-		planProductionCollection.setPlanno(planno + jhDateTime);
-		planProductionCollection.setDatetime(dateTime);
-		planProductionCollection.setEditdatetime(dateTime);
-		planProductionCollection.setDeletestate(1);
+		String planno = planProductionVo.getPlanno();
+		planProductionVo.setPlanno(planno + jhDateTime);
+		planProductionVo.setDatetime(dateTime);
+		planProductionVo.setEditdatetime(dateTime);
+		planProductionVo.setDeletestate(1);
 		User user = (User) session.getAttribute("user");
 		if (null != user) {
-            planProductionCollection.setEdituserid(user.getUserId());
-            ;
-        }
-        String planId = LDXXUtils.getUUID12();
-        planProductionCollection.setPlanid(planId);
+			planProductionVo.setEdituserid(user.getUserId());
+			;
+		}
+		String planId = LDXXUtils.getUUID12();
+		planProductionVo.setPlanid(planId);
 
-        PlanProductionCount planProductionCount = new PlanProductionCount();
-        planProductionCount.setDatetime(dateTime);
-        planProductionCount.setId(LDXXUtils.getUUID12());
-        planProductionCount.setPlanid(planId);
-        planProductionCount.setPdneedincordec(planProductionCollection.getPdneed());
-        planProductionCount.setPdneedsourcestate(1);
-        try {
+		PlanProductionCount planProductionCount = new PlanProductionCount();
+		planProductionCount.setDatetime(dateTime);
+		planProductionCount.setId(LDXXUtils.getUUID12());
+		planProductionCount.setPlanid(planId);
+		planProductionCount.setPdneedincordec(planProductionVo.getPdneed());
+		planProductionCount.setPdneedsourcestate(1);
+		try {
 
 			String siteId = LDXXUtils.getUUID12();
-			siteConstructionVo.setId(siteId);
-			siteConstructionVo.setDeletestate(1);
-			tanPuDiDianGuanLiDao.addTanPuDiDian(siteConstructionVo);
+			planProductionVo.setSiteId(siteId);
+			planProductionVo.setDeletestate(1);
 
-			int i = dao.addShengChanJiHua(planProductionCollection);
+			tanPuDiDianGuanLiDao.addTanPuDiDianVo(planProductionVo);
+
+			int i = dao.addShengChanJiHuaVo(planProductionVo);
+
 			jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
 
 			String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
 			jsonObject.put("resultMsg", daoMsg);
 			jsonObject.put("daoMsg", i);
-			jsonObject.put("obj", planProductionCollection);
+			jsonObject.put("obj", planProductionVo);
 		} catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        String result = jsonObject.toString();
-        return result;
-    }
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String result = jsonObject.toString();
+		return result;
+	}
 
-    @Override
-    public String updateShengChanJiHua(PlanProductionCollection planProductionCollection, HttpSession session) {
-        JSONObject jsonObject = new JSONObject();
-        String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
-        planProductionCollection.setEditdatetime(dateTime);
-        planProductionCollection.setDeletestate(1);
-        User user = (User) session.getAttribute("user");
-        if (null != user) {
-            planProductionCollection.setEdituserid(user.getUserId());
-            ;
+	@Override
+	public String updateShengChanJiHua(PlanProductionCollection planProductionCollection, HttpSession session) {
+		JSONObject jsonObject = new JSONObject();
+		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		planProductionCollection.setEditdatetime(dateTime);
+		planProductionCollection.setDeletestate(1);
+		User user = (User) session.getAttribute("user");
+		if (null != user) {
+			planProductionCollection.setEdituserid(user.getUserId());
+			;
 		}
 		try {
 			PlanProductionCollection ppcOld = dao.getShengChanJiHuaById(planProductionCollection.getPlanid());
@@ -158,8 +161,46 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
 			planProductionCount.setPdneedincordec(newJiHuaZengNum);
 			jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
 			String chnsMsg = MsgFormatUtils.getMsgByResult(i, "修改");
-			jsonObject.put("resultMsg",chnsMsg);
-			jsonObject.put("daoMsg",i);
+			jsonObject.put("resultMsg", chnsMsg);
+			jsonObject.put("daoMsg", i);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonObject.toString();
+	}
+
+	@Override
+	public String updateShengChanJiHuaVo(PlanProductionVo planProductionVo, HttpSession session) {
+		JSONObject jsonObject = new JSONObject();
+		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		planProductionVo.setEditdatetime(dateTime);
+		planProductionVo.setDeletestate(1);
+		User user = (User) session.getAttribute("user");
+		if (null != user) {
+			planProductionVo.setEdituserid(user.getUserId());
+		}
+		try {
+			PlanProductionCollection ppcOld = dao.getShengChanJiHuaById(planProductionVo.getPlanid());
+			BigDecimal oldPdNeed = ppcOld.getPdneed();
+			BigDecimal newPdNeed = planProductionVo.getPdneed();
+			BigDecimal newJiHuaZengNum = newPdNeed.subtract(oldPdNeed == null ? BigDecimal.valueOf(0) : oldPdNeed);
+
+			PlanProductionCount planProductionCount = new PlanProductionCount();
+
+			tanPuDiDianGuanLiDao.updateTanPuDiDianVo(planProductionVo);
+			int i = dao.updateShengChanJiHuaVo(planProductionVo);
+
+
+			planProductionCount.setId(LDXXUtils.getUUID12());
+			planProductionCount.setPdneedsourcestate(1);
+			planProductionCount.setDatetime(dateTime);
+			planProductionCount.setPlanid(planProductionVo.getPlanid());
+			planProductionCount.setPdneedincordec(newJiHuaZengNum);
+			jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
+			String chnsMsg = MsgFormatUtils.getMsgByResult(i, "修改");
+			jsonObject.put("resultMsg", chnsMsg);
+			jsonObject.put("daoMsg", i);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

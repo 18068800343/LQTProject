@@ -1,30 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ldxx.dao.TanPuDiDianGuanLiDao" >
+<mapper namespace="com.ldxx.dao.TanPuDiDianGuanLiDao">
 	<insert id="addTanPuDiDian" parameterType="siteConstructionVo">
 		insert into site_construction 
 			(id,road_id,site_number,lng,lat,stake_mark,lane,remarks,delete_state,road_name,direction,team,turn_round_stake_mark)
 			values(#{id},#{roadid},#{sitenumber},#{lng},#{lat},#{stakemark},
 			#{lane},#{remarks},#{deletestate},#{roadName},#{direction},#{team},#{turnRoundStakeMark})
 	</insert>
-	
+
+	<insert id="addTanPuDiDianVo" parameterType="siteConstructionVo">
+		insert into site_construction
+			(id,road_id,site_number,lng,lat,stake_mark,lane,remarks,delete_state,road_name,direction,team,turn_round_stake_mark)
+			values(#{siteId},#{roadid},#{sitenumber},#{lng},#{lat},#{stakeMark},
+			#{lane},#{remarks},#{deletestate},#{roadName},#{direction},#{team},#{turnRoundStakeMark})
+	</insert>
+
 	<update id="updateTanPuDiDian" parameterType="siteConstructionVo">
-		update site_construction 
+		update site_construction
 			set road_id=#{roadid},
 			site_number=#{sitenumber},
 			lng=#{lng},lat=#{lat},
 			stake_mark=#{stakemark},
-			lane=#{lane},remarks=#{remarks},road_name=#{roadName},direction=#{direction},team=#{team},turn_round_stake_mark=#{turnRoundStakeMark} where id=#{id} and delete_state=1
+			lane=#{lane},remarks=#{remarks},road_name=#{roadName},
+			direction=#{direction},team=#{team},
+			turn_round_stake_mark=#{turnRoundStakeMark}
+			where id=#{id} and delete_state=1
 	</update>
-	
+	<update id="updateTanPuDiDianVo" parameterType="siteConstructionVo">
+		update site_construction
+			set road_id=#{roadid},
+			site_number=#{sitenumber},
+			lng=#{lng},lat=#{lat},
+			stake_mark=#{stakeMark},
+			lane=#{lane},remarks=#{remarks},road_name=#{roadName},
+			direction=#{direction},team=#{team},
+			turn_round_stake_mark=#{turnRoundStakeMark}
+			where id=#{siteId} and delete_state=1
+	</update>
+
 
 	<update id="delTanPuDiDian" parameterType="String">
 		update site_construction set delete_state=#{status} where id=#{id} and delete_state=1
 	</update>
 
-	<update id="updateUser" parameterType="user" >
+	<update id="updateUser" parameterType="user">
 	  update u_user
-	  set 
+	  set
 	    username=#{user.username,jdbcType=VARCHAR},
 	    password=#{user.password,jdbcType=VARCHAR},
 	    work_id = #{user.workId,jdbcType=VARCHAR},
@@ -68,25 +89,29 @@
 			and
 		</if>
 	</sql>
-	
-	
+
+
 	<select id="getDistinctTanPuDiDian" resultType="siteConstruction">
 		select DISTINCT road_no,site_name from site_construction where sc.delete_state != 0
 	</select>
-	
+
 	<select id="getAllTanPuDiDian" resultType="siteConstructionVo">
-		select sc.*,srm.road_no,srm.road_name from site_construction sc 
+		select sc.*,srm.road_no,srm.road_name from site_construction sc
 		LEFT JOIN sys_road_mgn srm on sc.road_id = srm.road_id and srm.delete_state != 0
 		<where>
 			<include refid="luduanquanxian_sql"></include>
-			 sc.delete_state != 0
-        </where>
+			sc.delete_state != 0
+		</where>
 	</select>
-	
+
+	<select id="getAllTanPuDiDianVo" resultType="siteConstructionVo">
+		select sc.*  from site_construction sc
+	</select>
+
 	<select id="getBiaoDuanByLuDuan" resultType="siteConstruction" parameterType="map">
 		select * from site_construction where  road_no=#{roadno} and delete_state != 0
 	</select>
-	
+
 	<select id="selectUserById" parameterType="String" resultType="user">
 		select * from u_user where user_id=#{userId}
 	</select>
@@ -100,16 +125,16 @@
 
 	<select id="getIDisroadName" resultType="siteConstructionVo">
 		SELECT
-			DISTINCT sc.road_id,
-			srm.road_name
+		DISTINCT sc.road_id,
+		srm.road_name
 		FROM
-			site_construction sc
+		site_construction sc
 		LEFT JOIN sys_road_mgn srm ON sc.road_id = srm.road_id
 		AND srm.delete_state != 0
-        <where>
-            <include refid="luduanquanxian_sql"></include>
-             sc.delete_state != 0
-        </where>
+		<where>
+			<include refid="luduanquanxian_sql"></include>
+			sc.delete_state != 0
+		</where>
 	</select>
 
 

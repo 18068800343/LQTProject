@@ -10,9 +10,7 @@ import com.ldxx.service.ShengChanJiHuaService;
 import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
-import com.ldxx.vo.PlanConstructionDeviationVo;
-import com.ldxx.vo.PlanProductionCollectionVo;
-import com.ldxx.vo.SiteConstructionVo;
+import com.ldxx.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,53 +21,55 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/ShengChanJiHua")
 public class ShengChanJiHuaController {
-	
+
 	@Autowired
 	private ShengChanJiHuaService service;
 	@Resource
 	private ShengChanJiHuaDao dao;
-	
+
 	@RequestMapping("/getAllShengChanJiHua")
 	@ResponseBody
-    public List<PlanProductionCollectionVo> getAllShengChanJiHua() {
-        return service.getShengChanJiHuaListByCondition();
-    }
-	
+	public List<PlanProductionCollectionVo> getAllShengChanJiHua() {
+		return service.getShengChanJiHuaListByCondition();
+	}
+
 	@RequestMapping("/getPianChaById")
 	@ResponseBody
 	public PlanConstructionDeviationVo getPianChaById(String id) {
 		return dao.getPianChaById(id);
 	}
+
 	@RequestMapping("/linkShiGongPianCha")
 	@ResponseBody
 	public int linkShiGongPianCha(String planid, String pianchaid) {
- 		int i = dao.linkShiGongPianCha(planid,pianchaid);
+		int i = dao.linkShiGongPianCha(planid, pianchaid);
 
 		return i;
 	}
-	
+
 	@RequestMapping("/getAllShiGongPianCha")
 	@ResponseBody
 	public List<PlanConstructionDeviationVo> getAllShiGongPianCha() {
 		return dao.getAllShiGongPianCha();
 	}
-	
+
 	@RequestMapping("/delShengChanJiHuaById")
 	@ResponseBody
 	public int delShengChanJiHuaById(String planid) {
 		return dao.delShengChanJiHuaById(planid);
 	}
-	
+
 	@RequestMapping("/delShiGongPianChaById")
 	@ResponseBody
 	public int delShiGongPianChaById(String id) {
 		return dao.delShiGongPianChaById(id);
 	}
-	
+
 	@RequestMapping("/addShiGongPianCha")
 	@ResponseBody
 	public String addShiGongPianCha(@RequestBody PlanConstructionDeviation planConstructionDeviation) {
@@ -85,7 +85,7 @@ public class ShengChanJiHuaController {
 		jsonObject.put("obj",planConstructionDeviation);
 		return jsonObject.toString();
 	}
-	
+
 	@RequestMapping("/updateShiGongPianCha")
 	@ResponseBody
 	public String updateShiGongPianCha(@RequestBody PlanConstructionDeviation planConstructionDeviation) {
@@ -103,18 +103,19 @@ public class ShengChanJiHuaController {
 
 	@RequestMapping("/addShengChanJiHua")
 	@ResponseBody
-	public String addShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection, @RequestBody SiteConstructionVo siteConstructionVo, HttpSession session) {
+	public String addShengChanJiHua(@RequestBody PlanProductionVo planProductionVo, HttpSession session) {
 
-		String result = service.addShengChanJiHuaAndSiteConstruction(planProductionCollection, siteConstructionVo, session);
+
+		String result = service.addShengChanJiHuaAndSiteConstruction(planProductionVo, session);
 
 		return result;
 	}
-	
+
 	@RequestMapping("/updateShengChanJiHua")
 	@ResponseBody
-	public String updateShengChanJiHua(@RequestBody PlanProductionCollection planProductionCollection,HttpSession session) {
+	public String updateShengChanJiHua(@RequestBody PlanProductionVo planProductionVo, HttpSession session) {
 
-		String result = service.updateShengChanJiHua(planProductionCollection,session);
+		String result = service.updateShengChanJiHuaVo(planProductionVo, session);
 
 		return result;
 	}

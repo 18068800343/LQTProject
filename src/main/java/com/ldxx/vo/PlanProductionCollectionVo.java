@@ -2,23 +2,104 @@ package com.ldxx.vo;
 
 import com.ldxx.bean.PlanProductionCollection;
 
-public class PlanProductionCollectionVo extends PlanProductionCollection
-{
+import java.math.BigDecimal;
+
+public class PlanProductionCollectionVo extends PlanProductionCollection {
 	private String uname;
-	
+
 	private String flno;
-	
+
 	private String roadname;
-	
+
 	private String roadno;
-	
+
 	private String pianchano;
-	
+
 	private String pianchaname;
 
 	private String sumneed;
 
 	private String planstatecn;
+
+	private String stakeMark;
+
+	private String turnRoundStakeMark;
+
+	private String team;
+
+	private String direction;
+
+	private String roadName;
+
+	private BigDecimal lng;
+
+	private BigDecimal lat;
+
+	private String siteId;
+
+	public String getSiteId() {
+		return siteId;
+	}
+
+	public void setSiteId(String siteId) {
+		this.siteId = siteId;
+	}
+
+	public String getStakeMark() {
+		return stakeMark;
+	}
+
+	public void setStakeMark(String stakeMark) {
+		this.stakeMark = stakeMark;
+	}
+
+	public String getTurnRoundStakeMark() {
+		return turnRoundStakeMark;
+	}
+
+	public void setTurnRoundStakeMark(String turnRoundStakeMark) {
+		this.turnRoundStakeMark = turnRoundStakeMark;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
+	}
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public String getRoadName() {
+		return roadName;
+	}
+
+	public void setRoadName(String roadName) {
+		this.roadName = roadName;
+	}
+
+	public BigDecimal getLng() {
+		return lng;
+	}
+
+	public void setLng(BigDecimal lng) {
+		this.lng = lng;
+	}
+
+	public BigDecimal getLat() {
+		return lat;
+	}
+
+	public void setLat(BigDecimal lat) {
+		this.lat = lat;
+	}
 
 	public String getPlanstatecn() {
 		return planstatecn;
