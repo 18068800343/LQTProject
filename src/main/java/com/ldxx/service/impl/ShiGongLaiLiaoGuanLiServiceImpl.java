@@ -46,28 +46,30 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
         int i = dao.addShiGongLaiLiao(siteFieldMaterialMgtVo);
         //PianChaLiangVo piancha = dao.getPiancha(siteFieldMaterialMgtVo.getBatchid(),siteFieldMaterialMgtVo.getTemp());
         PianChaLiangVo piancha = shengChanJiHuaDao.getPiancha(siteFieldMaterialMgtVo);
-        //piancha1=来料温度-生产计划的到场温度要求
-        BigDecimal piancha1 = piancha.getPianCha();
-        //施工偏差的到场温度要求
-        BigDecimal piancha2 = piancha.getArriveTempOffset();
-        if(piancha1!=null&&piancha2!=null){
-            if(piancha1.compareTo(piancha2)==1){
-                //piancha1>piancha2；新增来料温度预警
-                SiteIncomingMaterialTempWarningVo sv=new SiteIncomingMaterialTempWarningVo();
-                sv.setId(LDXXUtils.getUUID12());
-                sv.setDeletestate(1);
-                String nowDateStr = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
-                sv.setDatetime(nowDateStr);
-                sv.setEditdatetime(nowDateStr);
-                sv.setFieid(siteFieldMaterialMgtVo.getId());
-                sv.setWarningcontent("大于施工偏差要求的到场温度"+piancha1.subtract(piancha2)+"度");
-                sv.setWarningstate(0);
-                User user = (User) session.getAttribute("user");
-                if(null!=user) {
-                    sv.setEdituserid(user.getUserId());
-                    sv.setUname(user.getuName());
+        if(piancha!=null){
+            //piancha1=来料温度-生产计划的到场温度要求
+            BigDecimal piancha1 = piancha.getPianCha();
+            //施工偏差的到场温度要求
+            BigDecimal piancha2 = piancha.getArriveTempOffset();
+            if(piancha1!=null&&piancha2!=null){
+                if(piancha1.compareTo(piancha2)==1){
+                    //piancha1>piancha2；新增来料温度预警
+                    SiteIncomingMaterialTempWarningVo sv=new SiteIncomingMaterialTempWarningVo();
+                    sv.setId(LDXXUtils.getUUID12());
+                    sv.setDeletestate(1);
+                    String nowDateStr = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+                    sv.setDatetime(nowDateStr);
+                    sv.setEditdatetime(nowDateStr);
+                    sv.setFieid(siteFieldMaterialMgtVo.getId());
+                    sv.setWarningcontent("大于施工偏差要求的到场温度"+piancha1.subtract(piancha2)+"度");
+                    sv.setWarningstate(0);
+                    User user = (User) session.getAttribute("user");
+                    if(null!=user) {
+                        sv.setEdituserid(user.getUserId());
+                        sv.setUname(user.getuName());
+                    }
+                    i = laidao.addLaiLiaoWenDu(sv);
                 }
-                i = laidao.addLaiLiaoWenDu(sv);
             }
         }
         return i;
