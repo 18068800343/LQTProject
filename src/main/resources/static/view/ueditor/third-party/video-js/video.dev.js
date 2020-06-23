@@ -76,15 +76,15 @@ vjs.ACCESS_PROTOCOL = ('https:' == document.location.protocol ? 'https://' : 'ht
  */
 vjs.options = {
   // Default order of fallback technology
-  'techOrder': ['html5','flash'],
+  'techOrder': ['html5', 'flash'],
   // techOrder: ['flash','html5'],
 
   'html5': {},
   'flash': {},
 
   // Default of web browser is 300x150. Should rely on source width/height.
-  'width': 300,
-  'height': 150,
+  'width': 1400,
+  'height': 700,
   // defaultVolume: 0.85,
   'defaultVolume': 0.00, // The freakin seaguls are driving me crazy!
 
@@ -108,7 +108,8 @@ vjs.options = {
 // Set CDN Version of swf
 // The added (+) blocks the replace from changing this 4.3 string
 if (vjs.CDN_VERSION !== 'GENERATED'+'_CDN_VSN') {
-  videojs.options['flash']['swf'] = vjs.ACCESS_PROTOCOL + 'vjs.zencdn.net/'+vjs.CDN_VERSION+'/video-js.swf';
+  videojs.options['flash']['swf'] = vjs.ACCESS_PROTOCOL + 'vjs.zencdn.net/' + vjs.CDN_VERSION + '/video-js.swf';
+  // videojs.options['flash']['swf'] = '/img/VideoJS.swf';
 }
 
 /**

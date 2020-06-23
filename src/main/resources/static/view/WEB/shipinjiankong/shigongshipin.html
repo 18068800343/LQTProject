@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
     <link href="../../toastr/toastr.css" rel="stylesheet">
 	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-   <!--  <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css"> -->
+   <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
@@ -120,16 +120,7 @@
 <!--<script src="../../video.min.js"></script>-->
 <!--<script src="../../js/videojs-flash.min.js"></script>-->
 <script>
-
-    // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
     videojs.options.flash.swf = '/img/VideoJS.swf';
-    let player = videojs('my-player'); //my-player为页面video元素的id
-    player.play(); //播放
-       // 1. 播放   player.play()
-       // 2. 停止   player.pause()
-       // 3. 暂停   player.pause()
-
-
 
     $(document).ready( function () {
     	
@@ -195,9 +186,14 @@
         $("#Caddress").val(address);
         $("#CProprietor-unit").val(ProprietorUnit);
         $("#CCode").val(Code);
-        rowIndex = bb.parentNode.parentNode.rowIndex; 
+        rowIndex = bb.parentNode.parentNode.rowIndex;
     }
 
-    
+    // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
+    let player = videojs('my-player'); //my-player为页面video元素的id
+    player.play(); //播放
+    // 1. 播放   player.play()
+    // 2. 停止   player.pause()
+    // 3. 暂停   player.pause()
 </script>
 </html>
