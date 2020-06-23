@@ -279,7 +279,7 @@
                                 </tr>
                                 <tr>
                                     <td>时间</td>
-                                    <td><input type="text" v-model="datetime" id="nianyaDate" class="form-control" style="width: 100%;"/></td>
+                                    <td><input type="text" v-model="datetime" id="xgnianyaDate" class="form-control" style="width: 100%;"/></td>
                                 </tr>
                             </table>
                         </form>
@@ -740,6 +740,13 @@
         type: 'datetime',
         done: function(value, date){
             newNianYaVm.datetime=value;
+        }
+    });
+    laydate.render({
+        elem: '#xgnianyaDate', //指定元素
+        type: 'datetime',
+        done: function(value, date){
+            xgNianYaVm.datetime=value;
         }
     });
 
