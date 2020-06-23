@@ -110,7 +110,7 @@
         <!--<div class="layui-tab-item weadmin-body">-->
         <div class="zhuti-content">
             <div class="UpperPart">
-                <div class="UpperPartL">
+                <div class="UpperPartL" style="z-index:10 !important;">
                     <div class="form-inline" style="margin: 5PX;float: left;">
                         <div class="form-group">
                             <input type="text" style="width:200px;margin-left: 15px;" class="form-control" placeholder="起始时间"
@@ -118,7 +118,7 @@
                         </div>
                         <span class="form-group" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
                         <div class="form-group">
-                            <input type="text" style="width:200px" class="form-control" placeholder="结束时间" id="reservationEnd"
+                            <input type="text" style="width:200px;" class="form-control" placeholder="结束时间" id="reservationEnd"
                                    onclick=""><br/>
                         </div>
                         <div class="form-group">
@@ -131,9 +131,9 @@
                 </div>
             </div>
         </div>
-        <div class="LowerPart" style=" background-color: #ffffff">
+        <div class="LowerPart" style="background-color: #ffffff; ">
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-            <div id="two" style="width: 1000px;height:600px;" ></div>
+            <div id="two" style="width: 1500px;height:600px;z-index:5;" ></div>
         </div>
     </div>
 </div>

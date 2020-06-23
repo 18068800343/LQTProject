@@ -113,9 +113,9 @@ function setCangChuOption(map){
 
 function setPeibiOption(list){
 	let peibiOption = {
-		title: {
-			text: '折线图堆叠'
-		},
+//		title: {
+//			text: '折线图堆叠'
+//		},
 		legend: {
 			data:['料1','料2','料3','料4','料5','料6','粉用量','沥青用量']
 		},
@@ -215,9 +215,9 @@ function setPeibiOption(list){
 
 function setYouShiBiOption(list){
 	let youshibiOption = {
-		title: {
-			text: '折线图堆叠'
-		},
+//		title: {
+//			text: '折线图堆叠'
+//		},
 		legend: {
 			data:['油石比']
 		},
@@ -282,9 +282,9 @@ function setYouShiBiOption(list){
 
 function setTanPuLiChengOption(list){
 	let tanPuLiChengOption = {
-		title: {
-			text: '折线图堆叠'
-		},
+//		title: {
+//			text: '折线图堆叠'
+//		},
 		legend: {
 			data:['所选路段']
 		},
@@ -349,9 +349,9 @@ function setTanPuLiChengOption(list){
 
 function setTanPuWenDuOption(list){
 	let tanPuWenDuOption = {
-		title: {
-			text: '折线图堆叠'
-		},
+//		title: {
+//			text: '折线图堆叠'
+//		},
 		legend: {
 			data:['温度1','温度2']
 		},
@@ -421,9 +421,9 @@ function setTanPuWenDuOption(list){
 
 function setTanPuLiXiDuOption(list){
 	let tanPuLiXiDuOption = {
-		title: {
-			text: '折线图堆叠'
-		},
+//		title: {
+//			text: '折线图堆叠'
+//		},
 		legend: {
 			data:['离析度']
 		},
@@ -489,11 +489,12 @@ function setTanPuLiXiDuOption(list){
 
 function setTongGuoVoOption(list){
 	let tongGuoOption = {
-		title: {
-			text: '折线图堆叠'
-		},
+//		title: {
+//			text: '折线图堆叠'
+//		},
 		legend: {
-			data:['料1','料2','料3','料4','料5','料6','粉用量','沥青用量']
+			data:['料1','料2','料3','料4','料5','料6','粉用量','沥青用量'],
+			
 		},
 		grid: {
 			left: '3%',
@@ -568,11 +569,12 @@ function setTongGuoVoOption(list){
 
 function setPianChaVoOption(list){
 	let pianChaOption = {
-		title: {
-			text: '折线图堆叠'
-		},
+//		title: {
+//			text: '折线图堆叠'
+//		},
 		legend: {
-			data:['料1偏差','料2偏差','料3偏差','料4偏差','料5偏差','料6偏差','粉偏差','沥青偏差','通过率偏差4.75','通过率偏差2.36','通过率偏差0.075']
+			data:['料1偏差','料2偏差','料3偏差','料4偏差','料5偏差','料6偏差','粉偏差','沥青偏差','通过率偏差4.75','通过率偏差2.36','通过率偏差0.075'],
+			right:10
 		},
 		grid: {
 			left: '3%',

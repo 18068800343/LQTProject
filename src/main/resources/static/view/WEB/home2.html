@@ -192,52 +192,31 @@
 						name: '',
 						type: 'map',
 						mapType: 'jiangsu',
-						selectedMode: false,
+						roam: true,
+						/* selectedMode: false, */
 						label: {
-							normal: {
-								show: true,
-								textStyle: {
-									color: '#fff'
-								}
-							},
-							emphasis: {
-								textStyle: {
-									color: '#fff'
-								}
-							}
-						},
+				              normal: {
+				                show: true,
+				                textStyle: {
+				                  color: 'red'
+				                }
+				              },
+				            },
 						itemStyle: {
-							normal: {
+							normal: {	
 								color: '#2e70bc', //地图背景色
-								areaColor: '#006fff',
-								borderWidth: 0,
-								shadowColor: 'rgba(0,54,255, 1)',
-								shadowBlur: 100,
-								areaColor: '#0e1c47',
-
-								         //shadowColor: '#fff',
-
-								        shadowColor: '#ccc',
-
-								          shadowBlur: 15,
-
-								        opacity: 0.8,
 								label: {
 									show: true
 								},
 								borderColor: '#82E1FF',
-								borderWidth: 2
+								borderWidth: 1
 							},
-
+							
 							emphasis: {
 								label: {
 									show: true,
 									 normal: {  
-                            textStyle: {
-                                fontSize: 15,
-                                fontWeight: 'bold',
-                                color: 'red'
-                            }
+                            
                         }
 								}
 							}
@@ -265,8 +244,9 @@
 							 /* symbol: 'circle', */
 							
 							itemStyle: {
-								
-								
+								normal: {
+			                        color: '#7FE0FF'
+			                    }
 							},
 							
 							data: [{
