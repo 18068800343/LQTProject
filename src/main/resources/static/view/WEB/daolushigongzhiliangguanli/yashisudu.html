@@ -73,11 +73,11 @@
             <div class="UpperPart">
                 <div class="UpperPartL" style="width:50%;">
                     <button type="button" class="btn btn-primary Pebba" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入碾压速度</button>
-                    <div class="form-inline">
+                    <!--<div class="form-inline">
                         <label>路段筛选：</label>
                         <select class="form-control" id="luduan" style="width:30%;">
                         </select>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="UpperPartR">
                     <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
@@ -91,7 +91,7 @@
                      <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                         <th>批次</th>
                         <th>压路机</th>
-                        <th>路段名称</th>
+                        <!--<th>路段名称</th>-->
                         <th>标段名称</th>
                         <th>碾压速度</th>
                         <th>时间</th>
@@ -110,14 +110,14 @@
 
     <div role="tabpanel" class="tab-pane" id="profile">
         <div style="margin:5px;z-index: 999;">
-            <form class="form-inline">
+            <!--<form class="form-inline">
                 <label>路段编号:</label>
                 <select class="form-control" style="width:180px;" id="luduanbianhao">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
-            </form>
+            </form>-->
         </div>
         <div class="LowerPart" style="margin-top:3px;">
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
@@ -198,12 +198,12 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>路段</td>
+                                    <!--<td>路段</td>
                                     <td><input type="text" style="display: none;" ref="getInputValue2" :value="roadid | optionTxt(roadList,'roadid','roadno')" />
                                         <input type="text" style="display: none;" ref="getInputValue1" :value="roadid | optionTxt(roadList,'roadid','roadname')" />
                                         <select @change="roadChange" class="form-control" style="width: 100%;" v-model="roadid" id="roadid">
                                             <option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
-                                        </select></td>
+                                        </select></td>-->
                                     <td>标段</td>
                                     <td>
                                         <input type="text" style="display: none;" ref="getInputValueSiteId" :value="siteid | optionTxt(siteList,'id','sitenumber')" />
@@ -211,10 +211,10 @@
                                             <option :value="site.id" v-for="site in siteList">{{site.sitenumber}}</option>
                                         </select>
                                     </td>
-                                </tr>
-                                <tr>
                                     <td>碾压速度</td>
                                     <td><input type="text" @blur="reg(compactionspeed,'xiaoshu','compactionspeed')" v-model="compactionspeed" class="form-control" style="width: 100%;"/></td>
+                                </tr>
+                                <tr>
                                     <td>时间</td>
                                     <td><input type="text" v-model="datetime" id="nianyaDate" class="form-control" style="width: 100%;"/></td>
                                 </tr>
@@ -261,12 +261,12 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>路段</td>
+                                    <!--<td>路段</td>
                                     <td><input type="text" style="display: none;" ref="getInputValue2" :value="roadid | optionTxt(roadList,'roadid','roadno')" />
                                         <input type="text" style="display: none;" ref="getInputValue1" :value="roadid | optionTxt(roadList,'roadid','roadname')" />
                                         <select @change="roadChange" class="form-control" style="width: 100%;" v-model="roadid" id="roadid">
                                             <option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
-                                        </select></td>
+                                        </select></td>-->
                                     <td>标段</td>
                                     <td>
                                         <input type="text" style="display: none;" ref="getInputValueSiteId" :value="siteid | optionTxt(siteList,'id','sitenumber')" />
@@ -274,10 +274,10 @@
                                             <option :value="site.id" v-for="site in siteList">{{site.sitenumber}}</option>
                                         </select>
                                     </td>
-                                </tr>
-                                <tr>
                                     <td>碾压速度</td>
                                     <td><input type="text" @blur="reg(compactionspeed,'xiaoshu','compactionspeed')" v-model="compactionspeed" class="form-control" style="width: 100%;"/></td>
+                                </tr>
+                                <tr>
                                     <td>时间</td>
                                     <td><input type="text" v-model="datetime" id="nianyaDate" class="form-control" style="width: 100%;"/></td>
                                 </tr>
@@ -310,167 +310,66 @@
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script>
     $(document).ready( function () {
-        initRoad();
-        $("#luduanbianhao").trigger("change");
+        /*initRoad();
+        $("#luduanbianhao").trigger("change");*/
+        initTable()
     });
 
 
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
-    var option;
-    $("#luduanbianhao").on("change", function(){
-        if($("#luduanbianhao").val()==1){
-            option = {
-                title: {
-                    text: '压实速度(km/h)',
-                },
-                color: ['#003366', '#4cabce',],
-                tooltip : {
-                    trigger: 'axis',
-                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                    }
-                },
-                legend: {
-                    data: ['钢轮', '胶轮',]
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis : [
-                    {
-                        type : 'category',
-                        data : ['2019-10-10', '2019-10-11', '2019-10-12', '2019-10-13', '2019-10-14', '2019-10-15', '2019-10-16'],
-                        axisTick: {
-                            alignWithLabel: true
-                        }
-                    }
-                ],
-                yAxis : [
-                    {
-                        type : 'value'
-                    }
-                ],
-                series : [
-                    {
-                        name:'钢轮',
-                        type:'bar',
-                        barGap: 0,
-                        data:[17, 32, 50, 84, 90, 120, 220]
-                    },
-                    {
-                        name: '胶轮',
-                        type: 'bar',
-                        data: [20, 52, 91, 234, 190,210,300]
-                    }
-                ]
-            };
-        }else if($("#luduanbianhao").val()==2){
-            option = {
-                title: {
-                    text: '压实速度(km/h)',
-                },
-                color: ['#003366', '#4cabce',],
-                tooltip : {
-                    trigger: 'axis',
-                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                    }
-                },
-                legend: {
-                    data: ['钢轮', '胶轮',]
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis : [
-                    {
-                        type : 'category',
-                        data : ['2019-10-10', '2019-10-11', '2019-10-12', '2019-10-13', '2019-10-14', '2019-10-15', '2019-10-16'],
-                        axisTick: {
-                            alignWithLabel: true
-                        }
-                    }
-                ],
-                yAxis : [
-                    {
-                        type : 'value'
-                    }
-                ],
-                series : [
-                    {
-                        name:'钢轮',
-                        type:'bar',
-                        barGap: 0,
-                        data:[40, 52, 100, 134, 190, 230, 260]
-                    },
-                    {
-                        name: '胶轮',
-                        type: 'bar',
-                        data: [20, 82, 111, 134, 190,220,300]
-                    }
-                ]
-            };
-        }else if($("#luduanbianhao").val()==3){
-            option = {
-                title: {
-                    text: '压实速度(km/h)',
-                },
-                color: ['#003366', '#4cabce',],
-                tooltip : {
-                    trigger: 'axis',
-                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                    }
-                },
-                legend: {
-                    data: ['钢轮', '胶轮',]
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis : [
-                    {
-                        type : 'category',
-                        data : ['2019-10-10', '2019-10-11', '2019-10-12', '2019-10-13', '2019-10-14', '2019-10-15', '2019-10-16'],
-                        axisTick: {
-                            alignWithLabel: true
-                        }
-                    }
-                ],
-                yAxis : [
-                    {
-                        type : 'value'
-                    }
-                ],
-                series : [
-                    {
-                        name:'钢轮',
-                        type:'bar',
-                        barGap: 0,
-                        data:[10, 52, 200, 334, 390, 330, 220]
-                    },
-                    {
-                        name: '胶轮',
-                        type: 'bar',
-                        data: [220, 182, 191, 234, 290,290,300]
-                    }
-                ]
-            };
-        }
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    })
+    var option = {
+        title: {
+            text: '压实速度(km/h)',
+        },
+        color: ['#003366', '#4cabce',],
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        legend: {
+            data: ['钢轮', '胶轮',]
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                type : 'category',
+                data : ['2019-10-10', '2019-10-11', '2019-10-12', '2019-10-13', '2019-10-14', '2019-10-15', '2019-10-16'],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'钢轮',
+                type:'bar',
+                barGap: 0,
+                data:[17, 32, 50, 84, 90, 120, 220]
+            },
+            {
+                name: '胶轮',
+                type: 'bar',
+                data: [20, 52, 91, 234, 190,210,300]
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
 
 
 
@@ -489,9 +388,9 @@
             "data" : "batch"
         }, {
             "data" : "roadrollername"
-        }, {
+        }, /*{
             "data" : "roadname"
-        }, {
+        },*/ {
             "data" : "sitenumber"
         }, {
             "data" : "compactionspeed"
@@ -504,7 +403,7 @@
         }],
         "columnDefs" : [ {
             "class" : "tcenter",
-            "targets" : 7,
+            "targets" : 6,
             "searchable" : true,
             "render" : function(data, type, full) {
                 var xiugai = '<i class="iconfont icon-xiugai Pebbb" style="font-size:18px;cursor:pointer;display:none;" data-f="'
@@ -567,7 +466,7 @@
         });
     }
 
-    function initRoad() {
+    /*function initRoad() {
         $.ajax({
             type : 'POST',
             url :'/SysRoadMgnController/getAllSysRoadMgn',
@@ -602,7 +501,7 @@
                 }
             });
         }
-    })
+    })*/
 
     function initTable(){
         $.ajax({
@@ -653,8 +552,8 @@
             //新建生产计划保存按钮事件
             save: function () {
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-                this.roadname = this.$refs.getInputValue1.value;
-                this.roadno = this.$refs.getInputValue2.value;
+                //this.roadname = this.$refs.getInputValue1.value;
+                //this.roadno = this.$refs.getInputValue2.value;
                 this.sitenumber = this.$refs.getInputValueSiteId.value;
                 this.batch = this.$refs.getInputValueBatch.value;
                 this.$http.post('/NianYaSuDuController/addNianYaSuDu',JSON.stringify(this._data),{}).then((res)=>{
@@ -690,7 +589,8 @@
                 },(res)=>{
                     console.log(res.status);
                 });
-            },roadPost:function(){
+            },
+            /*roadPost:function(){
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
                 this.$http.post('/SysRoadMgnController/getAllSysRoadMgnLowcase2',{},{emulateJSON:true}).then((res)=>{
                     this.roadList=res.body;
@@ -710,10 +610,19 @@
                 },(res)=>{
                     console.log(res.status);
                 });
+            }*/
+            roadinit:function(){
+                this.$http.post('/TanPuDiDianGuanLi/getAllTanPuDiDian',{},{emulateJSON:true}).then((res)=>{
+                    this.siteList=res.body;
+                    this.siteid=newNianYaVm.siteList[0].id;
+                    //this.siteId=this.roadBiaoduanhao
+                },(res)=>{
+                    console.log("初始化失败");
+                });
             }
         }
     })
-    newNianYaVm.roadPost();
+    newNianYaVm.roadinit();
     newNianYaVm.batchPost();
 
     var xgNianYaVm = new Vue({
@@ -739,8 +648,8 @@
             //新建生产计划保存按钮事件
             save: function () {
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-                this.roadname = this.$refs.getInputValue1.value;
-                this.roadno = this.$refs.getInputValue2.value;
+                //this.roadname = this.$refs.getInputValue1.value;
+                //this.roadno = this.$refs.getInputValue2.value;
                 this.sitenumber = this.$refs.getInputValueSiteId.value;
                 this.batch = this.$refs.getInputValueBatch.value;
                 this.$http.post('/NianYaSuDuController/updateNianYaSuDu',JSON.stringify(this._data),{}).then((res)=>{
@@ -777,7 +686,8 @@
                 },(res)=>{
                     console.log(res.status);
                 });
-            },roadPost:function(){
+            },
+            /*roadPost:function(){
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
                 this.$http.post('/SysRoadMgnController/getAllSysRoadMgnLowcase2',{},{emulateJSON:true}).then((res)=>{
                     this.roadList=res.body;
@@ -809,10 +719,19 @@
                 },(res)=>{
                     console.log(res.status);
                 });
+            }*/
+            roadinit:function(){
+                this.$http.post('/TanPuDiDianGuanLi/getAllTanPuDiDian',{},{emulateJSON:true}).then((res)=>{
+                    this.siteList=res.body;
+                    this.siteid=xgNianYaVm.siteList[0].id;
+                    //this.siteId=this.roadBiaoduanhao
+                },(res)=>{
+                    console.log("初始化失败");
+                });
             }
         }
     })
-    xgNianYaVm.roadPost();
+    xgNianYaVm.roadinit();
     xgNianYaVm.batchPost();
 
 
@@ -867,7 +786,7 @@
         xgNianYaVm.sitenumber=data.sitenumber
         xgNianYaVm.datetime=data.datetime
         xgNianYaVm.siteid=data.siteid
-        xgNianYaVm.xg_roadChange(data.siteid)
+        //xgNianYaVm.xg_roadChange(data.siteid)
         xgNianYaVm.batchid=data.batchid
         xgNianYaVm.batch=data.batch
         xgNianYaVm.compactionspeed=data.compactionspeed

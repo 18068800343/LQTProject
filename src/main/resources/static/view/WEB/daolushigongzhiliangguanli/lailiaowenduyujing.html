@@ -63,11 +63,11 @@
     <div class="UpperPart">
         <div class="UpperPartL" style="width:50%;">
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入来料温度预警</button> -->
-            <div class="form-inline" style="margin: 5px;">
+            <!--<div class="form-inline" style="margin: 5px;">
                 <label>路段筛选：</label>
                 <select class="form-control" id="luduan" style="width:200px;">
                 </select>
-            </div>
+            </div>-->
         </div>
         <div class="UpperPartR">
             <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
@@ -80,8 +80,8 @@
             <thead>
              <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                 <th style="width: 15%;">沥青砼批次</th>
-                <th style="width: 8%;">路段编号</th>
-                <th style="width: 10%;">路段名称</th>
+                 <!--<th style="width: 8%;">路段编号</th>
+                 <th style="width: 10%;">路段名称</th>-->
                 <th style="width: 10%;">沥青砼类型</th>
                 <th style="width: 20%;">预警内容</th>
                 <th style="width: 10%;">处理状态</th>
@@ -239,7 +239,7 @@
 <script src="../../js/myTool.js"></script>
 <script>
     $(document).ready( function () {
-        initRoad();
+        initTable()
     });
     var table=$('#mainContent').dataTable({
         "deferRender": true,
@@ -254,11 +254,11 @@
         "order": [[1, 'asc']],
         "columns" : [ {
             "data" : "batch"
-        }, {
+        }, /*{
             "data" : "roadno"
         },{
             "data" : "roadname"
-        }, {
+        }, */{
             "data" : "flname"
         }, {
             "data" : "warningcontent"
@@ -273,7 +273,7 @@
         }],
         "columnDefs" : [ {
                             "class" : "tcenter",
-                            "targets" : 8,
+                            "targets" : 6,
                             "searchable" : true,
                             "render" : function(data, type, full) {
                                 //var xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+ full+ '"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>';
@@ -290,7 +290,7 @@
                             }
                         },{
                             "class" : "tcenter",
-                            "targets" : 5,
+                            "targets" : 3,
                             "searchable" : true,
                             "render" : function(data, type, full) {
                                 if(data=='0'){
@@ -351,7 +351,7 @@
         });
     }
 
-    function initRoad() {
+    /*function initRoad() {
         $.ajax({
             type : 'POST',
             url :'/SysRoadMgnController/getAllSysRoadMgn',
@@ -386,7 +386,7 @@
                 }
             });
         }
-    })
+    })*/
 
     function initTable(){
         $.ajax({

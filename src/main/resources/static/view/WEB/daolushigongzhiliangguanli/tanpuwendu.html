@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
     <link href="../../toastr/toastr.css" rel="stylesheet">
 	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-   <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
@@ -86,11 +86,11 @@
                         <div class="form-inline">
 
                             <button type="button" class="btn btn-primary Peafa" data-toggle="modal" data-target="#myModal" style="margin-top:5PX;margin-right:20px;float: left;">录入摊铺温度</button>
-                            <div class="form-group">
+                            <!--<div class="form-group">
                                 <label>路段筛选：</label>
                                 <select class="form-control" id="luduan" style="width:200px;">
                                 </select>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                     <div class="UpperPartR">
@@ -101,7 +101,7 @@
                     <table class="layui-table" lay-skin="line" id="mainContent">
                         <thead>
                          <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
-                            <th>路段名称</th>
+                            <!--<th>路段名称</th>-->
                             <th>摊铺地点</th>
                             <th>摊铺温度1</th>
                             <th>摊铺温度2</th>
@@ -122,11 +122,11 @@
                 <div class="UpperPart">
                     <div class="UpperPartL">
                         <div class="form-inline" style="margin: 5PX;">
-                            <span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择路段:</span>
+                            <!--<span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择路段:</span>
                             <div class="pull-left col-xs-2.5">
                                 <select class="form-control" style="width:180px;margin-left: 15px;" id="luduanB" style="width:30%;">
                                 </select>
-                            </div>
+                            </div>-->
                             <span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">&nbsp;</span>
                             <div class="pull-left col-xs-2.5">
                                 <input type="text" style="width:180px;margin-left: 15px;" class="form-control" placeholder="起始时间"
@@ -158,11 +158,11 @@
                 <div class="UpperPart">
                     <div class="UpperPartL">
                         <div class="form-inline" style="margin: 5PX;">
-                            <span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择路段:</span>
+                            <!--<span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择路段:</span>
                             <div class="pull-left col-xs-2.5">
                                 <select class="form-control" style="width:180px;margin-left: 15px;" id="luduanB2" style="width:30%;">
                                 </select>
-                            </div>
+                            </div>-->
                             <span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">&nbsp;</span>
                             <div class="pull-left col-xs-2.5">
                                 <input type="text" style="width:180px;margin-left: 15px;" class="form-control" placeholder="起始时间"
@@ -174,7 +174,7 @@
                                        onclick=""><br/>
                             </div>
                             <div class="pull-left col-sm-1">
-                                <a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
+                                <a class="btn btn-primary btn-sm" onclick="searchBydate2()">检索</a>
                             </div>
                         </div>
                     </div>
@@ -204,28 +204,28 @@
                     <form class="form-inline">
                         <table  class="layui-table" lay-skin="line" >
                             <tr>
-                                <td style="width: 20%;">路段名称</td>
+                                <!--<td style="width: 20%;">路段名称</td>
                                 <td style="width: 30%;">
                                     <select class="form-control" @change="roadBianhaoChange" v-model="roadBianhao" style="width: 100%;" id="roadid">
                                         <option :value="road.roadid" v-for="road in luduanbianhao">{{road.roadname}}</option>
                                     </select>
-                                </td>
+                                </td>-->
                                 <td style="width: 20%;">摊铺地点</td>
                                 <td style="width: 30%;">
                                     <select class="form-control" style="width: 100%;" v-model="siteId=roadBiaoduanhao"  id="roadnumber">
                                         <option :value="road.id" v-for="road in biaoduanhao">{{road.sitenumber}}</option>
                                     </select>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>摊铺温度1</td>
                                 <td><input type="text"  class="form-control"  v-model="temp" id="temp" placeholder="请输入" style="width: 100%; height: 100%;" /></td>
+                            </tr>
+                            <tr>
                                 <td>摊铺温度2</td>
                                 <td><input type="text"  class="form-control"  v-model="temp2" id="temp2" placeholder="请输入" style="width: 100%; height: 100%;" /></td>
-                            </tr>
                                 <td>施工时间</td>
                                 <td><input type="text"  class="form-control"  v-model="datetime" id="datetime" placeholder="请输入" style="width: 100%; height: 100%; "></td>
-                                <td colspan="2"></td>
+                            </tr>
+
                         </table>
                     </form>
                 </div>
@@ -252,29 +252,28 @@
                     <form class="form-inline">
                         <table  class="layui-table" lay-skin="line" >
                             <tr>
-                                <td style="width: 20%;">路段名称</td>
+                                <!--<td style="width: 20%;">路段名称</td>
                                 <td style="width: 30%;">
                                     <select class="form-control" @change="roadBianhaoChange" v-model="roadBianhao" style="width: 100%;" id="roadid">
                                         <option :value="road.roadid" v-for="road in luduanbianhao">{{road.roadname}}</option>
                                     </select>
-                                </td>
+                                </td>-->
                                 <td style="width: 20%;">摊铺地点</td>
                                 <td style="width: 30%;">
                                     <select class="form-control" style="width: 100%;" v-model="siteId=roadBiaoduanhao"  id="roadnumber">
                                         <option :value="road.id" v-for="road in biaoduanhao">{{road.sitenumber}}</option>
                                     </select>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>摊铺温度1</td>
                                 <td><input type="text" class="form-control" v-model="temp" id="temp" placeholder="请输入" style="width: 100%; height: 100%; "/></td>
+                            </tr>
+                            <tr>
                                 <td>摊铺温度2</td>
                                 <td><input type="text" class="form-control" v-model="temp2" id="temp2" placeholder="请输入" style="width: 100%; height: 100%; "/></td>
-                                
-                            </tr>
                                 <td>施工时间</td>
                                 <td><input type="text" class="form-control" v-model="datetime" id="datetime" placeholder="请输入" style="width: 100%; height: 100%;"></td>
-                                <td colspan="2"></td>
+
+                            </tr>
                         </table>
                     </form>
                 </div>
@@ -323,9 +322,10 @@
                 xg_tanpuwendu.datetime=value;
             }
         });
-        initRoad()
+        /*initRoad()
         $("#luduanB").trigger("change");
-        $("#luduanB2").trigger("change");
+        $("#luduanB2").trigger("change");*/
+        initTable()
     });
 
     var table = $('#mainContent').dataTable({
@@ -339,7 +339,7 @@
             "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
         },
         "columns": [
-            { "data": "roadName"},
+            //{ "data": "roadName"},
             { "data": "siteNumber"},
             { "data": "temp"},
             { "data": "temp2"},
@@ -350,7 +350,7 @@
         "columnDefs": [
             {
                 "class": "tcenter",
-                "targets": 6,
+                "targets": 5,
                 "searchable": true,
                 "render": function(data, type, full) {
                     var xiugai='<i class="iconfont icon-xiugai Peafb" style="font-size:18px;cursor:pointer;display:none;" data-f="'+full+'"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>'
@@ -409,7 +409,7 @@
         });
     }
 
-    function initRoad() {
+    /*function initRoad() {
         $.ajax({
             type : 'POST',
             url :'/SysRoadMgnController/getAllSysRoadMgn',
@@ -497,7 +497,7 @@
             }
         });
 
-    })
+    })*/
 
     function initTable() {
         $.ajax({
@@ -545,7 +545,7 @@
 
                 });
             },
-            roadBianhao:function(){
+            /*roadBianhao:function(){
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
                 this.$http.post('/TanPuDiDianGuanLi/getIDisroadName',{},{emulateJSON:true}).then((res)=>{
                     this.luduanbianhao=res.body;
@@ -563,10 +563,19 @@
                 },(res)=>{
                     console.log("初始化失败");
                 });
+            }*/
+            roadinit:function(){
+                this.$http.post('/TanPuDiDianGuanLi/getAllTanPuDiDian',{},{emulateJSON:true}).then((res)=>{
+                    this.biaoduanhao=res.body;
+                    this.roadBiaoduanhao=tanpuwendu.biaoduanhao[0].id;
+                    this.siteId=this.roadBiaoduanhao
+                },(res)=>{
+                    console.log("初始化失败");
+                });
             }
         }
     })
-    tanpuwendu.roadBianhao();
+    tanpuwendu.roadinit();
 
 
     function delMsg(obj){
@@ -608,7 +617,8 @@
         var data = $("#mainContent").DataTable().row(tr).data();
         xg_tanpuwendu.id=data.id
         xg_tanpuwendu.roadBianhao=data.roadId
-        xg_tanpuwendu.xg_roadBianhaoChange(data.siteId)
+        xg_tanpuwendu.roadBiaoduanhao=data.siteId
+        //xg_tanpuwendu.xg_roadBianhaoChange(data.siteId)
         xg_tanpuwendu.datetime=data.datetime;
         xg_tanpuwendu.temp=data.temp;
         xg_tanpuwendu.temp2=data.temp2;
@@ -646,7 +656,7 @@
 
                 });
             },
-            roadBianhao:function(){
+            /*roadBianhao:function(){
                 //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
                 this.$http.post('/TanPuDiDianGuanLi/getIDisroadName',{},{emulateJSON:true}).then((res)=>{
                     this.luduanbianhao=res.body;
@@ -673,10 +683,19 @@
                 },(res)=>{
                     console.log("初始化失败");
                 });
+            }*/
+            roadinit:function(){
+                this.$http.post('/TanPuDiDianGuanLi/getAllTanPuDiDian',{},{emulateJSON:true}).then((res)=>{
+                    this.biaoduanhao=res.body;
+                    this.roadBiaoduanhao=xg_tanpuwendu.biaoduanhao[0].id;
+                    this.siteId=this.roadBiaoduanhao
+                },(res)=>{
+                    console.log("初始化失败");
+                });
             }
         }
     })
-    xg_tanpuwendu.roadBianhao();
+    xg_tanpuwendu.roadinit();
 
 
     function initPeiBiEcharts(startTime, endTime) {
@@ -685,7 +704,7 @@
             url: '/SiteRoadMileageTemp/getTanPuWenDuVoListByTime',
             dataType: 'json',
             data: {
-                roadId:$("#luduanB").val(),
+                //roadId:$("#luduanB").val(),
                 beginTime: startTime,
                 endTime: endTime
             },
@@ -778,6 +797,27 @@
 
         initPeiBiEcharts(start, end);
         console.log(start);
+    }
+
+
+    function searchBydate2(){
+        let begin = $('#reservation2').val();
+        let start = begin.replace(/年|月/g, '-').replace('日', '');
+        let end = $('#reservationEnd2').val().replace(/年|月/g, '-').replace('日', '');
+
+        $.ajax({
+            type : 'POST',
+            url : '/SiteRoadMileageTemp/getTanPuLiXiDuVoListByTime',
+            dataType : 'json',
+            data : {
+                //roadId : luduanB2,
+                beginTime: start,
+                endTime: end
+            },
+            success : function(json) {
+                initMychart2(json);
+            }
+        });
     }
 
     function myTrim(x) {

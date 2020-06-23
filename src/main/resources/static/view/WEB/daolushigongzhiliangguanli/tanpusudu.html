@@ -26,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
     <link href="../../toastr/toastr.css" rel="stylesheet">
 	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-   <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
@@ -82,11 +82,11 @@
 
                         <div class="form-inline">
                             <button type="button" class="btn btn-primary Peada form-group" data-toggle="modal" data-target="#myModal" style="margin-top: 5PX;margin-right: 20px;">录入摊铺里程</button>
-                            <div class="form-group">
+                            <!--<div class="form-group">
                                 <label>路段筛选：</label>
                                 <select class="form-control" id="luduan" style="width:200px;margin-left: 10px;">
                                 </select>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                     <div class="UpperPartR">
@@ -97,7 +97,7 @@
                     <table class="layui-table" lay-skin="line"  id="mainContent">
                         <thead>
                           <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
-                            <th>路段名称</th>
+                            <!--<th>路段名称</th>-->
                             <th>摊铺地点</th>
                             <th>摊铺速度</th>
                             <th>施工时间</th>
@@ -117,11 +117,11 @@
                 <div class="UpperPart">
                     <div class="UpperPartL">
                         <div class="form-inline" style="margin: 5PX;">
-                            <span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择路段:</span>
+                            <!--<span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择路段:</span>
                             <div class="pull-left col-xs-2.5">
                                 <select class="form-control" style="width:180px;margin-left: 15px;" id="luduanB" style="width:30%;">
                                 </select>
-                            </div>
+                            </div>-->
                             <span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">&nbsp;</span>
                             <div class="pull-left col-xs-2.5">
                                 <input type="text" style="width:180px;margin-left: 15px;" class="form-control" placeholder="起始时间"
@@ -166,24 +166,26 @@
                     <form class="form-inline">
                         <table class="layui-table" lay-skin="line">
                             <tr>
-                                <td>路段名称</td>
+                                <!--<td>路段名称</td>
                                 <td>
 									<select class="form-control" @change="roadChange" v-model="roadSelected" style="width: 100%;" id="roadid">
 										<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
 									</select>
-								</td>
+								</td>-->
                                 <td>摊铺地点</td>
                                 <td>
 									<select class="form-control" style="width: 100%;" v-model="siteId=roadSelected2"  id="roadnumber">
 										<option :value="road.id" v-for="road in roadList2">{{road.sitenumber}}</option>
 									</select>
 								</td>
-                            </tr>
-                            <tr>
                                 <td>摊铺速度</td>
                                 <td><input type="text"  class="form-control" v-model="speed" id="speed" placeholder="请输入"style="width: 100%; height: 100%;"></td>
+                            </tr>
+                            <tr>
                                 <td>施工时间</td>
                                 <td><input type="text" class="form-control" v-model="datetime" id="datetime" placeholder="请输入"style="width: 100%; height: 100%; "></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </table>
                     </form>
@@ -212,20 +214,18 @@
                     <form class="form-inline">
                         <table  class="layui-table" lay-skin="line">
 							<tr>
-								<td>路段名称</td>
+								<!--<td>路段名称</td>
 								<td>
 									<select class="form-control" @change="roadChange" v-model="roadSelected" style="width: 100%;" id="roadid">
 										<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
 									</select>
-								</td>
+								</td>-->
 								<td>摊铺地点</td>
 								<td>
 									<select class="form-control" style="width: 100%;" v-model="siteId = roadSelected2"  id="roadnumber">
 										<option :value="road.id" v-for="road in roadList2">{{road.sitenumber}}</option>
 									</select>
 								</td>
-							</tr>
-							<tr>
 								<td>摊铺速度</td>
 								<td><input type="text" class="form-control" v-model="speed" id="speed" placeholder="请输入"style="width: 100%; height: 100%; "></td>
 								<td>施工时间</td>
@@ -278,8 +278,9 @@
 				xg_Tanpusudu.datetime=value;
 			}
 		});
-        initRoad();
-        $("#luduanB").trigger("change");
+        /*initRoad();
+        $("#luduanB").trigger("change");*/
+        initTable()
     });
 
 	var table = $('#mainContent').dataTable({
@@ -293,7 +294,7 @@
 			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
 		"columns": [
-			{ "data": "roadName"},
+			/*{ "data": "roadName"},*/
 			{ "data": "siteNumber"},
 			{ "data": "speed"},
 			{ "data": "datetime"},
@@ -303,7 +304,7 @@
 		"columnDefs": [
 			{
 				"class": "tcenter",
-				"targets": 5,
+				"targets": 4,
 				"searchable": true,
 				"render": function(data, type, full) {
 					var xiugai='<i class="iconfont icon-xiugai Peaeb" style="font-size:18px;cursor:pointer;display:none;" data-f="'+full+'"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>'
@@ -362,7 +363,7 @@
         });
     }
 
-    function initRoad() {
+    /*function initRoad() {
         $.ajax({
             type : 'POST',
             url :'/SysRoadMgnController/getAllSysRoadMgn',
@@ -401,7 +402,7 @@
                 }
             });
         }
-    })
+    })*/
 
 	function initTable() {
 		$.ajax({
@@ -456,7 +457,7 @@
 
 				});
 			},
-			roadPost:function(){
+			/*roadPost:function(){
 				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
 				this.$http.post('/TanPuDiDianGuanLi/getIDisroadName',{},{emulateJSON:true}).then((res)=>{
 					this.roadList=res.body;
@@ -474,11 +475,20 @@
 				},(res)=>{
 					console.log("初始化失败");
 				});
-			}
+			}*/
+            roadinit:function(){
+                this.$http.post('/TanPuDiDianGuanLi/getAllTanPuDiDian',{},{emulateJSON:true}).then((res)=>{
+                    this.roadList2=res.body;
+                    this.roadSelected2=Tanpusudu.roadList2[0].id;
+                    this.siteId=this.roadSelected2
+                },(res)=>{
+                    console.log("初始化失败");
+                });
+            }
 		}
 	})
-	Tanpusudu.roadPost();
-
+	//Tanpusudu.roadPost();
+    Tanpusudu.roadinit();
 
 	//修改
 	function udMsg(obj) {
@@ -486,8 +496,8 @@
 		var data = $("#mainContent").DataTable().row(tr).data();
 		xg_Tanpusudu.id=data.id;
 		xg_Tanpusudu.roadSelected=data.roadId;
-		//xg_Tanpulicheng.roadSelected2=data.siteId;
-		xg_Tanpusudu.xg_roadChange(data.siteId)
+        xg_Tanpusudu.roadSelected2=data.siteId;
+        //xg_Tanpusudu.xg_roadChange(data.siteId)
 		xg_Tanpusudu.datetime=data.datetime;
 		xg_Tanpusudu.speed=data.speed;
 
@@ -525,7 +535,7 @@
 
 				});
 			},
-			roadPost:function(){
+			/*roadPost:function(){
 				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
 				this.$http.post('/TanPuDiDianGuanLi/getIDisroadName',{},{emulateJSON:true}).then((res)=>{
 					this.roadList=res.body;
@@ -552,10 +562,19 @@
 				},(res)=>{
 					console.log("初始化失败");
 				});
-			}
+			}*/
+            roadinit:function(){
+                this.$http.post('/TanPuDiDianGuanLi/getAllTanPuDiDian',{},{emulateJSON:true}).then((res)=>{
+                    this.roadList2=res.body;
+                    this.roadSelected2=xg_Tanpusudu.roadList2[0].id;
+                    this.siteId=this.roadSelected2
+                },(res)=>{
+                    console.log("初始化失败");
+                });
+            }
 		}
 	})
-	xg_Tanpusudu.roadPost();
+    xg_Tanpusudu.roadinit();
 
 	//箭头函数，内部this永远指向父级
 	var delMsg = (e)=>{
@@ -593,7 +612,7 @@
 		});
 	}
 
-    $("#luduanB").on("change", function() {
+    /*$("#luduanB").on("change", function() {
         let luduanB=$("#luduanB").val();
 
         let begin = $('#reservation').val();
@@ -614,7 +633,7 @@
             }
         });
 
-    })
+    })*/
 
     function initPeiBiEcharts(startTime, endTime) {
         $.ajax({
@@ -622,7 +641,7 @@
             url: '/SiteRoadSpend/getTanPuSuDuVoListByTime',
             dataType: 'json',
             data: {
-                roadId:$("#luduanB").val(),
+                //roadId:$("#luduanB").val(),
                 beginTime: startTime,
                 endTime: endTime
             },
@@ -690,7 +709,7 @@
     function initMychart(list) {
         let myChart = echarts.init(document.getElementById('two'));
         // 使用刚指定的配置项和数据显示图表。
-        let peibiOption = setTanPuLiChengOption(list);
+        let peibiOption = setTanPuSuDuOption(list);
         myChart.setOption(peibiOption);
     }
 </script>
