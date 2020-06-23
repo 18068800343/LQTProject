@@ -86,10 +86,21 @@
 				<div class="layui-tab-item layui-show">
 						<div id="main" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
 					</div>
-				<div class="layui-tab-item">1</div>
-				<div class="layui-tab-item">2</div>
-				<div class="layui-tab-item">3</div>
-				<div class="layui-tab-item">4</div>
+				<div class="layui-tab-item">
+				        <div id="main1" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
+				</div>
+				<div class="layui-tab-item">
+				         <div id="main2" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
+				</div>
+				<div class="layui-tab-item">
+				         <div id="main3" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
+				</div>
+				<div class="layui-tab-item">
+				          <div id="main4" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
+				</div>
+				<div class="layui-tab-item">
+				          <div id="main5" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
+				</div>
 			</div>
 		</div>
 		<div class="y-span10 y-last">
@@ -267,7 +278,611 @@
 				myChart.setOption(option);
 			}
 		);
+/* 地图2 */
+  require.config({
+		paths: {
+			echarts: '../js/build/dist'
+		}
+	});
 
+	// 使用
+	require(
+		[
+			'echarts',
+			'echarts/chart/map'
+		],
+		function(ec) {
+			require('echarts/util/mapData/params').params.jiangsu = {
+
+				getGeoJson: function(callback) {
+					$.getJSON('../geoJson/jiangsu.json', function(data) {
+						// 压缩后的地图数据必须使用 decode 函数转换
+						callback(require('echarts/util/mapData/params').decode(data));
+					});
+				}
+			}
+			var myChart = ec.init(document.getElementById('main1'));
+			var ecConfig = require('echarts/config');
+			var zrEvent = require('zrender/tool/event');
+			var curIndx = 0;
+			var mapType = ["江苏"];
+
+			myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
+			option = {
+				tooltip: {
+					trigger: 'item',
+					//formatter:'dede{b}'
+					formatter: function(param) {}
+				},
+				legend: {
+					orient: 'vertical',
+					x: '',
+					data: [' ']
+				},
+
+				series: [{
+					name: '',
+					type: 'map',
+					mapType: 'jiangsu',
+					roam: true,
+					/* selectedMode: false, */
+					label: {
+			              normal: {
+			                show: true,
+			                textStyle: {
+			                  color: 'red'
+			                }
+			              },
+			            },
+					itemStyle: {
+						normal: {	
+							color: '#2e70bc', //地图背景色
+							label: {
+								show: true
+							},
+							borderColor: '#82E1FF',
+							borderWidth: 1
+						},
+						
+						emphasis: {
+							label: {
+								show: true,
+								 normal: {  
+                        
+                    }
+							}
+						}
+					},
+
+					data: [{
+							name: '南京市',
+							value: Math.round(Math.random() * 500)
+						},
+						{
+							name: '苏州市',
+							value: Math.round(Math.random() * 500)
+						},
+						{
+							name: '连云港市',
+							value: Math.round(Math.random() * 500)
+						}
+					],
+				geoCoord: {
+						'南京市': [118.767413,32.041544],
+						'苏州市': [120.619585,31.299379],
+						'连云港市': [119.178821,34.600018]
+					},
+					markPoint: {
+						 /* symbol: 'circle', */
+						
+						itemStyle: {
+							normal: {
+		                        color: '#7FE0FF'
+		                    }
+						},
+						
+						data: [{
+								name: '南京市',
+								value: 95
+							},
+							{
+								name: '苏州市',
+								value: 2
+							},
+							{
+								name: '连云港市'
+							}]
+					}
+
+				}]
+			}
+			myChart.setOption(option);
+		}
+	);
+	/* 地图三 */
+	require.config({
+			paths: {
+				echarts: '../js/build/dist'
+			}
+		});
+
+		// 使用
+		require(
+			[
+				'echarts',
+				'echarts/chart/map'
+			],
+			function(ec) {
+				require('echarts/util/mapData/params').params.jiangsu = {
+
+					getGeoJson: function(callback) {
+						$.getJSON('../geoJson/jiangsu.json', function(data) {
+							// 压缩后的地图数据必须使用 decode 函数转换
+							callback(require('echarts/util/mapData/params').decode(data));
+						});
+					}
+				}
+				var myChart = ec.init(document.getElementById('main2'));
+				var ecConfig = require('echarts/config');
+				var zrEvent = require('zrender/tool/event');
+				var curIndx = 0;
+				var mapType = ["江苏	"];
+
+				myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
+				option = {
+					tooltip: {
+						trigger: 'item',
+						//formatter:'dede{b}'
+						formatter: function(param) {}
+					},
+					legend: {
+						orient: 'vertical',
+						x: '',
+						data: [' ']
+					},
+
+					series: [{
+						name: '',
+						type: 'map',
+						mapType: 'jiangsu',
+						roam: true,
+						/* selectedMode: false, */
+						label: {
+				              normal: {
+				                show: true,
+				                textStyle: {
+				                  color: 'red'
+				                }
+				              },
+				            },
+						itemStyle: {
+							normal: {	
+								color: '#2e70bc', //地图背景色
+								label: {
+									show: true
+								},
+								borderColor: '#82E1FF',
+								borderWidth: 1
+							},
+							
+							emphasis: {
+								label: {
+									show: true,
+									 normal: {  
+                            
+                        }
+								}
+							}
+						},
+
+						data: [{
+								name: '南京市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '苏州市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '连云港市',
+								value: Math.round(Math.random() * 500)
+							}
+						],
+					geoCoord: {
+							'南京市': [118.767413,32.041544],
+							'苏州市': [120.619585,31.299379],
+							'连云港市': [119.178821,34.600018]
+						},
+						markPoint: {
+							 /* symbol: 'circle', */
+							
+							itemStyle: {
+								normal: {
+			                        color: '#7FE0FF'
+			                    }
+							},
+							
+							data: [{
+									name: '南京市',
+									value: 95
+								},
+								{
+									name: '苏州市',
+									value: 2
+								},
+								{
+									name: '连云港市'
+								}]
+						}
+
+					}]
+				}
+				myChart.setOption(option);
+			}
+		);
+		/* 地图四 */
+		require.config({
+			paths: {
+				echarts: '../js/build/dist'
+			}
+		});
+
+		// 使用
+		require(
+			[
+				'echarts',
+				'echarts/chart/map'
+			],
+			function(ec) {
+				require('echarts/util/mapData/params').params.jiangsu = {
+
+					getGeoJson: function(callback) {
+						$.getJSON('../geoJson/jiangsu.json', function(data) {
+							// 压缩后的地图数据必须使用 decode 函数转换
+							callback(require('echarts/util/mapData/params').decode(data));
+						});
+					}
+				}
+				var myChart = ec.init(document.getElementById('main3'));
+				var ecConfig = require('echarts/config');
+				var zrEvent = require('zrender/tool/event');
+				var curIndx = 0;
+				var mapType = ["江苏	"];
+
+				myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
+				option = {
+					tooltip: {
+						trigger: 'item',
+						//formatter:'dede{b}'
+						formatter: function(param) {}
+					},
+					legend: {
+						orient: 'vertical',
+						x: '',
+						data: [' ']
+					},
+
+					series: [{
+						name: '',
+						type: 'map',
+						mapType: 'jiangsu',
+						roam: true,
+						/* selectedMode: false, */
+						label: {
+				              normal: {
+				                show: true,
+				                textStyle: {
+				                  color: 'red'
+				                }
+				              },
+				            },
+						itemStyle: {
+							normal: {	
+								color: '#2e70bc', //地图背景色
+								label: {
+									show: true
+								},
+								borderColor: '#82E1FF',
+								borderWidth: 1
+							},
+							
+							emphasis: {
+								label: {
+									show: true,
+									 normal: {  
+                            
+                        }
+								}
+							}
+						},
+
+						data: [{
+								name: '南京市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '苏州市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '连云港市',
+								value: Math.round(Math.random() * 500)
+							}
+						],
+					geoCoord: {
+							'南京市': [118.767413,32.041544],
+							'苏州市': [120.619585,31.299379],
+							'连云港市': [119.178821,34.600018]
+						},
+						markPoint: {
+							 /* symbol: 'circle', */
+							
+							itemStyle: {
+								normal: {
+			                        color: '#7FE0FF'
+			                    }
+							},
+							
+							data: [{
+									name: '南京市',
+									value: 95
+								},
+								{
+									name: '苏州市',
+									value: 2
+								},
+								{
+									name: '连云港市'
+								}]
+						}
+
+					}]
+				}
+				myChart.setOption(option);
+			}
+		);
+		/* 地图五 */
+		require.config({
+			paths: {
+				echarts: '../js/build/dist'
+			}
+		});
+
+		// 使用
+		require(
+			[
+				'echarts',
+				'echarts/chart/map'
+			],
+			function(ec) {
+				require('echarts/util/mapData/params').params.jiangsu = {
+
+					getGeoJson: function(callback) {
+						$.getJSON('../geoJson/jiangsu.json', function(data) {
+							// 压缩后的地图数据必须使用 decode 函数转换
+							callback(require('echarts/util/mapData/params').decode(data));
+						});
+					}
+				}
+				var myChart = ec.init(document.getElementById('main4'));
+				var ecConfig = require('echarts/config');
+				var zrEvent = require('zrender/tool/event');
+				var curIndx = 0;
+				var mapType = ["江苏	"];
+
+				myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
+				option = {
+					tooltip: {
+						trigger: 'item',
+						//formatter:'dede{b}'
+						formatter: function(param) {}
+					},
+					legend: {
+						orient: 'vertical',
+						x: '',
+						data: [' ']
+					},
+
+					series: [{
+						name: '',
+						type: 'map',
+						mapType: 'jiangsu',
+						roam: true,
+						/* selectedMode: false, */
+						label: {
+				              normal: {
+				                show: true,
+				                textStyle: {
+				                  color: 'red'
+				                }
+				              },
+				            },
+						itemStyle: {
+							normal: {	
+								color: '#2e70bc', //地图背景色
+								label: {
+									show: true
+								},
+								borderColor: '#82E1FF',
+								borderWidth: 1
+							},
+							
+							emphasis: {
+								label: {
+									show: true,
+									 normal: {  
+                            
+                        }
+								}
+							}
+						},
+
+						data: [{
+								name: '南京市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '苏州市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '连云港市',
+								value: Math.round(Math.random() * 500)
+							}
+						],
+					geoCoord: {
+							'南京市': [118.767413,32.041544],
+							'苏州市': [120.619585,31.299379],
+							'连云港市': [119.178821,34.600018]
+						},
+						markPoint: {
+							 /* symbol: 'circle', */
+							
+							itemStyle: {
+								normal: {
+			                        color: '#7FE0FF'
+			                    }
+							},
+							
+							data: [{
+									name: '南京市',
+									value: 95
+								},
+								{
+									name: '苏州市',
+									value: 2
+								},
+								{
+									name: '连云港市'
+								}]
+						}
+
+					}]
+				}
+				myChart.setOption(option);
+			}
+		);
+		/* 地图六 */
+		require.config({
+			paths: {
+				echarts: '../js/build/dist'
+			}
+		});
+
+		// 使用
+		require(
+			[
+				'echarts',
+				'echarts/chart/map'
+			],
+			function(ec) {
+				require('echarts/util/mapData/params').params.jiangsu = {
+
+					getGeoJson: function(callback) {
+						$.getJSON('../geoJson/jiangsu.json', function(data) {
+							// 压缩后的地图数据必须使用 decode 函数转换
+							callback(require('echarts/util/mapData/params').decode(data));
+						});
+					}
+				}
+				var myChart = ec.init(document.getElementById('main5'));
+				var ecConfig = require('echarts/config');
+				var zrEvent = require('zrender/tool/event');
+				var curIndx = 0;
+				var mapType = ["江苏	"];
+
+				myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
+				option = {
+					tooltip: {
+						trigger: 'item',
+						//formatter:'dede{b}'
+						formatter: function(param) {}
+					},
+					legend: {
+						orient: 'vertical',
+						x: '',
+						data: [' ']
+					},
+
+					series: [{
+						name: '',
+						type: 'map',
+						mapType: 'jiangsu',
+						roam: true,
+						/* selectedMode: false, */
+						label: {
+				              normal: {
+				                show: true,
+				                textStyle: {
+				                  color: 'red'
+				                }
+				              },
+				            },
+						itemStyle: {
+							normal: {	
+								color: '#2e70bc', //地图背景色
+								label: {
+									show: true
+								},
+								borderColor: '#82E1FF',
+								borderWidth: 1
+							},
+							
+							emphasis: {
+								label: {
+									show: true,
+									 normal: {  
+                            
+                        }
+								}
+							}
+						},
+
+						data: [{
+								name: '南京市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '苏州市',
+								value: Math.round(Math.random() * 500)
+							},
+							{
+								name: '连云港市',
+								value: Math.round(Math.random() * 500)
+							}
+						],
+					geoCoord: {
+							'南京市': [118.767413,32.041544],
+							'苏州市': [120.619585,31.299379],
+							'连云港市': [119.178821,34.600018]
+						},
+						markPoint: {
+							 /* symbol: 'circle', */
+							
+							itemStyle: {
+								normal: {
+			                        color: '#7FE0FF'
+			                    }
+							},
+							
+							data: [{
+									name: '南京市',
+									value: 95
+								},
+								{
+									name: '苏州市',
+									value: 2
+								},
+								{
+									name: '连云港市'
+								}]
+						}
+
+					}]
+				}
+				myChart.setOption(option);
+			}
+		);
 		//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
 		layui.use('element', function() {
 			var element = layui.element;
