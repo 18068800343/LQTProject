@@ -160,7 +160,7 @@
 				'echarts/chart/map'
 			],
 			function(ec) {
-				require('echarts/util/mapData/params').params.anhui = {
+				require('echarts/util/mapData/params').params.jiangsu = {
 
 					getGeoJson: function(callback) {
 						$.getJSON('../geoJson/jiangsu.json', function(data) {
@@ -191,7 +191,7 @@
 					series: [{
 						name: '',
 						type: 'map',
-						mapType: 'anhui',
+						mapType: 'jiangsu',
 						selectedMode: false,
 						label: {
 							normal: {
@@ -225,7 +225,7 @@
 								label: {
 									show: true
 								},
-								borderColor: 'white',
+								borderColor: '#82E1FF',
 								borderWidth: 2
 							},
 
@@ -262,36 +262,13 @@
 							'连云港市': [119.178821,34.600018]
 						},
 						markPoint: {
-							symbol: 'emptyCircle',
-							symbolSize: 15,
+							 /* symbol: 'circle', */
+							
 							itemStyle: {
-								normal: {
-									borderColor: '#f34010',
-									borderWidth: 1, // 标注边线线宽，单位px，默认为1
-									label: {
-										 normal: { //静态的时候展示样式
-			                                show: false, //是否显示地图省份得名称
-			                                textStyle: {
-			                                    color: "#fff",
-			                                    fontSize: 10,
-			                                    fontFamily: "Arial"
-			                                }
-			                            },
-									}
-								},
-								emphasis: {
-									borderColor: '#bc2e08',
-									borderWidth: 5,
-									label: {
-										show: true
-									}
-								}
+								
+								
 							},
-							effect: {
-								show: true,
-								shadowBlur: 0,
-								loop: true
-							},
+							
 							data: [{
 									name: '南京市',
 									value: 95
