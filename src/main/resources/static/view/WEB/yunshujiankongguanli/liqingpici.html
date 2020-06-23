@@ -73,8 +73,8 @@
             <table class="layui-table" lay-skin="line" id="mainContent">
                 <thead>
                     <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
-                        <th>路段编号</th>
-                        <th>批次</th> 
+                        <!--<th>路段编号</th>-->
+                        <th style="width: 15%;">批次</th>
                         <th>车牌</th>
                         <th>空车重量</th>
                         <th>装料重量</th>
@@ -184,35 +184,35 @@
                     <form class="form-inline">
                         <table class="layui-table "lay-skin="line">
 							<tr>
-								<td>路段编号</td>
+								<!--<td>路段编号</td>
 								<td>
 									<select class="form-inline" id="luduanbianhao" style="width: 70%;">
 									</select>
-								</td>
+								</td>-->
 								<td>车牌</td>
 								<td><input type="text" id="chepai" style="width: 70%;" disabled/></td>
-							</tr>
-							<tr>
 								<td>空车重量</td>
 								<td><input type="text" id="kongchezhongliang" style="width: 70%;" disabled/></td>
+							</tr>
+							<tr>
 								<td>装料后重量</td>
 								<td>
 									<select class="form-inline" id="zhuangzaihouzhongliang" style="width: 70%;">
 									</select>
 								</td>
-							</tr>
-							<tr>
 								<td>装料温度</td>
 								<td><input type="text" id="zhuangliaowendu" style="width: 70%;"/></td>
+							</tr>
+							<tr>
 								<td>成品沥青类型</td>
 								<td>
 									<select class="form-inline" id="liqingleixing" style="width: 70%;">
 									</select>
 								</td>
-							</tr>
-							<tr>
 								<td>入场时间</td>
 								<td><input type="text" id="ruchangshijian" style="width: 70%;" disabled/></td>
+							</tr>
+							<tr>
 								<td>出场时间</td>
 								<td><input type="text" id="chuchangshijian" style="width: 70%;"/></td>
 							</tr>
@@ -339,7 +339,7 @@
 		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
 		"columns": [
-            { "data": "roadName"},
+            //{ "data": "roadName"},
             { "data": "batch"}, 
             { "data": "licencePlate"},
             { "data": "unloadedWeight"},
@@ -353,7 +353,7 @@
         ],
         "columnDefs": [{	
 					 "class": "tcenter",
-					    "targets": 10,
+					    "targets": 9,
 					    "searchable": true,
 					    "render": function(data, type, full) {
 					  	  		//'<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
@@ -568,7 +568,7 @@
 	
 	
 	$("#baocun").click(function(){
-		var roadId=$("#luduanbianhao").val();
+		//var roadId=$("#luduanbianhao").val();
 		var licencePlate=$("#chepai").val();
 		var unloadedWeight=$("#kongchezhongliang").val();
 		var loadingWeight=$("#zhuangzaihouzhongliang").val();
@@ -584,7 +584,7 @@
             dataType: 'json',
             data: {
             	id:luru_id,
-            	roadId:roadId,
+            	//roadId:roadId,
             	licencePlate:licencePlate,
             	unloadedWeight:unloadedWeight,
             	loadingWeight:loadingWeight,
