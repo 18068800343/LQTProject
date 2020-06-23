@@ -4,18 +4,18 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>沥青质量信息管理一体化平台</title>
-		<link href="/view/favicon.ico" rel="shortcut icon">
-		<link href="/view/style/bootstrap.min.css" rel="stylesheet">
-		<link href="/view/style/style.css" rel="stylesheet">
-		<link href="/view/toastr/toastr.css" rel="stylesheet">
-		<link rel="stylesheet" href="/view/font2/iconfont.css">
-		<link rel="stylesheet" href="/view/style/jquery.dataTables.min.css">
-		<link rel="stylesheet" type="text/css" href="/view/easyUI/themes/default/easyui.css" />
-		<link rel="stylesheet" type="text/css" href="/view/easyUI/themes/icon.css" />
-		<link rel="stylesheet" type="text/css" href="/view/easyUI/demo/demo.css" />
-		<link rel="stylesheet" type="text/css" href="/view/css/layui.css"/>
-		<link rel="stylesheet" type="text/css" href="/view/css/layui.mobile.css"/>
-		<link rel="stylesheet" type="text/css" href="/view/css/laydate.css"/>
+		<link href="../../view/favicon.ico" rel="shortcut icon">
+		<link href="../../view/style/bootstrap.min.css" rel="stylesheet">
+		<link href="../../view/style/style.css" rel="stylesheet">
+		<link href="../../view/toastr/toastr.css" rel="stylesheet">
+		<link rel="stylesheet" href="../../view/font2/iconfont.css">
+		<link rel="stylesheet" href="../../view/style/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="../../view/easyUI/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../../view/easyUI/themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../../view/easyUI/demo/demo.css" />
+		<link rel="stylesheet" type="text/css" href="../../view/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../view/css/layui.mobile.css"/>
+		<link rel="stylesheet" type="text/css" href="../../view/css/laydate.css"/>
 		<style lang="">
 			html {
 				overflow-x: hidden;
@@ -172,7 +172,12 @@
 				overflow-y: hidden;
 				background: #fff;
 			}
-			
+			#leftTab{
+        	background-color: #0D366A !important;
+             }
+             #caidandianjibangding{
+        	background-color:#0D366A  !important;
+           }
 			@media screen and (max-height: 1080px) {
 				#leftTab {
 					height: 94%;
@@ -280,13 +285,13 @@
 
 		<section>
 			<!-- header -->
-			<header class="header white-bg yihang2" style="background: url(../img/top_bg.png) no-repeat;height: 20px;border: 1px solid #DEDEDE;">
+			<header class="header white-bg yihang2" style="background: url(../images/top.bg2.png) no-repeat;height: 20px;border: 1px solid #DEDEDE;background-size:100%;">
 				<div style="display:flex;align-items:center;">
 				<div class="logo">
 						<img src="../images/首页logo.png" height="30px"/>
 				</div>
 					<div>
-						<a class="logo" style="padding-bottom:4px;margin-left:12px;color:white;font-size:25px;">沥青质量信息管理一体化平台</a>
+						<a class="logo" style="padding-bottom:4px;margin-left:12px;color:white;font-size:23px;font-weight:500;">沥青质量信息管理一体化平台</a>
 					</div>
 				    	<!-- <div class="dl" style="width: 1350px;color:white;float:right;position:fixed;width:100%;right:1%;">
 						 	
@@ -375,8 +380,7 @@
 																<a href="shengchanguochengguanli/jinliaojiankongguanli.html" target="view_frame" class="yijicaidan Pbda">进料监控管理</a>
 															</li>
 															<li>
-																<a href="shengchanguochengguanli/cangchuguanli.html"
-																   target="view_frame" class="yijicaidan Pbdb">仓库盘点</a>
+																<a href="shengchanguochengguanli/cangchuguanli.html" target="view_frame" class="yijicaidan Pbdb">仓储管理</a>
 															</li>
 														</ul>
 													</li>
@@ -421,7 +425,9 @@
 														<a href="javascript:;" target="view_frame" class="yijicaidan Pbdb">生产计划管理</a>
 													</li>
 													<li>
-														<a href="" target="view_frame" class="yijicaidan Pbdc">拌和生产过程监控</a>
+									    
+									    
+									    					<a href="" target="view_frame" class="yijicaidan Pbdc">拌和生产过程监控</a>
 													</li> -->
 													<!-- <li> 
 														<a href="shengchanguochengguanli/picijiankongguanli.html" target="view_frame" class="yijicaidan Pbdd">批次监控管理</a>
@@ -591,7 +597,7 @@
 						</div>
 						<div  id="rightTab">
                             <!-- 主題內容开始 -->
-                              <iframe src="home.html" name="view_frame" id="rightMain" src="javascript:;"  frameborder="false" scrolling="auto" style="border: none;" width="100%" height="100%" mallowtransparency="true">
+                              <iframe src="home2.html" name="view_frame" id="rightMain" src="javascript:;"  frameborder="false" scrolling="auto" style="border: none;" width="100%" height="100%" mallowtransparency="true">
                               </iframe> 
                             <!-- 主题内容结束 -->
                         </div>
@@ -601,15 +607,15 @@
 		</section>
 			<!--<iframe src="home.html" width="90%" height="1000"style="margin-left: 13%;">
 			</iframe>-->
-		<script src="/view/js/jquery.js"></script>
-		<script src="/view/easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/view/easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/view/js/common-scripts.js"></script>
-		<script src="/view/js/jquery.dataTables.min.js"></script>
-		<script src="/view/js/main.js"></script>
-		<script src="/view/js/bootstrap.min.js"></script>
-		<script src="/view/toastr/toastr.js"></script>
-		<script src="/view/js/quanxian.js"></script>
+		<script src="../../view/js/jquery.js"></script>
+		<script src="../../view/easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../view/easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../view/js/common-scripts.js"></script>
+		<script src="../../view/js/jquery.dataTables.min.js"></script>
+		<script src="../../view/js/main.js"></script>
+		<script src="../../view/js/bootstrap.min.js"></script>
+		<script src="../../view/toastr/toastr.js"></script>
+		<script src="../../view/js/quanxian.js"></script>
 
 <script type="text/javascript">
 	var user;
