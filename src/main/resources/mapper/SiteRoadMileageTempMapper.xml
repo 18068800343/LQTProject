@@ -19,7 +19,7 @@
 
     <select id="getAllSiteRoadMileageTemp" resultType="SiteRoadMileageTemp">
         select a.id,a.site_id,a.temp,a.temp2,a.edit_user_id,a.edit_datetime,
-        a.datetime,a.delete_state,b.site_number,c.road_name,c.road_id,u.u_name as editUName
+        a.datetime,a.delete_state,b.site_number,b.road_name,c.road_id,u.u_name as editUName
         from site_road_mileage_temp a
         left join (SELECT *  from site_construction sc WHERE <include refid="luduanquanxian_sql"></include>  sc.delete_state!=0) as b on a.site_id=b.id
         left join sys_road_mgn as c on c.road_id=b.road_id

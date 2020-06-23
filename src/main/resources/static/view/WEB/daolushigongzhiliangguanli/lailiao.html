@@ -84,8 +84,8 @@
 				<thead>
 					<tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
 						<th style="width: 15%;">批次</th>
-						<!--<th style="width: 8%;">路段编号</th>-->
-						<th>路段名称</th>
+						<!--<th style="width: 8%;">路段编号</th>
+						<th>路段名称</th>-->
 						<th style="width: 10%;">车牌</th>
 						<th>来料类型</th>
 						<th>来料温度</th>
@@ -287,9 +287,9 @@
 							"data" : "batch"
 						}, /*{
 							"data" : "roadno"
-						},*/{
+						},{
 							"data" : "roadname"
-						}, {
+						},*/ {
 							"data" : "licenceplate"
 						}, {
 							"data" : "flname"
@@ -308,7 +308,7 @@
 						}, ],
 						"columnDefs" : [ {
 							"class" : "tcenter",
-							"targets" : 9,
+							"targets" : 8,
 							"searchable" : true,
 							"render" : function(data, type, full) {
 								var xiugai = '<i class="iconfont icon-xiugai Peabb" style="font-size:18px;cursor:pointer;display:none;" data-f="'
@@ -324,7 +324,7 @@
 							}
 						} ,{
                             "class" : "tcenter",
-                            "targets" : 8,
+                            "targets" : 7,
                             "searchable" : true,
                             "render" : function(data, type, full) {
                                 if(data==null||data==""||data==undefined){
