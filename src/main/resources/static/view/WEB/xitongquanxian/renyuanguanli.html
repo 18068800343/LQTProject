@@ -71,7 +71,7 @@
                                     <th>职务/工种</th>
                                     <th>单位</th>
                                     <th>是否有账户</th>
-                                    <th style="width:75px;">操作</th>
+                                    <th style="width:105px;">操作</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -373,6 +373,86 @@
     </div>
 </div>
 <!-- allMsg结束 -->
+    <!-- 修改Modal -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg2">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id=""><b>详细信息</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form class="form-inline" id="edit_form" method="post"  enctype="multipart/form-data">
+                            <table class="table table-bordered table-condensed" style="height: auto;">
+                                <tr>
+                                    <td style="width: 20%;">工号</td>
+                                    <td id="look_gonghao"></td>
+                                    <td>姓名</td>
+                                    <td id="look_xingming" ></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">性别</td>
+                                    <td id="look_xingbie"></td>
+                                    <td>身份证号</td>
+                                    <td id="look_shenfenzhenghao"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">联系方式</td>
+                                    <td id="look_lianxifangshi"></td>
+                                    <td>职务/工种</td>
+                                    <td id="look_zhiwu"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">所属单位</td>
+                                    <td id="look_suoshudanwei"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">所属部门</td>
+                                    <td id="look_suoshubumen"></td>
+                                    <td style="width: 20%;">人员作业危险级别</td>
+                                    <td id="look_ryzywxjb"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">合同用工性质</td>
+                                    <td id="look_htygxz"></td>
+                                    <td style="width: 20%;">合同有效期</td>
+                                    <td id="look_htyxq"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">商业保险购买情况</td>
+                                    <td id="look_sybxgmqk"></td>
+                                    <td style="width: 20%;">保险有效期</td>
+                                    <td id="look_bxyxq"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">持有证书</td>
+                                    <td colspan="3" id="look_cyzs"></td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered table-condensed" id="look_accessory">
+                                <thead>
+                                <tr>
+                                    <td style="width:20%;">合同附件:</td>
+                                    <td colspan="4"></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot></tfoot>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 修改model结束 -->
 </body>
 <script src="../../js/jquery.js"></script>
 <script src="../../js/common-scripts.js"></script>
@@ -441,11 +521,12 @@
 					  	  		var xiugai='<i class="iconfont icon-xiugai Phab" style="font-size:18px;cursor:pointer;display:none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>';
 	                            var shanchu='<i class="iconfont icon-shanchu Phac" style="font-size:18px;cursor:pointer;display:none;" id="del"  title="删除"></i>';
 	                            var tianjia='<i class="glyphicon glyphicon-plus Phad" style="font-size:18px;cursor:pointer;display:none;" id="tianjia"  title="添加"></i>';
-	                            var look='<i class="glyphicon glyphicon-pencil Phae" style="font-size:20px;cursor:pointer;display:none;" id="xg" title="修改用户密码"></i>';
+	                            var xg='<i class="glyphicon glyphicon-pencil Phae" style="font-size:20px;cursor:pointer;display:none;" id="xg" title="修改用户密码"></i>';
+	                            var xiangqing='<i class="iconfont icon-icon-test Phab" style="font-size:20px;cursor:pointer;display:none;" title="查看详情"  data-toggle="modal" data-target="#allMsg2" onclick="look(this)"></i>';
 	                            if(full.username==null||full.username==""||full.username==undefined){
-	                            	return xiugai+shanchu+tianjia;
+	                            	return xiugai+shanchu+tianjia+xiangqing;
 	                            }else{
-		                            return xiugai+shanchu+look;
+		                            return xiugai+shanchu+xg+xiangqing;
 	                            }
 					        }
 					  },
@@ -574,14 +655,14 @@
 	                    	 $("#suoshudanwei").append("<option data-id='"+json[i].id+"' value='"+json[i].id+"'>"+json[i].danweiName+"</option>");
 	                    	 $("#xg_suoshudanwei").append("<option data-id='"+json[i].id+"' value='"+json[i].id+"'>"+json[i].danweiName+"</option>");
                     }
-                    $("#suoshudanwei").trigger('change');
-                    $("#xg_suoshudanwei").trigger('change');
+                    //$("#suoshudanwei").trigger('change');
+                    //$("#xg_suoshudanwei").trigger('change');
 	                }
 	            }
 	        });
 	}
 
-    $("#suoshudanwei").change(function(){
+   /* $("#suoshudanwei").change(function(){
         var dataid=$("#suoshudanwei").find("option:selected").attr("data-id")
         if(dataid==2){
             $("#luduan-td").html("路段权限")
@@ -602,7 +683,7 @@
             $("#xg_luduan-td").html("")
             $("#xg_luduan-td2").html("")
         }
-    })
+    })*/
 
     function initluduan(){
         $.ajax({
@@ -667,12 +748,12 @@
         var dataid=$("#suoshudanwei").find("option:selected").attr("data-id")
         var danweiName=$("#suoshudanwei").find("option:selected").text()
         var luduanId;
-        if(dataid==2){
+        /*if(dataid==2){
              luduanId=$("#luduanquanxian").val().toString();
             var luduanName=$("#luduanquanxian").parent("td").find("button").attr("title");
         }else{
             luduanId=""
-        }
+        }*/
         var omId=$("#suoshubumen").val();
         var department=$("#suoshubumen").find("option:selected").text();
         var ryzywxjb=$("#ryzywxjb").val();
@@ -772,7 +853,44 @@
 	        	}
 	        });
 	})
-	
+
+
+    function look(obj){
+        var dom = $(obj).parents('tr');
+        var data=$('#mainContent').DataTable().row(dom).data();
+        $("#look_gonghao").text(data.workId);
+        $("#look_xingming").text(data.uName);
+        $("#look_xingbie").text(data.sex);
+        $("#look_shenfenzhenghao").text(data.cardId);
+        $("#look_lianxifangshi").text(data.phoneNo);
+        $("#look_zhiwu").text(data.zhiwu==null?"":data.zhiwu);
+        $("#look_suoshudanwei").text(data.danwei==null?"":data.danwei);
+        $("#look_suoshubumen").text(data.omId==null?"":data.department);
+        $("#look_ryzywxjb").text(data.dangerousLevels==null?"":data.dangerousLevels);
+        $("#lookg_htygxz").text(data.natureEmployment==null?"":data.natureEmployment);
+        $("#look_htyxq").text(data.contractLife==null?"":data.contractLife);
+        $("#look_sybxgmqk").text(data.insurancePurchases==null?"":data.insurancePurchases);
+        $("#look_bxyxq").text(data.insuranceDate==null?"":data.insuranceDate);
+        $("#look_cyzs").text(data.certificate==null?"":data.certificate);
+
+        $.ajax({
+            type:"post",
+            url:"/accessory/selectAccessoryById",
+            dataType:"json",
+            data:{
+                id:data.userId
+            },
+            success:function(json){
+                $("#look_accessory thead").siblings().empty();
+                for(var i=0;i<json.length;i++){
+                    $("#look_accessory tbody").append("<tr>"+
+                        "<td style='width:20%;'>附件</td>"+
+                        "<td><a href='"+getLocalPath()+"/LQTProject_file/user_File/"+json[i].acName+"' target='view_window' style='color:blue'>"+json[i].acName+"</a></td>"+
+                        "</tr>");
+                }
+            }
+        })
+    }
 	
 	var xgId;
 	var tr;
@@ -796,7 +914,7 @@
         $("#xg_bxyxq").val(data.insuranceDate);
         $("#xg_cyzs").val(data.certificate);
 
-        var dataid=$("#xg_suoshudanwei").find("option:selected").attr("data-id")
+        /*var dataid=$("#xg_suoshudanwei").find("option:selected").attr("data-id")
         if(dataid==2){
             var contractNameJiaArray = data.luduanquanxian.split(",");
             $("#xg_luduan-td").html("路段权限")
@@ -805,7 +923,7 @@
         }else{
             $("#xg_luduan-td").html("")
             $("#xg_luduan-td2").html("")
-        }
+        }*/
 
         $.ajax({
             type:"post",
@@ -901,7 +1019,7 @@
         var dataid=$("#xg_suoshudanwei").find("option:selected").attr("data-id")
         var danweiName=$("#xg_suoshudanwei").find("option:selected").text()
         var luduanId;
-        if(dataid==2){
+        /*if(dataid==2){
             if($("#xg_luduanquanxian").val()==""||$("#xg_luduanquanxian").val()==null||$("#xg_luduanquanxian").val()==undefined){
                 toastr.error("路段权限不能为空");
                 return;
@@ -910,7 +1028,7 @@
             var luduanName=$("#xg_luduanquanxian").parent("td").find("button").attr("title");
         }else{
             luduanId=""
-        }
+        }*/
         var omId=$("#xg_suoshubumen").val();
         var department=$("#xg_suoshubumen").find("option:selected").text();
         var ryzywxjb=$("#xg_ryzywxjb").val();
