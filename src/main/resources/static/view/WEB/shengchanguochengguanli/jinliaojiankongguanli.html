@@ -236,24 +236,37 @@
 											<td><input type="text" class="form-control" id="zhongliang" placeholder="请输入" style="width: 70%;"/></td>
 										</tr>
 										 <tr>
-											<td>含水量</td>
-											<td><input type="text" class="form-control" id="hanshuiliang" style="width: 70%;"/></td>
-											<td>来货单位</td>
-											<td><input type="text" class="form-control" id="laihuodanwei" placeholder="请输入" style="width: 70%;"/></td>
-										</tr>
-										 <tr>
-											<td>单价（元/千克）</td>
-											<td><input type="text" class="form-control" id="danjia" placeholder="请输入" style="width: 70%;"/></td>
-											<td>料仓编号</td>
-											<td><input type="text" class="form-control" id="liaocangbianhao" placeholder="请输入" style="width: 70%;"/></td>
-										</tr>
-										<tr>
-											<!--<td>录入人</td>
-											<td><input type="text" id="lururen" placeholder="请输入" style="width: 70%;"/></td>-->
-											<td>备注</td>
-											<td colspan="3"><textarea class="form-control" style="width:100%;border: none;" id="beizhu" rows="4" cols="90"></textarea></td>
-											
-										</tr>
+                                             <td>含水量</td>
+                                             <td><input type="text" class="form-control" id="hanshuiliang"
+                                                        style="width: 70%;"/></td>
+                                             <td>含尘量</td>
+                                             <td><input type="text" class="form-control" id="hanchenliang"
+                                                        placeholder="请输入" style="width: 70%;"/></td>
+                                         </tr>
+                                        <tr>
+                                            <td>单价（元/千克）</td>
+                                            <td><input type="text" class="form-control" id="danjia" placeholder="请输入"
+                                                       style="width: 70%;"/></td>
+                                            <td>料仓编号</td>
+                                            <td><input type="text" class="form-control" id="liaocangbianhao"
+                                                       placeholder="请输入" style="width: 70%;"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>来货单位</td>
+                                            <td><input type="text" class="form-control" id="laihuodanwei"
+                                                       placeholder="请输入" style="width: 70%;"/></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <!--<td>录入人</td>
+                                            <td><input type="text" id="lururen" placeholder="请输入" style="width: 70%;"/></td>-->
+                                            <td>备注</td>
+                                            <td colspan="3"><textarea class="form-control"
+                                                                      style="width:100%;border: none;" id="beizhu"
+                                                                      rows="4" cols="90"></textarea></td>
+
+                                        </tr>
                                     </table>
                                 </form>  
                             </div>
@@ -290,29 +303,36 @@
 											 <td>重量</td>
 											 <td><input type="text" class="form-control" id="xg_zhongliang" placeholder="请输入" style="width: 70%;"/></td>
 											</tr>
-										 <tr>
-											<td>含水量</td>
-											<td><input type="text" class="form-control" id="xg_hanshuiliang" style="width: 70%;"/></td>
-											<td>来货单位</td>
-											<td><input type="text" class="form-control" id="xg_laihuodanwei" placeholder="请输入" style="width: 70%;"/></td>
-										</tr>
-										 <tr>
-											<td>单价（元/千克）</td>
-											<td><input type="text" class="form-control" id="xg_danjia" placeholder="请输入" style="width: 70%;"/></td>
-											<td>料仓编号</td>
-											<td><input type="text" class="form-control" id="xg_liaocangbianhao" placeholder="请输入" style="width: 70%;"/></td>
-										</tr>
-										 <!--<tr>
-											<td>录入人</td>
-											<td><input type="text" id="xg_lururen" placeholder="请输入" style="width: 70%;"/></td>
-											<td></td>
-											<td></td>
-										</tr>-->
-										<tr>
-											<td>备注</td>
-											<td colspan="3"><textarea class="form-control" style="width:100%;border: none;" id="xg_beizhu" rows="4" cols="90"></textarea></td>
-										</tr>
-                                    </table>
+                                       <tr>
+                                           <td>含水量</td>
+                                           <td><input type="text" class="form-control" id="xg_hanshuiliang"
+                                                      style="width: 70%;"/></td>
+                                           <td>含尘量</td>
+                                           <td><input type="text" class="form-control" id="xg_hanchenliang"
+                                                      style="width: 70%;"/></td>
+                                       </tr>
+                                       <tr>
+                                           <td>单价（元/千克）</td>
+                                           <td><input type="text" class="form-control" id="xg_danjia" placeholder="请输入"
+                                                      style="width: 70%;"/></td>
+                                           <td>料仓编号</td>
+                                           <td><input type="text" class="form-control" id="xg_liaocangbianhao"
+                                                      placeholder="请输入" style="width: 70%;"/></td>
+                                       </tr>
+                                       <tr>
+                                           <td>来货单位</td>
+                                           <td><input type="text" class="form-control" id="xg_laihuodanwei"
+                                                      placeholder="请输入" style="width: 70%;"/></td>
+                                           <td></td>
+                                           <td></td>
+                                       </tr>
+                                       <tr>
+                                           <td>备注</td>
+                                           <td colspan="3"><textarea class="form-control"
+                                                                     style="width:100%;border: none;" id="xg_beizhu"
+                                                                     rows="4" cols="90"></textarea></td>
+                                       </tr>
+                                   </table>
                                 </form>  
                             </div>
                     </div>
@@ -531,35 +551,37 @@
 		}
 		
 		
-		$("#baocun").click(function(){
-			var bianhao=$("#bianhao").val();
-			var shijiian=$("#shijian").val();
-			var zhongliang=$("#zhongliang").val();
-			//var zhongliang="";
-			var cailiao=$("#cailiao").val();
-			var hanshuiliang=$("#hanshuiliang").val();
-			var laihuodanwei=$("#laihuodanwei").val();
-			var danjia=$("#danjia").val();
-			var liaocangbianhao=$("#liaocangbianhao").val();
-			//var lururen=$("#lururen").val();
-			var beizhu=$("#beizhu").val();
-			
-			$.ajax({
-	            type: 'POST',
-	            url: '/WhIncomingMaterial/insertWhIncomingMaterial',
-	            dataType: 'json',
+		$("#baocun").click(function() {
+            var bianhao = $("#bianhao").val();
+            var shijiian = $("#shijian").val();
+            var zhongliang = $("#zhongliang").val();
+            //var zhongliang="";
+            var cailiao = $("#cailiao").val();
+            var hanshuiliang = $("#hanshuiliang").val();
+            var hanchenliang = $("#hanchenliang").val();
+            var laihuodanwei = $("#laihuodanwei").val();
+            var danjia = $("#danjia").val();
+            var liaocangbianhao = $("#liaocangbianhao").val();
+            //var lururen=$("#lururen").val();
+            var beizhu = $("#beizhu").val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/WhIncomingMaterial/insertWhIncomingMaterial',
+                dataType: 'json',
 	            data: {
-	            	no:bianhao,
-	            	datetime:shijiian,
-	            	weight:zhongliang,
-	            	materials:cailiao,
-	            	waterContent:hanshuiliang,
-	            	companyId:laihuodanwei,
-	            	price:danjia,
-	            	storNo:liaocangbianhao,
-	            	meminfo:beizhu,
-	            	//editUserId:lururen,
-	            },
+                    no: bianhao,
+                    datetime: shijiian,
+                    weight: zhongliang,
+                    materials: cailiao,
+                    waterContent: hanshuiliang,
+                    companyId: laihuodanwei,
+                    price: danjia,
+                    storNo: liaocangbianhao,
+                    meminfo: beizhu,
+                    dustContent: hanchenliang,
+                    //editUserId:lururen,
+                },
 	            error: function (msg) {
 	                errMessage("请求UserController失败");
 	            },
@@ -614,51 +636,54 @@
 	
 	var xgId;
 	var tr;
-	$("#mainContent").delegate("#upd","click",function(){
-		var dom = $(this).parents('tr');
-		tr = $(this).closest('tr');
-		var data=$('#mainContent').DataTable().row(dom).data();
-		xgId=data.id
-		$("#xg_bianhao").val(data.no);
-		$("#xg_shijian").val(data.datetime);
-		$("#xg_zhongliang").val(data.weight);
-		$("#xg_cailiao").val(data.materials);
-		$("#xg_hanshuiliang").val(data.waterContent);
-		$("#xg_laihuodanwei").val(data.companyId);
-		$("#xg_danjia").val(data.price);
-		$("#xg_liaocangbianhao").val(data.storNo);
-		//$("#xg_lururen").val(data.editUserId);
-		$("#xg_beizhu").val(data.meminfo);
-	})
+	$("#mainContent").delegate("#upd","click",function() {
+        var dom = $(this).parents('tr');
+        tr = $(this).closest('tr');
+        var data = $('#mainContent').DataTable().row(dom).data();
+        xgId = data.id
+        $("#xg_bianhao").val(data.no);
+        $("#xg_shijian").val(data.datetime);
+        $("#xg_zhongliang").val(data.weight);
+        $("#xg_cailiao").val(data.materials);
+        $("#xg_hanshuiliang").val(data.waterContent);
+        $("#xg_hanchenliang").val(data.dustContent);
+        $("#xg_laihuodanwei").val(data.companyId);
+        $("#xg_danjia").val(data.price);
+        $("#xg_liaocangbianhao").val(data.storNo);
+        //$("#xg_lururen").val(data.editUserId);
+        $("#xg_beizhu").val(data.meminfo);
+    })
 	
-	$("#xg_baocun").click(function(){
-		var bianhao=$("#xg_bianhao").val();
-		var shijiian=$("#xg_shijian").val();
-		var zhongliang=$("#xg_zhongliang").val();
-		var cailiao=$("#xg_cailiao").val();
-		var hanshuiliang=$("#xg_hanshuiliang").val();
-		var laihuodanwei=$("#xg_laihuodanwei").val();
-		var danjia=$("#xg_danjia").val();
-		var liaocangbianhao=$("#xg_liaocangbianhao").val();
-		//var lururen=$("#xg_lururen").val();
-		var beizhu=$("#xg_beizhu").val();
-		
-		$.ajax({
+	$("#xg_baocun").click(function() {
+        var bianhao = $("#xg_bianhao").val();
+        var shijiian = $("#xg_shijian").val();
+        var zhongliang = $("#xg_zhongliang").val();
+        var cailiao = $("#xg_cailiao").val();
+        var hanshuiliang = $("#xg_hanshuiliang").val();
+        var hanchenliang = $("#xg_hanchenliang").val();
+        var laihuodanwei = $("#xg_laihuodanwei").val();
+        var danjia = $("#xg_danjia").val();
+        var liaocangbianhao = $("#xg_liaocangbianhao").val();
+        //var lururen=$("#xg_lururen").val();
+        var beizhu = $("#xg_beizhu").val();
+
+        $.ajax({
             type: 'POST',
-            url:'/WhIncomingMaterial/updWhIncomingMaterialById',
+            url: '/WhIncomingMaterial/updWhIncomingMaterialById',
             dataType: 'json',
             data: {
-            	id:xgId,
-            	no:bianhao,
-            	datetime:shijiian,
-            	weight:zhongliang,
-            	materials:cailiao,
-            	waterContent:hanshuiliang,
-            	companyId:laihuodanwei,
-            	price:danjia,
-            	storNo:liaocangbianhao,
-            	meminfo:beizhu,
-            	//editUserId:lururen,
+                id: xgId,
+                no: bianhao,
+                datetime: shijiian,
+                weight: zhongliang,
+                materials: cailiao,
+                waterContent: hanshuiliang,
+                dustContent: hanchenliang,
+                companyId: laihuodanwei,
+                price: danjia,
+                storNo: liaocangbianhao,
+                meminfo: beizhu,
+                //editUserId:lururen,
             },
             success: function (json) {
             	if(json.result>0){
