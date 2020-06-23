@@ -521,8 +521,8 @@
 				$("#mainContent").dataTable().fnClearTable();
 				$("#mainContent").DataTable().rows.add(json).draw(false);
 				for(var i in json){
-				var point = new BMap.Point(json[i].lng, json[i].lat);
-        addMarker(point, json[i].stakemark, json[i].lane,json[i]);
+					var point = new BMap.Point(json[i].lng, json[i].lat);
+					addMarker(point, json[i].stakemark, json[i].lane, json[i]);
 				}
 			}
 		});
