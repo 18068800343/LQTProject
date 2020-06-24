@@ -35,6 +35,7 @@ public class ChenBenJinDuController {
             if (chengpinliang != null && !"".equals(chengpinliang)) {
                 cbvo.setPdNeed(chengpinliang.getPdNeed());
             }
+
             //查询每天产能
             BigDecimal cn = new BigDecimal(0);
             ChenBenJinDuVo channeng = dao.getAllchenneng(datetime);
@@ -47,12 +48,17 @@ public class ChenBenJinDuController {
             BigDecimal fl = new BigDecimal(0);
             ChenBenJinDuVo feiliao = dao.getAllfeiliao(datetime);
             if (feiliao != null && !"".equals(feiliao)) {
-                cbvo.setFeiliao(feiliao.getFeiliao());
+                BigDecimal bigDecimal = feiliao.getFeiliao();
+                cbvo.setFeiliao(bigDecimal);
                 fl = feiliao.getFeiliao();
+            } else {
+                cbvo.setFeiliao(BigDecimal.ZERO);
             }
             //废料比=每日废料/每日实际产能
-            if (fl.compareTo(BigDecimal.ZERO)!=0 && cn.compareTo(BigDecimal.ZERO)!=0) {
-                cbvo.setFeiliaobi(fl.divide(cn,2, BigDecimal.ROUND_HALF_UP));
+            if (fl.compareTo(BigDecimal.ZERO) != 0 && cn.compareTo(BigDecimal.ZERO) != 0) {
+                cbvo.setFeiliaobi(fl.divide(cn, 2, BigDecimal.ROUND_HALF_UP));
+            } else {
+                cbvo.setFeiliaobi(BigDecimal.ZERO);
             }
 
             chenBenJinDuVoList.add(cbvo);
