@@ -48,8 +48,12 @@
             line-height:40px;
         }
        .UpperPart{
-            display:none;
+            position:absolute;
        }
+       .layui-input-block{
+            margin-left:0px;
+       }
+       
     </style>
 </head>
 <body>
@@ -67,15 +71,14 @@
         <!-- Tab panes -->
     <div class="zhuti-content">
         <div class="UpperPart">
-            <div class="UpperPartL">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2"
-                        style="margin: 5PX;float: left;">
-                    <录入></录入>
-                    考勤
-                </button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal4"
-                        style="margin: 5PX;float: left;">考勤统计
-                </button>
+            <div class="UpperPartL" style="z-index:10;">
+		    <div class="layui-input-block">
+		      <select name="interest" lay-filter="" style="height:40px;line-height:40px;padding-left:10px;border:1px solid #dedede;width:100px;">
+		        <option value="">迟到</option>
+		        <option value="0">全部</option>
+		        <option value="1" selected="">早退</option>
+		      </select>
+		    </div>
             </div>
             <div class="UpperPartR">
 				<!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
