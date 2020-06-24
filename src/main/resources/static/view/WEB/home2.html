@@ -86,6 +86,9 @@
 				<div class="layui-tab-item layui-show">
 						<div id="main" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -100%;margin-left:-20%"></div>
 					</div>
+					 <div id="box" >
+	            <span id="box-title"></span>
+	        </div>
 				<!-- <div class="layui-tab-item">
 				        <div id="main1" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
 				</div>
@@ -116,7 +119,7 @@
 				<div class="rightsec col-xs-4" style="float: right;background-color: white;margin-right: 2%;height: 290px;width: 580px;position: absolute;margin-top: 18%;">
 					<div class="title3" style="margin-left: 1%;padding-top: 2%;">
 						<img src="../images/dec.png" />
-						<p style="display: inline-block;color: #1897e8;font-size: 15px;font-weight: bold;margin-left: 1%;">逐盘重量统计</p>
+						<p style="display: inline-block;color: #1897e8;font-size: 15px;font-weight: bold;margin-left: 1%;">日生产量统计</p>
 					</div>
 					<!--标题结束-->
 					<div id="chart2" style="width:550px; height: 280px;"></div>
@@ -197,7 +200,7 @@
 					tooltip: {
 						trigger: 'item',
 						//formatter:'dede{b}'
-						formatter: function(param) {}
+						formatter:'{b}'
 					},
 					legend: {
 						orient: 'vertical',
