@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
      <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/all.css">
     
     
     <style lang="">
@@ -74,7 +75,7 @@
         <div class="modal-body">
                 <div>     
                     <form class="form-inline">
-                        <table class="table table-bordered">
+                        <table class="layui-table "lay-skin="line">
                             <tr>
                                 <td>配方名称:</td>
                                 <td><input type="text" class="form-control" id="fl_name"></td>
@@ -105,7 +106,7 @@
 							    <td><input type="text" class="form-control" id="pitch_use"></td>
 							</tr>
                         </table>
-                         <table class="table table-bordered table-condensed" id="new_materials">
+                         <table class="layui-table "lay-skin="line" id="new_materials">
 							<thead>
 								<tr>
 	                                <td style="width:15%;">附属材料:  <i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
@@ -140,7 +141,7 @@
         <div class="modal-body">
             <div>     
                 <form class="form-inline">
-                    <table class="table table-bordered">
+                    <table class="layui-table "lay-skin="line">
                     	 	<tr>
                     	 		<td>配方编号</td>
                                 <td><input type="text" class="form-control" id="edit_fl_no" disabled></td>
@@ -173,7 +174,7 @@
 							    
 							</tr>
                     </table>
-                   	<table class="table table-bordered table-condensed" id="edit_fushumaterials">
+                   	<table class="layui-table "lay-skin="line" id="edit_fushumaterials">
 							<thead>
 								<tr>
 	                                <td style="width:15%;">附属材料:  <i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
@@ -211,7 +212,7 @@
         <div class="modal-body">
             <div>     
                 <form class="form-inline">
-                    <table class="table table-bordered">
+                    <table class="layui-table "lay-skin="line">
                     	 	<tr>
                     	 		<td>配方编号</td>
                                 <td><input type="text" class="form-control" id="xq_fl_no" readonly="readonly"></td>
@@ -243,7 +244,7 @@
 							    <td><input type="text" class="form-control" id="xq_pitch_use" readonly="readonly"></td>
 							</tr>
                     </table>
-                    <table class="table table-bordered table-condensed" id="xq_fushumaterials">
+                    <table class="layui-table "lay-skin="line" id="xq_fushumaterials">
 							<thead>
 								<tr>
 	                                <td style="width:15%;">附属材料:  <i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
@@ -265,7 +266,7 @@
 <!-- allMsg结束 -->
 
 <div class="LowerPart" style="margin-top:3px;">
-            <table class="table table-bordered table-condensed table-hover" id="mainContent">
+            <table class="layui-table "lay-skin="line" id="mainContent">
                 <thead>
                     <tr>
                         <th>序号</th>
