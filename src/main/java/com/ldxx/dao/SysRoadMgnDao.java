@@ -7,6 +7,7 @@ import com.ldxx.vo.SysRoadMgnVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SysRoadMgnDao {
 
@@ -15,6 +16,8 @@ public interface SysRoadMgnDao {
 	public int updateSysRoadMgnById(@Param("sysRoadMgn") SysRoadMgn sysRoadMgn);
 
 	public List<SysRoadMgn> getAllSysRoadMgn(String luduanquanxian);
+
+	public List<Map> getDayWeightCount();
 
 
 	public List<SiteConstructionVo> getAllSysRoadMgnVoHomePage(String luduanquanxian);
