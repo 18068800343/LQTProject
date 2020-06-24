@@ -107,7 +107,7 @@ public class PeiBiVo  extends QualityByPlateRealTimeProdocutionData {
         List<BigDecimal> yList5 = list.stream().map(QualityByPlateRealTimeProdocutionData::getMaterialsUse5).collect(Collectors.toList());
         List<BigDecimal> yList6 = list.stream().map(QualityByPlateRealTimeProdocutionData::getMaterialsUse6).collect(Collectors.toList());
         List<BigDecimal> yList7 = list.stream().map(QualityByPlateRealTimeProdocutionData::getBoneFlourUse).collect(Collectors.toList());
-        List<BigDecimal> yList8 = list.stream().map(QualityByPlateRealTimeProdocutionData::getPitchUse).collect(Collectors.toList());
+        List<BigDecimal> yList8 = list.stream().map(QualityByPlateRealTimeProdocutionData::getBaifenbi).collect(Collectors.toList());
         List<Date> xList = list.stream().map(QualityByPlateRealTimeProdocutionData::getProductionTime).collect(Collectors.toList());
         PeiBiVo peiBiVo = new PeiBiVo();
         peiBiVo.setyList1(yList1);

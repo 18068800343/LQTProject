@@ -36,19 +36,29 @@ public class QualityByPlateRealTimeProdocutionData {
 
     public BigDecimal pitchUse;//沥青用量
 
-    public BigDecimal minTemperature;//最低温度
+	public BigDecimal minTemperature;//最低温度
 
-    public BigDecimal maxTemperature;//最高温度
+	public BigDecimal maxTemperature;//最高温度
 
-    public Time  dryTime;//干拌用时
+	public Time dryTime;//干拌用时
 
-    public Time  wetTime;//湿拌用时
+	public Time wetTime;//湿拌用时
 
 	private BigDecimal weight;
 
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private BigDecimal baifenbi;
 
-    public Date productionTime;//生产时间
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
+	public Date productionTime;//生产时间
+
+	public BigDecimal getBaifenbi() {
+		return baifenbi;
+	}
+
+	public void setBaifenbi(BigDecimal baifenbi) {
+		this.baifenbi = baifenbi;
+	}
 
 	public BigDecimal getWeight() {
 		return weight;

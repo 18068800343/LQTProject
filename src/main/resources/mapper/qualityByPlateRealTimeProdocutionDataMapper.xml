@@ -10,7 +10,7 @@
 
 	<select id="getPeiBiVoListByTime" resultType="QualityByPlateRealTimeProdocutionData">
 		SELECT
-          *
+		*,Convert(decimal(18,2),pitch_use/weight*100) baifenbi
 		FROM
 		quality_by_plate_real_time_prodocution_data qba
 		<where>
