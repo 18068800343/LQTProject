@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 摊铺速度
@@ -33,6 +35,8 @@ public class SiteRoadSpendController {
     @Resource
     private SiteRoadSpendDao dao;
 
+    private Map<String,Object> map=new HashMap<>();
+
     @RequestMapping("/selectAllSiteRoadSpend")
     public List<SiteRoadSpend> selectAllSiteRoadSpend(HttpSession session,String  roadquanxain){
     	String luduanquanxian="";
@@ -46,7 +50,7 @@ public class SiteRoadSpendController {
     }
 
     @RequestMapping("/updSiteRoadSpend")
-    public String updSiteRoadSpend(@RequestBody SiteRoadSpend srs,HttpSession session){
+    public Map<String,Object> updSiteRoadSpend(@RequestBody SiteRoadSpend srs,HttpSession session){
         JSONObject jsonObject=new JSONObject();
         srs.setEditDatetime2(GetThisTimeUtils.getDateTime());
         User user = (User) session.getAttribute("user");
@@ -55,10 +59,10 @@ public class SiteRoadSpendController {
 		}
         int i= service.updSiteRoadSpend(srs);
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "修改");
-        jsonObject.put("resultMsg",daoMsg);
-        jsonObject.put("daoMsg",i);
-        jsonObject.put("obj",srs);
-        return  jsonObject.toJSONString();
+        map.put("resultMsg",daoMsg);
+        map.put("daoMsg",i);
+        map.put("obj",srs);
+        return  map;
     }
 
     @RequestMapping("/delSiteRoadSpend")
@@ -67,7 +71,7 @@ public class SiteRoadSpendController {
     }
 
     @RequestMapping("/insertSiteRoadSpend")
-    public String insertSiteRoadSpend(@RequestBody SiteRoadSpend srs,HttpSession session){
+    public Map<String,Object> insertSiteRoadSpend(@RequestBody SiteRoadSpend srs,HttpSession session){
         JSONObject jsonObject=new JSONObject();
         srs.setId(LDXXUtils.getUUID12());
         srs.setEditDatetime2(GetThisTimeUtils.getDateTime());
@@ -77,10 +81,10 @@ public class SiteRoadSpendController {
 		}
         int i= service.insertSiteRoadSpend(srs);
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
-        jsonObject.put("resultMsg",daoMsg);
-        jsonObject.put("daoMsg",i);
-        jsonObject.put("obj",srs);
-        return  jsonObject.toJSONString();
+        map.put("resultMsg",daoMsg);
+        map.put("daoMsg",i);
+        map.put("obj",srs);
+        return  map;
     }
 
     /**
