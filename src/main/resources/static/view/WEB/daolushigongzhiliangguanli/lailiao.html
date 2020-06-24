@@ -84,8 +84,8 @@
 				<thead>
 					<tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
 						<th style="width: 15%;">批次</th>
-						<!--<th style="width: 8%;">路段编号</th>
-						<th>路段名称</th>-->
+						<!--<th style="width: 8%;">路段编号</th>-->
+						<th>标段名称</th>
 						<th style="width: 10%;">车牌</th>
 						<th>来料类型</th>
 						<th>来料温度</th>
@@ -179,18 +179,21 @@
 									<td style="height: 100%;">{{licenceplate}}</td>
 								</tr>
 								<tr>
-									<!--<td>路段</td>
-									<td>{{roadname}}</td>-->
+									<td>路段</td>
+									<td id="biaoduan" data-id="">{{roadname}}</td>
 									<td>来料类型</td>
 									<td>{{flname}}</td>
-									<td>空车重量</td>
-									<td>{{unloadedweight}}</td>
 								</tr>
 								<tr>
+									<td>空车重量</td>
+									<td>{{unloadedweight}}</td>
 									<td>来料重量</td>
 									<td><input type="text" class="form-control" @blur="reg(yuguweight,'xiaoshu','yuguweight')" v-model="weight = yuguweight" style="width: 100%;" /></td>
+								</tr>
+								<tr>
 									<td>来料温度</td>
 									<td><input type="text" class="form-control" @blur="reg(temp,'xiaoshu','temp')" v-model="temp" style="width: 100%;" /></td>
+
 								</tr>
 							</table>
 						</form>
@@ -231,18 +234,21 @@
 									<td style="height: 100%;">{{licenceplate}}</td>
 								</tr>
 								<tr>
-									<!--<td>路段</td>
-									<td>{{roadname}}</td>-->
+									<td>路段</td>
+									<td id="xgbiaoduan" data-id="">{{roadname}}</td>
 									<td>来料类型</td>
 									<td>{{flname}}</td>
-									<td>空车重量</td>
-									<td>{{unloadedweight}}</td>
 								</tr>
 								<tr>
+									<td>空车重量</td>
+									<td>{{unloadedweight}}</td>
 									<td>来料重量</td>
 									<td><input type="text" class="form-control" @blur="reg(yuguweight,'xiaoshu','yuguweight')" v-model="weight = yuguweight" style="width: 100%;" /></td>
+								</tr>
+								<tr>
 									<td>来料温度</td>
 									<td><input type="text" class="form-control" @blur="reg(temp,'xiaoshu','temp')" v-model="temp" style="width: 100%;" /></td>
+
 								</tr>
 							</table>
 						</form>
@@ -287,9 +293,9 @@
 							"data" : "batch"
 						}, /*{
 							"data" : "roadno"
-						},{
-							"data" : "roadname"
-						},*/ {
+						},*/{
+							"data" : "stakemark"
+						}, {
 							"data" : "licenceplate"
 						}, {
 							"data" : "flname"
@@ -308,7 +314,7 @@
 						}, ],
 						"columnDefs" : [ {
 							"class" : "tcenter",
-							"targets" : 8,
+							"targets" : 9,
 							"searchable" : true,
 							"render" : function(data, type, full) {
 								var xiugai = '<i class="iconfont icon-xiugai Peabb" style="font-size:18px;cursor:pointer;display:none;" data-f="'
@@ -324,7 +330,7 @@
 							}
 						} ,{
                             "class" : "tcenter",
-                            "targets" : 7,
+                            "targets" : 8,
                             "searchable" : true,
                             "render" : function(data, type, full) {
                                 if(data==null||data==""||data==undefined){
@@ -356,6 +362,7 @@
 						},
 
 					});
+	$.fn.dataTable.ext.errMode = 'none';
 
 	function initTableQuanxian(){
 		$.ajax({
@@ -458,10 +465,12 @@
 		  temp:"",
 		  loadingTemperature:"",
 		  batchList:'',
+		  siteId:'',
 	  },
 	  methods: {
 		//新建生产计划保存按钮事件
 	    save: function () {
+			this._data.siteId=$("#biaoduan").attr("data-id")
             //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
             this.$http.post('/ShiGongLaiLiaoGuanLi/addShiGongLaiLiao',JSON.stringify(this._data),{}).then((res)=>{
             	var resMsg = res.body;
@@ -503,13 +512,14 @@
        	 	this.$http.post('/BatchMgt/getBatchMgtVoById',{'id':this.batchid},{emulateJSON:true}).then((res)=>{
 		       	 	var batchVo = res.body;
 		        	this.licenceplate = batchVo.licencePlate;
-		        	this.roadname = batchVo.roadName;
+		        	this.roadname = batchVo.stakeMark;
 		        	this.flname = batchVo.flName;
 		        	this.unloadedweight = batchVo.unloadedWeight;
 		        	this.yuguweight = batchVo.yuguweight;
 		        	this.temp = batchVo.loadingTemperature;
 		        	this.batch = batchVo.batch;
 		        	this.roadno = batchVo.roadno;
+		        	$("#biaoduan").attr("data-id",batchVo.siteId)
             },(res)=>{
                 console.log(res.status);
             });
@@ -546,10 +556,12 @@
 		  temp:"",
 		  loadingTemperature:"",
 		  batchList:'',
+		  siteId:'',
 	  },
 	  methods: {
 		//新建生产计划保存按钮事件
 	    save: function () {
+			this._data.siteId=$("#xgbiaoduan").attr("data-id")
             //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
             this.$http.post('/ShiGongLaiLiaoGuanLi/updateShiGongLaiLiao',JSON.stringify(this._data),{}).then((res)=>{
             	var resMsg = res.body;
@@ -559,6 +571,7 @@
 					//initRoad()
             		toastr.success(resMsg.resultMsg);
 					initTableQuanxian()
+					initTable()
             	}else{
             		toastr.error(resMsg.resultMsg);
             	}
@@ -591,13 +604,14 @@
        	 	this.$http.post('/BatchMgt/getBatchMgtVoById',{'id':this.batchid},{emulateJSON:true}).then((res)=>{
 		       	 	var batchVo = res.body;
 		        	this.licenceplate = batchVo.licencePlate;
-					this.roadname = batchVo.roadName;
+					this.roadname = batchVo.stakeMark;
 					this.flname = batchVo.flName;
 		        	this.unloadedweight = batchVo.unloadedWeight;
 		        	this.yuguweight = batchVo.yuguweight;
 		        	this.temp = batchVo.loadingTemperature;
 		        	this.batch = batchVo.batch;
 		        	this.roadno = batchVo.roadno;
+					$("#xgbiaoduan").attr("data-id",batchVo.siteId)
             },(res)=>{
                 console.log(res.status);
             });
@@ -617,7 +631,7 @@
   	xgLaiLiaoVm.batch = data.batch;
 	  //车牌
 	  xgLaiLiaoVm.licenceplate = data.licenceplate;
-	  xgLaiLiaoVm.roadname = data.roadname;
+	  xgLaiLiaoVm.roadname = data.stakemark;
 	  xgLaiLiaoVm.roadno = data.roadno;
 	  xgLaiLiaoVm.id = data.id;
 	  //来料类型
@@ -630,6 +644,7 @@
 	  xgLaiLiaoVm.weight = data.weight;
 	  xgLaiLiaoVm.temp = data.temp;
 	  xgLaiLiaoVm.loadingTemperature = data.loadingTemperature;
+		$("#xgbiaoduan").attr("data-id",data.siteId)
 	}
 	
 	//箭头函数，内部this永远指向父级

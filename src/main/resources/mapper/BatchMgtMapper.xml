@@ -4,7 +4,7 @@
 
 	<select id="getAllBatchMgt" resultType="BatchMgtVo">
 		select a.id,a.road_id,a.batch,a.licence_plate,a.unloaded_weight,a.loading_weight,a.loading_temperature,a.pitch_type,a.datetime_in,
-		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,a.site_id,b.fl_name as pitchTypeName,sc.road_name,sc.site_number,usr.u_name
+		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,a.site_id,b.fl_name as pitchTypeName,sc.road_name,sc.site_number,sc.stake_mark,usr.u_name
 		from batch_mgt a
 		left join sys_formulation_management b on a.pitch_type=b.fl_id
 		left join site_construction sc on a.site_id=sc.id
@@ -19,13 +19,14 @@
 	
 	<select id="getBatchMgtVoById" resultType="batchMgtVo">
 		SELECT
-		bm.*,(bm.loading_weight-bm.unloaded_weight) yuguweight,srm.road_name,srm.road_no,sfm.fl_name
+		bm.*,(bm.loading_weight-bm.unloaded_weight) yuguweight,srm.road_name,srm.road_no,sfm.fl_name,sc.site_number,sc.stake_mark
 		FROM
 			batch_mgt bm
 		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id
 		AND srm.delete_state = 1
 		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = bm.pitch_type and sfm.delete_state = 1
-		where bm.delete_state = 1 and id=#{id}
+		left join site_construction sc on bm.site_id=sc.id
+		where bm.delete_state = 1 and bm.id=#{id}
 	</select>
 	
 	<update id="updBatchMgt" parameterType="BatchMgt">

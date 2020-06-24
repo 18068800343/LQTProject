@@ -156,8 +156,12 @@
 	<script src="../js/layui.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/element.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/build/dist/echarts.js" type="text/javascript" charset="utf-8"></script>
-
+	<script src="../js/homeEchars.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
+		$(document).ready( function () {
+			getEcahrs1Data()
+
+		});
 		require.config({
 			paths: {
 				echarts: '../js/build/dist'
@@ -226,7 +230,7 @@
 							emphasis: {
 								label: {
 									show: true,
-									 normal: {  
+									 normal: {
                             
                         }
 								}
@@ -889,93 +893,41 @@
 
 			//…
 		});
-		//		折线图1
-		option = {
 
-			legend: {
-				data: ['总需求量', '总供应量']
-			},
-			tooltip: {
-				trigger: 'axis'
-			},
-			grid: {
-				left: '3%',
-				right: '4%',
-				bottom: '3%',
-				containLabel: true
-			},
-			xAxis: {
-				type: 'category',
-				axisTick: { //y轴刻度线
-					show: false
-				},
-				axisLine: { //y轴
-					show: false
-				},
-				splitLine: {
-					show: false
-				},
-				boundaryGap: false,
-				data: ['沪宁', '沪深', '港澳', '宁粤', '沿江', '测试'],
-			},
-			yAxis: {
-				type: 'value',
+		function getEcahrs1Data(){
+			$.ajax({
+				type: 'POST',
+				url: '/SysRoadMgnController/getAllSysRoadMgnVoHomePage',
+				dataType: 'json',
+				data: {
 
-				axisTick: { //y轴刻度线
-					show: false
 				},
-				axisLine: { //y轴
-					show: false
+				error: function (msg) {
+					errMessage("请求UserController失败");
 				},
-				splitLine: {
-					show: false
-				},
-				splitLine: { //网格线
-					lineStyle: {
-						type: 'dashed' //设置网格线类型 dotted：虚线   solid:实线
-					},
-					show: true,
-
-				}
-			},
-			series: [
-
-				{
-					name: '总需求量',
-					type: 'line',
-					stack: '总量',
-					smooth: true, //这个是把线变成曲线
-					data: [120, 132, 101, 134, 90, 230],
-					lineStyle: {
-						color: '#70FEFF'
-					},
-					itemStyle: {
-						normal: {
-							color: '#70FEFF'
+				success: function (json) {
+					var xuqiu=[]
+					var gongying=[]
+					var roadname=[]
+					if(json!=null&&json.length!=0){
+						for(var i=0;i<json.length;i++){
+							xuqiu.push(json[i].allXuQiu)
+							gongying.push(json[i].allGongYing)
+							roadname.push(json[i].roadname)
 						}
 					}
-				},
-				{
-					name: '总供应量',
-					type: 'line',
-					stack: '总量',
-					smooth: true, //这个是把线变成曲线
-					data: [220, 182, 191, 234, 290, 330],
-					lineStyle: {
-						color: '#8780FF'
-					},
-					itemStyle: {
-						normal: {
-							color: '#8780FF'
-						}
-					}
+					initMychart1(xuqiu,gongying,roadname);
 				}
+			});
+		}
+		function initMychart1(xuqiu,gongying,roadname) {
+			var chart3 = echarts.init(document.getElementById('chart1'));
+			// 使用刚指定的配置项和数据显示图表。
+			let option = setHomeLDGXTJ(xuqiu,gongying,roadname);
+			chart3.setOption(option);
+		}
 
-			]
-		};
 
-		var chart3 = echarts.init(document.getElementById('chart1'));
-		chart3.setOption(option);
 		//		柱状图
 		option = {
 			color: ['#7FE0FF'],

@@ -20,7 +20,35 @@ public class SiteFieldMaterialMgtVo extends SiteFieldMaterialMgt {
 	private String uname;
 	//预估来料重量
 	private String yuguweight;
-	
+
+	private String siteId;
+	private String sitenumber;
+	private String stakemark;
+
+	public String getStakemark() {
+		return stakemark;
+	}
+
+	public void setStakemark(String stakemark) {
+		this.stakemark = stakemark;
+	}
+
+	public String getSitenumber() {
+		return sitenumber;
+	}
+
+	public void setSitenumber(String sitenumber) {
+		this.sitenumber = sitenumber;
+	}
+
+	public String getSiteId() {
+		return siteId;
+	}
+
+	public void setSiteId(String siteId) {
+		this.siteId = siteId;
+	}
+
 	public String getRoadname() {
 		return roadname;
 	}

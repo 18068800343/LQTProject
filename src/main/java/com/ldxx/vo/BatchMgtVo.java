@@ -15,7 +15,15 @@ public class BatchMgtVo extends BatchMgt {
 	private String uName;
 
 	private String siteNumber;
+	private String stakeMark;
 
+	public String getStakeMark() {
+		return stakeMark;
+	}
+
+	public void setStakeMark(String stakeMark) {
+		this.stakeMark = stakeMark;
+	}
 
 	public String getSiteNumber() {
 		return siteNumber;
