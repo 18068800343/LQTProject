@@ -80,8 +80,8 @@
             <thead>
              <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                 <th style="width: 15%;">沥青砼批次</th>
-                 <!--<th style="width: 8%;">路段编号</th>
-                 <th style="width: 10%;">路段名称</th>-->
+                 <!--<th style="width: 8%;">路段编号</th>-->
+                 <th style="width: 10%;">桩号</th>
                 <th style="width: 10%;">沥青砼类型</th>
                 <th style="width: 20%;">预警内容</th>
                 <th style="width: 10%;">处理状态</th>
@@ -256,9 +256,9 @@
             "data" : "batch"
         }, /*{
             "data" : "roadno"
-        },{
-            "data" : "roadname"
-        }, */{
+        },*/{
+            "data" : "stakemark"
+        }, {
             "data" : "flname"
         }, {
             "data" : "warningcontent"
@@ -273,7 +273,7 @@
         }],
         "columnDefs" : [ {
                             "class" : "tcenter",
-                            "targets" : 6,
+                            "targets" : 7,
                             "searchable" : true,
                             "render" : function(data, type, full) {
                                 //var xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" data-f="'+ full+ '"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>';
@@ -290,7 +290,7 @@
                             }
                         },{
                             "class" : "tcenter",
-                            "targets" : 3,
+                            "targets" : 4,
                             "searchable" : true,
                             "render" : function(data, type, full) {
                                 if(data=='0'){

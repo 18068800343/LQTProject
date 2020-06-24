@@ -159,7 +159,8 @@
 	<script src="../js/homeEchars.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready( function () {
-			getEcahrs1Data()
+			getEcahrsData()
+			getEcahrsData2()
 
 		});
 		require.config({
@@ -894,7 +895,7 @@
 			//…
 		});
 
-		function getEcahrs1Data(){
+		function getEcahrsData(){
 			$.ajax({
 				type: 'POST',
 				url: '/SysRoadMgnController/getAllSysRoadMgnVoHomePage',
@@ -927,52 +928,41 @@
 			chart3.setOption(option);
 		}
 
+		function getEcahrsData2(){
+			$.ajax({
+				type: 'POST',
+				url: '/SysRoadMgnController/getDayWeightCount',
+				dataType: 'json',
+				data: {
 
-		//		柱状图
-		option = {
-			color: ['#7FE0FF'],
-			xAxis: {
-				type: 'category',
-				data: ['沪宁', '沪深', '港澳', '宁粤', '沿江', '测试'],
-				axisTick: { //y轴刻度线
-					show: false
 				},
-				axisLine: { //y轴
-					show: false
+				error: function (msg) {
+					errMessage("请求UserController失败");
 				},
-				splitLine: {
-					show: false
-				},
-			},
-			yAxis: {
-				type: 'value',
-				axisTick: { //y轴刻度线
-					show: false
-				},
-				axisLine: { //y轴
-					show: false
-				},
-				splitLine: {
-					show: false
-				},
-				splitLine: { //网格线
-					lineStyle: {
-						type: 'dashed' //设置网格线类型 dotted：虚线   solid:实线
-					},
-					show: true,
-
+				success: function (json) {
+					var dayTime=[]
+					var totalWeight=[]
+					if(json!=null&&json.length!=0){
+						for(var i=0;i<json.length;i++){
+							dayTime.push(json[i].dayTime)
+							totalWeight.push(json[i].totalWeight)
+						}
+					}
+					initMychart2(dayTime,totalWeight);
 				}
-			},
-			series: [{
-				data: [120, 200, 150, 80, 70, 110],
-				type: 'bar',
-				barWidth: '30%',
+			});
+		}
 
-			}]
-		};
+		function initMychart2(dayTime,totalWeight) {
+			var chart = echarts.init(document.getElementById('chart2'));
+			// 使用刚指定的配置项和数据显示图表。
+			let option = setHomeZPZHTJ(dayTime,totalWeight);
+			chart.setOption(option);
+		}
 
-		var chart3 = echarts.init(document.getElementById('chart2'));
-		chart3.setOption(option);
+
+
+
 		//		柱状图
 		option = {
 			color: ['#4F9DFF', '#ff9d4e'],

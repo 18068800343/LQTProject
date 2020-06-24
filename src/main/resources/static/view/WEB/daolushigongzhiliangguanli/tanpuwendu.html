@@ -102,7 +102,7 @@
                         <thead>
                          <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                             <th>路段名称</th>
-                            <th>摊铺地点</th>
+                            <th>桩号</th>
                             <th>摊铺温度1</th>
                             <th>摊铺温度2</th>
                             <th>施工时间</th>
@@ -122,11 +122,11 @@
                 <div class="UpperPart">
                     <div class="UpperPartL">
                         <div class="form-inline" style="margin: 5PX;">
-                            <!--<span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择路段:</span>
+                            <span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择桩号:</span>
                             <div class="pull-left col-xs-2.5">
                                 <select class="form-control" style="width:180px;margin-left: 15px;" id="luduanB" style="width:30%;">
                                 </select>
-                            </div>-->
+                            </div>
                             <span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">&nbsp;</span>
                             <div class="pull-left col-xs-2.5">
                                 <input type="text" style="width:180px;margin-left: 15px;" class="form-control" placeholder="起始时间"
@@ -158,11 +158,11 @@
                 <div class="UpperPart">
                     <div class="UpperPartL">
                         <div class="form-inline" style="margin: 5PX;">
-                            <!--<span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择路段:</span>
+                            <span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择桩号:</span>
                             <div class="pull-left col-xs-2.5">
                                 <select class="form-control" style="width:180px;margin-left: 15px;" id="luduanB2" style="width:30%;">
                                 </select>
-                            </div>-->
+                            </div>
                             <span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">&nbsp;</span>
                             <div class="pull-left col-xs-2.5">
                                 <input type="text" style="width:180px;margin-left: 15px;" class="form-control" placeholder="起始时间"
@@ -210,10 +210,10 @@
                                         <option :value="road.roadid" v-for="road in luduanbianhao">{{road.roadname}}</option>
                                     </select>
                                 </td>-->
-                                <td style="width: 20%;">摊铺地点</td>
+                                <td style="width: 20%;">桩号</td>
                                 <td style="width: 30%;">
                                     <select class="form-control" style="width: 100%;" v-model="siteId=roadBiaoduanhao"  id="roadnumber">
-                                        <option :value="road.id" v-for="road in biaoduanhao">{{road.sitenumber}}</option>
+                                        <option :value="road.id" v-for="road in biaoduanhao">{{road.stakemark}}</option>
                                     </select>
                                 </td>
                                 <td>摊铺温度1</td>
@@ -258,10 +258,10 @@
                                         <option :value="road.roadid" v-for="road in luduanbianhao">{{road.roadname}}</option>
                                     </select>
                                 </td>-->
-                                <td style="width: 20%;">摊铺地点</td>
+                                <td style="width: 20%;">桩号</td>
                                 <td style="width: 30%;">
                                     <select class="form-control" style="width: 100%;" v-model="siteId=roadBiaoduanhao"  id="roadnumber">
-                                        <option :value="road.id" v-for="road in biaoduanhao">{{road.sitenumber}}</option>
+                                        <option :value="road.id" v-for="road in biaoduanhao">{{road.stakemark}}</option>
                                     </select>
                                 </td>
                                 <td>摊铺温度1</td>
@@ -322,9 +322,7 @@
                 xg_tanpuwendu.datetime=value;
             }
         });
-        /*initRoad()
-        $("#luduanB").trigger("change");
-        $("#luduanB2").trigger("change");*/
+        initRoad()
         initTable()
         searchBydate()
         searchBydate2()
@@ -342,7 +340,7 @@
         },
         "columns": [
             { "data": "roadName"},
-            { "data": "siteNumber"},
+            { "data": "stakeMark"},
             { "data": "temp"},
             { "data": "temp2"},
             { "data": "datetime"},
@@ -411,32 +409,26 @@
         });
     }
 
-    /*function initRoad() {
+    function initRoad() {
         $.ajax({
             type : 'POST',
-            url :'/SysRoadMgnController/getAllSysRoadMgn',
+            url :'/TanPuDiDianGuanLi/getAllTanPuDiDian',
             dataType : 'json',
+            async:false,
             data : {},
             success : function(json) {
-                $("#luduan").append("<option value='%'>全部</option>")
                 for (var i = 0; i < json.length; i++) {
-                    $("#luduan").append(
-                        "<option value="+json[i].roadId+">"
-                        + json[i].roadName + "</option>")
                     $("#luduanB").append(
-                        "<option value="+json[i].roadId+">"
-                        + json[i].roadName + "</option>")
+                        "<option value="+json[i].id+">"
+                        + json[i].stakemark + "</option>")
                     $("#luduanB2").append(
-                        "<option value="+json[i].roadId+">"
-                        + json[i].roadName + "</option>")
+                        "<option value="+json[i].id+">"
+                        + json[i].stakemark + "</option>")
                 }
-                $("#luduan").trigger("change");
-                $("#luduanB").trigger("change");
-                $("#luduanB2").trigger("change");
             }
         });
     }
-    $("#luduan").on("change", function() {
+    /*$("#luduan").on("change", function() {
         var luduan=$("#luduan").val();
         if(luduan=="%"){
             initTable()
@@ -700,13 +692,13 @@
     xg_tanpuwendu.roadinit();
 
 
-    function initPeiBiEcharts(startTime, endTime) {
+    function initPeiBiEcharts(startTime, endTime,roadId) {
         $.ajax({
             type: 'POST',
             url: '/SiteRoadMileageTemp/getTanPuWenDuVoListByTime',
             dataType: 'json',
             data: {
-                //roadId:$("#luduanB").val(),
+                roadId:roadId,
                 beginTime: startTime,
                 endTime: endTime
             },
@@ -795,9 +787,9 @@
         let begin = $('#reservation').val();
         let start = begin.replace(/年|月/g, '-').replace('日', '');
         let end = $('#reservationEnd').val().replace(/年|月/g, '-').replace('日', '');
+        let roadId=$("#luduanB").val()
 
-
-        initPeiBiEcharts(start, end);
+        initPeiBiEcharts(start, end,roadId);
         console.log(start);
     }
 
@@ -806,13 +798,13 @@
         let begin = $('#reservation2').val();
         let start = begin.replace(/年|月/g, '-').replace('日', '');
         let end = $('#reservationEnd2').val().replace(/年|月/g, '-').replace('日', '');
-
+        let roadId=$("#luduanB2").val()
         $.ajax({
             type : 'POST',
             url : '/SiteRoadMileageTemp/getTanPuLiXiDuVoListByTime',
             dataType : 'json',
             data : {
-                //roadId : luduanB2,
+                roadId : roadId,
                 beginTime: start,
                 endTime: end
             },

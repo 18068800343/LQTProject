@@ -25,7 +25,16 @@ public class SiteRoadMileage {
 
     private int deleteState;//逻辑删除1存在；0删除
 
-    
+    private String stakeMark;
+
+	public String getStakeMark() {
+		return stakeMark;
+	}
+
+	public void setStakeMark(String stakeMark) {
+		this.stakeMark = stakeMark;
+	}
+
 	public String getEditUName() {
 		return editUName;
 	}

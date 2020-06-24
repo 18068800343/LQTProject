@@ -92,7 +92,7 @@
                         <th style="width: 15%;">批次</th>
                         <th>压路机</th>
                         <th>路段名称</th>
-                        <th>标段名称</th>
+                        <th>桩号</th>
                         <th>碾压速度</th>
                         <th>时间</th>
                         <th>录入人</th>
@@ -204,11 +204,11 @@
                                         <select @change="roadChange" class="form-control" style="width: 100%;" v-model="roadid" id="roadid">
                                             <option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
                                         </select></td>-->
-                                    <td>标段</td>
+                                    <td>桩号</td>
                                     <td>
                                         <input type="text" style="display: none;" ref="getInputValueSiteId" :value="siteid | optionTxt(siteList,'id','sitenumber')" />
                                         <select class="form-control" style="width: 100%;" v-model="siteid" id="siteid">
-                                            <option :value="site.id" v-for="site in siteList">{{site.sitenumber}}</option>
+                                            <option :value="site.id" v-for="site in siteList">{{site.stakemark}}</option>
                                         </select>
                                     </td>
                                     <td>碾压速度</td>
@@ -267,11 +267,11 @@
                                         <select @change="roadChange" class="form-control" style="width: 100%;" v-model="roadid" id="roadid">
                                             <option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
                                         </select></td>-->
-                                    <td>标段</td>
+                                    <td>桩号</td>
                                     <td>
                                         <input type="text" style="display: none;" ref="getInputValueSiteId" :value="siteid | optionTxt(siteList,'id','sitenumber')" />
                                         <select class="form-control" style="width: 100%;" v-model="siteid" id="siteid">
-                                            <option :value="site.id" v-for="site in siteList">{{site.sitenumber}}</option>
+                                            <option :value="site.id" v-for="site in siteList">{{site.stakemark}}</option>
                                         </select>
                                     </td>
                                     <td>碾压速度</td>
@@ -391,7 +391,7 @@
         }, {
             "data" : "roadname"
         }, {
-            "data" : "sitenumber"
+            "data" : "stakeMark"
         }, {
             "data" : "compactionspeed"
         }, {

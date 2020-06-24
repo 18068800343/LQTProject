@@ -19,7 +19,7 @@
 
     <select id="selectAllSiteRoadSpend" resultType="SiteRoadSpend">
 		select a.id,a.site_id,a.speed,a.datetime,a.edit_user_id2,a.edit_datetime2,
-		a.delete_state,b.site_number,b.road_name,c.road_id,u.u_name as editUName
+		a.delete_state,b.site_number,b.road_name,b.stake_mark,c.road_id,u.u_name as editUName
 		from site_road_spend as a
 		left join (SELECT *  from site_construction sc WHERE <include refid="luduanquanxian_sql"></include>  sc.delete_state!=0) as b on a.site_id=b.id
 		left join sys_road_mgn as c on c.road_id=b.road_id
@@ -59,9 +59,9 @@
 
 	<select id="getTanPuSuDuVoListByTime" resultType="SiteRoadSpend">
 		SELECT
-		qba.*,sc.road_id
+		qba.*
 		FROM
-		site_road_spend qba LEFT JOIN site_construction sc on qba.site_id = sc.id
+		site_road_spend qba
 		<where>
 			<if test="beginTime !=null and beginTime!=''">
 				qba.datetime &gt; #{beginTime}
@@ -70,7 +70,7 @@
 				and qba.datetime &lt;  #{endTime}
 			</if>
 			<if test="roadId !=null and roadId!=''">
-				and sc.road_id = #{roadId}
+				and qba.site_id = #{roadId}
 			</if>
 		</where>
 		order by qba.datetime asc

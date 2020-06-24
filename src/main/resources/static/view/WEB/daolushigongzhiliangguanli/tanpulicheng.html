@@ -95,7 +95,7 @@
 						<thead>
 						 <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
 							<th>路段名称</th>
-							<th>摊铺地点</th>
+							<th>桩号</th>
 							<th>摊铺里程</th>
 							<th>施工时间</th>
 							<th>操作人员</th>
@@ -129,11 +129,11 @@
 							</div>
 						</div>-->
 						<div class="form-inline" style="margin: 5PX;">
-							<!--<span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择路段:</span>
+							<span class="pull-left spa" class="form-control" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">选择桩号:</span>
 							<div class="pull-left col-xs-2.5">
 								<select class="form-control" style="width:180px;margin-left: 15px;" id="luduanB" style="width:30%;">
 								</select>
-							</div>-->
+							</div>
 							<span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">&nbsp;</span>
 							<div class="pull-left col-xs-2.5">
 								<input type="text" style="width:180px;margin-left: 15px;" class="form-control" placeholder="起始时间"
@@ -180,10 +180,10 @@
                                     <select class="form-control" @change="roadChange" v-model="roadSelected" style="width: 100%;" id="roadid">
                                         <option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
                                     </select></td>-->
-                                <td>摊铺地点</td>
+                                <td>桩号</td>
                                 <td>
                                     <select class="form-control" style="width: 100%;" v-model="siteId=roadSelected2"  id="roadnumber">
-                                        <option :value="road.id" v-for="road in roadList2">{{road.sitenumber}}</option>
+                                        <option :value="road.id" v-for="road in roadList2">{{road.stakemark}}</option>
                                     </select>
                                 </td>
 
@@ -231,10 +231,10 @@
 								<select class="form-control" @change="roadChange" v-model="roadSelected" style="width: 100%;" id="roadid">
 									<option :value="road.roadid" v-for="road in roadList">{{road.roadname}}</option>
 								</select></td>-->
-							<td>摊铺地点</td>
+							<td>桩号</td>
 							<td>
 								<select class="form-control" style="width: 100%;" v-model="siteId=roadSelected2"  id="roadnumber">
-									<option :value="road.id" v-for="road in roadList2">{{road.sitenumber}}</option>
+									<option :value="road.id" v-for="road in roadList2">{{road.stakemark}}</option>
 								</select>
 							</td>
 
@@ -298,9 +298,9 @@
 				xg_Tanpulicheng.datetime=value;
 			}
 		});
+		initRoad();
 		initTable()
 		searchBydate()
-		//initRoad();
 		//$("#luduanB").trigger("change");
 	});
 
@@ -317,7 +317,7 @@
 		},
 		"columns": [
 			{ "data": "roadName"},
-			{ "data": "siteNumber"},
+			{ "data": "stakeMark"},
 			{ "data": "length"},
 			{ "data": "datetime"},
 			{ "data": "editUName"},
@@ -383,28 +383,23 @@
 		});
 	}
 
-	/*function initRoad() {
+	function initRoad() {
 		$.ajax({
 			type : 'POST',
-			url :'/SysRoadMgnController/getAllSysRoadMgn',
+			url :'/TanPuDiDianGuanLi/getAllTanPuDiDian',
 			dataType : 'json',
+			async:false,
 			data : {},
 			success : function(json) {
-				$("#luduan").append("<option value='%'>全部</option>")
 				for (var i = 0; i < json.length; i++) {
-					$("#luduan").append(
-							"<option value="+json[i].roadId+">"
-							+ json[i].roadName + "</option>")
 					$("#luduanB").append(
-							"<option value="+json[i].roadId+">"
-							+ json[i].roadName + "</option>")
+							"<option value="+json[i].id+">"
+							+ json[i].stakemark + "</option>")
 				}
-				$("#luduan").trigger("change");
-				$("#luduanB").trigger("change");
 			}
 		});
 	}
-	$("#luduan").on("change", function() {
+	/*$("#luduan").on("change", function() {
 		var luduan=$("#luduan").val();
 		if(luduan=="%"){
 			initTable()
@@ -656,13 +651,13 @@
 	}
 
 
-	function initPeiBiEcharts(startTime, endTime) {
+	function initPeiBiEcharts(startTime, endTime,roadId) {
 		$.ajax({
 			type: 'POST',
 			url: '/SiteRoadMileage/getTanPuLiChengVoListByTime',
 			dataType: 'json',
 			data: {
-				//roadId:$("#luduanB").val(),
+				roadId:roadId,
 				beginTime: startTime,
 				endTime: endTime
 			},
@@ -717,9 +712,9 @@
 		let begin = $('#reservation').val();
 		let start = begin.replace(/年|月/g, '-').replace('日', '');
 		let end = $('#reservationEnd').val().replace(/年|月/g, '-').replace('日', '');
+		let roadId=$("#luduanB").val()
 
-
-		initPeiBiEcharts(start, end);
+		initPeiBiEcharts(start, end,roadId);
 		console.log(start);
 	}
 

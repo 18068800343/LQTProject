@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 摊铺里程
@@ -34,6 +36,8 @@ public class SiteRoadMileageController {
 
 	@Resource
 	private SiteRoadMileageDao dao;
+
+	private Map<String,Object> map=new HashMap<>();
 	
 	@RequestMapping("/selectAllSiteRoadMileage")
 	public List<SiteRoadMileage> selectAllSiteRoadMileage(HttpSession session,String  roadquanxain){
@@ -57,7 +61,7 @@ public class SiteRoadMileageController {
 	}
 
 	@RequestMapping("/updSiteRoadMileage")
-	public String updSiteRoadMileage(@RequestBody SiteRoadMileage srm ,HttpSession session){
+	public Map<String,Object> updSiteRoadMileage(@RequestBody SiteRoadMileage srm ,HttpSession session){
 		JSONObject jsonObject = new JSONObject();
         srm.setEditDatetime2(GetThisTimeUtils.getDateTime());
         User user = (User) session.getAttribute("user");
@@ -67,10 +71,10 @@ public class SiteRoadMileageController {
 		}
 		int i= service.updSiteRoadMileage(srm);
 		String daoMsg = MsgFormatUtils.getMsgByResult(i, "修改");
-		jsonObject.put("resultMsg",daoMsg);
-		jsonObject.put("daoMsg",i);
-		jsonObject.put("obj",srm);
-		return jsonObject.toJSONString();
+		map.put("resultMsg",daoMsg);
+		map.put("daoMsg",i);
+		map.put("obj",srm);
+		return map;
 	}
 	
 	@RequestMapping("/delSiteRoadMileage")
@@ -80,7 +84,7 @@ public class SiteRoadMileageController {
 	}
 	
 	@RequestMapping("/insertSiteRoadMileage")
-	public String insertSiteRoadMileage(@RequestBody SiteRoadMileage srm,HttpSession session){
+	public Map<String,Object> insertSiteRoadMileage(@RequestBody SiteRoadMileage srm,HttpSession session){
 		JSONObject jsonObject = new JSONObject();
 		srm.setId(LDXXUtils.getUUID12());
 		srm.setEditDatetime2(GetThisTimeUtils.getDateTime());
@@ -91,10 +95,10 @@ public class SiteRoadMileageController {
 		}
 		int i= service.insertSiteRoadMileage(srm);
 		String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
-		jsonObject.put("resultMsg",daoMsg);
-		jsonObject.put("daoMsg",i);
-		jsonObject.put("obj",srm);
-		return jsonObject.toJSONString();
+		map.put("resultMsg",daoMsg);
+		map.put("daoMsg",i);
+		map.put("obj",srm);
+		return map;
 	}
 
 	/**
