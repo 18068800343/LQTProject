@@ -7,11 +7,11 @@
 		from u_signin
 		<where>
 			delete_state=1
-			<if test="state=='1'">
-				time_in>'09:00:00'
+			<if test='state=="1"'>
+				and time_in>'09:00:00'
 			</if>
-			<if test="state=='2'">
-				time_out&lt;'06:00:00'
+			<if test='state=="2"'>
+				and time_out&lt;'18:00:00'
 			</if>
 		</where>
 	</select>

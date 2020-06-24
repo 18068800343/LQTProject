@@ -73,6 +73,7 @@
 
 	<select id="getDayWeightCount" resultType="map">
 		select
+		top 10
 		convert(char(8),production_time,112) dayTime,
 		sum(weight) totalWeight
 

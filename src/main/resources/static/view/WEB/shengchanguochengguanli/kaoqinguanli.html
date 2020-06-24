@@ -73,13 +73,14 @@
         <div class="UpperPart">
             <div class="UpperPartL layui-form-item" style="z-index:10;">
 		    <div class="layui-input-block">
-		      <select name="interest" lay-filter="" style="height:35px;line-height:35px;padding-left:10px;border:1px solid #dedede;width:200px;">
-		       <!--  <option value="" selected="">请选择</option> -->
-		        <option value="">迟到</option>
-		        <option value=""  selected="">全部</option>
-		         <option value="">早退</option>
-		      </select>
-		    </div>
+                <select name="interest" id="state" lay-filter=""
+                        style="height:35px;line-height:35px;padding-left:10px;border:1px solid #dedede;width:200px;">
+                    <!--  <option value="" selected="">请选择</option> -->
+                    <option value="0">全部</option>
+                    <option value="1">迟到</option>
+                    <option value="2">早退</option>
+                </select>
+            </div>
             </div>
             <div class="UpperPartR">
 				<!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
@@ -360,6 +361,7 @@
             url: '/USignin/selectAllUSignin',
             dataType: 'json',
             data: {
+                state: $("#state").val()
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
@@ -371,6 +373,9 @@
         });
     }
 
+    $("#state").on('change', function () {
+        initTable();
+    });
 
 </script>
 </html>
