@@ -16,6 +16,25 @@ public class SiteIncomingMaterialTempWarningVo extends SiteIncomingMaterialTempW
 
     private String uname;
 
+    private String sitenumber;
+    private String stakemark;
+
+    public String getStakemark() {
+        return stakemark;
+    }
+
+    public void setStakemark(String stakemark) {
+        this.stakemark = stakemark;
+    }
+
+    public String getSitenumber() {
+        return sitenumber;
+    }
+
+    public void setSitenumber(String sitenumber) {
+        this.sitenumber = sitenumber;
+    }
+
     public String getBatchId() {
         return batchId;
     }

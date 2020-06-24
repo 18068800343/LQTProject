@@ -23,6 +23,15 @@ public class SiteRoadSpend {
     
     public int deleteState;//删除状态
 
+    private String stakeMark;
+
+    public String getStakeMark() {
+        return stakeMark;
+    }
+
+    public void setStakeMark(String stakeMark) {
+        this.stakeMark = stakeMark;
+    }
     
     public String getEditUName() {
 		return editUName;

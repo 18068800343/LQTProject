@@ -46,7 +46,7 @@
 		LEFT JOIN u_user uu ON uu.user_id= simtw.edit_user_id and uu.delete_state = 1
 		where simtw.delete_state=1 ORDER BY simtw.datetime desc*/
 		SELECT
-			simtw.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name
+			simtw.*,sfm.fl_name,bm.batch,srm.road_name,srm.road_no,uu.u_name,sc.road_name as roadname,sc.site_number as sitenumber,sc.stake_mark as stakemark
 		FROM
 			site_incoming_material_temp_warning simtw
 		LEFT JOIN site_field_material_mgt sfmm ON simtw.fie_id = sfmm.id and sfmm.delete_state !=0
@@ -54,6 +54,7 @@
 		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id and srm.delete_state !=0
 		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state !=0
 		LEFT JOIN u_user uu ON uu.user_id= simtw.edit_user_id and uu.delete_state = 1
+		LEFT JOIN site_construction sc on sfmm.site_id=sc.id
 		where simtw.delete_state!=0 AND sfmm.batch_id = bm.id ORDER BY simtw.datetime desc
 	</select>
 

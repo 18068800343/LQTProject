@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 摊铺温度
@@ -34,6 +36,8 @@ public class SiteRoadMileageTempController {
     @Resource
     private SiteRoadMileageTempDao dao;
 
+    private Map<String,Object> map=new HashMap<>();
+
     @RequestMapping("/getAllSiteRoadMileageTemp")
     public List<SiteRoadMileageTemp> getAllSiteRoadMileageTemp(HttpSession session,String  roadquanxain){
     	String luduanquanxian="";
@@ -47,7 +51,7 @@ public class SiteRoadMileageTempController {
     }
 
     @RequestMapping("/updSiteRoadMileageTemp")
-    public String updSiteRoadMileageTemp(@RequestBody SiteRoadMileageTemp srm,HttpSession session){
+    public Map<String,Object> updSiteRoadMileageTemp(@RequestBody SiteRoadMileageTemp srm, HttpSession session){
         JSONObject json=new JSONObject();
         srm.setEditDatetime(GetThisTimeUtils.getDateTime());
         User user = (User) session.getAttribute("user");
@@ -56,10 +60,10 @@ public class SiteRoadMileageTempController {
 		}
         int i= service.updSiteRoadMileageTemp(srm);
         String msg = MsgFormatUtils.getMsgByResult(i, "修改");
-        json.put("msg",msg);
-        json.put("result",i);
-        json.put("obj",srm);
-        return json.toJSONString();
+        map.put("msg",msg);
+        map.put("result",i);
+        map.put("obj",srm);
+        return map;
     }
 
     @RequestMapping("/delSiteRoadMileageTemp")
@@ -68,7 +72,7 @@ public class SiteRoadMileageTempController {
     }
 
     @RequestMapping("/insertSiteRoadMileageTemp")
-    public String insertSiteRoadMileageTemp(@RequestBody SiteRoadMileageTemp srm,HttpSession session){
+    public Map<String,Object> insertSiteRoadMileageTemp(@RequestBody SiteRoadMileageTemp srm,HttpSession session){
         JSONObject json=new JSONObject();
         srm.setId(LDXXUtils.getUUID12());
         srm.setEditDatetime(GetThisTimeUtils.getDateTime());
@@ -78,10 +82,10 @@ public class SiteRoadMileageTempController {
 		}
         int i= service.insertSiteRoadMileageTemp(srm);
         String msg = MsgFormatUtils.getMsgByResult(i, "新增");
-        json.put("msg",msg);
-        json.put("result",i);
-        json.put("obj",srm);
-        return json.toJSONString();
+        map.put("msg",msg);
+        map.put("result",i);
+        map.put("obj",srm);
+        return map;
     }
 
     /**

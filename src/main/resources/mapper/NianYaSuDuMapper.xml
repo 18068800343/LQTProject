@@ -48,7 +48,7 @@
     	LEFT JOIN site_construction sc on sc.id = scn.site_id and sc.delete_state = 1
 		where scn.delete_state=1 ORDER BY scn.datetime desc*/
 		SELECT
-			scn.*,sfm.fl_name,bm.batch,sc.site_number,sc.road_name,srm.road_no,uu.u_name,sc.site_number,srm.road_id
+			scn.*,sfm.fl_name,bm.batch,sc.site_number,sc.road_name,sc.stake_mark,srm.road_no,uu.u_name,srm.road_id
 		FROM
 			site_compaction_speed scn
 		LEFT JOIN batch_mgt bm ON scn.batch_id = bm.id and bm.delete_state != 0

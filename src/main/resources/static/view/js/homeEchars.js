@@ -112,6 +112,48 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 	return option;
 }
 
-function setZpzltj(){
+function setHomeZPZHTJ(dayTime,totalWeight){
+//		柱状图
+	option = {
+		color: ['#7FE0FF'],
+		xAxis: {
+			type: 'category',
+			data: dayTime,
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			},
+		},
+		yAxis: {
+			type: 'value',
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			},
+			splitLine: { //网格线
+				lineStyle: {
+					type: 'dashed' //设置网格线类型 dotted：虚线   solid:实线
+				},
+				show: true,
 
+			}
+		},
+		series: [{
+			data: totalWeight,
+			type: 'bar',
+			barWidth: '30%',
+
+		}]
+	};
+	return option;
 }

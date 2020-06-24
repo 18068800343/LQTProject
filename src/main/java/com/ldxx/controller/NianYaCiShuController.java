@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/NianYaCiShuController")
@@ -25,6 +27,8 @@ public class NianYaCiShuController {
 
 	@Resource
 	private NianYaCiShuDao dao;
+
+	private Map<String,Object> map=new HashMap<>();
 
 	@RequestMapping("/getAllNianYaCiShu")
 	@ResponseBody
@@ -47,7 +51,7 @@ public class NianYaCiShuController {
 
 	@RequestMapping("/addNianYaCiShu")
 	@ResponseBody
-	public String addNianYaCiShu(@RequestBody SiteCompactionNumVo siteCompactionNumVo,HttpSession session) {
+	public Map<String,Object> addNianYaCiShu(@RequestBody SiteCompactionNumVo siteCompactionNumVo,HttpSession session) {
 		JSONObject jsonObject = new JSONObject();
 		siteCompactionNumVo.setId(LDXXUtils.getUUID12());
 		siteCompactionNumVo.setDeletestate(1);
@@ -66,15 +70,15 @@ public class NianYaCiShuController {
 			jsonObject.put("errMsg","数据库插入出错,请检查经纬度输入格式");
 		}
 		String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
-		jsonObject.put("resultMsg",daoMsg);
-		jsonObject.put("daoMsg",i);
-		jsonObject.put("obj",siteCompactionNumVo);
-		return jsonObject.toString();
+		map.put("resultMsg",daoMsg);
+		map.put("daoMsg",i);
+		map.put("obj",siteCompactionNumVo);
+		return map;
 	}
 
 	@RequestMapping("/updateNianYaCiShu")
 	@ResponseBody
-	public String updateNianYaCiShu(@RequestBody SiteCompactionNumVo siteCompactionNumVo,HttpSession session) {
+	public Map<String,Object> updateNianYaCiShu(@RequestBody SiteCompactionNumVo siteCompactionNumVo,HttpSession session) {
 		JSONObject jsonObject = new JSONObject();
 		String nowDateStr = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
 		siteCompactionNumVo.setDatetime(nowDateStr);
@@ -92,10 +96,10 @@ public class NianYaCiShuController {
 			jsonObject.put("errMsg","数据库插入出错,请检查经纬度输入格式");
 		}
 		String daoMsg = MsgFormatUtils.getMsgByResult(i, "修改");
-		jsonObject.put("resultMsg",daoMsg);
-		jsonObject.put("daoMsg",i);
-		jsonObject.put("obj",siteCompactionNumVo);
-		return jsonObject.toString();
+		map.put("resultMsg",daoMsg);
+		map.put("daoMsg",i);
+		map.put("obj",siteCompactionNumVo);
+		return map;
 	}
 
 	@RequestMapping("/getByLuDuanId")

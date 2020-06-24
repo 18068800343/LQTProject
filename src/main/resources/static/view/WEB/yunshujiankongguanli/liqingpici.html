@@ -73,7 +73,7 @@
             <table class="layui-table" lay-skin="line" id="mainContent">
                 <thead>
                     <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
-                        <th>路段编号</th>
+                        <th>桩号</th>
                         <th style="width: 15%;">批次</th>
                         <th>车牌</th>
                         <th>空车重量</th>
@@ -184,7 +184,7 @@
                     <form class="form-inline">
                         <table class="layui-table "lay-skin="line">
 							<tr>
-								<td>路段编号</td>
+								<td>桩号</td>
 								<td>
 									<select class="form-inline" id="luduanbianhao" style="width: 70%;">
 									</select>
@@ -342,7 +342,7 @@
 		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
 		"columns": [
-            { "data": "siteNumber"},
+            { "data": "stakeMark"},
             { "data": "batch"}, 
             { "data": "licencePlate"},
             { "data": "unloadedWeight"},
@@ -441,9 +441,9 @@
 	        	$("#xg_luduanbianhao").html('');
 	        	 for(var i=0;i<json.length;i++){
 	        		$("#luduanbianhao").append( "<option value='" + json[i].id + "'>"
-			                    + json[i].sitenumber + "</option>")
+			                    + json[i].stakemark + "</option>")
 		            $("#xg_luduanbianhao").append( "<option value='" + json[i].id + "'>"
-		                    + json[i].sitenumber + "</option>")
+		                    + json[i].stakemark + "</option>")
 	        	} 
             }
         }); 

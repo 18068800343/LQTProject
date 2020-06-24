@@ -9,6 +9,15 @@ public class SiteCompactionSpeedVo extends SiteCompactionSpeed {
     private String uname;
     private String batch;
     private String sitenumber;
+    private String stakeMark;
+
+    public String getStakeMark() {
+        return stakeMark;
+    }
+
+    public void setStakeMark(String stakeMark) {
+        this.stakeMark = stakeMark;
+    }
 
     public String getSitenumber() {
         return sitenumber;
