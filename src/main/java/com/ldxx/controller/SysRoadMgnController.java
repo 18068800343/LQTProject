@@ -38,8 +38,8 @@ public class SysRoadMgnController {
 			User user = (User) session.getAttribute("user");
 			luduanquanxian = user.getLuduanquanxian();
 		}
-        return srmService.getAllSysRoadMgn(luduanquanxian);
-    }
+		return srmService.getAllSysRoadMgn(luduanquanxian);
+	}
 
 	@RequestMapping("/getAllSysRoadMgnVoHomePage")
 	public List<SiteConstructionVo> getAllSysRoadMgnVoHomePage(HttpSession session) {
@@ -48,8 +48,14 @@ public class SysRoadMgnController {
 		return dao.getAllSysRoadMgnVoHomePage(luduanquanxian);
 	}
 
+
+	@RequestMapping("/getDayWeightCount")
+	public List<Map> getDayWeightCount() {
+		return dao.getDayWeightCount();
+	}
+
 	@RequestMapping("/getAllSysRoadMgnLowcase2")//通过权限初始化路段（小写）
-	public List<SysRoadMgnLowcase> getAllSysRoadMgnLowcase2(HttpSession session){
+	public List<SysRoadMgnLowcase> getAllSysRoadMgnLowcase2(HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		String luduanquanxian = user.getLuduanquanxian();
 		List<SysRoadMgnLowcase> list = dao.getAllSysRoadMgn2(luduanquanxian);

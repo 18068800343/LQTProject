@@ -71,6 +71,15 @@
 		</where>
 	</select>
 
+	<select id="getDayWeightCount" resultType="map">
+		select
+		convert(char(8),production_time,112) dayTime,
+		sum(weight) totalWeight
+
+		from quality_by_plate_real_time_prodocution_data
+		group by convert(char(8),production_time,112) ORDER BY dayTime desc
+	</select>
+
 	<select id="getAllSysRoadMgnVoHomePageCopy" resultType="SysRoadMgnVo">
 		SELECT
 		srm.road_id,
