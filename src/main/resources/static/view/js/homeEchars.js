@@ -128,6 +128,31 @@ function setHomeZPZHTJ(dayTime,totalWeight){
 			splitLine: {
 				show: false
 			},
+			axisLabel : {
+				formatter: function (params) {
+					let newParamsName = "";
+					let paramsNameNumber = params.length;
+					let provideNumber = 4;
+					let rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+					if (paramsNameNumber > provideNumber) {
+						for (let p = 0; p < rowNumber; p++) {
+							let tempStr = "";
+							let start = p * provideNumber;
+							let end = start + provideNumber;
+							if (p == rowNumber - 1) {
+								tempStr = params.substring(start, paramsNameNumber);
+							} else {
+								tempStr = params.substring(start, end) + "\n";
+							}
+							newParamsName += tempStr;
+						}
+
+					} else {
+						newParamsName = params;
+					}
+					return newParamsName
+				}
+			}
 		},
 		yAxis: {
 			type: 'value',
@@ -154,6 +179,101 @@ function setHomeZPZHTJ(dayTime,totalWeight){
 			barWidth: '30%',
 
 		}]
+	};
+	return option;
+}
+
+function setHomeCBJDTJ(datetime,chenneng,feiliao){
+	//		柱状图
+	option = {
+		color: ['#4F9DFF', '#ff9d4e'],
+		tooltip: {
+			trigger: 'axis'
+		},
+		legend: {
+			data: ['日实际产能', '每日废料']
+		},
+		calculable: true,
+		xAxis: [{
+			type: 'category',
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			},
+			data: datetime,
+			axisLabel : {
+				formatter: function (params) {
+					let newParamsName = "";
+					let paramsNameNumber = params.length;
+					let provideNumber = 5;
+					let rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+					if (paramsNameNumber > provideNumber) {
+						for (let p = 0; p < rowNumber; p++) {
+							let tempStr = "";
+							let start = p * provideNumber;
+							let end = start + provideNumber;
+							if (p == rowNumber - 1) {
+								tempStr = params.substring(start, paramsNameNumber);
+							} else {
+								tempStr = params.substring(start, end) + "\n";
+							}
+							newParamsName += tempStr;
+						}
+
+					} else {
+						newParamsName = params;
+					}
+					return newParamsName
+				}
+			}
+		}],
+		yAxis: [{
+			type: 'value',
+			axisTick: { //y轴刻度线
+				show: false
+			},
+			axisLine: { //y轴
+				show: false
+			},
+			splitLine: {
+				show: false
+			},
+			splitLine: { //网格线
+				lineStyle: {
+					type: 'dashed' //设置网格线类型 dotted：虚线   solid:实线
+				},
+				show: true,
+
+			}
+		}],
+		series: [{
+			name: '日实际产能',
+			type: 'bar',
+			data: chenneng,
+			barWidth: '30%',
+			markPoint: {
+				data: [
+
+				]
+			},
+		},
+			{
+				name: '每日废料',
+				type: 'bar',
+				data: feiliao,
+				barWidth: '30%',
+				markPoint: {
+					data: [
+
+					]
+				},
+			}
+		]
 	};
 	return option;
 }

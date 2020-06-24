@@ -125,7 +125,7 @@
 					<div class="title3" style="margin-left: 1%;padding-top: 2%;">
 						<img src="../images/dec.png" />
 						<p style="display: inline-block;color: #1897e8;font-size: 15px;font-weight: bold;margin-left: 1%;">成本及进度管理统计</p>
-						<input type="date" name="" id="" value="" / style="float: right;height: 25px;">
+						<!--<input type="date" name="" id="" value="" / style="float: right;height: 25px;">-->
 					</div>
 					<!--标题结束-->
 					<div id="chart3" style="width:550px; height: 280px;"></div>
@@ -161,6 +161,7 @@
 		$(document).ready( function () {
 			getEcahrsData()
 			getEcahrsData2()
+			getEcahrsData3()
 
 		});
 		require.config({
@@ -922,10 +923,10 @@
 			});
 		}
 		function initMychart1(xuqiu,gongying,roadname) {
-			var chart3 = echarts.init(document.getElementById('chart1'));
+			var chart = echarts.init(document.getElementById('chart1'));
 			// 使用刚指定的配置项和数据显示图表。
 			let option = setHomeLDGXTJ(xuqiu,gongying,roadname);
-			chart3.setOption(option);
+			chart.setOption(option);
 		}
 
 		function getEcahrsData2(){
@@ -960,77 +961,41 @@
 			chart.setOption(option);
 		}
 
+		function getEcahrsData3(){
+			$.ajax({
+				type: 'POST',
+				url: '/ChenBenJinDu/getAllChenBenJinDu',
+				dataType: 'json',
+				data: {
 
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
 
-
-		//		柱状图
-		option = {
-			color: ['#4F9DFF', '#ff9d4e'],
-			tooltip: {
-				trigger: 'axis'
-			},
-			legend: {
-				data: ['日实际产能', '每日废料']
-			},
-			calculable: true,
-			xAxis: [{
-				type: 'category',
-				axisTick: { //y轴刻度线
-					show: false
-				},
-				axisLine: { //y轴
-					show: false
-				},
-				splitLine: {
-					show: false
-				},
-				data: ['8日', '9日', '11日', '15日', '20日']
-			}],
-			yAxis: [{
-				type: 'value',
-				axisTick: { //y轴刻度线
-					show: false
-				},
-				axisLine: { //y轴
-					show: false
-				},
-				splitLine: {
-					show: false
-				},
-				splitLine: { //网格线
-					lineStyle: {
-						type: 'dashed' //设置网格线类型 dotted：虚线   solid:实线
-					},
-					show: true,
-
+					var datetime=[]
+					var chenneng=[]
+					var feiliao=[]
+					if(json!=null&&json.length!=0){
+						for(var i=0;i<json.length;i++){
+							datetime.push(json[i].datetime)
+							chenneng.push(json[i].chenneng)
+							feiliao.push(json[i].feiliao)
+						}
+					}
+					initMychart3(datetime,chenneng,feiliao);
 				}
-			}],
-			series: [{
-					name: '日实际产能',
-					type: 'bar',
-					data: [2.0, 4.9, 7.0, 23.2, 25.6],
-					barWidth: '30%',
-					markPoint: {
-						data: [
+			});
+		}
 
-						]
-					},
-				},
-				{
-					name: '每日废料',
-					type: 'bar',
-					data: [2.6, 5.9, 9.0, 26.4, 28.7],
-					barWidth: '30%',
-					markPoint: {
-						data: [
+		function initMychart3(datetime,chenneng,feiliao) {
+			var chart = echarts.init(document.getElementById('chart3'));
+			// 使用刚指定的配置项和数据显示图表。
+			let option = setHomeCBJDTJ(datetime,chenneng,feiliao);
+			chart.setOption(option);
+		}
 
-						]
-					},
-				}
-			]
-		};
-		var chart3 = echarts.init(document.getElementById('chart3'));
-		chart3.setOption(option);
 	</script>
 
 </html>
