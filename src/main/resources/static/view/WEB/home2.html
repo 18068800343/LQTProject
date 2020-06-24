@@ -161,21 +161,58 @@
 	<script src="../js/build/dist/echarts.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/homeEchars.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		$(document).ready( function () {
+		$(document).ready(function () {
 			getEcahrsData()
 			getEcahrsData2()
 			getEcahrsData3()
-
+			initPoint()
 		});
+
+
+		let page_point;
+		let page_pointArray;
+
+		function initPoint() {
+			$.ajax({
+				type: 'POST',
+				url: '/TanPuDiDianGuanLi/getAllTanPuDiDian',
+				dataType: 'json',
+				data: {},
+				async: false,
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+
+					let pointArray = [];
+					let array = {};
+					for (var i in json) {
+						let lngLat = [];
+						lngLat[0] = json[i].lng;
+						lngLat[1] = json[i].lat;
+						array[json[i].stakemark] = lngLat;
+						// var point = new BMap.Point(json[i].lng, json[i].lat);
+						// addMarker(point, json[i].stakemark, json[i].lane, json[i]);
+						let point = {};
+						point.name = json[i].stakemark;
+						point.value = "";
+						pointArray.push(point);
+					}
+					page_pointArray = pointArray
+					page_point = array;
+				}
+			});
+		}
+
 		require.config({
 			paths: {
 				echarts: '../js/build/dist'
 			}
 		});
-   
+
 		// 使用
 		require(
-			[
+				[
 				'echarts',
 				'echarts/chart/map'
 			],
@@ -236,49 +273,45 @@
 							emphasis: {
 								label: {
 									show: true,
-									 normal: {
-                            
-                        }
+									normal: {}
 								}
 							}
 						},
 
-						data: [
-						],
-					geoCoord: {
-							'南京市': [118.767413,32.041544],
-							'苏州市': [120.619585,31.299379],
-							'连云港市': [119.178821,34.600018]
-						},
+						data: [],
+						geoCoord: page_point,
 						markPoint: {
-							 /* symbol: 'circle', */
-							
+							/* symbol: 'circle', */
+
 							itemStyle: {
 								normal: {
-			                        color: '#7FE0FF'
-			                    }
+									color: '#7FE0FF'
+								}
 							},
-							
-							data: [{
-									name: '南京市',
-									value: 95
-								},
-								{
-									name: '苏州市',
-									value: 2
-								},
-								{
-									name: '连云港市',
-									value: 59
-								}]
+
+							data: page_pointArray
+							// [
+							// 	{
+							// 	name: 'A',
+							// 	value: 95
+							// },
+							// {
+							// 	name: 'B',
+							// 	value: 2
+							// },
+							// {
+							// 	name: 'C',
+							// 	value: 59
+							// }
+							// ]
 						}
 
 					}]
 				}
 				myChart.setOption(option,true);
-				myChart.on('click', function(params){
-					alert(1);	
-					console.log(params);//此处写点击事件内容
+				myChart.on('click', function(params) {
+					// alert(1);
+					// console.log(params);//此处写点击事件内容
 				});
 			}
 		);
