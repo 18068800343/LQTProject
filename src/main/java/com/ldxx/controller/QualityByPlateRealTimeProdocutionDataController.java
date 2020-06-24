@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 /**
  * 逐盘拌合生产数据实时监控
@@ -48,12 +49,15 @@ public class QualityByPlateRealTimeProdocutionDataController {
 	@ResponseBody
 	public List getPeiBiTimeListByTime(String beginTime, String endTime) {
 		List<QualityByPlateRealTimeProdocutionData> list = dao.getPeiBiVoListByTime(beginTime, endTime);
+		//倒序
+		Collections.reverse(list);
 		return list;
 	}
 
 	@RequestMapping("/getPeiBiOneByTime")
 	@ResponseBody
 	public QualityByPlateRealTimeProdocutionData getPeiBiOneByTime(String time) {
+		time=time+"%";
 		QualityByPlateRealTimeProdocutionData one = dao.getPeiBiOneByTime(time);
 		return one;
 	}

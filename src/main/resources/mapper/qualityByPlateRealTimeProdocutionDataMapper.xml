@@ -27,19 +27,19 @@
 	<select id="getPeiBiOneByTime" resultType="QualityByPlateRealTimeProdocutionData">
 		SELECT
 		top 1
-		Convert(decimal(18,2),materials_use_1/weight*100) baifenbi1,
-		Convert(decimal(18,2),materials_use_2/weight*100) baifenbi2,
-		Convert(decimal(18,2),materials_use_3/weight*100) baifenbi3,
-		Convert(decimal(18,2),materials_use_4/weight*100) baifenbi4,
-		Convert(decimal(18,2),materials_use_5/weight*100) baifenbi5,
-		Convert(decimal(18,2),materials_use_6/weight*100) baifenbi6,
-		Convert(decimal(18,2),pitch_use/weight*100) baifenbi_liqing,
-		Convert(decimal(18,2),bone_flour_use/weight*100) baifenbi_fen
+		ISNULL(Convert(decimal(18,2),materials_use_1/weight*100), 0) baifenbi1,
+		ISNULL(Convert(decimal(18,2),materials_use_2/weight*100), 0) baifenbi2,
+		ISNULL(Convert(decimal(18,2),materials_use_3/weight*100), 0) baifenbi3,
+		ISNULL(Convert(decimal(18,2),materials_use_4/weight*100), 0) baifenbi4,
+		ISNULL(Convert(decimal(18,2),materials_use_5/weight*100), 0) baifenbi5,
+		ISNULL(Convert(decimal(18,2),materials_use_6/weight*100), 0) baifenbi6,
+		ISNULL(Convert(decimal(18,2),pitch_use/weight*100), 0) baifenbi_liqing,
+		ISNULL(Convert(decimal(18,2),bone_flour_use/weight*100), 0) baifenbi_fen
 		FROM
 		quality_by_plate_real_time_prodocution_data qba
 		<where>
 			<if test="time !=null and time!=''">
-				qba.production_time = #{time}
+				convert(varchar,qba.production_time ,120) like #{time}
 			</if>
 		</where>
 		order by qba.production_time desc

@@ -53,7 +53,7 @@
 		<div class="layui-tab layui-tab-card layui-tab-brief" lay-filter="docDemoTabBrief">
 			<ul class="layui-tab-title">
 				<li class="layui-this active">实时级配曲线图</li>
-				<li>级配统计图</li>
+				<!--<li>级配统计图</li>-->
 			</ul>
 			 
 			<div class="layui-tab-content" style="height: 100%;background-color:white;">
@@ -67,9 +67,13 @@
                         </div>
                         <span class="form-group" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
                         <div class="form-group">
-                            <input type="text" style="width:200px" class="form-control" placeholder="结束时间" id="reservationEnd"
-                                   onclick=""><br/>
+                            <input type="text" style="width:200px" class="form-control" placeholder="结束时间" id="reservationEnd"><br/>
                         </div>
+						<div class="form-group">
+							<select  class="form-control" id="time"  style="width: 100%;">
+
+							</select>
+						</div>
                       
                         <div class="form-group">
                             <a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
@@ -85,9 +89,9 @@
 					</div>
 				</div>
 				<!-- 三结束 -->
-					<div class="layui-tab-item weadmin-body">        
+					<!--<div class="layui-tab-item weadmin-body">
 						<div id="fou" style="width: 1500px;height:400px;"></div>
-					</div>
+					</div>-->
 			</div>
 		 </div>
 	</body>
@@ -102,10 +106,15 @@
 	<script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
-
+	<script src="../../js/myTool.js"></script>
 	<script>
+		var flag=0;
+		$(document).ready( function () {
+			getPeiBiTimeListByTime();
+			flag=1
+		});
 
-	var myChart = echarts.init(document.getElementById('sec'));
+
 
     let startTime = {
         elem: '#reservation',
@@ -121,6 +130,7 @@
                 $("#reservation").val('');
                 return false;
             }
+
         }
     };
     // 结束时间
@@ -138,218 +148,150 @@
                 $("#reservationEnd").val('');
                 return false;
             }
+			if(flag==1){
+				getPeiBiTimeListByTime2(d1,d2)
+			}
+
         }
     };
     laydate.render(startTime);
     laydate.render(endTime);
-	var option = {
-		
-		tooltip: {
-			trigger: 'axis'
-		},
-		legend: {
-			data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
-		},
-		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '3%',
-			containLabel: true
-		},
-		toolbox: {
-			feature: {
-				saveAsImage: {}
+
+		function showMask() {
+			myTool.mask.show('查询中...');
+		}
+		function hidMask() {
+			myTool.mask.hide();
+		}
+
+
+
+    function getPeiBiTimeListByTime(){
+		showMask()
+		$.ajax({
+			type: 'POST',
+			url: '/QualityByPlateRealTimeProdocutionData/getPeiBiTimeListByTime',
+			dataType: 'json',
+			data: {
+				beginTime:startTime,
+				endTime:endTime,
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				$("#time").empty()
+				if(json!=null){
+					$("#time").append("<option>"+json[0].productionTime+"</option>")
+				}
+				searchBydate()
+				hidMask()
 			}
-		},
-		xAxis: {
-			type: 'category',
-			boundaryGap: false,
-			data: ['0.07', '0.16', '0.3', '0.9', '1.38', '2,36', '4.75','5.75','5.25','6.15','7.2','8.7']
-		},
-		yAxis: {
-			type: 'value'
-		},
-		series: [{
-				name: '1',
-				type: 'line',
-				stack: '总量',
-				data: [10,24,36,43,56,62,79,89,92,43,56,62,]
+		});
+	}
+
+		function getPeiBiTimeListByTime2(obj1,obj2){
+			$.ajax({
+				type: 'POST',
+				url: '/QualityByPlateRealTimeProdocutionData/getPeiBiTimeListByTime',
+				dataType: 'json',
+				data: {
+					beginTime:obj1,
+					endTime:obj2,
+				},
+				error: function (msg) {
+					errMessage("请求UserController失败");
+				},
+				success: function (json) {
+					$("#time").empty()
+					if(json!=null){
+						for(var i=0;i<json.length;i++){
+							$("#time").append("<option>"+json[i].productionTime+"</option>")
+						}
+					}
+				}
+			});
+		}
+
+
+
+	function searchBydate(){
+    	var time=$("#time").find("option:selected").text()
+		$.ajax({
+			type: 'POST',
+			url: '/QualityByPlateRealTimeProdocutionData/getPeiBiOneByTime',
+			dataType: 'json',
+			data: {
+				time:time
 			},
-			{
-				name: '2',
-				type: 'line',
-				stack: '总量',
-				data: [19,38,50,50,72,92,80,75,60,80,75,60]
+			error: function (msg) {
+				errMessage("请求UserController失败");
 			},
-			{
-				name: '3',
-				type: 'line',
-				stack: '总量',
-				data: [10,20,30,40,50,60,70,80,90,92,80,75,]
-			},
-			{
-				name: '4',
-				type: 'line',
-				stack: '总量',
-				data: [10,20,30,40,50,60,70,80,90,79,89,92,]
-			},
-			{
-				name: '5',
-				type: 'line',
-				stack: '总量',
-				data: [10,20,30,40,50,60,70,80,90,79,89,92, ]
+			success: function (json) {
+				if(json!=null){
+					setEcahrs(json)
+				}
 			}
-		]
-	};
-	// 使用刚指定的配置项和数据显示图表。
-	myChart.setOption(option);
-	
-	
-	var myChart = echarts.init(document.getElementById('fou'));
-	
-	var option = {
-			title : {
-			    text: '分部沥青拌和楼沥青站数据实时监控',
-			    // subtext: '纯属虚构'
+		});
+	}
+
+
+
+	function setEcahrs(obj){
+    	var arr=[]
+		arr.push(obj.baifenbi1)
+		arr.push(obj.baifenbi2)
+		arr.push(obj.baifenbi3)
+		arr.push(obj.baifenbi4)
+		arr.push(obj.baifenbi5)
+		arr.push(obj.baifenbi6)
+		arr.push(obj.baifenbiFen)
+		arr.push(obj.baifenbiLiqing)
+
+		var myChart = echarts.init(document.getElementById('sec'));
+		var option = {
+
+			tooltip: {
+				trigger: 'axis'
 			},
-			tooltip : {
-			    trigger: 'axis'
-			},
-			legend: {
-			    data:['mm','200']
+			/*legend: {
+				data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+			},*/
+			grid: {
+				left: '3%',
+				right: '4%',
+				bottom: '3%',
+				containLabel: true
 			},
 			toolbox: {
-			    show : true,
-			    feature : {
-			        dataView : {show: true, readOnly: false},
-			        magicType : {show: true, type: ['line', 'bar']},
-			        restore : {show: true},
-			        saveAsImage : {show: true}
-			    }
-			},
-			calculable : true,
-			xAxis : [
-			    {
-			        type : 'category',
-			        data : ['2018-03-29','2018-03-29','2018-03-29','2018-03-29','2018-03-29','2018-03-29','2018-03-29','2018-03-29']
-			    }
-			],
-			yAxis : [
-			    {
-			        type : 'value'
-			    }
-			],
-			series : [
-			    {
-			        name:'蒸发量',
-			        type:'bar',
-			        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2],
-			        markPoint : {
-			            data : [
-			                {type : 'max', name: '最大值'},
-			                {type : 'min', name: '最小值'}
-			            ]
-			        },
-			        markLine : {
-			            data : [
-			                {type : 'average', name: '平均值'}
-			            ]
-			        }
-			    },
-			    {
-			        name:'降水量',
-			        type:'bar',
-			        data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6],
-			        markPoint : {
-			            data : [
-			                {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
-			                {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
-			            ]
-			        },
-			        markLine : {
-			            data : [
-			                {type : 'average', name : '平均值'}
-			            ]
-			        }
-			    }
-			]
-			};
-	// 使用刚指定的配置项和数据显示图表。
-	myChart.setOption(option);
-	
-		layui.use('element', function() {
-			var $ = layui.jquery,
-				element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
-
-			//触发事件
-			var active = {
-				tabAdd: function() {
-					//新增一个Tab项
-					element.tabAdd('demo', {
-						title: '新选项' + (Math.random() * 1000 | 0) //用于演示
-							,
-						content: '内容' + (Math.random() * 1000 | 0),
-						id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
-					})
-				},
-				tabDelete: function(othis) {
-					//删除指定Tab项
-					element.tabDelete('demo', '44'); //删除：“商品管理”
-
-
-					othis.addClass('layui-btn-disabled');
-				},
-				tabChange: function() {
-					//切换到指定Tab项
-					element.tabChange('demo', '22'); //切换到：用户管理
+				feature: {
+					saveAsImage: {}
 				}
-			};
-
-			$('.site-demo-active').on('click', function() {
-				var othis = $(this),
-					type = othis.data('type');
-				active[type] ? active[type].call(this, othis) : '';
-			});
-
-			//Hash地址的定位
-			var layid = location.hash.replace(/^#test=/, '');
-			element.tabChange('test', layid);
-
-			element.on('tab(test)', function(elem) {
-				location.hash = 'test=' + $(this).attr('lay-id');
-			});
-
-		});
-		
-	    var table=$('#mainContent').dataTable({
-	        "deferRender": true,
-	        "processing": true,
-	        "bDestroy": true,
-	        "iDisplayLength": 10,
-	        "searching": true,
-	        "lengthChange": false,
-	        "oLanguage": {
-			    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 			},
-	        "order": [[0, 'asc']],
-	        "oLanguage": { //国际化配置
-	        "sProcessing": "正在获取数据，请稍后...",
-	        "sLengthMenu": "显示 _MENU_ 条",
-	        "sZeroRecords": "查询不到相关数据",
-	        "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
-	        "sInfoEmpty": "记录数为0",
-	        "sInfoFiltered": "(全部记录数 _MAX_ 条)",
-	        "sInfoPostFix": "",
-	        "sSearch": "搜索",
-	        "sUrl": "",
-	        "oPaginate": {
-	            "sFirst": "第一页",
-	            "sPrevious": "上一页",
-	            "sNext": "下一页",
-	            "sLast": "最后一页"
-	        }},
-	        
-		});
+			xAxis: {
+				type: 'category',
+				boundaryGap: false,
+				data: ['料1', '料2', '料3', '料4', '料5', '料6', '粉尘比', '沥青比']
+			},
+			yAxis: {
+				type: 'value'
+			},
+			series: [{
+				name: '实时生产级配',
+				type: 'line',
+				stack: '总量',
+				data: arr
+			}
+			]
+		};
+		// 使用刚指定的配置项和数据显示图表。
+		myChart.setOption(option);
+
+	}
+
+	
+	
+
 	</script>
 
 </html>
