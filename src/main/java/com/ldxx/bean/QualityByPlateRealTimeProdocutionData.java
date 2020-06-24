@@ -52,6 +52,80 @@ public class QualityByPlateRealTimeProdocutionData {
 
 	public Date productionTime;//生产时间
 
+
+	private BigDecimal baifenbi1;
+	private BigDecimal baifenbi2;
+	private BigDecimal baifenbi3;
+	private BigDecimal baifenbi4;
+	private BigDecimal baifenbi5;
+	private BigDecimal baifenbi6;
+	private BigDecimal baifenbiFen;
+	private BigDecimal baifenbiLiqing;
+
+	public BigDecimal getBaifenbiFen() {
+		return baifenbiFen;
+	}
+
+	public void setBaifenbiFen(BigDecimal baifenbiFen) {
+		this.baifenbiFen = baifenbiFen;
+	}
+
+	public BigDecimal getBaifenbiLiqing() {
+		return baifenbiLiqing;
+	}
+
+	public void setBaifenbiLiqing(BigDecimal baifenbiLiqing) {
+		this.baifenbiLiqing = baifenbiLiqing;
+	}
+
+	public BigDecimal getBaifenbi1() {
+		return baifenbi1;
+	}
+
+	public void setBaifenbi1(BigDecimal baifenbi1) {
+		this.baifenbi1 = baifenbi1;
+	}
+
+	public BigDecimal getBaifenbi2() {
+		return baifenbi2;
+	}
+
+	public void setBaifenbi2(BigDecimal baifenbi2) {
+		this.baifenbi2 = baifenbi2;
+	}
+
+	public BigDecimal getBaifenbi3() {
+		return baifenbi3;
+	}
+
+	public void setBaifenbi3(BigDecimal baifenbi3) {
+		this.baifenbi3 = baifenbi3;
+	}
+
+	public BigDecimal getBaifenbi4() {
+		return baifenbi4;
+	}
+
+	public void setBaifenbi4(BigDecimal baifenbi4) {
+		this.baifenbi4 = baifenbi4;
+	}
+
+	public BigDecimal getBaifenbi5() {
+		return baifenbi5;
+	}
+
+	public void setBaifenbi5(BigDecimal baifenbi5) {
+		this.baifenbi5 = baifenbi5;
+	}
+
+	public BigDecimal getBaifenbi6() {
+		return baifenbi6;
+	}
+
+	public void setBaifenbi6(BigDecimal baifenbi6) {
+		this.baifenbi6 = baifenbi6;
+	}
+
 	public BigDecimal getBaifenbi() {
 		return baifenbi;
 	}

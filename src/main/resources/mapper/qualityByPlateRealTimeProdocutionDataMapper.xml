@@ -18,10 +18,31 @@
 				qba.production_time &gt; #{beginTime}
 			</if>
 			<if test="endTime !=null and endTime!=''">
-				and qba.production_time &lt;  #{endTime}
+				and qba.production_time &lt; #{endTime}
 			</if>
 		</where>
 		order by qba.production_time asc
 	</select>
-	
+
+	<select id="getPeiBiOneByTime" resultType="QualityByPlateRealTimeProdocutionData">
+		SELECT
+		top 1
+		Convert(decimal(18,2),materials_use_1/weight*100) baifenbi1,
+		Convert(decimal(18,2),materials_use_2/weight*100) baifenbi2,
+		Convert(decimal(18,2),materials_use_3/weight*100) baifenbi3,
+		Convert(decimal(18,2),materials_use_4/weight*100) baifenbi4,
+		Convert(decimal(18,2),materials_use_5/weight*100) baifenbi5,
+		Convert(decimal(18,2),materials_use_6/weight*100) baifenbi6,
+		Convert(decimal(18,2),pitch_use/weight*100) baifenbi_liqing,
+		Convert(decimal(18,2),bone_flour_use/weight*100) baifenbi_fen
+		FROM
+		quality_by_plate_real_time_prodocution_data qba
+		<where>
+			<if test="time !=null and time!=''">
+				qba.production_time = #{time}
+			</if>
+		</where>
+		order by qba.production_time desc
+	</select>
+
 </mapper>

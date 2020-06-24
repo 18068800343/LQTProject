@@ -29,7 +29,7 @@ public class QualityByPlateRealTimeProdocutionDataController {
 	
 	@RequestMapping("/getAllQualityByPlateRealTimeProdocutionData")
 	@ResponseBody
-	public List<QualityByPlateRealTimeProdocutionData> getAllQualityByPlateRealTimeProdocutionData(){
+	public List<QualityByPlateRealTimeProdocutionData> getAllQualityByPlateRealTimeProdocutionData() {
 		List<QualityByPlateRealTimeProdocutionData> list = service.getAllQualityByPlateRealTimeProdocutionData();
 		return list;
 	}
@@ -37,11 +37,25 @@ public class QualityByPlateRealTimeProdocutionDataController {
 
 	@RequestMapping("/getPeiBiVoListByTime")
 	@ResponseBody
-	public PeiBiVo getPeiBiVoListByTime(String beginTime,String endTime){
-		List<QualityByPlateRealTimeProdocutionData> list = dao.getPeiBiVoListByTime(beginTime,endTime);
+	public PeiBiVo getPeiBiVoListByTime(String beginTime, String endTime) {
+		List<QualityByPlateRealTimeProdocutionData> list = dao.getPeiBiVoListByTime(beginTime, endTime);
 		PeiBiVo peiBiVo = new PeiBiVo();
-		peiBiVo  = peiBiVo.getPeiBiVoByPeiBiVoList(list);
+		peiBiVo = peiBiVo.getPeiBiVoByPeiBiVoList(list);
 		return peiBiVo;
+	}
+
+	@RequestMapping("/getPeiBiTimeListByTime")
+	@ResponseBody
+	public List getPeiBiTimeListByTime(String beginTime, String endTime) {
+		List<QualityByPlateRealTimeProdocutionData> list = dao.getPeiBiVoListByTime(beginTime, endTime);
+		return list;
+	}
+
+	@RequestMapping("/getPeiBiOneByTime")
+	@ResponseBody
+	public QualityByPlateRealTimeProdocutionData getPeiBiOneByTime(String time) {
+		QualityByPlateRealTimeProdocutionData one = dao.getPeiBiOneByTime(time);
+		return one;
 	}
 
 }
