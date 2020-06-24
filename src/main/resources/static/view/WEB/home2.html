@@ -197,11 +197,12 @@
 
 				myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
 				option = {
-					tooltip: {
-						trigger: 'item',
-						//formatter:'dede{b}'
-						formatter:'{b}'
-					},
+						 tooltip: {
+		                      trigger: 'axis',
+		                      axisPointer: {
+		                          type: 'shadow'
+		                      }
+		                  },
 					legend: {
 						orient: 'vertical',
 						x: '',
@@ -242,18 +243,7 @@
 							}
 						},
 
-						data: [{
-								name: '南京市',
-								value: Math.round(Math.random() * 500)
-							},
-							{
-								name: '苏州市',
-								value: Math.round(Math.random() * 500)
-							},
-							{
-								name: '连云港市',
-								value: Math.round(Math.random() * 500)
-							}
+						data: [
 						],
 					geoCoord: {
 							'南京市': [118.767413,32.041544],
@@ -278,13 +268,18 @@
 									value: 2
 								},
 								{
-									name: '连云港市'
+									name: '连云港市',
+									value: 59
 								}]
 						}
 
 					}]
 				}
-				myChart.setOption(option);
+				myChart.setOption(option,true);
+				myChart.on('click', function(params){
+					alert(1);	
+					console.log(params);//此处写点击事件内容
+				});
 			}
 		);
 
