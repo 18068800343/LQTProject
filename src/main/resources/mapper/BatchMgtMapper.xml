@@ -4,16 +4,16 @@
 
 	<select id="getAllBatchMgt" resultType="BatchMgtVo">
 		select a.id,a.road_id,a.batch,a.licence_plate,a.unloaded_weight,a.loading_weight,a.loading_temperature,a.pitch_type,a.datetime_in,
-		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,b.fl_name as pitchTypeName,c.road_name,usr.u_name
+		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,a.site_id,b.fl_name as pitchTypeName,sc.road_name,sc.site_number,usr.u_name
 		from batch_mgt a
 		left join sys_formulation_management b on a.pitch_type=b.fl_id
-		left join sys_road_mgn c on a.road_id=c.road_id
+		left join site_construction sc on a.site_id=sc.id
 		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
 		 where a.delete_state=1
 	</select>
 	
 	<select id="getBatchMgtById" resultType="BatchMgt">
-		select id,road_id,batch,licence_plate,unloaded_weight,loading_weight,loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state
+		select id,road_id,batch,licence_plate,unloaded_weight,loading_weight,loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state,site_id
 		from batch_mgt where id=#{id}
 	</select>
 	
@@ -40,7 +40,8 @@
 		datetime_in=#{bm.datetimeIn},
 		datetime_out=#{bm.datetimeOut},
 		edit_user_id=#{bm.editUserId},
-		edit_datetime=#{bm.editDatetime}
+		edit_datetime=#{bm.editDatetime},
+		site_id=#{bm.siteId}
 		where id=#{bm.id}
 	</update>
 	
@@ -50,9 +51,9 @@
 	
 	<insert id="insertBatchMgt" parameterType="BatchMgt">
 		insert into batch_mgt(id,road_id,batch,licence_plate,unloaded_weight,loading_weight,
-		loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state)
+		loading_temperature,pitch_type,datetime_in,datetime_out,edit_user_id,edit_datetime,delete_state,site_id)
 		values(#{bm.id},#{bm.roadId},#{bm.batch},#{bm.licencePlate},#{bm.unloadedWeight},#{bm.loadingWeight},
-		#{bm.loadingTemperature},#{bm.pitchType},#{bm.datetimeIn},#{bm.datetimeOut},#{bm.editUserId},#{bm.editDatetime},1)
+		#{bm.loadingTemperature},#{bm.pitchType},#{bm.datetimeIn},#{bm.datetimeOut},#{bm.editUserId},#{bm.editDatetime},1,#{bm.siteId})
 	</insert>
 
 	<select id="getBatchMgtByPlate" resultType="BatchMgt">
