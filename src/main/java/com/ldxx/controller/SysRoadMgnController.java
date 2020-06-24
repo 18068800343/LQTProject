@@ -5,6 +5,7 @@ import com.ldxx.bean.SysRoadMgnLowcase;
 import com.ldxx.bean.User;
 import com.ldxx.dao.SysRoadMgnDao;
 import com.ldxx.service.SysRoadMgnService;
+import com.ldxx.vo.SiteConstructionVo;
 import com.ldxx.vo.SysRoadMgnVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,12 +41,12 @@ public class SysRoadMgnController {
         return srmService.getAllSysRoadMgn(luduanquanxian);
     }
 
-    @RequestMapping("/getAllSysRoadMgnVoHomePage")
-    public List<SysRoadMgnVo> getAllSysRoadMgnVoHomePage(HttpSession session){
+	@RequestMapping("/getAllSysRoadMgnVoHomePage")
+	public List<SiteConstructionVo> getAllSysRoadMgnVoHomePage(HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		String luduanquanxian = user.getLuduanquanxian();
-        return dao.getAllSysRoadMgnVoHomePage(luduanquanxian);
-    }
+		return dao.getAllSysRoadMgnVoHomePage(luduanquanxian);
+	}
 
 	@RequestMapping("/getAllSysRoadMgnLowcase2")//通过权限初始化路段（小写）
 	public List<SysRoadMgnLowcase> getAllSysRoadMgnLowcase2(HttpSession session){
