@@ -14,6 +14,17 @@ public class BatchMgtVo extends BatchMgt {
 
 	private String uName;
 
+	private String siteNumber;
+
+
+	public String getSiteNumber() {
+		return siteNumber;
+	}
+
+	public void setSiteNumber(String siteNumber) {
+		this.siteNumber = siteNumber;
+	}
+
 	public String getRoadName() {
 		return roadName;
 	}

@@ -1,11 +1,10 @@
 package com.ldxx.bean;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 批次管理
@@ -48,6 +47,17 @@ public class BatchMgt {
     public String editDatetime;//最后录入日期
 
     public int deleteState;//逻辑删除1存在，0删除
+
+	private String siteId;
+
+
+	public String getSiteId() {
+		return siteId;
+	}
+
+	public void setSiteId(String siteId) {
+		this.siteId = siteId;
+	}
 
 	public String getPitchTypeName() {
 		return pitchTypeName;

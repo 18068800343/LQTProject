@@ -73,7 +73,7 @@
             <table class="layui-table" lay-skin="line" id="mainContent">
                 <thead>
                     <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
-                        <!--<th>路段编号</th>-->
+                        <th>路段编号</th>
                         <th style="width: 15%;">批次</th>
                         <th>车牌</th>
                         <th>空车重量</th>
@@ -184,35 +184,35 @@
                     <form class="form-inline">
                         <table class="layui-table "lay-skin="line">
 							<tr>
-								<!--<td>路段编号</td>
+								<td>路段编号</td>
 								<td>
 									<select class="form-inline" id="luduanbianhao" style="width: 70%;">
 									</select>
-								</td>-->
+								</td>
 								<td>车牌</td>
 								<td><input type="text" id="chepai" style="width: 70%;" disabled/></td>
-								<td>空车重量</td>
-								<td><input type="text" id="kongchezhongliang" style="width: 70%;" disabled/></td>
 							</tr>
 							<tr>
+								<td>空车重量</td>
+								<td><input type="text" id="kongchezhongliang" style="width: 70%;" disabled/></td>
 								<td>装料后重量</td>
 								<td>
 									<select class="form-inline" id="zhuangzaihouzhongliang" style="width: 70%;">
 									</select>
 								</td>
-								<td>装料温度</td>
-								<td><input type="text" id="zhuangliaowendu" style="width: 70%;"/></td>
 							</tr>
 							<tr>
+								<td>装料温度</td>
+								<td><input type="text" id="zhuangliaowendu" style="width: 70%;"/></td>
 								<td>成品沥青类型</td>
 								<td>
 									<select class="form-inline" id="liqingleixing" style="width: 70%;">
 									</select>
 								</td>
-								<td>入场时间</td>
-								<td><input type="text" id="ruchangshijian" style="width: 70%;" disabled/></td>
 							</tr>
 							<tr>
+								<td>入场时间</td>
+								<td><input type="text" id="ruchangshijian" style="width: 70%;" disabled/></td>
 								<td>出场时间</td>
 								<td><input type="text" id="chuchangshijian" style="width: 70%;"/></td>
 							</tr>
@@ -259,24 +259,27 @@
 							<tr>
 								<td>空车重量</td>
 								<td><input type="text" id="xg_kongchezhongliang" style="width: 70%;"/></td>
-								<td>装料后重量</td>
-								<td><input type="text" id="xg_zhuangzaihouzhongliang" style="width: 70%;"/></td>
 							</tr>
 							<tr>
+								<td>装料后重量</td>
+								<td><input type="text" id="xg_zhuangzaihouzhongliang" style="width: 70%;"/></td>
 								<td>装料温度</td>
 								<td><input type="text" id="xg_zhuangliaowendu" style="width: 70%;"/></td>
+							</tr>
+							<tr>
 								<td>成品沥青类型</td>
 								<td>
 									<select class="form-inline" id="xg_liqingleixing" style="width: 70%;">
 									</select>
 								</td>
-							</tr>
-							<tr>
 								<td>入场时间</td>
 								<td><input type="text" id="xg_ruchangshijian" style="width: 70%;"/></td>
+							</tr>
+                            <tr>
 								<td>出场时间</td>
 								<td><input type="text" id="xg_chuchangshijian" style="width: 70%;"/></td>
-							</tr>
+
+                            </tr>
 							<!--<tr>
 								<td>录入人</td>
 								<td><input type="text" id="xg_lururen" style="width: 70%;"/></td>
@@ -339,7 +342,7 @@
 		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
 		"columns": [
-            //{ "data": "roadName"},
+            { "data": "siteNumber"},
             { "data": "batch"}, 
             { "data": "licencePlate"},
             { "data": "unloadedWeight"},
@@ -353,7 +356,7 @@
         ],
         "columnDefs": [{	
 					 "class": "tcenter",
-					    "targets": 9,
+					    "targets": 10,
 					    "searchable": true,
 					    "render": function(data, type, full) {
 					  	  		//'<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
@@ -383,6 +386,7 @@
         }},
         
 	});
+    $.fn.dataTable.ext.errMode = 'none';
 
     function initTableQuanxian(){
         $.ajax({
@@ -428,7 +432,7 @@
 	function initluduanbianhao(){
 		 $.ajax({
             type: 'POST',
-            url: '/SysRoadMgnController/getAllSysRoadMgn',
+            url: '/TanPuDiDianGuanLi/getAllTanPuDiDian',
             dataType: 'json',
             data: {
             },
@@ -436,10 +440,10 @@
             	$("#luduanbianhao").html('');
 	        	$("#xg_luduanbianhao").html('');
 	        	 for(var i=0;i<json.length;i++){
-	        		$("#luduanbianhao").append( "<option value='" + json[i].roadId + "'>"
-			                    + json[i].roadName + "</option>")
-		            $("#xg_luduanbianhao").append( "<option value='" + json[i].roadId + "'>"
-		                    + json[i].roadName + "</option>")
+	        		$("#luduanbianhao").append( "<option value='" + json[i].id + "'>"
+			                    + json[i].sitenumber + "</option>")
+		            $("#xg_luduanbianhao").append( "<option value='" + json[i].id + "'>"
+		                    + json[i].sitenumber + "</option>")
 	        	} 
             }
         }); 
@@ -530,6 +534,7 @@
 	            	   toastr.success("添加成功");
 	            	   $('#mainContent').DataTable().row.add(json.BatchMgt).draw(false);     //新增行立即显示
 	            	   $("#myModal2").modal('hide');
+                       initTable();
 	               }else{
 	            	   toastr.error("添加失败");
 	               }
@@ -568,7 +573,7 @@
 	
 	
 	$("#baocun").click(function(){
-		//var roadId=$("#luduanbianhao").val();
+		var roadId=$("#luduanbianhao").val();
 		var licencePlate=$("#chepai").val();
 		var unloadedWeight=$("#kongchezhongliang").val();
 		var loadingWeight=$("#zhuangzaihouzhongliang").val();
@@ -584,7 +589,7 @@
             dataType: 'json',
             data: {
             	id:luru_id,
-            	//roadId:roadId,
+                siteId:roadId,
             	licencePlate:licencePlate,
             	unloadedWeight:unloadedWeight,
             	loadingWeight:loadingWeight,
@@ -596,6 +601,7 @@
             },
             success: function (json) {
             	if(json.result>0){
+            	    json.siteNumber=$("#luduanbianhao").find("option:selected").text();
             	   toastr.success("录入成功");
             	   $("#myModal").modal('hide');
             	   initTable();
