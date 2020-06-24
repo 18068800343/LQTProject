@@ -5,6 +5,7 @@
 		select
 		id,user_id,work_no,name,date,time_in,time_out,remarks,delete_state
 		from u_signin
+
 		<where>
 			delete_state=1
 			<if test='state=="1"'>
