@@ -301,7 +301,9 @@ function setTanPuLiChengOption(list){
 			data: list.xList
 		},
 		yAxis: {
-			type: 'value'
+			type: 'value',
+			name: 'm',
+			position: 'left',
 		},
 		series: [
 			{
@@ -316,9 +318,9 @@ function setTanPuLiChengOption(list){
 
 function setTanPuSuDuOption(list){
 	let tanPusuduOption = {
-		title: {
+		/*title: {
 			text: '折线图堆叠'
-		},
+		},*/
 		legend: {
 			data:['摊铺速度统计']
 		},
@@ -368,7 +370,9 @@ function setTanPuSuDuOption(list){
 			data: list.xList
 		},
 		yAxis: {
-			type: 'value'
+			type: 'value',
+			name: 'm/min',
+			position: 'left',
 		},
 		series: [
 			{
@@ -435,7 +439,9 @@ function setTanPuWenDuOption(list){
 			data: list.xList
 		},
 		yAxis: {
-			type: 'value'
+			type: 'value',
+			name: '摄氏度(°)',
+			position: 'left',
 		},
 		series: [
 			{
@@ -507,7 +513,9 @@ function setTanPuLiXiDuOption(list){
 			data: list.xList
 		},
 		yAxis: {
-			type: 'value'
+			type: 'value',
+			name: '摄氏度(°)',
+			position: 'left',
 		},
 		series: [
 			{

@@ -93,7 +93,7 @@
                         <th>压路机</th>
                         <th>路段名称</th>
                         <th>桩号</th>
-                        <th>碾压速度</th>
+                        <th>碾压速度(km/h)</th>
                         <th>时间</th>
                         <th>录入人</th>
                         <th style="width:70px;">操作</th>
@@ -148,7 +148,7 @@
                             <tr>
                                 <td>摊铺地点</td>
                                 <td>22</td>
-                                <td>碾压速度</td>
+                                <td>碾压速度(km/h)</td>
                                 <td>1</td>
                             </tr>
                             <tr>
@@ -211,7 +211,7 @@
                                             <option :value="site.id" v-for="site in siteList">{{site.stakemark}}</option>
                                         </select>
                                     </td>
-                                    <td>碾压速度</td>
+                                    <td>碾压速度(km/h)</td>
                                     <td><input type="text" @blur="reg(compactionspeed,'xiaoshu','compactionspeed')" v-model="compactionspeed" class="form-control" style="width: 100%;"/></td>
                                 </tr>
                                 <tr>
@@ -274,7 +274,7 @@
                                             <option :value="site.id" v-for="site in siteList">{{site.stakemark}}</option>
                                         </select>
                                     </td>
-                                    <td>碾压速度</td>
+                                    <td>碾压速度(km/h)</td>
                                     <td><input type="text" @blur="reg(compactionspeed,'xiaoshu','compactionspeed')" v-model="compactionspeed" class="form-control" style="width: 100%;"/></td>
                                 </tr>
                                 <tr>
