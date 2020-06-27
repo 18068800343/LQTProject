@@ -182,7 +182,7 @@
 		GROUP BY
 		srm.id
 		) gy ON gy.id = srm.id
-		WHERE srm.state=#{state}
+		WHERE srm.delete_state=#{state}
 	</select>
 
 	<select id="getAllSysRoadMgn2" resultType="SysRoadMgnLowcase">

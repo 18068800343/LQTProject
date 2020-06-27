@@ -109,7 +109,7 @@
 	</select>
 
     <select id="getAllTanPuDiDianVoByState" resultType="siteConstructionVo">
-		select sc.*  from site_construction sc WHERE sc.state=#{state}
+		select sc.*  from site_construction sc WHERE sc.delete_state=#{state}
 	</select>
 
     <select id="getBiaoDuanByLuDuan" resultType="siteConstruction" parameterType="map">
