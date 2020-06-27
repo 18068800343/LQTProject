@@ -398,7 +398,7 @@
 
     let startTime = {
         elem: '#reservation',
-        type: 'datetime',
+        type: 'date',
         trigger: 'click',
         done: function (date) {
             let beginDate = date;
@@ -415,7 +415,7 @@
     // 结束时间
     let endTime = {
         elem: '#reservationEnd',
-        type: 'datetime',
+        type: 'date',
         trigger: 'click',
         done: function (date) {
             let beginDate = $("#reservation").val();

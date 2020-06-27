@@ -120,6 +120,12 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 function setHomeZPZHTJ(dayTime,totalWeight){
 //		柱状图
 	option = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
 		color: ['#7FE0FF'],
 		xAxis: {
 			type: 'category',
@@ -176,6 +182,11 @@ function setHomeZPZHTJ(dayTime,totalWeight){
 				},
 				show: true,
 
+			},
+			axisLabel: {
+				formatter: function (value, index) {
+					return value + "吨";
+				}
 			}
 		},
 		series: [{
@@ -254,6 +265,11 @@ function setHomeCBJDTJ(datetime,chenneng,feiliao){
 				},
 				show: true,
 
+			},
+			axisLabel: {
+				formatter: function (value, index) {
+					return value + "吨";
+				}
 			}
 		}],
 		series: [{
