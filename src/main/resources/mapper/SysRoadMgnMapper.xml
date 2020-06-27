@@ -74,11 +74,11 @@
 	<select id="getDayWeightCount" resultType="map">
 		select
 		top 10
-		convert(char(8),production_time,112) dayTime,
+		convert(char(10),production_time,120) dayTime,
 		Convert(decimal(18,2),sum(weight)/1000) totalWeight
 
 		from quality_by_plate_real_time_prodocution_data
-		group by convert(char(8),production_time,112) ORDER BY dayTime desc
+		group by convert(char(10),production_time,120) ORDER BY dayTime desc
 	</select>
 
 	<select id="getAllSysRoadMgnVoHomePageCopy" resultType="SysRoadMgnVo">
