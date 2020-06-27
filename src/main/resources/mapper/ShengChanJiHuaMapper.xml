@@ -141,6 +141,7 @@
 		 plan_production_collection AS a
 		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
 		LEFT JOIN site_construction srm on a.site_id = srm.id
+-- 		 and srm.delete_state = 1
 		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = a.recipe_id and sfm.delete_state = 1
     	LEFT JOIN plan_construction_deviation pcd on a.piancha_id = pcd.id and pcd.delete_state = 1
 		LEFT JOIN (select a.plan_id,sum(a.pd_need_inc_or_dec) sumneed from plan_production_count a GROUP BY a.plan_id) pniod on pniod.plan_id = a.plan_id

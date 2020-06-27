@@ -7,7 +7,8 @@
         bm.batch,sfm.fl_name,wwm.pitch_weight,usr.u_name
         from product_dispatch a
         LEFT JOIN plan_production_collection b ON a.plan_id=b.plan_id
-        LEFT JOIN site_construction srm on b.site_id = srm.id and srm.delete_state = 1
+        LEFT JOIN site_construction srm on b.site_id = srm.id
+--         and srm.delete_state = 1
         LEFT JOIN batch_mgt bm on a.batch_id=bm.id AND bm.delete_state=1
         LEFT JOIN sys_formulation_management sfm on bm.pitch_type=sfm.fl_id AND sfm.delete_state = 1
         LEFT JOIN wh_waste_mgn wwm on a.batch_id=wwm.batch_id  AND wwm.delete_state = 1

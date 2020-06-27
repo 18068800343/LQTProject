@@ -106,7 +106,8 @@
 			site_incoming_material_temp_warning simtw
 		LEFT JOIN site_field_material_mgt sfmm ON simtw.fie_id = sfmm.id and sfmm.delete_state = 1
 		LEFT JOIN batch_mgt bm ON sfmm.batch_id = bm.id and bm.delete_state = 1
-		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id and srm.delete_state = 1
+		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id
+-- 		and srm.delete_state = 1
 		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id= bm.pitch_type and sfm.delete_state = 1
 		LEFT JOIN u_user uu ON uu.user_id= simtw.edit_user_id and uu.delete_state = 1
 		where simtw.delete_state=1 and bm.batch=#{batch} and simtw.warning_state=0 ORDER BY simtw.datetime desc

@@ -24,7 +24,7 @@
 		FROM
 			batch_mgt bm
 		LEFT JOIN sys_road_mgn srm ON bm.road_id = srm.road_id
-		AND srm.delete_state = 1
+-- 		AND srm.delete_state = 1
 		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = bm.pitch_type and sfm.delete_state = 1
 		left join site_construction sc on bm.site_id=sc.id
 		where bm.delete_state = 1 and bm.id=#{id}

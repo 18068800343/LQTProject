@@ -35,7 +35,8 @@
 			plan_production_warning ppw
 		LEFT JOIN plan_production_collection ppc ON ppw.plan_id = ppc.plan_id
 		LEFT JOIN u_user uu on uu.user_id = ppw.send_user_id and uu.delete_state = 1
-		LEFT JOIN sys_road_mgn srm on ppw.road_id = srm.road_id and srm.delete_state = 1
+		LEFT JOIN sys_road_mgn srm on ppw.road_id = srm.road_id
+-- 		and srm.delete_state = 1
 
 		WHERE ppw.delete_state = 1
 	</select>
