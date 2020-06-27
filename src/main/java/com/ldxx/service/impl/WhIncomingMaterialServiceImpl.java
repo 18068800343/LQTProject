@@ -26,8 +26,8 @@ public class WhIncomingMaterialServiceImpl implements WhIncomingMaterialService 
 	@Autowired
 	private WhWarehouseCountDao wwcDao;
 	@Override
-	public List<WhIncomingMaterial> getAllWhIncomingMaterial() {
-		return dao.getAllWhIncomingMaterial();
+	public List<WhIncomingMaterial> getAllWhIncomingMaterial(String beginTime, String endTime) {
+		return dao.getAllWhIncomingMaterial(beginTime, endTime);
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.ldxx.bean.User;
+import com.ldxx.dao.WhIncomingMaterialDao;
+import com.ldxx.dao.WhWarehouseCountDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import com.ldxx.service.WhIncomingMaterialService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -25,18 +28,20 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("WhIncomingMaterial")
 public class WhIncomingMaterialController {
-	
+
 	@Autowired
 	private WhIncomingMaterialService service;
-	
-	private Map<String,Object> map=new HashMap<>();
-	
+	//仓储管理dao
+	@Resource
+	private WhIncomingMaterialDao dao;
+	private Map<String, Object> map = new HashMap<>();
+
 	@RequestMapping("/getAllWhIncomingMaterial")
 	@ResponseBody
-	public List<WhIncomingMaterial> getAllWhIncomingMaterial(){
-		return service.getAllWhIncomingMaterial();
+	public List<WhIncomingMaterial> getAllWhIncomingMaterial(String beginTime, String endTime) {
+		return dao.getAllWhIncomingMaterial(beginTime, endTime);
 	}
-	
+
 	@RequestMapping("/getWhIncomingMaterialById")
 	@ResponseBody
 	public WhIncomingMaterial getWhIncomingMaterialById(String id){
