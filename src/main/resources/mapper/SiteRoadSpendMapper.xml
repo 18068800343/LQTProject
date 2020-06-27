@@ -25,6 +25,7 @@
 		left join sys_road_mgn as c on c.road_id=b.road_id
 		left join u_user as u on a.edit_user_id2=u.user_id
 		where a.delete_state !=0 and a.site_id =b.id
+		order by a.datetime desc
 	</select>
 
     <update id="updSiteRoadSpend" parameterType="SiteRoadSpend">

@@ -10,6 +10,7 @@
 		left join site_construction sc on a.site_id=sc.id
 		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
 		 where a.delete_state=1
+		 order by a.datetime desc
 	</select>
 	
 	<select id="getBatchMgtById" resultType="BatchMgt">
