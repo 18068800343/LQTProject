@@ -63,6 +63,9 @@ public class ShiGongLaiLiaoGuanLiController {
 		int i = 0;
 		try {
 			i = service.addShiGongLaiLiao(siteFieldMaterialMgtVo, session);
+
+			//如果路段来料总重大于生产计划划实际生产总重,则将路段状态改为已完结!
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			jsonObject.put("errMsg","数据库插入出错,请检查经纬度输入格式");

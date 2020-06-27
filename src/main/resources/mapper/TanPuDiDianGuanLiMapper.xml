@@ -146,4 +146,8 @@
 		update site_construction set delete_state=2 where road_id=#{roadId} and delete_state=1
 	</update>
 
+	<update id="finishSiteConstructionById" parameterType="String">
+		update site_construction set delete_state=2 where id=#{id}
+	</update>
+
 </mapper>

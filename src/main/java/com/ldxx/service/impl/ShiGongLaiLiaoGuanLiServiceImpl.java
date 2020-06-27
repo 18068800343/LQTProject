@@ -5,6 +5,7 @@ import com.ldxx.bean.User;
 import com.ldxx.dao.LaiLiaoWenDuYuJingDao;
 import com.ldxx.dao.ShengChanJiHuaDao;
 import com.ldxx.dao.ShiGongLaiLiaoDao;
+import com.ldxx.dao.TanPuDiDianGuanLiDao;
 import com.ldxx.service.ShiGongLaiLiaoGuanLiService;
 import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -30,6 +32,8 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
     private LaiLiaoWenDuYuJingDao laidao;
     @Autowired
     private ShengChanJiHuaDao shengChanJiHuaDao;
+    @Resource
+    private TanPuDiDianGuanLiDao siteConstructionDao;
 
     @Override
     public List<SiteFieldMaterialMgtVo> getAllShiGongLaiLiao(String luduanquanxian) {
@@ -64,13 +68,19 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
                     sv.setWarningcontent("大于施工偏差要求的到场温度"+piancha1.subtract(piancha2)+"度");
                     sv.setWarningstate(0);
                     User user = (User) session.getAttribute("user");
-                    if(null!=user) {
+                    if (null != user) {
                         sv.setEdituserid(user.getUserId());
                         sv.setUname(user.getuName());
                     }
                     i = laidao.addLaiLiaoWenDu(sv);
                 }
             }
+        }
+
+        String siteId = siteFieldMaterialMgtVo.getSiteId();
+        Integer result = dao.getLailiaoTotalWeightOverPdNeed(siteId);
+        if (null != result && result > 0) {
+            Integer k = siteConstructionDao.finishSiteConstructionById(siteId);
         }
         return i;
     }
