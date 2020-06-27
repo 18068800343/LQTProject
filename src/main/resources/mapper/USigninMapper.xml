@@ -12,7 +12,7 @@
                 and date > #{beginTime}
             </if>
             <if test="endTime!='' and endTime !=null">
-                and endTime >#{endTime}
+                and #{endTime} > date
             </if>
             <if test='state=="1"'>
                 and time_in>'09:00:00'

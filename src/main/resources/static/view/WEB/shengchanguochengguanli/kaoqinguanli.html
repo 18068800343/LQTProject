@@ -448,13 +448,15 @@
             dataType: 'json',
             data: {
                 beginTime: startTime,
-                endTime: endTime
+                endTime: endTime,
+                state: $("#state").val()
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                initMychart(json);
+                $('#mainContent').dataTable().fnClearTable();
+                $('#mainContent').DataTable().rows.add(json).draw(false);
             }
         });
     }
