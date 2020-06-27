@@ -28,7 +28,7 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 			boundaryGap: false,
 			data: roadname,
 			axisLabel : {
-				formatter: function (params) {
+				/*formatter: function (params) {
 					let newParamsName = "";
 					let paramsNameNumber = params.length;
 					let provideNumber = 3;
@@ -50,7 +50,7 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 						newParamsName = params;
 					}
 					return newParamsName
-				}
+				}*/
 			}
 		},
 		yAxis: {
@@ -71,7 +71,7 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 				},
 				show: true,
 
-			},
+			},	
 			axisLabel: {
 				formatter: function (value, index) {
 					return value + "%";
@@ -143,7 +143,7 @@ function setHomeZPZHTJ(dayTime,totalWeight){
 				formatter: function (params) {
 					let newParamsName = "";
 					let paramsNameNumber = params.length;
-					let provideNumber = 4;
+					let provideNumber = 5;
 					let rowNumber = Math.ceil(paramsNameNumber / provideNumber);
 					if (paramsNameNumber > provideNumber) {
 						for (let p = 0; p < rowNumber; p++) {
