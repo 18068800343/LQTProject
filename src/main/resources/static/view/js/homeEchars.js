@@ -71,6 +71,11 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 				},
 				show: true,
 
+			},
+			axisLabel: {
+				formatter: function (value, index) {
+					return value + "%";
+				}
 			}
 		},
 		series: [
