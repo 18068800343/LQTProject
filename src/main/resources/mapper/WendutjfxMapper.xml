@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.WendutjfxDao" >
+
+
+	<select id="getWendutjfx" resultType="Wendutjfx">
+  			SELECT
+		sfmm.temp,sfmm.datetime,sc.stake_mark as stakemark,bm.loading_temperature as zlwendu,bm.licence_plate,bm.batch
+		FROM
+		site_field_material_mgt sfmm
+		LEFT JOIN (SELECT *  from batch_mgt bm  WHERE   bm.delete_state!=0) bm ON sfmm.batch_id = bm.id
+		LEFT JOIN u_user uu ON sfmm.edit_user_id = uu.user_id AND uu.delete_state = 1
+		left join site_construction sc on sfmm.site_id=sc.id
+		where sfmm.delete_state != 0  ORDER BY sfmm.datetime desc
+  	</select>
+
+
+</mapper>
