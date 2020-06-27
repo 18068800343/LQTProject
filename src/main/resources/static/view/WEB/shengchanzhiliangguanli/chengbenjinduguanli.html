@@ -58,7 +58,18 @@
 			<li class="active">成本及进度管理</li>
 		</ul>
     </div>
-
+ <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+<ul class="layui-tab-title" role="tablist" style="background: #fff;">
+    <li role="presentation" class="active  layui-this">
+        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">废料比通过率</a>
+    </li>
+    <li role="presentation">
+        <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">废料比折线图</a>
+    </li>
+</ul>
+</div>
+<div class="tab-content" style="margin-top:-10px;">
+ <div role="tabpanel" class="tab-pane active" id="profile">
     <div class="zhuti-content">
         <div class="UpperPart">
             <div class="UpperPartL">
@@ -86,14 +97,38 @@
             </table>
         </div>
     </div>
+    </div>
+     <div role="tabpanel" class="tab-pane" id="messages">
+        <!--<div class="layui-tab-item weadmin-body">-->
+        <div class="zhuti-content">
+            <div class="UpperPart">
+               
+                <div class="UpperPartR">
 
+                </div>
+            </div>
+        </div>
+        <div class="LowerPart" style="background-color: #ffffff; ">
+            <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+            <div id="chengbenecharts" style="width: 1500px;height:600px;z-index:5;" ></div>
+        </div>
+    </div>
+</div>
 <!-- allMsg结束 -->
 </body>
 <script src="../../js/jquery.js"></script>
 <script src="../../js/common-scripts.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../toastr/toastr.js"></script>
 <script>
+
+var names = []; 
+var nums = []; 
     $(document).ready( function () {
         initTable()
 	});
@@ -146,10 +181,57 @@
                 console.log(json)
                 $('#mainContent').dataTable().fnClearTable();
                 $('#mainContent').DataTable().rows.add(json).draw(false);
+            	for (var i = 0; i < json.length; i++) {
+    				names.push(json[i].datetime);
+    				nums.push(json[i].feiliaobi);
+    			}
+            	cbecharts(names,nums)
             }
         });
     }
+	function cbecharts(datetime,feiliaobi) {
+		var myChart = echarts.init(document.getElementById('chengbenecharts'));
+		var option = {
+				title: {
+					text: '堆叠区域图'
+				},
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'cross',
+						label: {
+							backgroundColor: '#6a7985'
+						}
+					}
+				},
+				toolbox: {
+					feature: {
+						saveAsImage: {}
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: [{
+					data:datetime
+				}],
+				yAxis: [{		
+					type: 'value',
+					data:feiliaobi
+				}],
+				series: [{
+					type: 'line',
+				}, ]
+			};
+			
 
+
+		// 使用刚指定的配置项和数据显示图表。
+		myChart.setOption(option);
+	}
     function getCreat(bb){
         var EnterpriseRating= $(bb).parent().prev().text();
         var Remarks= $(bb).parent().prev().prev().text();
