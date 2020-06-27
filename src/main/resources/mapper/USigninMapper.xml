@@ -7,14 +7,21 @@
 		from u_signin
 
 		<where>
-			delete_state=1
-			<if test='state=="1"'>
-				and time_in>'09:00:00'
-			</if>
-			<if test='state=="2"'>
-				and time_out&lt;'18:00:00'
-			</if>
-		</where>
+            delete_state=1
+            <if test="beginTime!='' and beginTime !=null">
+                and date > #{beginTime}
+            </if>
+            <if test="endTime!='' and endTime !=null">
+                and endTime >#{endTime}
+            </if>
+            <if test='state=="1"'>
+                and time_in>'09:00:00'
+            </if>
+            <if test='state=="2"'>
+                and time_out&lt;'18:00:00'
+            </if>
+
+        </where>
 	</select>
 
 	<select id="selectAllUSignin" resultType="USignin">

@@ -25,8 +25,8 @@ public class USigninController {
 
 	@RequestMapping("/selectAllUSignin")
 	@ResponseBody
-	public List<USignin> selectAllUSignin(String state) {
-		List<USignin> usList = uSigninDao.selectAllUSigninByState(state);
+	public List<USignin> selectAllUSignin(String state, String beginTime, String endTime) {
+		List<USignin> usList = uSigninDao.selectAllUSigninByState(state, beginTime, endTime);
 		return usList;
 	}
 }

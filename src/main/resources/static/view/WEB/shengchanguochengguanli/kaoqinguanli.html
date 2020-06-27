@@ -6,26 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="../../font2/iconfont.css">
-	<link href="../../style/bootstrap.min.css" rel="stylesheet">
+    <link href="../../style/bootstrap.min.css" rel="stylesheet">
     <link href="../../style/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../../style/jquery-editable-select.css">
-	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
-	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css" />
-	<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css" />
-	<link rel="stylesheet" type="text/css" href="../../css/layui.css" />
-	<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css" />
-	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
-	<link rel="stylesheet" type="text/css" href="../../css/code.css" />
-	<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+    <link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/code.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
     <link href="../../toastr/toastr.css" rel="stylesheet">
-	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-   <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
-     <!-- SmartAdmin RTL Support  -->
+    <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/all.css">
     <style lang="">
@@ -72,15 +72,34 @@
     <div class="zhuti-content">
         <div class="UpperPart">
             <div class="UpperPartL layui-form-item" style="z-index:10;">
-		    <div class="layui-input-block">
-                <select name="interest" id="state" lay-filter=""
-                        style="height:35px;line-height:35px;padding-left:10px;border:1px solid #dedede;width:200px;">
-                    <!--  <option value="" selected="">请选择</option> -->
-                    <option value="0">全部</option>
-                    <option value="1">迟到</option>
-                    <option value="2">早退</option>
-                </select>
-            </div>
+                <div class="layui-input-block">
+                    <div class="form-inline" style="margin: 5PX;float: left;">
+                        <div class="form-group">
+                            <input type="text" style="width:200px;margin-left: 15px;" class="form-control"
+                                   placeholder="起始时间"
+                                   id="reservation" onclick="">
+                        </div>
+                        <span class="form-group" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
+                        <div class="form-group">
+                            <input type="text" style="width:200px;" class="form-control" placeholder="结束时间"
+                                   id="reservationEnd"
+                                   onclick=""><br/>
+                        </div>
+                        <select class="form-group" name="interest" id="state" lay-filter=""
+                                style="height:35px;line-height:35px;padding-left:10px;border:1px solid #dedede;width:200px;">
+                            <!--  <option value="" selected="">请选择</option> -->
+                            <option value="0">全部</option>
+                            <option value="1">迟到</option>
+                            <option value="2">早退</option>
+                        </select>
+                        <div class="form-group">
+                            <a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
             <div class="UpperPartR">
 				<!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
@@ -302,8 +321,8 @@
 <script src="../../js/bootstrap.min.js"></script>
 <script src="../../js/jquery-editable-select.js"></script>
 <script src="../../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../js/laydate/laydate.js"></script>
 <script src="../../js/main.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
 <script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
@@ -374,8 +393,70 @@
     }
 
     $("#state").on('change', function () {
-        initTable();
+        searchBydate();
     });
 
+    let startTime = {
+        elem: '#reservation',
+        type: 'datetime',
+        trigger: 'click',
+        done: function (date) {
+            let beginDate = date;
+            let endDate = $("#reservationEnd").val();
+            let d1 = beginDate;
+            let d2 = endDate;
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                toastr.error("开始时间不能大于结束时间！");
+                $("#reservation").val('');
+                return false;
+            }
+        }
+    };
+    // 结束时间
+    let endTime = {
+        elem: '#reservationEnd',
+        type: 'datetime',
+        trigger: 'click',
+        done: function (date) {
+            let beginDate = $("#reservation").val();
+            let endDate = date;
+            let d1 = beginDate;
+            let d2 = endDate;
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                toastr.error("开始时间不能大于结束时间！");
+                $("#reservationEnd").val('');
+                return false;
+            }
+        }
+    };
+    laydate.render(startTime);
+    laydate.render(endTime);
+
+    function searchBydate() {
+        let begin = $('#reservation').val();
+        let start = begin.replace(/年|月/g, '-').replace('日', '');
+        let end = $('#reservationEnd').val().replace(/年|月/g, '-').replace('日', '');
+        initKaoQingByDate(start, end);
+        console.log(start);
+
+    }
+
+    function initKaoQingByDate(startTime, endTime) {
+        $.ajax({
+            type: 'POST',
+            url: '/USignin/selectAllUSignin',
+            dataType: 'json',
+            data: {
+                beginTime: startTime,
+                endTime: endTime
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                initMychart(json);
+            }
+        });
+    }
 </script>
 </html>
