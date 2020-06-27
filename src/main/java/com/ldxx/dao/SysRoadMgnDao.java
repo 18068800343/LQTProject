@@ -11,26 +11,26 @@ import java.util.Map;
 
 public interface SysRoadMgnDao {
 
-	public int addSysRoadMgn(@Param("sysRoadMgn") SysRoadMgn sysRoadMgn);
+    public int addSysRoadMgn(@Param("sysRoadMgn") SysRoadMgn sysRoadMgn);
 
-	public int updateSysRoadMgnById(@Param("sysRoadMgn") SysRoadMgn sysRoadMgn);
+    public int updateSysRoadMgnById(@Param("sysRoadMgn") SysRoadMgn sysRoadMgn);
 
-	public List<SysRoadMgn> getAllSysRoadMgn(String luduanquanxian);
+    public List<SysRoadMgn> getAllSysRoadMgn(String luduanquanxian);
 
-	public List<Map> getDayWeightCount();
+    public List<Map> getDayWeightCount();
 
 
-	public List<SiteConstructionVo> getAllSysRoadMgnVoHomePage(String luduanquanxian);
+    public List<SiteConstructionVo> getAllSysRoadMgnVoHomePage(String luduanquanxian, Integer state);
 
-	public List<SysRoadMgnVo> getAllSysRoadMgnVoHomePageCopy(String luduanquanxian);
+    public List<SysRoadMgnVo> getAllSysRoadMgnVoHomePageCopy(String luduanquanxian);
 
-	public List<SysRoadMgnLowcase> getAllSysRoadMgnLowcase();
+    public List<SysRoadMgnLowcase> getAllSysRoadMgnLowcase();
 
-	public int delSysRoadMgn(@Param("id") String id);
+    public int delSysRoadMgn(@Param("id") String id);
 
-	public SysRoadMgn getByIdSysRoadMgn(@Param("id") String id);
+    public SysRoadMgn getByIdSysRoadMgn(@Param("id") String id);
 
-	SysRoadMgn selectSysRoadMgnById(String luduan);
+    SysRoadMgn selectSysRoadMgnById(String luduan);
 
 	public int finishRoad(String id);
 

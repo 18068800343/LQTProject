@@ -42,10 +42,10 @@ public class SysRoadMgnController {
 	}
 
 	@RequestMapping("/getAllSysRoadMgnVoHomePage")
-	public List<SiteConstructionVo> getAllSysRoadMgnVoHomePage(HttpSession session) {
+	public List<SiteConstructionVo> getAllSysRoadMgnVoHomePage(HttpSession session, Integer state) {
 		User user = (User) session.getAttribute("user");
 		String luduanquanxian = user.getLuduanquanxian();
-		return dao.getAllSysRoadMgnVoHomePage(luduanquanxian);
+		return dao.getAllSysRoadMgnVoHomePage(luduanquanxian, state);
 	}
 
 

@@ -75,7 +75,7 @@
 		select
 		top 10
 		convert(char(8),production_time,112) dayTime,
-		sum(weight) totalWeight
+		Convert(decimal(18,2),sum(weight)/1000) totalWeight
 
 		from quality_by_plate_real_time_prodocution_data
 		group by convert(char(8),production_time,112) ORDER BY dayTime desc
@@ -143,8 +143,8 @@
 		srm.*,
 		delete_state,
 		direction,
-		CASE WHEN rn.allXuQiu is null then 0 ELSE allXuQiu end as allXuQiu,
-		CASE WHEN gy.allGongYing is null then 0 ELSE allGongYing end as allGongYing
+		CASE WHEN rn.allXuQiu is null then 0 ELSE Convert(decimal(18,2),allXuQiu/1000) end as allXuQiu,
+		CASE WHEN gy.allGongYing is null then 0 ELSE Convert(decimal(18,2),allGongYing/1000) end as allGongYing
 		FROM
 		site_construction srm
 		LEFT JOIN (
@@ -182,6 +182,7 @@
 		GROUP BY
 		srm.id
 		) gy ON gy.id = srm.id
+		WHERE srm.state=#{state}
 	</select>
 
 	<select id="getAllSysRoadMgn2" resultType="SysRoadMgnLowcase">

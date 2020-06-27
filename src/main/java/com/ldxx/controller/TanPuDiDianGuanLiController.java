@@ -40,23 +40,29 @@ public class TanPuDiDianGuanLiController {
     @ResponseBody
     public List<SiteConstructionVo> getAllTanPuDiDian(HttpSession session, String roadquanxain) {
         String luduanquanxian = "";
-        if (roadquanxain != null) {
-            luduanquanxian = roadquanxain;
-        } else {
-            User user = (User) session.getAttribute("user");
-            luduanquanxian = user.getLuduanquanxian();
-        }
+		if (roadquanxain != null) {
+			luduanquanxian = roadquanxain;
+		} else {
+			User user = (User) session.getAttribute("user");
+			luduanquanxian = user.getLuduanquanxian();
+		}
 
-        return dao.getAllTanPuDiDianVo();
-    }
-
-    @RequestMapping("/delTanPuDiDian")
-	@ResponseBody
-	public int delTanPuDiDian(String id,String status) {
-		return dao.delTanPuDiDian(id,status);
+		return dao.getAllTanPuDiDianVo();
 	}
 
-    @RequestMapping("/addTanPuDiDian")
+	@RequestMapping("/getAllTanPuDiDianVoByState")
+	@ResponseBody
+	public List<SiteConstructionVo> getAllTanPuDiDianVoByState(HttpSession session, Integer state) {
+		return dao.getAllTanPuDiDianVoByState(state);
+	}
+
+	@RequestMapping("/delTanPuDiDian")
+	@ResponseBody
+	public int delTanPuDiDian(String id, String status) {
+		return dao.delTanPuDiDian(id, status);
+	}
+
+	@RequestMapping("/addTanPuDiDian")
 	@ResponseBody
 	public String addTanPuDiDian(@RequestBody SiteConstructionVo siteConstructionVo) {
 		JSONObject jsonObject = new JSONObject();

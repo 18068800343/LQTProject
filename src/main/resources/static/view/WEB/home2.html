@@ -175,9 +175,11 @@
 		function initPoint() {
 			$.ajax({
 				type: 'POST',
-				url: '/TanPuDiDianGuanLi/getAllTanPuDiDian',
+				url: '/TanPuDiDianGuanLi/getAllTanPuDiDianVoByState',
 				dataType: 'json',
-				data: {},
+				data: {
+					state: 1
+				},
 				async: false,
 				error: function (msg) {
 					errMessage("请求UserController失败");
@@ -329,7 +331,7 @@
 				url: '/SysRoadMgnController/getAllSysRoadMgnVoHomePage',
 				dataType: 'json',
 				data: {
-
+					state: 1
 				},
 				error: function (msg) {
 					errMessage("请求UserController失败");
@@ -339,10 +341,10 @@
 					var gongying=[]
 					var roadname=[]
 					if(json!=null&&json.length!=0){
-						for(var i=0;i<json.length;i++){
+						for(var i=0;i<json.length;i++) {
 							xuqiu.push(json[i].allXuQiu)
 							gongying.push(json[i].allGongYing)
-							roadname.push(json[i].roadname)
+							roadname.push(json[i].stakemark)
 						}
 					}
 					initMychart1(xuqiu,gongying,roadname);

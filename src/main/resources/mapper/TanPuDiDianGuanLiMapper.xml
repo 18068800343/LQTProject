@@ -98,26 +98,30 @@
 	<select id="getAllTanPuDiDian" resultType="siteConstructionVo">
 		select sc.*,srm.road_no,srm.road_name from site_construction sc
 		LEFT JOIN sys_road_mgn srm on sc.road_id = srm.road_id and srm.delete_state != 0
-		<where>
-			<include refid="luduanquanxian_sql"></include>
-			sc.delete_state != 0
-		</where>
-	</select>
+        <where>
+            <include refid="luduanquanxian_sql"></include>
+            sc.delete_state != 0
+        </where>
+    </select>
 
-	<select id="getAllTanPuDiDianVo" resultType="siteConstructionVo">
+    <select id="getAllTanPuDiDianVo" resultType="siteConstructionVo">
 		select sc.*  from site_construction sc
 	</select>
 
-	<select id="getBiaoDuanByLuDuan" resultType="siteConstruction" parameterType="map">
+    <select id="getAllTanPuDiDianVoByState" resultType="siteConstructionVo">
+		select sc.*  from site_construction sc WHERE sc.state=#{state}
+	</select>
+
+    <select id="getBiaoDuanByLuDuan" resultType="siteConstruction" parameterType="map">
 		select * from site_construction where  road_no=#{roadno} and delete_state != 0
 	</select>
 
-	<select id="selectUserById" parameterType="String" resultType="user">
+    <select id="selectUserById" parameterType="String" resultType="user">
 		select * from u_user where user_id=#{userId}
 	</select>
 
 
-	<select id="getByLuDuanId" resultType="SiteConstructionVo" parameterType="map">
+    <select id="getByLuDuanId" resultType="SiteConstructionVo" parameterType="map">
 		select sc.*,srm.road_no,srm.road_name  from site_construction sc
 		LEFT JOIN sys_road_mgn srm on sc.road_id = srm.road_id and srm.delete_state != 0
 		 where  sc.road_id=#{roadId} and sc.delete_state != 0

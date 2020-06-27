@@ -8,21 +8,23 @@ import java.util.Map;
 
 public interface TanPuDiDianGuanLiDao {
 
-	List<SiteConstruction> getDistinctTanPuDiDian();
+    List<SiteConstruction> getDistinctTanPuDiDian();
 
-	List<SiteConstructionVo> getAllTanPuDiDian(String luduanquanxian);
+    List<SiteConstructionVo> getAllTanPuDiDian(String luduanquanxian);
 
-	List<SiteConstructionVo> getAllTanPuDiDianVo();
+    List<SiteConstructionVo> getAllTanPuDiDianVo();
 
-	int addTanPuDiDian(SiteConstructionVo siteConstructionVo);
+    List<SiteConstructionVo> getAllTanPuDiDianVoByState(Integer state);
 
-	int addTanPuDiDianVo(SiteConstructionVo siteConstructionVo);
+    int addTanPuDiDian(SiteConstructionVo siteConstructionVo);
 
-	int delTanPuDiDian(String id, String status);
+    int addTanPuDiDianVo(SiteConstructionVo siteConstructionVo);
 
-	int updateTanPuDiDian(SiteConstructionVo siteConstructionVo);
+    int delTanPuDiDian(String id, String status);
 
-	int updateTanPuDiDianVo(SiteConstructionVo siteConstructionVo);
+    int updateTanPuDiDian(SiteConstructionVo siteConstructionVo);
+
+    int updateTanPuDiDianVo(SiteConstructionVo siteConstructionVo);
 
 	List<SiteConstruction> getBiaoDuanByLuDuan(Map<String, String> map);
 
