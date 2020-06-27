@@ -17,6 +17,7 @@ public class SiteRoadMileageTemp {
 	private BigDecimal temp;//摊铺温度
 
 	private BigDecimal temp2;//摊铺温度
+    private BigDecimal intensityOfSegregation;
 
 	private BigDecimal lixidu;//摊铺温度
 
@@ -31,6 +32,15 @@ public class SiteRoadMileageTemp {
     private int deleteState;
 
     private String stakeMark;
+
+
+    public BigDecimal getIntensityOfSegregation() {
+        return intensityOfSegregation;
+    }
+
+    public void setIntensityOfSegregation(BigDecimal intensityOfSegregation) {
+        this.intensityOfSegregation = intensityOfSegregation;
+    }
 
     public String getStakeMark() {
         return stakeMark;

@@ -105,6 +105,7 @@
                             <th>桩号</th>
                             <th>摊铺温度1(°)</th>
                             <th>摊铺温度2(°)</th>
+                            <th>摊铺温度离析度(°)</th>
                             <th>施工时间</th>
                             <th>操作人员</th>
                             <th style="width:75px;">操作</th>
@@ -343,6 +344,7 @@
             { "data": "stakeMark"},
             { "data": "temp"},
             { "data": "temp2"},
+            { "data": "intensityOfSegregation"},
             { "data": "datetime"},
             { "data": "editUName"},
             { "data": "id"},
@@ -350,7 +352,7 @@
         "columnDefs": [
             {
                 "class": "tcenter",
-                "targets": 6,
+                "targets": 7,
                 "searchable": true,
                 "render": function(data, type, full) {
                     var xiugai='<i class="iconfont icon-xiugai Peafb" style="font-size:18px;cursor:pointer;display:none;" data-f="'+full+'"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change"></i>'
