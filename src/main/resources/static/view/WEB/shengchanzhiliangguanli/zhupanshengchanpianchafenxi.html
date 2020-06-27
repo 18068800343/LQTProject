@@ -155,7 +155,7 @@
 <script src="../../js/main.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
 <script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
-
+<script src="../../js/myTool.js"></script>
 <script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
@@ -213,7 +213,16 @@
         }},
 
 	});
+
+	function showMask() {
+		myTool.mask.show('查询中...');
+	}
+	function hidMask() {
+		myTool.mask.hide();
+	}
+
 	function initTable(){
+		showMask()
         $.ajax({
             type: 'POST',
             url: '/QualityRealtimeDeviation/getAllQualityRealtimeDeviation',
@@ -224,6 +233,7 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
+				hidMask()
                 $('#mainContent').dataTable().fnClearTable();
                 $('#mainContent').DataTable().rows.add(json).draw(false);
             }

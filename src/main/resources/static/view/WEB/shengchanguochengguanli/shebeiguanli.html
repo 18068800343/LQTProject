@@ -78,6 +78,7 @@
                         <th>设备型号</th>
 						<th>设备类型</th>
 						<th>生产厂家</th>
+						<th>自有/租赁</th>
 						<th>联系方式</th>
 						<th>完好情况</th>
                         <th style="width:100px;">操作</th>
@@ -395,6 +396,7 @@
 	            { "data": "model"},
 	            { "data": "dicDeviceType.typeName"},
 	            { "data": "manufacturer"},
+	            { "data": "ownOrLease"},
 	            { "data": "contact"},
 	            { "data": "status"},
 	            { "data": null}
@@ -402,7 +404,7 @@
  		"columnDefs": [
 					{
 					"class": "tcenter",
-					"targets": 7,
+					"targets": 8,
 					"searchable": false,
 					"render": function(data, type, full) {
 						    	return  '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看详情"  data-toggle="modal" data-target="#allMsg1" onclick="look(this)"></i>'

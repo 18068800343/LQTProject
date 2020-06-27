@@ -52,7 +52,12 @@
 			status=#{deviceInfo.status},
 			remarks=#{deviceInfo.remarks},
 			edit_user_id=#{deviceInfo.editUserId},
-			edit_datetime=#{deviceInfo.editDatetime}
+			edit_datetime=#{deviceInfo.editDatetime},
+			service_condition=#{deviceInfo.serviceCondition},
+			device_maintenance_cycle=#{deviceInfo.deviceMaintenanceCycle},
+			enter_time=#{deviceInfo.enterTime},
+			quit_time=#{deviceInfo.quitTime},
+			own_or_lease=#{deviceInfo.ownOrLease}
 		where delete_state=1 and id=#{deviceInfo.id}
 	</update>
 	<update id="deleteDeviceInfo" >

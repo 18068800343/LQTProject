@@ -51,9 +51,7 @@
             line-height:50px;
             height:50px;
         }
-       .UpperPart{
-            display:none;
-       }
+
     </style>
 </head>
 <body>
@@ -311,6 +309,9 @@
                     var arr = json.uPermissions.split(',');
                     for(var i=0;i<arr.length;i++){
                         var arr2 = arr[i].replace("+","");
+                        if(arr[i].indexOf("Pbba") >= 0 ){
+                            $(".Pbba").show();
+                        }
                         if(arr[i].indexOf("Pbbb") >= 0 ){
                             $(".Pbbb").show();
                         }

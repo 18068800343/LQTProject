@@ -232,7 +232,9 @@ function setYouShiBiOption(list){
 			data: list.xList
 		},
 		yAxis: {
-			type: 'value'
+			type: 'value',
+			name: '百分比(%)',
+			position: 'left',
 		},
 		series: [
 			{

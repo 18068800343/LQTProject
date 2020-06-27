@@ -90,7 +90,7 @@
 							<tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
 								<th>计划编号</th>
 								<th>时间</th>
-								<th>油石比</th>
+								<th>油石比(%)</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -125,7 +125,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="LowerPart" style="  background-color: #ffffff">
+				<div class="LowerPart" style="  background-color: #ffffff;margin-top:2%;">
 					<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
 					<div id="two" style="width: 1500px;height:600px; margin-left: 5px;" ></div>
 				</div>
@@ -144,6 +144,7 @@
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../toastr/toastr.js"></script>
+<script src="../../js/myTool.js"></script>
 <script>
 	$(document).ready( function () {
 		initTable();
@@ -184,8 +185,15 @@
 	        }},
 	        
 		});
-		
+
+	function showMask() {
+		myTool.mask.show('查询中...');
+	}
+	function hidMask() {
+		myTool.mask.hide();
+	}
 		function initTable(){
+			showMask()
 	        $.ajax({
 	            type: 'POST',
 	            url: '/QualityByPlateAsphaltAggregateRatio/getAllQualityByPlateAsphaltAggregateRatio',
@@ -196,6 +204,7 @@
 	                errMessage("请求UserController失败");
 	            },
 	            success: function (json) {
+					hidMask()
 	                $('#mainContent').dataTable().fnClearTable();
 	                $('#mainContent').DataTable().rows.add(json).draw(false);
 	            }
