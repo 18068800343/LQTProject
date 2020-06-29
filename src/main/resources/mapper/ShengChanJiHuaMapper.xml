@@ -36,7 +36,7 @@
 			(id,Material_deviation_1,Material_deviation_2,Material_deviation_3,
 			Material_deviation_4,Material_deviation_5,Material_deviation_6,
 			Bone_flour_deviation,pitch_deviation,
-			temp_max,temp_min,dry_mixing_time_deviation,wet_mixing_time_deviation,pass_475,pass_236,pass_0075,datetime,delete_state,piancha_name,piancha_no)
+			pd_temp_offset,arrive_temp_offset,dry_mixing_time_deviation,wet_mixing_time_deviation,pass_475,pass_236,pass_0075,datetime,delete_state,piancha_name,piancha_no)
 			values(#{id},#{Materialdeviation1},#{Materialdeviation2},
 			#{Materialdeviation3},#{Materialdeviation4},
 			#{Materialdeviation5},#{Materialdeviation6},
