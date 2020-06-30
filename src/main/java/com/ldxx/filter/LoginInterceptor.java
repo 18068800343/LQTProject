@@ -18,6 +18,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		//String requestUrl = request.getRequestURL().toString();
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
+		if(null==user&&(request.getRequestURI().equals("/view/WEB/index")||(request.getRequestURI().equals("/view/WEB/index.html"))))
+		{
+			response.sendRedirect("/view/WEB/login.html");
+			return false;
+		}
 		if(null==user)
 		{
 			response.sendRedirect("../login.html");
