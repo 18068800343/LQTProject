@@ -71,7 +71,7 @@
 				#main{
 				   width:500px !important;
 				   height:500px !important;
-				   margin:-85% 15px 0px -40% !important;
+				 /*   margin:-85% 15px 0px -40% !important; */
 				}
 				.rightfirst{
 				   width:500px !important;
@@ -100,48 +100,13 @@
 				}
 				body{
 				/* overflow:scroll; */
-				/* overflow-x:hidden; */
-				}
-			}
+				/* overflow-x:hidden; */ll.d
 		</style>
 	</head>
 
 	<body class="jd" style="background-color: #F5F5F5;">
-		<div class="head" style="height: 100%;width: 100%;"></div>
-		<div class="layui-tab" style="position: absolute;margin-left: 3%;height:10px;padding-left:200px;border-radius: 5px;bottom:7%">
-			<div style="height:5px;width:58%;position:absolute;margin-top:5px;"></div>
-			<!-- <ul class="layui-tab-title" style="height: 10px !important;">
-				<li class="layui-this">沪宁高速</li>
-				<li>沪深高速</li>
-				<li>港澳高速</li>
-				<li>宁粤高速</li>
-				<li>宁粤高速</li>
-				<li>沿江高速</li>
-			</ul> -->
-			<div class="layui-tab-content">
-				<div class="layui-tab-item layui-show">
-						<div id="main" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -96%;margin-left:-20%"></div>
-					</div>
-					 <div id="box" >
-	            <span id="box-title"></span>
-	        </div>
-				<!-- <div class="layui-tab-item">
-				        <div id="main1" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
-				</div>
-				<div class="layui-tab-item">
-				         <div id="main2" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
-				</div>
-				<div class="layui-tab-item">
-				         <div id="main3" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
-				</div>
-				<div class="layui-tab-item">
-				          <div id="main4" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
-				</div>
-				<div class="layui-tab-item">
-				          <div id="main5" style="height:800px;width:800px;margin:0 15px;float:left;margin-top: -105%;margin-left:-20%"></div>
-				</div> -->
-			</div>
-		</div>
+	<div class="head" style="height: 100%;width: 100%;"></div>
+	<div id="main" style="height:800px;width:800px;float:left;margin-top:5%;margin-left:5%;"></div>
 		<div class="y-span10 y-last">
 			<div class="B" style="float: right;">
 				<div class="rightfirst col-xs-4" style="float: right;background-color: white;margin-right: 0px;height: 260px;width: 580px;">
@@ -173,7 +138,7 @@
 			<div class="table" style="background-color: #FFF;width: 60%;height: 950px;margin-left: 1%;margin-top: 1%;">
 
 				<div class="bj_nav y-clearfix">
-					<div class="title" style="margin-left: 1%;padding-top: 1%;">
+					<div class="title" style="margin-left: 1%;padding-top: 1%;position:absolute;float:left;width:100%;">
 						<img src="../images/dec.png" />
 						<p style="display: inline-block;color: #1897e8;font-size: 15px;font-weight: bold;margin-left: 1%;">施工地点</p>
 					</div>
@@ -287,7 +252,7 @@
 						name: '',
 						type: 'map',
 						mapType: 'jiangsu',
-						roam: false,
+						roam: true,
 						/* selectedMode: false, */
 						label: {
 				              normal: {
