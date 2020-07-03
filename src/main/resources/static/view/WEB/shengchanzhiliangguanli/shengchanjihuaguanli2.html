@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="../../font2/iconfont.css">
+	<link href="../../style/bootstrap.min.css" rel="stylesheet">
+	<link href="../../style/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="../../style/jquery-editable-select.css">
+	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/layui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/code.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/laydate.css"/>
+	<link href="../../toastr/toastr.css" rel="stylesheet">
+	<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+	<link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
+	<!-- SmartAdmin RTL Support  -->
+	<link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../../css/all.css">
+	<style lang="">
+		body {
+			background: #fff;
+		}
+
+		.UpperPart {
+			display: flex;
+			justify-content: space-between;
+			border-bottom: 1px solid #ccc;
+			padding-bottom: 12px;
+		}
+
+		.selected {
+			background: rgba(247, 161, 3, 0.2);
+		}
+
+		#mainContent th {
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+
+<!-- 面包屑 -->
+<div class="mianbao">
+	<ul class="breadcrumb">
+		<li>
+			<i class="iconfont icon-knowledgebase"></i>
+		</li>
+		<li>沥青生产质量管理</li>
+		<li class="active">当前生产计划管理</li>
+	</ul>
+</div>
+<div class="background" style="background-color:#F0F1F1;width:100%;height:40px;">
+</div>
+<div>
+	<!-- Nav tabs -->
+	<!--<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+		<ul class="layui-tab-title" role="tablist" style="background: #fff;">
+			<li role="presentation" class="active  layui-this">
+				<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">生产计划</a>
+			</li>
+			<li role="presentation">
+				<a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">施工路段偏差</a>
+			</li>
+		</ul>
+	</div>-->
+	<!-- Tab panes -->
+	<div class="tab-content">
+
+		<div role="tabpanel" class="tab-pane active" id="profile">
+			<div class="zhuti-content">
+				<div class="UpperPart" style="height: 90px;">
+					<div class="UpperPartL">
+						<div style="display:flex;align-items: center;">
+							<label>当前生产计划:</label>&nbsp;
+							<label id="nowscjh"></label>
+						</div>
+						<div class="form-group" style="width:800px;margin-top: -15px;">
+							<div style="display:flex;align-items: center;">
+								<label>设置当前生产计划：</label>
+								<select class="form-control" id="scjh" style="width:60%;">
+
+								</select>
+								<button type="button" class="btn btn-primary" id="shezhi" style="margin: 5PX;">设置</button>
+							</div>
+						</div>
+					</div>
+					<div class="UpperPartR">
+						<!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
+					</div>
+				</div>
+				<div class="LowerPart" style="margin-top: 50px;" name="tbVm">
+					<div>
+						<form class="form-inline">
+							<table class="table table-bordered table-condensed" style="height: auto;">
+								<tr style="line-height: 40px;height: 40px;">
+									<td style="width: 20%;">计划编号</td>
+									<td id="jhbh"></td>
+									<td>成品需要量</td>
+									<td id="cpxql"></td>
+								</tr>
+								<tr style="line-height: 40px;height: 40px;">
+									<td>干拌时间</td>
+									<td id="gbsj"></td>
+									<td>湿拌时间</td>
+									<td id="sbsj"></td>
+								</tr>
+								<tr style="line-height: 40px;height: 40px;">
+									<td>成品温度要求</td>
+									<td id="cpwdyq"></td>
+									<td>到现场温度要求</td>
+									<td id="dxcwdyq"></td>
+								</tr>
+								<tr style="line-height: 40px;height: 40px;">
+									<td>油石比</td>
+									<td id="ysb"></td>
+									<td>单价</td>
+									<td id="dj"></td>
+								</tr>
+								<tr style="line-height: 40px;height: 40px;">
+									<td>运输距离</td>
+									<td id="ysjl"></td>
+									<td>规划高速路径</td>
+									<td id="ghgslj"></td>
+								</tr>
+								<tr style="line-height: 40px;height: 40px;">
+									<td>日期时间</td>
+									<td id="rqsj"></td>
+									<td>生产完成时间</td>
+									<td id="scwcsj"></td>
+								</tr>
+
+							</table>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+
+
+</body>
+<script src="../../js/jquery.js"></script>
+<script src="../../js/common-scripts.js"></script>
+<script src="../../toastr/toastr.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../js/jquery-editable-select.js"></script>
+<script src="../../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
+<script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="../../js/quanxian.js"></script>
+<script>
+	$(document).ready( function () {
+		initscjhnow();
+		initscjh();
+	});
+
+
+	function initscjhnow(){
+		$.ajax({
+			type:"post",
+			url:"/ShengChanJiHua/getShengChanJiHuaNow",
+			data:{
+			},
+			success:function(json){
+				$("#nowscjh").empty();
+				if(json!=null &&json!=""){
+					$("#nowscjh").html(json.planno);
+					look(json)
+
+				}
+
+			}
+		});
+	}
+
+	function initscjh(){
+		$.ajax({
+			type:"post",
+			url:"/ShengChanJiHua/getShengChanJiHuaToday",
+			data:{
+			},
+			success:function(json){
+					$("#scjh").empty();
+					if(json!=null &&json!=""){
+						for(var i=0;i<json.length;i++){
+							$("#scjh").append("<option value="+json[i].planid+">"+json[i].planno+"</option>")
+						}
+
+					}
+
+
+			}
+		});
+	}
+
+	  $("#shezhi").click(function(){
+	  	var planId=$("#scjh").val();
+	  	var planNo=$("#scjh").find("option:selected").text();
+		  $.ajax({
+			  type:"post",
+			  url:"/ShengChanJiHua/addShengChanJiHuaCurrent",
+			  data:{
+				  planId:planId,
+				  planNo:planNo
+			  },
+			  success:function(json){
+				  if(json>0){
+					  toastr.success("设置成功")
+					  initscjhnow();
+				  }else{
+				  	toastr.error("设置失败")
+				  }
+
+
+			  }
+		  });
+	  })
+
+	function look(obj){
+		$("#jhbh").text(obj.planno)
+		$("#cpxql").text(obj.pdneed)
+		$("#gbsj").text(obj.drymixingtime)
+		$("#sbsj").text(obj.wetmixingtime)
+		$("#ysb").text(obj.radio)
+		$("#cpwdyq").text(obj.pdtemp)
+		$("#dxcwdyq").text(obj.arrivetemp)
+		$("#dj").text(obj.price)
+		$("#rqsj").text(obj.datetime)
+		$("#scwcsj").text(obj.finishTime)
+		$("#ysjl").text(obj.distance)
+		$("#ghgslj").text(obj.pathPlan)
+
+	}
+
+</script>
+</html>
