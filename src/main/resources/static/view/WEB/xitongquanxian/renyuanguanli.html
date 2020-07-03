@@ -1088,8 +1088,8 @@
                    json.user.danweiName=danweiName
             	   $('#mainContent').DataTable().row(tr).data(json.user);//修改行立即显示 */
             	   $("#change").modal('hide');
-                   //initTable()
-                   initTableQuanxian()
+                   initTable()
+                   //initTableQuanxian()
                }else if(json.result==-1){
             	   toastr.error("工号重复");
                }else if(json.result==-2){

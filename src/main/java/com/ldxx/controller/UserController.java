@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -114,13 +113,13 @@ public class UserController {
 				user.setAccessory(list);
 			}
 			i= service.updateUser(user);
-			HttpSession session = request.getSession();
+			/*HttpSession session = request.getSession();
 			user = service.selectUserById(user.getUserId());
 			User suser = (User)session.getAttribute("user");
 			if(suser!=null&&suser.getUserId().equals(user.getUserId()))
 			{
 				session.setAttribute("user",user);
-			}
+			}*/
 		}
 
 
