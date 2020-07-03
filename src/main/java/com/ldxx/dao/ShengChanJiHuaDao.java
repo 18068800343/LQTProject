@@ -23,7 +23,7 @@ public interface ShengChanJiHuaDao {
 
     int emptyShengChanJiHua();
 
-    int addShengChanJiHuaCurrent(String planId, String planNo, String editUserId, String editDateTime);
+    int addShengChanJiHuaCurrent(PlanProductionCollection planProductionCollection);
 
     int addShengChanJiHuaVo(PlanProductionVo planProductionVo);
 

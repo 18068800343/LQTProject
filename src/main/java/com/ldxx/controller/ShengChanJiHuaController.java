@@ -122,7 +122,7 @@ public class ShengChanJiHuaController {
 		if (null != user) {
 			userId = user.getUserId();
 		}
-		int result = service.addShengChanJiHuaCurrent(planId, planNo, nowDate, userId);
+		int result = service.addShengChanJiHuaCurrent(planId, planNo, userId, nowDate);
 
 		return result;
 	}

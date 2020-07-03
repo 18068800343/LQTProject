@@ -92,7 +92,12 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
         int k = dao.emptyShengChanJiHua();
         int i = 0;
         if (k >= 0) {
-			i = dao.addShengChanJiHuaCurrent(planId, planNo, editUserId, time);
+			PlanProductionCollectionVo planProductionCollectionVo = new PlanProductionCollectionVo();
+			planProductionCollectionVo.setPlanid(planId);
+			planProductionCollectionVo.setPlanno(planNo);
+			planProductionCollectionVo.setEdituserid(editUserId);
+			planProductionCollectionVo.setEditdatetime(time);
+			i = dao.addShengChanJiHuaCurrent(planProductionCollectionVo);
 		}
         return i;
     }
