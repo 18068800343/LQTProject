@@ -16,8 +16,8 @@
 			)
 	</insert>
 
-	<insert id="addShengChanJiHuaCurrent" parameterType="map">
-		insert INTO plan_production_collection_now values (#{planId},#{planNo},#{editUserId},#{editDateTime})
+	<insert id="addShengChanJiHuaCurrent">
+		insert into plan_production_collection_now (plan_id,plan_no,edit_user_id,edit_datetime) values (#{planId},#{planNo},#{editUserId},#{editDateTime})
 	</insert>
 
 	<insert id="addShengChanJiHuaVo" parameterType="planProductionVo">
@@ -100,7 +100,7 @@
 	</update>
 
 	<update id="emptyShengChanJiHua">
-		truncate table plan_production_collection_now
+		delete from plan_production_collection_now
 	</update>
 
 	<update id="updateUser" parameterType="user">
@@ -175,7 +175,7 @@
     	LEFT JOIN plan_construction_deviation pcd on a.piancha_id = pcd.id and pcd.delete_state = 1
 		LEFT JOIN (select a.plan_id,sum(a.pd_need_inc_or_dec) sumneed from plan_production_count a GROUP BY a.plan_id) pniod on pniod.plan_id = a.plan_id
 	    WHERE
-  		a.delete_state = 1 and convert(varchar,datetime ,120) like #{time} order by a.datetime desc
+  		a.delete_state = 1 and convert(varchar,a.datetime ,120) like #{time} order by a.datetime desc
 	</select>
 
 	<select id="getAllShiGongPianCha" resultType="planConstructionDeviationVo">

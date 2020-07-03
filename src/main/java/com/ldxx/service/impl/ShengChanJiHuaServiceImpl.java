@@ -91,9 +91,9 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
 
         int k = dao.emptyShengChanJiHua();
         int i = 0;
-        if (k > 0) {
-            i = dao.addShengChanJiHuaCurrent(planId, planNo, editUserId, time);
-        }
+        if (k >= 0) {
+			i = dao.addShengChanJiHuaCurrent(planId, planNo, editUserId, time);
+		}
         return i;
     }
 
