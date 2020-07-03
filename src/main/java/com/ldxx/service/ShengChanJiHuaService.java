@@ -11,13 +11,15 @@ import java.util.List;
 
 public interface ShengChanJiHuaService {
 
-	List<PlanProductionCollectionVo> getShengChanJiHuaListByCondition();
+    List<PlanProductionCollectionVo> getShengChanJiHuaListByCondition();
 
-	String addShengChanJiHua(PlanProductionCollection planProductionCollection, HttpSession session);
+    String addShengChanJiHua(PlanProductionCollection planProductionCollection, HttpSession session);
 
-	String addShengChanJiHuaAndSiteConstruction(PlanProductionVo planProductionVo, HttpSession session);
+    int addShengChanJiHuaCurrent(String planId, String planNo, String editUserId, String time);
 
-	String updateShengChanJiHua(PlanProductionCollection planProductionCollection, HttpSession session);
+    String addShengChanJiHuaAndSiteConstruction(PlanProductionVo planProductionVo, HttpSession session);
 
-	String updateShengChanJiHuaVo(PlanProductionVo planProductionVo, HttpSession session);
+    String updateShengChanJiHua(PlanProductionCollection planProductionCollection, HttpSession session);
+
+    String updateShengChanJiHuaVo(PlanProductionVo planProductionVo, HttpSession session);
 }

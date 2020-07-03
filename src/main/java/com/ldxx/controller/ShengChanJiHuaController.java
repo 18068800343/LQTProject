@@ -5,6 +5,7 @@ import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.PlanConstructionDeviation;
 import com.ldxx.bean.PlanProductionCollection;
 import com.ldxx.bean.SiteConstruction;
+import com.ldxx.bean.User;
 import com.ldxx.dao.ShengChanJiHuaDao;
 import com.ldxx.service.ShengChanJiHuaService;
 import com.ldxx.util.DateUtil;
@@ -97,7 +98,7 @@ public class ShengChanJiHuaController {
 		String daoMsg = MsgFormatUtils.getMsgByResult(i, "修改");
 		jsonObject.put("resultMsg",daoMsg);
 		jsonObject.put("daoMsg",i);
-		jsonObject.put("obj",planConstructionDeviation);
+		jsonObject.put("obj", planConstructionDeviation);
 		return jsonObject.toString();
 	}
 
@@ -109,6 +110,34 @@ public class ShengChanJiHuaController {
 		String result = service.addShengChanJiHuaAndSiteConstruction(planProductionVo, session);
 
 		return result;
+	}
+
+	@RequestMapping("/addShengChanJiHuaCurrent")
+	@ResponseBody
+	public int addShengChanJiHuaCurrent(String planId, String planNo, HttpSession session) {
+
+		String nowDate = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		User user = (User) session.getAttribute("user");
+		String userId = "";
+		if (null != user) {
+			userId = user.getUserId();
+		}
+		int result = service.addShengChanJiHuaCurrent(planId, planNo, nowDate, userId);
+
+		return result;
+	}
+
+	@RequestMapping("/getShengChanJiHuaNow")
+	@ResponseBody
+	public PlanProductionCollectionVo getShengChanJiHuaNow() {
+		return dao.getShengChanJiHuaNow();
+	}
+
+	@RequestMapping("/getShengChanJiHuaToday")
+	@ResponseBody
+	public List<PlanProductionCollectionVo> getShengChanJiHuaToday() {
+		String time = DateUtil.getDateStrByPattern(DateConstant.DATE10, new Date()) + "%";
+		return dao.getShengChanJiHuaListByTime(time);
 	}
 
 	@RequestMapping("/updateShengChanJiHua")

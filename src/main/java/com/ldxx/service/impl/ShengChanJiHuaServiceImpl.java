@@ -76,25 +76,36 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
 
 			String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
 			jsonObject.put("resultMsg", daoMsg);
-			jsonObject.put("daoMsg", i);
-			jsonObject.put("obj", planProductionCollection);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String result = jsonObject.toString();
-		return result;
-	}
+            jsonObject.put("daoMsg", i);
+            jsonObject.put("obj", planProductionCollection);
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        String result = jsonObject.toString();
+        return result;
+    }
 
-	@Override
-	public String addShengChanJiHuaAndSiteConstruction(PlanProductionVo planProductionVo, HttpSession session) {
-		JSONObject jsonObject = new JSONObject();
-		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
-		String jhDateTime = DateUtil.getDateStrByPattern(DateConstant.DATE14_, new Date());
-		String planno = planProductionVo.getPlanno();
-		planProductionVo.setPlanno(planno + jhDateTime);
-		planProductionVo.setDatetime(dateTime);
-		planProductionVo.setEditdatetime(dateTime);
+    @Override
+    public int addShengChanJiHuaCurrent(String planId, String planNo, String editUserId, String time) {
+
+        int k = dao.emptyShengChanJiHua();
+        int i = 0;
+        if (k > 0) {
+            i = dao.addShengChanJiHuaCurrent(planId, planNo, editUserId, time);
+        }
+        return i;
+    }
+
+    @Override
+    public String addShengChanJiHuaAndSiteConstruction(PlanProductionVo planProductionVo, HttpSession session) {
+        JSONObject jsonObject = new JSONObject();
+        String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+        String jhDateTime = DateUtil.getDateStrByPattern(DateConstant.DATE14_, new Date());
+        String planno = planProductionVo.getPlanno();
+        planProductionVo.setPlanno(planno + jhDateTime);
+        planProductionVo.setDatetime(dateTime);
+        planProductionVo.setEditdatetime(dateTime);
 		planProductionVo.setDeletestate(1);
 		User user = (User) session.getAttribute("user");
 		if (null != user) {

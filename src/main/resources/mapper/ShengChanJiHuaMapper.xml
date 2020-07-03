@@ -16,6 +16,10 @@
 			)
 	</insert>
 
+	<insert id="addShengChanJiHuaCurrent" parameterType="map">
+		insert INTO plan_production_collection_now values (#{planId},#{planNo},#{editUserId},#{editDateTime})
+	</insert>
+
 	<insert id="addShengChanJiHuaVo" parameterType="planProductionVo">
 		insert into plan_production_collection
 			(plan_id,road_id,plan_no,recipe_id,pd_need,dry_mixing_time,wet_mixing_time,radio,pd_temp,
@@ -95,7 +99,11 @@
 		update plan_construction_deviation set delete_state=0 where id=#{id}
 	</update>
 
-	<update id="updateUser" parameterType="user" >
+	<update id="emptyShengChanJiHua">
+		truncate table plan_production_collection_now
+	</update>
+
+	<update id="updateUser" parameterType="user">
 	  update u_user
 	  set
 	    username=#{user.username,jdbcType=VARCHAR},
@@ -149,6 +157,27 @@
   		a.delete_state = 1 order by a.datetime desc
 	</select>
 
+	<select id="getShengChanJiHuaListByTime" resultType="planProductionCollectionVo">
+		SELECT
+		 case  srm.delete_state
+		 when 1 then '正在进行'
+		 when 2 then '已完成'
+		 else ''
+		 end as planstatecn,
+		 round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,srm.*,srm.id siteId,
+		 pcd.piancha_name,pcd.piancha_no,pniod.sumneed
+		FROM
+		 plan_production_collection AS a
+		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
+		LEFT JOIN site_construction srm on a.site_id = srm.id
+-- 		 and srm.delete_state = 1
+		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = a.recipe_id and sfm.delete_state = 1
+    	LEFT JOIN plan_construction_deviation pcd on a.piancha_id = pcd.id and pcd.delete_state = 1
+		LEFT JOIN (select a.plan_id,sum(a.pd_need_inc_or_dec) sumneed from plan_production_count a GROUP BY a.plan_id) pniod on pniod.plan_id = a.plan_id
+	    WHERE
+  		a.delete_state = 1 and convert(varchar,datetime ,120) like #{time} order by a.datetime desc
+	</select>
+
 	<select id="getAllShiGongPianCha" resultType="planConstructionDeviationVo">
 		SELECT a.* from plan_construction_deviation a
     WHERE  a.delete_state = 1 order by a.datetime desc
@@ -160,6 +189,10 @@
 
 	<select id="getPianChaById" parameterType="String" resultType="planConstructionDeviationVo">
 		select * from plan_construction_deviation where id=#{id} and delete_state=1
+	</select>
+
+	<select id="getShengChanJiHuaNow" resultType="planProductionCollectionVo">
+		select a.* from plan_production_collection a RIGHT JOIN  plan_production_collection_now b on a.plan_id = b.plan_id
 	</select>
 	<select id="getShengChanJiHuaById" parameterType="string" resultType="planProductionCollection">
 		select * from plan_production_collection where plan_id=#{id} and delete_state=1

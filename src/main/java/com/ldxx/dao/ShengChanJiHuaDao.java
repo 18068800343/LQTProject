@@ -9,23 +9,31 @@ import java.util.List;
 
 public interface ShengChanJiHuaDao {
 
-	List<PlanProductionCollectionVo> getShengChanJiHuaListByCondition();
+    List<PlanProductionCollectionVo> getShengChanJiHuaListByCondition();
 
-	List<PlanConstructionDeviationVo> getAllShiGongPianCha();
+    List<PlanProductionCollectionVo> getShengChanJiHuaListByTime(String time);
 
-	PlanConstructionDeviationVo getPianChaById(String id);
+    List<PlanConstructionDeviationVo> getAllShiGongPianCha();
 
-	int addShengChanJiHua(PlanProductionCollection planProductionCollection);
+    PlanConstructionDeviationVo getPianChaById(String id);
 
-	int addShengChanJiHuaVo(PlanProductionVo planProductionVo);
+    PlanProductionCollectionVo getShengChanJiHuaNow();
 
-	PlanProductionCollection getShengChanJiHuaById(String id);
+    int addShengChanJiHua(PlanProductionCollection planProductionCollection);
 
-	int addShiGongPianCha(PlanConstructionDeviation planConstructionDeviation);
+    int emptyShengChanJiHua();
 
-	int updateShiGongPianCha(PlanConstructionDeviation planConstructionDeviation);
+    int addShengChanJiHuaCurrent(String planId, String planNo, String editUserId, String editDateTime);
 
-	int updateShengChanJiHua(PlanProductionCollection planProductionCollection);
+    int addShengChanJiHuaVo(PlanProductionVo planProductionVo);
+
+    PlanProductionCollection getShengChanJiHuaById(String id);
+
+    int addShiGongPianCha(PlanConstructionDeviation planConstructionDeviation);
+
+    int updateShiGongPianCha(PlanConstructionDeviation planConstructionDeviation);
+
+    int updateShengChanJiHua(PlanProductionCollection planProductionCollection);
 
 	int updateShengChanJiHuaVo(PlanProductionVo planProductionVo);
 
