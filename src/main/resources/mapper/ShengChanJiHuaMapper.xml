@@ -16,11 +16,11 @@
 			)
 	</insert>
 
-	<insert id="addShengChanJiHuaCurrent">
-		insert into plan_production_collection_now (plan_id,plan_no,edit_user_id,edit_datetime) values (#{planId},#{planNo},#{editUserId},#{editDateTime})
+    <insert id="addShengChanJiHuaCurrent" parameterType="planProductionCollectionVo">
+		insert into plan_production_collection_now (plan_id,plan_no,edit_user_id,edit_datetime) values (#{planid},#{planno},#{edituserid},#{editdatetime})
 	</insert>
 
-	<insert id="addShengChanJiHuaVo" parameterType="planProductionVo">
+    <insert id="addShengChanJiHuaVo" parameterType="planProductionVo">
 		insert into plan_production_collection
 			(plan_id,road_id,plan_no,recipe_id,pd_need,dry_mixing_time,wet_mixing_time,radio,pd_temp,
 			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state,finish_time,site_id,path_plan,distance)
