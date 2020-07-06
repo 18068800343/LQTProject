@@ -208,4 +208,14 @@
         LEFT JOIN plan_construction_deviation b ON b.id=a.piancha_id
         where a.road_id=(SELECT road_id from batch_mgt where id=#{batchid}) AND a.delete_state=1 ORDER BY a.datetime DESC
 	</select>
+
+	<select id="getCountByfinishTime" resultType="int">
+		select COUNT(0) from plan_production_collection where finish_time &gt; #{startime} and finish_time &lt; #{endTime} AND delete_state=1
+	</select>
+
+	<select id="xggetCountByfinishTime" resultType="int">
+		select COUNT(0) from plan_production_collection
+		where finish_time &gt; #{startime} and finish_time &lt; #{endTime} AND delete_state=1 and plan_id !=#{id}
+	</select>
+
 </mapper>

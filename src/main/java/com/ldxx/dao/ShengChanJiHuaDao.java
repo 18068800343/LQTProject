@@ -46,4 +46,8 @@ public interface ShengChanJiHuaDao {
 	int addPlanProductionCount(PlanProductionCount planProductionCount);
 
 	PianChaLiangVo getPiancha(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo);
+
+    int getCountByfinishTime(String startime, String endTime);
+
+    int xggetCountByfinishTime(String startime, String endTime,String id);
 }
