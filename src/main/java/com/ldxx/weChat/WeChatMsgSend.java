@@ -106,8 +106,38 @@ public class WeChatMsgSend {
         return gson.toJson(wcd);
     }
 
+
+    public String createPostDataApp(String touser, String title, String description, String key, String value) {
+        WeChatData2 wcd = new WeChatData2();
+        wcd.setTouser(touser);
+        wcd.setToparty("");
+        wcd.setTotag("");
+        wcd.setMsgtype("miniprogram_notice");
+
+        Map[] s = new Map[1];
+        Map<Object, Object> content_item = new HashMap<Object, Object>();
+        content_item.put("key", key);
+        content_item.put("value", value);
+        s[0] = content_item;
+
+        Map<Object, Object> miniprogram_notice = new HashMap<Object, Object>();
+
+        miniprogram_notice.put("appid", "wx4bc136cb6f83cacf");
+        miniprogram_notice.put("page", "pages/dlsgzlgl/dlsgIndex");
+        miniprogram_notice.put("title", title);
+        miniprogram_notice.put("description", description);
+        miniprogram_notice.put("emphasis_first_item", true);
+        miniprogram_notice.put("content_item", s);
+
+        wcd.setMiniprogram_notice(miniprogram_notice);
+        wcd.setEnable_id_trans("0");
+        wcd.setEnable_duplicate_check("0");
+        return gson.toJson(wcd);
+    }
+
+
     /**
-     * @Title  创建微信发送请求post实体，charset消息编码    ，contentType消息体内容类型，
+     * @Title 创建微信发送请求post实体，charset消息编码    ，contentType消息体内容类型，
      * url微信消息发送请求地址，data为post数据，token鉴权token
      * @param charset
      * @param contentType
