@@ -72,8 +72,11 @@
         <ul class="layui-tab-title" role="tablist" style="background:#fff;margin-top:-10px;">
             <li role="presentation" class="active layui-this"><a href="#home" aria-controls="home" role="tab"
                                                                  data-toggle="tab">仓库盘点</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">仓储管理分析</a></li>
-        </ul>     
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">仓储管理分析</a>
+            </li>
+            <li role="presentation"><a href="#profile1" aria-controls="profile1" role="tab" data-toggle="tab">仓储管理盘点</a>
+            </li>
+        </ul>
         </div>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -151,14 +154,22 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" id="profile">
-    			<div class="LowerPart" style="margin-top:3px;">
-					<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-					<div id="main" style="width: 1000px;height:600px;">
-					</div>  
-				</div>
+                <div class="LowerPart" style="margin-top:3px;">
+                    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                    <div id="main" style="width: 1000px;height:600px;">
+                    </div>
+                </div>
             </div>
 
-            
+            <div role="tabpanel" class="tab-pane" id="profile1">
+                <div class="LowerPart" style="margin-top:3px;">
+                    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                    <div id="main1" style="width: 1000px;height:600px;">
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
     
@@ -303,8 +314,9 @@
 	        type: 'datetime' 
 	    });
     	$("#luduanbianhao").trigger("change");
-    	initTable();
-    	initCailiao();
+        initTable();
+        initTableInOut();
+        initCailiao();
     	
 	});
 	
@@ -407,26 +419,35 @@
         }
     })
     roadVm.roadPost();
-     // 基于准备好的dom，初始化echarts实例
+    // 基于准备好的dom，初始化echarts实例
     let myChart = echarts.init(document.getElementById('main'));
     let option;
-    let initOption = ()=>{
+    let initOption = () => {
         setCangChuEchartsConfig(myChart);
         setLableOption(myChart);
         option = setCangChuOption(pageVariable);
-         // 使用刚指定的配置项和数据显示图表。
+        // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     }
 
-    let pageVariable = {
 
+    // 基于准备好的dom，初始化echarts实例
+    let myChart1 = echarts.init(document.getElementById('main1'));
+    let option1;
+    let initOption1 = () => {
+        option1 = setCangChuPanDianOption(pageVariableOut);
+        myChart1.setOption(option1);
     }
 
-    function getXYList(list){
+    let pageVariable = {}
+
+    let pageVariableOut = {}
+
+    function getXYList(list) {
         let xList = [];
         let aList = [];
         let bList = [];
-        for (let i in list){
+        for (let i in list) {
             xList[i] = list[i].storNo;
             aList[i] = list[i].weight;
             bList[i] = list[i].maxWeight;
@@ -436,32 +457,62 @@
         pageVariable.bList = bList;
     }
 
-        function initTable(){
-	        $.ajax({
-	            type: 'POST',
-	            url: '/WhWarehouseCount/getAllWhWarehouseCount',
-	            data: {
-	            },
-	            error: function (msg) {
-	                errMessage("请求UserController失败");
-	            },
-	            success: function (json) {
-	                $('#mainContent').dataTable().fnClearTable();
-	                $('#mainContent').DataTable().rows.add(json).draw(false);
-                    getXYList(json);
-                    initOption();
-	            }
-	        });
-	    }
-        
-        function initCailiao(){
-			$.ajax({
-	            type: 'POST',
-	            url: '/DicMaterials/selectAllDicMaterials',
-	            dataType: 'json',
-	            data: {
-	            },
-	            success: function (json) {
+    function getXYListInOut(list) {
+        let xList = [];
+        let aList = [];
+        let bList = [];
+        let cList = [];
+        for (let i in list) {
+            xList[i] = list[i].dayTimeOut;
+            aList[i] = list[i].dayWeightIn;
+            bList[i] = list[i].dayWeightOut;
+            cList[i] = list[i].dayWeightCha;
+        }
+        pageVariableOut.xList = xList;
+        pageVariableOut.aList = aList;
+        pageVariableOut.bList = bList;
+        pageVariableOut.cList = cList;
+    }
+
+    function initTable() {
+        $.ajax({
+            type: 'POST',
+            url: '/WhWarehouseCount/getAllWhWarehouseCount',
+            data: {},
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $('#mainContent').dataTable().fnClearTable();
+                $('#mainContent').DataTable().rows.add(json).draw(false);
+                getXYList(json);
+                initOption();
+            }
+        });
+    }
+
+    function initTableInOut() {
+        $.ajax({
+            type: 'POST',
+            url: '/WhWarehouseCount/getLiaoCangPanDian',
+            data: {},
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                getXYListInOut(json);
+                initOption1();
+            }
+        });
+    }
+
+    function initCailiao() {
+        $.ajax({
+            type: 'POST',
+            url: '/DicMaterials/selectAllDicMaterials',
+            dataType: 'json',
+            data: {},
+            success: function (json) {
 	            	$("#cailiao").html('');
 		        	$("#xg_cailiao").html('');
 		        	 for(var i=0;i<json.length;i++){

@@ -107,11 +107,65 @@ function setCangChuOption(map){
 					data: map.aList
 				}
 			]
-		};
+	};
 	return option;
 }
 
-function setPeibiOption(list){
+function setCangChuPanDianOption(map) {
+	let option = {
+		title: {
+			text: '仓储盘点'
+		},
+		tooltip: {
+			trigger: 'axis'
+		},
+		legend: {
+			data: ['来料信息', '用料信息', '余料信息']
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		toolbox: {
+			feature: {
+				saveAsImage: {}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			boundaryGap: false,
+			data: map.xList
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [
+			{
+				name: '来料信息',
+				type: 'line',
+				stack: '总量',
+				data: map.aList
+			},
+			{
+				name: '用料信息',
+				type: 'line',
+				stack: '总量',
+				data: map.bList
+			},
+			{
+				name: '余料信息',
+				type: 'line',
+				stack: '总量',
+				data: map.cList
+			}
+		]
+	};
+	return option;
+}
+
+function setPeibiOption(list) {
 	let peibiOption = {
 //		title: {
 //			text: '折线图堆叠'
