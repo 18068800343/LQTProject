@@ -284,13 +284,13 @@
             "render" : function(data, type, full) {
                   switch (data) {
                       case '1':
-                          return '普通预警';
+                          return '<span class="label label-success state">普通预警</span>';
                           break;
                       case '2':
-                          return '中等预警'
+                          return '<span class="label label-warning state">中等预警</span>';
                           break;
                       case '3':
-                          return '紧急预警';
+                          return '<span class="label label-danger state">紧急预警</span>';
                           break;
                   }
             }
