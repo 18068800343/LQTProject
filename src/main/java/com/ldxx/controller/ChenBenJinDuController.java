@@ -1,6 +1,8 @@
 package com.ldxx.controller;
 
 import com.ldxx.dao.ChenBenJinDuDao;
+import com.ldxx.util.GetThisTimeUtils;
+import com.ldxx.util.TestWeekToDay;
 import com.ldxx.vo.ChenBenJinDuVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +61,50 @@ public class ChenBenJinDuController {
                 cbvo.setFeiliaobi(fl.divide(cn, 2, BigDecimal.ROUND_HALF_UP));
             } else {
                 cbvo.setFeiliaobi(BigDecimal.ZERO);
+            }
+
+            chenBenJinDuVoList.add(cbvo);
+        }
+
+        return chenBenJinDuVoList;
+    }
+
+
+    @RequestMapping("/getchannengWeek")
+    public List<ChenBenJinDuVo> getchannengWeek() {
+
+        String year = GetThisTimeUtils.getYear();
+
+        List<ChenBenJinDuVo> chenBenJinDuVoList = dao.getchannengWeek(year);
+        if(chenBenJinDuVoList!=null&&chenBenJinDuVoList.size()!=0){
+            for (int i = 0; i < chenBenJinDuVoList.size(); i++){
+                String toDayFormate = TestWeekToDay.weekToDayFormate(Integer.parseInt(year), Integer.parseInt(chenBenJinDuVoList.get(i).getDatetime()));
+                chenBenJinDuVoList.get(i).setDatetime(toDayFormate);
+            }
+        }
+
+        return chenBenJinDuVoList;
+    }
+
+    @RequestMapping("/getchannengMonth")
+    public List<ChenBenJinDuVo> getchannengMonth() {
+        List<ChenBenJinDuVo> chenBenJinDuVoList = new ArrayList<>();
+
+        //查询去重后的时间（年月）
+        List<ChenBenJinDuVo> list = dao.getAllMonth();
+
+        for (int i = 0; i < list.size(); i++) {
+            ChenBenJinDuVo cbvo = new ChenBenJinDuVo();
+            String datetime = list.get(i).getDatetime();
+            cbvo.setDatetime(datetime);
+
+            //查询每月产能
+            BigDecimal cn = new BigDecimal(0);
+            ChenBenJinDuVo channeng = dao.getchannengBymonth(datetime);
+            if (channeng != null && !"".equals(channeng)) {
+                cbvo.setChenneng(channeng.getChenneng());
+            }else{
+                cbvo.setChenneng(cn);
             }
 
             chenBenJinDuVoList.add(cbvo);

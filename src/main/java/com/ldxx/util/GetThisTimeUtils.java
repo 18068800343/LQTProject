@@ -25,4 +25,10 @@ public class GetThisTimeUtils {
 		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyyMMddHHmmss");
 		return dateFormat.format(date);
 	}
+
+	public static String getYear(){
+		Date date = new Date();
+		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy");
+		return dateFormat.format(date);
+	}
 }

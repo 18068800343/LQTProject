@@ -13,4 +13,10 @@ public interface ChenBenJinDuDao {
     public ChenBenJinDuVo getAllchenneng(String datetime);
 
     public ChenBenJinDuVo getAllfeiliao(String datetime);
+
+    public List<ChenBenJinDuVo> getAllMonth();
+
+    public ChenBenJinDuVo getchannengBymonth(String datetime);
+
+    public List<ChenBenJinDuVo> getchannengWeek(String datetime);
 }
