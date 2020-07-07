@@ -191,7 +191,7 @@
 			success:function(json){
 				$("#nowscjh").empty();
 				if(json!=null &&json!=""){
-					$("#nowscjh").html(json.planno);
+					$("#nowscjh").html(json.planno+" - "+json.roadname);
 					look(json)
 
 				}

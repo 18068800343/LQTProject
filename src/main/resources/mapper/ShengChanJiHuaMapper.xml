@@ -192,7 +192,7 @@
 	</select>
 
 	<select id="getShengChanJiHuaNow" resultType="planProductionCollectionVo">
-		select a.* from plan_production_collection a RIGHT JOIN  plan_production_collection_now b on a.plan_id = b.plan_id
+		select a.*,srm.* from plan_production_collection a RIGHT JOIN  plan_production_collection_now b on a.plan_id = b.plan_id left JOIN site_construction srm on a.site_id = srm.id
 	</select>
 	<select id="getShengChanJiHuaById" parameterType="string" resultType="planProductionCollection">
 		select * from plan_production_collection where plan_id=#{id} and delete_state=1
