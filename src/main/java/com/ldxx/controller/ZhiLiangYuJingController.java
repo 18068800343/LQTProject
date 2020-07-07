@@ -4,12 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.User;
 import com.ldxx.dao.StateRoleLinkDao;
+import com.ldxx.dao.UserDao;
 import com.ldxx.dao.ZhiLiangYuJingDao;
 import com.ldxx.service.ZhiLiangYuJingService;
 import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
 import com.ldxx.vo.PlanProductionWarningVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,19 +32,30 @@ public class ZhiLiangYuJingController {
 	private StateRoleLinkDao roleLinkDao;
 	@Resource
 	private ZhiLiangYuJingService service;
+	@Autowired
+	private UserDao udao;
 
 	@RequestMapping("/getAllZhiLiangYuJing")
 	@ResponseBody
-	public Map getAllZhiLiangYuJing(HttpSession session) {
-        User user = (User) session.getAttribute("user");
+	public Map getAllZhiLiangYuJing(HttpSession session,String userId) {
+		 String uId;
+		User user;
+		if(userId==null||userId==""){
+			 user = (User) session.getAttribute("user");
+			uId=user.getUserId();
+		}else{
+			uId=userId;
+			user=udao.selectUserById(uId);
+		}
+
 
 		Map map = new HashMap();
 
 		map.put("list",dao.getAllZhiLiangYuJing());
 		Optional.ofNullable(user)
 				.ifPresent(u->{
-                    String userId = user.getUserId();
-					List roleList = roleLinkDao.getStateRoleByUserId(userId);
+
+					List roleList = roleLinkDao.getStateRoleByUserId(uId);
 					map.put("user",u);
 					map.put("stateList",roleList);
 				});
