@@ -61,6 +61,9 @@
                     <tr>
                         <th>序号</th>
                         <th>预警项</th>
+                        <th>最小温度(°)</th>
+                        <th>最大温度(°)</th>
+                        <th>预警等级</th>
                         <th>是否预警</th>
                         <th style="width:50px;">操作</th>
                     </tr>
@@ -87,6 +90,18 @@
                             <td style="width: 30%;" id="look_yjxiang"></td>
                             <td style="width: 20%;">是否预警:</td>
                             <td style="width: 30%;" id="look_sfyujing"></td>
+                        </tr>
+                        <tr>
+                            <td>最小温度:</td>
+                            <td id="look_zxwd"></td>
+                            <td>最大温度:</td>
+                            <td id="look_zdwd" ></td>
+                        </tr>
+                        <tr>
+                            <td>预警等级</td>
+                            <td id="look_yjdj"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </table>
                 </form>  
@@ -121,6 +136,24 @@
                                     </select>
 								</td>
                             </tr>
+                            <tr>
+                                <td>最小温度:</td>
+                                <td><input type="text" id="zxwd" class="form-control"></td>
+                                <td>最大温度:</td>
+                                <td><input type="text" id="zdwd" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>预警等级</td>
+                                <td>
+                                    <select class="form-control" id="yjdj" style="width:180px;">
+                                        <option value="1">一级预警</option>
+                                        <option value="2">二级预警</option>
+                                        <option value="3">三级预警</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         </table>
                     </form> 
                 </div>
@@ -154,6 +187,24 @@
                                     <option value="0">否</option>
                                 </select>
                     		</td>
+                        </tr>
+                        <tr>
+                            <td>最小温度:</td>
+                            <td><input type="text" id="xg_zxwd" class="form-control"></td>
+                            <td>最大温度:</td>
+                            <td><input type="text" id="xg_zdwd" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <td>预警等级</td>
+                            <td>
+                                <select class="form-control" id="xg_yjdj" style="width:180px;">
+                                    <option value="1">一级预警</option>
+                                    <option value="2">二级预警</option>
+                                    <option value="3">三级预警</option>
+                                </select>
+                            </td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </table>
                 </form>  
@@ -193,12 +244,15 @@
 		"columns": [
             { "data": null}, 
             { "data": "warnName"},
-            { "data": "warnSet"}, 
+            { "data": "minwarn"},
+            { "data": "maxwarn"},
+            { "data": "warngrade"},
+            { "data": "warnSet"},
             { "data": null},
         ],
         "columnDefs": [{	
 			 "class": "tcenter",
-			    "targets": 2,
+			    "targets": 5,
 			    "searchable": true,
 			    "render": function(data, type, full) {
 			    		if(data==0){
@@ -210,7 +264,7 @@
 			  },
 				{	
 					 "class": "tcenter",
-					    "targets": 3,
+					    "targets": 6,
 					    "searchable": true,
 					    "render": function(data, type, full) {
 					  	  		return '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" id="look" title="查看详细信息"  data-toggle="modal" data-target="#allMsg1"></i>'
@@ -291,14 +345,20 @@
 	$("#baocun").click(function(){
 		var yjxiang=$("#yujingxiang").val();
 		var sfyujing=$("#sfyujing").val();
-		
+		var minwarn=$("#zxwd").val();
+		var maxwarn=$("#zdwd").val();
+		var warngrade=$("#yjdj").val();
+
 		 $.ajax({
 	            type: 'POST',
 	            url: '/SysWarningSet/addSysWarningSet',
 	            dataType: 'json',
 	            data: {
 	            	warnName:yjxiang,
-	            	warnSet:sfyujing
+	            	warnSet:sfyujing,
+                    minwarn:minwarn,
+                    maxwarn:maxwarn,
+                    warngrade:warngrade,
 	            },
 	            error: function (msg) {
 	                errMessage("请求UserController失败");
@@ -358,11 +418,17 @@
 		xgId=data.id
 		$("#xg_yjxiang").val(data.warnName);
 		$("#xg_sfyujing").val(data.warnSet);
+        $("#xg_zxwd").val(data.minwarn);
+        $("#xg_zdwd").val(data.maxwarn);
+        $("#xg_yjdj").val(data.warngrade);
 	})
 	
 	$("#xg_baocun").click(function(){
 		var warnName=$("#xg_yjxiang").val();
 		var warnSet=$("#xg_sfyujing").val();
+        var minwarn=$("#xg_zxwd").val();
+        var maxwarn=$("#xg_zdwd").val();
+        var warngrade=$("#xg_yjdj").val();
 		
 		var oldNum=$(tr.children()[0]).text();
 		$.ajax({
@@ -372,7 +438,10 @@
             data: {
             	id:xgId,
 				warnName:warnName,
-		    	warnSet:warnSet
+		    	warnSet:warnSet,
+                minwarn:minwarn,
+                maxwarn:maxwarn,
+                warngrade:warngrade,
             },
             success: function (json) {
             	if(json.result>0){
@@ -394,6 +463,9 @@
 		var data=$('#mainContent').DataTable().row(dom).data();
 		$("#look_yjxiang").text(data.warnName)
 		$("#look_sfyujing").text(data.warnSet==1?"是":"否")
+        $("#look_zxwd").text(data.minwarn);
+        $("#look_zdwd").text(data.maxwarn);
+        $("#look_yjdj").text(data.warngrade);
 	})
     
 </script>

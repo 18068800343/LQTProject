@@ -3,15 +3,21 @@
 <mapper namespace="com.ldxx.dao.SysWarningSetDao" >
 	
 	<insert id="addSysWarningSet" parameterType="SysWarningSet">
-		insert into sys_warning_set (id,warn_name,warn_set) values(#{ss.id},#{ss.warnName},#{ss.warnSet})
+		insert into sys_warning_set (id,warn_name,warn_set,minwarn,maxwarn,warngrade) values(#{ss.id},#{ss.warnName},#{ss.warnSet},#{ss.minwarn},#{ss.maxwarn},#{ss.warngrade})
 	</insert>
 	
 	<update id="updateSysWarningSetById">
-		update sys_warning_set set warn_name=#{ss.warnName},warn_set=#{ss.warnSet} where id=#{ss.id}
+		update sys_warning_set set
+		warn_name=#{ss.warnName},
+		warn_set=#{ss.warnSet},
+		minwarn=#{ss.minwarn},
+		maxwarn=#{ss.maxwarn},
+		warngrade=#{ss.warngrade}
+		where id=#{ss.id}
 	</update>
 	
 	<select id="getAllSysWarningSet" resultType="SysWarningSet">
-		select id,warn_name,warn_set from sys_warning_set
+		select id,warn_name,warn_set,minwarn,maxwarn,warngrade from sys_warning_set
 	</select>
 	
 	<delete id="delSysWarningSet">
