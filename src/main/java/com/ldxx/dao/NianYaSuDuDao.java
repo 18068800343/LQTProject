@@ -17,4 +17,8 @@ public interface NianYaSuDuDao {
 	int updateNianYaSuDu(SiteCompactionSpeedVo siteCompactionSpeedVo);
 
     List<SiteCompactionSpeedVo> getByLuDuanId(String roadId);
+
+	List<SiteCompactionSpeedVo> getDISTINCTDate(String startime,String endtime);
+
+	SiteCompactionSpeedVo getnianyasuduEchars(String datetime,String name,String siteId);
 }
