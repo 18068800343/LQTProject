@@ -1365,7 +1365,9 @@
 						$("#myModal2").modal("hide");
 						initTable();
 						toastr.success(resMsg.resultMsg);
-					} else {
+					} else if (resMsg.daoMsg ==-1) {
+						toastr.error("生产计划要求完成时间冲突");
+					}else {
 						toastr.error(resMsg.resultMsg);
 					}
 				}, (res) => {
@@ -1513,6 +1515,8 @@
 						initTable();
 						initTableQuanxian()
 						toastr.success(resMsg.resultMsg);
+					}else if (resMsg.daoMsg ==-1) {
+						toastr.error("生产计划要求完成时间冲突");
 					} else {
 						toastr.error(resMsg.resultMsg);
 					}
