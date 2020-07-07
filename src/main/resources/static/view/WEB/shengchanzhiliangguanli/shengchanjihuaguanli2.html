@@ -210,7 +210,7 @@
 					$("#scjh").empty();
 					if(json!=null &&json!=""){
 						for(var i=0;i<json.length;i++){
-							$("#scjh").append("<option value="+json[i].planid+">"+json[i].planno+"</option>")
+							$("#scjh").append("<option value="+json[i].planid+">"+(json[i].planno+" - "+json[i].roadname)+"</option>")
 						}
 
 					}
