@@ -114,6 +114,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVo selectUserByUsername(String username) {
         UserVo user = dao.selectUserByUsername(username);
+        if(user==null)
+        {
+        	return null;
+        }
         //查询编码名称
         String uPermissions = "";
         String userRole = user.getUserRole();
