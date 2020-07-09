@@ -1,18 +1,17 @@
 package com.ldxx.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.ldxx.bean.SysFormulationManagement;
 import com.ldxx.bean.SysMaterialAttached;
 import com.ldxx.dao.SysFormulationManagementDao;
 import com.ldxx.service.SysFormulationManagementService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -31,7 +30,10 @@ public class SysFormulationManagementServiceImpl implements SysFormulationManage
 		{
 			sma.setFlId(sysFormulationManagement.getFlId());
 		}
-		sdao.addFuShuCaiLiao(sysFormulationManagement.getFsclList());
+		List<SysMaterialAttached> fsclList = sysFormulationManagement.getFsclList();
+		if(fsclList!=null&&fsclList.size()!=0){
+			sdao.addFuShuCaiLiao(fsclList);
+		}
 		return num;
 	}
 
