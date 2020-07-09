@@ -7,25 +7,35 @@ public class BatchMgtVo extends BatchMgt {
 	private String roadName;
 
 	private String roadNo;
-	
-	private String flName;
-	
-	private String yuguweight;
 
-	private String uName;
+    private String flName;
 
-	private String siteNumber;
-	private String stakeMark;
+    private String yuguweight;
 
-	public String getStakeMark() {
-		return stakeMark;
-	}
+    private String uName;
 
-	public void setStakeMark(String stakeMark) {
-		this.stakeMark = stakeMark;
-	}
+    private String siteNumber;
+    private String stakeMark;
 
-	public String getSiteNumber() {
+    private String weight;
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getStakeMark() {
+        return stakeMark;
+    }
+
+    public void setStakeMark(String stakeMark) {
+        this.stakeMark = stakeMark;
+    }
+
+    public String getSiteNumber() {
 		return siteNumber;
 	}
 
