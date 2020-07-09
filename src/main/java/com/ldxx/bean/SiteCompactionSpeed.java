@@ -1,5 +1,7 @@
 package com.ldxx.bean;
 
+import java.math.BigDecimal;
+
 public class SiteCompactionSpeed {
     private String id;
 
@@ -9,7 +11,7 @@ public class SiteCompactionSpeed {
 
     private String roadrollername;
 
-    private int compactionspeed;
+    private BigDecimal compactionspeed;
 
     private String datetime;
 
@@ -51,11 +53,11 @@ public class SiteCompactionSpeed {
         this.roadrollername = roadrollername;
     }
 
-    public int getCompactionspeed() {
+    public BigDecimal getCompactionspeed() {
         return compactionspeed;
     }
 
-    public void setCompactionspeed(int compactionspeed) {
+    public void setCompactionspeed(BigDecimal compactionspeed) {
         this.compactionspeed = compactionspeed;
     }
 

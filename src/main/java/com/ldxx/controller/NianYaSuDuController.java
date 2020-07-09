@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Controller
 @RequestMapping("/NianYaSuDuController")
@@ -98,7 +96,7 @@ public class NianYaSuDuController {
 		String daoMsg = MsgFormatUtils.getMsgByResult(i, "修改");
 		map.put("resultMsg",daoMsg);
 		map.put("daoMsg",i);
-		map.put("obj",siteCompactionSpeedVo);
+		map.put("obj", siteCompactionSpeedVo);
 		return map;
 	}
 
@@ -106,6 +104,41 @@ public class NianYaSuDuController {
 	@ResponseBody
 	public List<SiteCompactionSpeedVo> getByLuDuanId(String roadId) {
 		return dao.getByLuDuanId(roadId);
+	}
+
+
+	@RequestMapping("/getnianyasuduEchars")
+	@ResponseBody
+	public List<SiteCompactionSpeedVo> getnianyasuduEchars(String startime, String endtime, String siteId) {
+		List<SiteCompactionSpeedVo> list = new ArrayList<SiteCompactionSpeedVo>();
+
+		List<SiteCompactionSpeedVo> slist = dao.getDISTINCTDate(startime, endtime);
+		if (slist != null && slist.size() != 0) {
+			for (int i = 0; i < slist.size(); i++) {
+				SiteCompactionSpeedVo ss = new SiteCompactionSpeedVo();
+				String datetime = slist.get(i).getDatetime();
+				ss.setDatetime(datetime);
+				BigDecimal speed = new BigDecimal(0);
+				SiteCompactionSpeedVo vo = dao.getnianyasuduEchars(datetime, "钢轮", siteId);
+				ss.setName1("钢轮");
+				if (vo != null && !"".equals(vo)) {
+					ss.setName1speed(vo.getCompactionspeed());
+				} else {
+					ss.setName1speed(speed);
+				}
+				SiteCompactionSpeedVo vo2 = dao.getnianyasuduEchars(datetime, "胶轮", siteId);
+				ss.setName2("胶轮");
+				if (vo2 != null && !"".equals(vo2)) {
+					ss.setName2speed(vo2.getCompactionspeed());
+				} else {
+					ss.setName2speed(speed);
+				}
+
+				list.add(ss);
+			}
+		}
+
+		return list;
 	}
 
 }
