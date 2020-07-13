@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 成本进度管理
@@ -76,14 +77,20 @@ public class ChenBenJinDuController {
         String year = GetThisTimeUtils.getYear();
 
         List<ChenBenJinDuVo> chenBenJinDuVoList = dao.getchannengWeek(year);
-        if(chenBenJinDuVoList!=null&&chenBenJinDuVoList.size()!=0){
-            for (int i = 0; i < chenBenJinDuVoList.size(); i++){
+        if (chenBenJinDuVoList != null && chenBenJinDuVoList.size() != 0) {
+            for (int i = 0; i < chenBenJinDuVoList.size(); i++) {
                 String toDayFormate = TestWeekToDay.weekToDayFormate(Integer.parseInt(year), Integer.parseInt(chenBenJinDuVoList.get(i).getDatetime()));
                 chenBenJinDuVoList.get(i).setDatetime(toDayFormate);
             }
         }
 
         return chenBenJinDuVoList;
+    }
+
+    @RequestMapping("/getDayCount")
+    public List<Map> getDayCount(String dateTime) {
+        List<Map> maps = dao.getDayCount(dateTime);
+        return maps;
     }
 
     @RequestMapping("/getchannengMonth")

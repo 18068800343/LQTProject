@@ -19,7 +19,6 @@
 	<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css" />
 	<link rel="stylesheet" type="text/css" href="../../css/layui.css" />
 	<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css" />
-	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
 	<link rel="stylesheet" type="text/css" href="../../css/code.css" />
 	<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
     <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
@@ -71,6 +70,15 @@
     </li>
     <li role="presentation">
         <a href="#month" aria-controls="month" role="tab" data-toggle="tab">每月产能折线图</a>
+    </li>
+    <li role="presentation">
+        <a href="#dayCount" aria-controls="dayCount" role="tab" data-toggle="tab">每日配料统计</a>
+    </li>
+    <li role="presentation">
+        <a href="#weekCount" aria-controls="weekCount" role="tab" data-toggle="tab">每周产能统计</a>
+    </li>
+    <li role="presentation">
+        <a href="#monthCount" aria-controls="monthCount" role="tab" data-toggle="tab">每月产能统计</a>
     </li>
 </ul>
 </div>
@@ -146,7 +154,102 @@
         </div>
         <div class="LowerPart" style="background-color: #ffffff; ">
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-            <div id="monthchanneng" style="width: 1500px;height:600px;z-index:5;" ></div>
+            <div id="monthchanneng" style="width: 1500px;height:600px;z-index:5;"></div>
+        </div>
+    </div>
+
+
+    <div role="tabpanel" class="tab-pane" id="dayCount">
+        <div class="zhuti-content">
+            <div class="UpperPart">
+                <div class="UpperPartL">
+                    <div class="form-inline" style="margin: 5PX;float: left;">
+                        <div class="form-group">
+                            <input type="text" style="width:200px;margin-left: 15px;" class="form-control"
+                                   placeholder="起始时间"
+                                   id="reservation" onclick="">
+                        </div>
+                    </div>
+                </div>
+                <div class="UpperPartR">
+                    <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
+                </div>
+            </div>
+            <div class="LowerPart" style="margin-top:3px;">
+                <table class="layui-table" lay-skin="line" id="mainContentDay">
+                    <thead>
+                    <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
+                        <th>日期</th>
+                        <th>用料类型(kg)</th>
+                        <th>日实际产能(kg)</th>
+                        <th>每日废料(%)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="weekCount">
+        <div class="zhuti-content">
+            <div class="UpperPart">
+                <div class="UpperPartL">
+                    <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入产能信息</button>-->
+                </div>
+                <div class="UpperPartR">
+                    <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
+                </div>
+            </div>
+            <div class="LowerPart" style="margin-top:3px;">
+                <table class="layui-table" lay-skin="line" id="mainContentWeek">
+                    <thead>
+                    <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
+                        <th>日期</th>
+                        <th>日供料计划(kg)</th>
+                        <th>日实际产能(kg)</th>
+                        <th>每日废料(%)</th>
+                        <th>废料比(%)</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="monthCount">
+        <div class="zhuti-content">
+            <div class="UpperPart">
+                <div class="UpperPartL">
+                    <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入产能信息</button>-->
+                </div>
+                <div class="UpperPartR">
+                    <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
+                </div>
+            </div>
+            <div class="LowerPart" style="margin-top:3px;">
+                <table class="layui-table" lay-skin="line" id="mainContentMonth">
+                    <thead>
+                    <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
+                        <th>日期</th>
+                        <th>日供料计划(kg)</th>
+                        <th>日实际产能(kg)</th>
+                        <th>每日废料(%)</th>
+                        <th>废料比(%)</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -161,16 +264,25 @@
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../toastr/toastr.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
 <script>
 
-var names = []; 
-var nums = []; 
-    $(document).ready( function () {
+    var names = [];
+    var nums = [];
+    $(document).ready(function () {
         initTable()
         initWeek();
         initMonth();
-	});
-    var table=$('#mainContent').dataTable({
+    });
+
+    let startTime = {
+        elem: '#reservation',
+        type: 'date',
+        trigger: 'click'
+    };
+    laydate.render(startTime);
+
+    var table = $('#mainContent').dataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
@@ -178,7 +290,7 @@ var nums = [];
         "searching": true,
         "lengthChange": false,
         "oLanguage": {
-		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},"columns": [
             { "data": "datetime"},
             { "data": "pdNeed"},

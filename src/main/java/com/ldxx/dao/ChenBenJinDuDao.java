@@ -3,6 +3,7 @@ package com.ldxx.dao;
 import com.ldxx.vo.ChenBenJinDuVo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ChenBenJinDuDao {
 
@@ -19,4 +20,6 @@ public interface ChenBenJinDuDao {
     public ChenBenJinDuVo getchannengBymonth(String datetime);
 
     public List<ChenBenJinDuVo> getchannengWeek(String datetime);
+
+    public List<Map> getDayCount(String datetime);
 }
