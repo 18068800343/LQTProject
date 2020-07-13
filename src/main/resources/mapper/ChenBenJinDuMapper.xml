@@ -43,8 +43,9 @@
 
     <select id="getDayCount" resultType="map">
         SELECT
-            SUM (weight),
-            peifang_name
+            SUM (weight) weight,
+            peifang_name peifangName,
+            #{datetime} as datetime
         FROM
             quality_by_plate_real_time_prodocution_data
         WHERE
@@ -52,7 +53,7 @@
                 VARCHAR,
                 production_time,
                 120
-            ) LIKE LIKE concat(concat('%',#{datetime}),'%')
+            ) LIKE concat(concat('%',#{datetime}),'%')
         GROUP BY
             peifang_name
     </select>
