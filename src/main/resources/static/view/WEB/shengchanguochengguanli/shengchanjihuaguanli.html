@@ -522,19 +522,19 @@
 								<td><input class="form-control" type="text" readonly="true" v-model="finishTime"
 										   id="finishTime" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td>干拌时间</td>
-								<td><input class="form-control" type="text" readonly="true" v-model="drymixingtime"
+								<td hidden>干拌时间</td>
+								<td hidden><input class="form-control" type="text" readonly="true" v-model="drymixingtime"
 										   id="drymixingtime" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
-							<tr>
-								<td>湿拌时间</td>
-								<td><input class="form-control" type="text" readonly="true" v-model="wetmixingtime"
+							<tr hidden>
+								<td hidden>湿拌时间</td>
+								<td hidden><input class="form-control" type="text" readonly="true" v-model="wetmixingtime"
 										   id="wetmixingtime" placeholder="请输入"
 										   style="width: 100%; height: 100%;"></td>
-								<td>油石比</td>
-								<td><input class="form-control" type="text" @blur="reg(radio,'xiaoshu','radio')"
-										   v-model="radio" id="radio" placeholder="请输入"
+								<td hidden>油石比</td>
+								<td hidden><input class="form-control" type="text" @blur="reg(radio,'xiaoshu','radio')"
+										   v-model="radio" id="radio" placeholder="请输入" value="00:00:00"
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
@@ -542,8 +542,8 @@
 								<td><input class="form-control" type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')"
 										   v-model="pdtemp" id="pdtemp" placeholder="请输入"
 										   style="width: 100%; height: 100%;"></td>
-								<td>到现场温度要求</td>
-								<td><input class="form-control" type="text"
+								<td hidden>到现场温度要求</td>
+								<td hidden><input class="form-control" type="text"
 										   @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp"
 										   id="arrivetemp" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
@@ -570,11 +570,11 @@
 								<td>路段经度</td>
 								<td><input class="form-control" type="text" @blur="reg(lng,'price','lng')"
 										   v-model="lng" id="lng" placeholder="请输入"
-										   style="width: 100%; height: 100%; "></td>
+										   style="width: 100%; height: 100%; " disabled></td>
 								<td>路段纬度</td>
 								<td><input class="form-control" type="text" @blur="reg(lat,'xiaoshu','lat')"
 										   v-model="lat" id="lat" placeholder="请输入"
-										   style="width: 100%; height: 100%; "></td>
+										   style="width: 100%; height: 100%; " disabled></td>
 							</tr>
 							<tr>
 								<td>施工桩号</td>
@@ -731,24 +731,24 @@
 								<td><input class="form-control" type="text" readonly="true" v-model="finishTime" id="xgfinishTime"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td>干拌时间</td>
-								<td><input class="form-control" type="text" readonly="true" v-model="drymixingtime"
+								<td hidden>干拌时间</td>
+								<td hidden><input class="form-control" type="text" readonly="true" v-model="drymixingtime"
 										   placeholder="请输入" id="xgdrymixingtime"
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
-								<td>湿拌时间</td>
-								<td><input class="form-control" type="text" readonly="true" v-model="wetmixingtime"
+								<td hidden>湿拌时间</td>
+								<td hidden><input class="form-control" type="text" readonly="true" v-model="wetmixingtime"
 										   placeholder="请输入" id="xgwetmixingtime"
 										   style="width: 100%; height: 100%;"></td>
-								<td>油石比</td>
-								<td><input class="form-control" type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" placeholder="请输入" style="width: 100%; height: 100%;"></td>
+								<td hidden>油石比</td>
+								<td hidden><input class="form-control" type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" placeholder="请输入" style="width: 100%; height: 100%;"></td>
 							</tr>
 							<tr>
 								<td>成品温度要求</td>
 								<td><input class="form-control" type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" placeholder="请输入" style="width: 100%; height: 100%;"></td>
-								<td>到现场温度要求</td>
-								<td><input class="form-control" type="text"
+								<td hidden>到现场温度要求</td>
+								<td hidden><input class="form-control" type="text"
 										   @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%;"></td>
@@ -774,11 +774,11 @@
 								<td>路段经度</td>
 								<td><input class="form-control" type="text" @blur="reg(lng,'price','lng')"
 										   v-model="lng" placeholder="请输入"
-										   style="width: 100%; height: 100%; "></td>
+										   style="width: 100%; height: 100%; " disabled></td>
 								<td>路段纬度</td>
 								<td><input class="form-control" type="text" @blur="reg(lat,'xiaoshu','lat')"
 										   v-model="lat" placeholder="请输入"
-										   style="width: 100%; height: 100%; "></td>
+										   style="width: 100%; height: 100%; " disabled></td>
 							</tr>
 							<tr>
 								<td>施工桩号</td>
@@ -1046,6 +1046,7 @@
 		"oLanguage": {
 			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
+		/*"pagingType": "full_numbers",*/
 		"order": [],
 		"columns": [
 			{"data": "planno"},
@@ -1060,7 +1061,7 @@
 			{"data": "radio"},
 			{"data": "pdtemp"},
 			{"data": "arrivetemp"},
-			{ "data": "price"},
+			{ "data": "zongjia"},
 			{ "data": "datetime"},
 			{ "data": "uname"},
 			{ "data": "planstatecn"},
@@ -1078,10 +1079,29 @@
 
 					var qiyong='<i class="iconfont icon-shanchu Pbec " style="font-size:18px;cursor:pointer;display:none;" data-id="'+data+'" onclick="delMsg(this)" title="删除"></i>'
 					if(isNull(full.pianchaid)){
-						return guanlian+xiugai+qiyong;
+						return xiugai+qiyong;
 					}else{
-						return guanlian+xiangqing+xiugai+qiyong;
+						return xiangqing+xiugai+qiyong;
 					}
+				}
+			},
+			{
+				"class": "tcenter",
+				"targets": 6,
+				"searchable": true,
+				"createdCell": function(td,data, full) {
+					/*console.log(arr)
+					console.log(colorArr)*/
+					if(arr!=null&&arr.length!=0){
+						for(var i=0;i<arr.length;i++){
+							if(arr[i].indexOf(full.planno) >= 0 ) {
+								//var index=$.inArray(arr[i], arr);
+								$(td).css("background-color",colorArr[i])
+							}
+						}
+					}
+
+					return data;
 				}
 			}
 		],
@@ -1357,6 +1377,34 @@
 		methods: {
 			//新建生产计划保存按钮事件
 			save: function () {
+				if(this.planno==""){
+					toastr.error("生产计划编号为空!")
+					return;
+				}
+				if(this.roadName==""){
+					toastr.error("路名为空!")
+					return;
+				}
+				if(this.finishTime==""){
+					toastr.error("要求完成时间为空!")
+					return;
+				}
+				if(this.pdneed==""){
+					toastr.error("成品需要量为空!")
+					return;
+				}if(this.pdtemp==""){
+					toastr.error("成品温度要求为空!")
+					return;
+				}if(this.stakeMark==""){
+					toastr.error("施工桩号为空!")
+					return;
+				}if(this.team==""){
+					toastr.error("路名施工队为空!")
+					return;
+				}
+				if(this.drymixingtime=="")this.drymixingtime="00:00:00";
+				if(this.wetmixingtime=="")this.wetmixingtime="00:00:00";
+				if(this.distance=="")this.distance="0";
 				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
 				this.$http.post('/ShengChanJiHua/addShengChanJiHua',JSON.stringify(this._data),{}).then((res) => {
 					var resMsg = res.body;
@@ -1365,8 +1413,14 @@
 						$("#myModal2").modal("hide");
 						initTable();
 						toastr.success(resMsg.resultMsg);
-					} else if (resMsg.daoMsg ==-1) {
-						toastr.error("生产计划要求完成时间冲突");
+						var conflictMsgArr=resMsg.conflictMsg;
+						if(conflictMsgArr!=null&&conflictMsgArr.size!=0){
+							for(var i=0;i<conflictMsgArr.length;i++){
+								arr.push(conflictMsgArr[i].planno)
+								toastr.error("完成时间与"+conflictMsgArr[i].finishTime+"的"+conflictMsgArr[i].roadname+"路段冲突");
+							}
+						}
+
 					}else {
 						toastr.error(resMsg.resultMsg);
 					}
@@ -1507,6 +1561,34 @@
 		methods: {
 			//新建生产计划保存按钮事件
 			save: function () {
+				if(this.planno==""){
+					toastr.error("生产计划编号为空!")
+					return;
+				}
+				if(this.roadName==""){
+					toastr.error("路名为空!")
+					return;
+				}
+				if(this.finishTime==""){
+					toastr.error("要求完成时间为空!")
+					return;
+				}
+				if(this.pdneed==""){
+					toastr.error("成品需要量为空!")
+					return;
+				}if(this.pdtemp==""){
+					toastr.error("成品温度要求为空!")
+					return;
+				}if(this.stakeMark==""){
+					toastr.error("施工桩号为空!")
+					return;
+				}if(this.team==""){
+					toastr.error("路名施工队为空!")
+					return;
+				}
+				if(this.drymixingtime=="")this.drymixingtime="00:00:00";
+				if(this.wetmixingtime=="")this.wetmixingtime="00:00:00";
+				if(this.distance=="")this.distance="0";
 				//发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
 				this.$http.post('/ShengChanJiHua/updateShengChanJiHua',JSON.stringify(this._data),{}).then((res) => {
 					var resMsg = res.body;
@@ -1515,9 +1597,14 @@
 						initTable();
 						initTableQuanxian()
 						toastr.success(resMsg.resultMsg);
-					}else if (resMsg.daoMsg ==-1) {
-						toastr.error("生产计划要求完成时间冲突");
-					} else {
+						var conflictMsgArr=resMsg.conflictMsg;
+						if(conflictMsgArr!=null&&conflictMsgArr.size!=0){
+							for(var i=0;i<conflictMsgArr.length;i++){
+								arr.push(conflictMsgArr[i].planno)
+								toastr.error("完成时间与"+conflictMsgArr[i].finishTime+"的"+conflictMsgArr[i].roadname+"路段冲突");
+							}
+						}
+					}else {
 						toastr.error(resMsg.resultMsg);
 					}
 				}, (res) => {
@@ -1560,6 +1647,9 @@
 	xgSCVm.roadPost();
 	xgSCVm.recipePost();
 
+
+	var arr=[];
+	var colorArr=[];
 	function initTable(){
 		$.ajax({
 			type: 'POST',
@@ -1571,11 +1661,70 @@
 				errMessage("请求UserController失败");
 			},
 			success: function (json) {
+
+				/* initTbVm(); */
+
+				/*for(var i=0;i<json.length-1;i++){
+					var time1=json[i].finishTime.split(" ");
+					var time2=json[i+1].finishTime.split(" ");
+
+					if(time1[0]==time2[0]&&time2[1]!=undefined&&time1[1]!=undefined){
+						var xctime=timeDifference(time2[1],time1[1])
+						//console.log("时间差==="+xctime);
+						if(Math.abs(xctime)<30){
+							var no=json[i].planno+"-"+json[i+1].planno;
+							arr.push(no)
+							colorArr.push(getRandomColor())
+						}
+					}
+				}*/
+				for(var i=0;i<json.length;i++){
+					for(var j=i;j<json.length;j++){
+						if(i!=j){
+							var time1=json[i].finishTime.split(" ");
+							var time2=json[j].finishTime.split(" ");
+							if(time1[0]==time2[0]&&time2[1]!=undefined&&time1[1]!=undefined){
+								var xctime=timeDifference(time2[1],time1[1])
+								console.log("时间差==="+xctime);
+								if(Math.abs(xctime)<30){
+									var no=json[i].planno+"-"+json[j].planno;
+									arr.push(no)
+									var color=getRandomColor()
+									colorArr.push(color)
+
+								}
+							}
+						}
+					}
+				}
+
 				$("#mainContent").dataTable().fnClearTable();
 				$("#mainContent").DataTable().rows.add(json).draw(false);
-				/* initTbVm(); */
+
 			}
 		});
+	}
+
+	function getRandomColor() {
+		var color= '#' +
+				(function(color) {
+					return(color += '0123456789abcdef' [Math.floor(Math.random() * 16)]) &&
+					(color.length == 6) ? color : arguments.callee(color);
+				})('');
+		if(colorArr.indexOf(color) >= 0 ) {
+			//'colorArr中包含color字符串';
+			getRandomColor()
+		}
+		return color;
+	}
+
+	function timeDifference(startTime,endTime){
+		var start1=startTime.split(":");
+		var startAll=parseInt(start1[0]*60)+parseInt(start1[1]);
+		var end1=endTime.split(":");
+		var endAll=parseInt(end1[0]*60)+parseInt(end1[1]);
+		var xiangchatime=endAll-startAll;
+		return xiangchatime
 	}
 
 	function initTablePianCha(){

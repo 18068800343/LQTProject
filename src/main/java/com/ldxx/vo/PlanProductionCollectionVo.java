@@ -37,6 +37,16 @@ public class PlanProductionCollectionVo extends PlanProductionCollection {
 
 	private String siteId;
 
+	private BigDecimal zongjia;
+
+	public BigDecimal getZongjia() {
+		return zongjia;
+	}
+
+	public void setZongjia(BigDecimal zongjia) {
+		this.zongjia = zongjia;
+	}
+
 	public String getSiteId() {
 		return siteId;
 	}

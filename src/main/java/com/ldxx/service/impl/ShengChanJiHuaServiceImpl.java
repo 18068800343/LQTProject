@@ -145,36 +145,33 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
 			cal.setTime(endTime);
 			cal.add(Calendar.MINUTE, 30);// 24小时制
 			endTime = cal.getTime();
-			System.out.println("after:" + format.format(endTime));  //显示更新后的日期
+			//System.out.println("after:" + format.format(endTime));  //显示更新后的日期
 			Calendar cal2 = Calendar.getInstance();
 			cal2.setTime(startime);
 			cal2.add(Calendar.MINUTE, -30);// 24小时制
 			startime = cal2.getTime();
-			System.out.println("after:" + format.format(startime));  //显示更新后的日期
+			//System.out.println("after:" + format.format(startime));  //显示更新后的日期
 
 			String end = format.format(endTime);
 			String start = format.format(startime);
-			int count= dao.getCountByfinishTime(start,end);
+			List<PlanProductionCollectionVo> countList= dao.getCountByfinishTime(start,end);
 
-			int i=0;
-			if(count>0){
+			if(countList!=null&&countList.size()>0){
 				shengchanjihuachongtutishi.chongtutishi();
-				i=-1;
-			}else{
-				String siteId = LDXXUtils.getUUID12();
-				planProductionVo.setSiteId(siteId);
-				planProductionVo.setDeletestate(1);
-
-				tanPuDiDianGuanLiDao.addTanPuDiDianVo(planProductionVo);
-
-				i = dao.addShengChanJiHuaVo(planProductionVo);
-
-				jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
-
 			}
+			String siteId = LDXXUtils.getUUID12();
+			planProductionVo.setSiteId(siteId);
+			planProductionVo.setDeletestate(1);
+
+			tanPuDiDianGuanLiDao.addTanPuDiDianVo(planProductionVo);
+
+			int i = dao.addShengChanJiHuaVo(planProductionVo);
+
+			jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
 			String daoMsg = MsgFormatUtils.getMsgByResult(i, "新增");
 			jsonObject.put("resultMsg", daoMsg);
 			jsonObject.put("daoMsg", i);
+			jsonObject.put("conflictMsg", countList);
 			jsonObject.put("obj", planProductionVo);
 
 		} catch (JSONException  e) {
@@ -259,35 +256,32 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
 
 			String end = format.format(endTime);
 			String start = format.format(startime);
-			int count= dao.xggetCountByfinishTime(start,end,planProductionVo.getPlanid());
+			List<PlanProductionCollectionVo> countList= dao.xggetCountByfinishTime(start,end,planProductionVo.getPlanid());
 
-			int i=0;
-			if(count>0){
+			if(countList!=null&&countList.size()>0){
 				shengchanjihuachongtutishi.chongtutishi();
-				i=-1;
-			}else{
-				PlanProductionCollection ppcOld = dao.getShengChanJiHuaById(planProductionVo.getPlanid());
-				BigDecimal oldPdNeed = ppcOld.getPdneed();
-				BigDecimal newPdNeed = planProductionVo.getPdneed();
-				BigDecimal newJiHuaZengNum = newPdNeed.subtract(oldPdNeed == null ? BigDecimal.valueOf(0) : oldPdNeed);
-
-				PlanProductionCount planProductionCount = new PlanProductionCount();
-
-				tanPuDiDianGuanLiDao.updateTanPuDiDianVo(planProductionVo);
-				 i = dao.updateShengChanJiHuaVo(planProductionVo);
-
-
-				planProductionCount.setId(LDXXUtils.getUUID12());
-				planProductionCount.setPdneedsourcestate(1);
-				planProductionCount.setDatetime(dateTime);
-				planProductionCount.setPlanid(planProductionVo.getPlanid());
-				planProductionCount.setPdneedincordec(newJiHuaZengNum);
-				jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
-
 			}
+			PlanProductionCollection ppcOld = dao.getShengChanJiHuaById(planProductionVo.getPlanid());
+			BigDecimal oldPdNeed = ppcOld.getPdneed();
+			BigDecimal newPdNeed = planProductionVo.getPdneed();
+			BigDecimal newJiHuaZengNum = newPdNeed.subtract(oldPdNeed == null ? BigDecimal.valueOf(0) : oldPdNeed);
+
+			PlanProductionCount planProductionCount = new PlanProductionCount();
+
+			tanPuDiDianGuanLiDao.updateTanPuDiDianVo(planProductionVo);
+			int i = dao.updateShengChanJiHuaVo(planProductionVo);
+
+
+			planProductionCount.setId(LDXXUtils.getUUID12());
+			planProductionCount.setPdneedsourcestate(1);
+			planProductionCount.setDatetime(dateTime);
+			planProductionCount.setPlanid(planProductionVo.getPlanid());
+			planProductionCount.setPdneedincordec(newJiHuaZengNum);
+			jiHuaZengJianDao.addJiHuaZengJian(planProductionCount);
 			String chnsMsg = MsgFormatUtils.getMsgByResult(i, "修改");
 			jsonObject.put("resultMsg", chnsMsg);
 			jsonObject.put("daoMsg", i);
+			jsonObject.put("conflictMsg", countList);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

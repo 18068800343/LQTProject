@@ -47,7 +47,7 @@ public interface ShengChanJiHuaDao {
 
 	PianChaLiangVo getPiancha(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo);
 
-    int getCountByfinishTime(String startime, String endTime);
+    List<PlanProductionCollectionVo> getCountByfinishTime(String startime, String endTime);
 
-    int xggetCountByfinishTime(String startime, String endTime,String id);
+    List<PlanProductionCollectionVo> xggetCountByfinishTime(String startime, String endTime,String id);
 }

@@ -143,7 +143,7 @@
 		 when 2 then '已完成'
 		 else ''
 		 end as planstatecn,
-		 round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,srm.*,srm.id siteId,
+		 round(a.price*a.pd_need,2) as zongjia,a.*,usr.u_name,sfm.fl_no,srm.*,srm.id siteId,
 		 pcd.piancha_name,pcd.piancha_no,pniod.sumneed
 		FROM
 		 plan_production_collection AS a
@@ -209,13 +209,16 @@
         where a.road_id=(SELECT road_id from batch_mgt where id=#{batchid}) AND a.delete_state=1 ORDER BY a.datetime DESC
 	</select>
 
-	<select id="getCountByfinishTime" resultType="int">
-		select COUNT(0) from plan_production_collection where finish_time &gt; #{startime} and finish_time &lt; #{endTime} AND delete_state=1
+	<select id="getCountByfinishTime" resultType="planProductionCollectionVo">
+		select a.plan_id,a.plan_no,a.finish_time,srm.road_name from plan_production_collection a
+		LEFT JOIN site_construction srm on a.site_id = srm.id
+		where a.finish_time &gt; #{startime} and a.finish_time &lt; #{endTime} AND a.delete_state=1
 	</select>
 
-	<select id="xggetCountByfinishTime" resultType="int">
-		select COUNT(0) from plan_production_collection
-		where finish_time &gt; #{startime} and finish_time &lt; #{endTime} AND delete_state=1 and plan_id !=#{id}
+	<select id="xggetCountByfinishTime" resultType="planProductionCollectionVo">
+		select a.plan_id,a.plan_no,a.finish_time,srm.road_name from plan_production_collection a
+		LEFT JOIN site_construction srm on a.site_id = srm.id
+		where a.finish_time &gt; #{startime} and a.finish_time &lt; #{endTime} AND a.delete_state=1 and a.plan_id !=#{id}
 	</select>
 
 </mapper>

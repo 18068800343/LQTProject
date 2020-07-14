@@ -61,7 +61,7 @@
     <div class="zhuti-content">
         <div class="UpperPart">
             <div class="UpperPartL">
-                <button type="button" class="btn btn-primary Pdaa" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入车辆管理</button>
+                <!--<button type="button" class="btn btn-primary Pdaa" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入车辆管理</button>-->
             </div>
             <div class="UpperPartR">
                 <!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
@@ -78,7 +78,7 @@
 						<th>载重(kg)</th>
 						<th>驾驶员</th>
 						<th>GPS序号</th>
-                        <th style="width:70px;">操作</th>
+                        <!--<th style="width:70px;">操作</th>-->
                     </tr>
                 </thead>
                 <tbody>
@@ -251,9 +251,9 @@
             { "data": "weight"},
             { "data": "driver"},
             { "data": "GPSId"},
-            { "data": null},
+            /*{ "data": null},*/
         ],
-        "columnDefs": [{	
+        "columnDefs": [/*{
 					 "class": "tcenter",
 					    "targets": 5,
 					    "searchable": true,
@@ -261,7 +261,7 @@
 					  	  		return '<i class="iconfont icon-xiugai Pdab" style="font-size:18px;cursor:pointer;display:none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
 	                            +'<i class="iconfont icon-shanchu Pdac" style="font-size:18px;cursor:pointer;display:none;" id="del"  title="删除"></i>'
 					        }
-					  }
+					  }*/
 					  
 			],"fnDrawCallback" : function() {
                 initTableQuanxian()
