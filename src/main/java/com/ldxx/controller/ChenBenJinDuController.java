@@ -93,6 +93,12 @@ public class ChenBenJinDuController {
         return maps;
     }
 
+    @RequestMapping("/getWeekCount")
+    public List<Map> getWeekCount(String dateTime) {
+        List<Map> maps = dao.getWeekCount(dateTime);
+        return maps;
+    }
+
     @RequestMapping("/getchannengMonth")
     public List<ChenBenJinDuVo> getchannengMonth() {
         List<ChenBenJinDuVo> chenBenJinDuVoList = new ArrayList<>();

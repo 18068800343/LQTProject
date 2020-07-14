@@ -22,4 +22,6 @@ public interface ChenBenJinDuDao {
     public List<ChenBenJinDuVo> getchannengWeek(String datetime);
 
     public List<Map> getDayCount(String datetime);
+
+    public List<Map> getWeekCount(String datetime);
 }

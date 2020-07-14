@@ -43,19 +43,51 @@
 
     <select id="getDayCount" resultType="map">
         SELECT
-            SUM (weight) weight,
-            peifang_name peifangName,
-            #{datetime} as datetime
+            *
         FROM
-            quality_by_plate_real_time_prodocution_data
-        WHERE
-            CONVERT (
-                VARCHAR,
-                production_time,
-                120
-            ) LIKE concat(concat('%',#{datetime}),'%')
-        GROUP BY
-            peifang_name
+            (
+                SELECT
+                    SUM (weight) weight,
+                    peifang_name peifangName,
+                    #{datetime} AS datetime
+                FROM
+                    quality_by_plate_real_time_prodocution_data pbd
+                WHERE
+                    CONVERT (
+                        VARCHAR,
+                        production_time,
+                        120
+                    ) LIKE concat (
+                        concat ('%', #{datetime}),
+                        '%'
+                    )
+                GROUP BY
+                    peifang_name
+            ) a
+        LEFT JOIN (
+            SELECT
+                CASE
+            WHEN CONVERT (
+                DECIMAL (18, 2),
+                SUM (pitch_weight) / 1000
+            ) IS NULL THEN
+                0
+            ELSE
+                CONVERT (
+                    DECIMAL (18, 2),
+                    SUM (pitch_weight) / 1000
+                )
+            END AS feiliao
+            FROM
+                wh_waste_mgn
+            WHERE
+                CONVERT (VARCHAR, deal_time, 120) LIKE concat (
+                    concat ('%', #{datetime}),
+                    '%'
+                )
+            AND warning_state = 1
+            AND delete_state != 0
+        ) b ON 1 = 1
     </select>
 
 </mapper>
