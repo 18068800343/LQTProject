@@ -42,7 +42,7 @@ public class UserController {
 		}else if(iscountUName>0){
 			i=-2;
 		}else{
-			String webFile = getWebFileUtils.getWebFile();
+			String webFile = new getWebFileUtils().getWebFile();;
 			String path=webFile+"user_File";
 			File f=new File(path);
 			if(!f.exists()){
@@ -90,7 +90,7 @@ public class UserController {
 		}else if(iscountUNameEdit>0){
 			i=-2;
 		}else{
-			String webFile = getWebFileUtils.getWebFile();
+			String webFile = new getWebFileUtils().getWebFile();
 			String path=webFile+"user_File";
 			File f=new File(path);
 			if(!f.exists()){

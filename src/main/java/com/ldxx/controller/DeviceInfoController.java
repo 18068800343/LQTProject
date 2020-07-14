@@ -59,7 +59,7 @@ public class DeviceInfoController {
 		dt.setEditDatetime(GetThisTimeUtils.getDateTime());
 		dt.setId(id);
 
-		String webFile = getWebFileUtils.getWebFile();
+		String webFile = new getWebFileUtils().getWebFile();;
 		String path=webFile+"shebeiguanli_File";
 		File f=new File(path);
 		if(!f.exists()){
@@ -100,7 +100,7 @@ public class DeviceInfoController {
 		}
 		dt.setEditDatetime(GetThisTimeUtils.getDateTime());
 
-		String webFile = getWebFileUtils.getWebFile();
+		String webFile = new getWebFileUtils().getWebFile();;
 		String path=webFile+"shebeiguanli_File";
 		File f=new File(path);
 		if(!f.exists()){
