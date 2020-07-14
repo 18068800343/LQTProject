@@ -102,7 +102,7 @@
 								<th>生产计划编号</th>
 								<th>路段编号</th>
 								<th>路段名称</th>
-								<th>配方编号</th>
+								<th>拌合料编号</th>
 								<th>成品需要量（每日）</th>
 								<th>待生产量</th>
 								<th>完成时间</th>
@@ -509,7 +509,7 @@
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
-								<td>配方</td>
+								<td>拌合料</td>
 								<td><select class="form-control" style="width: 100%;" v-model="recipeid = recipeSelected" id="recipeid">
 									<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
 								</select></td>
@@ -718,7 +718,7 @@
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
-								<td>配方</td>
+								<td>拌合料</td>
 								<td><select class="form-control" style="width: 100%;" v-model="recipeid = recipeSelected">
 									<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
 								</select></td>
