@@ -24,6 +24,8 @@ public class WhIncomingMaterial {
 
 	private String companyId;//来货单位
 
+	private String chandi;//来货单位
+
 	private Double price;//价格
 
 	private String storNo;//料仓编号
@@ -31,12 +33,20 @@ public class WhIncomingMaterial {
 	private String meminfo;//备注
 
 	private String editUserId;//录入人
-    
-    private String editDatetime;
-    
+
+	private String editDatetime;
+
 	private String uName;
 
-    public int deleteState;//逻辑删除 1:存在；0删除
+	public int deleteState;//逻辑删除 1:存在；0删除
+
+	public String getChandi() {
+		return chandi;
+	}
+
+	public void setChandi(String chandi) {
+		this.chandi = chandi;
+	}
 
 	public String getuName() {
 		return uName;

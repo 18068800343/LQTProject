@@ -96,19 +96,20 @@
                         <table class="layui-table" lay-skin="line" style="width:100%;" id="mainContent">
                             <thead>
                                <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
-                                    <th>编号</th>
-									<th style="width:10%;">时间</th>
-									<th>重量</th>
-									<th>材料</th>
-									<th>含水量</th>
-									<th>来货单位</th>
-									<th>单价</th>
-									<th>总价</th>
-									<th>料仓编号</th>
-									<th>备注</th>
-									<th>录入人</th>
-                                    <th style="width:75px;">操作</th>
-                                </tr>
+                                   <th>编号</th>
+                                   <th style="width:10%;">时间</th>
+                                   <th>重量</th>
+                                   <th>材料</th>
+                                   <th>含水量</th>
+                                   <th>来货单位</th>
+                                   <th>产地</th>
+                                   <th>单价</th>
+                                   <th>总价</th>
+                                   <th>料仓编号</th>
+                                   <th>备注</th>
+                                   <th>录入人</th>
+                                   <th style="width:75px;">操作</th>
+                               </tr>
                             </thead>
                             <tbody>
                                 
@@ -277,8 +278,9 @@
                                             <td>来货单位</td>
                                             <td><input type="text" class="form-control" id="laihuodanwei"
                                                        placeholder="请输入" style="width: 70%;"/></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>产地</td>
+                                            <td><input type="text" class="form-control" id="chandi"
+                                                       placeholder="请输入" style="width: 70%;"/></td>
                                         </tr>
                                         <tr>
                                             <!--<td>录入人</td>
@@ -345,8 +347,9 @@
                                            <td>来货单位</td>
                                            <td><input type="text" class="form-control" id="xg_laihuodanwei"
                                                       placeholder="请输入" style="width: 70%;"/></td>
-                                           <td></td>
-                                           <td></td>
+                                           <td>产地</td>
+                                           <td><input type="text" class="form-control" id="xg_chandi"
+                                                      placeholder="请输入" style="width: 70%;"/></td>
                                        </tr>
                                        <tr>
                                            <td>备注</td>
@@ -408,30 +411,31 @@
 			    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 			},
 			"columns": [
-	            { "data": "no"},
-	            { "data": "datetime"}, 
-	            { "data": "weight"},
-	            { "data": "materialsName"},
-	            { "data": "waterContent"},
-	            { "data": "companyId"},
-	            { "data": "price"},
-	            { "data": null},
-	            { "data": "storNo"},
-	            { "data": "meminfo"},
-	            { "data": "uName"},
-	            { "data": null},
-	        ],
+                {"data": "no"},
+                {"data": "datetime"},
+                {"data": "weight"},
+                {"data": "materialsName"},
+                {"data": "waterContent"},
+                {"data": "companyId"},
+                {"data": "chandi"},
+                {"data": "price"},
+                {"data": null},
+                {"data": "storNo"},
+                {"data": "meminfo"},
+                {"data": "uName"},
+                {"data": null},
+            ],
 	        "columnDefs": [{
-				 "class": "tcenter",
-				    "targets": 7,
-				    "searchable": true,
-				    "render": function(data, type, full) {
-				  	  		var zongjia= Number(full.price)*Number(full.weight);
-				  	  		return zongjia;
-				        }
-				  },{
-						 "class": "tcenter",
-                "targets": 11,
+                "class": "tcenter",
+                "targets": 8,
+                "searchable": true,
+                "render": function (data, type, full) {
+                    var zongjia = Number(full.price) * Number(full.weight);
+                    return zongjia;
+                }
+            }, {
+                "class": "tcenter",
+                "targets": 12,
                 "searchable": true,
                 "render": function (data, type, full) {
                     return '<i class="iconfont icon-xiugai Pbdab" style="font-size:18px;cursor:pointer;display:none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
@@ -582,6 +586,7 @@
             var hanshuiliang = $("#hanshuiliang").val();
             var hanchenliang = $("#hanchenliang").val();
             var laihuodanwei = $("#laihuodanwei").val();
+            var chandi = $("#chandi").val();
             var danjia = $("#danjia").val();
             var liaocangbianhao = $("#liaocangbianhao").val();
             //var lururen=$("#lururen").val();
@@ -598,6 +603,7 @@
                     materials: cailiao,
                     waterContent: hanshuiliang,
                     companyId: laihuodanwei,
+                    chandi: chandi,
                     price: danjia,
                     storNo: liaocangbianhao,
                     meminfo: beizhu,
@@ -670,6 +676,7 @@
         $("#xg_hanshuiliang").val(data.waterContent);
         $("#xg_hanchenliang").val(data.dustContent);
         $("#xg_laihuodanwei").val(data.companyId);
+        $("#xg_chandi").val(data.chandi);
         $("#xg_danjia").val(data.price);
         $("#xg_liaocangbianhao").val(data.storNo);
         //$("#xg_lururen").val(data.editUserId);
@@ -684,6 +691,7 @@
         var hanshuiliang = $("#xg_hanshuiliang").val();
         var hanchenliang = $("#xg_hanchenliang").val();
         var laihuodanwei = $("#xg_laihuodanwei").val();
+        var chandi = $("#xg_chandi").val();
         var danjia = $("#xg_danjia").val();
         var liaocangbianhao = $("#xg_liaocangbianhao").val();
         //var lururen=$("#xg_lururen").val();
@@ -702,6 +710,7 @@
                 waterContent: hanshuiliang,
                 dustContent: hanchenliang,
                 companyId: laihuodanwei,
+                chandi: chandi,
                 price: danjia,
                 storNo: liaocangbianhao,
                 meminfo: beizhu,
