@@ -168,7 +168,7 @@ public class UserServiceImpl implements UserService {
 				for(String roleCode:userRoles){
 					List<URoleVo> roles = uRoleDao.selectRoleByRoleCode(roleCode);
 					if(roles.size()>0){
-						userRoleNames=userRoleNames+","+roles.get(0).getRoleName();
+						userRoleNames=userRoleNames+"，"+roles.get(0).getRoleName();
 					}
 				}
 
