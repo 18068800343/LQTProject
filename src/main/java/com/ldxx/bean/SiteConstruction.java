@@ -32,11 +32,21 @@ public class SiteConstruction {
 
 	private String chedao;
 
+	private String xiangmubu;
+
 	private String direction;
 
 	private String roadName;
 
 	private Integer state;
+
+	public String getXiangmubu() {
+		return xiangmubu;
+	}
+
+	public void setXiangmubu(String xiangmubu) {
+		this.xiangmubu = xiangmubu;
+	}
 
 	public String getShigongceng() {
 		return shigongceng;

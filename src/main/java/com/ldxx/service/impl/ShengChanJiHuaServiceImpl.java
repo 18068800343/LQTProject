@@ -113,7 +113,7 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
 			jhDateTime = planProductionVo.getFinishTime().replace("-", "").replace(" ", "").replace(":", "");
 		}
 		String planno = planProductionVo.getPlanno();
-		planProductionVo.setPlanno(jhDateTime + new Random().nextInt());
+		planProductionVo.setPlanno(jhDateTime + new Random().nextInt(1000));
 		planProductionVo.setDatetime(dateTime);
 		planProductionVo.setEditdatetime(dateTime);
 		planProductionVo.setDeletestate(1);

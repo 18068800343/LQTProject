@@ -551,23 +551,20 @@
 										   v-model="pdtemp" id="pdtemp" placeholder="请输入"
 										   style="width: 100%; height: 100%;"></td>
 								<td>
+									单价
 									<!--									到现场温度要求-->
 								</td>
 								<td>
+									<input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')"
+										   v-model="price" id="price" placeholder="请输入"
+										   style="width: 100%; height: 100%; ">
 									<!--									<input class="form-control" type="text"-->
 									<!--										   @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp"-->
 									<!--										   id="arrivetemp" placeholder="请输入"-->
 									<!--										   style="width: 100%; height: 100%; ">-->
 								</td>
 							</tr>
-							<tr>
-								<td>单价</td>
-								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')"
-										   v-model="price" id="price" placeholder="请输入"
-										   style="width: 100%; height: 100%; "></td>
-								<td></td>
-								<td></td>
-							</tr>
+
 							<tr>
 								<td>规划高速路径</td>
 								<td><input class="form-control" type="text" v-model="pathPlan" id="pathPlan"
@@ -607,18 +604,26 @@
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
-
 							<tr>
+								<td>项目部</td>
+								<td><input class="form-control" type="text" v-model="xiangmubu" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 								<td>施工层</td>
-								<td><select class="form-control" style="width: 100%;" v-model="shigongceng">
-									<option value="上">上</option>
-									<option value="中">中</option>
-									<option value="下">下</option>
-								</select></td>
+								<td>
+									<select class="form-control" style="width: 100%;" v-model="shigongceng">
+										<option value="上">上</option>
+										<option value="中">中</option>
+										<option value="下">下</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
 								<td>施工车道</td>
 								<td><input class="form-control" type="text" v-model="chedao" id="chedao"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
+								<td></td>
+								<td></td>
 							</tr>
 						</table>
                         <div style="width: 870px;height: 300px;" id="map"></div>
@@ -755,31 +760,51 @@
 							</tr>
 							<tr>
 								<td>要求完成时间</td>
-								<td><input class="form-control" type="text" readonly="true" v-model="finishTime" id="xgfinishTime"
+								<td><input class="form-control" type="text" readonly="true" v-model="finishTime"
+										   id="xgfinishTime"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td hidden>干拌时间</td>
-								<td hidden><input class="form-control" type="text" readonly="true" v-model="drymixingtime"
-										   placeholder="请输入" id="xgdrymixingtime"
-										   style="width: 100%; height: 100%; "></td>
+								<td>
+									成品温度要求
+									<!--									干拌时间-->
+								</td>
+								<td>
+									<input class="form-control" type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')"
+										   v-model="pdtemp" placeholder="请输入" style="width: 100%; height: 100%;">
+									<!--									<input class="form-control" type="text" readonly="true" v-model="drymixingtime"-->
+									<!--										   placeholder="请输入" id="xgdrymixingtime"-->
+									<!--										   style="width: 100%; height: 100%; ">-->
+								</td>
 							</tr>
-							<tr>
-								<td hidden>湿拌时间</td>
-								<td hidden><input class="form-control" type="text" readonly="true" v-model="wetmixingtime"
-										   placeholder="请输入" id="xgwetmixingtime"
-										   style="width: 100%; height: 100%;"></td>
-								<td hidden>油石比</td>
-								<td hidden><input class="form-control" type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" placeholder="请输入" style="width: 100%; height: 100%;"></td>
-							</tr>
-							<tr>
-								<td>成品温度要求</td>
-								<td><input class="form-control" type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')" v-model="pdtemp" placeholder="请输入" style="width: 100%; height: 100%;"></td>
-								<td hidden>到现场温度要求</td>
-								<td hidden><input class="form-control" type="text"
-										   @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp"
-										   placeholder="请输入"
-										   style="width: 100%; height: 100%;"></td>
-							</tr>
+							<!--							<tr>-->
+							<!--								<td>-->
+							<!--&lt;!&ndash;									湿拌时间&ndash;&gt;-->
+							<!--								</td>-->
+							<!--								<td>-->
+							<!--&lt;!&ndash;									<input class="form-control" type="text" readonly="true" v-model="wetmixingtime"&ndash;&gt;-->
+							<!--&lt;!&ndash;										   placeholder="请输入" id="xgwetmixingtime"&ndash;&gt;-->
+							<!--&lt;!&ndash;										   style="width: 100%; height: 100%;">&ndash;&gt;-->
+							<!--								</td>-->
+							<!--								<td>-->
+							<!--&lt;!&ndash;									油石比&ndash;&gt;-->
+							<!--								</td>-->
+							<!--								<td>-->
+							<!--&lt;!&ndash;									<input class="form-control" type="text" @blur="reg(radio,'xiaoshu','radio')" v-model="radio" placeholder="请输入" style="width: 100%; height: 100%;">&ndash;&gt;-->
+							<!--								</td>-->
+							<!--							</tr>-->
+							<!--							<tr>-->
+							<!--								<td></td>-->
+							<!--								<td></td>-->
+							<!--								<td>-->
+							<!--&lt;!&ndash;									到现场温度要求&ndash;&gt;-->
+							<!--								</td>-->
+							<!--								<td>-->
+							<!--&lt;!&ndash;									<input class="form-control" type="text"&ndash;&gt;-->
+							<!--&lt;!&ndash;										   @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp"&ndash;&gt;-->
+							<!--&lt;!&ndash;										   placeholder="请输入"&ndash;&gt;-->
+							<!--&lt;!&ndash;										   style="width: 100%; height: 100%;">&ndash;&gt;-->
+							<!--								</td>-->
+							<!--							</tr>-->
 							<tr>
 								<td>单价</td>
 								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')"
@@ -837,6 +862,14 @@
 								<td><input class="form-control" type="text" v-model="chedao"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
+							</tr>
+
+							<tr>
+								<td>项目部</td>
+								<td><input class="form-control" type="text" v-model="xiangmubu" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+								<td></td>
+								<td></td>
 							</tr>
 						</table>
 						<div style="width: 870px;height: 300px;" id="xgmap"></div>
@@ -1412,6 +1445,7 @@
 			team: '',
 			shigongceng: '',
 			chedao: '',
+			xiangmubu: '',
 			direction: '',
 			roadName: '',
 		},
@@ -1531,6 +1565,7 @@
 		xgSCVm.team = data.team;
 		xgSCVm.shigongceng = data.shigongceng;
 		xgSCVm.chedao = data.chedao;
+		xgSCVm.xiangmubu = data.xiangmubu;
 		xgSCVm.direction = data.direction;
 		xgSCVm.roadName = data.roadname;
 		xgSCVm.finishTime = data.finishTime;
@@ -1597,6 +1632,7 @@
 			turnRoundStakeMark: '',
 			team: '',
 			chedao: '',
+			xiangmubu: '',
 			shigongceng: '',
 			direction: '',
 			roadName: '',

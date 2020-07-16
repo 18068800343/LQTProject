@@ -21,39 +21,49 @@ public class PlanProductionCollectionVo extends PlanProductionCollection {
 
     private String planstatecn;
 
-    private String stakeMark;
+	private String stakeMark;
 
-    private String turnRoundStakeMark;
+	private String turnRoundStakeMark;
 
-    private String team;
+	private String team;
 
-    private String shigongceng;
+	private String shigongceng;
 
-    private String chedao;
+	private String chedao;
 
-    private String direction;
+	private String xiangmubu;
 
-    private String roadName;
+	private String direction;
 
-    private BigDecimal lng;
+	private String roadName;
 
-    private BigDecimal lat;
+	private BigDecimal lng;
 
-    private String siteId;
+	private BigDecimal lat;
 
-    private BigDecimal zongjia;
+	private String siteId;
 
-    public String getShigongceng() {
-        return shigongceng;
-    }
+	private BigDecimal zongjia;
 
-    public void setShigongceng(String shigongceng) {
-        this.shigongceng = shigongceng;
-    }
+	public String getXiangmubu() {
+		return xiangmubu;
+	}
 
-    public String getChedao() {
-        return chedao;
-    }
+	public void setXiangmubu(String xiangmubu) {
+		this.xiangmubu = xiangmubu;
+	}
+
+	public String getShigongceng() {
+		return shigongceng;
+	}
+
+	public void setShigongceng(String shigongceng) {
+		this.shigongceng = shigongceng;
+	}
+
+	public String getChedao() {
+		return chedao;
+	}
 
     public void setChedao(String chedao) {
         this.chedao = chedao;
