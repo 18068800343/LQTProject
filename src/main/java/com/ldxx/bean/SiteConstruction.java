@@ -28,11 +28,31 @@ public class SiteConstruction {
 
 	private String team;
 
+	private String shigongceng;
+
+	private String chedao;
+
 	private String direction;
 
 	private String roadName;
 
 	private Integer state;
+
+	public String getShigongceng() {
+		return shigongceng;
+	}
+
+	public void setShigongceng(String shigongceng) {
+		this.shigongceng = shigongceng;
+	}
+
+	public String getChedao() {
+		return chedao;
+	}
+
+	public void setChedao(String chedao) {
+		this.chedao = chedao;
+	}
 
 	public Integer getState() {
 		return state;

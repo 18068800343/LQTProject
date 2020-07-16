@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -105,13 +106,16 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
 
     @Override
     public String addShengChanJiHuaAndSiteConstruction(PlanProductionVo planProductionVo, HttpSession session) {
-        JSONObject jsonObject = new JSONObject();
-        String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
-        String jhDateTime = DateUtil.getDateStrByPattern(DateConstant.DATE14_, new Date());
-        String planno = planProductionVo.getPlanno();
-        planProductionVo.setPlanno(planno + jhDateTime);
-        planProductionVo.setDatetime(dateTime);
-        planProductionVo.setEditdatetime(dateTime);
+		JSONObject jsonObject = new JSONObject();
+		String dateTime = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		String jhDateTime = DateUtil.getDateStrByPattern(DateConstant.DATE14_, new Date());
+		if (null != planProductionVo.getFinishTime() && !"".equals(planProductionVo.getFinishTime())) {
+			jhDateTime = planProductionVo.getFinishTime().replace("-", "").replace(" ", "").replace(":", "");
+		}
+		String planno = planProductionVo.getPlanno();
+		planProductionVo.setPlanno(jhDateTime + new Random().nextInt());
+		planProductionVo.setDatetime(dateTime);
+		planProductionVo.setEditdatetime(dateTime);
 		planProductionVo.setDeletestate(1);
 		User user = (User) session.getAttribute("user");
 		if (null != user) {

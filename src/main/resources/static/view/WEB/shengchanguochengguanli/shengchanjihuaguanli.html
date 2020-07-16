@@ -102,7 +102,7 @@
 								<th>生产计划编号</th>
 								<th>路段编号</th>
 								<th>路段名称</th>
-								<th>拌合料编号</th>
+								<th>混合料编号</th>
 								<th>成品需要量（每日）</th>
 								<th>待生产量</th>
 								<th>完成时间</th>
@@ -499,22 +499,22 @@
 				<div>
 					<form class="form-inline">
 						<table class="layui-table "lay-skin="line" style="height:auto;" >
+							<!--							<tr>-->
+							<!--								<td>生产计划编号</td>-->
+							<!--								<td><input class="form-control" type="text" v-model="planno" id="planno"-->
+							<!--										   placeholder="请输入" style="width: 100%; height: 100%; "></td>-->
+							<!--								<td></td>-->
+							<!--								<td></td>-->
+							<!--							</tr>-->
 							<tr>
-								<td>生产计划编号</td>
-								<td><input class="form-control" type="text" v-model="planno" id="planno"
-										   placeholder="请输入" style="width: 100%; height: 100%; "></td>
-								<td>路名</td>
-								<td><input class="form-control" type="text" v-model="roadName" id="roadName"
-										   placeholder="请输入"
-										   style="width: 100%; height: 100%; "></td>
-							</tr>
-							<tr>
-								<td>拌合料</td>
-								<td><select class="form-control" style="width: 100%;" v-model="recipeid = recipeSelected" id="recipeid">
+								<td>混合料名称</td>
+								<td><select class="form-control" style="width: 100%;"
+											v-model="recipeid = recipeSelected" id="recipeid">
 									<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
 								</select></td>
 								<td>成品需要量</td>
-								<td><input class="form-control" type="text" @blur="reg(pdneed,'xiaoshu','pdneed')" v-model="pdneed" id="pdneed" placeholder="请输入"
+								<td><input class="form-control" type="text" @blur="reg(pdneed,'xiaoshu','pdneed')"
+										   v-model="pdneed" id="pdneed" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
@@ -522,31 +522,43 @@
 								<td><input class="form-control" type="text" readonly="true" v-model="finishTime"
 										   id="finishTime" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td hidden>干拌时间</td>
-								<td hidden><input class="form-control" type="text" readonly="true" v-model="drymixingtime"
-										   id="drymixingtime" placeholder="请输入"
-										   style="width: 100%; height: 100%; "></td>
+								<td>
+									路名
+									<!--									干拌时间-->
+								</td>
+								<td>
+									<input class="form-control" type="text" v-model="roadName" id="roadName"
+										   placeholder="请输入"
+										   style="width: 100%; height: 100%; ">
+									<!--									<input class="form-control" type="text" readonly="true" v-model="drymixingtime"-->
+									<!--										   id="drymixingtime" placeholder="请输入"-->
+									<!--										   style="width: 100%; height: 100%; ">-->
+								</td>
 							</tr>
-							<tr hidden>
-								<td hidden>湿拌时间</td>
-								<td hidden><input class="form-control" type="text" readonly="true" v-model="wetmixingtime"
-										   id="wetmixingtime" placeholder="请输入"
-										   style="width: 100%; height: 100%;"></td>
-								<td hidden>油石比</td>
-								<td hidden><input class="form-control" type="text" @blur="reg(radio,'xiaoshu','radio')"
-										   v-model="radio" id="radio" placeholder="请输入" value="00:00:00"
-										   style="width: 100%; height: 100%; "></td>
-							</tr>
+							<!--							<tr hidden>-->
+							<!--								<td hidden>湿拌时间</td>-->
+							<!--								<td hidden><input class="form-control" type="text" readonly="true" v-model="wetmixingtime"-->
+							<!--										   id="wetmixingtime" placeholder="请输入"-->
+							<!--										   style="width: 100%; height: 100%;"></td>-->
+							<!--								<td hidden>油石比</td>-->
+							<!--								<td hidden><input class="form-control" type="text" @blur="reg(radio,'xiaoshu','radio')"-->
+							<!--										   v-model="radio" id="radio" placeholder="请输入" value="00:00:00"-->
+							<!--										   style="width: 100%; height: 100%; "></td>-->
+							<!--							</tr>-->
 							<tr>
 								<td>成品温度要求</td>
 								<td><input class="form-control" type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')"
 										   v-model="pdtemp" id="pdtemp" placeholder="请输入"
 										   style="width: 100%; height: 100%;"></td>
-								<td hidden>到现场温度要求</td>
-								<td hidden><input class="form-control" type="text"
-										   @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp"
-										   id="arrivetemp" placeholder="请输入"
-										   style="width: 100%; height: 100%; "></td>
+								<td>
+									<!--									到现场温度要求-->
+								</td>
+								<td>
+									<!--									<input class="form-control" type="text"-->
+									<!--										   @blur="reg(arrivetemp,'xiaoshu','arrivetemp')" v-model="arrivetemp"-->
+									<!--										   id="arrivetemp" placeholder="请输入"-->
+									<!--										   style="width: 100%; height: 100%; ">-->
+								</td>
 							</tr>
 							<tr>
 								<td>单价</td>
@@ -581,21 +593,34 @@
 								<td><input class="form-control" type="text" v-model="stakeMark" id="stakeMark"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td>掉头桩号</td>
+								<td>桩号米数</td>
 								<td><input class="form-control" type="text" v-model="turnRoundStakeMark"
 										   id="turnRoundStakeMark" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
-                            <tr>
-                                <td>路面施工队</td>
-                                <td><input class="form-control" type="text" v-model="team" id="team" placeholder="请输入"
-                                           style="width: 100%; height: 100%; "></td>
-                                <td>方向</td>
-                                <td><input class="form-control" type="text" v-model="direction" id="direction"
-                                           placeholder="请输入"
-                                           style="width: 100%; height: 100%; "></td>
-                            </tr>
-                        </table>
+							<tr>
+								<td>路面施工队</td>
+								<td><input class="form-control" type="text" v-model="team" id="team" placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+								<td>方向</td>
+								<td><input class="form-control" type="text" v-model="direction" id="direction"
+										   placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+							</tr>
+
+							<tr>
+								<td>施工层</td>
+								<td><select class="form-control" style="width: 100%;" v-model="shigongceng">
+									<option value="上">上</option>
+									<option value="中">中</option>
+									<option value="下">下</option>
+								</select></td>
+								<td>施工车道</td>
+								<td><input class="form-control" type="text" v-model="chedao" id="chedao"
+										   placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+							</tr>
+						</table>
                         <div style="width: 870px;height: 300px;" id="map"></div>
                     </form>
 				</div>
@@ -718,12 +743,14 @@
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
-								<td>拌合料</td>
-								<td><select class="form-control" style="width: 100%;" v-model="recipeid = recipeSelected">
+								<td>混合料名称</td>
+								<td><select class="form-control" style="width: 100%;"
+											v-model="recipeid = recipeSelected">
 									<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
 								</select></td>
 								<td>成品需要量</td>
-								<td><input class="form-control" type="text" @blur="reg(pdneed,'xiaoshu','pdneed')" v-model="pdneed" placeholder="请输入" style="width: 100%; height: 100%;" /></td>
+								<td><input class="form-control" type="text" @blur="reg(pdneed,'xiaoshu','pdneed')"
+										   v-model="pdneed" placeholder="请输入" style="width: 100%; height: 100%;"/></td>
 
 							</tr>
 							<tr>
@@ -785,7 +812,7 @@
 								<td><input class="form-control" type="text" v-model="stakeMark"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td>掉头桩号</td>
+								<td>桩号米数</td>
 								<td><input class="form-control" type="text" v-model="turnRoundStakeMark"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
@@ -796,6 +823,18 @@
 										   style="width: 100%; height: 100%; "></td>
 								<td>方向</td>
 								<td><input class="form-control" type="text" v-model="direction"
+										   placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
+							</tr>
+							<tr>
+								<td>施工层</td>
+								<td><select class="form-control" style="width: 100%;" v-model="shigongceng">
+									<option value="上">上</option>
+									<option value="中">中</option>
+									<option value="下">下</option>
+								</select></td>
+								<td>施工车道</td>
+								<td><input class="form-control" type="text" v-model="chedao"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
@@ -1371,25 +1410,27 @@
 			stakeMark: '',
 			turnRoundStakeMark: '',
 			team: '',
+			shigongceng: '',
+			chedao: '',
 			direction: '',
 			roadName: '',
 		},
 		methods: {
 			//新建生产计划保存按钮事件
 			save: function () {
-				if(this.planno==""){
-					toastr.error("生产计划编号为空!")
-					return;
-				}
-				if(this.roadName==""){
+				// if(this.planno==""){
+				// 	toastr.error("生产计划编号为空!")
+				// 	return;
+				// }
+				if (this.roadName == "") {
 					toastr.error("路名为空!")
 					return;
 				}
-				if(this.finishTime==""){
+				if (this.finishTime == "") {
 					toastr.error("要求完成时间为空!")
 					return;
 				}
-				if(this.pdneed==""){
+				if (this.pdneed == "") {
 					toastr.error("成品需要量为空!")
 					return;
 				}if(this.pdtemp==""){
@@ -1488,6 +1529,8 @@
 		xgSCVm.stakeMark = data.stakeMark;
 		xgSCVm.turnRoundStakeMark = data.turnRoundStakeMark;
 		xgSCVm.team = data.team;
+		xgSCVm.shigongceng = data.shigongceng;
+		xgSCVm.chedao = data.chedao;
 		xgSCVm.direction = data.direction;
 		xgSCVm.roadName = data.roadname;
 		xgSCVm.finishTime = data.finishTime;
@@ -1553,6 +1596,8 @@
 			stakeMark: '',
 			turnRoundStakeMark: '',
 			team: '',
+			chedao: '',
+			shigongceng: '',
 			direction: '',
 			roadName: '',
 			siteId: '',
@@ -1561,19 +1606,19 @@
 		methods: {
 			//新建生产计划保存按钮事件
 			save: function () {
-				if(this.planno==""){
-					toastr.error("生产计划编号为空!")
-					return;
-				}
-				if(this.roadName==""){
+				// if(this.planno==""){
+				// 	toastr.error("生产计划编号为空!")
+				// 	return;
+				// }
+				if (this.roadName == "") {
 					toastr.error("路名为空!")
 					return;
 				}
-				if(this.finishTime==""){
+				if (this.finishTime == "") {
 					toastr.error("要求完成时间为空!")
 					return;
 				}
-				if(this.pdneed==""){
+				if (this.pdneed == "") {
 					toastr.error("成品需要量为空!")
 					return;
 				}if(this.pdtemp==""){
