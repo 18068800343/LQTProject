@@ -133,6 +133,7 @@
 					</div>
 					<!--标题结束-->
 					<div id="chart3" style="width:550px; height: 250px;"></div>
+					<div id="daiding" style="width:150px; height: 100px;margin-left: 8%;margin-top: 10px;">内容待定...</div>
 				</div>
 			</div>
 			<div class="table" style="background-color: #FFF;width: 60%;height: 950px;margin-left: 1%;margin-top: 1%;">
@@ -163,6 +164,7 @@
 	<script src="../js/homeEchars.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
+			initTableQuanxian()
 			getEcahrsData()
 			getEcahrsData2()
 			getEcahrsData3()
@@ -207,6 +209,28 @@
 			});
 		}
 
+		function initTableQuanxian(){
+			$.ajax({
+				type:"post",
+				url:"/login/getUser",
+				async:false,
+				data:{
+				},
+				success:function(json){
+					console.log(json)
+					var name=json.department;
+					if(name=="拌合站"){
+						$("#chart3").show();
+						$("#daiding").hide();
+					}else{
+						$("#chart3").hide();
+						$("#daiding").show();
+					}
+
+
+				}
+			});
+		}
 		require.config({
 			paths: {
 				echarts: '../js/build/dist'

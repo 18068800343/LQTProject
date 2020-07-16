@@ -193,6 +193,13 @@ function setHomeZPZHTJ(dayTime,totalWeight){
 			data: totalWeight,
 			type: 'bar',
 			barWidth: '30%',
+			label: {
+				normal: {
+					show: true,
+					color:"black",
+					position: 'top'
+				}
+			},
 
 		}]
 	};
@@ -277,6 +284,13 @@ function setHomeCBJDTJ(datetime,chenneng,feiliao){
 			type: 'bar',
 			data: chenneng,
 			barWidth: '30%',
+			label: {
+				normal: {
+					show: true,
+					color:"black",
+					position: 'top'
+				}
+			},
 			markPoint: {
 				data: [
 
@@ -288,6 +302,13 @@ function setHomeCBJDTJ(datetime,chenneng,feiliao){
 				type: 'bar',
 				data: feiliao,
 				barWidth: '30%',
+				label: {
+					normal: {
+						show: true,
+						color:"black",
+						position: 'top'
+					}
+				},
 				markPoint: {
 					data: [
 

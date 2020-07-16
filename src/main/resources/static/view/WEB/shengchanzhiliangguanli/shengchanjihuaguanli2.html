@@ -111,15 +111,21 @@
 								<tr style="line-height: 40px;height: 40px;">
 									<td style="width: 20%;">计划编号</td>
 									<td id="jhbh"></td>
+									<td>路名</td>
+									<td id="lm"></td>
+								</tr>
+								<tr>
 									<td>成品需要量</td>
 									<td id="cpxql"></td>
+									<td>施工桩号</td>
+									<td id="sgzh"></td>
 								</tr>
-								<tr style="line-height: 40px;height: 40px;">
+								<!--<tr style="line-height: 40px;height: 40px;">
 									<td>干拌时间</td>
 									<td id="gbsj"></td>
 									<td>湿拌时间</td>
 									<td id="sbsj"></td>
-								</tr>
+								</tr>-->
 								<tr style="line-height: 40px;height: 40px;">
 									<td>成品温度要求</td>
 									<td id="cpwdyq"></td>
@@ -143,6 +149,12 @@
 									<td id="rqsj"></td>
 									<td>生产完成时间</td>
 									<td id="scwcsj"></td>
+								</tr>
+								<tr style="line-height: 40px;height: 40px;">
+									<td>路面施工队</td>
+									<td id="lmsgd"></td>
+									<td></td>
+									<td></td>
 								</tr>
 
 							</table>
@@ -246,6 +258,8 @@
 	function look(obj){
 		$("#jhbh").text(obj.planno)
 		$("#cpxql").text(obj.pdneed)
+		$("#lm").text(obj.roadname)
+		$("#sgzh").text(obj.stakeMark)
 		$("#gbsj").text(obj.drymixingtime)
 		$("#sbsj").text(obj.wetmixingtime)
 		$("#ysb").text(obj.radio)
@@ -256,7 +270,7 @@
 		$("#scwcsj").text(obj.finishTime)
 		$("#ysjl").text(obj.distance)
 		$("#ghgslj").text(obj.pathPlan)
-
+		$("#lmsgd").text(obj.team)
 	}
 
 </script>
