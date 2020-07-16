@@ -109,9 +109,9 @@
                          <table class="layui-table "lay-skin="line" id="new_materials">
 							<thead>
 								<tr>
-	                                <td style="width:15%;">附属材料:  <i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
+	                                <td style="width:15%;">添加剂材料:  <i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
 	                                <td >
-	                                    <button type="button" class="btn btn-primary" onclick="new_materials()">增加附属材料</button>
+	                                    <button type="button" class="btn btn-primary" onclick="new_materials()">增加添加剂材料</button>
 	                                </td>
 	                                <td colspan="2"> 材料重量</td>
                             	</tr>
@@ -177,9 +177,9 @@
                    	<table class="layui-table "lay-skin="line" id="edit_fushumaterials">
 							<thead>
 								<tr>
-	                                <td style="width:15%;">附属材料:  <i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
+	                                <td style="width:15%;">添加剂材料:  <i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
 	                                <td >
-	                                    <button type="button" class="btn btn-primary" onclick="edit_fushumaterials()">增加附属材料</button>
+	                                    <button type="button" class="btn btn-primary" onclick="edit_fushumaterials()">增加添加剂材料</button>
 	                                </td>
 	                                <td colspan="2"> 材料重量</td>
                             	</tr>
@@ -247,7 +247,7 @@
                     <table class="layui-table "lay-skin="line" id="xq_fushumaterials">
 							<thead>
 								<tr>
-	                                <td style="width:15%;">附属材料:  <i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
+	                                <td style="width:15%;">添加剂材料:  <i class="iconfont icon-xingxing-copy" style="color:red;"></i></td>
 	                                <td ></td>
 	                                <td colspan=""> 材料重量</td>
                             	</tr>
@@ -352,7 +352,7 @@
 							"targets": 10,
 							"searchable": false,
 							"render": function(data, type, full) {
-								    	var chakan=  '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看附属材料"  data-toggle="modal" onclick="xiangqingpeibihuixian(this)"></i>'
+								    	var chakan=  '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看添加剂材料"  data-toggle="modal" onclick="xiangqingpeibihuixian(this)"></i>'
 			                            var xiugai='<i class="iconfont icon-xiugai Pheb" style="font-size:18px;cursor:pointer;" title="修改" data-toggle="modal" onclick="xgpeibihuixian(this)"></i>'
 			                            var shanchu='<i class="iconfont icon-shanchu Phec" style="font-size:18px;cursor:pointer;" title="删除" onclick="deleteyige(this)"></i>';
 								    	return chakan;
@@ -421,11 +421,11 @@
             }
         });
     }
-	//添加页面附属材料数量的增加
+	//添加页面添加剂材料数量的增加
 	var len=1;
 	function new_materials(){
 			$("#new_materials tbody").append(
-			"<tr><td>附属材料</td><td>"+
+			"<tr><td>添加剂材料</td><td>"+
 			"<select class='form-control' style='width:180px;' id='materialName"+len+"'>"+
 			"</select></td>"+
 			"<td><input type='text' id='materialWeight"+len+"' name='materialWeight' class='form-control'></td>"+
@@ -433,12 +433,12 @@
 			initMaterials(len);
 			len++;
 		}
-	//删除已增加到列表的附属材料
+	//删除已增加到列表的添加剂材料
 	function removeThis(obj){
     	var tr=$(obj).parent().parent();
 		  $(tr).remove();
     }
-    //初始化附属材料类型
+    //初始化添加剂材料类型
 	function initMaterials(obj){
 		$.ajax({
             type: 'POST',
@@ -543,13 +543,13 @@
             }
         });
     }
-    //修改列表增加附属材料
+    //修改列表增加添加剂材料
     
     function edit_fushumaterials(){
     	len=$("#edit_fushumaterials tbody tr").length;
     	len++;
 		$("#edit_fushumaterials tbody").append(
-		"<tr><td>附属材料</td><td>"+
+		"<tr><td>添加剂材料</td><td>"+
 		"<select class='form-control' style='width:180px;' id='edit_fushumaterialName"+len+"' >"+
 		"</select></td>"+
 		"<td><input type='text' id='materialWeight"+len+"' name='edit_materialWeight' class='form-control' ></td>"+
@@ -602,7 +602,7 @@
 			for(var k=0;k<data.fsclList.length;k++)
 			{
 				$("#edit_fushumaterials tbody").append(
-						"<tr><td>附属材料</td><td>"+
+						"<tr><td>添加剂材料</td><td>"+
 						"<select class='form-control' style='width:180px;' id='edit_fushumaterialName"+k+"'>"+
 						"</select></td>"+
 						"<td><input type='text' id='materialWeight"+k+"' name='edit_materialWeight' class='form-control' value='"+data.fsclList[k].weight+"'></td>"+
@@ -757,7 +757,7 @@
 			for(var k=0;k<data.fsclList.length;k++)
 			{
 				$("#xq_fushumaterials tbody").append(
-						"<tr><td>附属材料</td>"+
+						"<tr><td>添加剂材料</td>"+
 						"<td><input type='text'  name='xq_materialWeight' class='form-control' value='"+data.fsclList[k].mName+"' readonly='readonly'></td>"+
 						"<td><input type='text'  name='xq_materialWeight' class='form-control' value='"+data.fsclList[k].weight+"' readonly='readonly'></td>"+
 						"</tr>");
