@@ -10,9 +10,9 @@
 
 	<insert id="addTanPuDiDianVo" parameterType="siteConstructionVo">
 		insert into site_construction
-			(id,road_id,site_number,lng,lat,stake_mark,lane,remarks,delete_state,road_name,direction,team,turn_round_stake_mark,shigongceng,chedao)
+			(id,road_id,site_number,lng,lat,stake_mark,lane,remarks,delete_state,road_name,direction,team,turn_round_stake_mark,shigongceng,chedao,xiangmubu)
 			values(#{siteId},#{roadid},#{sitenumber},#{lng},#{lat},#{stakeMark},
-			#{lane},#{remarks},#{deletestate},#{roadName},#{direction},#{team},#{turnRoundStakeMark},#{shigongceng},#{chedao})
+			#{lane},#{remarks},#{deletestate},#{roadName},#{direction},#{team},#{turnRoundStakeMark},#{shigongceng},#{chedao},#{xiangmubu})
 	</insert>
 
 	<update id="updateTanPuDiDian" parameterType="siteConstructionVo">
@@ -22,7 +22,7 @@
 			lng=#{lng},lat=#{lat},
 			stake_mark=#{stakemark},
 			lane=#{lane},remarks=#{remarks},road_name=#{roadName},
-			direction=#{direction},team=#{team},shigongceng=#{shigongceng},chedao=#{chedao},
+			direction=#{direction},team=#{team},shigongceng=#{shigongceng},chedao=#{chedao},xiangmubu=#{xiangmubu},
 			turn_round_stake_mark=#{turnRoundStakeMark}
 			where id=#{id} and delete_state=1
 	</update>
@@ -33,7 +33,7 @@
 			lng=#{lng},lat=#{lat},
 			stake_mark=#{stakeMark},
 			lane=#{lane},remarks=#{remarks},road_name=#{roadName},
-			direction=#{direction},team=#{team},shigongceng=#{shigongceng},chedao=#{chedao},
+			direction=#{direction},team=#{team},shigongceng=#{shigongceng},chedao=#{chedao},xiangmubu=#{xiangmubu},
 			turn_round_stake_mark=#{turnRoundStakeMark}
 			where id=#{siteId} and delete_state=1
 	</update>
