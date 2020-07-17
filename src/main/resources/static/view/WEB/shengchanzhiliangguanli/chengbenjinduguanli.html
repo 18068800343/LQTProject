@@ -110,7 +110,18 @@
 
                 </tbody>   
             </table>
+            <div id="cbjdtj" class="rightsec col-xs-4" style="float: right;background-color: white;margin-right: 2%;height: 380px;width: 100%;position: absolute;margin-top: 1%;">
+                <div class="title3" style="margin-left: 1%;padding-top: 2%;">
+                    <img src="../../images/dec.png" />
+                    <p style="display: inline-block;color: #1897e8;font-size: 15px;font-weight: bold;margin-left: 1%;">成本及进度管理统计</p>
+                    <!--<input type="date" name="" id="" value="" / style="float: right;height: 25px;">-->
+                </div>
+                <!--标题结束-->
+                <div id="chart3" style="width:100%; height: 350px;"></div>
+
+            </div>
         </div>
+
     </div>
     </div>
      <div role="tabpanel" class="tab-pane" id="messages">
@@ -254,7 +265,9 @@
 <script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/homeEchars.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../toastr/toastr.js"></script>
+<script src="../../js/myTool.js"></script>
 
 <script>
 
@@ -262,6 +275,7 @@
     var nums = [];
     $(document).ready(function () {
         initTable()
+        getEcahrsData3()
         initWeek();
         initMonth();
         //初始化选择框时间
@@ -314,7 +328,16 @@
         }},
         
 	});
+
+    function showMask() {
+        myTool.mask.show('查询中...');
+    }
+    function hidMask() {
+        myTool.mask.hide();
+    }
+
 	function initTable(){
+        showMask()
         $.ajax({
             type: 'POST',
             url: '/ChenBenJinDu/getAllChenBenJinDu',
@@ -325,7 +348,7 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                console.log(json)
+                hidMask()
                 $('#mainContent').dataTable().fnClearTable();
                 $('#mainContent').DataTable().rows.add(json).draw(false);
             	for (var i = 0; i < json.length; i++) {
@@ -336,6 +359,43 @@
             }
         });
     }
+
+    function getEcahrsData3(){
+        $.ajax({
+            type: 'POST',
+            url: '/ChenBenJinDu/getAllChenBenJinDu',
+            dataType: 'json',
+            data: {
+
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+
+                var datetime=[]
+                var chenneng=[]
+                var feiliao=[]
+                if(json!=null&&json.length!=0){
+                    for(var i=0;i<json.length;i++){
+                        datetime.push(json[i].datetime)
+                        chenneng.push(json[i].chenneng)
+                        feiliao.push(json[i].feiliao)
+                    }
+                }
+                initMychart3(datetime,chenneng,feiliao);
+            }
+        });
+    }
+
+    function initMychart3(datetime,chenneng,feiliao) {
+        var chart = echarts.init(document.getElementById('chart3'));
+        // 使用刚指定的配置项和数据显示图表。
+        let option = setHomeCBJDTJ(datetime,chenneng,feiliao);
+        chart.setOption(option);
+    }
+
+
 	function cbecharts(datetime,feiliaobi) {
 		var myChart = echarts.init(document.getElementById('chengbenecharts'));
 		var option = {
