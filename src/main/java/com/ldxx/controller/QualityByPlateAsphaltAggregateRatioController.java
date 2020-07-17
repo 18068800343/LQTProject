@@ -38,10 +38,10 @@ public class QualityByPlateAsphaltAggregateRatioController {
 
 	@RequestMapping("/getYouShiBiVoListByTime")
 	@ResponseBody
-	public YouShiBiVo getYouShiBiVoListByTime(String beginTime, String endTime){
-		List<QualityByPlateAsphaltAggregateRatio> list = dao.getYouShiBiVoListByTime(beginTime,endTime);
+	public YouShiBiVo getYouShiBiVoListByTime(String beginTime, String endTime, String peifang) {
+		List<QualityByPlateAsphaltAggregateRatio> list = dao.getYouShiBiVoListByTime(beginTime, endTime, peifang);
 		YouShiBiVo youShiBiVo = new YouShiBiVo();
-		youShiBiVo  = youShiBiVo.getYouShiBiVoByPeiBiVoList(list);
+		youShiBiVo = youShiBiVo.getYouShiBiVoByPeiBiVoList(list);
 		return youShiBiVo;
 	}
 }

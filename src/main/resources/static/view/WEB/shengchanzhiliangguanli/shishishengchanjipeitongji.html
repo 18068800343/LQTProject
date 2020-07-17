@@ -108,17 +108,16 @@
 	<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/myTool.js"></script>
 	<script>
-		var flag=0;
-		$(document).ready( function () {
+		let flag = 0;
+		$(document).ready(function () {
 			getPeiBiTimeListByTime();
-			flag=1
+			flag = 1
 		});
 
 
-
-    let startTime = {
-        elem: '#reservation',
-        type: 'datetime',
+		let startTime = {
+			elem: '#reservation',
+			type: 'datetime',
         trigger: 'click',
         done: function (date) {
             let beginDate = date;

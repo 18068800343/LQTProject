@@ -11,12 +11,18 @@
 		qba.now_time as nowTime,qba.*
 		FROM
 		quality_by_plate_asphalt_aggregate_ratio qba
+		LEFT JOIN plan_production_collection ppc ON qba.plan_id = ppc.plan_id
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id = ppc.recipe_id
 		<where>
 			<if test="beginTime !=null and beginTime!=''">
 				qba.now_time &gt; #{beginTime}
 			</if>
 			<if test="endTime !=null and endTime!=''">
-				and qba.now_time &lt;  #{endTime}
+				and qba.now_time &lt; #{endTime}
+			</if>
+
+			<if test="peifang !=null and peifang!=''">
+				and sfm.fl_id = #{peifang}
 			</if>
 		</where>
 		order by qba.now_time asc

@@ -107,17 +107,25 @@
 						<div class="UpperPartL" style="z-index:10 !important;">
 							<div class="form-inline" style="margin: 5PX;">
 								<div class="form-group">
-									<input type="text" style="width:200px;margin-left: 15px;" class="form-control" placeholder="起始时间"
+									<input type="text" style="width:200px;margin-left: 15px;" class="form-control"
+										   placeholder="起始时间"
 										   id="reservation" onclick="">
 								</div>
-								<span class="form-group" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
+								<span class="form-group"
+									  style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
 								<div class="form-group">
-									<input type="text" style="width:200px" class="form-control" placeholder="结束时间" id="reservationEnd"
+									<input type="text" style="width:200px" class="form-control" placeholder="结束时间"
+										   id="reservationEnd"
 										   onclick=""><br/>
+								</div>
+								<div class="form-group">
+									<select class="form-control" id="peifang" style="width: 100%;">
+									</select>
 								</div>
 								<div class="form-group">
 									<a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
 								</div>
+
 							</div>
 						</div>
 						<div class="UpperPartR">
@@ -148,7 +156,8 @@
 <script>
 	$(document).ready( function () {
 		initTable();
-		initPeiBiEcharts();
+		initPeiFangOption();
+
 	});
 
 	    var table=$('#mainContent').dataTable({
@@ -219,7 +228,8 @@
 			dataType: 'json',
 			data: {
 				beginTime: startTime,
-				endTime: endTime
+				endTime: endTime,
+				peifang: $("#peifang").val(),
 			},
 			error: function (msg) {
 				errMessage("请求UserController失败");
@@ -265,6 +275,28 @@
 	};
 	laydate.render(startTime);
 	laydate.render(endTime);
+
+	function initPeiFangOption() {
+		$.ajax({
+			type: 'POST',
+			url: '/SysFormulationManagement/selectAllSysFormulationManagement',
+			dataType: 'json',
+			data: {},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				$("#peifang").empty()
+				if (json != null) {
+					$("#peifang").append(`<option value="">全部</option>`);
+					for (var i = 0; i < json.length; i++) {
+						$("#peifang").append(`<option value=${json[i].flId}>${json[i].flName}</option>`);
+					}
+				}
+				initPeiBiEcharts();
+			}
+		});
+	}
 
 	function searchBydate() {
 		let begin = $('#reservation').val();
