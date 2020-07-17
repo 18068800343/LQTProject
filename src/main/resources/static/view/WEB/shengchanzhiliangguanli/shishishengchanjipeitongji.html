@@ -182,7 +182,7 @@
 			success: function (json) {
 				$("#time").empty()
 				if(json!=null){
-					$("#time").append("<option>"+json[0].productionTime+"</option>")
+					$("#time").append(`<option value=${json[0].productionTime}>${json[0].productionTime}_${json[0].peifangName}</option>`);
 				}
 				searchBydate()
 				hidMask()
@@ -205,8 +205,8 @@
 				success: function (json) {
 					$("#time").empty()
 					if(json!=null){
-						for(var i=0;i<json.length;i++){
-							$("#time").append("<option>"+json[i].productionTime+"</option>")
+						for(var i=0;i<json.length;i++) {
+							$("#time").append(`<option value=${json[i].productionTime}>${json[i].productionTime}_${json[i].peifangName}</option>`);
 						}
 					}
 				}
@@ -215,14 +215,14 @@
 
 
 
-	function searchBydate(){
-    	var time=$("#time").find("option:selected").text()
+	function searchBydate() {
+		var time = $("#time option:selected").text().split("_")[0];
 		$.ajax({
 			type: 'POST',
 			url: '/QualityByPlateRealTimeProdocutionData/getPeiBiOneByTime',
 			dataType: 'json',
 			data: {
-				time:time
+				time: time
 			},
 			error: function (msg) {
 				errMessage("请求UserController失败");

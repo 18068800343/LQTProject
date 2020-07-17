@@ -13,22 +13,24 @@ import java.util.Date;
  *
  */
 public class QualityByPlateRealTimeProdocutionData {
-	
+
 	public String ID;
-	
-    public String planId;//生产计划_ID
 
-    public String planNo;//计划编号
+	public String planId;//生产计划_ID
 
-    public BigDecimal materialsUse1;//料1用量
+	public String planNo;//计划编号
 
-    public BigDecimal materialsUse2;
+	public String peifangName;//计划编号
 
-    public BigDecimal materialsUse3;
+	public BigDecimal materialsUse1;//料1用量
 
-    public BigDecimal materialsUse4;
+	public BigDecimal materialsUse2;
 
-    public BigDecimal materialsUse5;
+	public BigDecimal materialsUse3;
+
+	public BigDecimal materialsUse4;
+
+	public BigDecimal materialsUse5;
 
     public BigDecimal materialsUse6;
 
@@ -61,6 +63,14 @@ public class QualityByPlateRealTimeProdocutionData {
 	private BigDecimal baifenbi6;
 	private BigDecimal baifenbiFen;
 	private BigDecimal baifenbiLiqing;
+
+	public String getPeifangName() {
+		return peifangName;
+	}
+
+	public void setPeifangName(String peifangName) {
+		this.peifangName = peifangName;
+	}
 
 	public BigDecimal getBaifenbiFen() {
 		return baifenbiFen;
