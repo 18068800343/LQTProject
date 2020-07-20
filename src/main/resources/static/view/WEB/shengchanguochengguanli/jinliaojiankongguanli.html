@@ -98,7 +98,7 @@
                                <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                                    <th>编号</th>
                                    <th style="width:10%;">时间</th>
-                                   <th>重量</th>
+                                   <th>重量(kg)</th>
                                    <th>材料</th>
                                    <th>含水量</th>
                                    <th>来货单位</th>
@@ -145,12 +145,12 @@
 				                    		<td>时间:</td>
 				                    		<td><input type="text" class="form-control"></td>
 				                        </tr>
-				                    	<tr>
-											<td>材料:</td>
-				                    		<td><input type="text" class="form-control"></td>
-				                    	    <td>重量:</td>
-				                    	    <td><input type="text" class="form-control"></td>
-				                    	</tr>
+                                        <tr>
+                                            <td>材料:</td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td>重量(kg):</td>
+                                            <td><input type="text" class="form-control"></td>
+                                        </tr>
 				                    	<tr>
 				                    	    <td>含水量:</td>
 				                    	    <td><input type="text" class="form-control"></td>
@@ -178,18 +178,18 @@
                     <div class="LowerPart" style="margin-top:3px;">
                         <table class="table table-bordered table-condensed" style="width:100%;" id="mainContent2">
                             <thead>
-                                <tr>
-                                    <td>编号</td>
-									<td>时间</td>
-									<td>重量</td>
-									<td>材料</td>
-									<td>含水量</td>
-									<td>来货单位</td>
-									<td>单价</td>
-									<td>总价</td>
-									<td>录入人</td>
-                                    <th style="width:75px;">操作</th>
-                                </tr>
+                            <tr>
+                                <td>编号</td>
+                                <td>时间</td>
+                                <td>重量(kg)</td>
+                                <td>材料</td>
+                                <td>含水量</td>
+                                <td>来货单位</td>
+                                <td>单价</td>
+                                <td>总价</td>
+                                <td>录入人</td>
+                                <th style="width:75px;">操作</th>
+                            </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -250,14 +250,16 @@
 											<td style="width: 15%;">时间</td>
 											<td><input type="text"  class="form-control" id="shijian" placeholder="请选择"style="width: 70%;" /></td>
 										</tr>
-										 <tr>
-											 <td>材料</td>
-											 <td><select id="cailiao" class="form-control" style="width: 70%; border:1px solid #DEDEDE;border-radius:5px 5px 5px !important;">
-												</select>
-											</td>
-											<td>重量</td>
-											<td><input type="text" class="form-control" id="zhongliang" placeholder="请输入" style="width: 70%;"/></td>
-										</tr>
+                                        <tr>
+                                            <td>材料</td>
+                                            <td><select id="cailiao" class="form-control"
+                                                        style="width: 70%; border:1px solid #DEDEDE;border-radius:5px 5px 5px !important;">
+                                            </select>
+                                            </td>
+                                            <td>重量(kg)</td>
+                                            <td><input type="text" class="form-control" id="zhongliang"
+                                                       placeholder="请输入" style="width: 70%;"/></td>
+                                        </tr>
 										 <tr>
                                              <td>含水量</td>
                                              <td><input type="text" class="form-control" id="hanshuiliang"
@@ -321,12 +323,14 @@
 											<td style="width: 15%;">时间</td>
 											<td><input type="text"  class="form-control" id="xg_shijian" placeholder="请选择"style="width: 70%;" /></td>
 										</tr>
-										 <tr>
-											 <td>材料</td>
-											 <td><select class="form-control" id="xg_cailiao" style="width: 70%;"></select></td>
-											 <td>重量</td>
-											 <td><input type="text" class="form-control" id="xg_zhongliang" placeholder="请输入" style="width: 70%;"/></td>
-											</tr>
+                                       <tr>
+                                           <td>材料</td>
+                                           <td><select class="form-control" id="xg_cailiao"
+                                                       style="width: 70%;"></select></td>
+                                           <td>重量(kg)</td>
+                                           <td><input type="text" class="form-control" id="xg_zhongliang"
+                                                      placeholder="请输入" style="width: 70%;"/></td>
+                                       </tr>
                                        <tr>
                                            <td>含水量</td>
                                            <td><input type="text" class="form-control" id="xg_hanshuiliang"
