@@ -112,7 +112,7 @@ function setCangChuOption(map){
 }
 
 function setCangChuPanDianOption(map) {
-	let option = {
+	/*let option = {
 		title: {
 			text: '仓储盘点'
 		},
@@ -159,6 +159,95 @@ function setCangChuPanDianOption(map) {
 				type: 'line',
 				stack: '总量',
 				data: map.cList
+			}
+		]
+	};*/
+	var option = {
+		title: {
+			text: '仓储盘点'
+		},
+		color: ['#FE545E','#6154FD','#006699'],
+		textStyle: {
+			color: '#black',
+			fontSize: 13
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {
+				type: 'cross'
+			}
+		},
+
+		legend: {
+			data: ['来料信息', '用料信息', '余料信息'],
+			itemGap: 80,
+			textStyle: {
+				color: '#17447E',
+				fontSize: 13
+			},
+
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: map.xList
+			}
+		],
+		yAxis: [
+			{
+				show:true,
+				type: 'value',
+				position: 'left',
+				axisLine: {
+					lineStyle: {
+						color: "#black"
+					}
+				},
+				axisLabel: {
+					formatter: '{value} '
+				}
+			},
+
+		],
+		series: [
+			{
+				name: '来料信息',
+				type: 'bar',
+				label: {
+					normal: {
+						show: true,
+						position: 'top',
+						color: 'black',
+					}
+				},
+				data: map.aList,
+				barWidth : 30,//柱图宽度
+
+			},
+			{
+				name: '用料信息',
+				type: 'bar',
+				label: {
+					normal: {
+						show: true,
+						position: 'top',
+						color: 'black',
+					}
+				},
+				data: map.bList,
+				barWidth : 30,//柱图宽度
+			},{
+				name: '余料信息',
+				type: 'bar',
+				label: {
+					normal: {
+						show: true,
+						position: 'bottom',
+						color: 'black',
+					}
+				},
+				data: map.cList,
+				barWidth : 30,//柱图宽度
 			}
 		]
 	};
