@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.WhCangchuDao" >
+
+	<select id="getAllWhCangchu" resultType="WhCangchu">
+		select a.id,a.bianhao,a.chuliang,a.cailiao,b.material_name as cailiaoming from wh_cangchu a
+		left join dic_materials b on a.cailiao=b.id
+	</select>
+
+	<insert id="addWhCangchu" parameterType="WhCangchu">
+		insert into wh_cangchu(id,bianhao,chuliang,cailiao) values (#{id},#{bianhao},#{chuliang},#{cailiao})
+	</insert>
+
+	<update id="updWhCangchu" parameterType="WhCangchu">
+		update  wh_cangchu set bianhao=#{bianhao},chuliang=#{chuliang},cailiao=#{cailiao} where id=#{id}
+	</update>
+
+	<delete id="delWhCangchu">
+		delete  from wh_cangchu where id=#{id}
+	</delete>
+
+	<select id="getWhCangchuById" resultType="WhCangchu">
+		select a.id,a.bianhao,a.chuliang,a.cailiao,b.material_name as cailiaoming from wh_cangchu a
+		left join dic_materials b on a.cailiao=b.id
+		where id=#{id}
+	</select>
+
+	<select id="countbianhao" resultType="int">
+		select count(bianhao) from wh_cangchu where bianhao=#{bianhao}
+	</select>
+
+	<select id="xgcountbianhao" resultType="int">
+		select count(bianhao) from wh_cangchu where bianhao=#{bianhao} and id!=#{id}
+	</select>
+
+
+</mapper>
