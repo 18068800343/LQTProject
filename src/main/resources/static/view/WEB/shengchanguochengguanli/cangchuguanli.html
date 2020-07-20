@@ -185,14 +185,20 @@
                                 <form class="form-inline">
                                    <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
-											<td style="width: 20%;">料仓编号</td>
-											<td style="width: 30%;"><input type="text" id="liaocangbianhao" style="width: 70%;" /></td>
-											<td style="width: 20%;">时间</td>
-											<td style="width: 30%;"><input type="text" id="shijian" style="width: 70%;" /></td>
-										</tr>
+                                            <td style="width: 20%;">料仓编号</td>
+                                            <td style="width: 30%;">
+                                                <select id="liaocangbianhao" class="form-control" style="width: 70%;"
+                                                        onchange="liaocangchange(this)">
+                                                </select>
+                                            </td>
+                                            <td style="width: 20%;">时间</td>
+                                            <td style="width: 30%;"><input type="text" id="shijian"
+                                                                           style="width: 70%;"/></td>
+                                        </tr>
                                        <tr>
                                            <td>重量(kg)</td>
-                                           <td><input type="text" id="zhongliang" style="width: 70%;"/></td>
+                                           <td><input type="text" class="form-control" id="zhongliang"
+                                                      style="width: 70%;"/></td>
                                            <td>材料</td>
                                            <td>
                                                <select id="cailiao" style="width: 70%;">
@@ -200,10 +206,17 @@
                                            </td>
                                        </tr>
                                        <tr>
-                                           <td>仓库最大容纳重量(kg)</td>
-                                           <td><input type="text" id="maxWeight" style="width: 70%;"/></td>
-                                           <td></td>
                                            <td>
+                                               体积(m³)
+                                           </td>
+                                           <td>
+                                               <input type="text" class="form-control" id="tiji" style="width: 70%;"/>
+                                           </td>
+                                           <td>
+                                               仓库最大容纳重量(kg)
+                                           </td>
+                                           <td>
+                                               <input type="text" id="maxWeight" style="width: 70%;"/>
                                            </td>
                                        </tr>
 										<!--<tr>
@@ -241,15 +254,21 @@
                             <div>     
                                 <form class="form-inline">
                                     <table class="layui-table "lay-skin="line" style="height:auto;">
-                                    	<tr>
-											<td style="width: 20%;">料仓编号</td>
-											<td style="width: 30%;"><input type="text" id="xg_liaocangbianhao" style="width: 70%;" /></td>
-											<td style="width: 20%;">时间</td>
-											<td style="width: 30%;"><input type="text" id="xg_shijian" style="width: 70%;" /></td>
-										</tr>
+                                        <tr>
+                                            <td style="width: 20%;">料仓编号</td>
+                                            <td style="width: 30%;">
+                                                <select id="xg_liaocangbianhao" class="form-control"
+                                                        style="width: 70%;">
+                                                </select>
+                                            </td>
+                                            <td style="width: 20%;">时间</td>
+                                            <td style="width: 30%;"><input type="text" id="xg_shijian"
+                                                                           style="width: 70%;"/></td>
+                                        </tr>
                                         <tr>
                                             <td>重量(kg)</td>
-                                            <td><input type="text" id="xg_zhongliang" style="width: 70%;"/></td>
+                                            <td><input type="text" class="form-control" id="xg_zhongliang"
+                                                       style="width: 70%;"/></td>
                                             <td>材料</td>
                                             <td>
                                                 <select id="xg_cailiao" style="width: 70%;">
@@ -257,10 +276,17 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>仓库最大容纳重量(kg)</td>
-                                            <td><input type="text" id="xg_maxWeight" style="width: 70%;"/></td>
-                                            <td></td>
                                             <td>
+                                                体积(m³)
+                                            </td>
+                                            <td>
+                                                <input type="text" id="xg_tiji" style="width: 70%;"/>
+                                            </td>
+                                            <td>
+                                                仓库最大容纳重量(kg)
+                                            </td>
+                                            <td>
+                                                <input type="text" id="xg_maxWeight" style="width: 70%;"/>
                                             </td>
                                         </tr>
 										<!--<tr>
@@ -318,7 +344,6 @@
         initTable();
         initTableInOut();
         initCailiao();
-    	
 	});
 	
 	var table=$('#mainContent').dataTable({
@@ -507,6 +532,35 @@
         });
     }
 
+    let page_liaocang = {};
+
+    function liaocangchange(e) {
+        let bianhao = $(e).val();
+        let cailiaoid = page_liaocang[bianhao];
+        $("#cailiao").val(cailiaoid);
+    }
+
+    function initliaocangbianhao() {
+        $.ajax({
+            type: 'POST',
+            url: '/WhCangchu/getAllWhCangchu',
+            dataType: 'json',
+            data: {},
+            success: function (json) {
+                $("#liaocangbianhao").html('');
+                $("#xg_liaocangbianhao").html('');
+                for (var i = 0; i < json.length; i++) {
+                    page_liaocang[json[i].bianhao] = json[i].cailiao;
+                    $("#liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"
+                        + json[i].bianhao + "</option>")
+                    $("#xg_liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"
+                        + json[i].bianhao + "</option>")
+                }
+                $("#liaocangbianhao").trigger("change");
+            }
+        });
+    }
+
     function initCailiao() {
         $.ajax({
             type: 'POST',
@@ -514,39 +568,42 @@
             dataType: 'json',
             data: {},
             success: function (json) {
-	            	$("#cailiao").html('');
-		        	$("#xg_cailiao").html('');
-		        	 for(var i=0;i<json.length;i++){
-		        		$("#cailiao").append( "<option value='" + json[i].id + "'>"
-			                    + json[i].materialName + "</option>")
-			            $("#xg_cailiao").append( "<option value='" + json[i].id + "'>"
-			                    + json[i].materialName + "</option>")
-		        	}
-	            }
-	        });
-		}
-        
-        $("#baocun").click(function(){
-        	var liaocangbianhao=$("#liaocangbianhao").val();
-        	var shijian=$("#shijian").val();
-        	var zhongliang=$("#zhongliang").val();
-        	var cailiao=$("#cailiao").val();
-        	//var lururen=$("#lururen").val();
-        	var beizhu=$("#beizhu").val();
-        	var maxWeight = $("#maxWeight").val();
-        	$.ajax({
-	            type: 'POST',
-	            url: '/WhWarehouseCount/insertWhWarehouseCount',
-	            dataType: 'json',
-	            data: {
-	            	storNo:liaocangbianhao,
-	            	datetime:shijian,
-	            	weight:zhongliang,
-	            	materials:cailiao,
-	            	meminfo:beizhu,
-                    maxWeight:maxWeight,
-	            	//editUserId2:lururen,
-	            },
+                $("#cailiao").html('');
+                $("#xg_cailiao").html('');
+                for (var i = 0; i < json.length; i++) {
+                    $("#cailiao").append("<option value='" + json[i].id + "'>"
+                        + json[i].materialName + "</option>")
+                    $("#xg_cailiao").append("<option value='" + json[i].id + "'>"
+                        + json[i].materialName + "</option>")
+                }
+                initliaocangbianhao();
+            }
+        });
+    }
+
+    $("#baocun").click(function () {
+        var liaocangbianhao = $("#liaocangbianhao").val();
+        var shijian = $("#shijian").val();
+        var zhongliang = $("#zhongliang").val();
+        var cailiao = $("#cailiao").val();
+        //var lururen=$("#lururen").val();
+        var beizhu = $("#beizhu").val();
+        var maxWeight = $("#maxWeight").val();
+        var tiji = $("#tiji").val();
+        $.ajax({
+            type: 'POST',
+            url: '/WhWarehouseCount/insertWhWarehouseCount',
+            dataType: 'json',
+            data: {
+                storNo: liaocangbianhao,
+                datetime: shijian,
+                weight: zhongliang,
+                materials: cailiao,
+                meminfo: beizhu,
+                maxWeight: maxWeight,
+                tiji: tiji,
+                //editUserId2:lururen,
+            },
 	            error: function (msg) {
 	                errMessage("请求UserController失败");
 	            },
@@ -601,40 +658,43 @@
 	var tr;
 	$("#mainContent").delegate("#upd","click",function(){
 		var dom = $(this).parents('tr');
-		tr = $(this).closest('tr');
-		var data=$('#mainContent').DataTable().row(dom).data();
-		xgId=data.id
-		$("#xg_liaocangbianhao").val(data.storNo);
-    	$("#xg_shijian").val(data.datetime);
-    	$("#xg_zhongliang").val(data.weight);
-    	$("#xg_cailiao").val(data.materials);
-    	//$("#xg_lururen").val(data.editUserId2);
-    	$("#xg_beizhu").val(data.meminfo);
-    	$("#xg_maxWeight").val(data.maxWeight);
-	})
+        tr = $(this).closest('tr');
+        var data = $('#mainContent').DataTable().row(dom).data();
+        xgId = data.id
+        $("#xg_liaocangbianhao").val(data.storNo);
+        $("#xg_shijian").val(data.datetime);
+        $("#xg_zhongliang").val(data.weight);
+        $("#xg_cailiao").val(data.materials);
+        //$("#xg_lururen").val(data.editUserId2);
+        $("#xg_beizhu").val(data.meminfo);
+        $("#xg_maxWeight").val(data.maxWeight);
+        $("#xg_tiji").val(data.tiji);
+    })
 	
-	$("#xg_baocun").click(function(){
-		var liaocangbianhao=$("#xg_liaocangbianhao").val();
-    	var shijian=$("#xg_shijian").val();
-    	var zhongliang=$("#xg_zhongliang").val();
-    	var cailiao=$("#xg_cailiao").val();
-    	//var lururen=$("#xg_lururen").val();
-    	var beizhu=$("#xg_beizhu").val();
-    	var maxWeight=$("#xg_maxWeight").val();
+	$("#xg_baocun").click(function() {
+        var liaocangbianhao = $("#xg_liaocangbianhao").val();
+        var shijian = $("#xg_shijian").val();
+        var zhongliang = $("#xg_zhongliang").val();
+        var cailiao = $("#xg_cailiao").val();
+        //var lururen=$("#xg_lururen").val();
+        var beizhu = $("#xg_beizhu").val();
+        var maxWeight = $("#xg_maxWeight").val();
+        var tiji = $("#xg_tiji").val();
 
-		$.ajax({
+        $.ajax({
             type: 'POST',
-            url:'/WhWarehouseCount/updWhWarehouseCountById',
+            url: '/WhWarehouseCount/updWhWarehouseCountById',
             dataType: 'json',
             data: {
-            	id:xgId,
-            	storNo:liaocangbianhao,
-            	datetime:shijian,
-            	weight:zhongliang,
-            	materials:cailiao,
-            	meminfo:beizhu,
-                maxWeight:maxWeight,
-            	//editUserId2:lururen,
+                id: xgId,
+                storNo: liaocangbianhao,
+                datetime: shijian,
+                weight: zhongliang,
+                materials: cailiao,
+                meminfo: beizhu,
+                maxWeight: maxWeight,
+                tiji: tiji,
+                //editUserId2:lururen,
             },
             success: function (json) {
             	if(json.result>0){

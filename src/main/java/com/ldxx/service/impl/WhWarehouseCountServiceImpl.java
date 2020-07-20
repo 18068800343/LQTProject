@@ -1,5 +1,6 @@
 package com.ldxx.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,12 @@ public class WhWarehouseCountServiceImpl implements WhWarehouseCountService {
 	@Override
 	@Transactional
 	public int insertWhWarehouseCount(WhWarehouseCount wwc) {
+		BigDecimal tiji = wwc.getTiji();
+		BigDecimal weight = wwc.getWeight();
+		if (null != tiji && null == weight) {
+			weight = tiji.multiply(new BigDecimal(1.5));
+			wwc.setWeight(weight);
+		}
 		return dao.insertWhWarehouseCount(wwc);
 	}
 

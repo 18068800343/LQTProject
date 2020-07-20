@@ -28,14 +28,24 @@ public class WhWarehouseCount {
 
     public String meminfo;//备注
 
-    public String editUserId2;//最后录入用户
+	public String editUserId2;//最后录入用户
 	private String uName;
 
-    public String editDatetime2;//最后录入日期
+	public String editDatetime2;//最后录入日期
 
-    public int deleteState;//逻辑删除 0:删除；1存在
+	public int deleteState;//逻辑删除 0:删除；1存在
 
 	private BigDecimal maxWeight;
+
+	private BigDecimal tiji;
+
+	public BigDecimal getTiji() {
+		return tiji;
+	}
+
+	public void setTiji(BigDecimal tiji) {
+		this.tiji = tiji;
+	}
 
 	public BigDecimal getMaxWeight() {
 		return maxWeight;

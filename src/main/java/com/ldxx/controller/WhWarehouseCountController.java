@@ -84,6 +84,7 @@ public class WhWarehouseCountController {
 			wwc.setEditUserId2(user.getUserId());
 			;
 		}
+
 		int i= service.insertWhWarehouseCount(wwc);
 		map.put("result",i);
 		map.put("WhWarehouseCount",wwc);
