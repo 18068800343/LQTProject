@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.DicStonesDao" >
+
+<select id="selectAllDicStones" resultType="DicStones">
+	select 
+		id,stones_name,delete_state
+	from dic_stones
+	where delete_state=1
+</select>
+
+<insert id="addDicStones" parameterType="DicStones">
+		insert into 
+		dic_stones(id,stones_name,delete_state)
+		values(#{id},
+			   #{stonesName},
+			   1)
+</insert>
+
+<update id="updateDicStones" parameterType="DicStones">
+	update dic_stones
+	set 
+	     stones_name=#{stonesName}
+    where id=#{id}
+</update>
+
+<update id="deleteDicStones">
+	update dic_stones
+	set
+		delete_state=0
+	where id=#{id}
+</update>
+
+<select id="selectByName" resultType="DicStones">
+	select 
+		id,stones_name,delete_state
+	from dic_stones
+	where delete_state=1 and stones_name=#{name}
+</select>
+
+	<select id="selectByName2" resultType="DicStones">
+	select
+		id,stones_name,delete_state
+	from dic_stones
+	where delete_state=1 and stones_name=#{stonesName} and id!=#{id}
+</select>
+
+</mapper>
