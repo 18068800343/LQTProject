@@ -10,15 +10,20 @@
 
 	<select id="getPeiBiVoListByTime" resultType="QualityByPlateRealTimeProdocutionData">
 		SELECT
-		*,Convert(decimal(18,2),pitch_use/weight*100) baifenbi
+		*,Convert(decimal(18,2),qba.pitch_use/qba.weight*100) baifenbi
 		FROM
 		quality_by_plate_real_time_prodocution_data qba
+		LEFT JOIN plan_production_collection ppc ON qba.plan_id = ppc.plan_id
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id = ppc.recipe_id
 		<where>
 			<if test="beginTime !=null and beginTime!=''">
 				qba.production_time &gt; #{beginTime}
 			</if>
 			<if test="endTime !=null and endTime!=''">
 				and qba.production_time &lt; #{endTime}
+			</if>
+			<if test="peifang !=null and peifang!=''">
+				and sfm.fl_id = #{peifang}
 			</if>
 		</where>
 		order by qba.production_time asc

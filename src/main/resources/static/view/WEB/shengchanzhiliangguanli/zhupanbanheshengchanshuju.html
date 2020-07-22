@@ -132,6 +132,10 @@
                                    onclick=""><br/>
                         </div>
                         <div class="form-group">
+                            <select class="form-control" id="peifang" style="width: 100%;">
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
                         </div>
                     </div>
@@ -164,7 +168,7 @@
 <script>
     $(document).ready(function () {
         initTable();
-        initPeiBiEcharts();
+        initPeiFangOption();
     });
     function showMask() {
         myTool.mask.show('查询中...');
@@ -173,19 +177,43 @@
         myTool.mask.hide();
     }
 
+    function initPeiFangOption() {
+        $.ajax({
+            type: 'POST',
+            url: '/SysFormulationManagement/selectAllSysFormulationManagement',
+            dataType: 'json',
+            data: {},
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $("#peifang").empty()
+                if (json != null) {
+                    $("#peifang").append(`<option value="">全部</option>`);
+                    for (var i = 0; i < json.length; i++) {
+                        $("#peifang").append(`<option value=${json[i].flId}>${json[i].flName}</option>`);
+                    }
+                }
+                initPeiBiEcharts();
+            }
+        });
+    }
     function initPeiBiEcharts(startTime, endTime) {
+        showMask()
         $.ajax({
             type: 'POST',
             url: '/QualityByPlateRealTimeProdocutionData/getPeiBiVoListByTime',
             dataType: 'json',
             data: {
                 beginTime: startTime,
-                endTime: endTime
+                endTime: endTime,
+                peifang: $("#peifang").val(),
             },
             error: function (msg) {
                 errMessage("请求UserController失败");
             },
             success: function (json) {
+                hidMask()
                 initMychart(json);
             }
         });

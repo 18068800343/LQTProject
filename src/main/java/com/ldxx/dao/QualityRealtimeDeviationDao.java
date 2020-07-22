@@ -9,6 +9,6 @@ public interface QualityRealtimeDeviationDao {
 	List<QualityRealtimeDeviation> getAllQualityRealtimeDeviation();
 
 
-	List<QualityRealtimeDeviation> getPianChaVoListByTime(String beginTime, String endTime);
+	List<QualityRealtimeDeviation> getPianChaVoListByTime(String beginTime, String endTime, String peifang);
 
 }

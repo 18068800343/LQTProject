@@ -34,8 +34,8 @@ public class QualityRealtimeDeviationController {
 
 	@RequestMapping("/getPianChaVoListByTime")
 	@ResponseBody
-	public PianChaVo getPianChaVoListByTime(String beginTime, String endTime){
-		List<QualityRealtimeDeviation> list = dao.getPianChaVoListByTime(beginTime,endTime);
+	public PianChaVo getPianChaVoListByTime(String beginTime, String endTime, String peifang){
+		List<QualityRealtimeDeviation> list = dao.getPianChaVoListByTime(beginTime,endTime,peifang);
 		PianChaVo pianChaVo = new PianChaVo();
 		pianChaVo  = pianChaVo.getPianChaVoByPianChaVoList(list);
 		return pianChaVo;

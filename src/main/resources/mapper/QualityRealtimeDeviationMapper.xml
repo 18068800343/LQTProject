@@ -13,12 +13,17 @@
 		*
 		FROM
 		quality_realtime_deviation qkr
+		LEFT JOIN plan_production_collection ppc ON qkr.plan_id = ppc.plan_id
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id = ppc.recipe_id
 		<where>
 			<if test="beginTime !=null and beginTime!=''">
 				qkr.datetime &gt; #{beginTime}
 			</if>
 			<if test="endTime !=null and endTime!=''">
 				and qkr.datetime &lt;  #{endTime}
+			</if>
+			<if test="peifang !=null and peifang!=''">
+				and sfm.fl_id = #{peifang}
 			</if>
 		</where>
 		order by qkr.datetime asc

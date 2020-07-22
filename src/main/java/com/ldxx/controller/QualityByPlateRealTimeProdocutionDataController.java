@@ -38,8 +38,8 @@ public class QualityByPlateRealTimeProdocutionDataController {
 
 	@RequestMapping("/getPeiBiVoListByTime")
 	@ResponseBody
-	public PeiBiVo getPeiBiVoListByTime(String beginTime, String endTime) {
-		List<QualityByPlateRealTimeProdocutionData> list = dao.getPeiBiVoListByTime(beginTime, endTime);
+	public PeiBiVo getPeiBiVoListByTime(String beginTime, String endTime, String peifang) {
+		List<QualityByPlateRealTimeProdocutionData> list = dao.getPeiBiVoListByTime(beginTime, endTime, peifang);
 		PeiBiVo peiBiVo = new PeiBiVo();
 		peiBiVo = peiBiVo.getPeiBiVoByPeiBiVoList(list);
 		return peiBiVo;
@@ -47,8 +47,8 @@ public class QualityByPlateRealTimeProdocutionDataController {
 
 	@RequestMapping("/getPeiBiTimeListByTime")
 	@ResponseBody
-	public List getPeiBiTimeListByTime(String beginTime, String endTime) {
-		List<QualityByPlateRealTimeProdocutionData> list = dao.getPeiBiVoListByTime(beginTime, endTime);
+	public List getPeiBiTimeListByTime(String beginTime, String endTime, String peifang) {
+		List<QualityByPlateRealTimeProdocutionData> list = dao.getPeiBiVoListByTime(beginTime, endTime,peifang);
 		//倒序
 		Collections.reverse(list);
 		return list;

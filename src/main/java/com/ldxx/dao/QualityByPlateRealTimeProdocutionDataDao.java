@@ -8,7 +8,7 @@ public interface QualityByPlateRealTimeProdocutionDataDao {
 
 	List<QualityByPlateRealTimeProdocutionData> getAllQualityByPlateRealTimeProdocutionData();
 
-	List<QualityByPlateRealTimeProdocutionData> getPeiBiVoListByTime(String beginTime, String endTime);
+	List<QualityByPlateRealTimeProdocutionData> getPeiBiVoListByTime(String beginTime, String endTime, String peifang);
 
 	QualityByPlateRealTimeProdocutionData getPeiBiOneByTime(String time);
 }
