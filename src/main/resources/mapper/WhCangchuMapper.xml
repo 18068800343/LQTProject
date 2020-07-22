@@ -3,8 +3,8 @@
 <mapper namespace="com.ldxx.dao.WhCangchuDao" >
 
 	<select id="getAllWhCangchu" resultType="WhCangchu">
-		select a.id,a.bianhao,a.chuliang,a.cailiao,b.material_name as cailiaoming from wh_cangchu a
-		left join dic_materials b on a.cailiao=b.id
+		select a.id,a.bianhao,a.chuliang,a.cailiao,b.stones_name as  cailiaoming from wh_cangchu a
+		left join dic_stones b on a.cailiao=b.id
 	</select>
 
 	<insert id="addWhCangchu" parameterType="WhCangchu">
@@ -20,8 +20,8 @@
 	</delete>
 
 	<select id="getWhCangchuById" resultType="WhCangchu">
-		select a.id,a.bianhao,a.chuliang,a.cailiao,b.material_name as cailiaoming from wh_cangchu a
-		left join dic_materials b on a.cailiao=b.id
+		select a.id,a.bianhao,a.chuliang,a.cailiao,b.stones_name as cailiaoming from wh_cangchu a
+		left join dic_stones b on a.cailiao=b.id
 		where id=#{id}
 	</select>
 
