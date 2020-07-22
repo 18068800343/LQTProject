@@ -196,11 +196,11 @@
                                         </tr>
                                        <tr>
                                            <td>重量(kg)</td>
-                                           <td><input type="text" class="form-control" id="zhongliang"
+                                           <td><input type="text" class="form-control" id="zhongliang" disabled
                                                       style="width: 70%;"/></td>
                                            <td>材料</td>
                                            <td>
-                                               <select id="cailiao" style="width: 70%;">
+                                               <select id="cailiao" style="width: 70%;" disabled>
                                                </select>
                                            </td>
                                        </tr>
@@ -209,24 +209,38 @@
                                                体积(m³)
                                            </td>
                                            <td>
-                                               <input type="text" class="form-control" id="tiji" style="width: 70%;"/>
+                                               <input type="text" class="form-control" id="tiji" style="width: 70%;"
+                                                      onblur="countWeight()"/>
                                            </td>
+                                           <td>
+                                               单位体积重量(kg/m³)
+                                           </td>
+                                           <td>
+                                               <input type="text" id="midu" style="width: 70%;" onblur="countWeight()"/>
+                                           </td>
+                                       </tr>
+                                       <tr>
                                            <td>
                                                仓库最大容纳重量(kg)
                                            </td>
                                            <td>
-                                               <input type="text" id="maxWeight" style="width: 70%;"/>
+                                               <input type="text" id="maxWeight" style="width: 70%;" disabled/>
+                                           </td>
+                                           <td>
+                                           </td>
+                                           <td>
                                            </td>
                                        </tr>
-										<!--<tr>
-											<td>录入人</td>
-											<td><input type="text" id="lururen" style="width: 70%;" /></td>
-											<td></td>
-											<td></td>
-										</tr>-->
-										<tr>
-											<td>备注</td>
-											<td colspan="3"><textarea id="beizhu" rows="3" style="width: 90%;"/></textarea></td>
+                                       <!--<tr>
+                                           <td>录入人</td>
+                                           <td><input type="text" id="lururen" style="width: 70%;" /></td>
+                                           <td></td>
+                                           <td></td>
+                                       </tr>-->
+                                       <tr>
+                                           <td>备注</td>
+                                           <td colspan="3"><textarea id="beizhu" rows="3"
+                                                                     style="width: 90%;"/></textarea></td>
 										</tr>
                                     </table>
                                 </form>  
@@ -266,11 +280,11 @@
                                         </tr>
                                         <tr>
                                             <td>重量(kg)</td>
-                                            <td><input type="text" class="form-control" id="xg_zhongliang"
+                                            <td><input type="text" class="form-control" id="xg_zhongliang" disabled
                                                        style="width: 70%;"/></td>
                                             <td>材料</td>
                                             <td>
-                                                <select id="xg_cailiao" style="width: 70%;">
+                                                <select id="xg_cailiao" style="width: 70%;" disabled>
                                                 </select>
                                             </td>
                                         </tr>
@@ -279,13 +293,29 @@
                                                 体积(m³)
                                             </td>
                                             <td>
-                                                <input type="text" id="xg_tiji" style="width: 70%;"/>
+                                                <input type="text" id="xg_tiji" style="width: 70%;"
+                                                       onblur="xg_countWeight()"/>
                                             </td>
+                                            <td>
+                                                单位体积重量(kg/m³)
+                                            </td>
+                                            <td>
+                                                <input type="text" id="xg_midu" style="width: 70%;"
+                                                       onblur="xg_countWeight()"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td>
                                                 仓库最大容纳重量(kg)
                                             </td>
                                             <td>
-                                                <input type="text" id="xg_maxWeight" style="width: 70%;"/>
+                                                <input type="text" id="xg_maxWeight" style="width: 70%;" disabled/>
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                            <td>
+
                                             </td>
                                         </tr>
 										<!--<tr>
@@ -333,19 +363,83 @@
 	$(document).ready( function () {
 		laydate.render({
 	        elem: '#shijian', //指定元素
-	        type: 'datetime' 
-	    });
-		laydate.render({
-	        elem: '#xg_shijian', //指定元素
-	        type: 'datetime' 
-	    });
-    	$("#luduanbianhao").trigger("change");
+	        type: 'datetime'
+        });
+        laydate.render({
+            elem: '#xg_shijian', //指定元素
+            type: 'datetime'
+        });
+        $("#luduanbianhao").trigger("change");
         initTable();
         initTableInOut();
         initCailiao();
-	});
-	
-	var table=$('#mainContent').dataTable({
+    });
+
+    //全局错误提示
+    let errMsg = {
+        compactionnum: '碾压次数输入错误，请输入纯数字',
+    }
+    //全局正则KV集合
+    let regMap = {
+        xiaoshu: '^[0-9]+\.?[0-9]*$'
+    }
+
+    function reg(str, re) {
+        if (re.test(str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function countWeight() {
+        let tiji = $("#tiji").val()
+        let midu = $("#midu").val()
+
+        let re = new RegExp('^[0-9]+\.?[0-9]*$');
+        let flag1;
+        let flag2;
+        flag1 = reg(tiji, re);
+        flag2 = reg(midu, re);
+
+        if (!flag1) {
+            toastr.error("体积请输入数字");
+            $("#tiji").val('')
+        }
+        if (!flag2) {
+            toastr.error("密度请输入数字");
+            $("#midu").val('')
+        }
+
+        let countWeight = tiji * midu;
+        $("#zhongliang").val(countWeight);
+
+    }
+
+    function xg_countWeight() {
+        let tiji = $("#xg_tiji").val()
+        let midu = $("#xg_midu").val()
+
+        let re = new RegExp('^[0-9]+\.?[0-9]*$');
+        let flag1;
+        let flag2;
+        flag1 = reg(tiji, re);
+        flag2 = reg(midu, re);
+
+        if (!flag1) {
+            toastr.error("体积请输入数字");
+            $("#xg_tiji").val('')
+        }
+        if (!flag2) {
+            toastr.error("密度请输入数字");
+            $("#xg_midu").val('')
+        }
+
+        let countWeight = tiji * midu;
+        $("#xg_zhongliang").val(countWeight);
+    }
+
+    var table = $('#mainContent').dataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
@@ -353,18 +447,18 @@
         "searching": true,
         "lengthChange": false,
         "oLanguage": {
-		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
 		"columns": [
-            { "data": "storNo"},
-            { "data": "datetime"}, 
-            { "data": "weight"},
-            { "data": "maxWeight"},
-            { "data": "materialsName"},
-            { "data": "meminfo"},
-            { "data": "uName"},
-            { "data": "editDatetime2"},
-            { "data": null},
+            {"data": "storNo"},
+            {"data": "datetime"},
+            {"data": "weight"},
+            {"data": "maxWeight"},
+            {"data": "stonesName"},
+            {"data": "meminfo"},
+            {"data": "uName"},
+            {"data": "editDatetime2"},
+            {"data": null},
         ],
         "columnDefs": [{	
 					 "class": "tcenter",
@@ -536,13 +630,17 @@
     function liaocangchange(e) {
         let bianhao = $(e).val();
         let cailiaoid = page_liaocang[bianhao];
+        let chuliang = page_liaocang["chuliang" + bianhao];
         $("#cailiao").val(cailiaoid);
+        $("#maxWeight").val(chuliang);
     }
 
     function xg_liaocangchange(e) {
         let bianhao = $(e).val();
         let cailiaoid = page_liaocang[bianhao];
+        let chuliang = page_liaocang["chuliang" + bianhao];
         $("#xg_cailiao").val(cailiaoid);
+        $("#xg_maxWeight").val(chuliang);
     }
 
     function initliaocangbianhao() {
@@ -556,6 +654,8 @@
                 $("#xg_liaocangbianhao").html('');
                 for (var i = 0; i < json.length; i++) {
                     page_liaocang[json[i].bianhao] = json[i].cailiao;
+                    page_liaocang["chuliang" + json[i].bianhao] = json[i].chuliang;
+
                     $("#liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"
                         + json[i].bianhao + "</option>")
                     $("#xg_liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"
@@ -614,12 +714,12 @@
 	                errMessage("请求UserController失败");
 	            },
 	            success: function (json) {
-	               if(json.result>0){
-	            	   toastr.success("添加成功");
-	            	   json.WhWarehouseCount.materialsName=$("#cailiao").find("option:selected").text();
-	            	   $('#mainContent').DataTable().row.add(json.WhWarehouseCount).draw(false);     //新增行立即显示
-	            	   $("#myModal").modal('hide');
-	               }else{
+	               if(json.result>0) {
+                       toastr.success("添加成功");
+                       json.WhWarehouseCount.stonesName = $("#cailiao").find("option:selected").text();
+                       $('#mainContent').DataTable().row.add(json.WhWarehouseCount).draw(false);     //新增行立即显示
+                       $("#myModal").modal('hide');
+                   }else{
 	            	   toastr.error("添加失败");
 	               }
 	            }
@@ -675,6 +775,9 @@
         $("#xg_beizhu").val(data.meminfo);
         $("#xg_maxWeight").val(data.maxWeight);
         $("#xg_tiji").val(data.tiji);
+        let midu = data.weight / data.tiji
+        $("#xg_midu").val(midu);
+        $("#xg_liaocangbianhao").trigger("change");
     })
 	
 	$("#xg_baocun").click(function() {
@@ -703,13 +806,13 @@
                 //editUserId2:lururen,
             },
             success: function (json) {
-            	if(json.result>0){
-            	   toastr.success("修改成功");
-            	   json.WhWarehouseCount.materialsName=$("#xg_cailiao").find("option:selected").text();
-            	   $('#mainContent').DataTable().row(tr).data(json.WhWarehouseCount);//修改行立即显示 */
-            	   $("#change").modal('hide');
+            	if(json.result>0) {
+                    toastr.success("修改成功");
+                    json.WhWarehouseCount.stonesName = $("#xg_cailiao").find("option:selected").text();
+                    $('#mainContent').DataTable().row(tr).data(json.WhWarehouseCount);//修改行立即显示 */
+                    $("#change").modal('hide');
                     initTableQuanxian()
-               }else{
+                }else{
             	   toastr.error("修改失败");
                }
             }

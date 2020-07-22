@@ -17,16 +17,18 @@ public class WhWarehouseCount {
 
     public String storNo;//料仓编号
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public Date datetime;//时间
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date datetime;//时间
 
-    public BigDecimal weight;//重量
+	public BigDecimal weight;//重量
 
-    public String materials;//材料
-    public String materialsName;//材料名称
+	public String materials;//材料
+	public String materialsName;//材料名称
 
-    public String meminfo;//备注
+	public String stonesName;//材料名称
+
+	public String meminfo;//备注
 
 	public String editUserId2;//最后录入用户
 	private String uName;
@@ -38,6 +40,14 @@ public class WhWarehouseCount {
 	private BigDecimal maxWeight;
 
 	private BigDecimal tiji;
+
+	public String getStonesName() {
+		return stonesName;
+	}
+
+	public void setStonesName(String stonesName) {
+		this.stonesName = stonesName;
+	}
 
 	public BigDecimal getTiji() {
 		return tiji;

@@ -54,8 +54,11 @@ public class WhWarehouseCountController {
 		wwc.setEditDatetime2(GetThisTimeUtils.getDateTime());
 		User user = (User) session.getAttribute("user");
 		if(null!=user) {
-			wwc.setEditUserId2(user.getUserId());;
-		}
+            wwc.setEditUserId2(user.getUserId());
+            ;
+            wwc.setuName(user.getuName());
+            ;
+        }
 		int i = service.updWhWarehouseCountById(wwc);
 		map.put("result", i);
 		map.put("WhWarehouseCount", wwc);
@@ -81,9 +84,10 @@ public class WhWarehouseCountController {
 		wwc.setEditDatetime2(GetThisTimeUtils.getDateTime());
 		User user = (User) session.getAttribute("user");
 		if (null != user) {
-			wwc.setEditUserId2(user.getUserId());
-			;
-		}
+            wwc.setEditUserId2(user.getUserId());
+            wwc.setuName(user.getuName());
+            ;
+        }
 
 		int i= service.insertWhWarehouseCount(wwc);
 		map.put("result",i);
