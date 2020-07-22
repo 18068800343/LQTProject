@@ -77,7 +77,23 @@ public class WhWarehouseCountController {
 		List<Map> map = dao.getLiaoCangPanDian();
 		for (Map dom : map) {
 			String dayTimeOut = (String) dom.get("dayTimeOut");
-
+			//获取本日最后一个生产时间 格式 yyyy-MM-dd HH:mm:ss
+			String endTime = dao.getProductEndTime(dayTimeOut.trim());
+			//获取本日最新一个盘点时间 格式 yyyy-MM-dd HH:mm:ss
+			String startTime = dao.getLaiLiaoTime();
+			Double yongliao = 0.0;
+			Double lailiao = 0.0;
+			yongliao = dao.getYongLiaoWeightByTime(startTime, endTime);
+			lailiao = dao.getLaiLiaoWeightByTime(startTime.replace(":", "-"), endTime.replace(":", "-"));
+			if (yongliao == null) {
+				yongliao = 0.0;
+			}
+			if (lailiao == null) {
+				lailiao = 0.0;
+			}
+			Double yuliao = lailiao - yongliao;
+			yuliao = Double.valueOf(String.format("%.2f", yuliao));
+			dom.put("dayWeightCha", yuliao);
 		}
 		return map;
 

@@ -54,7 +54,32 @@
 		ORDER BY a.dayTimeOut ASC
 	</select>
 
-	<select id="getLaiLiaoByTime" resultType="String">
+	<select id="getLaiLiaoWeightByTime" resultType="Double">
+		SELECT SUM(weight) FROM wh_incoming_material WHERE datetime BETWEEN #{startTime} and  #{endTime}
+	</select>
 
+	<select id="getYongLiaoWeightByTime" resultType="Double">
+		SELECT SUM(weight) FROM quality_by_plate_real_time_prodocution_data WHERE production_time BETWEEN #{startTime} and  #{endTime}
+	</select>
+
+	<select id="getProductEndTime" resultType="String">
+		SELECT top 1 CONVERT (
+				CHAR (19),
+				production_time,
+				120
+			) FROM quality_by_plate_real_time_prodocution_data
+				WHERE 	CONVERT (
+				CHAR (10),
+				production_time,
+				120
+			) = #{time} ORDER BY production_time desc
+	</select>
+
+	<select id="getLaiLiaoTime" resultType="String">
+			SELECT top 1 CONVERT (
+				CHAR (19),
+				datetime,
+				120
+			) FROM wh_warehouse_count  	ORDER BY datetime desc
 	</select>
 </mapper>

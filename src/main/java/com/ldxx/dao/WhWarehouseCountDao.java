@@ -1,5 +1,6 @@
 package com.ldxx.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -22,5 +23,13 @@ public interface WhWarehouseCountDao {
 	WhWarehouseCount getWhWarehouseCountByStorNo(@Param("storNo") String storNo);
 
 	List<Map> getLiaoCangPanDian();
+
+	Double getLaiLiaoWeightByTime(String startTime, String endTime);
+
+	Double getYongLiaoWeightByTime(String startTime, String endTime);
+
+	String getProductEndTime(String time);
+
+	String getLaiLiaoTime();
 
 }
