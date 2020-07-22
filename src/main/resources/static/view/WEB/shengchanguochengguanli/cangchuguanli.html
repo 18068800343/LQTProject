@@ -257,7 +257,7 @@
                                             <td style="width: 20%;">料仓编号</td>
                                             <td style="width: 30%;">
                                                 <select id="xg_liaocangbianhao" class="form-control"
-                                                        style="width: 70%;">
+                                                        onchange="xg_liaocangchange(this)" style="width: 70%;">
                                                 </select>
                                             </td>
                                             <td style="width: 20%;">时间</td>
@@ -539,6 +539,12 @@
         $("#cailiao").val(cailiaoid);
     }
 
+    function xg_liaocangchange(e) {
+        let bianhao = $(e).val();
+        let cailiaoid = page_liaocang[bianhao];
+        $("#xg_cailiao").val(cailiaoid);
+    }
+
     function initliaocangbianhao() {
         $.ajax({
             type: 'POST',
@@ -556,6 +562,7 @@
                         + json[i].bianhao + "</option>")
                 }
                 $("#liaocangbianhao").trigger("change");
+                $("#xg_liaocangbianhao").trigger("change");
             }
         });
     }
@@ -563,7 +570,7 @@
     function initCailiao() {
         $.ajax({
             type: 'POST',
-            url: '/DicMaterials/selectAllDicMaterials',
+            url: '/DicStones/selectAllDicStones',
             dataType: 'json',
             data: {},
             success: function (json) {
@@ -571,9 +578,9 @@
                 $("#xg_cailiao").html('');
                 for (var i = 0; i < json.length; i++) {
                     $("#cailiao").append("<option value='" + json[i].id + "'>"
-                        + json[i].materialName + "</option>")
+                        + json[i].stonesName + "</option>")
                     $("#xg_cailiao").append("<option value='" + json[i].id + "'>"
-                        + json[i].materialName + "</option>")
+                        + json[i].stonesName + "</option>")
                 }
                 initliaocangbianhao();
             }
