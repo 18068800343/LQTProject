@@ -53,4 +53,8 @@
 		LEFT JOIN (SELECT SUM(weight) dayWeightIn,convert(char(10),datetime ,120) dayTimeIn FROM wh_incoming_material GROUP BY convert(char(10),datetime ,120)) b on a.dayTimeOut = b.dayTimeIn
 		ORDER BY a.dayTimeOut ASC
 	</select>
+
+	<select id="getLaiLiaoByTime" resultType="String">
+
+	</select>
 </mapper>

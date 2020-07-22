@@ -74,7 +74,13 @@ public class WhWarehouseCountController {
 	@RequestMapping("/getLiaoCangPanDian")
 	@ResponseBody
 	public List<Map> getLiaoCangPanDian() {
-		return dao.getLiaoCangPanDian();
+		List<Map> map = dao.getLiaoCangPanDian();
+		for (Map dom : map) {
+			String dayTimeOut = (String) dom.get("dayTimeOut");
+
+		}
+		return map;
+
 	}
 
 	@RequestMapping("/insertWhWarehouseCount")
