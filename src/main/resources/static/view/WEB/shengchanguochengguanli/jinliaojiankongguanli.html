@@ -245,11 +245,16 @@
                                 <form class="form-inline">
                                     <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
-											<td style="width: 15%;">编号</td>
-											<td><input type="text" class="form-control"  id="bianhao" style="width: 70%;"/></td>
-											<td style="width: 15%;">时间</td>
-											<td><input type="text"  class="form-control" id="shijian" placeholder="请选择"style="width: 70%;" /></td>
-										</tr>
+                                            <td style="width: 15%;">时间</td>
+                                            <td><input type="text" class="form-control" id="shijian" placeholder="请选择"
+                                                       style="width: 70%;"/></td>
+                                            <td style="width: 15%;">
+                                                <!--                                                编号-->
+                                            </td>
+                                            <td>
+                                                <!--                                                <input type="text" class="form-control"  id="bianhao" style="width: 70%;"/>-->
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>材料</td>
                                             <td><select id="cailiao" class="form-control"
@@ -317,12 +322,18 @@
                             <div>     
                                 <form class="form-inline">
                                    <table class="layui-table "lay-skin="line" style="height:auto;">
-                                    	<tr>
-											<td style="width: 15%;">编号</td>
-											<td><input type="text"  class="form-control" id="xg_bianhao" style="width: 70%;"/></td>
-											<td style="width: 15%;">时间</td>
-											<td><input type="text"  class="form-control" id="xg_shijian" placeholder="请选择"style="width: 70%;" /></td>
-										</tr>
+                                       <tr>
+                                           <td style="width: 15%;">
+                                               编号
+                                           </td>
+                                           <td>
+                                               <input type="text" class="form-control" id="xg_bianhao"
+                                                      style="width: 70%;"/>
+                                           </td>
+                                           <td style="width: 15%;">时间</td>
+                                           <td><input type="text" class="form-control" id="xg_shijian" placeholder="请选择"
+                                                      style="width: 70%;"/></td>
+                                       </tr>
                                        <tr>
                                            <td>材料</td>
                                            <td><select class="form-control" id="xg_cailiao"
@@ -562,19 +573,18 @@
 		
 		function initCailiao(){
 			$.ajax({
-	            type: 'POST',
-	            url: '/DicMaterials/selectAllDicMaterials',
-	            dataType: 'json',
-	            data: {
-	            },
-	            success: function (json) {
-	            	$("#cailiao").html('');
-		        	$("#xg_cailiao").html('');
-		        	 for(var i=0;i<json.length;i++){
-		        		$("#cailiao").append( "<option value='" + json[i].id + "'>"
-			                    + json[i].materialName + "</option>")
-			            $("#xg_cailiao").append( "<option value='" + json[i].id + "'>"
-			                    + json[i].materialName + "</option>")
+                type: 'POST',
+                url: '/DicStones/selectAllDicStones',
+                dataType: 'json',
+                data: {},
+                success: function (json) {
+                    $("#cailiao").html('');
+                    $("#xg_cailiao").html('');
+                    for (var i = 0; i < json.length; i++) {
+                        $("#cailiao").append("<option value='" + json[i].id + "'>"
+                            + json[i].stonesName + "</option>")
+                        $("#xg_cailiao").append("<option value='" + json[i].id + "'>"
+                            + json[i].stonesName + "</option>")
 		        	}
 	            }
 	        });

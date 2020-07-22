@@ -304,17 +304,17 @@
     function initCailiao() {
         $.ajax({
             type: 'POST',
-            url: '/DicMaterials/selectAllDicMaterials',
+            url: '/DicStones/selectAllDicStones',
             dataType: 'json',
             data: {},
             success: function (json) {
-	            	$("#cailiao").html('');
-		        	$("#xg_cailiao").html('');
-		        	 for(var i=0;i<json.length;i++){
-		        		$("#cailiao").append( "<option value='" + json[i].id + "'>"
-			                    + json[i].materialName + "</option>")
-			            $("#xg_cailiao").append( "<option value='" + json[i].id + "'>"
-			                    + json[i].materialName + "</option>")
+                $("#cailiao").html('');
+                $("#xg_cailiao").html('');
+                for (var i = 0; i < json.length; i++) {
+                    $("#cailiao").append("<option value='" + json[i].id + "'>"
+                        + json[i].stonesName + "</option>")
+                    $("#xg_cailiao").append("<option value='" + json[i].id + "'>"
+                        + json[i].stonesName + "</option>")
 		        	}
 	            }
 	        });

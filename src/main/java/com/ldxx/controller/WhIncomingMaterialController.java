@@ -1,12 +1,12 @@
 package com.ldxx.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.User;
 import com.ldxx.dao.WhIncomingMaterialDao;
 import com.ldxx.dao.WhWarehouseCountDao;
+import com.ldxx.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,15 +71,18 @@ public class WhIncomingMaterialController {
 	
 	@RequestMapping("/insertWhIncomingMaterial")
 	@ResponseBody
-	public Map<String,Object> insertWhIncomingMaterial(WhIncomingMaterial wm, HttpSession session){
+	public Map<String,Object> insertWhIncomingMaterial(WhIncomingMaterial wm, HttpSession session) {
 		wm.setId(LDXXUtils.getUUID12());
 		User user = (User) session.getAttribute("user");
-		if(null!=user) {
+		String jhDateTime = DateUtil.getDateStrByPattern(DateConstant.DATE14_, new Date());
+		jhDateTime = jhDateTime + new Random().nextInt(100);
+		wm.setNo(jhDateTime);
+		if (null != user) {
 			wm.setEditUserId(user.getUserId());
 			wm.setEditDatetime(GetThisTimeUtils.getDateTime());
 			wm.setuName(user.getuName());
 		}
-		int i= service.insertWhIncomingMaterial(wm);
+		int i = service.insertWhIncomingMaterial(wm);
 		map.put("result", i);
 		map.put("WhIncomingMaterial", wm);
 		return map;
