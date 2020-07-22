@@ -74,7 +74,7 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 			},	
 			axisLabel: {
 				formatter: function (value, index) {
-					return value + "%";
+					return value + "吨";
 				}
 			}
 		},
