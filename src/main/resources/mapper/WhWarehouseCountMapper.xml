@@ -40,9 +40,9 @@
 		values(#{wwc.id},#{wwc.storNo},#{wwc.datetime},#{wwc.weight},#{wwc.materials},#{wwc.meminfo},#{wwc.editUserId2},#{wwc.editDatetime2},1,#{wwc.maxWeight},#{wwc.tiji})
 	</insert>
 	<select id="getWhWarehouseCountByStorNo" resultType="WhWarehouseCount">
-		select top 1 a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state,b.material_name as materialsName,usr.u_name
+		select top 1 a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state,b.stones_name as materialsName,usr.u_name
 		from wh_warehouse_count as a
-		left join dic_materials b on a.materials=b.id
+		left join dic_stones b on a.materials=b.id
 		LEFT JOIN u_user usr ON a.edit_user_id2 = usr.user_id and usr.delete_state = 1
 		where a.delete_state=1 and a.stor_no=#{storNo}
 	</select>
