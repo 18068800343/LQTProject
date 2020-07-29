@@ -172,6 +172,7 @@
 			initPoint()
 		});
 
+		var geoCoordMap = [];
 
 		let page_point;
 		let page_pointArray;
@@ -201,11 +202,13 @@
 						// addMarker(point, json[i].stakemark, json[i].lane, json[i]);
 						let point = {};
 						point.name = json[i].stakemark;
-						point.value = "";
+						//point.value = "";
+						point.value = lngLat;
 						pointArray.push(point);
 					}
 					page_pointArray = pointArray
 					page_point = array;
+
 				}
 			});
 		}
@@ -256,6 +259,8 @@
 				//		});
 				//	}
 				//}
+
+
 		$.getJSON('../geoJson/jiangsu.json', function(data) {
 			// 压缩后的地图数据必须使用 decode 函数转换
 			echarts.registerMap('jiangsu', data);
@@ -266,12 +271,16 @@
 			var mapType = ["江苏"];
 			//myChart.on(ecConfig.EVENT.MAP_SELECTED, function(param) {});
 			option = {
-					 tooltip: {
-	                      trigger: 'axis',
-	                      axisPointer: {
-	                          type: 'shadow'
-	                      }
-	                  },
+				tooltip: {
+					trigger: 'item',
+					formatter: function (params) {
+						if(typeof(params.value)[2] == "undefined"){
+							return params.name + ' : ' + params.name;
+						}else{
+							return params.name + ' : ' + params.name;
+						}
+					}
+				},
 				legend: {
 					orient: 'vertical',
 					x: '',
@@ -297,9 +306,12 @@
 			            }
 			        },
 			    },
-			    series: [{
+			    series: [
+					{
 			        type: 'effectScatter',
 			        coordinateSystem: 'geo',
+					symbol: 'pin',
+					symbolSize: 15,
 			        itemStyle: {
 			            normal: {
 			            	show:true,
@@ -312,6 +324,7 @@
 			        data: page_pointArray
 			    },{
 			        type: 'lines',
+
 			        //coordinateSystem: 'bmap',
 			        data: [
 			            {
