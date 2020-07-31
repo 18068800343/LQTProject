@@ -79,12 +79,13 @@
             <!--loop=true 自动循环-->
             <!--data-setup='{"example_option":true}' 可以把一些属性写到这个里面来，如data-setup={"autoplay":true}-->
 
-            <video id="my-player"  class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" autoplay="autoplay"
-                   poster="//vjs.zencdn.net/v/oceans.png" width="1400" height="700" data-setup='{"fluid":true}'>
-                <!--src: 规定媒体文件的 URL  type:规定媒体资源的类型-->
-                <source src='rtmp://rtmp01open.ys7.com/openlive/0bb5bb8d1e1a457098024003a58ed234' type='rtmp/flv'/>
-<!--                <source src='rtmp://58.200.131.2:1935/livetv/hunantv' type='rtmp/flv'/>-->
-            </video>
+            <!--            <video id="my-player"  class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" autoplay="autoplay"-->
+            <!--                   poster="//vjs.zencdn.net/v/oceans.png" width="1400" height="700" data-setup='{"fluid":true}'>-->
+            <!--                &lt;!&ndash;src: 规定媒体文件的 URL  type:规定媒体资源的类型&ndash;&gt;-->
+            <!--                <source src='rtmp://rtmp01open.ys7.com/openlive/0bb5bb8d1e1a457098024003a58ed234' type='rtmp/flv'/>-->
+            <!--&lt;!&ndash;                <source src='rtmp://58.200.131.2:1935/livetv/hunantv' type='rtmp/flv'/>&ndash;&gt;-->
+            <!--            </video>-->
+            <div id="myPlayer" style="width: 1700px;height: 800px;"></div>
         </div>
     </div>
 <!-- allMsg -->
@@ -116,16 +117,52 @@
 <script src="../../js/common-scripts.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../js/EZUIKit-JavaScript/ezuikit.js"></script>
 <!--&lt;!&ndash;引入播放器js&ndash;&gt;-->
 <!--<script src="../../video.min.js"></script>-->
 <!--<script src="../../js/videojs-flash.min.js"></script>-->
 <script>
     videojs.options.flash.swf = '/img/VideoJS.swf';
 
-    $(document).ready( function () {
-    	
-	});
-    var table=$('#mainContent').dataTable({
+    $(document).ready(function () {
+        initYinShiYun();
+    });
+
+    function initYinShiYun() {
+        $.ajax({
+            type: 'POST',
+            url: 'https://open.ys7.com/api/lapp/token/get',
+            dataType: 'json',
+            data: {
+                appKey: 'c1fa9e666f9745e288ddad12cc2da97d',
+                appSecret: 'f58d8f4af7fe95bda3030a9d4ea2fe11'
+            },
+            error: function (msg) {
+            },
+            success: function (json) {
+                let accessToken = json.data.accessToken;
+                // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
+                // 开始初始化直播源地址
+                //开始初始化监控地址
+                let url = 'ezopen://open.ys7.com/D99811486/1.live'
+
+                let player = new EZUIPlayer({
+                    id: 'myPlayer',
+                    url: url,
+                    autoplay: true,
+                    accessToken: accessToken,
+                    //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
+                    decoderPath: '/view/js/EZUIKit-JavaScript',
+                    width: 1700,
+                    height: 800,
+                });
+                //播放
+                player.play();
+            }
+        });
+    }
+
+    var table = $('#mainContent').dataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
@@ -133,8 +170,8 @@
         "searching": true,
         "lengthChange": false,
         "oLanguage": {
-		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-		},
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
         "order": [[0, 'asc']],
         "oLanguage": { //国际化配置
         "sProcessing": "正在获取数据，请稍后...",
@@ -190,8 +227,8 @@
     }
 
     // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
-    let player = videojs('my-player'); //my-player为页面video元素的id
-    player.play(); //播放
+    // let player = videojs('my-player'); //my-player为页面video元素的id
+    // player.play(); //播放
     // 1. 播放   player.play()
     // 2. 停止   player.pause()
     // 3. 暂停   player.pause()

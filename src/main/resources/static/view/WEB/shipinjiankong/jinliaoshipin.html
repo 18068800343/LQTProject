@@ -82,8 +82,7 @@
         <!--        <video id="my-player"  class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" autoplay="autoplay"-->
         <!--               poster="//vjs.zencdn.net/v/oceans.png" width="1400" height="700" data-setup='{"fluid":true}'>-->
         <!--            &lt;!&ndash;src: 规定媒体文件的 URL  type:规定媒体资源的类型&ndash;&gt;-->
-        <!--            <source src='rtmp://rtmp01open.ys
-        7.com/openlive/0bb5bb8d1e1a457098024003a58ed234' type='rtmp/flv'/>-->
+        <!--            <source src='rtmp://rtmp01open.ys7.com/openlive/0bb5bb8d1e1a457098024003a58ed234' type='rtmp/flv'/>-->
         <!--            &lt;!&ndash;                <source src='rtmp://58.200.131.2:1935/livetv/hunantv' type='rtmp/flv'/>&ndash;&gt;-->
         <!--        </video>-->
         <div id="myPlayer" style="width: 1700px;height: 800px;"></div>
@@ -125,24 +124,45 @@
 <script>
     videojs.options.flash.swf = '/img/VideoJS.swf';
 
-    $(document).ready( function () {
-        // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
-        // 开始初始化直播源地址
-        //开始初始化监控地址
-        let url = 'ezopen://open.ys7.com/E20449234/3.live'
-        let player = new EZUIPlayer({
-            id: 'myPlayer',
-            url: url,
-            autoplay: true,
-            accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
-            decoderPath: '/view/js/EZUIKit-JavaScript',
-            width: 1700,
-            height: 800,
-        });
-        //播放
-        player.play();
+    $(document).ready(function () {
+        initYinShiYun();
     });
-    var table=$('#mainContent').dataTable({
+
+    function initYinShiYun() {
+        $.ajax({
+            type: 'POST',
+            url: 'https://open.ys7.com/api/lapp/token/get',
+            dataType: 'json',
+            data: {
+                appKey: '4d52a9408b4a46a18ab18599dcf5ec19',
+                appSecret: 'decd0cade9d503de6d6380535d867413'
+            },
+            error: function (msg) {
+            },
+            success: function (json) {
+                let accessToken = json.data.accessToken;
+                // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
+                // 开始初始化直播源地址
+                //开始初始化监控地址
+                let url = 'ezopen://open.ys7.com/E20449234/3.live'
+
+                let player = new EZUIPlayer({
+                    id: 'myPlayer',
+                    url: url,
+                    autoplay: true,
+                    accessToken: accessToken,
+                    //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
+                    decoderPath: '/view/js/EZUIKit-JavaScript',
+                    width: 1700,
+                    height: 800,
+                });
+                //播放
+                player.play();
+            }
+        });
+    }
+
+    var table = $('#mainContent').dataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
