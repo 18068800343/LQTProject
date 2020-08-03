@@ -221,4 +221,8 @@
 		where a.finish_time &gt; #{startime} and a.finish_time &lt; #{endTime} AND a.delete_state=1 and a.plan_id !=#{id}
 	</select>
 
+	<select id="getBysiteId" resultType="planProductionCollectionVo">
+		select * from plan_production_collection where site_id=#{id} and delete_state=1
+	</select>
+
 </mapper>

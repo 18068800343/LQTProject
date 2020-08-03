@@ -193,7 +193,14 @@
 								<tr>
 									<td>来料温度</td>
 									<td><input type="text" class="form-control" @blur="reg(temp,'xiaoshu','temp')" v-model="temp" style="width: 100%;" /></td>
-
+									<td style="width: 20%;">设备编号</td>
+									<td style="width: 30%;">
+										<select  class="form-control"  v-model="sbbh" style="width: 100%;">
+											<option value="123">123</option>
+											<option value="234">234</option>
+											<option value="345">345</option>
+										</select>
+									</td>
 								</tr>
 							</table>
 						</form>
@@ -248,7 +255,14 @@
 								<tr>
 									<td>来料温度</td>
 									<td><input type="text" class="form-control" @blur="reg(temp,'xiaoshu','temp')" v-model="temp" style="width: 100%;" /></td>
-
+									<td style="width: 20%;">设备编号</td>
+									<td style="width: 30%;">
+										<select  class="form-control"  v-model="sbbh" style="width: 100%;">
+											<option value="123">123</option>
+											<option value="234">234</option>
+											<option value="345">345</option>
+										</select>
+									</td>
 								</tr>
 							</table>
 						</form>
@@ -466,10 +480,15 @@
 		  loadingTemperature:"",
 		  batchList:'',
 		  siteId:'',
+		  sbbh:'',
 	  },
 	  methods: {
 		//新建生产计划保存按钮事件
 	    save: function () {
+			if(this.sbbh==""){
+				toastr.error("设备编号不能为空")
+				return;
+			}
 			this._data.siteId=$("#biaoduan").attr("data-id")
             //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
             this.$http.post('/ShiGongLaiLiaoGuanLi/addShiGongLaiLiao',JSON.stringify(this._data),{}).then((res)=>{
@@ -519,11 +538,25 @@
 		        	this.temp = batchVo.loadingTemperature;
 		        	this.batch = batchVo.batch;
 		        	this.roadno = batchVo.roadno;
-		        	$("#biaoduan").attr("data-id",batchVo.siteId)
+		        	$("#biaoduan").attr("data-id",batchVo.siteId);
+					this.getGuanlianbianhao();
             },(res)=>{
                 console.log(res.status);
             });
-        }
+        },
+		  getGuanlianbianhao:function(){
+			  this._data.siteId=$("#biaoduan").attr("data-id")
+			  this.$http.post('/Guanlianbianhao/getcountBysiteIdAndDate',{'siteId':this.siteId},{emulateJSON:true}).then((res)=>{
+				  var data = res.body;
+				  if(data.sbbh==null||data.sbbh==""||data.sbbh==undefined){
+					  this.sbbh=""
+				  }else{
+					  this.sbbh=data.sbbh;
+				  }
+			  },(res)=>{
+				  console.log(res.status);
+			  });
+		  }
 	  }
 	})
 	//初始化下拉框路段
@@ -557,11 +590,16 @@
 		  loadingTemperature:"",
 		  batchList:'',
 		  siteId:'',
+		  sbbh:'',
 	  },
 	  methods: {
 		//新建生产计划保存按钮事件
 	    save: function () {
 			this._data.siteId=$("#xgbiaoduan").attr("data-id")
+			if(this.sbbh==""){
+				toastr.error("设备编号不能为空")
+				return;
+			}
             //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
             this.$http.post('/ShiGongLaiLiaoGuanLi/updateShiGongLaiLiao',JSON.stringify(this._data),{}).then((res)=>{
             	var resMsg = res.body;
@@ -612,10 +650,24 @@
 		        	this.batch = batchVo.batch;
 		        	this.roadno = batchVo.roadno;
 					$("#xgbiaoduan").attr("data-id",batchVo.siteId)
+					this.getGuanlianbianhao();
             },(res)=>{
                 console.log(res.status);
             });
-        }
+        },
+		  getGuanlianbianhao:function(){
+			  this._data.siteId=$("#xgbiaoduan").attr("data-id")
+			  this.$http.post('/Guanlianbianhao/getcountBysiteIdAndDate',{'siteId':this.siteId},{emulateJSON:true}).then((res)=>{
+				  var data = res.body;
+				  if(data.sbbh==null||data.sbbh==""||data.sbbh==undefined){
+					  this.sbbh=""
+				  }else{
+					  this.sbbh=data.sbbh;
+				  }
+			  },(res)=>{
+				  console.log(res.status);
+			  });
+		  }
 	  }
 	})
 	//初始化下拉框路段
@@ -644,7 +696,23 @@
 	  xgLaiLiaoVm.weight = data.weight;
 	  xgLaiLiaoVm.temp = data.temp;
 	  xgLaiLiaoVm.loadingTemperature = data.loadingTemperature;
+
 		$("#xgbiaoduan").attr("data-id",data.siteId)
+
+		xgLaiLiaoVm.sbbh =""
+		$.ajax({
+			type : 'POST',
+			url : '/Guanlianbianhao/getcountBysiteIdAndDate',
+			dataType : 'json',
+			data : {
+				siteId:data.siteId,
+			},
+			success : function(json) {
+				if(json!=null&&json!=undefined&&json!=""){
+					xgLaiLiaoVm.sbbh = json.sbbh;
+				}
+			}
+		});
 	}
 	
 	//箭头函数，内部this永远指向父级

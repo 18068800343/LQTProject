@@ -20,6 +20,16 @@ public class SiteFieldMaterialMgt {
 
     private int deletestate;
 
+    private String sbbh;//设备编号
+
+	public String getSbbh() {
+		return sbbh;
+	}
+
+	public void setSbbh(String sbbh) {
+		this.sbbh = sbbh;
+	}
+
 	public String getId() {
 		return id;
 	}

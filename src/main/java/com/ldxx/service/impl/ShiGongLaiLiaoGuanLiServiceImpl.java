@@ -1,15 +1,15 @@
 package com.ldxx.service.impl;
 
 import com.ldxx.Constant.DateConstant;
+import com.ldxx.bean.Guanlianbianhao;
 import com.ldxx.bean.User;
-import com.ldxx.dao.LaiLiaoWenDuYuJingDao;
-import com.ldxx.dao.ShengChanJiHuaDao;
-import com.ldxx.dao.ShiGongLaiLiaoDao;
-import com.ldxx.dao.TanPuDiDianGuanLiDao;
+import com.ldxx.dao.*;
 import com.ldxx.service.ShiGongLaiLiaoGuanLiService;
 import com.ldxx.util.DateUtil;
+import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.vo.PianChaLiangVo;
+import com.ldxx.vo.PlanProductionCollectionVo;
 import com.ldxx.vo.SiteFieldMaterialMgtVo;
 import com.ldxx.vo.SiteIncomingMaterialTempWarningVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,8 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
     private ShengChanJiHuaDao shengChanJiHuaDao;
     @Resource
     private TanPuDiDianGuanLiDao siteConstructionDao;
+    @Autowired
+    private GuanlianbianhaoDao guanlianbianhaoDao;
 
     @Override
     public List<SiteFieldMaterialMgtVo> getAllShiGongLaiLiao(String luduanquanxian) {
@@ -48,6 +50,25 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
     @Override
     public int addShiGongLaiLiao(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo, HttpSession session) {
         int i = dao.addShiGongLaiLiao(siteFieldMaterialMgtVo);
+        if(i>0){
+            Guanlianbianhao guanlianbianhao=new Guanlianbianhao();
+            guanlianbianhao.setLlId(siteFieldMaterialMgtVo.getId());
+            guanlianbianhao.setSbbh(siteFieldMaterialMgtVo.getSbbh());
+            guanlianbianhao.setSiteId(siteFieldMaterialMgtVo.getSiteId());
+            PlanProductionCollectionVo vo = shengChanJiHuaDao.getBysiteId(siteFieldMaterialMgtVo.getSiteId());
+            if(vo!=null){
+                guanlianbianhao.setPpcId(vo.getPlanid());
+            }
+            guanlianbianhao.setDatetime(GetThisTimeUtils.getDateTime());
+            Guanlianbianhao getcountBysiteIdAndDate = guanlianbianhaoDao.getcountBysiteIdAndDate(siteFieldMaterialMgtVo.getSiteId(), "%" + GetThisTimeUtils.getDate() + "%");
+            if(getcountBysiteIdAndDate!=null){
+                guanlianbianhao.setId(getcountBysiteIdAndDate.getId());
+                guanlianbianhaoDao.updGuanlianbianhao(guanlianbianhao);
+            }else{
+                guanlianbianhao.setId(LDXXUtils.getUUID12());
+                guanlianbianhaoDao.insertGuanlianbianhao(guanlianbianhao);
+            }
+        }
         //PianChaLiangVo piancha = dao.getPiancha(siteFieldMaterialMgtVo.getBatchid(),siteFieldMaterialMgtVo.getTemp());
         PianChaLiangVo piancha = shengChanJiHuaDao.getPiancha(siteFieldMaterialMgtVo);
         if(piancha!=null){
@@ -87,7 +108,27 @@ public class ShiGongLaiLiaoGuanLiServiceImpl implements ShiGongLaiLiaoGuanLiServ
 
     @Override
     public int updateShiGongLaiLiao(SiteFieldMaterialMgtVo siteFieldMaterialMgtVo) {
-        return dao.updateShiGongLaiLiao(siteFieldMaterialMgtVo);
+        int i= dao.updateShiGongLaiLiao(siteFieldMaterialMgtVo);
+        if(i>0){
+            Guanlianbianhao guanlianbianhao=new Guanlianbianhao();
+            guanlianbianhao.setLlId(siteFieldMaterialMgtVo.getId());
+            guanlianbianhao.setSbbh(siteFieldMaterialMgtVo.getSbbh());
+            guanlianbianhao.setSiteId(siteFieldMaterialMgtVo.getSiteId());
+            PlanProductionCollectionVo vo = shengChanJiHuaDao.getBysiteId(siteFieldMaterialMgtVo.getSiteId());
+            if(vo!=null){
+                guanlianbianhao.setPpcId(vo.getPlanid());
+            }
+            guanlianbianhao.setDatetime(GetThisTimeUtils.getDateTime());
+            Guanlianbianhao getcountBysiteIdAndDate = guanlianbianhaoDao.getcountBysiteIdAndDate(siteFieldMaterialMgtVo.getSiteId(), "%" + GetThisTimeUtils.getDate() + "%");
+            if(getcountBysiteIdAndDate!=null){
+                guanlianbianhao.setId(getcountBysiteIdAndDate.getId());
+                guanlianbianhaoDao.updGuanlianbianhao(guanlianbianhao);
+            }else{
+                guanlianbianhao.setId(LDXXUtils.getUUID12());
+                guanlianbianhaoDao.insertGuanlianbianhao(guanlianbianhao);
+            }
+        }
+        return i;
     }
 
     @Override

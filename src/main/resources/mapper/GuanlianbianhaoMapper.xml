@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.GuanlianbianhaoDao" >
+  		<insert id="insertGuanlianbianhao" parameterType="Guanlianbianhao">
+			insert into guanlianbianhao (id,ll_id,site_id,ppc_id,datetime,sbbh) values (#{id},#{llId},#{siteId},#{ppcId},#{datetime},#{sbbh})
+		</insert>
+
+		<update id="updGuanlianbianhao" parameterType="Guanlianbianhao">
+			update guanlianbianhao set
+			ll_id=#{llId},
+			site_id=#{siteId},
+			ppc_id=#{ppcId},
+			datetime=#{datetime},
+			sbbh=#{sbbh}
+			where id=#{id}
+		</update>
+
+		<select id="getcountBysiteIdAndDate" resultType="Guanlianbianhao">
+			select * from guanlianbianhao where site_id=#{siteId} and datetime like #{datetime}
+		</select>
+</mapper>
