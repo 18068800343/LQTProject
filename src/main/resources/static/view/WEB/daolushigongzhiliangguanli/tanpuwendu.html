@@ -422,10 +422,10 @@
                 for (var i = 0; i < json.length; i++) {
                     $("#luduanB").append(
                         "<option value="+json[i].id+">"
-                        + json[i].stakemark + "</option>")
+                        + (json[i].stakemark+"+"+json[i].roadname)+ "</option>")
                     $("#luduanB2").append(
                         "<option value="+json[i].id+">"
-                        + json[i].stakemark + "</option>")
+                        + (json[i].stakemark+"+"+json[i].roadname) + "</option>")
                 }
             }
         });
