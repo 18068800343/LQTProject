@@ -1099,6 +1099,7 @@
 <script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="../../js/myUtil.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/quanxian.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BmTwezCvWyGaH3KNYkc5P6uq"></script>
 <script>
@@ -1154,6 +1155,22 @@
 						return xiugai+qiyong;
 					}else{
 						return xiangqing+xiugai+qiyong;
+					}
+				}
+			},
+			{
+				"class": "tcenter",
+				"targets": 15,
+				"searchable": true,
+				"render": function(data, type, full) {
+					var finishtime=full.finishTime.split(" ")[0];
+					const time = new Date();
+					time.setTime(time.getTime());
+					var now = time.Format("yyyy-MM-dd");
+					if(finishtime<now){
+						return "已完成"
+					}else{
+						return data;
 					}
 				}
 			},
