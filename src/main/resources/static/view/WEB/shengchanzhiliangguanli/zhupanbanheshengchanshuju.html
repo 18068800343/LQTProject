@@ -164,11 +164,22 @@
 <script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/myUtil.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../toastr/toastr.js"></script>
 <script>
     $(document).ready(function () {
+        const start = new Date();
+        const end = new Date();
+        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+        end.setTime(end.getTime());
+        var startTime = start.Format("yyyy-MM-dd hh:mm:ss");
+        var endTime = end.Format("yyyy-MM-dd hh:mm:ss");
+        $("#reservation").val(startTime)
+        $("#reservationEnd").val(endTime)
+
         initTable();
         initPeiFangOption();
+        searchBydate()
     });
     function showMask() {
         myTool.mask.show('查询中...');
@@ -194,7 +205,7 @@
                         $("#peifang").append(`<option value=${json[i].flId}>${json[i].flName}</option>`);
                     }
                 }
-                initPeiBiEcharts();
+                //initPeiBiEcharts();
             }
         });
     }
@@ -334,9 +345,9 @@
                 errMessage("请求UserController失败");
             },
             success: function (json) {
-                hidMask()
                 $('#mainContent').dataTable().fnClearTable();
                 $('#mainContent').DataTable().rows.add(json).draw(false);
+                hidMask()
             }
         });
     }

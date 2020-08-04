@@ -43,7 +43,7 @@
 			bone_flour_use,pitch_use,delete_state
 		from
 		  sys_formulation_management
-		where delete_state=1
+		where delete_state=1 ORDER BY fl_name desc
 	</select>
 	
 	<select id="selectByIdSysFormulationManagement" resultType="SysFormulationManagement">
