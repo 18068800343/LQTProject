@@ -1,11 +1,10 @@
 package com.ldxx.dao;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.ldxx.bean.BatchMgt;
 import com.ldxx.vo.BatchMgtVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface BatchMgtDao {
 	
@@ -22,4 +21,8 @@ public interface BatchMgtDao {
 	int insertBatchMgt(@Param("bm")BatchMgt bm);
 	
 	BatchMgt getBatchMgtByPlate(@Param("licencePlate")String licencePlate);
+
+	List<BatchMgtVo> getBatchToday(@Param("batch")String batch,@Param("licencePlate")String licencePlate);
+
+	List<BatchMgtVo> getBatchBybatch(@Param("batch")String batch,@Param("licencePlate")String licencePlate);
 }

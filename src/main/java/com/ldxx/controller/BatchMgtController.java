@@ -1,22 +1,21 @@
 package com.ldxx.controller;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.ldxx.bean.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.ldxx.bean.BatchMgt;
+import com.ldxx.bean.User;
 import com.ldxx.dao.BatchMgtDao;
 import com.ldxx.service.BatchMgtService;
 import com.ldxx.util.GetThisTimeUtils;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.vo.BatchMgtVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 批次管理
@@ -92,5 +91,17 @@ public class BatchMgtController {
 	public BatchMgt getBatchMgtByPlate(String licencePlate){
 		BatchMgt bm = service.getBatchMgtByPlate(licencePlate);
 		return bm;
+	}
+
+	@RequestMapping("/getBatchToday")
+	public List<BatchMgtVo> getBatchToday(String batch, String licencePlate){
+		List<BatchMgtVo> batchToday = dao.getBatchToday(batch, licencePlate);
+		return batchToday;
+	}
+
+	@RequestMapping("/getBatchBybatch")
+	public List<BatchMgtVo> getBatchBybatch(String batch, String licencePlate){
+		List<BatchMgtVo> batchToday = dao.getBatchBybatch(batch, licencePlate);
+		return batchToday;
 	}
 }

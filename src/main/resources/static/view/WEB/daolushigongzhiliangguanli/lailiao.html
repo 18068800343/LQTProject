@@ -170,13 +170,17 @@
 						<form class="form-inline">
 							<table  class="layui-table "lay-skin="line">
 								<tr>
+									<td style="height: 100%;">车牌</td>
+									<td style="height: 100%;"><!--{{licenceplate}}-->
+										<select  class="form-control" @change="getlicenceplate" v-model="licenceplate" id="licencePlate" style="width: 100%;">
+											<option :value="item.licencePlate" v-for="item in licenceplateList">{{item.licencePlate}}</option>
+										</select>
+									</td>
 									<td style="width: 20%;">批次</td>
 									<td style="width: 30%;">
 										<select  class="form-control" @change="getBatchVoById" v-model="batchid" style="width: 100%;">
 											<option :value="item.id" v-for="item in batchList">{{item.batch}}</option>
 										</select></td>
-									<td style="height: 100%;">车牌</td>
-									<td style="height: 100%;">{{licenceplate}}</td>
 								</tr>
 								<tr>
 									<td>桩号</td>
@@ -232,13 +236,17 @@
 						<form class="form-inline">
 							<table class="layui-table "lay-skin="line">
 								<tr>
+									<td style="height: 100%;">车牌</td>
+									<td style="height: 100%;"><!--{{licenceplate}}-->
+										<select  class="form-control" @change="getlicenceplate" v-model="licenceplate" style="width: 100%;">
+											<option :value="item.licencePlate" v-for="item in licenceplateList">{{item.licencePlate}}</option>
+										</select>
+									</td>
 									<td style="width: 20%;">批次</td>
 									<td style="width: 30%;">
-										<select  class="form-control" @change="getBatchVoById" v-model="batchid" style="width: 100%;">
+										<select  class="form-control" @change="getBatchVoById" v-model="batchid" id="batchid" style="width: 100%;">
 											<option :value="item.id" v-for="item in batchList">{{item.batch}}</option>
 										</select></td>
-									<td style="height: 100%;">车牌</td>
-									<td style="height: 100%;">{{licenceplate}}</td>
 								</tr>
 								<tr>
 									<td>桩号</td>
@@ -481,6 +489,7 @@
 		  batchList:'',
 		  siteId:'',
 		  sbbh:'',
+		  licenceplateList:'',
 	  },
 	  methods: {
 		//新建生产计划保存按钮事件
@@ -516,21 +525,43 @@
     		    }
     		}
 	    },
-        batchPost:function(){
+        /*batchPost:function(){
             //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
-            this.$http.post('/BatchMgt/getAllBatchMgt',{},{}).then((res)=>{
+            this.$http.post('/BatchMgt/getBatchToday',{},{}).then((res)=>{
             	this.batchList=res.body;
             	this.batchid=this.batchList[0].id;
             	this.getBatchVoById();
             },(res)=>{
                 console.log(res.status);
             });
-        },
+        },*/
+		initlicenceplate:function(){
+			this.$http.post('/BatchMgt/getBatchToday',{},{}).then((res)=>{
+				this.licenceplateList=res.body;
+				this.licenceplate=this.licenceplateList[0].licencePlate;
+				//this.batchid=this.licenceplateList[0].id;
+				this.getlicenceplate();
+			},(res)=>{
+				console.log(res.status);
+			});
+		},
+		getlicenceplate:function(){
+			this.$http.post('/BatchMgt/getBatchToday',{'licencePlate':this.licenceplate},{emulateJSON:true}).then((res)=>{
+				//var batchVo = res.body;
+				this.batchList=res.body;
+				this.batchid=this.batchList[0].id;
+				this.getBatchVoById();
+				this.getGuanlianbianhao();
+			},(res)=>{
+				console.log(res.status);
+			});
+		},
         getBatchVoById:function(){
         	
        	 	this.$http.post('/BatchMgt/getBatchMgtVoById',{'id':this.batchid},{emulateJSON:true}).then((res)=>{
 		       	 	var batchVo = res.body;
 		        	this.licenceplate = batchVo.licencePlate;
+		        	$("#licencePlate").val(this.licenceplate)
 		        	this.roadname = batchVo.stakeMark;
 		        	this.flname = batchVo.flName;
 		        	this.unloadedweight = batchVo.unloadedWeight;
@@ -560,8 +591,9 @@
 	  }
 	})
 	//初始化下拉框路段
-	addLaiLiaoVm.batchPost();
-	
+	//addLaiLiaoVm.batchPost();
+	addLaiLiaoVm.initlicenceplate();
+
 	
 	
 	//新建生产计划
@@ -591,6 +623,7 @@
 		  batchList:'',
 		  siteId:'',
 		  sbbh:'',
+		  licenceplateList:'',
 	  },
 	  methods: {
 		//新建生产计划保存按钮事件
@@ -628,7 +661,7 @@
     		    }
     		}
 	    },
-        batchPost:function(){
+        /*batchPost:function(){
             //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
             this.$http.post('/BatchMgt/getAllBatchMgt',{},{}).then((res)=>{
             	this.batchList=res.body;
@@ -636,7 +669,28 @@
             },(res)=>{
                 console.log(res.status);
             });
-        },
+        },*/
+		  initlicenceplate:function(){
+			  this.$http.post('/BatchMgt/getAllBatchMgt',{},{}).then((res)=>{
+				  this.licenceplateList=res.body;
+				  this.licenceplate=this.licenceplateList[0].licencePlate;
+				  //this.batchid=this.licenceplateList[0].id;
+				  this.getlicenceplate();
+			  },(res)=>{
+				  console.log(res.status);
+			  });
+		  },
+		  getlicenceplate:function(){
+			  this.$http.post('/BatchMgt/getBatchBybatch',{'licencePlate':this.licenceplate},{emulateJSON:true}).then((res)=>{
+				  //var batchVo = res.body;
+				  this.batchList=res.body;
+				  this.batchid=this.batchList[0].id;
+				  this.getBatchVoById();
+				  this.getGuanlianbianhao();
+			  },(res)=>{
+				  console.log(res.status);
+			  });
+		  },
         getBatchVoById:function(){
         	
        	 	this.$http.post('/BatchMgt/getBatchMgtVoById',{'id':this.batchid},{emulateJSON:true}).then((res)=>{
@@ -667,12 +721,24 @@
 			  },(res)=>{
 				  console.log(res.status);
 			  });
-		  }
+		  },
+		  xg_getlicenceplate:function(obj,obj2){
+			  this.$http.post('/BatchMgt/getBatchBybatch',{'licencePlate':obj},{emulateJSON:true}).then((res)=>{
+				  //var batchVo = res.body;
+				  this.batchList=res.body;
+				  this.batchid=obj2;
+				  this.getBatchVoById();
+				  this.getGuanlianbianhao();
+			  },(res)=>{
+				  console.log(res.status);
+			  });
+		  },
 	  }
 	})
 	//初始化下拉框路段
-	xgLaiLiaoVm.batchPost();
-	
+	//xgLaiLiaoVm.batchPost();
+	xgLaiLiaoVm.initlicenceplate();
+
 	var page_tr;
 	
 	var udMsg = (e)=>{
@@ -686,6 +752,9 @@
 	  xgLaiLiaoVm.roadname = data.stakemark;
 	  xgLaiLiaoVm.roadno = data.roadno;
 	  xgLaiLiaoVm.id = data.id;
+
+		xgLaiLiaoVm.xg_getlicenceplate(data.licenceplate,data.batchid)
+
 	  //来料类型
 	  xgLaiLiaoVm.flname = data.flname;
 	  //空车重量

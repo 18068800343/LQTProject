@@ -63,4 +63,40 @@
 		from batch_mgt where licence_plate=#{licencePlate} and loading_weight is null and delete_state=1 order by datetime_in desc
 	</select>
 
+	<select id="getBatchToday" resultType="BatchMgtVo">
+		select  a.id,a.road_id,a.batch,a.licence_plate,a.unloaded_weight,a.loading_weight,a.loading_weight-a.unloaded_weight weight,a.loading_temperature,a.pitch_type,a.datetime_in,
+		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,a.site_id,b.fl_name as pitchTypeName,sc.road_name,sc.site_number,sc.stake_mark,usr.u_name
+		from batch_mgt a
+		left join sys_formulation_management b on a.pitch_type=b.fl_id
+		left join site_construction sc on a.site_id=sc.id
+		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
+		 <where>
+		    a.delete_state=1 and  DateDiff(dd,a.datetime_in,getdate())=0 and loading_weight is not null
+			<if test="batch!='' and batch!=null">
+				and a.batch=#{batch}
+			</if>
+			<if test="licencePlate!=''and licencePlate!=null">
+				and a.licence_plate=#{licencePlate}
+			</if>
+		 </where>
+	</select>
+
+	<select id="getBatchBybatch" resultType="BatchMgtVo">
+		select  a.id,a.road_id,a.batch,a.licence_plate,a.unloaded_weight,a.loading_weight,a.loading_weight-a.unloaded_weight weight,a.loading_temperature,a.pitch_type,a.datetime_in,
+		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,a.site_id,b.fl_name as pitchTypeName,sc.road_name,sc.site_number,sc.stake_mark,usr.u_name
+		from batch_mgt a
+		left join sys_formulation_management b on a.pitch_type=b.fl_id
+		left join site_construction sc on a.site_id=sc.id
+		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
+		<where>
+			a.delete_state=1  and loading_weight is not null
+			<if test="batch!='' and batch!=null">
+				and a.batch=#{batch}
+			</if>
+			<if test="licencePlate!=''and licencePlate!=null">
+				and a.licence_plate=#{licencePlate}
+			</if>
+		</where>
+	</select>
+
 </mapper>
