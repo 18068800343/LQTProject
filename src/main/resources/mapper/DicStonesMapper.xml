@@ -6,7 +6,7 @@
 	select 
 		id,stones_name,delete_state
 	from dic_stones
-	where delete_state=1
+	where delete_state=1 ORDER BY sort
 </select>
 
 <insert id="addDicStones" parameterType="DicStones">

@@ -4,7 +4,7 @@
 
 	<select id="getAllWhCangchu" resultType="WhCangchu">
 		select a.id,a.bianhao,a.chuliang,a.cailiao,b.stones_name as  cailiaoming from wh_cangchu a
-		left join dic_stones b on a.cailiao=b.id
+		left join dic_stones b on a.cailiao=b.id order by a.bianhao
 	</select>
 
 	<insert id="addWhCangchu" parameterType="WhCangchu">

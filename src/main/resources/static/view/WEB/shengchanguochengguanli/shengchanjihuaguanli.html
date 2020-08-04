@@ -512,7 +512,7 @@
 											v-model="recipeid = recipeSelected" id="recipeid">
 									<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
 								</select></td>
-								<td>成品需要量</td>
+								<td>成品需要量(kg)</td>
 								<td><input class="form-control" type="text" @blur="reg(pdneed,'xiaoshu','pdneed')"
 										   v-model="pdneed" id="pdneed" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
@@ -546,7 +546,7 @@
 							<!--										   style="width: 100%; height: 100%; "></td>-->
 							<!--							</tr>-->
 							<tr>
-								<td>成品温度要求</td>
+								<td>成品温度要求(℃)</td>
 								<td><input class="form-control" type="text" @blur="reg(pdtemp,'xiaoshu','pdtemp')"
 										   v-model="pdtemp" id="pdtemp" placeholder="请输入"
 										   style="width: 100%; height: 100%;"></td>
@@ -570,7 +570,7 @@
 								<td><input class="form-control" type="text" v-model="pathPlan" id="pathPlan"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td>运输距离</td>
+								<td>运输距离(km)</td>
 								<td><input class="form-control" type="text" @blur="reg(distance,'xiaoshu','distance')"
 										   v-model="distance" id="distance" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
@@ -590,7 +590,7 @@
 								<td><input class="form-control" type="text" v-model="stakeMark" id="stakeMark"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td>桩号米数</td>
+								<td>桩号米数(m)</td>
 								<td><input class="form-control" type="text" v-model="turnRoundStakeMark"
 										   id="turnRoundStakeMark" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
@@ -731,7 +731,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					<b>修改生产数据计划</b>
+					<b>修改生产计划数据</b>
 				</h4>
 			</div>
 			<div class="modal-body">
@@ -753,7 +753,7 @@
 											v-model="recipeid = recipeSelected">
 									<option :value="item.flId" v-for="item in recipeList">{{item.flName}}</option>
 								</select></td>
-								<td>成品需要量</td>
+								<td>成品需要量(kg)</td>
 								<td><input class="form-control" type="text" @blur="reg(pdneed,'xiaoshu','pdneed')"
 										   v-model="pdneed" placeholder="请输入" style="width: 100%; height: 100%;"/></td>
 
@@ -765,7 +765,7 @@
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
 								<td>
-									成品温度要求
+									成品温度要求(℃)
 									<!--									干拌时间-->
 								</td>
 								<td>
@@ -806,7 +806,7 @@
 							<!--								</td>-->
 							<!--							</tr>-->
 							<tr>
-								<td>单价</td>
+								<td>单价(元)</td>
 								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')"
 										   v-model="price" placeholder="请输入" style="width: 100%; height: 100%;"></td>
 								<td></td>
@@ -817,7 +817,7 @@
 								<td><input class="form-control" type="text" v-model="pathPlan"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td>运输距离</td>
+								<td>运输距离(km)</td>
 								<td><input class="form-control" type="text" @blur="reg(distance,'xiaoshu','distance')"
 										   v-model="distance" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
@@ -837,7 +837,7 @@
 								<td><input class="form-control" type="text" v-model="stakeMark"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td>桩号米数</td>
+								<td>桩号米数(m)</td>
 								<td><input class="form-control" type="text" v-model="turnRoundStakeMark"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>

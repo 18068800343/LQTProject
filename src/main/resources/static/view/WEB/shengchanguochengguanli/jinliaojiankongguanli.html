@@ -278,8 +278,8 @@
                                             <td><input type="text" class="form-control" id="danjia" placeholder="请输入"
                                                        style="width: 70%;"/></td>
                                             <td>料仓编号</td>
-                                            <td><input type="text" class="form-control" id="liaocangbianhao"
-                                                       placeholder="请输入" style="width: 70%;"/></td>
+                                            <td><select id="liaocangbianhao" class="form-control" style="width: 70%;">
+                                            </select></td>
                                         </tr>
                                         <tr>
                                             <td>来货单位</td>
@@ -355,8 +355,8 @@
                                            <td><input type="text" class="form-control" id="xg_danjia" placeholder="请输入"
                                                       style="width: 70%;"/></td>
                                            <td>料仓编号</td>
-                                           <td><input type="text" class="form-control" id="xg_liaocangbianhao"
-                                                      placeholder="请输入" style="width: 70%;"/></td>
+                                           <td><select id="xg_liaocangbianhao" class="form-control" style="width: 70%;">
+                                           </select></td>
                                        </tr>
                                        <tr>
                                            <td>来货单位</td>
@@ -412,7 +412,8 @@
 		    });
 			
 			initTable();
-			initCailiao();
+            initCailiao();
+            initliaocangbianhao();
 		});
 		
 		var table=$('#mainContent').DataTable({
@@ -585,13 +586,36 @@
                             + json[i].stonesName + "</option>")
                         $("#xg_cailiao").append("<option value='" + json[i].id + "'>"
                             + json[i].stonesName + "</option>")
-		        	}
-	            }
-	        });
-		}
-		
-		
-		$("#baocun").click(function() {
+                    }
+                }
+            });
+        }
+
+
+        function initliaocangbianhao() {
+            $.ajax({
+                type: 'POST',
+                url: '/WhCangchu/getAllWhCangchu',
+                dataType: 'json',
+                data: {},
+                success: function (json) {
+                    $("#liaocangbianhao").html('');
+                    $("#xg_liaocangbianhao").html('');
+                    for (var i = 0; i < json.length; i++) {
+
+                        $("#liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"
+                            + json[i].bianhao + "</option>")
+                        $("#xg_liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"
+                            + json[i].bianhao + "</option>")
+                    }
+                    $("#liaocangbianhao").trigger("change");
+                    $("#xg_liaocangbianhao").trigger("change");
+                }
+            });
+        }
+
+
+        $("#baocun").click(function () {
             var bianhao = $("#bianhao").val();
             var shijiian = $("#shijian").val();
             var zhongliang = $("#zhongliang").val();
