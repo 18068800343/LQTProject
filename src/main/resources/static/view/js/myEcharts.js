@@ -36,13 +36,8 @@ function setLableOption(echartsDom){
 	pageCangChuLabelOption = {
 		normal: {
 			show: true,
-			position: echartsDom.config.position,
-			distance: echartsDom.config.distance,
-			align: echartsDom.config.align,
-			verticalAlign: echartsDom.config.verticalAlign,
-			rotate: echartsDom.config.rotate,
 			formatter: '{c}  {name|{a}}',
-			fontSize: 30,
+			fontSize:15,
 			rich: {
 				name: {
 					textBorderColor: '#fffdfc'
@@ -54,46 +49,33 @@ function setLableOption(echartsDom){
 
 function setCangChuOption(map){
 	let option = {
-			color: ['#585858', '#006699'],
-			tooltip: {
-				trigger: 'axis',
-				axisPointer: {
+			color: ['#1F99EE', '#006699'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
 					type: 'shadow'
 				}
-			},
-			legend: {
-				data: ['仓库容量', '剩余重量']
-			},
-			toolbox: {
-				show: true,
-				orient: 'vertical',
-				left: 'right',
-				top: 'center',
-				feature: {
-					mark: {show: true},
-					dataView: {show: true, readOnly: false},
-					magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-					restore: {show: true},
-					saveAsImage: {show: true}
-				}
-			},
-			calculable: true,
-			xAxis: [
-				{
-					type: 'category',
-					name: '仓库编号',
-					axisTick: {show: true},
-					data: map.xList
-				}
-			],
-			yAxis: [
-				{
-					type: 'value',
-					name:"重量",
-				}
-			],
-			series: [
-				{
+		    },
+		    legend: {
+		    	data: ['仓库容量', '剩余重量']
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    xAxis: {
+		        type: 'value',
+		        name:"重量",
+		    },
+		    yAxis: {
+		    	name: '仓库编号',
+				axisTick: {show: true},
+				data: map.xList
+		    },
+		    series: [
+		    	{
 					name: '仓库容量',
 					type: 'bar',
 					barGap: 0,
@@ -106,8 +88,9 @@ function setCangChuOption(map){
 					label: pageCangChuLabelOption,
 					data: map.aList
 				}
-			]
-	};
+		    ]
+		};
+
 	return option;
 }
 
