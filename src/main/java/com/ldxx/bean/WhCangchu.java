@@ -8,6 +8,8 @@ public class WhCangchu {
 
     private String cailiaoming;
 
+    private String stonesName;
+
     public String getCailiaoming() {
         return cailiaoming;
     }

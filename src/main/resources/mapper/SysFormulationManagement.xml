@@ -68,7 +68,7 @@
 			fl_id,fl_no,fl_name
 		from
 		  sys_formulation_management
-		where delete_state=1
+		where delete_state=1 order by fl_name
 	</select>
 	
 	<insert id="addFuShuCaiLiao" parameterType="java.util.List" useGeneratedKeys="false">
@@ -90,7 +90,7 @@
 		from
 		  sys_material_attached as a
 		left join sys_formulation_management as b on a.fl_id=b.fl_id
-		where b.delete_state=1
+		where b.delete_state=1 ORDER BY m_name
 	</select>
 	
 	<delete id="deleteByIdFuShuCaiLiao" >

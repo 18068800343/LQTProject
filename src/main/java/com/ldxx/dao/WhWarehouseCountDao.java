@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import com.ldxx.bean.WhCangchu;
 import org.apache.ibatis.annotations.Param;
 
 import com.ldxx.bean.WhWarehouseCount;
@@ -21,6 +22,8 @@ public interface WhWarehouseCountDao {
 	int insertWhWarehouseCount(@Param("wwc") WhWarehouseCount wwc);
 
 	WhWarehouseCount getWhWarehouseCountByStorNo(@Param("storNo") String storNo);
+
+	WhCangchu getWhCangChuByStorNo(String storNo);
 
 	List<Map> getLiaoCangPanDian();
 

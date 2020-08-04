@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.ldxx.bean.WhCangchu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,8 +59,8 @@ public class WhIncomingMaterialServiceImpl implements WhIncomingMaterialService 
 		//插入进料信息的同时插入一条仓库记录start
 		Date date = new Date();
 		WhWarehouseCount wwc = wwcDao.getWhWarehouseCountByStorNo(wm.getStorNo());
-		if(null==wwc)
-		{
+		WhCangchu wwc1 = wwcDao.getWhCangChuByStorNo(wm.getStorNo());
+		if (null == wwc) {
 			wwc = new WhWarehouseCount();
 			wwc.setId(LDXXUtils.getUUID12());
 			wwc.setStorNo(wm.getStorNo());
@@ -69,12 +70,12 @@ public class WhIncomingMaterialServiceImpl implements WhIncomingMaterialService 
 			wwc.setEditUserId2(wm.getEditUserId());
 			wwc.setEditDatetime2(wm.getEditDatetime());
 			wwc.setDeleteState(1);
-			wwcDao.insertWhWarehouseCount(wwc);	
-		}else if(!wwc.getMaterials().equals(wm.getMaterials())){
+			wwcDao.insertWhWarehouseCount(wwc);
+		} else if (!wwc1.getCailiao().equals(wm.getMaterials())) {
 			//如果进料材料类型和料仓对应不上，则不能插入数据
 			return -3;
-		}else{
-			wwc.setWeight(new BigDecimal(wwc.getWeight().doubleValue()+wm.getWeight()));
+		} else {
+			wwc.setWeight(new BigDecimal(wwc.getWeight().doubleValue() + wm.getWeight()));
 			wwc.setDatetime(date);
 			wwc.setEditDatetime2(wm.getEditDatetime());
 			wwc.setEditUserId2(wm.getEditUserId());

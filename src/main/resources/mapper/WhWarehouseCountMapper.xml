@@ -34,12 +34,12 @@
 	<update id="delWhWarehouseCountById">
 		update wh_warehouse_count set delete_state=0 where id=#{id}
 	</update>
-	
-	<insert id="insertWhWarehouseCount" parameterType="WhWarehouseCount">
+
+    <insert id="insertWhWarehouseCount" parameterType="WhWarehouseCount">
 		insert into wh_warehouse_count(id,stor_no,datetime,weight,materials,meminfo,edit_user_id2,edit_datetime2,delete_state,max_weight,tiji)
 		values(#{wwc.id},#{wwc.storNo},#{wwc.datetime},#{wwc.weight},#{wwc.materials},#{wwc.meminfo},#{wwc.editUserId2},#{wwc.editDatetime2},1,#{wwc.maxWeight},#{wwc.tiji})
 	</insert>
-	<select id="getWhWarehouseCountByStorNo" resultType="WhWarehouseCount">
+    <select id="getWhWarehouseCountByStorNo" resultType="WhWarehouseCount">
 		select top 1 a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state,b.stones_name as materialsName,usr.u_name
 		from wh_warehouse_count as a
 		left join dic_stones b on a.materials=b.id
@@ -47,14 +47,21 @@
 		where a.delete_state=1 and a.stor_no=#{storNo}
 	</select>
 
+    <select id="getWhCangChuByStorNo" resultType="WhCangchu">
+		select top 1 a.*,b.stones_name
+		from wh_cangchu as a
+		left join dic_stones b on a.cailiao=b.id
+		where a.bianhao=#{storNo}
+	</select>
 
-	<select id="getLiaoCangPanDian" resultType="map">
+
+    <select id="getLiaoCangPanDian" resultType="map">
 		SELECT a.*,CASE WHEN b.dayWeightIn is null THEN 0 ELSE b.dayWeightIn end as dayWeightIn ,CASE WHEN b.dayWeightIn is null THEN 0 ELSE b.dayWeightIn-a.dayWeightOut end as dayWeightCha  FROM (SELECT top 7 SUM(weight) dayWeightOut,convert(char(10),production_time ,120) dayTimeOut FROM quality_by_plate_real_time_prodocution_data GROUP BY convert(char(10),production_time ,120) ORDER BY convert(char(10),production_time ,120) desc) a
 		LEFT JOIN (SELECT SUM(weight) dayWeightIn,convert(char(10),datetime ,120) dayTimeIn FROM wh_incoming_material GROUP BY convert(char(10),datetime ,120)) b on a.dayTimeOut = b.dayTimeIn
 		ORDER BY a.dayTimeOut ASC
 	</select>
 
-	<select id="getLaiLiaoWeightByTime" resultType="Double">
+    <select id="getLaiLiaoWeightByTime" resultType="Double">
 		SELECT SUM(weight) FROM wh_incoming_material WHERE datetime BETWEEN #{startTime} and  #{endTime}
 	</select>
 
