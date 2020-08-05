@@ -10,6 +10,15 @@ public class SiteConstructionVo extends SiteConstruction {
 	private String roadname;
 	private BigDecimal allXuQiu;
 	private BigDecimal allGongYing;
+	private String datetime;
+
+	public String getDatetime() {
+		return datetime;
+	}
+
+	public void setDatetime(String datetime) {
+		this.datetime = datetime;
+	}
 
 	public BigDecimal getAllXuQiu() {
 		return allXuQiu;

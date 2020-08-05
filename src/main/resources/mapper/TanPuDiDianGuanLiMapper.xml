@@ -105,7 +105,12 @@
     </select>
 
     <select id="getAllTanPuDiDianVo" resultType="siteConstructionVo">
-		select sc.*  from site_construction sc
+		SELECT
+			sc.*,ppc.datetime
+		FROM
+			site_construction sc
+		LEFT JOIN plan_production_collection ppc
+		on sc.id = ppc.site_id
 	</select>
 
     <select id="getAllTanPuDiDianVoByState" resultType="siteConstructionVo">
