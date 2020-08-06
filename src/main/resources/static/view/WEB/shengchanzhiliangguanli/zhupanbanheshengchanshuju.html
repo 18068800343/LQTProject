@@ -167,6 +167,7 @@
 <script src="../../js/myUtil.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../toastr/toastr.js"></script>
 <script>
+    var flag=0
     $(document).ready(function () {
         const start = new Date();
         const end = new Date();
@@ -180,6 +181,7 @@
         initTable();
         initPeiFangOption();
         searchBydate()
+        flag=1
     });
     function showMask() {
         myTool.mask.show('查询中...');
@@ -188,12 +190,25 @@
         myTool.mask.hide();
     }
 
-    function initPeiFangOption() {
+    function initPeiFangOption(obj1,obj2) {
+        var startime;
+        var endtime;
+        if(obj1!=""&&obj1!=null&&obj1!=undefined&&obj2!=""&&obj2!=null&&obj2!=undefined){
+            startime=obj1;
+            endtime=obj2;
+        }else{
+            startime=$("#reservation").val();
+            endtime=$("#reservationEnd").val();
+        }
         $.ajax({
             type: 'POST',
-            url: '/SysFormulationManagement/selectAllSysFormulationManagement',
+            //url: '/SysFormulationManagement/selectAllSysFormulationManagement',
+            url: '/ShengChanJiHua/getDISTINCTRecipeIdByFinishTime',
             dataType: 'json',
-            data: {},
+            data: {
+                startime:startime,
+                endTime:endtime
+            },
             error: function (msg) {
                 errMessage("请求UserController失败");
             },
@@ -244,6 +259,9 @@
                 $("#reservation").val('');
                 return false;
             }
+            if(flag==1){
+                initPeiFangOption(d1,d2)
+            }
         }
     };
     // 结束时间
@@ -260,6 +278,9 @@
                 toastr.error("开始时间不能大于结束时间！");
                 $("#reservationEnd").val('');
                 return false;
+            }
+            if(flag==1){
+                initPeiFangOption(d1,d2)
             }
         }
     };

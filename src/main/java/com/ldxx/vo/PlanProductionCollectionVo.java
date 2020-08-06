@@ -45,6 +45,25 @@ public class PlanProductionCollectionVo extends PlanProductionCollection {
 
 	private BigDecimal zongjia;
 
+	private String flId;
+	private String flName;
+
+	public String getFlId() {
+		return flId;
+	}
+
+	public void setFlId(String flId) {
+		this.flId = flId;
+	}
+
+	public String getFlName() {
+		return flName;
+	}
+
+	public void setFlName(String flName) {
+		this.flName = flName;
+	}
+
 	public String getXiangmubu() {
 		return xiangmubu;
 	}

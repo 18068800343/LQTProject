@@ -52,4 +52,6 @@ public interface ShengChanJiHuaDao {
     List<PlanProductionCollectionVo> xggetCountByfinishTime(String startime, String endTime,String id);
 
     PlanProductionCollectionVo getBysiteId(String id);
+
+    List<PlanProductionCollectionVo> getDISTINCTRecipeIdByFinishTime(String startime, String endTime);
 }

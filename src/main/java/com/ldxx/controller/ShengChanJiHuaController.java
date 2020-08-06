@@ -3,15 +3,15 @@ package com.ldxx.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.PlanConstructionDeviation;
-import com.ldxx.bean.PlanProductionCollection;
-import com.ldxx.bean.SiteConstruction;
 import com.ldxx.bean.User;
 import com.ldxx.dao.ShengChanJiHuaDao;
 import com.ldxx.service.ShengChanJiHuaService;
 import com.ldxx.util.DateUtil;
 import com.ldxx.util.LDXXUtils;
 import com.ldxx.util.MsgFormatUtils;
-import com.ldxx.vo.*;
+import com.ldxx.vo.PlanConstructionDeviationVo;
+import com.ldxx.vo.PlanProductionCollectionVo;
+import com.ldxx.vo.PlanProductionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +22,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/ShengChanJiHua")
@@ -149,4 +148,10 @@ public class ShengChanJiHuaController {
 		return result;
 	}
 
+	@RequestMapping("/getDISTINCTRecipeIdByFinishTime")
+	@ResponseBody
+	public List<PlanProductionCollectionVo> getDISTINCTRecipeIdByFinishTime(String startime, String endTime) {
+		List<PlanProductionCollectionVo> list = dao.getDISTINCTRecipeIdByFinishTime(startime,endTime);
+		return list;
+	}
 }
