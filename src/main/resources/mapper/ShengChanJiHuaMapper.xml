@@ -226,14 +226,21 @@
 	</select>
 
 	<select id="getDISTINCTRecipeIdByFinishTime" resultType="planProductionCollectionVo">
-		select DISTINCT sfm.fl_id, sfm.fl_name from plan_production_collection a
-		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = a.recipe_id and sfm.delete_state = 1
-		where a.delete_state=1
+		SELECT DISTINCT
+		sfm.fl_id,
+		sfm.fl_name
+		FROM
+		quality_by_plate_real_time_prodocution_data qbd
+		LEFT JOIN plan_production_collection a ON qbd.plan_id = a.plan_id
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id = a.recipe_id
+		AND sfm.delete_state = 1
+		WHERE
+		a.delete_state = 1
 		<if test="startime!='' and startime!=null">
-			AND a.finish_time &gt; #{startime}
+			AND qbd.production_time &gt; #{startime}
 		</if>
 		<if test="endTime!='' and endTime!=null">
-			and a.finish_time &lt; #{endTime}
+			and qbd.production_time &lt; #{endTime}
 		</if>
 
 	</select>
