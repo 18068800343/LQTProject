@@ -79,11 +79,12 @@
                         <th>空车重量(kg)</th>
                         <th>装料重量(kg)</th>
                         <th>料净重量(kg)</th>
-						<th>装料温度(°)</th>
-						<th>成品沥青类型</th>
-						<th>入场时间</th>
-						<th>出场时间</th>
-						<th>录入人</th>
+                        <th>装料温度(°)</th>
+                        <th>成品沥青类型</th>
+                        <th>客户名称</th>
+                        <th>入场时间</th>
+                        <th>出场时间</th>
+                        <th>录入人</th>
                         <th style="width:70px;">操作</th>
                     </tr>
                 </thead>
@@ -351,6 +352,7 @@
             {"data": "weight"},
             {"data": "loadingTemperature"},
             {"data": "pitchType"},
+            {"data": "keHuMingCheng"},
             {"data": "datetimeIn"},
             {"data": "datetimeOut"},
             {"data": "editUserId"},
@@ -358,7 +360,7 @@
         ],
         "columnDefs": [{
             "class": "tcenter",
-            "targets": 11,
+            "targets": 12,
             "searchable": true,
             "render": function (data, type, full) {
                 //'<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
@@ -369,7 +371,7 @@
         ], "fnDrawCallback": function () {
             initTableQuanxian()
         },
-        "order": [[8, 'desc']],
+        "order": [[9, 'desc']],
         "oLanguage": { //国际化配置
             "sProcessing": "正在获取数据，请稍后...",
             "sLengthMenu": "显示 _MENU_ 条",

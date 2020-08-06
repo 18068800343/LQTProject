@@ -4,7 +4,7 @@
 
 	<select id="getAllBatchMgt" resultType="BatchMgtVo">
 		select a.id,a.road_id,a.batch,a.licence_plate,a.unloaded_weight,a.loading_weight,a.loading_weight-a.unloaded_weight weight,a.loading_temperature,a.pitch_type,a.datetime_in,
-		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,a.site_id,b.fl_name as pitchTypeName,sc.road_name,sc.site_number,sc.stake_mark,usr.u_name
+		a.datetime_out,a.edit_user_id,a.edit_datetime,a.delete_state,a.site_id,b.fl_name as pitchTypeName,a.ke_hu_ming_cheng,sc.road_name,sc.site_number,sc.stake_mark,usr.u_name
 		from batch_mgt a
 		left join sys_formulation_management b on a.pitch_type=b.fl_id
 		left join site_construction sc on a.site_id=sc.id

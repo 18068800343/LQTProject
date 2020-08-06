@@ -29,27 +29,37 @@ public class BatchMgt {
 
 	private String pitchType;//成品沥青类型
 	private String pitchTypeName;
-	
+
 	private String uName;
-	
+
+	private String keHuMingCheng;
+
 	private String roadName;//路段编号，暂时防止显示报错用 19.11.25
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public Date datetimeIn;//入场时间
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date datetimeIn;//入场时间
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public Date datetimeOut;//出场时间
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public Date datetimeOut;//出场时间
 
-    public String editUserId;//最后录入用户
+	public String editUserId;//最后录入用户
 
-    public String editDatetime;//最后录入日期
+	public String editDatetime;//最后录入日期
 
-    public int deleteState;//逻辑删除1存在，0删除
+	public int deleteState;//逻辑删除1存在，0删除
 
 	private String siteId;
 
+
+	public String getKeHuMingCheng() {
+		return keHuMingCheng;
+	}
+
+	public void setKeHuMingCheng(String keHuMingCheng) {
+		this.keHuMingCheng = keHuMingCheng;
+	}
 
 	public String getSiteId() {
 		return siteId;
