@@ -352,11 +352,11 @@
 							"targets": 10,
 							"searchable": false,
 							"render": function(data, type, full) {
-								    	var chakan=  '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看添加剂材料"  data-toggle="modal" onclick="xiangqingpeibihuixian(this)"></i>'
-			                            var xiugai='<i class="iconfont icon-xiugai Pheb" style="font-size:18px;cursor:pointer;" title="修改" data-toggle="modal" onclick="xgpeibihuixian(this)"></i>'
-			                            var shanchu='<i class="iconfont icon-shanchu Phec" style="font-size:18px;cursor:pointer;" title="删除" onclick="deleteyige(this)"></i>';
-								    	return chakan;
-								        }
+								var chakan = '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看添加剂材料"  data-toggle="modal" onclick="xiangqingpeibihuixian(this)"></i>'
+								var xiugai = '<i class="iconfont icon-xiugai Pheb" style="font-size:18px;cursor:pointer;" title="修改" data-toggle="modal" onclick="xgpeibihuixian(this)"></i>'
+								var shanchu = '<i class="iconfont icon-shanchu Phec" style="font-size:18px;cursor:pointer;" title="删除" onclick="deleteyige(this)"></i>';
+								return chakan + xiugai + shanchu;
+							}
 							},
 						],"fnDrawCallback" : function() {
 								initTableQuanxian()
