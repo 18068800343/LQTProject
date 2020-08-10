@@ -21,4 +21,11 @@ public class GuanlianbianhaoController {
         return guanlianbianhao;
     }
 
+    @RequestMapping("/getBysiteIdAndDate")
+    public Guanlianbianhao getcountBysiteIdAndDate( String siteId,String editDate){
+        String datetime="%" +editDate.split(" ")[0] + "%";
+        Guanlianbianhao guanlianbianhao = dao.getcountBysiteIdAndDate(siteId, datetime);
+        return guanlianbianhao;
+    }
+
 }

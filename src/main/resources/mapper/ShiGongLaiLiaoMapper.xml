@@ -42,7 +42,7 @@
 	<select id="getAllShiGongLaiLiao" parameterType="String" resultType="siteFieldMaterialMgtVo">
 		SELECT
 		sfmm.*,bm.licence_plate,bm.batch,bm.unloaded_weight,sfm.fl_name,srm.road_no,srm.road_name,
-		uu.u_name,(bm.loading_weight-bm.unloaded_weight) as yuguweight,sc.road_name as roadname,sc.site_number as sitenumber,sc.stake_mark as stakemark
+		uu.u_name,(bm.loading_weight-bm.unloaded_weight) as yuguweight,sc.road_name as roadname,sc.site_number as sitenumber,sc.stake_mark as stakemark,bm.pitch_type
 		FROM
 		site_field_material_mgt sfmm
 		LEFT JOIN (SELECT *  from batch_mgt bm  WHERE <include refid="luduanquanxian_sql"></include>  bm.delete_state!=0)
