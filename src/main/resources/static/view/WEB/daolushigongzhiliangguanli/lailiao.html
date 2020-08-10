@@ -320,7 +320,7 @@
 						}, {
 							"data" : "licenceplate"
 						}, {
-							"data" : "flname"
+							"data" : "pitchType"
 						}, {
 							"data" : "temp"
 						}, {
@@ -563,7 +563,8 @@
 		        	this.licenceplate = batchVo.licencePlate;
 		        	$("#licencePlate").val(this.licenceplate)
 		        	this.roadname = batchVo.stakeMark;
-		        	this.flname = batchVo.flName;
+		        	//this.flname = batchVo.flName;
+		        	this.flname = batchVo.pitchType;
 		        	this.unloadedweight = batchVo.unloadedWeight;
 		        	this.yuguweight = batchVo.yuguweight;
 		        	this.temp = batchVo.loadingTemperature;
@@ -697,14 +698,14 @@
 		       	 	var batchVo = res.body;
 		        	this.licenceplate = batchVo.licencePlate;
 					this.roadname = batchVo.stakeMark;
-					this.flname = batchVo.flName;
+					//this.flname = batchVo.flName;
+					this.flname = batchVo.pitchType;
 		        	this.unloadedweight = batchVo.unloadedWeight;
 		        	this.yuguweight = batchVo.yuguweight;
 		        	this.temp = batchVo.loadingTemperature;
 		        	this.batch = batchVo.batch;
 		        	this.roadno = batchVo.roadno;
 					$("#xgbiaoduan").attr("data-id",batchVo.siteId)
-					this.getGuanlianbianhao();
             },(res)=>{
                 console.log(res.status);
             });
@@ -728,7 +729,6 @@
 				  this.batchList=res.body;
 				  this.batchid=obj2;
 				  this.getBatchVoById();
-				  this.getGuanlianbianhao();
 			  },(res)=>{
 				  console.log(res.status);
 			  });
@@ -771,10 +771,11 @@
 		xgLaiLiaoVm.sbbh =""
 		$.ajax({
 			type : 'POST',
-			url : '/Guanlianbianhao/getcountBysiteIdAndDate',
+			url : '/Guanlianbianhao/getBysiteIdAndDate',
 			dataType : 'json',
 			data : {
 				siteId:data.siteId,
+				editDate:data.editdatetime
 			},
 			success : function(json) {
 				if(json!=null&&json!=undefined&&json!=""){

@@ -25,6 +25,16 @@ public class SiteFieldMaterialMgtVo extends SiteFieldMaterialMgt {
 	private String sitenumber;
 	private String stakemark;
 
+	private String pitchType;
+
+	public String getPitchType() {
+		return pitchType;
+	}
+
+	public void setPitchType(String pitchType) {
+		this.pitchType = pitchType;
+	}
+
 	public String getStakemark() {
 		return stakemark;
 	}
