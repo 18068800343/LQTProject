@@ -3,7 +3,7 @@
 <mapper namespace="com.ldxx.dao.WhCangchuDao" >
 
 	<select id="getAllWhCangchu" resultType="WhCangchu">
-		select a.id,a.bianhao,a.chuliang,a.cailiao,b.stones_name as  cailiaoming from wh_cangchu a
+		select a.id,a.bianhao,a.chuliang,a.cailiao,a.caizhi,a.chandi,b.stones_name as  cailiaoming from wh_cangchu a
 		left join dic_stones b on a.cailiao=b.id order by a.bianhao
 	</select>
 
@@ -12,7 +12,7 @@
 	</insert>
 
 	<update id="updWhCangchu" parameterType="WhCangchu">
-		update  wh_cangchu set bianhao=#{bianhao},chuliang=#{chuliang},cailiao=#{cailiao} where id=#{id}
+		update  wh_cangchu set bianhao=#{bianhao},chuliang=#{chuliang},cailiao=#{cailiao},caizhi=#{caizhi},chandi=#{chandi} where id=#{id}
 	</update>
 
 	<delete id="delWhCangchu">
@@ -20,7 +20,7 @@
 	</delete>
 
 	<select id="getWhCangchuById" resultType="WhCangchu">
-		select a.id,a.bianhao,a.chuliang,a.cailiao,b.stones_name as cailiaoming from wh_cangchu a
+		select a.id,a.bianhao,a.chuliang,a.cailiao,b.stones_name,caizhi,chandi as cailiaoming from wh_cangchu a
 		left join dic_stones b on a.cailiao=b.id
 		where id=#{id}
 	</select>

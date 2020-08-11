@@ -205,6 +205,24 @@
                                            </td>
                                        </tr>
                                        <tr>
+                                           <td>长</td>
+                                           <td><input type="text" class="form-control" id="chang"
+                                                      style="width: 70%;"/></td>
+                                           <td>宽</td>
+                                           <td>
+                                               <input type="text" class="form-control" id="kuan"
+                                                      style="width: 70%;"/>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>高</td>
+                                           <td><input type="text" class="form-control" id="gao"
+                                                      style="width: 70%;"/></td>
+                                           <td></td>
+                                           <td>
+                                           </td>
+                                       </tr>
+                                       <tr>
                                            <td>
                                                体积(m³)
                                            </td>
@@ -289,19 +307,35 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td>长</td>
+                                            <td><input type="text" class="form-control" id="xg_chang"
+                                                       style="width: 70%;"/></td>
+                                            <td>宽</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="xg_kuan"
+                                                       style="width: 70%;"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>高</td>
+                                            <td><input type="text" class="form-control" id="xg_gao"
+                                                       style="width: 70%;"/></td>
+                                            <td></td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td>
                                                 体积(m³)
                                             </td>
                                             <td>
-                                                <input type="text" id="xg_tiji" style="width: 70%;"
-                                                       onblur="xg_countWeight()"/>
+                                                <input type="text" id="xg_tiji" style="width: 70%;"/>
                                             </td>
                                             <td>
                                                 单位体积重量(kg/m³)
                                             </td>
                                             <td>
-                                                <input type="text" id="xg_midu" style="width: 70%;"
-                                                       onblur="xg_countWeight()"/>
+                                                <input type="text" id="xg_midu" style="width: 70%;"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -395,48 +429,101 @@
     function countWeight() {
         let tiji = $("#tiji").val()
         let midu = $("#midu").val()
+        let chang = $("#chang").val()
+        let kuan = $("#kuan").val()
+        let gao = $("#gao").val()
 
         let re = new RegExp('^[0-9]+\.?[0-9]*$');
         let flag1;
         let flag2;
+        let flag3;
+        let flag4;
+        let flag5;
         flag1 = reg(tiji, re);
         flag2 = reg(midu, re);
+        flag3 = reg(chang, re);
+        flag4 = reg(kuan, re);
+        flag5 = reg(gao, re);
 
         if (!flag1) {
             toastr.error("体积请输入数字");
             $("#tiji").val('')
+            return
         }
         if (!flag2) {
             toastr.error("密度请输入数字");
             $("#midu").val('')
+            return
+        }
+        if (!flag3) {
+            toastr.error("长度请输入数字");
+            $("#chang").val('')
+            return
+        }
+        if (!flag4) {
+            toastr.error("宽度请输入数字");
+            $("#kuan").val('')
+            return
+        }
+        if (!flag5) {
+            toastr.error("高度请输入数字");
+            $("#gao").val('')
+            return
         }
 
         let countWeight = tiji * midu;
+        let tijiCount = chang * kuan * gao;
         $("#zhongliang").val(countWeight);
+        $("#tiji").val(tijiCount);
 
     }
 
     function xg_countWeight() {
         let tiji = $("#xg_tiji").val()
         let midu = $("#xg_midu").val()
-
+        let chang = $("#xg_chang").val()
+        let kuan = $("#xg_kuan").val()
+        let gao = $("#xg_gao").val()
         let re = new RegExp('^[0-9]+\.?[0-9]*$');
         let flag1;
         let flag2;
+        let flag3;
+        let flag4;
+        let flag5;
         flag1 = reg(tiji, re);
         flag2 = reg(midu, re);
-
+        flag3 = reg(chang, re);
+        flag4 = reg(kuan, re);
+        flag5 = reg(gao, re);
         if (!flag1) {
             toastr.error("体积请输入数字");
-            $("#xg_tiji").val('')
+            $("#xg_tiji").val('');
+            return;
         }
         if (!flag2) {
             toastr.error("密度请输入数字");
             $("#xg_midu").val('')
+            return;
         }
-
+        if (!flag3) {
+            toastr.error("长度请输入数字");
+            $("#xg_chang").val('')
+            return;
+        }
+        if (!flag4) {
+            toastr.error("宽度请输入数字");
+            $("#xg_kuan").val('')
+            return;
+        }
+        if (!flag5) {
+            toastr.error("高度请输入数字");
+            $("#xg_gao").val('')
+            return;
+        }
         let countWeight = tiji * midu;
+        let tijiCount = chang * kuan * gao;
         $("#xg_zhongliang").val(countWeight);
+        $("#xg_tiji").val(tijiCount);
     }
 
     var table = $('#mainContent').dataTable({
@@ -688,6 +775,7 @@
     }
 
     $("#baocun").click(function () {
+        countWeight();
         var liaocangbianhao = $("#liaocangbianhao").val();
         var shijian = $("#shijian").val();
         var zhongliang = $("#zhongliang").val();
@@ -695,6 +783,10 @@
         //var lururen=$("#lururen").val();
         var beizhu = $("#beizhu").val();
         var maxWeight = $("#maxWeight").val();
+        var chang = $("#chang").val();
+        var kuan = $("#kuan").val();
+        var gao = $("#gao").val();
+
         var tiji = $("#tiji").val();
         $.ajax({
             type: 'POST',
@@ -781,6 +873,7 @@
     })
 	
 	$("#xg_baocun").click(function() {
+        xg_countWeight();
         var liaocangbianhao = $("#xg_liaocangbianhao").val();
         var shijian = $("#xg_shijian").val();
         var zhongliang = $("#xg_zhongliang").val();

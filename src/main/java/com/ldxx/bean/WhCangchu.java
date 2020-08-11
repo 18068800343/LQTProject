@@ -5,10 +5,37 @@ public class WhCangchu {
     private String bianhao;
     private String chuliang;
     private String cailiao;
+    private String caizhi;
+    private String chandi;
 
     private String cailiaoming;
 
     private String stonesName;
+
+    public String getCaizhi() {
+
+        return caizhi;
+    }
+
+    public void setCaizhi(String caizhi) {
+        this.caizhi = caizhi;
+    }
+
+    public String getChandi() {
+        return chandi;
+    }
+
+    public void setChandi(String chandi) {
+        this.chandi = chandi;
+    }
+
+    public String getStonesName() {
+        return stonesName;
+    }
+
+    public void setStonesName(String stonesName) {
+        this.stonesName = stonesName;
+    }
 
     public String getCailiaoming() {
         return cailiaoming;

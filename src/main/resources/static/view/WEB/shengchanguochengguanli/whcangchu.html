@@ -81,11 +81,13 @@
                         <table class="layui-table" lay-skin="line" id="mainContent">
                             <thead>
                                     <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
-                                    <th>编号</th>
-                                    <th>储量(kg)</th>
-                                    <th>材料</th>
-                                    <th style="width:75px;">操作</th>
-                                </tr>
+                                        <th>编号</th>
+                                        <th>储量(kg)</th>
+                                        <th>材料</th>
+                                        <th>材质</th>
+                                        <th>产地</th>
+                                        <th style="width:75px;">操作</th>
+                                    </tr>
                             </thead>
                             <tbody>
                                 
@@ -154,19 +156,27 @@
                                     <table class="layui-table "lay-skin="line" style="height:auto;">
                                     	<tr>
 											<td style="width: 20%;">编号</td>
-											<td style="width: 30%;"><input type="text" id="xg_liaocangbianhao"  style="width: 70%;" /></td>
-											<td>储量(kg)</td>
-											<td><input type="text" id="xg_maxWeight" style="width: 70%;" /></td>
-										</tr>
+                                            <td style="width: 30%;"><input type="text" id="xg_liaocangbianhao"
+                                                                           style="width: 70%;"/></td>
+                                            <td>储量(kg)</td>
+                                            <td><input type="text" id="xg_maxWeight" style="width: 70%;"/></td>
+                                        </tr>
                                         <tr>
-											<td>材料</td>
-											<td>
-												<select id="xg_cailiao" style="width: 70%;">
-												</select>
-											</td>
-											<td></td>
-											<td></td>
-										</tr>
+                                            <td>材料</td>
+                                            <td>
+                                                <select id="xg_cailiao" style="width: 70%;">
+                                                </select>
+                                            </td>
+                                            <td>材质</td>
+                                            <td><input type="text" id="xg_caizhi" style="width: 70%;"/></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>产地</td>
+                                            <td><input type="text" id="xg_chandi" style="width: 70%;"/></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
                                     </table>
                                 </form>  
                             </div>
@@ -216,14 +226,16 @@
 		    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
 		"columns": [
-            { "data": "bianhao"},
-            { "data": "chuliang"},
-            { "data": "cailiaoming"},
-            { "data": null},
+            {"data": "bianhao"},
+            {"data": "chuliang"},
+            {"data": "cailiaoming"},
+            {"data": "caizhi"},
+            {"data": "chandi"},
+            {"data": null},
         ],
-        "columnDefs": [{	
-					 "class": "tcenter",
-					    "targets": 3,
+        "columnDefs": [{
+            "class": "tcenter",
+            "targets": 5,
             "searchable": true,
             "render": function (data, type, full) {
                 return '<i class="iconfont icon-xiugai Pbdbb" style="font-size:18px;cursor:pointer;display:none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
@@ -387,30 +399,36 @@
 	
 	var xgId;
 	var tr;
-	$("#mainContent").delegate("#upd","click",function(){
-		var dom = $(this).parents('tr');
-		tr = $(this).closest('tr');
-		var data=$('#mainContent').DataTable().row(dom).data();
-		xgId=data.id
-		$("#xg_liaocangbianhao").val(data.bianhao);
-    	$("#xg_cailiao").val(data.cailiao);
-    	$("#xg_maxWeight").val(data.chuliang);
-	})
+	$("#mainContent").delegate("#upd","click",function() {
+        var dom = $(this).parents('tr');
+        tr = $(this).closest('tr');
+        var data = $('#mainContent').DataTable().row(dom).data();
+        xgId = data.id
+        $("#xg_liaocangbianhao").val(data.bianhao);
+        $("#xg_cailiao").val(data.cailiao);
+        $("#xg_maxWeight").val(data.chuliang);
+        $("#xg_caizhi").val(data.caizhi);
+        $("#xg_chandi").val(data.chandi);
+    })
 	
-	$("#xg_baocun").click(function(){
-		var liaocangbianhao=$("#xg_liaocangbianhao").val();
-    	var cailiao=$("#xg_cailiao").val();
-    	var maxWeight=$("#xg_maxWeight").val();
+	$("#xg_baocun").click(function() {
+        var liaocangbianhao = $("#xg_liaocangbianhao").val();
+        var cailiao = $("#xg_cailiao").val();
+        var maxWeight = $("#xg_maxWeight").val();
+        var caizhi = $("#xg_caizhi").val();
+        var chandi = $("#xg_chandi").val();
 
-		$.ajax({
+        $.ajax({
             type: 'POST',
-            url:'/WhCangchu/updWhCangchu',
+            url: '/WhCangchu/updWhCangchu',
             dataType: 'json',
             data: {
-            	id:xgId,
-                bianhao:liaocangbianhao,
-                cailiao:cailiao,
-                chuliang:maxWeight,
+                id: xgId,
+                bianhao: liaocangbianhao,
+                cailiao: cailiao,
+                chuliang: maxWeight,
+                caizhi: caizhi,
+                chandi: chandi,
             },
             success: function (json) {
             	if(json.daoMsg>0){
