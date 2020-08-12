@@ -1,7 +1,6 @@
 function setHomeLDGXTJ(xuqiu,gongying,roadname){
 	//		折线图1
 	option = {
-
 		legend: {
 			data: ['总需求量', '总供应量']
 		},
@@ -55,7 +54,6 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 		},
 		yAxis: {
 			type: 'value',
-
 			axisTick: { //y轴刻度线
 				show: false
 			},
@@ -79,13 +77,11 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 			}
 		},
 		series: [
-
 			{
 				name: '总需求量',
-				type: 'line',
-				stack: '总量',
-				smooth: true, //这个是把线变成曲线
+				type: 'bar',
 				data: xuqiu,
+			    barWidth : 10,//柱图宽度
 				lineStyle: {
 					color: '#70FEFF'
 				},
@@ -97,13 +93,9 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 			},
 			{
 				name: '总供应量',
-				type: 'line',
-				stack: '总量',
-				smooth: true, //这个是把线变成曲线
+				type: 'bar',
 				data: gongying,
-				lineStyle: {
-					color: '#8780FF'
-				},
+			    barWidth:10,//柱图宽度
 				itemStyle: {
 					normal: {
 						color: '#8780FF'
@@ -111,7 +103,7 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 				}
 			}
 
-		]
+		]	
 	};
 
 	return option;
@@ -286,7 +278,7 @@ function setHomeCBJDTJ(datetime,chenneng,feiliao){
 			barWidth: '30%',
 			label: {
 				normal: {
-					show: true,
+					show: false,
 					color:"black",
 					position: 'top'
 				}
