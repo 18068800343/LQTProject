@@ -82,6 +82,14 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 				type: 'bar',
 				data: xuqiu,
 			    barWidth : 10,//柱图宽度
+				label: {
+					normal: {
+						show: true,
+						color:"black",
+						position: 'top'
+					}
+				},
+
 				lineStyle: {
 					color: '#70FEFF'
 				},
@@ -96,6 +104,14 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 				type: 'bar',
 				data: gongying,
 			    barWidth:10,//柱图宽度
+				label: {
+					normal: {
+						show: true,
+						color:"black",
+						position: 'top'
+					}
+				},
+
 				itemStyle: {
 					normal: {
 						color: '#8780FF'

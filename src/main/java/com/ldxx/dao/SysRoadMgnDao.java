@@ -20,7 +20,7 @@ public interface SysRoadMgnDao {
     public List<Map> getDayWeightCount();
 
 
-    public List<SiteConstructionVo> getAllSysRoadMgnVoHomePage(String luduanquanxian, Integer state);
+    public List<SiteConstructionVo> getAllSysRoadMgnVoHomePage(String luduanquanxian, Integer state,String time);
 
     public List<SysRoadMgnVo> getAllSysRoadMgnVoHomePageCopy(String luduanquanxian);
 

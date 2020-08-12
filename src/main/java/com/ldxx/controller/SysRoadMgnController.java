@@ -1,12 +1,13 @@
 package com.ldxx.controller;
 
+import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.SysRoadMgn;
 import com.ldxx.bean.SysRoadMgnLowcase;
 import com.ldxx.bean.User;
 import com.ldxx.dao.SysRoadMgnDao;
 import com.ldxx.service.SysRoadMgnService;
+import com.ldxx.util.DateUtil;
 import com.ldxx.vo.SiteConstructionVo;
-import com.ldxx.vo.SysRoadMgnVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,10 +44,15 @@ public class SysRoadMgnController {
 	}
 
 	@RequestMapping("/getAllSysRoadMgnVoHomePage")
-	public List<SiteConstructionVo> getAllSysRoadMgnVoHomePage(HttpSession session, Integer state) {
+	public List<SiteConstructionVo> getAllSysRoadMgnVoHomePage(HttpSession session, Integer state,String time) {
 		User user = (User) session.getAttribute("user");
 		String luduanquanxian = user.getLuduanquanxian();
-		return dao.getAllSysRoadMgnVoHomePage(luduanquanxian, state);
+		if(time!=null){
+			time+=time + "%";
+		}else{
+			time = DateUtil.getDateStrByPattern(DateConstant.DATE10, new Date()) + "%";
+		}
+		return dao.getAllSysRoadMgnVoHomePage(luduanquanxian, state, time);
 	}
 
 

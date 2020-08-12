@@ -150,13 +150,13 @@
 		LEFT JOIN (
 		SELECT
 		SUM (pd_need) allXuQiu,
-		site_id
+		site_id,finish_time
 		FROM
 		plan_production_collection
 		WHERE
 		delete_state = 1
 		GROUP BY
-		site_id
+		site_id,finish_time
 		) rn ON srm.id = rn.site_id
 		LEFT JOIN (
 		SELECT
@@ -182,7 +182,7 @@
 		GROUP BY
 		srm.id
 		) gy ON gy.id = srm.id
-		WHERE srm.delete_state=#{state}
+		WHERE srm.delete_state=#{state} and convert(varchar,rn.finish_time ,120) like #{time}
 	</select>
 
 	<select id="getAllSysRoadMgn2" resultType="SysRoadMgnLowcase">
