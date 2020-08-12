@@ -139,6 +139,17 @@ public class ShengChanJiHuaController {
 		return dao.getShengChanJiHuaListByTime(time);
 	}
 
+	@RequestMapping("/getShengChanJiHuaListByFinishTime")
+	@ResponseBody
+	public List<PlanProductionCollectionVo> getShengChanJiHuaListByFinishTime(String time) {
+		if(time!=null){
+			time+=time + "%";
+		}else{
+			time = DateUtil.getDateStrByPattern(DateConstant.DATE10, new Date()) + "%";
+		}
+		return dao.getShengChanJiHuaListByFinishTime(time);
+	}
+
 	@RequestMapping("/updateShengChanJiHua")
 	@ResponseBody
 	public String updateShengChanJiHua(@RequestBody PlanProductionVo planProductionVo, HttpSession session) {

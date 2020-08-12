@@ -178,6 +178,27 @@
   		a.delete_state = 1 and convert(varchar,a.datetime ,120) like #{time} order by a.datetime desc
 	</select>
 
+	<select id="getShengChanJiHuaListByFinishTime" resultType="planProductionCollectionVo">
+		SELECT
+		 case  srm.delete_state
+		 when 1 then '正在进行'
+		 when 2 then '已完成'
+		 else ''
+		 end as planstatecn,
+		 round(a.price*a.pd_need,2) as price,a.*,usr.u_name,sfm.fl_no,srm.*,srm.id siteId,
+		 pcd.piancha_name,pcd.piancha_no,pniod.sumneed
+		FROM
+		 plan_production_collection AS a
+		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
+		LEFT JOIN site_construction srm on a.site_id = srm.id
+-- 		 and srm.delete_state = 1
+		LEFT JOIN sys_formulation_management sfm on sfm.fl_id = a.recipe_id and sfm.delete_state = 1
+    	LEFT JOIN plan_construction_deviation pcd on a.piancha_id = pcd.id and pcd.delete_state = 1
+		LEFT JOIN (select a.plan_id,sum(a.pd_need_inc_or_dec) sumneed from plan_production_count a GROUP BY a.plan_id) pniod on pniod.plan_id = a.plan_id
+	    WHERE
+  		a.delete_state = 1 and convert(varchar,a.finish_time ,120) like #{time} order by a.finish_time desc
+	</select>
+
 	<select id="getAllShiGongPianCha" resultType="planConstructionDeviationVo">
 		SELECT a.* from plan_construction_deviation a
     WHERE  a.delete_state = 1 order by a.datetime desc

@@ -54,4 +54,6 @@ public interface ShengChanJiHuaDao {
     PlanProductionCollectionVo getBysiteId(String id);
 
     List<PlanProductionCollectionVo> getDISTINCTRecipeIdByFinishTime(String startime, String endTime);
+
+    List<PlanProductionCollectionVo> getShengChanJiHuaListByFinishTime(String time);
 }
