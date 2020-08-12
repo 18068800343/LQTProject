@@ -228,13 +228,14 @@
                                            </td>
                                            <td>
                                                <input type="text" class="form-control" id="tiji" style="width: 70%;"
-                                                      onblur="countWeight()"/>
+                                                      disabled
+                                               />
                                            </td>
                                            <td>
                                                单位体积重量(kg/m³)
                                            </td>
                                            <td>
-                                               <input type="text" id="midu" style="width: 70%;" onblur="countWeight()"/>
+                                               <input type="text" id="midu" style="width: 70%;"/>
                                            </td>
                                        </tr>
                                        <tr>
@@ -329,7 +330,7 @@
                                                 体积(m³)
                                             </td>
                                             <td>
-                                                <input type="text" id="xg_tiji" style="width: 70%;"/>
+                                                <input type="text" id="xg_tiji" style="width: 70%;" disabled/>
                                             </td>
                                             <td>
                                                 单位体积重量(kg/m³)
@@ -448,27 +449,27 @@
         if (!flag1) {
             toastr.error("体积请输入数字");
             $("#tiji").val('')
-            return
+            return 1
         }
         if (!flag2) {
             toastr.error("密度请输入数字");
             $("#midu").val('')
-            return
+            return 1
         }
         if (!flag3) {
             toastr.error("长度请输入数字");
             $("#chang").val('')
-            return
+            return 1
         }
         if (!flag4) {
             toastr.error("宽度请输入数字");
             $("#kuan").val('')
-            return
+            return 1
         }
         if (!flag5) {
             toastr.error("高度请输入数字");
             $("#gao").val('')
-            return
+            return 1
         }
 
         let countWeight = tiji * midu;
@@ -498,27 +499,27 @@
         if (!flag1) {
             toastr.error("体积请输入数字");
             $("#xg_tiji").val('');
-            return;
+            return 1;
         }
         if (!flag2) {
             toastr.error("密度请输入数字");
             $("#xg_midu").val('')
-            return;
+            return 1;
         }
         if (!flag3) {
             toastr.error("长度请输入数字");
             $("#xg_chang").val('')
-            return;
+            return 1;
         }
         if (!flag4) {
             toastr.error("宽度请输入数字");
             $("#xg_kuan").val('')
-            return;
+            return 1;
         }
         if (!flag5) {
             toastr.error("高度请输入数字");
             $("#xg_gao").val('')
-            return;
+            return 1;
         }
         let countWeight = tiji * midu;
         let tijiCount = chang * kuan * gao;
@@ -775,7 +776,10 @@
     }
 
     $("#baocun").click(function () {
-        countWeight();
+        let res = countWeight();
+        if (res == 1) {
+            return;
+        }
         var liaocangbianhao = $("#liaocangbianhao").val();
         var shijian = $("#shijian").val();
         var zhongliang = $("#zhongliang").val();
@@ -800,6 +804,9 @@
                 meminfo: beizhu,
                 maxWeight: maxWeight,
                 tiji: tiji,
+                chang: chang,
+                kuan: kuan,
+                gao: gao,
                 //editUserId2:lururen,
             },
 	            error: function (msg) {
@@ -873,7 +880,10 @@
     })
 	
 	$("#xg_baocun").click(function() {
-        xg_countWeight();
+        let res = xg_countWeight();
+        if (res == 1) {
+            return;
+        }
         var liaocangbianhao = $("#xg_liaocangbianhao").val();
         var shijian = $("#xg_shijian").val();
         var zhongliang = $("#xg_zhongliang").val();
@@ -882,7 +892,9 @@
         var beizhu = $("#xg_beizhu").val();
         var maxWeight = $("#xg_maxWeight").val();
         var tiji = $("#xg_tiji").val();
-
+        var chang = $("#xg_chang").val();
+        var kuan = $("#xg_kuan").val();
+        var gao = $("#xg_gao").val();
         $.ajax({
             type: 'POST',
             url: '/WhWarehouseCount/updWhWarehouseCountById',
@@ -896,6 +908,9 @@
                 meminfo: beizhu,
                 maxWeight: maxWeight,
                 tiji: tiji,
+                chang: chang,
+                kuan: kuan,
+                gao: gao,
                 //editUserId2:lururen,
             },
             success: function (json) {

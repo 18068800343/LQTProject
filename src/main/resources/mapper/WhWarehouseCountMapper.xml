@@ -3,7 +3,11 @@
 <mapper namespace="com.ldxx.dao.WhWarehouseCountDao" >
 	
 	<select id="getAllWhWarehouseCount" resultType="WhWarehouseCount">
-		select a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state,a.max_weight,a.tiji,b.stones_name as stonesName,usr.u_name
+		select a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state
+		,a.max_weight,a.tiji
+		,a.chang,a.kuan
+		,a.gao
+		,b.stones_name as stonesName,usr.u_name
 		from wh_warehouse_count as a
 		left join dic_stones b on a.materials=b.id
 		LEFT JOIN u_user usr ON a.edit_user_id2 = usr.user_id and usr.delete_state = 1
@@ -27,6 +31,9 @@
 			edit_user_id2=#{wwc.editUserId2},
 			edit_datetime2=#{wwc.editDatetime2},
 			tiji=#{wwc.tiji},
+			chang=#{wwc.chang},
+			kuan=#{wwc.kuan},
+			gao=#{wwc.gao},
 			max_weight=#{wwc.maxWeight}
 		where id=#{wwc.id}
 	</update>
@@ -36,11 +43,16 @@
 	</update>
 
     <insert id="insertWhWarehouseCount" parameterType="WhWarehouseCount">
-		insert into wh_warehouse_count(id,stor_no,datetime,weight,materials,meminfo,edit_user_id2,edit_datetime2,delete_state,max_weight,tiji)
-		values(#{wwc.id},#{wwc.storNo},#{wwc.datetime},#{wwc.weight},#{wwc.materials},#{wwc.meminfo},#{wwc.editUserId2},#{wwc.editDatetime2},1,#{wwc.maxWeight},#{wwc.tiji})
+		insert into wh_warehouse_count(id,stor_no,datetime,weight,materials,meminfo,edit_user_id2,edit_datetime2,delete_state,max_weight,tiji,chang,kuan,gao)
+		values(#{wwc.id},#{wwc.storNo},#{wwc.datetime},#{wwc.weight}
+		,#{wwc.materials},#{wwc.meminfo},#{wwc.editUserId2}
+		,#{wwc.editDatetime2},1,#{wwc.maxWeight},#{wwc.tiji}
+		,#{wwc.chang},1,#{wwc.kuan},#{wwc.gao}
+		)
 	</insert>
     <select id="getWhWarehouseCountByStorNo" resultType="WhWarehouseCount">
-		select top 1 a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state,b.stones_name as materialsName,usr.u_name
+		select top 1 a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2
+		,a.delete_state,b.stones_name as materialsName,usr.u_name
 		from wh_warehouse_count as a
 		left join dic_stones b on a.materials=b.id
 		LEFT JOIN u_user usr ON a.edit_user_id2 = usr.user_id and usr.delete_state = 1

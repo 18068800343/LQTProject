@@ -266,10 +266,10 @@
                                                        placeholder="请输入" style="width: 70%;"/></td>
                                         </tr>
 										 <tr>
-                                             <td>含水量</td>
+                                             <td>含水量(小数)</td>
                                              <td><input type="text" class="form-control" id="hanshuiliang"
                                                         style="width: 70%;"/></td>
-                                             <td>含尘量</td>
+                                             <td>含尘量(小数)</td>
                                              <td><input type="text" class="form-control" id="hanchenliang"
                                                         placeholder="请输入" style="width: 70%;"/></td>
                                          </tr>
@@ -343,10 +343,10 @@
                                                       placeholder="请输入" style="width: 70%;"/></td>
                                        </tr>
                                        <tr>
-                                           <td>含水量</td>
+                                           <td>含水量(小数)</td>
                                            <td><input type="text" class="form-control" id="xg_hanshuiliang"
                                                       style="width: 70%;"/></td>
-                                           <td>含尘量</td>
+                                           <td>含尘量(小数)</td>
                                            <td><input type="text" class="form-control" id="xg_hanchenliang"
                                                       style="width: 70%;"/></td>
                                        </tr>
@@ -592,6 +592,8 @@
         }
 
 
+        let page_liaocang;
+
         function initliaocangbianhao() {
             $.ajax({
                 type: 'POST',
@@ -601,8 +603,9 @@
                 success: function (json) {
                     $("#liaocangbianhao").html('');
                     $("#xg_liaocangbianhao").html('');
+                    page_liaocang = {};
                     for (var i = 0; i < json.length; i++) {
-
+                        page_liaocang[i]
                         $("#liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"
                             + json[i].bianhao + "</option>")
                         $("#xg_liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"

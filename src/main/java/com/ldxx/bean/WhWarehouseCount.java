@@ -40,6 +40,33 @@ public class WhWarehouseCount {
 	private BigDecimal maxWeight;
 
 	private BigDecimal tiji;
+	private BigDecimal chang;
+	private BigDecimal kuan;
+	private BigDecimal gao;
+
+	public BigDecimal getChang() {
+		return chang;
+	}
+
+	public void setChang(BigDecimal chang) {
+		this.chang = chang;
+	}
+
+	public BigDecimal getKuan() {
+		return kuan;
+	}
+
+	public void setKuan(BigDecimal kuan) {
+		this.kuan = kuan;
+	}
+
+	public BigDecimal getGao() {
+		return gao;
+	}
+
+	public void setGao(BigDecimal gao) {
+		this.gao = gao;
+	}
 
 	public String getStonesName() {
 		return stonesName;
