@@ -4,8 +4,8 @@
 
 	<select id="getAllWhIncomingMaterial" resultType="WhIncomingMaterial">
         select
-        a.id,a.no,a.datetime,a.weight,a.materials,a.water_content,a.dust_content,a.company_id,a.chandi,a.price,a.stor_no,a.meminfo,a.edit_user_id,a.delete_state,b.stones_name
-        as materialsName,usr.u_name
+		a.id,a.no,a.datetime,a.weight,a.jingzhongliang,a.materials,a.water_content,a.dust_content,a.company_id,a.chandi,a.price,a.stor_no,a.meminfo,a.edit_user_id,a.delete_state,b.stones_name
+		as materialsName,usr.u_name
         from wh_incoming_material as a
         left join dic_stones b on a.materials=b.id
         LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
@@ -39,6 +39,7 @@
 		stor_no=#{wm.storNo},
 		meminfo=#{wm.meminfo},
 		chandi=#{wm.chandi},
+		jingzhongliang=#{wm.jingzhongliang},
 		edit_user_id=#{wm.editUserId}
 		where id=#{wm.id}
 	</update>
@@ -48,8 +49,8 @@
 	</update>
 	
 	<insert id="insertWhIncomingMaterial" parameterType="WhIncomingMaterial">
-		insert into wh_incoming_material(id,no,datetime,weight,materials,water_content,company_id,price,stor_no,meminfo,edit_user_id,delete_state,dust_content,chandi)
-		values(#{wm.id},#{wm.no},#{wm.datetime},#{wm.weight},#{wm.materials},#{wm.waterContent},#{wm.companyId},#{wm.price},#{wm.storNo},#{wm.meminfo},#{wm.editUserId},1,#{wm.dustContent},#{wm.chandi})
+		insert into wh_incoming_material(id,no,datetime,weight,materials,water_content,company_id,price,stor_no,meminfo,edit_user_id,delete_state,dust_content,chandi,jingzhongliang)
+		values(#{wm.id},#{wm.no},#{wm.datetime},#{wm.weight},#{wm.materials},#{wm.waterContent},#{wm.companyId},#{wm.price},#{wm.storNo},#{wm.meminfo},#{wm.editUserId},1,#{wm.dustContent},#{wm.chandi},#{wm.jingzhongliang})
 	</insert>
 	
 </mapper>

@@ -1,12 +1,14 @@
 package com.ldxx.bean;
 
+import java.math.BigDecimal;
+
 /**
  * 进料监控报表
- * @author hp
  *
+ * @author hp
  */
 public class WhIncomingMaterial {
-	
+
 	private String id;
 
 	private String no;//编号
@@ -14,6 +16,8 @@ public class WhIncomingMaterial {
 	private String datetime;//时间
 
 	private Double weight;//重量
+
+	private BigDecimal jingzhongliang;//净重量
 
 	private String materials;//材料id
 	private String materialsName;//材料名
@@ -39,6 +43,14 @@ public class WhIncomingMaterial {
 	private String uName;
 
 	public int deleteState;//逻辑删除 1:存在；0删除
+
+	public BigDecimal getJingzhongliang() {
+		return jingzhongliang;
+	}
+
+	public void setJingzhongliang(BigDecimal jingzhongliang) {
+		this.jingzhongliang = jingzhongliang;
+	}
 
 	public String getChandi() {
 		return chandi;

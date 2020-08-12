@@ -47,7 +47,7 @@
 		values(#{wwc.id},#{wwc.storNo},#{wwc.datetime},#{wwc.weight}
 		,#{wwc.materials},#{wwc.meminfo},#{wwc.editUserId2}
 		,#{wwc.editDatetime2},1,#{wwc.maxWeight},#{wwc.tiji}
-		,#{wwc.chang},1,#{wwc.kuan},#{wwc.gao}
+		,#{wwc.chang},#{wwc.kuan},#{wwc.gao}
 		)
 	</insert>
     <select id="getWhWarehouseCountByStorNo" resultType="WhWarehouseCount">

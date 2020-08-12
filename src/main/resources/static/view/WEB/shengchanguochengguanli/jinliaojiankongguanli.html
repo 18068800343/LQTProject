@@ -265,20 +265,30 @@
                                             <td><input type="text" class="form-control" id="zhongliang"
                                                        placeholder="请输入" style="width: 70%;"/></td>
                                         </tr>
-										 <tr>
-                                             <td>含水量(小数)</td>
-                                             <td><input type="text" class="form-control" id="hanshuiliang"
-                                                        style="width: 70%;"/></td>
-                                             <td>含尘量(小数)</td>
-                                             <td><input type="text" class="form-control" id="hanchenliang"
-                                                        placeholder="请输入" style="width: 70%;"/></td>
-                                         </tr>
+                                        <tr>
+                                            <td>含水量(小数)</td>
+                                            <td><input type="text" class="form-control" id="hanshuiliang"
+                                                       style="width: 70%;"/></td>
+                                            <td>含尘量(小数)</td>
+                                            <td><input type="text" class="form-control" id="hanchenliang"
+                                                       placeholder="请输入" style="width: 70%;" onblur="countWeight()"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>净重量(kg)</td>
+                                            <td><input type="text" class="form-control" id="jingzhongliang"
+                                                       style="width: 70%;"/></td>
+                                            <td>石料材质</td>
+                                            <td><input type="text" class="form-control" id="caizhi" disabled
+                                                       placeholder="请输入" style="width: 70%;"/></td>
+                                        </tr>
                                         <tr>
                                             <td>单价（元/千克）</td>
                                             <td><input type="text" class="form-control" id="danjia" placeholder="请输入"
                                                        style="width: 70%;"/></td>
                                             <td>料仓编号</td>
-                                            <td><select id="liaocangbianhao" class="form-control" style="width: 70%;">
+                                            <td><select id="liaocangbianhao" class="form-control" style="width: 70%;"
+                                                        onchange="liaocangChange()">
                                             </select></td>
                                         </tr>
                                         <tr>
@@ -348,14 +358,24 @@
                                                       style="width: 70%;"/></td>
                                            <td>含尘量(小数)</td>
                                            <td><input type="text" class="form-control" id="xg_hanchenliang"
+                                                      onblur="xg_countWeight()"
                                                       style="width: 70%;"/></td>
+                                       </tr>
+                                       <tr>
+                                           <td>净重量(kg)</td>
+                                           <td><input type="text" class="form-control" id="xg_jingzhongliang"
+                                                      style="width: 70%;"/></td>
+                                           <td>石料材质</td>
+                                           <td><input type="text" class="form-control" id="xg_caizhi" disabled
+                                                      placeholder="请输入" style="width: 70%;"/></td>
                                        </tr>
                                        <tr>
                                            <td>单价（元/千克）</td>
                                            <td><input type="text" class="form-control" id="xg_danjia" placeholder="请输入"
                                                       style="width: 70%;"/></td>
                                            <td>料仓编号</td>
-                                           <td><select id="xg_liaocangbianhao" class="form-control" style="width: 70%;">
+                                           <td><select id="xg_liaocangbianhao" class="form-control" style="width: 70%;"
+                                                       onchange="xgliaocangChange()">
                                            </select></td>
                                        </tr>
                                        <tr>
@@ -558,22 +578,29 @@
 	            type: 'POST',
 	            url: '',
 	            dataType: 'json',
-	            data: {
-	            },
-	            error: function (msg) {
-	                errMessage("请求UserController失败");
-	            },
-	            success: function (json) {
-	                $('#').dataTable().fnClearTable();
-	                $('#').DataTable().rows.add(json).draw(false);
-	            }
-	        });
-	    }
-		
-		
-		
-		function initCailiao(){
-			$.ajax({
+	            data: {},
+                error: function (msg) {
+                    errMessage("请求UserController失败");
+                },
+                success: function (json) {
+                    $('#').dataTable().fnClearTable();
+                    $('#').DataTable().rows.add(json).draw(false);
+                }
+            });
+        }
+
+        function liaocangChange() {
+            let bianhao = $("#liaocangbianhao").val();
+            $("#caizhi").val(page_liaocang[bianhao].caizhi);
+        }
+
+        function xgliaocangChange() {
+            let bianhao = $("#xg_liaocangbianhao").val();
+            $("#xg_caizhi").val(page_liaocang[bianhao].caizhi);
+        }
+
+        function initCailiao() {
+            $.ajax({
                 type: 'POST',
                 url: '/DicStones/selectAllDicStones',
                 dataType: 'json',
@@ -605,7 +632,8 @@
                     $("#xg_liaocangbianhao").html('');
                     page_liaocang = {};
                     for (var i = 0; i < json.length; i++) {
-                        page_liaocang[i]
+                        let bianhao = json[i].bianhao;
+                        page_liaocang[bianhao] = json[i];
                         $("#liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"
                             + json[i].bianhao + "</option>")
                         $("#xg_liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"
@@ -619,6 +647,10 @@
 
 
         $("#baocun").click(function () {
+            let res = countWeight();
+            if (res == 1) {
+                return;
+            }
             var bianhao = $("#bianhao").val();
             var shijiian = $("#shijian").val();
             var zhongliang = $("#zhongliang").val();
@@ -632,6 +664,7 @@
             var liaocangbianhao = $("#liaocangbianhao").val();
             //var lururen=$("#lururen").val();
             var beizhu = $("#beizhu").val();
+            var jingzhongliang = $("#jingzhongliang").val();
 
             $.ajax({
                 type: 'POST',
@@ -649,6 +682,7 @@
                     storNo: liaocangbianhao,
                     meminfo: beizhu,
                     dustContent: hanchenliang,
+                    jingzhongliang: jingzhongliang,
                     //editUserId:lururen,
                 },
 	            error: function (msg) {
@@ -692,42 +726,118 @@
 	                    	if(json!=0){
 	                    		$('#mainContent').DataTable().row(dom).remove().draw(false); //删除行立即显示
 	                    		toastr.success('删除成功');
-	                    	}else{
-	                    		 toastr.error('删除失败');
-	                    	}
-	                    }
-	                }); 
-	        	    	
-	        	}
-	        });
-		
-	})
-	
-	var xgId;
-	var tr;
-	$("#mainContent").delegate("#upd","click",function() {
-        var dom = $(this).parents('tr');
-        tr = $(this).closest('tr');
-        var data = $('#mainContent').DataTable().row(dom).data();
-        xgId = data.id
-        $("#xg_bianhao").val(data.no);
-        $("#xg_shijian").val(data.datetime);
-        $("#xg_zhongliang").val(data.weight);
-        $("#xg_cailiao").val(data.materials);
+                            } else {
+                                toastr.error('删除失败');
+                            }
+                        }
+                    });
+
+                }
+        });
+
+    })
+
+        function reg(str, re) {
+            if (re.test(str)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function countWeight() {
+            let zhongliang = $("#zhongliang").val()
+            let hanshuiliang = $("#hanshuiliang").val()
+            let hanchenliang = $("#hanchenliang").val()
+
+            let re = new RegExp('^[0-9]+\.?[0-9]*$');
+            let flag1;
+            let flag2;
+            let flag3;
+            flag1 = reg(zhongliang, re);
+            flag2 = reg(hanshuiliang, re);
+            flag3 = reg(hanchenliang, re);
+
+            if (!flag1) {
+                toastr.error("重量请输入数字");
+                $("#zhongliang").val('')
+                return 1
+            }
+            if (!flag2) {
+                toastr.error("含水量请输入小数");
+                $("#hanshuiliang").val('')
+                return 1
+            }
+            if (!flag3) {
+                toastr.error("含尘量请输入小数");
+                $("#hanchenliang").val('')
+                return 1
+            }
+            let countWeight = zhongliang - zhongliang * hanshuiliang - zhongliang * hanchenliang;
+            $("#jingzhongliang").val(countWeight);
+        }
+
+        function xg_countWeight() {
+            let zhongliang = $("#xg_zhongliang").val()
+            let hanshuiliang = $("#xg_hanshuiliang").val()
+            let hanchenliang = $("#xg_hanchenliang").val()
+
+            let re = new RegExp('^[0-9]+\.?[0-9]*$');
+            let flag1;
+            let flag2;
+            let flag3;
+            flag1 = reg(zhongliang, re);
+            flag2 = reg(hanshuiliang, re);
+            flag3 = reg(hanchenliang, re);
+
+            if (!flag1) {
+                toastr.error("重量请输入数字");
+                $("#xg_zhongliang").val('')
+                return 1
+            }
+            if (!flag2) {
+                toastr.error("含水量请输入小数");
+                $("#xg_hanshuiliang").val('')
+                return 1
+            }
+            if (!flag3) {
+                toastr.error("含尘量请输入小数");
+                $("#xg_hanchenliang").val('')
+                return 1
+            }
+            let countWeight = zhongliang - zhongliang * hanshuiliang - zhongliang * hanchenliang;
+            $("#xg_jingzhongliang").val(countWeight);
+        }
+
+        var xgId;
+        var tr;
+        $("#mainContent").delegate("#upd", "click", function () {
+            var dom = $(this).parents('tr');
+            tr = $(this).closest('tr');
+            var data = $('#mainContent').DataTable().row(dom).data();
+            xgId = data.id
+            $("#xg_bianhao").val(data.no);
+            $("#xg_shijian").val(data.datetime);
+            $("#xg_zhongliang").val(data.weight);
+            $("#xg_jingzhongliang").val(data.jingzhongliang);
+            $("#xg_cailiao").val(data.materials);
         $("#xg_hanshuiliang").val(data.waterContent);
         $("#xg_hanchenliang").val(data.dustContent);
         $("#xg_laihuodanwei").val(data.companyId);
         $("#xg_chandi").val(data.chandi);
         $("#xg_danjia").val(data.price);
-        $("#xg_liaocangbianhao").val(data.storNo);
+            $("#xg_liaocangbianhao").val(data.storNo);
+            $("#xg_liaocangbianhao").trigger("change");
         //$("#xg_lururen").val(data.editUserId);
         $("#xg_beizhu").val(data.meminfo);
     })
 	
 	$("#xg_baocun").click(function() {
+        xg_countWeight();
         var bianhao = $("#xg_bianhao").val();
         var shijiian = $("#xg_shijian").val();
         var zhongliang = $("#xg_zhongliang").val();
+        var jingzhongliang = $("#xg_jingzhongliang").val();
         var cailiao = $("#xg_cailiao").val();
         var hanshuiliang = $("#xg_hanshuiliang").val();
         var hanchenliang = $("#xg_hanchenliang").val();
@@ -747,6 +857,7 @@
                 no: bianhao,
                 datetime: shijiian,
                 weight: zhongliang,
+                jingzhongliang: jingzhongliang,
                 materials: cailiao,
                 waterContent: hanshuiliang,
                 dustContent: hanchenliang,
