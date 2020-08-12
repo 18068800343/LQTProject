@@ -106,7 +106,13 @@
 
 	<body class="jd" style="background-color: #F5F5F5;">
 	<div class="head" style="height: 100%;width: 100%;"></div>
-	<div id="main" style="height:800px;width:800px;float:left;margin-top:5%;margin-left:5%;"></div>
+			<div class="left" style="width:1000px;" id="hsMap">
+		    <div style="width: 58%;height: 90%;overflow: hidden;margin:0;position: absolute;top:7%;left:2%;border:2px solid #1F99ee;"
+		         id="dituContent"></div>
+		    <div class="center_text">
+		    </div>
+		</div>
+		
 		<div class="y-span10 y-last">
 			<div class="B" style="float: right;">
 				<div class="rightfirst col-xs-4" style="float: right;background-color: white;margin-right: 0px;height: 260px;width: 580px;">
@@ -161,9 +167,111 @@
 	<!-- <script src="../js/layui.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/element.js" type="text/javascript" charset="utf-8"></script> -->
 	<script src="../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 	<script src="../js/build/dist/echarts.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/homeEchars.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=BmTwezCvWyGaH3KNYkc5P6uq&s=1"></script>
 	<script type="text/javascript">
+	$(document).ready(function () {
+
+    });
+
+    let points = [{
+        id: 1,
+        lng: 118.096525,
+        lat: 24.462602,
+        title: "工地名称：厦门中山公园",
+        content: ["经度：118.096525;纬度：24.462602", "桩号：010 ; 车道：010"]
+    }];
+    let page_map;
+    page_map = new BMap.Map("dituContent");
+
+    // 百度地图API功能
+    //GPS坐标
+    var x = 119.605720;
+    var y = 32.989924;
+    var ggPoint = new BMap.Point(x,y);
+    // 创建点坐标
+    page_map.centerAndZoom(ggPoint, 8);
+    page_map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+    page_map.addControl(new BMap.ScaleControl());
+    page_map.addControl(new BMap.NavigationControl());
+
+/*    var zoomCtrl = new BMap.ZoomControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT, offset: new BMap.Size(20, 20)});
+    page_map.addControl(zoomCtrl);*/
+
+
+
+
+    let luduanVm = new Vue({
+        el: '#luduan',
+        //表单数据
+        data: {
+            roadId:"",
+            roadNo:"",
+            roadName:"",
+            startLng:"",
+            startLat:"",
+            endLng:"",
+            endLat:"",
+            remarks:"",
+            expresswayName:"",
+            allXuQiu:'',
+            allGongYing:'',
+            roadList:'',
+        },
+        methods: {
+            roadPost:function(){
+                //发送 post 请求  then中第一个function或者箭头函数为success回调函数, 第二个function为失败fail回调函数
+                this.$http.post('/SysRoadMgnController/getAllSysRoadMgnVoHomePage',{},{emulateJSON:true}).then((res)=>{
+                    this.roadList=res.body;
+                    this.initMap();
+                },(res)=>{
+                    console.log(res.status);
+                });
+            },
+            initMap:function(){
+               let rdList = this.roadList;
+               for(let i in rdList){
+                   let p1 = new BMap.Point(rdList[i].startLng,rdList[i].startLat);
+                   let p2 = new BMap.Point(rdList[i].endLng,rdList[i].endLat);
+                   let driving = new BMap.DrivingRoute(page_map, {renderOptions:{map: page_map, autoViewport: false}});
+                   pageDom.arr[i] = driving;
+                   driving.search(p1, p2);
+               }
+                //page_map.centerAndZoom("江苏", 7);
+               /* page_map.panTo(new BMap.Point(120.5195950,31.9281190));*/
+
+            },
+            dwMap:function(e,index){
+                clearResult(pageDom.arr);
+                let p1 = new BMap.Point(e.startLng,e.startLat);
+                let p2 = new BMap.Point(e.endLng,e.endLat);
+                let driving1 = new BMap.DrivingRoute(page_map, {renderOptions:{map: page_map, autoViewport: false}});
+                pageDom.arr.push(driving1);
+                driving1.search(p1, p2);
+            },
+        }
+    })
+    luduanVm.roadPost();
+    let pageDom = {};
+    pageDom.arr = [];
+
+    function clearResult(arr){
+        for(let i in arr){
+            let driveIndex = arr[i];
+            driveIndex.clearResults();
+        }
+    }
+
+
+    let getRandomColor = function(){
+        return '#'+Math.floor(Math.random()*16777215).toString(16);
+    }
+    
+    
 		$(document).ready(function () {
 			initTableQuanxian()
 			getEcahrsData()
