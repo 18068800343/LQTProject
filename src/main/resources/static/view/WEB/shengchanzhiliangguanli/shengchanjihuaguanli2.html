@@ -271,9 +271,14 @@
 				"class": "tcenter",
 				"targets": 16,
 				"searchable": true,
-				"render": function(data, type, full) {
+				"render": function(data, type, full, columnIdx, rowIdx, code ) {
 					var kaishi='<i class="glyphicon glyphicon-off Pbeb" style="font-size:18px;cursor:pointer;display:none;"   onclick="kaishi(this)" title="开始" ></i>'
-					return kaishi;
+					if(full.finishTime<scjh_now.finishTime||full.finishTime==scjh_now.finishTime){
+						return ""
+					}else {
+						return kaishi;
+					}
+
 				}
 			},
 
@@ -341,6 +346,7 @@
 		$.ajax({
 			type:"post",
 			url:"/ShengChanJiHua/getShengChanJiHuaNow",
+			async:false,
 			data:{
 			},
 			success:function(json){
@@ -380,7 +386,7 @@
 	function kaishi(e){
 		var tr=$(e).parents("tr");
 		var data=$("#mainContent").DataTable().row(tr).data();
-		var msg = "确定要开始吗？\n\n请确认！";
+		var msg = "确定要开始该生产计划吗？\n\n请确认！";
 		if (confirm(msg) == true){
 			console.log(data)
 			$.ajax({
