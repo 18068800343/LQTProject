@@ -64,7 +64,7 @@
                 <!--<button type="button" class="btn btn-primary Pdaa" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入车辆管理</button>-->
             </div>
             <div class="UpperPartR">
-                <!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
+                <div id="tabBtn" style="margin-left: 10px;margin-top: 1%;"></div>
             </div>
 
 
@@ -231,11 +231,21 @@
 <script src="../../js/quanxian.js"></script>
 <script src="../../js/SmartNotification.min.js"></script>
 <script src="../../js/myTool.js"></script>
+<!--导出CSV开始-->
+<script src="../../js/datatables/jquery.dataTables.min.js"></script>
+<script src="../../js/datatables/dataTables.colVis.min.js"></script>
+<script src="../../js/datatables/dataTables.tableTools.min.js"></script>
+<script src="../../js/datatables/datatables.responsive.min.js"></script>
+<script src="../../js/datatables/dataTables.buttons.min.js" ></script>
+<script src="../../js/datatables/buttons.html5.min.js" ></script>
+<script src="../../js/datatables/buttons.flash.min.js" ></script>
+<script src="../../js/datatables/jszip.min.js"></script>
+<!--导出CSV结束-->
 <script>
     $(document).ready( function () {
     	initTable();
 	});
-    var table=$('#mainContent').dataTable({
+    var table=$('#mainContent').DataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
@@ -283,7 +293,29 @@
             "sNext": "下一页",
             "sLast": "最后一页"
         }},
+        "buttons": [
+            {
+                extend: "csv",
+                text: "导出Excel",
+                bom: true,
+                filename: '车辆管理',
+                fieldSeparator: ',',
+                exportOptions: {
+                    format: {
+                        header: function ( data) {
+                            return data;
+                        },
+                        body: function ( data, columnIdx, rowIdx, code ) {
+                            return data;
+                        }
+                    },
+                    columns:[0,1,2,3,4]
+                }
+            }
+        ]
 	});
+    table.buttons().container().appendTo( $('#tabBtn') );
+    $('.buttons-csv').addClass('btn btn-primary');
 
     function initTableQuanxian(){
         $.ajax({
