@@ -83,10 +83,10 @@
                         <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入关键筛孔通过率</button> -->
                     </div>
                     <div class="UpperPartR">
-                        <!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
+                        <div id="tabBtn" style="margin-left: 10px;margin-top: 1%;"></div>
                     </div>
                 </div>
-                <div class="LowerPart" style="margin-top:3px;">
+                <div class="LowerPart" style="margin-top:35px;">
                     <table class="layui-table" lay-skin="line"  id="mainContent">
                     
                         <thead>
@@ -154,12 +154,22 @@
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../toastr/toastr.js"></script>
+<!--导出CSV开始-->
+<script src="../../js/datatables/jquery.dataTables.min.js"></script>
+<script src="../../js/datatables/dataTables.colVis.min.js"></script>
+<script src="../../js/datatables/dataTables.tableTools.min.js"></script>
+<script src="../../js/datatables/datatables.responsive.min.js"></script>
+<script src="../../js/datatables/dataTables.buttons.min.js" ></script>
+<script src="../../js/datatables/buttons.html5.min.js" ></script>
+<script src="../../js/datatables/buttons.flash.min.js" ></script>
+<script src="../../js/datatables/jszip.min.js"></script>
+<!--导出CSV结束-->
 <script>
     $(document).ready(function () {
         initTable();
         initPeiBiEcharts();
     });
-    var table = $('#mainContent').dataTable({
+    var table = $('#mainContent').DataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
@@ -195,13 +205,34 @@
                 "sLast": "最后一页"
             }
         },
-
+        "buttons": [
+            {
+                extend: "csv",
+                text: "导出Excel",
+                bom: true,
+                filename: '关键筛孔通过率',
+                fieldSeparator: ',',
+                exportOptions: {
+                    format: {
+                        header: function ( data) {
+                            return data;
+                        },
+                        body: function ( data, columnIdx, rowIdx, code ) {
+                            return data;
+                        }
+                    },
+                    columns:[1,2,3,4,5]
+                }
+            }
+        ],
         "fnDrawCallback": function () {
             this.api().column(0).nodes().each(function (cell, i) {
                 cell.innerHTML = i + 1;
             });
         }
     });
+    table.buttons().container().appendTo( $('#tabBtn') );
+    $('.buttons-csv').addClass('btn btn-primary');
 
     function showMask() {
         myTool.mask.show('查询中...');

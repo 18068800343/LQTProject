@@ -181,11 +181,11 @@
                     </button>
                 </div>
                 <div class="UpperPartR">
-                    <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
+                    <div id="tabBtnDay" style="margin-left: 10px;margin-top: 1%;"></div>
                 </div>
             </div>
-            <div class="LowerPart" style="margin-top:15px;">
-                <table class="layui-table" lay-skin="line" id="mainContentDay">
+            <div class="LowerPart" style="margin-top:35px;">
+                <table class="layui-table" lay-skin="line" id="mainContentDay"style="width:100%;">
                     <thead>
                     <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                         <th>日期</th>
@@ -209,11 +209,11 @@
                     <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入产能信息</button>-->
                 </div>
                 <div class="UpperPartR">
-                    <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
+                    <div id="tabBtnWeek" style="margin-left: 10px;margin-top: 1%;"></div>
                 </div>
             </div>
-            <div class="LowerPart" style="margin-top:3px;">
-                <table class="layui-table" lay-skin="line" id="mainContentWeek">
+            <div class="LowerPart" style="margin-top:35px;">
+                <table class="layui-table" lay-skin="line" id="mainContentWeek" style="width:100%;">
                     <thead>
                     <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                         <th>日期</th>
@@ -239,11 +239,11 @@
                     <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin: 5PX;">录入产能信息</button>-->
                 </div>
                 <div class="UpperPartR">
-                    <!--<button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button>-->
+                    <div id="tabBtnMonth" style="margin-left: 10px;margin-top: 1%;"></div>
                 </div>
             </div>
-            <div class="LowerPart" style="margin-top:3px;">
-                <table class="layui-table" lay-skin="line" id="mainContentMonth">
+            <div class="LowerPart" style="margin-top:35px;">
+                <table class="layui-table" lay-skin="line" id="mainContentMonth" style="width:100%;">
                     <thead>
                     <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
                         <th>日期</th>
@@ -652,7 +652,7 @@ function cbechartsMonth(date,chenneng) {
     }
 
 
-    let tableDayCount = $('#mainContentDay').dataTable({
+    let tableDayCount = $('#mainContentDay').DataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
@@ -685,8 +685,29 @@ function cbechartsMonth(date,chenneng) {
                 "sLast": "最后一页"
             }
         },
-
+        "buttons": [
+            {
+                extend: "csv",
+                text: "导出Excel",
+                bom: true,
+                filename: '每日配料',
+                fieldSeparator: ',',
+                exportOptions: {
+                    format: {
+                        header: function ( data) {
+                            return data;
+                        },
+                        body: function ( data, columnIdx, rowIdx, code ) {
+                            return data;
+                        }
+                    },
+                    columns:[0,1,2,3]
+                }
+            }
+        ]
     });
+    tableDayCount.buttons().container().appendTo( $('#tabBtnDay') );
+    $('.buttons-csv').addClass('btn btn-primary');
 
     function queryDayCount() {
         $.ajax({
@@ -706,7 +727,7 @@ function cbechartsMonth(date,chenneng) {
         });
     }
 
-    let tableWeekCount = $('#mainContentWeek').dataTable({
+    let tableWeekCount = $('#mainContentWeek').DataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
@@ -737,9 +758,29 @@ function cbechartsMonth(date,chenneng) {
                 "sLast": "最后一页"
             }
         },
-
+        "buttons": [
+            {
+                extend: "csv",
+                text: "导出Excel",
+                bom: true,
+                filename: '每周产能',
+                fieldSeparator: ',',
+                exportOptions: {
+                    format: {
+                        header: function ( data) {
+                            return data;
+                        },
+                        body: function ( data, columnIdx, rowIdx, code ) {
+                            return data;
+                        }
+                    },
+                    columns:[0,1]
+                }
+            }
+        ]
     });
-
+    tableWeekCount.buttons().container().appendTo( $('#tabBtnWeek') );
+    $('.buttons-csv').addClass('btn btn-primary');
 
     function queryWeekCount() {
         $.ajax({
@@ -759,7 +800,7 @@ function cbechartsMonth(date,chenneng) {
         });
     }
 
-    let tableMonthCount = $('#mainContentMonth').dataTable({
+    let tableMonthCount = $('#mainContentMonth').DataTable({
         "deferRender": true,
         "processing": true,
         "bDestroy": true,
@@ -790,9 +831,29 @@ function cbechartsMonth(date,chenneng) {
                 "sLast": "最后一页"
             }
         },
-
+        "buttons": [
+            {
+                extend: "csv",
+                text: "导出Excel",
+                bom: true,
+                filename: '每月产能',
+                fieldSeparator: ',',
+                exportOptions: {
+                    format: {
+                        header: function ( data) {
+                            return data;
+                        },
+                        body: function ( data, columnIdx, rowIdx, code ) {
+                            return data;
+                        }
+                    },
+                    columns:[0,1]
+                }
+            }
+        ]
     });
-
+    tableMonthCount.buttons().container().appendTo( $('#tabBtnMonth') );
+    $('.buttons-csv').addClass('btn btn-primary');
 
     function queryMonthCount() {
         $.ajax({
