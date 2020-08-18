@@ -267,14 +267,18 @@
 				"searchable": true,
 				"render": function(data, type, full) {
 					var finishtime=full.finishTime;
-
-					if(finishtime<scjh_now.finishTime){
-						return "已结束"
-					}else if(finishtime>scjh_now.finishTime){
+					if(finishtime!=null&&finishtime!=""&&finishtime!=undefined&&scjh_now.finishTime!=null&&scjh_now.finishTime!=""&&scjh_now.finishTime!=undefined){
+						if(finishtime<scjh_now.finishTime){
+							return "已结束"
+						}else if(finishtime>scjh_now.finishTime){
+							return "未开始";
+						}else {
+							return "已开始";
+						}
+					}else{
 						return "未开始";
-					}else {
-						return "已开始";
 					}
+
 				}
 			},
 			{
