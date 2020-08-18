@@ -20,7 +20,12 @@ public class SiteRoadMileageTempServiceImpl implements SiteRoadMileageTempServic
     public List<SiteRoadMileageTemp> getAllSiteRoadMileageTemp(String luduanquanxian) {
         return dao.getAllSiteRoadMileageTemp(luduanquanxian);
     }
-
+    
+    @Override
+    public List<SiteRoadMileageTemp> getAllSiteRoadMileageTempShiro(String luduanquanxian) {
+        return dao.getAllSiteRoadMileageTempShiro(luduanquanxian);
+    }
+    
     @Override
     public int updSiteRoadMileageTemp(SiteRoadMileageTemp srm) {
         return dao.updSiteRoadMileageTemp(srm);

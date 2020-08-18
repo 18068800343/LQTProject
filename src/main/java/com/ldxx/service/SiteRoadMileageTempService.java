@@ -8,6 +8,8 @@ public interface SiteRoadMileageTempService {
 
     List<SiteRoadMileageTemp> getAllSiteRoadMileageTemp(String luduanquanxian);
 
+    List<SiteRoadMileageTemp> getAllSiteRoadMileageTempShiro(String luduanquanxian);
+    
     int updSiteRoadMileageTemp(SiteRoadMileageTemp srm);
 
     int delSiteRoadMileageTemp(String id);

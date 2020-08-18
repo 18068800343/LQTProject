@@ -8,7 +8,9 @@ import java.util.List;
 public interface SiteRoadMileageTempDao {
 
     List<SiteRoadMileageTemp> getAllSiteRoadMileageTemp(String luduanquanxian);
-
+    
+    List<SiteRoadMileageTemp> getAllSiteRoadMileageTempShiro(String luduanquanxian);
+    
     int updSiteRoadMileageTemp(@Param("srm") SiteRoadMileageTemp srm);
 
     int delSiteRoadMileageTemp(@Param("id") String id);

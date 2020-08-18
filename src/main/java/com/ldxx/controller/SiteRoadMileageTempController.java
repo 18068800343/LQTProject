@@ -41,13 +41,20 @@ public class SiteRoadMileageTempController {
     @RequestMapping("/getAllSiteRoadMileageTemp")
     public List<SiteRoadMileageTemp> getAllSiteRoadMileageTemp(HttpSession session,String  roadquanxain){
     	String luduanquanxian="";
+    	String username="";
 		if(roadquanxain!=null){
 			luduanquanxian=roadquanxain;
 		}else{
 			User user = (User) session.getAttribute("user");
 	        luduanquanxian = user.getLuduanquanxian();
+	        username = user.getuName();
 		}
-        return service.getAllSiteRoadMileageTemp(luduanquanxian);
+		if("shiro".equals(username))
+		{
+			return service.getAllSiteRoadMileageTempShiro(luduanquanxian);
+		}else {
+			return service.getAllSiteRoadMileageTemp(luduanquanxian);
+		}
     }
 
     @RequestMapping("/updSiteRoadMileageTemp")
