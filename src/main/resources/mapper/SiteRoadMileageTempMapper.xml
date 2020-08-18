@@ -79,7 +79,7 @@
     <select id="getTanPuLiXiDuVoListByTime" resultType="SiteRoadMileageTemp">
         SELECT
         ABS(qba.temp-qba.temp2) as lixidu,qba.*
-        FROM
+        FROM 
         site_road_mileage_temp qba
         <where>
             <if test="beginTime !=null and beginTime!=''">
