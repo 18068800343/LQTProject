@@ -22,7 +22,6 @@
     <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
     <link rel="stylesheet" type="text/css" href="../../css/code.css" />
     <link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
     <link href="../../toastr/toastr.css" rel="stylesheet">
     <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
@@ -69,6 +68,23 @@
 
 <div class="zhuti-content">
     <div class="UpperPart">
+        <div class="form-inline" style="margin: 5PX;">
+            <div class="pull-left col-xs-2.5">
+                <input type="text" style="width:180px;margin-left: 15px;" class="form-control" placeholder="起始时间"
+                       id="reservation" onclick="">
+            </div>
+            <span class="pull-left spa" style="padding-top: 5px;margin-left: 5px;margin-right: 5px;">至</span>
+            <div class="pull-left col-xs-2.5">
+                <input type="text" style="width:180px" class="form-control" placeholder="结束时间" id="reservationEnd"
+                       onclick=""><br/>
+            </div>
+            <div class="pull-left col-sm-1">
+                <a class="btn btn-primary btn-sm" onclick="searchBydate()">回放</a>
+            </div>&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="pull-left col-sm-1">
+                <a class="btn btn-primary btn-sm" onclick="playYinShiYun()">监控</a>
+            </div>
+        </div>
     </div>
     <div class="LowerPart" style="margin-top:3px;">
         <!--vjs-big-play-centered 播放按钮居中-->
@@ -114,6 +130,7 @@
 <!-- allMsg结束 -->
 </body>
 <script src="../../js/jquery.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
 <script src="../../js/common-scripts.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
@@ -122,7 +139,92 @@
 <!--<script src="../../video.min.js"></script>-->
 <!--<script src="../../js/videojs-flash.min.js"></script>-->
 <script>
-    videojs.options.flash.swf = '/img/VideoJS.swf';
+    let startTime = {
+        elem: '#reservation',
+        type: 'datetime',
+        trigger: 'click',
+        format: 'yyyyMMddHHmmss',
+        done: function (date) {
+            let beginDate = date;
+            let endDate = $("#reservationEnd").val();
+            let d1 = beginDate;
+            let d2 = endDate;
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                toastr.error("开始时间不能大于结束时间！");
+                $("#reservation").val('');
+                return false;
+            }
+        }
+    };
+    // 结束时间
+    let endTime = {
+        elem: '#reservationEnd',
+        type: 'datetime',
+        trigger: 'click',
+        format: 'yyyyMMddHHmmss',
+        done: function (date) {
+            let beginDate = $("#reservation").val();
+            let endDate = date;
+            let d1 = beginDate;
+            let d2 = endDate;
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                toastr.error("开始时间不能大于结束时间！");
+                $("#reservationEnd").val('');
+                return false;
+            }
+        }
+    };
+    laydate.render(startTime);
+    laydate.render(endTime);
+
+    function searchBydate() {
+        let begin = $('#reservation').val();
+        let start = begin.replace(/年|月/g, '-').replace('日', '');
+        let end = $('#reservationEnd').val().replace(/年|月/g, '-').replace('日', '');
+        rePlayYinShiYun(start, end)
+    }
+
+    let page_accessToken;
+
+    function rePlayYinShiYun(start, end) {
+        // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
+        // 开始初始化直播源地址
+        //开始初始化监控地址
+        let url = `ezopen://open.ys7.com/E20449234/3.rec?begin=${start}&end=${end}`;
+
+        let player = new EZUIPlayer({
+            id: 'myPlayer',
+            url: url,
+            autoplay: true,
+            accessToken: page_accessToken,
+            //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
+            decoderPath: '/view/js/EZUIKit-JavaScript',
+            width: 1700,
+            height: 800,
+        });
+        //播放
+        player.play();
+    }
+
+    function playYinShiYun() {
+        // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
+        // 开始初始化直播源地址
+        //开始初始化监控地址
+        let url = `ezopen://open.ys7.com/E20449234/3.live`;
+
+        let player = new EZUIPlayer({
+            id: 'myPlayer',
+            url: url,
+            autoplay: true,
+            accessToken: page_accessToken,
+            //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
+            decoderPath: '/view/js/EZUIKit-JavaScript',
+            width: 1700,
+            height: 800,
+        });
+        //播放
+        player.play();
+    }
 
     $(document).ready(function () {
         initYinShiYun();
@@ -141,6 +243,7 @@
             },
             success: function (json) {
                 let accessToken = json.data.accessToken;
+                page_accessToken = accessToken;
                 // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
                 // 开始初始化直播源地址
                 //开始初始化监控地址
