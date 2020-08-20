@@ -60,7 +60,7 @@ function setCangChuOption(map){
 		    	data: ['仓库容量', '剩余重量']
 		    },
 		    grid: {
-		        left: '3%',
+		        left: '10%',
 		        right: '4%',
 		        bottom: '3%',
 		        containLabel: true
@@ -68,10 +68,12 @@ function setCangChuOption(map){
 		    xAxis: {
 		        type: 'value',
 		        name:"重量",
+		        
 		    },
 		    yAxis: {
 		    	name: '仓库编号',
 				axisTick: {show: true},
+				show:false,
 				data: map.xList
 		    },
 		    series: [
@@ -80,6 +82,7 @@ function setCangChuOption(map){
 					type: 'bar',
 					barGap: 0,
 					label: pageCangChuLabelOption,
+					position: 'top',
 					data: map.bList
 				},
 				{
