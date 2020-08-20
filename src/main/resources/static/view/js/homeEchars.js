@@ -294,7 +294,7 @@ function setHomeCBJDTJ(datetime,chenneng,feiliao){
 			barWidth: '30%',
 			label: {
 				normal: {
-					show: false,
+					show: true,
 					color:"black",
 					position: 'top'
 				}
