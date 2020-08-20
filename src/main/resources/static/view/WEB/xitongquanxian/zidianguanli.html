@@ -55,14 +55,16 @@
     </div>
     <div>
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist" style="background:#fff;">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">设备</a></li>
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+         <ul class="layui-tab-title" role="tablist" style="background:#fff;margin-top:-10px;">
+            <li role="presentation" class="active layui-this"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">设备</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">添加剂</a></li>
             <li role="presentation"><a href="#danwei" aria-controls="danwei" role="tab" data-toggle="tab">单位</a></li>
             <li role="presentation"><a href="#zhiwu" aria-controls="zhiwu" role="tab" data-toggle="tab">职务/工种</a></li>
             <li role="presentation"><a href="#bumen" aria-controls="bumen" role="tab" data-toggle="tab">部门</a></li>
             <li role="presentation"><a href="#shiliao" aria-controls="shiliao" role="tab" data-toggle="tab">石料</a></li>
         </ul>     
+        </div>
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
@@ -231,10 +233,10 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline">
-                                    <table class="table table-bordered table-condensed" >
+                                     <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
 											<td style="width: 20%;">名称</td>
-											<td style="width: 30%;"><input type="text" style="width: 70%;" id="add_type_name" /></td>
+											<td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="add_type_name" /></td>
 										</tr>
                                     </table>
                                 </form>  
@@ -260,10 +262,10 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline" id="ddt_edit_form">
-                                    <table class="table table-bordered table-condensed" >
+                                     <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
 											<td style="width: 20%;">名称</td>
-											<td style="width: 30%;"><input type="text" style="width: 70%;" id="edit_type_name" /></td>
+											<td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="edit_type_name" /></td>
 										</tr>
                                     </table>
                                 </form>  
@@ -289,10 +291,10 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline" id="add_form">
-                                    <table class="table table-bordered table-condensed" >
+                                     <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
 											<td style="width: 20%;">名称</td>
-											<td style="width: 30%;"><input type="text" style="width: 70%;" id="add_material_name" /></td>
+											<td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="add_material_name" /></td>
 										</tr>
                                     </table>
                                 </form>  
@@ -318,10 +320,10 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline" id="edit_form">
-                                    <table class="table table-bordered table-condensed" >
+                                     <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
 											<td style="width: 20%;">名称</td>
-											<td style="width: 30%;"><input type="text" style="width: 70%;" id="edit_material_name" /></td>
+											<td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="edit_material_name" /></td>
 										</tr>
                                     </table>
                                 </form>  
@@ -347,10 +349,10 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline" >
-                                    <table class="table table-bordered table-condensed" >
+                                     <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
 											<td style="width: 20%;">名称</td>
-											<td style="width: 30%;"><input type="text" style="width: 70%;" id="add_danwei" /></td>
+											<td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="add_danwei" /></td>
 										</tr>
                                     </table>
                                 </form>  
@@ -375,10 +377,10 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline" >
-                                    <table class="table table-bordered table-condensed" >
+                                     <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
 											<td style="width: 20%;">名称</td>
-											<td style="width: 30%;"><input type="text" style="width: 70%;" id="xg_danwei" /></td>
+											<td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="xg_danwei" /></td>
 										</tr>
                                     </table>
                                 </form>  
@@ -404,10 +406,10 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline" >
-                                    <table class="table table-bordered table-condensed" >
+                                     <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
 											<td style="width: 20%;">名称</td>
-											<td style="width: 30%;"><input type="text" style="width: 70%;" id="add_zw" /></td>
+											<td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="add_zw" /></td>
 										</tr>
                                     </table>
                                 </form>  
@@ -432,10 +434,10 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline" >
-                                    <table class="table table-bordered table-condensed" >
+                                     <table class="layui-table "lay-skin="line" style="height:auto;" >
                                     	<tr>
 											<td style="width: 20%;">名称</td>
-											<td style="width: 30%;"><input type="text" style="width: 70%;" id="xg_zw" /></td>
+											<td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="xg_zw" /></td>
 										</tr>
                                     </table>
                                 </form>  
@@ -461,10 +463,10 @@
                 <div class="modal-body">
                     <div>
                         <form class="form-inline" >
-                            <table class="table table-bordered table-condensed" >
+                             <table class="layui-table "lay-skin="line" style="height:auto;" >
                                 <tr>
                                     <td style="width: 20%;">名称</td>
-                                    <td style="width: 30%;"><input type="text" style="width: 70%;" id="add_bm" /></td>
+                                    <td style="width: 30%;"><input type="text"  class="form-control" style="width: 70%;" id="add_bm" /></td>
                                 </tr>
                             </table>
                         </form>
@@ -489,10 +491,10 @@
                 <div class="modal-body">
                     <div>
                         <form class="form-inline" >
-                            <table class="table table-bordered table-condensed" >
+                             <table class="layui-table "lay-skin="line" style="height:auto;" >
                                 <tr>
                                     <td style="width: 20%;">名称</td>
-                                    <td style="width: 30%;"><input type="text" style="width: 70%;" id="xg_bm" /></td>
+                                    <td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="xg_bm" /></td>
                                 </tr>
                             </table>
                         </form>
@@ -518,10 +520,10 @@
                 <div class="modal-body">
                     <div>
                         <form class="form-inline" id="">
-                            <table class="table table-bordered table-condensed" >
+                             <table class="layui-table "lay-skin="line" style="height:auto;" >
                                 <tr>
                                     <td style="width: 20%;">名称</td>
-                                    <td style="width: 30%;"><input type="text" style="width: 70%;" id="add_stones_name" /></td>
+                                    <td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="add_stones_name" /></td>
                                 </tr>
                             </table>
                         </form>
@@ -547,10 +549,10 @@
                 <div class="modal-body">
                     <div>
                         <form class="form-inline" id="">
-                            <table class="table table-bordered table-condensed" >
+                             <table class="layui-table "lay-skin="line" style="height:auto;" >
                                 <tr>
                                     <td style="width: 20%;">名称</td>
-                                    <td style="width: 30%;"><input type="text" style="width: 70%;" id="edit_stones_name" /></td>
+                                    <td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="edit_stones_name" /></td>
                                 </tr>
                             </table>
                         </form>

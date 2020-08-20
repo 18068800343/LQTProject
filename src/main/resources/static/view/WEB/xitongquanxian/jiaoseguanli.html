@@ -9,11 +9,23 @@
     <link href="../../style/bootstrap.min.css" rel="stylesheet">
     <link href="../../style/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style/bootstrap-treeview.css" />
-    <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../../font-awesome/4.5.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="../../css/css.css" />
     <link rel="stylesheet" href="../../css/zTreeStyle.css" />
     <link href="../../toastr/toastr.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../../style/jquery-editable-select.css">
+    
+    <link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css" />
+	<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/layui.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/code.css" />
+	<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+	<link href="../../toastr/toastr.css" rel="stylesheet">
         	<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
@@ -53,11 +65,12 @@
 
     <div>
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">人员角色管理</a></li>
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title" role="tablist" style="background:#fff;margin-top:-10px;">
+            <li role="presentation" class="active layui-this"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">人员角色管理</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">角色管理</a></li>
         </ul>
-
+		</div>
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
@@ -252,18 +265,23 @@
 
 </body>
 <script src="../../js/jquery.js"></script>
+<script src="../../easyUI/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/common-scripts.js"></script>
 <script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../js/laydate/laydate.js"></script>
+<script src="../../js/main.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
-<script src="../../js/bootstrap-treeview.js" ></script>
-<script src="../../js/tree.min.js"></script>
+<script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../toastr/toastr.js"></script>
-<script src="../../js/jquery.ztree.core.js"></script>
-<script src="../../js/jquery.ztree.excheck.js"></script>
-<script type="text/javascript" src="../../js/config.js" ></script>
-<script type="text/javascript" src="../../js/data.js" ></script>
-<script src="../../js/quanxian.js"></script>
+<script src="../../js/SmartNotification.min.js"></script>
 <script src="../../js/myTool.js"></script>
+<script src="../../js/quanxian.js"></script>
+<script src="../../js/myEcharts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script>
     $(document).ready( function () {
 
