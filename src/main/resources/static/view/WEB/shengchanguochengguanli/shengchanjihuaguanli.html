@@ -754,11 +754,6 @@
 								<td>成品需要量(kg)</td>
 								<td><input class="form-control" type="text" @blur="reg(pdneed,'xiaoshu','pdneed')"
 										   v-model="pdneed" placeholder="请输入" style="width: 100%; height: 100%;"/></td>
-								<td>单价(元)</td>
-								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')"
-										   v-model="price" placeholder="请输入" style="width: 100%; height: 100%;"></td>
-							</tr>
-							<tr>
 								<td>
 									成品温度要求(℃)
 									<!--									干拌时间-->
@@ -770,6 +765,12 @@
 									<!--										   placeholder="请输入" id="xgdrymixingtime"-->
 									<!--										   style="width: 100%; height: 100%; ">-->
 								</td>
+
+							</tr>
+							<tr>
+								<td>单价(元)</td>
+								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')"
+										   v-model="price" placeholder="请输入" style="width: 100%; height: 100%;"></td>
 								<td>要求完成时间</td>
 								<td><input class="form-control" type="text" readonly="true" v-model="finishTime"
 										   id="xgfinishTime"
@@ -811,8 +812,10 @@
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
 
-								<td></td>
-								<td></td>
+								<td>方向</td>
+								<td><input class="form-control" type="text" v-model="direction"
+										   placeholder="请输入"
+										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
 								<td>规划高速路径</td>
@@ -848,31 +851,30 @@
 								<td>路面施工队</td>
 								<td><input class="form-control" type="text" v-model="team" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td>方向</td>
-								<td><input class="form-control" type="text" v-model="direction"
-										   placeholder="请输入"
-										   style="width: 100%; height: 100%; "></td>
-							</tr>
-							<tr>
 								<td>施工层</td>
 								<td><select class="form-control" style="width: 100%;" v-model="shigongceng">
 									<option value="上">上</option>
 									<option value="中">中</option>
 									<option value="下">下</option>
 								</select></td>
+							</tr>
+							<tr>
 								<td>施工车道</td>
 								<td><input class="form-control" type="text" v-model="chedao"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-							</tr>
-
-							<tr>
 								<td>项目部</td>
 								<td><input class="form-control" type="text" v-model="xiangmubu" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
-								<td></td>
-								<td></td>
 							</tr>
+
+							<!--							<tr>-->
+							<!--								<td>项目部</td>-->
+							<!--								<td><input class="form-control" type="text" v-model="xiangmubu" placeholder="请输入"-->
+							<!--										   style="width: 100%; height: 100%; "></td>-->
+							<!--								<td></td>-->
+							<!--								<td></td>-->
+							<!--							</tr>-->
 						</table>
 						<div style="width: 870px;height: 300px;" id="xgmap"></div>
 					</form>
