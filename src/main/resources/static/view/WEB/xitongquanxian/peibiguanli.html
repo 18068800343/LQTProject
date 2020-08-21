@@ -96,16 +96,28 @@
 							<tr>	
 								<td>17-22用量(kg):</td>
 								<td><input type="text" class="form-control" id="materials_use_5"></td>
-							    <td>22-32用量(kg):</td>
-							    <td><input type="text" class="form-control" id="materials_use_6"></td>
+								<td>22-32用量(kg):</td>
+								<td><input type="text" class="form-control" id="materials_use_6"></td>
 							</tr>
-							<tr>	
+							<tr>
 								<td>粉用量(kg):</td>
 								<td><input type="text" class="form-control" id="bone_flour_use"></td>
-							    <td>沥青用量(kg):</td>
-							    <td><input type="text" class="form-control" id="pitch_use"></td>
+								<td>沥青用量(kg):</td>
+								<td><input type="text" class="form-control" id="pitch_use"></td>
 							</tr>
-                        </table>
+							<tr>
+								<td>标准温度(℃):</td>
+								<td><input type="text" class="form-control" id="biaozhunwendu"></td>
+								<td>温度偏差1(℃):</td>
+								<td><input type="text" class="form-control" id="wendupiancha1"></td>
+							</tr>
+							<tr>
+								<td>温度偏差2(℃):</td>
+								<td><input type="text" class="form-control" id="wendupiancha2"></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
                          <table class="layui-table "lay-skin="line" id="new_materials">
 							<thead>
 								<tr>
@@ -163,17 +175,28 @@
 							<tr>
 								<td>17-22用量:</td>
 								<td><input type="text" class="form-control" id="edit_materials_use_5"></td>
-							    <td>22-32用量:</td>
-							    <td><input type="text" class="form-control" id="edit_materials_use_6"></td>
+								<td>22-32用量:</td>
+								<td><input type="text" class="form-control" id="edit_materials_use_6"></td>
 							</tr>
-							<tr>
-								<td>粉用量:</td>
-								<td><input type="text" class="form-control" id="edit_bone_flour_use"></td>
-							    <td>沥青用量:</td>
-							    <td><input type="text" class="form-control" id="edit_pitch_use"></td>
-							    
-							</tr>
-                    </table>
+						<tr>
+							<td>粉用量:</td>
+							<td><input type="text" class="form-control" id="edit_bone_flour_use"></td>
+							<td>沥青用量:</td>
+							<td><input type="text" class="form-control" id="edit_pitch_use"></td>
+						</tr>
+						<tr>
+							<td>标准温度(℃):</td>
+							<td><input type="text" class="form-control" id="edit_biaozhunwendu"></td>
+							<td>温度偏差1(℃):</td>
+							<td><input type="text" class="form-control" id="edit_wendupiancha1"></td>
+						</tr>
+						<tr>
+							<td>温度偏差2(℃):</td>
+							<td><input type="text" class="form-control" id="edit_wendupiancha2"></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
                    	<table class="layui-table "lay-skin="line" id="edit_fushumaterials">
 							<thead>
 								<tr>
@@ -504,26 +527,29 @@
 			fscl.mName=mName;
 			fscl.weight=weight;
 			fsclList.push(fscl);
-    	});
-    	var flName=$("#fl_name").val();
-    	var materialsUse1=$("#materials_use_1").val();
-    	var materialsUse2=$("#materials_use_2").val();
-    	var materialsUse3=$("#materials_use_3").val();
-    	var materialsUse4=$("#materials_use_4").val();
-    	var materialsUse5=$("#materials_use_5").val();
-    	var materialsUse6=$("#materials_use_6").val();
-    	var boneFlourUse=$("#bone_flour_use").val();
-    	var pitchUse=$("#pitch_use").val();
-    	if(flName==''){
-    		toastr.error("配方名称不能为空");
-    		return;
-    	}
-    	
-    	var pb={
-    			flId:undefined,
-    			flNo:undefined,
-    			flName:undefined,
-    			materialsUse1:0,
+		});
+		var flName = $("#fl_name").val();
+		var materialsUse1 = $("#materials_use_1").val();
+		var materialsUse2 = $("#materials_use_2").val();
+		var materialsUse3 = $("#materials_use_3").val();
+		var materialsUse4 = $("#materials_use_4").val();
+		var materialsUse5 = $("#materials_use_5").val();
+		var materialsUse6 = $("#materials_use_6").val();
+		var boneFlourUse = $("#bone_flour_use").val();
+		var pitchUse = $("#pitch_use").val();
+		var biaozhunwendu = $("#biaozhunwendu").val();
+		var wendupiancha1 = $("#wendupiancha1").val();
+		var wendupiancha2 = $("#wendupiancha2").val();
+		if (flName == '') {
+			toastr.error("配方名称不能为空");
+			return;
+		}
+
+		var pb = {
+			flId: undefined,
+			flNo: undefined,
+			flName: undefined,
+			materialsUse1: 0,
     			materialsUse2:0,
     			materialsUse3:0,
     			materialsUse4:0,
@@ -533,26 +559,29 @@
     			pitchUse:0,
     			fsclList:undefined
     	}
-    	pb.flName=flName;
-    	pb.materialsUse1=materialsUse1;
-    	pb.materialsUse2=materialsUse2;
-    	pb.materialsUse3=materialsUse3;
-    	pb.materialsUse4=materialsUse4;
-    	pb.materialsUse5=materialsUse5;
-    	pb.materialsUse6=materialsUse6;
-    	pb.boneFlourUse=boneFlourUse;
-    	pb.pitchUse=pitchUse;
-    	pb.fsclList=fsclList;
-    	var pbjson=JSON.stringify(pb);
-    	$.ajax({
-            type: 'POST',
-            url: '/SysFormulationManagement/addSysFormulationManagement',
-            contentType: 'application/json',
-            dataType: 'json',
-            data: pbjson,
-            error: function (msg) {
-                errMessage("请求UserController失败");
-            },
+		pb.flName = flName;
+		pb.materialsUse1 = materialsUse1;
+		pb.materialsUse2 = materialsUse2;
+		pb.materialsUse3 = materialsUse3;
+		pb.materialsUse4 = materialsUse4;
+		pb.materialsUse5 = materialsUse5;
+		pb.materialsUse6 = materialsUse6;
+		pb.boneFlourUse = boneFlourUse;
+		pb.pitchUse = pitchUse;
+		pb.fsclList = fsclList;
+		pb.biaozhunwendu = biaozhunwendu;
+		pb.wendupiancha1 = wendupiancha1;
+		pb.wendupiancha2 = wendupiancha2;
+		var pbjson = JSON.stringify(pb);
+		$.ajax({
+			type: 'POST',
+			url: '/SysFormulationManagement/addSysFormulationManagement',
+			contentType: 'application/json',
+			dataType: 'json',
+			data: pbjson,
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
             success: function (json) {
             	if(json.result=='0'){
 	        		toastr.error("保存失败");
@@ -625,16 +654,17 @@
 		$("#edit_materials_use_6").val(data.materialsUse6);
 		$("#edit_bone_flour_use").val(data.boneFlourUse);
 		$("#edit_pitch_use").val(data.pitchUse);
+		$("#edit_biaozhunwendu").val(data.biaozhunwendu);
+		$("#edit_wendupiancha1").val(data.wendupiancha1);
+		$("#edit_wendupiancha2").val(data.wendupiancha2);
 		$("#edit_fushumaterials tbody").html('');
-		len=1;
-		if(data.fsclList!=null)
-		{
-			for(var k=0;k<data.fsclList.length;k++)
-			{
+		len = 1;
+		if (data.fsclList != null) {
+			for (var k = 0; k < data.fsclList.length; k++) {
 				$("#edit_fushumaterials tbody").append(
-						"<tr><td>添加剂材料</td><td>"+
-						"<select class='form-control' style='width:180px;' id='edit_fushumaterialName"+k+"'>"+
-						"</select></td>"+
+						"<tr><td>添加剂材料</td><td>" +
+						"<select class='form-control' style='width:180px;' id='edit_fushumaterialName" + k + "'>" +
+						"</select></td>" +
 						"<td><input type='text' id='materialWeight"+k+"' name='edit_materialWeight' class='form-control' value='"+data.fsclList[k].weight+"'></td>"+
 						"<td><button type='button' class='btn btn-primary' onclick='removeThis(this)'>移除</button></td></tr>");
 						initMaterials(k);
@@ -662,33 +692,36 @@
 			fscl.weight=weight;
 			fsclList.push(fscl);
     	});
-    	var flNo=$("#edit_fl_no").val();
-    	var flName=$("#edit_fl_name").val();
-    	var materialsUse1=$("#edit_materials_use_1").val();
-    	var materialsUse2=$("#edit_materials_use_2").val();
-    	var materialsUse3=$("#edit_materials_use_3").val();
-    	var materialsUse4=$("#edit_materials_use_4").val();
-    	var materialsUse5=$("#edit_materials_use_5").val();
-    	var materialsUse6=$("#edit_materials_use_6").val();
-    	var boneFlourUse=$("#edit_bone_flour_use").val();
-    	var pitchUse=$("#edit_pitch_use").val();
-    	if(flName==''){
-    		toastr.error("配方名称不能为空");
-    		return;
-    	}
-    	
-    	/* 
-		edit_fl_no
-		edit_fl_name
-		edit_materials_use_1
-		edit_materials_use_2
-		edit_materials_use_3
-		edit_materials_use_4
-		edit_materials_use_5
-		edit_materials_use_6
-		edit_bone_flour_use
-		edit_pitch_use 
-		*/
+		var flNo = $("#edit_fl_no").val();
+		var flName = $("#edit_fl_name").val();
+		var materialsUse1 = $("#edit_materials_use_1").val();
+		var materialsUse2 = $("#edit_materials_use_2").val();
+		var materialsUse3 = $("#edit_materials_use_3").val();
+		var materialsUse4 = $("#edit_materials_use_4").val();
+		var materialsUse5 = $("#edit_materials_use_5").val();
+		var materialsUse6 = $("#edit_materials_use_6").val();
+		var boneFlourUse = $("#edit_bone_flour_use").val();
+		var pitchUse = $("#edit_pitch_use").val();
+		var biaozhunwendu = $("#edit_biaozhunwendu").val();
+		var wendupiancha1 = $("#edit_wendupiancha1").val();
+		var wendupiancha2 = $("#edit_wendupiancha2").val();
+		if (flName == '') {
+			toastr.error("配方名称不能为空");
+			return;
+		}
+
+		/*
+        edit_fl_no
+        edit_fl_name
+        edit_materials_use_1
+        edit_materials_use_2
+        edit_materials_use_3
+        edit_materials_use_4
+        edit_materials_use_5
+        edit_materials_use_6
+        edit_bone_flour_use
+        edit_pitch_use
+        */
     	var pb={
     			flId:undefined,
     			flNo:undefined,
@@ -704,26 +737,29 @@
     			fsclList:undefined
     	}
     	pb.flId=ddtId;
-    	pb.flNo=flNo;
-    	pb.flName=flName;
-    	pb.materialsUse1=materialsUse1;
-    	pb.materialsUse2=materialsUse2;
-    	pb.materialsUse3=materialsUse3;
-    	pb.materialsUse4=materialsUse4;
-    	pb.materialsUse5=materialsUse5;
-    	pb.materialsUse6=materialsUse6;
-    	pb.boneFlourUse=boneFlourUse;
-    	pb.pitchUse=pitchUse;
-    	pb.fsclList=fsclList;
-    	var xgpbjson=JSON.stringify(pb);
-    	$.ajax({
-            type: 'POST',
-            url: '/SysFormulationManagement/updateSysFormulationManagement',
-            contentType: 'application/json',
-            dataType: 'json',
-            data: xgpbjson,
-            error: function (msg) {
-                errMessage("请求UserController失败");
+		pb.flNo = flNo;
+		pb.flName = flName;
+		pb.materialsUse1 = materialsUse1;
+		pb.materialsUse2 = materialsUse2;
+		pb.materialsUse3 = materialsUse3;
+		pb.materialsUse4 = materialsUse4;
+		pb.materialsUse5 = materialsUse5;
+		pb.materialsUse6 = materialsUse6;
+		pb.boneFlourUse = boneFlourUse;
+		pb.pitchUse = pitchUse;
+		pb.biaozhunwendu = biaozhunwendu;
+		pb.wendupiancha1 = wendupiancha1;
+		pb.wendupiancha2 = wendupiancha2;
+		pb.fsclList = fsclList;
+		var xgpbjson = JSON.stringify(pb);
+		$.ajax({
+			type: 'POST',
+			url: '/SysFormulationManagement/updateSysFormulationManagement',
+			contentType: 'application/json',
+			dataType: 'json',
+			data: xgpbjson,
+			error: function (msg) {
+				errMessage("请求UserController失败");
             },
             success: function (json) {
             	if(json.result=='0'){

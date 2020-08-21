@@ -113,7 +113,7 @@ public class ShengChanJiHuaController {
 
 	@RequestMapping("/addShengChanJiHuaCurrent")
 	@ResponseBody
-	public int addShengChanJiHuaCurrent(String planId, String planNo, HttpSession session) {
+	public int addShengChanJiHuaCurrent(String planId, String planNo, String recipeid, HttpSession session) {
 
 		String nowDate = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
 		User user = (User) session.getAttribute("user");
@@ -121,7 +121,7 @@ public class ShengChanJiHuaController {
 		if (null != user) {
 			userId = user.getUserId();
 		}
-		int result = service.addShengChanJiHuaCurrent(planId, planNo, userId, nowDate);
+		int result = service.addShengChanJiHuaCurrent(planId, planNo, recipeid, userId, nowDate);
 
 		return result;
 	}

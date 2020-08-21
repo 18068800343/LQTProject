@@ -5,7 +5,7 @@
 		insert into 
 		sys_formulation_management(fl_id,fl_no,fl_name,materials_use_1,materials_use_2,
 			materials_use_3,materials_use_4,materials_use_5,materials_use_6,
-			bone_flour_use,pitch_use,delete_state)
+			bone_flour_use,pitch_use,delete_state,biaozhunwendu,wendupiancha1,wendupiancha2)
 		values(#{sysFormulationManagement.flId},
 			   #{sysFormulationManagement.flNo},
 			   #{sysFormulationManagement.flName},
@@ -17,7 +17,10 @@
 			   #{sysFormulationManagement.materialsUse6},
 			   #{sysFormulationManagement.boneFlourUse},
 			   #{sysFormulationManagement.pitchUse},
-			   1
+			   1,
+			   #{sysFormulationManagement.biaozhunwendu},
+			   #{sysFormulationManagement.wendupiancha1},
+			   #{sysFormulationManagement.wendupiancha2}
 			   )
 	</insert>
 	
@@ -33,14 +36,17 @@
 			 materials_use_5=#{sysFormulationManagement.materialsUse5},
 			 materials_use_6=#{sysFormulationManagement.materialsUse6},
 			 bone_flour_use=#{sysFormulationManagement.boneFlourUse},
-			 pitch_use=#{sysFormulationManagement.pitchUse}
+			 pitch_use=#{sysFormulationManagement.pitchUse},
+			 biaozhunwendu=#{sysFormulationManagement.biaozhunwendu},
+			 wendupiancha1=#{sysFormulationManagement.wendupiancha1},
+			 wendupiancha2=#{sysFormulationManagement.wendupiancha2}
 	    where fl_id=#{sysFormulationManagement.flId} and delete_state=1
 	</update>
 	<select id="selectAllSysFormulationManagement" resultType="SysFormulationManagement">
 		select 
 			fl_id,fl_no,fl_name,materials_use_1,materials_use_2,
 			materials_use_3,materials_use_4,materials_use_5,materials_use_6,
-			bone_flour_use,pitch_use,delete_state
+			bone_flour_use,pitch_use,delete_state,biaozhunwendu,wendupiancha1,wendupiancha2
 		from
 		  sys_formulation_management
 		where delete_state=1 ORDER BY fl_name desc
@@ -50,7 +56,7 @@
 		select
 			fl_id,fl_no,fl_name,materials_use_1,materials_use_2,
 			materials_use_3,materials_use_4,materials_use_5,materials_use_6,
-			bone_flour_use,pitch_use,delete_state
+			bone_flour_use,pitch_use,delete_state,biaozhunwendu,wendupiancha1,wendupiancha2
 		from
 		  sys_formulation_management
 		where fl_id=#{id} and delete_state=1

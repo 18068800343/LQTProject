@@ -430,8 +430,9 @@
 				type:"post",
 				url:"/ShengChanJiHua/addShengChanJiHuaCurrent",
 				data:{
-					planId:data.planid,
-					planNo:data.planno
+					planId: data.planid,
+					planNo: data.planno,
+					recipeid: data.recipeid
 				},
 				success:function(json){
 					if(json>0){

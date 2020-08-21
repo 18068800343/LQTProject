@@ -15,14 +15,44 @@ public class SysFormulationManagement {
 	private BigDecimal materialsUse6;
 	private BigDecimal boneFlourUse;
 	private BigDecimal pitchUse;
+	private BigDecimal biaozhunwendu;
+	private BigDecimal wendupiancha1;
+	private BigDecimal wendupiancha2;
 	private List<SysMaterialAttached> fsclList;
 	private Integer deleteState;
+
+	public BigDecimal getBiaozhunwendu() {
+		return biaozhunwendu;
+	}
+
+	public void setBiaozhunwendu(BigDecimal biaozhunwendu) {
+		this.biaozhunwendu = biaozhunwendu;
+	}
+
+	public BigDecimal getWendupiancha1() {
+		return wendupiancha1;
+	}
+
+	public void setWendupiancha1(BigDecimal wendupiancha1) {
+		this.wendupiancha1 = wendupiancha1;
+	}
+
+	public BigDecimal getWendupiancha2() {
+		return wendupiancha2;
+	}
+
+	public void setWendupiancha2(BigDecimal wendupiancha2) {
+		this.wendupiancha2 = wendupiancha2;
+	}
+
 	public String getFlId() {
 		return flId;
 	}
+
 	public void setFlId(String flId) {
 		this.flId = flId;
 	}
+
 	public String getFlNo() {
 		return flNo;
 	}

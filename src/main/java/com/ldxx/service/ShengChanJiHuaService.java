@@ -15,7 +15,7 @@ public interface ShengChanJiHuaService {
 
     String addShengChanJiHua(PlanProductionCollection planProductionCollection, HttpSession session);
 
-    int addShengChanJiHuaCurrent(String planId, String planNo, String editUserId, String time);
+    int addShengChanJiHuaCurrent(String planId, String planNo, String recipeid, String editUserId, String time);
 
     String addShengChanJiHuaAndSiteConstruction(PlanProductionVo planProductionVo, HttpSession session);
 

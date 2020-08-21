@@ -17,7 +17,7 @@
 	</insert>
 
     <insert id="addShengChanJiHuaCurrent" parameterType="planProductionCollectionVo">
-		insert into plan_production_collection_now (plan_id,plan_no,edit_user_id,edit_datetime) values (#{planid},#{planno},#{edituserid},#{editdatetime})
+		insert into plan_production_collection_now (plan_id,plan_no,edit_user_id,edit_datetime,recipe_id) values (#{planid},#{planno},#{edituserid},#{editdatetime},#{recipeid})
 	</insert>
 
     <insert id="addShengChanJiHuaVo" parameterType="planProductionVo">

@@ -89,18 +89,19 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
     }
 
     @Override
-    public int addShengChanJiHuaCurrent(String planId, String planNo, String editUserId, String time) {
+    public int addShengChanJiHuaCurrent(String planId, String planNo, String recipeid, String editUserId, String time) {
 
         int k = dao.emptyShengChanJiHua();
         int i = 0;
         if (k >= 0) {
-			PlanProductionCollectionVo planProductionCollectionVo = new PlanProductionCollectionVo();
-			planProductionCollectionVo.setPlanid(planId);
-			planProductionCollectionVo.setPlanno(planNo);
-			planProductionCollectionVo.setEdituserid(editUserId);
-			planProductionCollectionVo.setEditdatetime(time);
-			i = dao.addShengChanJiHuaCurrent(planProductionCollectionVo);
-		}
+            PlanProductionCollectionVo planProductionCollectionVo = new PlanProductionCollectionVo();
+            planProductionCollectionVo.setPlanid(planId);
+            planProductionCollectionVo.setPlanno(planNo);
+            planProductionCollectionVo.setEdituserid(editUserId);
+            planProductionCollectionVo.setEditdatetime(time);
+            planProductionCollectionVo.setRecipeid(recipeid);
+            i = dao.addShengChanJiHuaCurrent(planProductionCollectionVo);
+        }
         return i;
     }
 
