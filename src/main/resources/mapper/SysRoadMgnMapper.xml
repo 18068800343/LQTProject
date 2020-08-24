@@ -75,7 +75,7 @@
 		select
 		top 10
 		convert(char(10),production_time,120) dayTime,
-		Convert(decimal(18,2),sum(weight)/1000) totalWeight
+		Convert(decimal(18,1),sum(weight)/1000) totalWeight
 
 		from quality_by_plate_real_time_prodocution_data
 		group by convert(char(10),production_time,120) ORDER BY dayTime desc
@@ -190,8 +190,8 @@
 		srm.*,
 		delete_state,
 		direction,
-		CASE WHEN rn.allXuQiu is null then 0 ELSE Convert(decimal(18,2),allXuQiu/1000) end as allXuQiu,
-		CASE WHEN gy.allGongYing is null then 0 ELSE Convert(decimal(18,2),allGongYing/1000) end as allGongYing
+		CASE WHEN rn.allXuQiu is null then 0 ELSE Convert(decimal(18,1),allXuQiu/1000) end as allXuQiu,
+		CASE WHEN gy.allGongYing is null then 0 ELSE Convert(decimal(18,1),allGongYing/1000) end as allGongYing
 		FROM
 		site_construction srm
 		LEFT JOIN (
