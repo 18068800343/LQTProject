@@ -139,13 +139,19 @@
 
 	//鼠标绘制完成回调方法   获取各个点的经纬度
 	let overlays = [];
+	let pointList = [];
 	let overlaycomplete = function (e) {
 		overlays.push(e.overlay);
 		let path = e.overlay.getPath();//Array<Point> 返回多边型的点数组
 
+		let point = {};
 		for (let i = 0; i < path.length; i++) {
 			console.log("lng:" + path[i].lng + "\n lat:" + path[i].lat);
 		}
+		point.lng = path[i].lng;
+		point.lat = path[i].lat;
+		pointList.push(point);
+
 		draw(page_dom);
 	};
 	//添加鼠标绘制工具监听事件，用于获取绘制结果
