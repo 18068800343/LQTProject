@@ -63,6 +63,7 @@
             <li role="presentation"><a href="#zhiwu" aria-controls="zhiwu" role="tab" data-toggle="tab">职务/工种</a></li>
             <li role="presentation"><a href="#bumen" aria-controls="bumen" role="tab" data-toggle="tab">部门</a></li>
             <li role="presentation"><a href="#shiliao" aria-controls="shiliao" role="tab" data-toggle="tab">石料</a></li>
+             <li role="presentation"><a href="#shoufeizhan" aria-controls="shoufeizhan" role="tab" data-toggle="tab">收费站</a></li>
         </ul>     
         </div>
         <!-- Tab panes -->
@@ -210,6 +211,31 @@
                             <tr>
                                 <th >序号</th>
                                 <th>实料名称</th>
+                                <th style="width:75px;">操作</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="shoufeizhan">
+                <div class="zhuti-content">
+                    <div class="UpperPart">
+                        <div class="UpperPartL">
+                            <button type="button" class="btn btn-primary Phgd" data-toggle="modal" data-target="#myModal7" style="margin: 5PX;float: left;">录入收费站</button>
+                        </div>
+                        <div class="UpperPartR">
+
+                        </div>
+
+                    </div>
+                    <div class="LowerPart" style="margin-top:3px;">
+                        <table class="table table-bordered table-condensed table-hover" style="width:100%;" id="mainContent7">
+                            <thead>
+                            <tr>
+                                <th >序号</th>
+                                <th>名称</th>
                                 <th style="width:75px;">操作</th>
                             </tr>
                             </thead>
@@ -566,6 +592,64 @@
         </div>
     </div>
     <!-- 修改model结束 -->
+
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal7">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" ><b>录入收费站</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form class="form-inline" id="">
+                            <table class="layui-table "lay-skin="line" style="height:auto;" >
+                                <tr>
+                                    <td style="width: 20%;">名称</td>
+                                    <td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="sfzName" /></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-default" onclick="addSave7()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- model结束 -->
+
+    <!-- 修改Modal -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="change7">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" ><b>修改收费站</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form class="form-inline" id="">
+                            <table class="layui-table "lay-skin="line" style="height:auto;" >
+                                <tr>
+                                    <td style="width: 20%;">名称</td>
+                                    <td style="width: 30%;"><input type="text" class="form-control" style="width: 70%;" id="edit_sfzName" /></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-success" onclick="editSave7()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 修改model结束 -->
             
 	</body>
 		<script src="../../js/jquery.js"></script>
@@ -591,6 +675,7 @@
     	initTable4()
         initTable5()
         initTable6()
+        initTable7()
 	});
 	
 		var table=$('#mainContent').dataTable({
@@ -920,6 +1005,61 @@
 
     });
 
+    var table7=$('#mainContent7').dataTable({
+        "deferRender": true,
+        "processing": true,
+        "bDestroy": true,
+        "iDisplayLength": 10,
+        "sDom":
+            "t"+
+            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+        "searching": true,
+        "lengthChange": false,
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+        },
+        "columns": [
+            { "data" : null },
+            { "data": "name"}
+        ],
+        "columnDefs": [
+            {
+                "class": "tcenter",
+                "targets": 2,
+                "searchable": false,
+                "render": function(data, type, full) {
+                    return '<i class="iconfont icon-xiugai Phge" style="font-size:18px;cursor:pointer;display:none;" title="修改" data-toggle="modal" onclick="Change7(this)"></i>'
+                        +'<i class="iconfont icon-shanchu Phgf" style="font-size:18px;cursor:pointer;display:none;" title="删除" onclick="delete7(this)"></i>';
+                }
+            },
+        ],"fnDrawCallback" : function() {
+            this.api().column(0).nodes().each(function(cell, i){
+                cell.innerHTML=i+1;
+            });
+            initTableQuanxian();
+
+        },
+
+        "order": [[0, 'asc']],
+        "oLanguage": { //国际化配置
+            "sProcessing": "正在获取数据，请稍后...",
+            "sLengthMenu": "显示 _MENU_ 条",
+            "sZeroRecords": "查询不到相关数据",
+            "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+            "sInfoEmpty": "记录数为0",
+            "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "第一页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "最后一页"
+            }},
+
+    });
+
     function initTableQuanxian(){
         $.ajax({
             type:"post",
@@ -1045,6 +1185,23 @@
             success: function (json) {
                 $('#mainContent6').dataTable().fnClearTable();
                 $('#mainContent6').DataTable().rows.add(json).draw(false);
+            }
+        });
+    }
+
+    function initTable7(){
+        $.ajax({
+            type: 'POST',
+            url: '/shoufeizhan/getAllshoufeizhan',
+            dataType: 'json',
+            data: {
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $('#mainContent7').dataTable().fnClearTable();
+                $('#mainContent7').DataTable().rows.add(json).draw(false);
             }
         });
     }
@@ -1694,6 +1851,115 @@
                         myTool.mask.hide();
                         if(json!=0){
                             $('#mainContent6').DataTable().row(dom).remove().draw(false); //删除行立即显示
+                            toastr.success('删除成功');
+                        }else{
+                            toastr.error('删除失败');
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+
+    //===================================================收费站================================================================================
+
+    function addSave7(){
+        var sfzName=$("#sfzName").val();
+        $.ajax({
+            type: 'POST',
+            url: '/shoufeizhan/addShoufeizhan',
+            dataType: 'json',
+            data: {
+                name:sfzName
+            },
+            success: function (json) {
+                if(json.result=='0'){
+                    toastr.error("保存失败");
+                }else if(json.result=="-1"){
+                    toastr.error("已有相同名称");
+                    return;
+                }else{
+                    $("#myModal7").modal("hide");
+                    toastr.success('保存成功');
+                    $('#mainContent7').DataTable().row.add(json.obj).draw(false);     //新增行立即显示
+                }
+            },
+            error:function(json){
+                toastr.error("保存失败"+json);
+                $("#myModal7").modal("hide");
+            }
+        });
+    }
+
+    //材料类型修改回显
+    var Id7;
+    function Change7(obj){
+        var tr=$(obj).parents("tr");
+        trr=$(obj).closest('tr');
+        var data=$("#mainContent7").DataTable().row(tr).data();
+        Id7=data.id;
+        $("#edit_sfzName").val(data.name);
+        $("#change7").modal("show");
+    }
+    //材料类型修改保存
+    function editSave7(){
+        var edit_sfzName=$("#edit_sfzName").val();
+        var oldNum=$(trr.children()[0]).text();
+        $.ajax({
+            type: 'POST',
+            url: '/shoufeizhan/updShoufeizhan',
+            dataType: 'json',
+            data: {
+                id:Id7,
+                name:edit_sfzName
+            },
+            success: function (json) {
+                if(json.result=='0'){
+                    toastr.error("修改失败");
+                } else if(json.result=="-1"){
+                    toastr.error("已有相同名称");
+                    return;
+                }
+                else{
+                    $("#change7").modal("hide");
+                    toastr.success('修改成功');
+                    $("#change7").modal("hide");
+                    $('#mainContent7').DataTable().row(trr).data(json.obj);//修改行立即显示 */
+                    $(trr.children()[0]).text(oldNum);
+                    initTableQuanxian();
+                }
+            },
+            error:function(json){
+                toastr.error("保存失败"+json);
+                $("#change7").modal("hide");
+            }
+        });
+    }
+
+    //设备类型删除
+    function delete7(obj) {
+        var dom = $(obj).parents('tr');
+        var data=$('#mainContent7').DataTable().row(dom).data();
+        $.SmartMessageBox({
+            title: "删除提示",
+            content: "确认删除？",
+            buttons: '[取消][确定]'
+        }, function (ButtonPressed) {
+            if (ButtonPressed === "确定") {
+                myTool.mask.show('删除中...');
+                $.ajax({
+                    type: 'POST',
+                    url:'/shoufeizhan/delShoufeizhan',
+                    dataType: 'json',
+                    data: {
+                        id:data.id
+                    },
+                    success: function (json) {
+                        myTool.mask.hide();
+                        if(json!=0){
+                            $('#mainContent7').DataTable().row(dom).remove().draw(false); //删除行立即显示
                             toastr.success('删除成功');
                         }else{
                             toastr.error('删除失败');

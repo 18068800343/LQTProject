@@ -49,6 +49,52 @@ public class PlanProductionVo extends SiteConstructionVo {
 
     private String siteId;
 
+    private BigDecimal chang;
+    private BigDecimal kuan;
+    private BigDecimal gao;
+    private BigDecimal midu;
+    private BigDecimal fuyuliang;
+
+    public BigDecimal getChang() {
+        return chang;
+    }
+
+    public void setChang(BigDecimal chang) {
+        this.chang = chang;
+    }
+
+    public BigDecimal getKuan() {
+        return kuan;
+    }
+
+    public void setKuan(BigDecimal kuan) {
+        this.kuan = kuan;
+    }
+
+    public BigDecimal getGao() {
+        return gao;
+    }
+
+    public void setGao(BigDecimal gao) {
+        this.gao = gao;
+    }
+
+    public BigDecimal getMidu() {
+        return midu;
+    }
+
+    public void setMidu(BigDecimal midu) {
+        this.midu = midu;
+    }
+
+    public BigDecimal getFuyuliang() {
+        return fuyuliang;
+    }
+
+    public void setFuyuliang(BigDecimal fuyuliang) {
+        this.fuyuliang = fuyuliang;
+    }
+
     public String getSiteId() {
         return siteId;
     }

@@ -23,7 +23,7 @@
     <insert id="addShengChanJiHuaVo" parameterType="planProductionVo">
 		insert into plan_production_collection
 			(plan_id,road_id,plan_no,recipe_id,pd_need,dry_mixing_time,wet_mixing_time,radio,pd_temp,
-			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state,finish_time,site_id,path_plan,distance)
+			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state,finish_time,site_id,path_plan,distance,chang,kuan,gao,midu,fuyuliang)
 			values(#{planid},#{roadid},#{planno},
 			#{recipeid},#{pdneed},
 			#{drymixingtime},#{wetmixingtime},
@@ -32,6 +32,7 @@
 			#{datetime},#{edituserid},
 			#{editdatetime},#{deletestate},#{finishTime}
 			,#{siteId},#{pathPlan},#{distance}
+			,#{chang},#{kuan},#{gao},#{midu},#{fuyuliang}
 			)
 	</insert>
 
@@ -83,7 +84,8 @@
 			arrive_temp=#{arrivetemp},price=#{price},datetime=#{datetime},
 			edit_user_id=#{edituserid},edit_datetime=#{editdatetime},
 			finish_time=#{finishTime},delete_state=#{deletestate},
-			site_id = #{siteId},path_plan = #{pathPlan},distance = #{distance}
+			site_id = #{siteId},path_plan = #{pathPlan},distance = #{distance},
+			chang=#{chang},kuan=#{kuan},gao=#{gao},midu=#{midu},fuyuliang=#{fuyuliang}
 			where plan_id=#{planid}
 	</update>
 

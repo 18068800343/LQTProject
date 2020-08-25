@@ -106,7 +106,7 @@
 								<th>混合料编号</th>
 								<th>成品需要量（每日）</th>
 								<th>待生产量</th>
-								<th>完成时间</th>
+								<th>到场时间要求</th>
 								<th>干拌时间</th>
 								<th>湿拌时间</th>
 								<th>油石比</th>
@@ -519,7 +519,7 @@
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
-								<td>要求完成时间</td>
+								<td>到场时间要求</td>
 								<td><input class="form-control" type="text" readonly="true" v-model="finishTime"
 										   id="finishTime" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
@@ -567,10 +567,12 @@
 							</tr>
 
 							<tr>
-								<td>规划高速路径</td>
-								<td><input class="form-control" type="text" v-model="pathPlan" id="pathPlan"
-										   placeholder="请输入"
-										   style="width: 100%; height: 100%; "></td>
+								<td>前方掉头收费站</td>
+								<td><!--<input class="form-control" type="text" v-model="pathPlan" id="pathPlan" placeholder="请输入" style="width: 100%; height: 100%; ">-->
+									<select class="form-control" style="width: 100%;" v-model="pathPlan = pathPlanSelected" id="pathPlan">
+										<option :value="item.name" v-for="item in pathPlanList">{{item.name}}</option>
+									</select>
+								</td>
 								<td>运输距离(km)</td>
 								<td><input class="form-control" type="text" @blur="reg(distance,'xiaoshu','distance')"
 										   v-model="distance" id="distance" placeholder="请输入"
@@ -623,6 +625,33 @@
 								<td><input class="form-control" type="text" v-model="chedao" id="chedao"
 										   placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>长</td>
+								<td><input type="text" class="form-control" id="chang"  v-model="chang"
+										   style="width: 100%; height: 100%;"/></td>
+								<td>宽</td>
+								<td>
+									<input type="text" class="form-control" id="kuan"  v-model="kuan"
+										   style="width: 100%; height: 100%;"/>
+								</td>
+							</tr>
+							<tr>
+								<td>深</td>
+								<td><input type="text" class="form-control" id="gao" v-model="gao"
+										   style="width: 100%; height: 100%;" onblur="countWeight(1)"/></td>
+								<td>密度</td>
+								<td>
+									<input type="text" id="midu" class="form-control" v-model="midu" style="width: 100%; height: 100%;"/>
+								</td>
+							</tr>
+							<tr>
+								<td>富余量</td>
+								<td>
+									<input type="text" id="fuyuliang" class="form-control" v-model="fuyuliang" style="width: 100%; height: 100%;"/>
+								</td>
 								<td></td>
 								<td></td>
 							</tr>
@@ -753,7 +782,7 @@
 							<tr>
 								<td>成品需要量(kg)</td>
 								<td><input class="form-control" type="text" @blur="reg(pdneed,'xiaoshu','pdneed')"
-										   v-model="pdneed" placeholder="请输入" style="width: 100%; height: 100%;"/></td>
+										   v-model="pdneed" id="xg_pdneed" placeholder="请输入" style="width: 100%; height: 100%;"/></td>
 								<td>
 									成品温度要求(℃)
 									<!--									干拌时间-->
@@ -771,7 +800,7 @@
 								<td>单价(元)</td>
 								<td><input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')"
 										   v-model="price" placeholder="请输入" style="width: 100%; height: 100%;"></td>
-								<td>要求完成时间</td>
+								<td>到场时间要求</td>
 								<td><input class="form-control" type="text" readonly="true" v-model="finishTime"
 										   id="xgfinishTime"
 										   placeholder="请输入"
@@ -818,10 +847,12 @@
 										   style="width: 100%; height: 100%; "></td>
 							</tr>
 							<tr>
-								<td>规划高速路径</td>
-								<td><input class="form-control" type="text" v-model="pathPlan"
-										   placeholder="请输入"
-										   style="width: 100%; height: 100%; "></td>
+								<td>前方掉头收费站</td>
+								<td><!--<input class="form-control" type="text" v-model="pathPlan" placeholder="请输入" style="width: 100%; height: 100%; ">-->
+									<select class="form-control" style="width: 100%;" v-model="pathPlan = pathPlanSelected" id="xg_pathPlan">
+										<option :value="item.name" v-for="item in pathPlanList">{{item.name}}</option>
+									</select>
+								</td>
 								<td>运输距离(km)</td>
 								<td><input class="form-control" type="text" @blur="reg(distance,'xiaoshu','distance')"
 										   v-model="distance" placeholder="请输入"
@@ -866,6 +897,33 @@
 								<td>项目部</td>
 								<td><input class="form-control" type="text" v-model="xiangmubu" placeholder="请输入"
 										   style="width: 100%; height: 100%; "></td>
+							</tr>
+							<tr>
+								<td>长</td>
+								<td><input type="text" class="form-control" id="xg_chang"  v-model="chang"
+										   style="width: 100%; height: 100%;"/></td>
+								<td>宽</td>
+								<td>
+									<input type="text" class="form-control" id="xg_kuan"  v-model="kuan"
+										   style="width: 100%; height: 100%;"/>
+								</td>
+							</tr>
+							<tr>
+								<td>深</td>
+								<td><input type="text" class="form-control" id="xg_gao" v-model="gao"
+										   style="width: 100%; height: 100%;" onblur="countWeight(2)"/></td>
+								<td>密度</td>
+								<td>
+									<input type="text" id="xg_midu" class="form-control" v-model="midu" style="width: 100%; height: 100%;"/>
+								</td>
+							</tr>
+							<tr>
+								<td>富余量</td>
+								<td>
+									<input type="text" id="xg_fuyuliang" class="form-control" v-model="fuyuliang" style="width: 100%; height: 100%;"/>
+								</td>
+								<td></td>
+								<td></td>
 							</tr>
 
 							<!--							<tr>-->
@@ -1430,6 +1488,110 @@
 			}
 		});
 	}
+	function countWeight(obj) {
+		if(obj==1){
+			//let tiji = $("#tiji").val()
+			//let midu = $("#midu").val()
+			let chang = $("#chang").val()
+			let kuan = $("#kuan").val()
+			let gao = $("#gao").val()
+
+			let re = new RegExp('^[0-9]+\.?[0-9]*$');
+			let flag1;
+			let flag2;
+			let flag3;
+			let flag4;
+			let flag5;
+			//flag1 = reg(tiji, re);
+			//flag2 = reg(midu, re);
+			flag3 = reg(chang, re);
+			flag4 = reg(kuan, re);
+			flag5 = reg(gao, re);
+
+			// if (!flag1) {
+			//     toastr.error("体积请输入数字");
+			//     $("#tiji").val('')
+			//     return 1
+			// }
+			/*if (!flag2) {
+                toastr.error("密度请输入数字");
+                $("#midu").val('')
+                return 1
+            }*/
+			if (!flag3) {
+				toastr.error("长度请输入数字");
+				$("#chang").val('')
+				return 1
+			}
+			if (!flag4) {
+				toastr.error("宽度请输入数字");
+				$("#kuan").val('')
+				return 1
+			}
+			if (!flag5) {
+				toastr.error("高度请输入数字");
+				$("#gao").val('')
+				return 1
+			}
+
+			/*let countWeight = tiji * midu;
+            $("#zhongliang").val(countWeight);*/
+			let tijiCount = chang * kuan * gao;
+			$("#pdneed").val(tijiCount);
+			app5.pdneed=tijiCount
+		}else{
+			//let tiji = $("#tiji").val()
+			//let midu = $("#midu").val()
+			let chang = $("#xg_chang").val()
+			let kuan = $("#xg_kuan").val()
+			let gao = $("#xg_gao").val()
+
+			let re = new RegExp('^[0-9]+\.?[0-9]*$');
+			let flag1;
+			let flag2;
+			let flag3;
+			let flag4;
+			let flag5;
+			//flag1 = reg(tiji, re);
+			//flag2 = reg(midu, re);
+			flag3 = reg(chang, re);
+			flag4 = reg(kuan, re);
+			flag5 = reg(gao, re);
+
+			// if (!flag1) {
+			//     toastr.error("体积请输入数字");
+			//     $("#tiji").val('')
+			//     return 1
+			// }
+			/*if (!flag2) {
+                toastr.error("密度请输入数字");
+                $("#midu").val('')
+                return 1
+            }*/
+			if (!flag3) {
+				toastr.error("长度请输入数字");
+				$("#xg_chang").val('')
+				return 1
+			}
+			if (!flag4) {
+				toastr.error("宽度请输入数字");
+				$("#xg_kuan").val('')
+				return 1
+			}
+			if (!flag5) {
+				toastr.error("高度请输入数字");
+				$("#xg_gao").val('')
+				return 1
+			}
+
+			/*let countWeight = tiji * midu;
+            $("#zhongliang").val(countWeight);*/
+			let tijiCount = chang * kuan * gao;
+			$("#xg_pdneed").val(tijiCount);
+			xgSCVm.pdneed=tijiCount
+		}
+
+	}
 
 	//全局正则KV集合
 	var regMap = {
@@ -1492,6 +1654,8 @@
 			recipeSelected: '',
 			distance: '',
 			pathPlan: '',
+			pathPlanSelected:'',
+			pathPlanList:'',
 			lng: '',
 			lat: '',
 			stakeMark: '',
@@ -1502,6 +1666,11 @@
 			xiangmubu: '',
 			direction: '',
 			roadName: '',
+			chang:'',
+			kuan:'',
+			gao:'',
+			midu:'',
+			fuyuliang:'',
 		},
 		methods: {
 			//新建生产计划保存按钮事件
@@ -1515,7 +1684,7 @@
 					return;
 				}
 				if (this.finishTime == "") {
-					toastr.error("要求完成时间为空!")
+					toastr.error("到场时间要求为空!")
 					return;
 				}
 				if (this.pdneed == "") {
@@ -1529,6 +1698,15 @@
 					return;
 				}if(this.team==""){
 					toastr.error("路名施工队为空!")
+					return;
+				}if(this.chang==""){
+					toastr.error("长为空!")
+					return;
+				}if(this.kuan==""){
+					toastr.error("宽为空!")
+					return;
+				}if(this.gao==""){
+					toastr.error("深为空!")
 					return;
 				}
 				if(this.drymixingtime=="")this.drymixingtime="00:00:00";
@@ -1546,7 +1724,7 @@
 						if(conflictMsgArr!=null&&conflictMsgArr.size!=0){
 							for(var i=0;i<conflictMsgArr.length;i++){
 								arr.push(conflictMsgArr[i].planno)
-								toastr.error("完成时间与"+conflictMsgArr[i].finishTime+"的"+conflictMsgArr[i].roadname+"路段冲突");
+								toastr.error("到场时间要求与"+conflictMsgArr[i].finishTime+"的"+conflictMsgArr[i].roadname+"路段冲突");
 							}
 						}
 
@@ -1585,12 +1763,21 @@
 				}, (res) => {
 					console.log(res.status);
 				});
+			},
+			pathPlanPost:function(){
+				this.$http.post('/shoufeizhan/getAllshoufeizhan',{},{emulateJSON:true}).then((res) => {
+					this.pathPlanList = res.body;
+					this.pathPlanSelected = this.pathPlanList[0].name;
+				}, (res) => {
+					console.log(res.status);
+				});
 			}
 		}
 	})
 	//初始化下拉框路段
 	app5.roadPost();
 	app5.recipePost();
+	app5.pathPlanPost();
 
 	function udMsg(obj){
 		var tr=$(obj).parents("tr");
@@ -1612,6 +1799,7 @@
 		xgSCVm.recipeSelected = data.recipeid;
 		xgSCVm.distance = data.distance;
 		xgSCVm.pathPlan = data.pathPlan;
+		xgSCVm.pathPlanSelected = data.pathPlan;
 		xgSCVm.lng = data.lng;
 		xgSCVm.lat = data.lat;
 		xgSCVm.stakeMark = data.stakeMark;
@@ -1624,6 +1812,11 @@
 		xgSCVm.roadName = data.roadname;
 		xgSCVm.finishTime = data.finishTime;
 		xgSCVm.siteId = data.siteId;
+		xgSCVm.chang=data.chang
+		xgSCVm.kuan=data.kuan
+		xgSCVm.gao=data.gao
+		xgSCVm.midu=data.midu
+		xgSCVm.fuyuliang=data.fuyuliang
 		console.log(data);
 	}
 	function pcMsg(obj){
@@ -1680,6 +1873,8 @@
 
 			distance: '',
 			pathPlan: '',
+			pathPlanSelected:'',
+			pathPlanList:'',
 			lng: '',
 			lat: '',
 			stakeMark: '',
@@ -1692,6 +1887,11 @@
 			roadName: '',
 			siteId: '',
 			finishTime: '',
+			chang:'',
+			kuan:'',
+			gao:'',
+			midu:'',
+			fuyuliang:'',
 		},
 		methods: {
 			//新建生产计划保存按钮事件
@@ -1705,7 +1905,7 @@
 					return;
 				}
 				if (this.finishTime == "") {
-					toastr.error("要求完成时间为空!")
+					toastr.error("到场时间要求为空!")
 					return;
 				}
 				if (this.pdneed == "") {
@@ -1719,6 +1919,15 @@
 					return;
 				}if(this.team==""){
 					toastr.error("路名施工队为空!")
+					return;
+				}if(this.chang==""){
+					toastr.error("长为空!")
+					return;
+				}if(this.kuan==""){
+					toastr.error("宽为空!")
+					return;
+				}if(this.gao==""){
+					toastr.error("深为空!")
 					return;
 				}
 				if(this.drymixingtime=="")this.drymixingtime="00:00:00";
@@ -1736,7 +1945,7 @@
 						if(conflictMsgArr!=null&&conflictMsgArr.size!=0){
 							for(var i=0;i<conflictMsgArr.length;i++){
 								arr.push(conflictMsgArr[i].planno)
-								toastr.error("完成时间与"+conflictMsgArr[i].finishTime+"的"+conflictMsgArr[i].roadname+"路段冲突");
+								toastr.error("到场时间要求与"+conflictMsgArr[i].finishTime+"的"+conflictMsgArr[i].roadname+"路段冲突");
 							}
 						}
 					}else {
@@ -1774,6 +1983,14 @@
 				}, (res) => {
 					console.log(res.status);
 				});
+			},
+			pathPlanPost:function(){
+				this.$http.post('/shoufeizhan/getAllshoufeizhan',{},{emulateJSON:true}).then((res) => {
+					this.pathPlanList = res.body;
+					this.pathPlanSelected = this.pathPlanList[0].name;
+				}, (res) => {
+					console.log(res.status);
+				});
 			}
 		}
 	})
@@ -1781,6 +1998,7 @@
 	//初始化下拉框路段
 	xgSCVm.roadPost();
 	xgSCVm.recipePost();
+	xgSCVm.pathPlanPost();
 
 
 	var arr=[];
