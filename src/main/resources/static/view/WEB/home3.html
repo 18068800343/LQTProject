@@ -56,8 +56,7 @@
 			    padding-top:5px;
 			    padding-left:-30px;
 			}
-			@media screen and (min-width: 1920px) {
-				.righttop {
+			.righttop {
 					margin-top: -20% !important;
 				}
 				.rightbottom {
@@ -66,7 +65,6 @@
 				.rightbottom span {
 					margin-top: 1% !important;
 				}
-			}
 			@media screen and (max-width: 1366px) {
 				#main{
 				   width:500px !important;
@@ -107,12 +105,12 @@
 			}
 			@media screen and (max-width: 1600px) {
 			     .rightfirst{
-				   width:450px !important;
+				   width:450px;
 				   height:250px !important;
 				   right:30px;
 				}
 				.rightsec{
-				   width:450px !important;
+				   width:450px ;
 				   margin-top:21%  !important;
 				   height:300px !important;
 				   right:0px;
@@ -120,6 +118,9 @@
 				#chart2{
 				   height:290px !important;
 				   width:400px !important;
+				}
+				.table{
+				   height:600px ;
 				}
 			}
 		</style>
@@ -339,15 +340,25 @@
 					page_point = array;*/
 					for(var i in json){
 						var point = new BMap.Point(json[i].lng, json[i].lat);
-						addMarker(point, json[i].stakemark, json[i].lane, json[i]);
+						addMarker(point, json[i].stakemark, json[i].lane, json[i], i);
 					}
 				}
 			});
 		}
-
-		function addMarker(point, stakemark,lane,obj) {
-			var marker = new BMap.Marker(point);
-			marker = new BMap.Marker(point);
+		function dianImg () {
+			var imgArr=['../images/wz1.png','../images/wz2.png','../images/wz3.png','../images/wz4.png','../images/wz5.png','../images/wz6.png','../images/wz7.png','../images/wz8.png','../images/wz9.png','../images/wz10.png','../images/wz11.png','../images/wz12.png','../images/wz13.png','../images/wz14.png','../images/wz15.png','../images/wz16.png','../images/wz17.png','../images/wz18.png','../images/wz19.png','../images/wz20.png','../images/wz21.png','../images/wz22.png','../images/wz23.png','../images/wz24.png'];
+			var index = Math.floor(Math.random()*imgArr.length);
+			var imgSrc = imgArr[index];
+			return imgSrc;
+		};
+		
+		function addMarker(point, stakemark,lane,obj, i) {
+			var marker = new BMap.Marker(point, {
+				icon: new BMap.Icon(dianImg(), new BMap.Size(30, 30), {
+					  anchor: new BMap.Size(52, 26),
+					  imageSize: new BMap.Size(30, 30)
+				})
+			});
 			var sContent =
 					"<h4 style='margin:0 0 5px 0;padding:0.2em 0'>" + obj.stakemark + "</h4>" +"<br/>"
 			"";
@@ -356,8 +367,10 @@
 			marker.addEventListener("click", function () {
 				this.openInfoWindow(infoWindow);
 			});
-		}
-
+		} 
+		
+		
+		
 	function initTableQuanxian(){
 			$.ajax({
 				type:"post",
@@ -573,7 +586,7 @@
 					errMessage("请求UserController失败");
 				},
 				success: function (json) {
-
+                     
 					var datetime=[]
 					var chenneng=[]
 					var feiliao=[]
