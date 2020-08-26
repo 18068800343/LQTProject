@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+	<script type="text/javascript" src="//api.map.baidu.com/api?v=3.0&ak=BmTwezCvWyGaH3KNYkc5P6uq"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/laydate.css" />
+	<style type="text/css">
+		body, html, #container {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			margin: 0;
+			font-family: "微软雅黑";
+		}
+		a {
+			cursor:pointer;
+			text-decoration:none
+		}
+
+
+	</style>
+</head>
+<body>
+
+<div id="container"></div>
+</body>
+
+</html>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.0/js/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="../toastr/toastr.js"></script>
+<script src="../js/laydate/laydate.js"></script>
+<script src="../js/getDayScope.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		laydate.render({
+			elem: '#starTime', //指定元素
+			type: 'datetime',trigger: 'click'
+		});
+		laydate.render({
+			elem: '#endTime', //指定元素
+			type: 'datetime',trigger: 'click'
+		});
+	});
+
+	var key="f30da8ee-61da-4c1a-bd73-54fee1d19d69";
+	function initChePai(){
+		$.ajax({
+	// get请求地址
+			url: "http://58.222.201.158:6809/deviceData/vehicleBaseInfo.do?key="+key,
+			dataType: "json",
+			success: function (data) {
+
+				for (var i = 0; i < data.obj.length; i++) {
+					$('.selectpicker').append("<option value=" + data.obj[i].id + ">" + data.obj[i].plate + "</option>");
+				}
+
+				$('#suggestId').selectpicker({
+					'selectedText': 'cat',
+					'noneSelectedText': '请选择',
+					'deselectAllText': '全不选',
+					'selectAllText': '全选'
+				});
+				// 缺一不可
+				$('#suggestId').selectpicker('refresh');
+				$('#suggestId').selectpicker('render');
+
+			}
+		});
+	}
+
+	function selectOnchang(){
+		var chepaipID=$('#suggestId').val().toString();
+		let starthaomiao = getHaomiao($("#starTime").val());
+		let endTimehaomiao = getHaomiao($("#endTime").val());
+		if(chepaipID!=""&&chepaipID!=undefined&&chepaipID!=null&&$("#starTime").val()!=null&&$("#starTime").val()!=""&&$("#starTime").val()!=undefined
+				&&$("#endTime").val()!=null&&$("#endTime").val()!=""&&$("#endTime").val()!=undefined){
+			getlicheng(chepaipID,starthaomiao,endTimehaomiao)
+		}else{
+			toastr.error("请选择车牌和时间")
+			alert("请选择车牌和时间")
+		}
+	}
+
+	function getlicheng(chepaipID,starthaomiao,endTimehaomiao){
+		$.ajax({
+			// get请求地址
+			url: "http://58.222.201.158:6809/mileage/mileageData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&startTime="+starthaomiao+"&endTime="+endTimehaomiao+"&id="+chepaipID,
+			dataType: "json",
+			success: function (data) {
+				if(data.flag==1){
+					setDiTu(data.obj);
+				}else{
+					toastr.error(data.msg)
+				}
+			}
+		});
+	}
+
+	function setDiTu(data){
+
+		//起点-途经点-终点
+		if(data!=null&&data.length!=0){
+			console.log(data)
+			/**/
+			for(var i=0;i<data.length;i++){
+				var start = new BMap.Point(data[i].lonBegin,data[i].latBegin);
+				var end = new BMap.Point(data[i].lonEnd,data[i].latEnd);
+				var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}
+					});
+				driving.search(start, end);
+			}
+
+		}
+
+	}
+
+
+
+	let map = new BMap.Map("container"); // 创建Map实例,GL版命名空间为BMapGL(鼠标右键控制倾斜角度)
+	map.centerAndZoom(new BMap.Point(116.404, 39.915), 14);      // 初始化地图,设置中心点坐标和地图级别
+	map.enableScrollWheelZoom(true);
+
+
+	// 百度地图API功能
+	function G(id) {
+		return document.getElementById(id);
+	}
+
+	/*var map = new BMap.Map("l-map");
+	map.centerAndZoom(new BMap.Point(120.714537, 30.122469), 9);*/              // 初始化地图,设置城市和地图级别。
+
+	// 定义一个控件类,即function
+	function ZoomControl() {
+		this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+		this.defaultOffset = new BMap.Size(10, 10);
+	}
+
+	// 通过JavaScript的prototype属性继承于BMap.Control
+	ZoomControl.prototype = new BMap.Control();
+
+	// 自定义控件必须实现自己的initialize方法,并且将控件的DOM元素返回
+	// 在本方法中创建个p元素作为控件的容器,并将其添加到地图容器中
+	ZoomControl.prototype.initialize = function(map){
+		// 创建一个DOM元素
+		var p = document.createElement("p");
+		p.innerHTML = '<div style="width: 250px;background-color: white;box-shadow:grey 0px 0px 5px">' +
+				'<p id="r-result">车辆筛选:<!--<input type="text" id="suggestId" size="20" value="百度" placeholder="支持搜索" style="width:150px;" />-->' +
+				'<select class="form-control selectpicker" multiple data-max-options="1" data-actions-box="false"' +
+				'data-live-search="true"  id="suggestId"   style="width:80%;"></select></p>' +
+				'<div class="ivu-col ivu-col-span-8">选择时间：</div>' +
+				' <div class="ivu-col ivu-col-span-16"><!--<a onclick="getDay(0)">今天</a>--> <a onclick="getDay(-1)">昨天</a> <a onclick="getDay(-3)">近三天</a> <a onclick="getDay(-7)">近七天</a></div>'+
+				'<div class="ivu-col ivu-col-span-7">开始时间：</div>' +
+				' <div class="ivu-col ivu-col-span-17">' +
+				'<input type="text" autocomplete="off" id="starTime" placeholder="选择日期时间" ></div>' +
+				'<div class="ivu-col ivu-col-span-7">结束时间：</div>' +
+				' <div class="ivu-col ivu-col-span-17">' +
+				'<input type="text" autocomplete="off" id="endTime" placeholder="选择日期时间" ></div>' +
+				'<button type="button" onclick="selectOnchang()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small"> <span>查找</span></button></div>';
+
+
+
+		initChePai()
+		// 添加DOM元素到地图中
+		map.getContainer().appendChild(p);
+		// 将DOM元素返回
+		return p;
+
+
+	}
+
+	// 创建控件
+	var myZoomCtrl = new ZoomControl();
+	// 添加到地图当中
+	map.addControl(myZoomCtrl);
+
+
+
+
+	 function doHandleMonth(month){
+		 　　var m = month;
+		 　　if(month.toString().length == 1){
+			 　　　　m = "0" + month;
+			 　　}
+		 　　return m;
+		 }
+
+	/*var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+			{"input" : "suggestId"
+				,"location" : map
+			});
+
+	ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+		var str = "";
+		var _value = e.fromitem.value;
+		var value = "";
+		if (e.fromitem.index > -1) {
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}
+		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+		value = "";
+		if (e.toitem.index > -1) {
+			_value = e.toitem.value;
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}
+		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+		G("searchResultPanel").innerHTML = str;
+
+
+	});
+
+	var myValue;
+	ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+		var _value = e.item.value;
+		myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+		setPlace();
+	});
+
+	function setPlace(){
+		map.clearOverlays();    //清除地图上所有覆盖物
+		function myFun(){
+			var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+			map.centerAndZoom(pp, 14);
+			console.log('pp',pp)
+			map.addOverlay(new BMap.Marker(pp));    //添加标注
+		}
+		var local = new BMap.LocalSearch(map, { //智能搜索
+			onSearchComplete: myFun
+		});
+		local.search(myValue);
+	}*/
+</script>
