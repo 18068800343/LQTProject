@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../font2/iconfont.css">
+	<link href="../../style/bootstrap.min.css" rel="stylesheet">
+    <link href="../../style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../../style/jquery-editable-select.css">
+	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../../easyUI/themes/icon.css" />
+	<link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/layui.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/code.css" />
+	<link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
+    <link href="../../toastr/toastr.css" rel="stylesheet">
+	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+   <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
+     <!-- SmartAdmin RTL Support  -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/all.css">
+    <style lang="">
+        .UpperPart{
+            display: flex;
+            justify-content:space-between;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 12px;
+        }
+        .selected{
+            background: rgba(247, 161, 3,0.2);
+        }
+        #mainContent th{
+            cursor: pointer;
+        }
+       .layui-tab-brief>.layui-tab-title .layui-this{
+        	color: #5B82b3;
+        }
+        .layui-btn{
+        	width: 50px;
+        	height: 30px;
+        	padding: 0px;
+        	line-height: 0px;
+        	border-radius: 7px;
+        	border: none;
+        }
+        .anniu button{
+        	width: 70px;
+        	margin-right: 10px;
+        }
+        .layui-table tr:hover{
+        	background-color: #E5F1FF !important;
+        }
+        .layui-laypage .layui-laypage-curr .layui-laypage-em{
+        	background-color: #215Ba3;
+        }
+        h1{
+        	margin: 0px;
+        }
+    </style>
+</head>
+<body>
+   <div class="bg" id="bg" onclick="bg()" style="width: 100%;height: 100%;background-color: black;position: absolute;z-index: 3;background-color:rgba(0,0,0,0.3);display: none;">
+   	<div class="ceng col-xs-7" style="height: 600px;background-color: white;position: absolute;z-index: 4;margin-top: 10%;margin-left: 20%;border-radius: 10px;padding: 0px;">
+   		<div class="title" style="width: 100%;height: 70px;background-color: #3567A2;border-radius: 10px 10px 0px 0px;">
+   			<h1 style="color: white;font-size: 25px;font-weight: bold;padding: 21px;display: inline-block;">里程详情</h1>
+   			<a href="JavaScript:;" onclick="fs()"><img src="../../images/false.png"/ style="width: 30px;height: 30px;float: right;margin-top: 20px;margin-right: 20px;"></a>
+   		</div>
+   		 <table class="layui-table" lay-skin="line">
+   		 	 			<colgroup>
+					    <col width="80">
+					    <col width="120">
+					    <col>
+					  </colgroup>
+					  <thead>
+					    <tr style="color: #5C82B2;font-weight: bolder">
+					      <th>序号</th>
+					      <th>车牌号</th>
+					      <th>日期</th>
+					      <th>开始里程（KM）</th>
+					      <th>结束里程（KM）</th>
+					      <th>行驶里程（KM）</th>
+					       <th>开始地址</th>
+					      <th>结束地址</th>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <td>1</td>
+					      <td>苏A2912929</td>
+					      <td>2020-08-25</td>
+					       <td>12314.8</td>
+					       <td>12314.8</td>
+					       <td>8</td>
+					       <td style="color: #63A1EF;">南京市秦淮区永智路5号科技创业研发孵化综合楼F幢523</td>
+					       <td style="color: #63A1EF;">南京市秦淮区永智路5号科技创业研发孵化综合楼F幢523</td>
+					    </tr>
+					     <tr>
+					      <td>1</td>
+					      <td>苏A2912929</td>
+					      <td>2020-08-25</td>
+					       <td>12314.8</td>
+					       <td>12314.8</td>
+					       <td>8</td>
+					       <td style="color: #63A1EF;">南京市秦淮区永智路5号科技创业研发孵化综合楼F幢523</td>
+					       <td style="color: #63A1EF;">南京市秦淮区永智路5号科技创业研发孵化综合楼F幢523</td>
+					    </tr>
+					     <tr>
+					      <td>1</td>
+					      <td>苏A2912929</td>
+					      <td>2020-08-25</td>
+					       <td>12314.8</td>
+					       <td>12314.8</td>
+					       <td>8</td>
+					       <td style="color: #63A1EF;">南京市秦淮区永智路5号科技创业研发孵化综合楼F幢523</td>
+					       <td style="color: #63A1EF;">南京市秦淮区永智路5号科技创业研发孵化综合楼F幢523</td>
+					    </tr>
+					     <tr>
+					      <td>1</td>
+					      <td>苏A2912929</td>
+					      <td>2020-08-25</td>
+					       <td>12314.8</td>
+					       <td>12314.8</td>
+					       <td>8</td>
+					       <td style="color: #63A1EF;">南京市秦淮区永智路5号科技创业研发孵化综合楼F幢523</td>
+					       <td style="color: #63A1EF;">南京市秦淮区永智路5号科技创业研发孵化综合楼F幢523</td>
+					    </tr>
+					  </tbody>
+					</table>
+					 <div id="fy1" style="position: relative;margin-left: 45%;"></div>
+					 <button type="button" onclick="qs()" class="layui-btn layui-btn-primary" style="background-color: #B5B5B5;">取消</button>
+   	</div>
+   </div>
+     
+    <!-- 面包屑 -->
+    <div class="mianbao">
+    	<ul class="breadcrumb">
+    		<li><i class="iconfont icon-knowledgebase"></i></li>
+    			<li>道路施工质量管理</li>
+			<li>沥青砼摊铺监控管理</li>
+			<li class="active" style="color: #5F84B2;">摊铺地点管理</li>
+		</ul>
+    </div>
+
+<!-- allMsg -->
+<div class="maindiv" style="background-color: white;border-radius: 10px;margin-left: 1%;width: 98%;height:950px;">
+		<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+			  <ul class="layui-tab-title">
+			    <li class="layui-this">车辆动态数据</li>
+			    <li>单个车辆里程数据</li>
+			    <li>单个车辆轨迹数据</li>
+			    <li>单个车辆行驶路线</li>
+			  </ul>
+			<div class="layui-tab-content" style="height: 100px;">
+				<!--分页1-->
+			    <div class="layui-tab-item layui-show">
+			    	<div class="gj" style="background-color: white;border-radius:10px;width: 350px;height: 70px;position: absolute;z-index: 1;box-shadow: 10px 10px 10px #818181;left: 5%;margin-top: 1%;">
+			    		<div class="layui-input-block">
+			    			<label for="" style="line-height: 70px;margin-left: -90px;">车辆筛选：</label>
+					      <select name="city" lay-verify="required" style="width:100%;margin-top: 15px;height: 30px;border: 1px solid #dedede;padding: 5px;border-radius: 5px;color: #818181;">
+					        <option value="" >支持搜索</option>
+					        <option value="0">1</option>
+					        <option value="1">2</option>
+					        <option value="2">3</option>
+					        <option value="3">4</option>
+					        <option value="4">5</option>
+					      </select>
+					    </div>
+			    	</div>
+			    	<div style="width: 97%;height: 84%;overflow: hidden;margin:0;position: absolute;"id="dituContent"></div>
+			    </div>
+			    <!--分页2-->
+			    <div class="layui-tab-item">
+			    	<div class="layui-input-block"style="display: inline-block;">
+			    			<label for="" style="line-height: 50px;margin-left: -90px;width: 100px;">车辆筛选：</label>
+					      <select name="city" lay-verify="required" style="margin-top: 15px;height: 30px;border: 1px solid #dedede;padding: 5px;border-radius: 5px;width: 200px;">
+					        <option value="" >苏A919291</option>
+					        <option value="0">1</option>
+					        <option value="1">2</option>
+					        <option value="2">3</option>
+					        <option value="3">4</option>
+					        <option value="4">5</option>
+					      </select>
+					    </div>
+					    <!---->
+					    <label for="" style="margin-left: 15%;">时间筛选：</label>
+					     <button type="button" class="layui-btn layui-btn-normal" style="background-color: #94C5FF;">今天</button>
+					      <button type="button" class="layui-btn layui-btn-primary">昨天</button>
+					       <button type="button" class="layui-btn layui-btn-primary">近3天</button>
+					        <button type="button" class="layui-btn layui-btn-primary">近7天</button>
+					        <br  />
+					    <label for="" style="margin-left: 20px;margin-top:10px;width: 100px;">开始时间：</label>
+					     <div class="layui-inline" style="margin-top: 10px;">
+					      <div class="layui-input-inline">
+					        <input type="text" class="layui-input" id="test5" placeholder="2020-08-24 00:00:00" style="width: 200px;border-radius: 5px;height: 30px;">
+					      </div>
+					    </div>
+					     <label for="" style="margin-left: 15%;margin-top:10px;">结束时间：</label>
+					     <div class="layui-inline" style="margin-top: 10px;">
+					      <div class="layui-input-inline">
+					        <input type="text" class="layui-input" id="test6" placeholder="2020-08-24 00:00:00"  style="width: 240px;border-radius: 5px;height: 30px;">
+					      </div>
+						  	 <button type="button" class="layui-btn layui-btn-primary" style="border: 1px solid #A9A9A9;width: 70px;margin-left: 200px">重置</button>
+						  	  <button type="button" class="layui-btn layui-btn-normal"style="background-color: #215BA3;width: 70px;">搜索</button>
+					    </div>
+					 <table class="layui-table" lay-skin="line"style="margin-top: 30px;">
+					  <colgroup>
+					    <col width="150">
+					    <col width="200">
+					    <col>
+					  </colgroup>
+					  <thead>
+					    <tr style="background-color: transparent;color: #5C82B2;font-weight: bolder">
+					      <th>序号</th>
+					      <th>车牌号</th>
+					      <th>车牌颜色</th>
+					      <th>终端编号</th>
+					      <th>终端类型</th>
+					      <th>所属车组</th>
+					       <th>开始时间</th>
+					      <th>结束时间</th>
+					      <th>行驶里程（km）</th>
+					       <th>营运天数</th>
+					      <th>操作</th>
+					    </tr> 
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <td>1</td>
+					      <td>苏A2912929</td>
+					      <td>黄色</td>
+					       <td>12345678</td>
+					      <td>GHW-部标</td>
+					      <td>A组</td>
+					       <td>2020-08-25 00:00:00</td>
+					       <td>2020-08-25 00:00:00</td>
+					      <td>2514.4</td>
+					      <td>7</td>
+					       <td><a href="JavaScript:;" onclick="divSW()" style="color: #5F84B3;">详情</a></td>
+					    </tr>
+					  </tbody>
+					</table>
+			    </div>
+			    <div class="layui-tab-item">
+			    	  <div class="layui-tab-item layui-show">
+			    	<div class="gj" style="background-color: white;border-radius:10px;width: 350px;height: 300px;position: absolute;z-index: 1;box-shadow: 10px 10px 10px #818181;left: 5%;margin-top: 1%;">
+			    		<div class="layui-input-block">
+			    			<label for="" style="line-height: 50px;margin-left: -90px;">车辆筛选：</label>
+					      <select name="city" lay-verify="required" style="width:100%;margin-top: 15px;height: 30px;border: 1px solid #dedede;padding: 5px;border-radius: 5px;color: #818181;">
+					        <option value="" >支持搜索</option>
+					        <option value="0">1</option>
+					        <option value="1">2</option>
+					        <option value="2">3</option>
+					        <option value="3">4</option>
+					        <option value="4">5</option>
+					      </select>
+					    </div>
+					    <!---->
+					    <label for="" style="margin-left: 20px;">时间筛选：</label>
+					     <button type="button" class="layui-btn layui-btn-normal" style="background-color: #94C5FF;">今天</button>
+					      <button type="button" class="layui-btn layui-btn-primary">昨天</button>
+					       <button type="button" class="layui-btn layui-btn-primary">近3天</button>
+					        <button type="button" class="layui-btn layui-btn-primary">近7天</button>
+					    <label for="" style="margin-left: 20px;margin-top:10px;">开始时间：</label>
+					     <div class="layui-inline" style="margin-top: 10px;">
+					      <div class="layui-input-inline">
+					        <input type="text" class="layui-input" id="test5" placeholder="2020-08-24 00:00:00" style="width: 240px;">
+					      </div>
+					    </div>
+					     <label for="" style="margin-left: 20px;margin-top:10px;">结束时间：</label>
+					     <div class="layui-inline" style="margin-top: 10px;">
+					      <div class="layui-input-inline">
+					        <input type="text" class="layui-input" id="test6" placeholder="2020-08-24 00:00:00" style="width: 240px;">
+					      </div>
+					    </div>
+					     <label for="" style="margin-left: 20px;margin-top:10px;">停车时间&nbsp;&nbsp;&nbsp;&nbsp;>=</label>
+					      <div class="layui-inline">
+						      <div class="layui-input-inline">
+						        <input type="text" class="layui-input" id="test14" placeholder="10" style="margin-top: 10px;display: inline-block;width: 50px;height: 30px;">
+						        <span style="position: relative;top: 5px;left: 10px;color: #A9A9A9;">分钟</span>
+						      </div>
+						  </div>
+						  <!--按钮区-->
+						  <div class="anniu" style="display: block;width: 100%;text-align: right;margin-top: 20px;">
+						  	 <button type="button" class="layui-btn layui-btn-primary" style="border: 1px solid #A9A9A9;">重置</button>
+						  	  <button type="button" class="layui-btn layui-btn-normal"style="background-color: #215BA3;">搜索</button>
+						  </div>
+			    	</div>
+			    	<div style="width: 97%;height:50%;overflow: hidden;margin:0;position: absolute;"id="dituContent2"></div>
+			    	
+			    </div>
+			    <table class="layui-table" lay-skin="line" style="position: relative;top: 550px;">
+					  <colgroup>
+					    <col width="150">
+					    <col width="200">
+					    <col>
+					  </colgroup>
+					  <thead>
+					    <tr style="background-color: transparent;color: #5C82B2;font-weight: bolder">
+					      <th>序号</th>
+					      <th>车牌号</th>
+					      <th>车组</th>
+					      <th>时间</th>
+					      <th>停车时长</th>
+					      <th>速度（km/h）</th>
+					       <th>空载量</th>
+					      <th>传感器速度（km/h）</th>
+					      <th>震动传感器</th>
+					       <th>方向</th>
+					      <th>里程（km）</th>
+					      <th>相对里程（km）</th>
+					      <th>报警状态</th>
+					    </tr> 
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <td>1</td>
+					      <td>苏A2912929</td>
+					      <td>A组</td>
+					       <td>2020-8-26 05:45:24</td>
+					      <td>-</td>
+					      <td>4</td>
+					       <td>空载</td>
+					      <td>3</td>
+					      <td>-</td>
+					       <td>东</td>
+					      <td>3306</td>
+					      <td>0</td>
+					      <td>-</td>
+					    </tr>
+					    <tr>
+					     <td>1</td>
+					      <td>苏A2912929</td>
+					      <td>A组</td>
+					       <td>2020-8-26 05:45:24</td>
+					      <td>-</td>
+					      <td>4</td>
+					       <td>空载</td>
+					      <td>3</td>
+					      <td>-</td>
+					       <td>东</td>
+					      <td>3306</td>
+					      <td>0</td>
+					      <td>-</td>
+					    </tr>
+					      <tr>
+					     <td>1</td>
+					      <td>苏A2912929</td>
+					      <td>A组</td>
+					       <td>2020-8-26 05:45:24</td>
+					      <td>-</td>
+					      <td>4</td>
+					       <td>空载</td>
+					      <td>3</td>
+					      <td>-</td>
+					       <td>东</td>
+					      <td>3306</td>
+					      <td>0</td>
+					      <td>-</td>
+					    </tr>
+					     <tr>
+					     <td>1</td>
+					      <td>苏A2912929</td>
+					      <td>A组</td>
+					       <td>2020-8-26 05:45:24</td>
+					      <td>-</td>
+					      <td>4</td>
+					       <td>空载</td>
+					      <td>3</td>
+					      <td>-</td>
+					       <td>东</td>
+					      <td>3306</td>
+					      <td>0</td>
+					      <td>-</td>
+					    </tr>
+					     <tr>
+					     <td>1</td>
+					      <td>苏A2912929</td>
+					      <td>A组</td>
+					       <td>2020-8-26 05:45:24</td>
+					      <td>-</td>
+					      <td>4</td>
+					       <td>空载</td>
+					      <td>3</td>
+					      <td>-</td>
+					       <td>东</td>
+					      <td>3306</td>
+					      <td>0</td>
+					      <td>-</td>
+					    </tr>
+					  </tbody>
+					</table>
+     			 <div id="fy" style="position: relative;top: 550px;margin-left: 45%;"></div>
+			    </div>
+			    <div class="layui-tab-item">内容4</div>
+			  </div>      
+</div>
+<!-- allMsg结束 -->
+
+
+<!-- model结束 -->
+
+<!-- 修改Modal -->
+<!-- 修改model结束 -->
+
+
+</body>
+<script src="../../js/jquery.js"></script>
+<script src="../../js/layui.all.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/common-scripts.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/jquery.dataTables.min.js"></script>
+<script src="../../toastr/toastr.js"></script>
+<script src="../../js/quanxian.js"></script>
+<script src="../../js/SmartNotification.min.js"></script>
+<script src="../../js/myTool.js"></script>
+<!--导出CSV开始-->
+<script src="../../js/datatables/jquery.dataTables.min.js"></script>
+<script src="../../js/datatables/dataTables.colVis.min.js"></script>
+<script src="../../js/datatables/dataTables.tableTools.min.js"></script>
+<script src="../../js/datatables/datatables.responsive.min.js"></script>
+<script src="../../js/datatables/dataTables.buttons.min.js" ></script>
+<script src="../../js/datatables/buttons.html5.min.js" ></script>
+<script src="../../js/datatables/buttons.flash.min.js" ></script>
+<script src="../../js/datatables/jszip.min.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=BmTwezCvWyGaH3KNYkc5P6uq&s=1"></script>
+<!--导出CSV结束-->
+<script>
+    let points = [{
+        id: 1,
+        lng: 118.096525,
+        lat: 24.462602,
+        title: "工地名称：厦门中山公园",
+        content: ["经度：118.096525;纬度：24.462602", "桩号：010 ; 车道：010"]
+    }];
+    let page_map;
+    page_map = new BMap.Map("dituContent");
+
+    // 百度地图API功能
+    //GPS坐标
+    var x = 119.605720;
+    var y = 32.989924;
+    var ggPoint = new BMap.Point(x,y);
+    // 创建点坐标
+    page_map.centerAndZoom(ggPoint, 8);
+    page_map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+    page_map.addControl(new BMap.ScaleControl());
+    page_map.addControl(new BMap.NavigationControl());
+
+/*    var zoomCtrl = new BMap.ZoomControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT, offset: new BMap.Size(20, 20)});
+    page_map.addControl(zoomCtrl);*/
+
+//第三页面地图
+var map = new BMap.Map('dituContent2');
+// 创建地图实例
+var point = new BMap.Point(116.404, 39.915);
+// 创建点坐标
+map.centerAndZoom(point, 11);
+// 初始化地图， 设置中心点坐标和地图级别
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  laydate.render({
+    elem: '#test5'
+    ,type: 'datetime'
+  });
+   laydate.render({
+    elem: '#test6'
+    ,type: 'datetime'
+  });
+   laydate.render({
+    elem: '#test14'
+    ,type: 'time'
+    ,format: 'H点m分'
+  });
+  });
+  layui.use('laypage', function(){
+  var laypage = layui.laypage;
+  
+  //执行一个laypage实例
+  laypage.render({
+    elem: 'fy' //注意，这里的 test1 是 ID，不用加 # 号
+    ,count: 10 //数据总数，从服务端得到
+  });
+});
+  layui.use('laypage', function(){
+  var laypage = layui.laypage;
+  
+  //执行一个laypage实例
+  laypage.render({
+    elem: 'fy1' //注意，这里的 test1 是 ID，不用加 # 号
+    ,count: 10 //数据总数，从服务端得到
+  });
+});
+var dv = document.getElementById( "bg" );
+var hide = true;
+function divSW() {
+    if( hide ) {
+       dv.style.display = "block"; 
+       hide = false;
+    } else {
+        dv.style.display = "none";
+        hide = true;
+    }
+}
+var da = document.getElementById( "bg" );
+var hide = true;
+function fs() {
+    if( hide ) {
+       dv.style.display = "none"; 
+       hide = false;
+    } else {
+        dv.style.display = "block";
+        hide = true;
+    }
+}
+var dw = document.getElementById( "bg" );
+var hide = true;
+function bg() {
+    if( hide ) {
+       dv.style.display = "none"; 
+       hide = false;
+    } else {
+        dv.style.display = "block";
+        hide = true;
+    }
+}
+var dw = document.getElementById( "bg" );
+var hide = true;
+function qs() {
+    if( hide ) {
+       dv.style.display = "none"; 
+       hide = false;
+    } else {
+        dv.style.display = "block";
+        hide = true;
+    }
+}
+</script>
+</html>
