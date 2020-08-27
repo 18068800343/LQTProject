@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
-	<script type="text/javascript" src="//api.map.baidu.com/api?v=3.0&ak=BmTwezCvWyGaH3KNYkc5P6uq"></script>
+	<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=BmTwezCvWyGaH3KNYkc5P6uq"></script>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/laydate.css" />
@@ -56,20 +56,36 @@
 				<div class="span12">
 					<div class="zhuti-content">
 						<div class="LowerPart">
-							<table class=" table table-bordered table-condensed table-hover layui-table" lay-skin="line" id="mainContent" style="width: 1800px;white-space: nowrap;">
+							<table class=" table table-bordered table-condensed table-hover layui-table" lay-skin="line" id="mainContent" style="width: 3200px;">
 								<thead>
 								<tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
 									<th>序号</th>
 									<th>车牌</th>
-									<th style="width: 500px;">开始时间</th>
-									<th style="width: 200px;">结束时间</th>
+									<th style="width: 500px;">时间</th>
+									<th>是否补传数据</th>
+									<th>方向</th>
+									<th>里程(m)</th>
+									<th>Acc状态</th>
 									<th>速度(km/h)</th>
-									<th>开始里程(km)</th>
-									<th>结束里程(km)</th>
-									<th>本次行程的持续里程(km)</th>
-									<th>本次行程的持续时间(s)</th>
-									<th>开始经纬度</th>
-									<th>结束经纬度</th>
+									<th>定位状态</th>
+									<th>停车时长(ms)</th>
+									<th>行停状态</th>
+									<th>油量</th>
+									<th>传感器速度</th>
+									<th>温度</th>
+									<th>报警</th>
+									<th>刻度(电阻)</th>
+									<th>扩展数据</th>
+									<th>近光灯信号</th>
+									<th>远光灯信号</th>
+									<th>右转向灯信号</th>
+									<th>左转向灯信号</th>
+									<th>制动信号</th>
+									<th>倒挡信号</th>
+									<th>喇叭信号</th>
+									<th>空调信号</th>
+									<th>正反转状态</th>
+									<th>经纬度</th>
 
 								</tr>
 								</thead>
@@ -123,34 +139,191 @@
 		"columns": [
 			{"data": null},
 			{"data": "plate"},
-			{"data": "beginTime"},
-			{"data": "endTime"},
+			{"data": "devTime"},
+			{"data": "isRealTime"},
+			{"data": "direct"},
+			{"data": "mileage"},
+			{"data": "isAcc"},
 			{"data": "speed"},
-			{"data": "mileageBegin"},
-			{"data": "mileageEnd"},
-			{"data": "thisMileage"},
-			{"data": "thisSecs"},
-			{"data": "lonBegin"},
-			{"data": "lonEnd"},
-			/*{"data": "latBegin"},
-			{"data": "latEnd"},*/
+			{"data": "isPos"},
+			{"data": "stopTime"},
+			{"data": "stopState"},
+			{"data": "oil"},
+			{"data": "sensorSpeed"},
+			{"data": "temperature"},
+			{"data": "alarm"},
+			{"data": "scale"},
+			{"data": "extend"},
+			{"data": "lbSignal"},
+			{"data": "hbSignal"},
+			{"data": "rtlSignal"},
+			{"data": "ltlSignal"},
+			{"data": "brakeSignal"},
+			{"data": "RSignal"},
+			{"data": "hornSignal"},
+			{"data": "acSignal"},
+			{"data": "turnDir"},
+			{"data": "lon"},
 		],
 		"columnDefs": [
 			{
 				"class": "tcenter",
-				"targets": 9,
+				"targets": 1,
 				"searchable": false,
 				"render": function(data, type, full) {
-					return data+","+full.latBegin;
+					return   $('#suggestId').find('option:selected')[0].textContent.toString();
+				}
+			},{
+				"class": "tcenter",
+				"targets": 3,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==0){
+						return "实时数据"
+					}else if(data==1){
+						return "补传数据"
+					}else return ''
+				}
+			},{
+				"class": "tcenter",
+				"targets": 6,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==0){
+						return "开启"
+					}else if(data==1){
+						return "关闭"
+					}else if(data==2){
+						return "不解析"
+					}else return ''
+				}
+			},{
+				"class": "tcenter",
+				"targets": 8,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==0){
+						return "不定位"
+					}else if(data==1){
+						return "定位"
+					}else  return ''
 				}
 			},{
 				"class": "tcenter",
 				"targets": 10,
 				"searchable": false,
 				"render": function(data, type, full) {
-					return data+","+full.latEnd;
+					if(data==1){
+						return "行"
+					}else if(data==2){
+						return "停"
+					}else if(data==3){
+						return "离线"
+					}else  return ''
+				}
+			},{
+				"class": "tcenter",
+				"targets": 16,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data.lbSignal==undefined||data.lbSignal==null||data.lbSignal==""){
+						return ""
+					}else  return data
+				}
+			},{
+				"class": "tcenter",
+				"targets": 17,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==1){
+						return "开启近光灯"
+					}else  return '关闭近光灯'
+				}
+			},{
+				"class": "tcenter",
+				"targets": 18,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==1){
+						return "开启远光灯"
+					}else  return '关闭远光灯'
+				}
+			},{
+				"class": "tcenter",
+				"targets": 19,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==1){
+						return "开启右转向灯"
+					}else  return '关闭右转向灯'
+				}
+			},{
+				"class": "tcenter",
+				"targets": 20,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==1){
+						return "开启左转向灯"
+					}else  return '关闭左转向灯'
+				}
+			},{
+				"class": "tcenter",
+				"targets": 21,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==1){
+						return "开启制动信号"
+					}else  return '关闭制动信号'
+				}
+			},{
+				"class": "tcenter",
+				"targets": 22,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==1){
+						return "开启倒挡信号"
+					}else  return '关闭倒挡信号'
+				}
+			},{
+				"class": "tcenter",
+				"targets": 23,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==1){
+						return "开启喇叭信号"
+					}else  return '关闭喇叭信号'
+				}
+			},{
+				"class": "tcenter",
+				"targets": 24,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==1){
+						return "开启空调信号"
+					}else  return '关闭空调信号'
+				}
+			},{
+				"class": "tcenter",
+				"targets": 25,
+				"searchable": false,
+				"render": function(data, type, full) {
+					if(data==1){
+						return "正转"
+					}else if(data==0){
+						return "反转"
+					}else if(data==-1){
+						return "无正反转状态"
+					}else return ''
 				}
 			},
+			{
+				"class": "tcenter",
+				"targets": 26,
+				"searchable": false,
+				"render": function(data, type, full) {
+					return data+","+full.lat;
+				}
+			}
 		], "fnDrawCallback": function () {
 			this.api().column(0).nodes().each(function(cell, i){
 				cell.innerHTML=i+1;
@@ -184,21 +357,23 @@
 
 	//行点击事件
 	$('#mainContent tbody').on('click','tr', function (e) {
+		var name = $(this).text()
 		var data = table.row( this ).data();
-		var point = new BMap.Point(data.lonEnd, data.latEnd);
-		map.centerAndZoom(point, 15);
+		var point = new BMap.Point(data.lon, data.lat);
+		map.centerAndZoom(point, 14);
 
 		var marker = new BMap.Marker(point);  // 创建标注
 		map.addOverlay(marker);              // 将标注添加到地图中
 		var opts = {
-			width : 200,     // 信息窗口宽度
-			height: 120,     // 信息窗口高度
+			width : 250,     // 信息窗口宽度
+			height: 100,     // 信息窗口高度
 			title : "指定车辆里程数据" , // 信息窗口标题
 			message:"这里是故宫"
 		}
 		var infoWindow = new BMap.InfoWindow(
-				"<div class='amap-info-content amap-info-outer'>车牌："+data.plate+"<br>开始时间："+data.beginTime+"<br>结束时间："+data.endTime+"<br>速度："+data.speed+"Km/h<br>里程："+data.thisMileage+"km/h<br><a class='amap-info-close' href='javascript: void(0)' style='right: 5px;'>×</a></div>", opts);  // 创建信息窗口对象
-			map.openInfoWindow(infoWindow, point); //开启信息窗口
+				"<div class='amap-info-content amap-info-outer'>车牌："+($('#suggestId').find('option:selected')[0].textContent.toString())+"<br>时间："+data.devTime+"<br>速度："+data.speed+"Km/h<br>里程："+data.mileage+"m<br><a class='amap-info-close' href='javascript: void(0)' style='right: 5px;'>×</a></div>", opts);  // 创建信息窗口对象
+
+		map.openInfoWindow(infoWindow, point); //开启信息窗口
 		/*marker.addEventListener("click", function(){
 		});*/
 	} );
@@ -235,17 +410,17 @@
 		let endTimehaomiao = getHaomiao($("#endTime").val());
 		if(chepaipID!=""&&chepaipID!=undefined&&chepaipID!=null&&$("#starTime").val()!=null&&$("#starTime").val()!=""&&$("#starTime").val()!=undefined
 				&&$("#endTime").val()!=null&&$("#endTime").val()!=""&&$("#endTime").val()!=undefined){
-			getlicheng(chepaipID,starthaomiao,endTimehaomiao)
+			getlichengguiji(chepaipID,starthaomiao,endTimehaomiao)
 		}else{
 			toastr.error("请选择车牌和时间")
 			alert("请选择车牌和时间")
 		}
 	}
 
-	function getlicheng(chepaipID,starthaomiao,endTimehaomiao){
+	function getlichengguiji(chepaipID,starthaomiao,endTimehaomiao){
 		$.ajax({
 			// get请求地址
-			url: "http://58.222.201.158:6809/mileage/mileageData.do?key="+key+"&startTime="+starthaomiao+"&endTime="+endTimehaomiao+"&id="+chepaipID,
+			url: "http://58.222.201.158:6809/track/queryTrackData.do?key="+key+"&startTime="+starthaomiao+"&endTime="+endTimehaomiao+"&id="+chepaipID,
 			dataType: "json",
 			success: function (data) {
 				if(data.flag==1){
@@ -261,26 +436,59 @@
 
 	function setDiTu(data){
 
-		//起点-途经点-终点
-		if(data!=null&&data.length!=0){
-			console.log(data)
-			/**/
+		//起点-途经点-终点 有bug,3.0z这个方法只有百度2.0支持，3.0报错画出的路线不准
+		/*if(data!=null&&data.length!=0){
+			var pois = [];
+			var start;
+			var end;
+			var flag=true;
 			for(var i=0;i<data.length;i++){
-				var start = new BMap.Point(data[i].lonBegin,data[i].latBegin);
-				var end = new BMap.Point(data[i].lonEnd,data[i].latEnd);
-				var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}
-					});
-				driving.search(start, end);
+				if(flag){
+					start = new BMap.Point(data[0].lon,data[0].lat);
+					end = new BMap.Point(data[(data.length-1)].lon,data[(data.length-1)].lat);
+				}
+				pois.push(new BMap.Point(data[i].lon,data[i].lat))
+
+
 			}
+			var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}
+			});
+			//driving.search(start, end);
+			driving.search(start, end,{waypoints:pois});//waypoints表示途经点
 
+		}*/
+		//轨迹
+		var sy = new BMap.Symbol(BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW, {
+			scale: 0.6,//图标缩放大小
+			strokeColor:'#fff',//设置矢量图标的线填充颜色
+			strokeWeight: '2',//设置线宽
+		});
+		var icons = new BMap.IconSequence(sy, '10', '0');
+		// 创建polyline对象
+		var pois = [];
+
+		if(data!=null&&data.length!=0){
+			for(var i=0;i<data.length;i++){
+				pois.push(new BMap.Point(data[i].lon,data[i].lat))
+			}
 		}
-
+		var polyline =new BMap.Polyline(pois, {
+			enableEditing: false,//是否启用线编辑，默认为false
+			enableClicking: true,//是否响应点击事件，默认为true
+			icons:[icons],
+			strokeWeight:'8',//折线的宽度，以像素为单位
+			strokeOpacity: 0.8,//折线的透明度，取值范围0 - 1
+			strokeColor:"#18a45b" //折线颜色
+		});
+		clearAll()
+		map.addOverlay(polyline);          //增加折线
+		map.setViewport(pois);
 	}
 
 
 
 	let map = new BMap.Map("container"); // 创建Map实例,GL版命名空间为BMapGL(鼠标右键控制倾斜角度)
-	map.centerAndZoom(new BMap.Point(116.404, 39.915), 14);      // 初始化地图,设置中心点坐标和地图级别
+	map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);      // 初始化地图,设置中心点坐标和地图级别
 	map.enableScrollWheelZoom(true);
 
 
@@ -336,6 +544,10 @@
 	// 添加到地图当中
 	map.addControl(myZoomCtrl);
 
+
+	function clearAll(){
+		map.clearOverlays();    //清除地图上所有覆盖物
+	}
 
 
 
