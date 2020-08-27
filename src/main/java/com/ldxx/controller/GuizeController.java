@@ -53,6 +53,14 @@ public class GuizeController {
         return i;
     }
 
+    @RequestMapping("/updateGuizeAndCars")
+    @ResponseBody
+    public int updateGuizeAndPlates(@RequestBody GuizeVo guizeVo) {
+        guizeVo.setGuizeId(LDXXUtils.getUUID12());
+        int i = service.updateGuizeVo(guizeVo);
+        return i;
+    }
+
     @RequestMapping("/delTruckInfo")
     @ResponseBody
     public int delTruckInfo(String id) {

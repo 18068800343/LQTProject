@@ -7,17 +7,21 @@ import java.util.List;
 
 public interface GuizeDao {
 
-	List<GuizeVo> getAllGuizeVo();
+    List<GuizeVo> getAllGuizeVo();
 
-	GuizeVo getGuizeVoById(String id);
+    GuizeVo getGuizeVoById(String id);
 
-	int updGuizeVo(GuizeVo t);
+    int updGuizeVo(GuizeVo t);
 
-	int delGuizeVo(String id);
+    int delGuize(String id);
 
-	int insertGuize(GuizeVo t);
+    int delGuizeCar(String id);
 
-	int insertGuizeLnglat(GuizeVo t);
+    int delGuizeLnglat(String id);
 
-	int insertGuizeCar(GuizeVo t);
+    int insertGuize(GuizeVo t);
+
+    int insertGuizeLnglat(GuizeVo t);
+
+    int insertGuizeCar(GuizeVo t);
 }

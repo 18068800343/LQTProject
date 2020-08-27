@@ -337,7 +337,7 @@
 
 	//鼠标绘制完成回调方法   获取各个点的经纬度
 	let overlays = [];
-	let page_pointList;
+	let page_pointList = [];
 	let overlaycomplete = function (e) {
 
 		let pointList = [];
@@ -403,7 +403,7 @@
 				"searchable": true,
 				"render": function (data, type, full) {
 					let dingwei = '<i class="iconfont icon-genzong" style="font-size:18px;cursor:pointer;" id="dingwei" title="定位" onclick="dingwei(this)"></i>';
-					let xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" id="upd" title="修改车牌" data-toggle="modal" data-target="#change"></i>';
+					let xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" id="upd" onclick="xiugai(this)" title="修改车牌" data-toggle="modal" data-target="#change"></i>';
 					return dingwei + xiugai;
 				}
 			},
@@ -467,6 +467,29 @@
 		let tr = $(e).parents("tr");
 		let data = $("#mainContent").DataTable().row(tr).data();
 		let points = data.points;
+		clearStart();
+		initMapLine(points);
+	}
+
+	let page_xg_data;
+
+	function xiugai(e) {
+		let tr = $(e).parents("tr");
+		let data = $("#mainContent").DataTable().row(tr).data();
+		page_xg_data = data;
+		let points = data.points;
+		let plates = data.plates;
+		let plateArr = [];
+		for (let i in plates) {
+			let item = {};
+			item.carId = plates[i].carId;
+			item.plate = plates[i].plate;
+			plateArr.push(JSON.stringify(item));
+		}
+		let guize = data;
+		$("#xg_guizeName").val(guize.guizeName);
+		$("#xg_plate").val(plateArr);
+		$("#xg_plate").selectpicker("refresh");
 		initMapLine(points);
 	}
 
@@ -545,6 +568,49 @@
 			success: function (json) {
 				if (json > 0) {
 					$("#myModal").modal("hide");
+					initTable();
+					toastr.success("添加成功")
+					clearAll();
+
+				} else {
+					toastr.success("添加失败")
+				}
+
+			}
+		});
+	}
+
+
+	function xg_saveGuize() {
+		let plates = $('#xg_plate').val();
+		if (plates == null || plates == "") {
+			toastr.error("请至少选择一辆车!");
+			return;
+		}
+		let guizeName = $("#xg_guizeName").val();
+		if (null == guizeName || "" == guizeName) {
+			toastr.error("请填写名称!");
+			return;
+		}
+		let array = [];
+		for (let i in plates) {
+			array.push(JSON.parse(plates[i]));
+		}
+		let guizeVo = {};
+		guizeVo.plates = array;
+		guizeVo.id = page_xg_data.id;
+		guizeVo.guizeName = guizeName;
+		guizeVo.points = page_xg_data.points;
+		$.ajax({
+			type: "post",
+			url: "/Guize/updateGuizeAndCars",
+			async: false,
+			contentType: 'application/json;',
+			dataType: "json",
+			data: JSON.stringify(guizeVo),
+			success: function (json) {
+				if (json > 0) {
+					$("#change").modal("hide");
 					initTable();
 					toastr.success("添加成功")
 					clearAll();

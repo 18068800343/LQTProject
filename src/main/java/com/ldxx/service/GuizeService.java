@@ -7,14 +7,16 @@ import java.util.List;
 
 public interface GuizeService {
 
-	List<GuizeVo> getAllGuizeVo();
+    List<GuizeVo> getAllGuizeVo();
 
-	GuizeVo getGuizeVoById(String id);
+    GuizeVo getGuizeVoById(String id);
 
-	int updGuizeVo(GuizeVo t);
+    int updGuizeVo(GuizeVo t);
 
-	int delGuizeVo(String id);
+    int delGuizeVo(String id);
 
-	int insertGuizeVo(GuizeVo t);
+    int insertGuizeVo(GuizeVo t);
+
+    int updateGuizeVo(GuizeVo t);
 
 }

@@ -42,8 +42,15 @@
 		where id=#{t.id}
 	</update>
 
-    <update id="delGuizeVo">
-		update  truck_info set delete_state=0 where id=#{id}
+    <update id="delGuize">
+		delete from guize where id=#{id}
+	</update>
+
+    <update id="delGuizeCar">
+		delete from guize_car where guize_id=#{id}
+	</update>
+    <update id="delGuizeLnglat">
+		delete from guize_lnglat where guize_id=#{id}
 	</update>
 
     <insert id="insertGuize" parameterType="GuizeVo">

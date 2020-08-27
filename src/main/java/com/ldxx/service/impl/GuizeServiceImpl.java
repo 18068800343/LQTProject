@@ -39,7 +39,7 @@ public class GuizeServiceImpl implements GuizeService {
 	@Transactional
 	public int delGuizeVo(String id) {
 		// TODO Auto-generated method stub
-		return dao.delGuizeVo(id);
+		return dao.delGuize(id);
 	}
 
 	@Override
@@ -49,6 +49,24 @@ public class GuizeServiceImpl implements GuizeService {
 
 		int i = dao.insertGuize(t);
 		if (i > 0) {
+			i = dao.insertGuizeLnglat(t);
+			if (i > 0) {
+				i = dao.insertGuizeCar(t);
+			}
+		}
+		return i;
+	}
+
+	@Override
+	@Transactional
+	public int updateGuizeVo(GuizeVo t) {
+		// TODO Auto-generated method stub
+
+		int i = dao.delGuize(t.getId());
+		if (i > 0) {
+			i = dao.delGuizeCar(t.getId());
+			i = dao.delGuizeLnglat(t.getId());
+			i = dao.insertGuize(t);
 			i = dao.insertGuizeLnglat(t);
 			if (i > 0) {
 				i = dao.insertGuizeCar(t);
