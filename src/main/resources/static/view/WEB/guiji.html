@@ -308,11 +308,15 @@
 			strokeOpacity: 1,//折线的透明度，取值范围0 - 1
 			strokeColor: "#343861" //折线颜色
 		});
+		if (e != null && e.length > 0) {
+			map.centerAndZoom(new BMapGL.Point(e[0].lng, e[0].lat), 14);
+		}
 		map.addOverlay(polyline);          //增加折线
 		overlays.push(polyline)
 	}
 
 	function draw(e) {
+
 		let arr = document.getElementsByClassName('bmap-btn');
 		if (initFlag) {
 			drawingManager.open();
@@ -326,12 +330,16 @@
 			initFlag = !initFlag;
 		}
 		page_dom = e;
+		if (overlays.length > 0) {
+			clearStart()
+		}
 	};
 
 	//鼠标绘制完成回调方法   获取各个点的经纬度
 	let overlays = [];
 	let page_pointList;
 	let overlaycomplete = function (e) {
+
 		let pointList = [];
 		overlays.push(e.overlay);
 		let path = e.overlay.getPath();//Array<Point> 返回多边型的点数组
@@ -351,7 +359,7 @@
 
 	function clearAll() {
 
-		if () {
+		if (overlays.length > 0) {
 			for (let i = 0; i < overlays.length; i++) {
 				map.removeOverlay(overlays[i]);
 			}
@@ -359,6 +367,14 @@
 			drawingManager.close();
 			page_dom.style.backgroundPositionY = '0px';
 			initFlag = true;
+		}
+	}
+
+	function clearStart() {
+		if (overlays.length > 0) {
+			for (let i = 0; i < overlays.length; i++) {
+				map.removeOverlay(overlays[i]);
+			}
 		}
 	}
 
@@ -529,8 +545,10 @@
 			success: function (json) {
 				if (json > 0) {
 					$("#myModal").modal("hide");
+					initTable();
 					toastr.success("添加成功")
 					clearAll();
+
 				} else {
 					toastr.success("添加失败")
 				}
