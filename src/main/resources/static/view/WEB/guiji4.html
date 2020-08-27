@@ -37,7 +37,20 @@
 		table thead {
 			width: calc( 100% - 1em);
 		}
-
+        .ceng{
+             background-color: white;
+             border-radius:10px;
+             width: 350px;
+             height: 320px;
+             position: absolute;
+             z-index: 1;
+             box-shadow: 10px 10px 10px #818181;
+             left: 5%;
+             margin-top: 1%;
+        }
+        .layui-btn+.layui-btn{
+            margin-left:0px;
+        }
 	</style>
 </head>
 <body>
@@ -514,19 +527,19 @@
 	ZoomControl.prototype.initialize = function(map){
 		// 创建一个DOM元素
 		var p = document.createElement("p");
-		p.innerHTML = '<div style="width: 250px;background-color: white;box-shadow:grey 0px 0px 5px">' +
-				'<p id="r-result">车辆筛选:<!--<input type="text" id="suggestId" size="20" value="百度" placeholder="支持搜索" style="width:150px;" />-->' +
+		p.innerHTML = '<div class="ceng" style="width: 250px;background-color: white;box-shadow:grey 0px 0px 5px">' +
+				'<p id="r-result" style="padding:10px;">车辆筛选:<!--<input type="text" id="suggestId" size="20" value="百度" placeholder="支持搜索" style="width:150px;" />-->' +
 				'<select class="form-control selectpicker" multiple data-max-options="1" data-actions-box="false"' +
 				'data-live-search="true"  id="suggestId"   style="width:80%;"></select></p>' +
-				'<div class="ivu-col ivu-col-span-8">选择时间：</div>' +
-				' <div class="ivu-col ivu-col-span-16"><!--<a onclick="getDay(0)">今天</a>--> <a onclick="getDay(-1)">昨天</a> <a onclick="getDay(-3)">近三天</a> <a onclick="getDay(-7)">近七天</a></div>'+
-				'<div class="ivu-col ivu-col-span-7">开始时间：</div>' +
+				'<div class="ivu-col ivu-col-span-8" style="padding:5px;">选择时间：</div>' +
+				' <div class="ivu-col ivu-col-span-16"><!--<button onclick="getDay(0)"  class="layui-btn layui-btn-normal">今天</button>--> <button onclick="getDay(-1)" class="layui-btn layui-btn-normal" style="margin-left:15px">昨天</button> <button onclick="getDay(-3)"  class="layui-btn layui-btn-normal">近三天</button> <button onclick="getDay(-7)"  class="layui-btn layui-btn-normal">近七天</button></div>'+
+				'<div class="ivu-col ivu-col-span-7"style="padding:5px;">开始时间：</div>' +
 				' <div class="ivu-col ivu-col-span-17">' +
-				'<input type="text" autocomplete="off" id="starTime" placeholder="选择日期时间" ></div>' +
-				'<div class="ivu-col ivu-col-span-7">结束时间：</div>' +
+				'<input type="text" autocomplete="off" id="starTime" placeholder="选择日期时间" style="height:30px;margin-left:10px;" ></div>' +
+				'<div class="ivu-col ivu-col-span-7"style="padding:5px;">结束时间：</div>' +
 				' <div class="ivu-col ivu-col-span-17">' +
-				'<input type="text" autocomplete="off" id="endTime" placeholder="选择日期时间" ></div>' +
-				'<button type="button" onclick="search()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small"> <span>查找</span></button></div>';
+				'<input type="text" autocomplete="off" id="endTime" placeholder="选择日期时间"  style="height:30px;margin-left:10px;"></div>' +
+				'<button type="button" onclick="search()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small layui-btn layui-btn-normal" style="margin:10px;"> <span>查找</span></button></div>';
 
 
 
