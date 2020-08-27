@@ -10,11 +10,20 @@ public class GuizeVo {
 
     String id;
     String guizeId;
+    String time;
     String guizeName;
     String guizeType;
     String pianliJuli;
     List<GuizeCar> plates;
     List<GuizeLnglat> points;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getId() {
         return id;
