@@ -24,6 +24,13 @@ function getDay(day){
     $("#endTime").val(end)
 
 }
+function doHandleMonth(month){
+    var m = month;
+    if(month.toString().length == 1){
+        m = "0" + month;
+    }
+    return m;
+}
 
 //时间转化为毫秒
 function getHaomiao(time){
