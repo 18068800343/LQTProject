@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <title>OA</title>
     <link rel="stylesheet" href="../font2/iconfont.css">
-    <link href="../style/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../easyUI/themes/default/easyui.css" />
     <link rel="stylesheet" type="text/css" href="../easyUI/themes/icon.css" />
     <link rel="stylesheet" type="text/css" href="../easyUI/demo/demo.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
     <link rel="stylesheet" type="text/css" href="../css/laydate.css" />
+    <link rel="stylesheet" type="text/css" href="../css/layui.css" />
+	<link rel="stylesheet" type="text/css" href="../css/layui.mobile.css" />
     <style>
         #titles {
             width: 100%;
@@ -123,8 +125,8 @@
 
         // 百度地图API功能
         //GPS坐标
-        var x = 119.605720;
-        var y = 32.989924;
+        var x = 120.115828;
+        var y = 32.531684;
         var ggPoint = new BMap.Point(x, y);
         // 创建点坐标
         page_map.centerAndZoom(ggPoint, 9);
@@ -148,11 +150,11 @@
             // searchDiv.style.backgroundColor = 'white';
             // searchDiv.style.boxShadow = 'grey 0px 0px 5px';
             searchDiv.innerHTML = '<div style="width: 250px;background-color: white;box-shadow:grey 0px 0px 5px">' +
-                '<p id="r-result">车辆筛选:<!--<input type="text" id="suggestId" size="20" value="百度" placeholder="支持搜索" style="width:150px;" />-->' +
+                '<p id="r-result" style="padding:10px;">车辆筛选:<!--<input type="text" id="suggestId" size="20" value="百度" placeholder="支持搜索" style="width:150px;" />-->' +
                 '<select class="form-control selectpicker" multiple data-max-options="1" data-actions-box="false"' +
                 'data-live-search="true"  id="suggestId"   style="width:80%;"></select></p>' +
-                '<button type="button" onclick="selectOnchange()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small"> <span>查找</span></button>' +
-                '<button type="button" onclick="selectCancle()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small"> <span>取消选择</span></button></div>';
+                '<button type="button" onclick="selectOnchange()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small layui-btn layui-btn-normal" style="margin:10px;"> <span>查找</span></button>' +
+                '<button type="button" onclick="selectCancle()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small layui-btn layui-btn-normal" style="margin:10px;"> <span>取消选择</span></button></div>';
 
             initChePai()
                 // 添加DOM元素到地图中
