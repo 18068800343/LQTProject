@@ -21,6 +21,22 @@
 		select * from guize
 	</select>
 
+    <select id="getPointsByCarId" resultType="Point">
+		SELECT
+            *
+        FROM
+            guize_lnglat
+        WHERE
+	    guize_id =
+	    (select top 1 guize_id from guize_car gc LEFT JOIN
+	     guize g on gc.guize_id = g.id where car_id = #{id} )
+	</select>
+
+    <select id="getDistinctAllCar" resultType="string">
+        SELECT ',' +  car_id
+        FROM guize_car for xml path('')
+	</select>
+
     <select id="selectGuizeCarsCollection" resultType="GuizeCar">
 		select * from guize_car where guize_id=#{guizeId}
 	</select>
