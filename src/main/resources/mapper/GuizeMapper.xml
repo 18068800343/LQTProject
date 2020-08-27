@@ -54,13 +54,14 @@
 	</update>
 
     <insert id="insertGuize" parameterType="GuizeVo">
-		insert into guize(id,guize_name,guize_type,pianli_juli)
+		insert into guize(id,guize_name,guize_type,pianli_juli,time)
 		values
 		(
 		#{guizeId},
 		#{guizeName},
 		'偏离轨道',
-		50
+		50,
+		#{time}
 		)
 	</insert>
 

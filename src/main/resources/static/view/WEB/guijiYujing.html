@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+	<script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=3.0&ak=BmTwezCvWyGaH3KNYkc5P6uq"></script>
+	<link href="//mapopen.cdn.bcebos.com/github/BMapGLLib/DrawingManager/src/DrawingManager.min.css" rel="stylesheet">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+		  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+	<link rel="stylesheet" href="../font2/iconfont.css">
+	<link href="../style/bootstrap.min.css" rel="stylesheet">
+	<link href="../style/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="../style/jquery-editable-select.css">
+	<link rel="stylesheet" type="text/css" href="../css/layui.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/laydate.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/code.css"/>
+	<link rel="stylesheet" type="text/css" href="../../js/skin/default/layer.css"/>
+	<link href="../toastr/toastr.css" rel="stylesheet">
+	<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-production-plugins.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-production.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-skins.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/font.css">
+	<!-- SmartAdmin RTL Support  -->
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-rtl.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/all.css">
+	<script type="text/javascript"
+			src="//mapopen.cdn.bcebos.com/github/BMapGLLib/DrawingManager/src/DrawingManager.min.js"></script>
+	<title>鼠标绘制工具(GL)</title>
+	<link href="../style/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		body, html, #container {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			margin: 0;
+			font-family: "微软雅黑";
+		}
+
+		ul li {
+			list-style: none;
+		}
+
+		.info {
+			z-index: 999;
+			width: auto;
+			min-width: 22rem;
+			padding: .75rem 1.25rem;
+			margin-left: 1.25rem;
+			position: fixed;
+			top: 1rem;
+			background-color: #fff;
+			border-radius: .25rem;
+			font-size: 14px;
+			color: #666;
+			box-shadow: 0 2px 6px 0 rgba(27, 142, 236, 0.5);
+		}
+
+		.drawing-panel {
+			z-index: 999;
+			position: fixed;
+			margin-left: 1rem;
+			padding-left: 0;
+			margin-top: 1rem;
+			border-radius: .25rem;
+			height: 47px;
+			box-shadow: 0 2px 6px 0 rgba(27, 142, 236, 0.5);
+		}
+
+		.bmap-btn {
+			border-right: 1px solid #d2d2d2;
+			float: left;
+			width: 64px;
+			height: 100%;
+			background-image: url(//api.map.baidu.com/library/DrawingManager/1.4/src/bg_drawing_tool.png);
+			cursor: pointer;
+		}
+
+		.drawing-panel .bmap-marker {
+			background-position: -65px 0;
+		}
+
+		.drawing-panel .bmap-polyline {
+			background-position: -195px 0;
+		}
+
+		.drawing-panel .bmap-rectangle {
+			background-position: -325px 0;
+		}
+
+		.drawing-panel .bmap-polygon {
+			background-position: -260px 0;
+		}
+
+		.drawing-panel .bmap-circle {
+			background-position: -130px 0;
+		}
+	</style>
+
+</head>
+<body>
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="row-fluid">
+				<div class="span12">
+					<!--<div class = "info">该示例实现基于JSAPI GL版的开源工具库，详情可查看https://github.com/huiyan-fe/BMapGLLib</div>-->
+					<ul class="drawing-panel">
+						<li class="bmap-btn bmap-polyline" id="polyline" onclick="draw(this)" title="单击开始绘制轨迹"></li>
+						<li class="bmap-btn bmap-rectangle" id="rectangle" onclick="clearAll()" title="清除所有轨迹"></li>
+					</ul>
+					<div id="container" style="height: 60vh;"></div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="zhuti-content">
+						<div class="LowerPart">
+							<table class="col-sm-12 layui-table" lay-skin="line" id="mainContent">
+								<thead>
+								<tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
+									<th>规则名称</th>
+									<th>规则类型</th>
+									<th>偏离距离</th>
+									<th>对应车牌</th>
+									<th style="width:75px;">操作</th>
+								</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
+	 aria-labelledby="myLargeModalLabel"
+	 id="myModal">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel"><b>录入规划路线信息</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height:auto;">
+							<tr>
+								<td style="width: 20%;">规则名称</td>
+								<td style="width: 30%;"><input type="text" id="guizeName" class="form-control"
+															   placeholder="请输入" style="width: 80%;"></td>
+								<td style="width: 20%;">规则类型</td>
+								<td style="width: 30%;">路线偏离</td>
+							</tr>
+							<tr>
+								<td style="width: 20%;">车牌号</td>
+								<td style="width: 30%;" colspan="3">
+									<select id="plate" name="plate" class="selectpicker show-tick form-control" multiple
+											data-live-search="false">
+										<option></option>
+										<option></option>
+										<option></option>
+										<option></option>
+									</select>
+								</td>
+
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-default" id="baocun" onclick="saveGuize()">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- model结束 -->
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
+	 aria-labelledby="myLargeModalLabel"
+	 id="change">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"><b>录入规划路线信息</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height:auto;">
+							<tr>
+								<td style="width: 20%;">规则名称</td>
+								<td style="width: 30%;"><input type="text" id="xg_guizeName" class="form-control"
+															   placeholder="请输入" style="width: 80%;"></td>
+								<td style="width: 20%;">规则类型</td>
+								<td style="width: 30%;">路线偏离</td>
+							</tr>
+							<tr>
+								<td style="width: 20%;">车牌号</td>
+								<td style="width: 30%;" colspan="3">
+									<select id="xg_plate" name="plate" class="selectpicker show-tick form-control"
+											multiple
+											data-live-search="false">
+									</select>
+								</td>
+
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-default" onclick="xg_saveGuize()">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- model结束 -->
+</body>
+<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/common-scripts.js"></script>
+<script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/jquery-editable-select.js"></script>
+<script src="../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/laydate/laydate.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/element.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../toastr/toastr.js"></script>
+<script src="../js/SmartNotification.min.js"></script>
+<script src="../js/myTool.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+</html>
+<script type="text/javascript">
+
+	$(function () {
+		initPlate();
+		initTable();
+	})
+
+
+	let map = new BMapGL.Map("container", {enableMapClick: false}); // 创建Map实例,GL版命名空间为BMapGL(鼠标右键控制倾斜角度)
+	map.centerAndZoom(new BMapGL.Point(116.404, 39.915), 14);  // 初始化地图,设置中心点坐标和地图级别
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+
+	let styleOptions = {
+		strokeColor: '#343861',   // 边线颜色
+		fillColor: '#343861',     // 填充颜色。当参数为空时，圆形没有填充颜色
+		strokeWeight: 4,          // 边线宽度，以像素为单位
+		strokeOpacity: 1,         // 边线透明度，取值范围0-1
+		fillOpacity: 0.2          // 填充透明度，取值范围0-1
+	};
+	let labelOptions = {
+		borderRadius: '2px',
+		background: '#FFFBCC',
+		border: '1px solid #E1E1E1',
+		color: '#703A04',
+		fontSize: '12px',
+		letterSpacing: '0',
+		padding: '5px'
+	};
+
+	// 实例化鼠标绘制工具
+	let drawingManager = new BMapGLLib.DrawingManager(map, {
+		//isOpen: true,        // 是否开启绘制模式
+		enableCalculate: false, // 绘制是否进行测距测面
+		enableSorption: true,   // 是否开启边界吸附功能
+		sorptiondistance: 20,   // 边界吸附距离
+		polylineOptions: styleOptions,   // 线的样式
+	});
+
+	let initFlag = true;
+	let page_dom;
+
+	function initMapLine(e) {
+		// 创建polyline对象
+		let pois = [];
+		for (let i in e) {
+			let point = new BMapGL.Point(e[i].lng, e[i].lat);
+			pois.push(point);
+		}
+		let polyline = new BMapGL.Polyline(pois, {
+			enableEditing: false,//是否启用线编辑，默认为false
+			enableClicking: true,//是否响应点击事件，默认为true
+			strokeWeight: '3',//折线的宽度，以像素为单位
+			strokeOpacity: 1,//折线的透明度，取值范围0 - 1
+			strokeColor: "#343861" //折线颜色
+		});
+		if (e != null && e.length > 0) {
+			map.centerAndZoom(new BMapGL.Point(e[0].lng, e[0].lat), 14);
+		}
+		map.addOverlay(polyline);          //增加折线
+		overlays.push(polyline)
+	}
+
+	function draw(e) {
+
+		let arr = document.getElementsByClassName('bmap-btn');
+		if (initFlag) {
+			drawingManager.open();
+			let drawingType = BMAP_DRAWING_POLYLINE;
+			drawingManager.setDrawingMode(drawingType);
+			e.style.backgroundPositionY = '-52px';
+			initFlag = !initFlag;
+		} else {
+			drawingManager.close();
+			e.style.backgroundPositionY = '0px';
+			initFlag = !initFlag;
+		}
+		page_dom = e;
+		if (overlays.length > 0) {
+			clearStart()
+		}
+	};
+
+	//鼠标绘制完成回调方法   获取各个点的经纬度
+	let overlays = [];
+	let page_pointList = [];
+	let overlaycomplete = function (e) {
+
+		let pointList = [];
+		overlays.push(e.overlay);
+		let path = e.overlay.getPath();//Array<Point> 返回多边型的点数组
+		for (let i = 0; i < path.length; i++) {
+			let point = {};
+			console.log("lng:" + path[i].lng + "\n lat:" + path[i].lat);
+			point.lng = path[i].lng;
+			point.lat = path[i].lat;
+			pointList.push(point);
+		}
+		page_pointList = pointList;
+		draw(page_dom);
+		$("#myModal").modal("show");
+	};
+	//添加鼠标绘制工具监听事件，用于获取绘制结果
+	drawingManager.addEventListener('overlaycomplete', overlaycomplete);
+
+	function clearAll() {
+
+		if (overlays.length > 0) {
+			for (let i = 0; i < overlays.length; i++) {
+				map.removeOverlay(overlays[i]);
+			}
+			overlays.length = 0
+			drawingManager.close();
+			page_dom.style.backgroundPositionY = '0px';
+			initFlag = true;
+		}
+	}
+
+	function clearStart() {
+		if (overlays.length > 0) {
+			for (let i = 0; i < overlays.length; i++) {
+				map.removeOverlay(overlays[i]);
+			}
+		}
+	}
+
+
+	let table = $('#mainContent').DataTable({
+		"deferRender": true,
+		"processing": true,
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"searching": false,
+		"lengthChange": false,
+		"oLanguage": {
+			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+		},
+		"columns": [
+			{"data": "guizeName"},
+			{"data": "guizeType"},
+			{"data": "pianliJuli"},
+			{"data": null},
+			{"data": null},
+		],
+		"columnDefs": [
+			{
+				"class": "tcenter",
+				"targets": 4,
+				"searchable": true,
+				"render": function (data, type, full) {
+					let dingwei = '<i class="iconfont icon-genzong" style="font-size:18px;cursor:pointer;" id="dingwei" title="定位" onclick="dingwei(this)"></i>';
+					let xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" id="upd" onclick="xiugai(this)" title="修改车牌" data-toggle="modal" data-target="#change"></i>';
+					return dingwei + xiugai;
+				}
+			},
+			{
+				"class": "tcenter",
+				"targets": 3,
+				"searchable": true,
+				"render": function (data, type, full) {
+					let plates = full.plates;
+					let arry = [];
+					for (let i in plates) {
+						arry.push(plates[i].plate);
+					}
+					return arry.toString();
+				}
+			},
+		],
+		"fnDrawCallback": function () {
+		},
+		"order": [[2, 'desc']],
+		"oLanguage": { //国际化配置
+			"sProcessing": "正在获取数据，请稍后...",
+			"sLengthMenu": "显示 _MENU_ 条",
+			"sZeroRecords": "查询不到相关数据",
+			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+			"sInfoEmpty": "记录数为0",
+			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+			"sInfoPostFix": "",
+			"sSearch": "搜索",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "第一页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "最后一页"
+			}
+		},
+		"buttons": [
+			{
+				extend: "csv",
+				text: "导出Excel",
+				bom: true,
+				filename: '值班管理',
+				fieldSeparator: ',',
+				exportOptions: {
+					format: {
+						header: function (data) {
+							return data;
+						},
+						body: function (data, columnIdx, rowIdx, code) {
+							return data;
+						}
+					},
+					columns: [0, 1, 2, 3, 4, 5]
+				}
+			}
+		]
+	});
+
+	function dingwei(e) {
+		let tr = $(e).parents("tr");
+		let data = $("#mainContent").DataTable().row(tr).data();
+		let points = data.points;
+		clearStart();
+		initMapLine(points);
+	}
+
+	let page_xg_data;
+
+	function xiugai(e) {
+		let tr = $(e).parents("tr");
+		let data = $("#mainContent").DataTable().row(tr).data();
+		page_xg_data = data;
+		let points = data.points;
+		let plates = data.plates;
+		let plateArr = [];
+		for (let i in plates) {
+			let item = {};
+			item.carId = plates[i].carId;
+			item.plate = plates[i].plate;
+			plateArr.push(JSON.stringify(item));
+		}
+		let guize = data;
+		$("#xg_guizeName").val(guize.guizeName);
+		$("#xg_plate").val(plateArr);
+		$("#xg_plate").selectpicker("refresh");
+		initMapLine(points);
+	}
+
+	function initTable() {
+		$.ajax({
+			type: 'POST',
+			url: '/Guize/getAllGuize',
+			dataType: 'json',
+			data: {},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				$('#mainContent').dataTable().fnClearTable();
+				$('#mainContent').DataTable().rows.add(json).draw(false);
+			}
+		});
+	}
+
+
+	function initPlate() {
+		$.ajax({
+			type: 'POST',
+			url: 'http://58.222.201.158:6809/deviceData/vehicleBaseInfo.do',
+			dataType: 'json',
+			data: {
+				key: 'f30da8ee-61da-4c1a-bd73-54fee1d19d69'
+			},
+			error: function (msg) {
+				errMessage("请求UserController失败");
+			},
+			success: function (json) {
+				$('#plate').empty();
+				$('#xg_plate').empty();
+				let obj = json.obj;
+				for (let i in obj) {
+					let dom = {};
+					dom.carId = obj[i].id;
+					dom.plate = obj[i].plate;
+					let option = `<option value=${JSON.stringify(dom)}>${obj[i].plate}</option>`;
+					$('#plate').append(option);
+					$('#xg_plate').append(option);
+				}
+				$('#plate').selectpicker({});
+				$('#xg_plate').selectpicker({});
+			}
+		});
+	}
+
+	function saveGuize() {
+		let plates = $('#plate').val();
+		if (plates == null || plates == "") {
+			toastr.error("请至少选择一辆车!");
+			return;
+		}
+		let guizeName = $("#guizeName").val();
+		if (null == guizeName || "" == guizeName) {
+			toastr.error("请填写名称!");
+			return;
+		}
+		let array = [];
+		for (let i in plates) {
+			array.push(JSON.parse(plates[i]));
+		}
+		let guizeVo = {};
+		guizeVo.plates = array;
+		guizeVo.guizeName = guizeName;
+		guizeVo.points = page_pointList;
+		$.ajax({
+			type: "post",
+			url: "/Guize/addGuizeAndCars",
+			async: false,
+			contentType: 'application/json;',
+			dataType: "json",
+			data: JSON.stringify(guizeVo),
+			success: function (json) {
+				if (json > 0) {
+					$("#myModal").modal("hide");
+					initTable();
+					toastr.success("添加成功")
+					clearAll();
+
+				} else {
+					toastr.success("添加失败")
+				}
+
+			}
+		});
+	}
+
+
+	function xg_saveGuize() {
+		let plates = $('#xg_plate').val();
+		if (plates == null || plates == "") {
+			toastr.error("请至少选择一辆车!");
+			return;
+		}
+		let guizeName = $("#xg_guizeName").val();
+		if (null == guizeName || "" == guizeName) {
+			toastr.error("请填写名称!");
+			return;
+		}
+		let array = [];
+		for (let i in plates) {
+			array.push(JSON.parse(plates[i]));
+		}
+		let guizeVo = {};
+		guizeVo.plates = array;
+		guizeVo.id = page_xg_data.id;
+		guizeVo.guizeName = guizeName;
+		guizeVo.points = page_xg_data.points;
+		$.ajax({
+			type: "post",
+			url: "/Guize/updateGuizeAndCars",
+			async: false,
+			contentType: 'application/json;',
+			dataType: "json",
+			data: JSON.stringify(guizeVo),
+			success: function (json) {
+				if (json > 0) {
+					$("#change").modal("hide");
+					initTable();
+					toastr.success("添加成功")
+					clearAll();
+
+				} else {
+					toastr.success("添加失败")
+				}
+
+			}
+		});
+	}
+</script>
