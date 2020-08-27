@@ -23,40 +23,42 @@
 			cursor:pointer;
 			text-decoration:none
 		}
-
+.bootstrap-select.btn-group:not(.input-group-btn), .bootstrap-select.btn-group[class*=col-]{
+			margin-top:-90px !important;
+			margin-left: 15px;
+	        width:140%;
+		}
 
 	</style>
 </head>
 <body>
 
 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-	<ul class="layui-tab-title">
-		<li class="layui-this">单个车辆里程数据</li>
-	</ul>
 	<div class="layui-tab-content" style="height: 100px;">
 
 		<!--分页2-->
 		<div class="layui-tab-item layui-show">
 			<div class="layui-input-block"style="display: inline-block;">
-				<label for="" style="line-height: 50px;margin-left: -90px;width: 100px;">车辆筛选：</label>
+				<label for="" style="line-height: 50px;margin-left: -90px;width: 100px;position: relative;margin-top: -10px;">车辆筛选：</label>
 				<select style="margin-top: 15px;height: 30px;border: 1px solid #dedede;padding: 5px;border-radius: 5px;width: 80%;"
 						class="form-control selectpicker" multiple data-max-options="1" data-actions-box="false" data-live-search="true"  id="suggestId" >
 				</select>
 			</div>
 			<!---->
-			<label for="" style="margin-left: 15%;">时间筛选：</label>
-			<button type="button" class="layui-btn layui-btn-normal" style="background-color: #94C5FF;" onclick="getDay(0)">今天</button>
+			<div style="margin-top:-5%">
+			<label for="" style="margin-left: 35%;">时间筛选：</label>
 			<button type="button" class="layui-btn layui-btn-primary" onclick="getDay(-1)">昨天</button>
 			<button type="button" class="layui-btn layui-btn-primary" onclick="getDay(-3)">近3天</button>
 			<button type="button" class="layui-btn layui-btn-primary" onclick="getDay(-7)">近7天</button>
 			<br  />
+			</div>
 			<label for="" style="margin-left: 20px;margin-top:10px;width: 100px;">开始时间：</label>
 			<div class="layui-inline" style="margin-top: 10px;">
 				<div class="layui-input-inline">
 					<input type="text" class="layui-input" id="starTime"  style="width: 200px;border-radius: 5px;height: 30px;">
 				</div>
 			</div>
-			<label for="" style="margin-left: 15%;margin-top:10px;">结束时间：</label>
+			<label for="" style="margin-left: 14%;margin-top:10px;">结束时间：</label>
 			<div class="layui-inline" style="margin-top: 10px;">
 				<div class="layui-input-inline">
 					<input type="text" class="layui-input" id="endTime"   style="width: 240px;border-radius: 5px;height: 30px;">
@@ -65,7 +67,11 @@
 				<button type="button" class="layui-btn layui-btn-normal"style="background-color: #215BA3;width: 70px;" onclick="search()">搜索</button>
 			</div>
 			<table class="layui-table" lay-skin="line"style="margin-top: 30px;" id="mainContent">
-
+						<colgroup>
+					    <col width="80">
+					    <col width="120">
+					    <col>
+					  </colgroup>
 				<thead>
 				<tr style="background-color: transparent;color: #5C82B2;font-weight: bolder">
 					<th>序号</th>
