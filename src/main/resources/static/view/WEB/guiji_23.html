@@ -167,6 +167,7 @@
         page_map.addControl(myZoomCtrl);
     }
 
+    //初始化选择栏菜单车牌信息
     function initChePai() {
         var key = "f30da8ee-61da-4c1a-bd73-54fee1d19d69";
         $.ajax({
@@ -192,7 +193,8 @@
             }
         });
     }
-
+	
+    //查询所有车辆当前信息
     function showAllTrucks() {
         $.ajax({
             type: 'POST',
@@ -212,6 +214,7 @@
         });
     }
 
+    //添加地图上的车辆图片
     function addMarker(truckData) {
         let myIcon;
         let myIconStr;
@@ -263,6 +266,7 @@
         });
     }
 
+    //菜单栏选择了一辆车
     function selectOnchange() {
         let chepaipID = $('#suggestId').val()[0];
         let datenow = new Date();
