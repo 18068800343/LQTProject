@@ -245,7 +245,7 @@
 	function getlicheng(chepaipID,starthaomiao,endTimehaomiao){
 		$.ajax({
 			// get请求地址
-			url: "http://58.222.201.158:6809/mileage/mileageData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&startTime="+starthaomiao+"&endTime="+endTimehaomiao+"&id="+chepaipID,
+			url: "http://58.222.201.158:6809/mileage/mileageData.do?key="+key+"&startTime="+starthaomiao+"&endTime="+endTimehaomiao+"&id="+chepaipID,
 			dataType: "json",
 			success: function (data) {
 				if(data.flag==1){
@@ -339,13 +339,7 @@
 
 
 
-	 function doHandleMonth(month){
-		 　　var m = month;
-		 　　if(month.toString().length == 1){
-			 　　　　m = "0" + month;
-			 　　}
-		 　　return m;
-		 }
+
 
 	/*var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
 			{"input" : "suggestId"

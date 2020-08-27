@@ -193,24 +193,7 @@
 
 	});
 
-	//行点击事件
-	/*$('#mainContent tbody').on('click','tr', function (e) {
-		var data = table.row( this ).data();
-		var point = new BMap.Point(data.lonEnd, data.latEnd);
-		map.centerAndZoom(point, 15);
 
-		var marker = new BMap.Marker(point);  // 创建标注
-		map.addOverlay(marker);              // 将标注添加到地图中
-		var opts = {
-			width : 200,     // 信息窗口宽度
-			height: 120,     // 信息窗口高度
-			title : "指定车辆里程数据" , // 信息窗口标题
-			message:"这里是故宫"
-		}
-		var infoWindow = new BMap.InfoWindow(
-				"<div class='amap-info-content amap-info-outer'>车牌："+data.plate+"<br>开始时间："+data.beginTime+"<br>结束时间："+data.endTime+"<br>速度："+data.speed+"Km/h<br>里程："+data.thisMileage+"km/h<br><a class='amap-info-close' href='javascript: void(0)' style='right: 5px;'>×</a></div>", opts);  // 创建信息窗口对象
-			map.openInfoWindow(infoWindow, point); //开启信息窗口
-	} );*/
 
 
 	function initChePai(){
@@ -270,137 +253,9 @@
 		});
 	}
 
-	function setDiTu(data){
-
-		//起点-途经点-终点
-		if(data!=null&&data.length!=0){
-			console.log(data)
-			/**/
-			for(var i=0;i<data.length;i++){
-				var start = new BMap.Point(data[i].lonBegin,data[i].latBegin);
-				var end = new BMap.Point(data[i].lonEnd,data[i].latEnd);
-				var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}
-					});
-				driving.search(start, end);
-			}
-
-		}
-
-	}
-
-
-
-	/*let map = new BMap.Map("container"); // 创建Map实例,GL版命名空间为BMapGL(鼠标右键控制倾斜角度)
-	map.centerAndZoom(new BMap.Point(116.404, 39.915), 14);      // 初始化地图,设置中心点坐标和地图级别
-	map.enableScrollWheelZoom(true);
-
-
-	// 百度地图API功能
-	function G(id) {
-		return document.getElementById(id);
-	}
-
-
-	// 定义一个控件类,即function
-	function ZoomControl() {
-		this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
-		this.defaultOffset = new BMap.Size(10, 10);
-	}
-
-	// 通过JavaScript的prototype属性继承于BMap.Control
-	ZoomControl.prototype = new BMap.Control();
-
-	// 自定义控件必须实现自己的initialize方法,并且将控件的DOM元素返回
-	// 在本方法中创建个p元素作为控件的容器,并将其添加到地图容器中
-	ZoomControl.prototype.initialize = function(map){
-		// 创建一个DOM元素
-		var p = document.createElement("p");
-		p.innerHTML = '<div style="width: 250px;background-color: white;box-shadow:grey 0px 0px 5px">' +
-				'<p id="r-result">车辆筛选:<!--<input type="text" id="suggestId" size="20" value="百度" placeholder="支持搜索" style="width:150px;" />-->' +
-				'<select class="form-control selectpicker" multiple data-max-options="1" data-actions-box="false"' +
-				'data-live-search="true"  id="suggestId"   style="width:80%;"></select></p>' +
-				'<div class="ivu-col ivu-col-span-8">选择时间：</div>' +
-				' <div class="ivu-col ivu-col-span-16"><!--<a onclick="getDay(0)">今天</a>--> <a onclick="getDay(-1)">昨天</a> <a onclick="getDay(-3)">近三天</a> <a onclick="getDay(-7)">近七天</a></div>'+
-				'<div class="ivu-col ivu-col-span-7">开始时间：</div>' +
-				' <div class="ivu-col ivu-col-span-17">' +
-				'<input type="text" autocomplete="off" id="starTime" placeholder="选择日期时间" ></div>' +
-				'<div class="ivu-col ivu-col-span-7">结束时间：</div>' +
-				' <div class="ivu-col ivu-col-span-17">' +
-				'<input type="text" autocomplete="off" id="endTime" placeholder="选择日期时间" ></div>' +
-				'<button type="button" onclick="search()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small"> <span>查找</span></button></div>';
-
-
-
-		initChePai()
-		// 添加DOM元素到地图中
-		map.getContainer().appendChild(p);
-		// 将DOM元素返回
-		return p;
-
-
-	}
-
-	// 创建控件
-	var myZoomCtrl = new ZoomControl();
-	// 添加到地图当中
-	map.addControl(myZoomCtrl);
 
 
 
 
-	 function doHandleMonth(month){
-		 　　var m = month;
-		 　　if(month.toString().length == 1){
-			 　　　　m = "0" + month;
-			 　　}
-		 　　return m;
-		 }*/
 
-	/*var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
-			{"input" : "suggestId"
-				,"location" : map
-			});
-
-	ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
-		var str = "";
-		var _value = e.fromitem.value;
-		var value = "";
-		if (e.fromitem.index > -1) {
-			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-		}
-		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
-
-		value = "";
-		if (e.toitem.index > -1) {
-			_value = e.toitem.value;
-			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-		}
-		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
-		G("searchResultPanel").innerHTML = str;
-
-
-	});
-
-	var myValue;
-	ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
-		var _value = e.item.value;
-		myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-		G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
-
-		setPlace();
-	});
-
-	function setPlace(){
-		map.clearOverlays();    //清除地图上所有覆盖物
-		function myFun(){
-			var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
-			map.centerAndZoom(pp, 14);
-			console.log('pp',pp)
-			map.addOverlay(new BMap.Marker(pp));    //添加标注
-		}
-		var local = new BMap.LocalSearch(map, { //智能搜索
-			onSearchComplete: myFun
-		});
-		local.search(myValue);
-	}*/
 </script>
