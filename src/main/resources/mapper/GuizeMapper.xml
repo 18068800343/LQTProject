@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.GuizeDao">
+
+    <resultMap id="baseResultMap" type="com.ldxx.vo.GuizeVo">
+
+        <id column="id" property="id"/>
+        <result column="guize_name" property="guizeName"/>
+        <collection property="plates"
+                    ofType="com.ldxx.bean.GuizeCar"
+                    column="{guizeId = id}"
+                    select="selectGuizeCarsCollection"
+                    javaType="java.util.ArrayList"/>
+        <collection property="points"
+                    ofType="com.ldxx.bean.GuizeLnglat"
+                    column="{guizeId = id}"
+                    select="selectGuizeLngLatsCollection"
+                    javaType="java.util.ArrayList"/>
+    </resultMap>
+    <select id="getAllGuizeVo" resultMap="baseResultMap">
+		select * from guize
+	</select>
+
+    <select id="selectGuizeCarsCollection" resultType="GuizeCar">
+		select * from guize_car where guize_id=#{guizeId}
+	</select>
+    <select id="selectGuizeLngLatsCollection" resultType="GuizeLnglat">
+		select * from guize_lnglat where guize_id=#{guizeId}
+	</select>
+
+    <select id="getGuizeVoById" resultType="GuizeVo">
+		select id,truck_ic,truck_type,weight,driver,GPS_id,delete_state from truck_info where id=#{id}
+	</select>
+
+    <update id="updGuizeVo" parameterType="GuizeVo">
+		update truck_info set 
+			truck_ic=#{t.truckIc},
+			truck_type=#{t.truckType},
+			weight=#{t.weight},
+			driver=#{t.driver},
+			GPS_id=#{t.GPSId}
+		where id=#{t.id}
+	</update>
+
+    <update id="delGuizeVo">
+		update  truck_info set delete_state=0 where id=#{id}
+	</update>
+
+    <insert id="insertGuize" parameterType="GuizeVo">
+		insert into guize(id,guize_name,guize_type,pianli_juli)
+		values
+		(
+		#{guizeId},
+		#{guizeName},
+		'偏离轨道',
+		50
+		)
+	</insert>
+
+    <insert id="insertGuizeLnglat" parameterType="GuizeVo">
+        insert into guize_lnglat(guize_id,lng,lat)
+        values
+        <foreach collection="points" item="item" index="index" separator=",">
+            (
+            #{guizeId},
+            #{item.lng},
+            #{item.lat}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertGuizeCar" parameterType="GuizeVo" useGeneratedKeys="false">
+        insert into guize_car(car_id,guize_id,plate)
+        values
+        <foreach collection="plates" item="item" index="index" separator=",">
+            (
+            #{item.carId},
+            #{guizeId},
+            #{item.plate}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

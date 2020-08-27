@@ -6,6 +6,5 @@ import lombok.Data;
 public class GuizeCar {
     String carId;
     String guizeId;
-    String carName;
-    String carPlate;
+    String plate;
 }

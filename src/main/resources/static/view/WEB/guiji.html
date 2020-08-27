@@ -122,12 +122,10 @@
 							<table class="col-sm-12 layui-table" lay-skin="line" id="mainContent">
 								<thead>
 								<tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
-									<th>工号</th>
-									<th>姓名</th>
-									<th>开始时间</th>
-									<th>结束时间</th>
-									<th>录入人</th>
-									<th>值班事由</th>
+									<th>规则名称</th>
+									<th>规则类型</th>
+									<th>偏离距离</th>
+									<th>对应车牌</th>
 									<th style="width:75px;">操作</th>
 								</tr>
 								</thead>
@@ -144,7 +142,8 @@
 
 
 <!-- Modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<div class="modal fade bs-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
+	 aria-labelledby="myLargeModalLabel"
 	 id="myModal">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -189,6 +188,51 @@
 	</div>
 </div>
 <!-- model结束 -->
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
+	 aria-labelledby="myLargeModalLabel"
+	 id="change">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"><b>录入规划路线信息</b></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-inline">
+						<table class="table table-bordered table-condensed" style="height:auto;">
+							<tr>
+								<td style="width: 20%;">规则名称</td>
+								<td style="width: 30%;"><input type="text" id="xg_guizeName" class="form-control"
+															   placeholder="请输入" style="width: 80%;"></td>
+								<td style="width: 20%;">规则类型</td>
+								<td style="width: 30%;">路线偏离</td>
+							</tr>
+							<tr>
+								<td style="width: 20%;">车牌号</td>
+								<td style="width: 30%;" colspan="3">
+									<select id="xg_plate" name="plate" class="selectpicker show-tick form-control"
+											multiple
+											data-live-search="false">
+									</select>
+								</td>
+
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-default" onclick="xg_saveGuize()">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- model结束 -->
 </body>
 <script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -219,22 +263,7 @@
 	let map = new BMapGL.Map("container", {enableMapClick: false}); // 创建Map实例,GL版命名空间为BMapGL(鼠标右键控制倾斜角度)
 	map.centerAndZoom(new BMapGL.Point(116.404, 39.915), 14);  // 初始化地图,设置中心点坐标和地图级别
 	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-	// 创建polyline对象
-	let pois = [
-		new BMapGL.Point(116.350658, 39.938285),
-		new BMapGL.Point(116.386446, 39.939281),
-		new BMapGL.Point(116.389034, 39.913828),
-		new BMapGL.Point(116.442501, 39.914603)
-	];
-	let polyline = new BMapGL.Polyline(pois, {
-		enableEditing: false,//是否启用线编辑，默认为false
-		enableClicking: true,//是否响应点击事件，默认为true
-		strokeWeight: '3',//折线的宽度，以像素为单位
-		strokeOpacity: 1,//折线的透明度，取值范围0 - 1
-		strokeColor: "#343861" //折线颜色
-	});
 
-	map.addOverlay(polyline);          //增加折线
 
 	let styleOptions = {
 		strokeColor: '#343861',   // 边线颜色
@@ -264,6 +293,24 @@
 
 	let initFlag = true;
 	let page_dom;
+
+	function initMapLine(e) {
+		// 创建polyline对象
+		let pois = [];
+		for (let i in e) {
+			let point = new BMapGL.Point(e[i].lng, e[i].lat);
+			pois.push(point);
+		}
+		let polyline = new BMapGL.Polyline(pois, {
+			enableEditing: false,//是否启用线编辑，默认为false
+			enableClicking: true,//是否响应点击事件，默认为true
+			strokeWeight: '3',//折线的宽度，以像素为单位
+			strokeOpacity: 1,//折线的透明度，取值范围0 - 1
+			strokeColor: "#343861" //折线颜色
+		});
+		map.addOverlay(polyline);          //增加折线
+		overlays.push(polyline)
+	}
 
 	function draw(e) {
 		let arr = document.getElementsByClassName('bmap-btn');
@@ -303,13 +350,16 @@
 	drawingManager.addEventListener('overlaycomplete', overlaycomplete);
 
 	function clearAll() {
-		for (let i = 0; i < overlays.length; i++) {
-			map.removeOverlay(overlays[i]);
+
+		if () {
+			for (let i = 0; i < overlays.length; i++) {
+				map.removeOverlay(overlays[i]);
+			}
+			overlays.length = 0
+			drawingManager.close();
+			page_dom.style.backgroundPositionY = '0px';
+			initFlag = true;
 		}
-		overlays.length = 0
-		drawingManager.close();
-		page_dom.style.backgroundPositionY = '0px';
-		initFlag = true;
 	}
 
 
@@ -324,25 +374,38 @@
 			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
 		},
 		"columns": [
-			{"data": "workId"},
-			{"data": "uName"},
-			{"data": "datetimeStart"},
-			{"data": "datetimeEnd"},
-			{"data": "userName"},
-			{"data": "remarks"},
+			{"data": "guizeName"},
+			{"data": "guizeType"},
+			{"data": "pianliJuli"},
+			{"data": null},
 			{"data": null},
 		],
-		"columnDefs": [{
-			"class": "tcenter",
-			"targets": 6,
-			"searchable": true,
-			"render": function (data, type, full) {
-				var xiugai = '<i class="iconfont icon-xiugai Pbbb" style="font-size:18px;cursor:pointer;" id="upd" title="定位" data-toggle="modal" data-target="#change"></i>';
-				// var shanchu='<i class="iconfont icon-shanchu Pbbc" style="font-size:18px;cursor:pointer;" id="del"  title="删除"></i>';
-				return xiugai;
-			}
-		}
-		], "fnDrawCallback": function () {
+		"columnDefs": [
+			{
+				"class": "tcenter",
+				"targets": 4,
+				"searchable": true,
+				"render": function (data, type, full) {
+					let dingwei = '<i class="iconfont icon-genzong" style="font-size:18px;cursor:pointer;" id="dingwei" title="定位" onclick="dingwei(this)"></i>';
+					let xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" id="upd" title="修改车牌" data-toggle="modal" data-target="#change"></i>';
+					return dingwei + xiugai;
+				}
+			},
+			{
+				"class": "tcenter",
+				"targets": 3,
+				"searchable": true,
+				"render": function (data, type, full) {
+					let plates = full.plates;
+					let arry = [];
+					for (let i in plates) {
+						arry.push(plates[i].plate);
+					}
+					return arry.toString();
+				}
+			},
+		],
+		"fnDrawCallback": function () {
 		},
 		"order": [[2, 'desc']],
 		"oLanguage": { //国际化配置
@@ -384,10 +447,17 @@
 		]
 	});
 
+	function dingwei(e) {
+		let tr = $(e).parents("tr");
+		let data = $("#mainContent").DataTable().row(tr).data();
+		let points = data.points;
+		initMapLine(points);
+	}
+
 	function initTable() {
 		$.ajax({
 			type: 'POST',
-			url: '/UDutySchedule/getAllUDutySchedule',
+			url: '/Guize/getAllGuize',
 			dataType: 'json',
 			data: {},
 			error: function (msg) {
@@ -414,12 +484,18 @@
 			},
 			success: function (json) {
 				$('#plate').empty();
+				$('#xg_plate').empty();
 				let obj = json.obj;
 				for (let i in obj) {
-					let option = `<option value=${JSON.stringify(obj[i])}>${obj[i].plate}</option>`;
+					let dom = {};
+					dom.carId = obj[i].id;
+					dom.plate = obj[i].plate;
+					let option = `<option value=${JSON.stringify(dom)}>${obj[i].plate}</option>`;
 					$('#plate').append(option);
+					$('#xg_plate').append(option);
 				}
 				$('#plate').selectpicker({});
+				$('#xg_plate').selectpicker({});
 			}
 		});
 	}
@@ -430,28 +506,35 @@
 			toastr.error("请至少选择一辆车!");
 			return;
 		}
-		let platesArray = plates.split(",");
 		let guizeName = $("#guizeName").val();
 		if (null == guizeName || "" == guizeName) {
 			toastr.error("请填写名称!");
 			return;
 		}
+		let array = [];
+		for (let i in plates) {
+			array.push(JSON.parse(plates[i]));
+		}
+		let guizeVo = {};
+		guizeVo.plates = array;
+		guizeVo.guizeName = guizeName;
+		guizeVo.points = page_pointList;
 		$.ajax({
 			type: "post",
-			url: "/login/getUser",
+			url: "/Guize/addGuizeAndCars",
 			async: false,
-			data: {
-				plates: platesArray,
-				guizeName:,
-			},
+			contentType: 'application/json;',
+			dataType: "json",
+			data: JSON.stringify(guizeVo),
 			success: function (json) {
-				var name = json.department;
-				if (name == "拌合站") {
-					$("#cbjdtj").show();
+				if (json > 0) {
+					$("#myModal").modal("hide");
+					toastr.success("添加成功")
+					clearAll();
 				} else {
-					$("#cbjdtj").hide();
+					toastr.success("添加失败")
 				}
-				clearAll();
+
 			}
 		});
 	}
