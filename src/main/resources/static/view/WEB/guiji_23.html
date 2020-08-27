@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OA</title>
+    <link rel="stylesheet" href="../font2/iconfont.css">
+    <link href="../style/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../easyUI/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../easyUI/themes/icon.css" />
+    <link rel="stylesheet" type="text/css" href="../easyUI/demo/demo.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/laydate.css" />
+    <style>
+        #titles {
+            width: 100%;
+            height: 60px;
+            text-indent: 16px;
+            padding-top: 6px;
+            background: #eee;
+        }
+        
+        .divBo {
+            border: 2px solid #a1a1a1;
+            padding: 10px 40px;
+            background: #dddddd;
+            width: auto;
+            border-radius: 5px;
+        }
+        
+        #srcontent {
+            width: 100%;
+        }
+        
+        #BTon {
+            text-align: right;
+            margin-top: 18px;
+            margin-right: 36px;
+        }
+        
+        .lianjieColor {
+            color: #3d7dd5;
+        }
+        
+        @media screen and (max-height: 1080px) {
+            .home-content {
+                margin-bottom: 50px !important;
+            }
+        }
+        /* 1080px */
+        
+        @media screen and (max-height: 1050px) {
+            .home-content {
+                margin-bottom: 170px !important;
+            }
+        }
+        /* 1050px */
+        
+        @media screen and (max-height: 900px) {
+            .home-content {
+                margin-bottom: 120px !important;
+            }
+        }
+        /* 900px */
+        
+        @media screen and (max-height: 768px) {
+            .home-content {
+                margin-bottom: 120px !important;
+            }
+        }
+        /* @media screen and (max-width: 1920px) {
+            .dada{
+                margin-bottom:170px !important;
+            }
+        }
+        @media screen and (max-width: 1920px) {
+            .dadayb{
+                margin-bottom:170px !important;
+            }
+        } */
+        
+        @page {
+            size: auto;
+            margin: 0mm;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="left" style="width:1000px;" id="hsMap">
+        <div style="width: 100%;min-height: 99%;overflow: hidden;margin:0;position: absolute;top:1px;" id="dituContent"></div>
+        <div class="center_text">
+        </div>
+    </div>
+
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=BmTwezCvWyGaH3KNYkc5P6uq&s=1"></script>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&amp;key=f1881dc07874081e4244c2ee4d6581ca&amp;plugin=AMap.MarkerClusterer,AMap.MouseTool,AMap.PolyEditor,AMap.Autocomplete,AMap.PlaceSearch,AMap.GraspRoad,AMap.ControlBar"></script>
+<script type="text/javascript" src="https://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="../toastr/toastr.js"></script>
+<script src="../js/laydate/laydate.js"></script>
+<script src="../js/getDayScope.js"></script>
+<script type="text/javascript">
+    var page_map;
+    var showAllTrucks_timeout;
+    var OneTrucksRefresh_timeout;
+    $(document).ready(function() {
+        initmaps();
+        showAllTrucks();
+
+        showAllTrucks_timeout = clearInterval(showAllTrucks, 30000);
+    });
+
+    function initmaps() {
+
+        page_map = new BMap.Map("dituContent");
+
+        // 百度地图API功能
+        //GPS坐标
+        var x = 119.605720;
+        var y = 32.989924;
+        var ggPoint = new BMap.Point(x, y);
+        // 创建点坐标
+        page_map.centerAndZoom(ggPoint, 9);
+        page_map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
+        //page_map.addControl(new BMap.ScaleControl());
+        //page_map.addControl(new BMap.NavigationControl());
+
+        // 定义一个控件类,即function
+        function ZoomControl() {
+            this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+            this.defaultOffset = new BMap.Size(10, 10);
+        }
+        // 通过JavaScript的prototype属性继承于BMap.Control
+        ZoomControl.prototype = new BMap.Control();
+
+        // 自定义控件必须实现自己的initialize方法,并且将控件的DOM元素返回
+        // 在本方法中创建个p元素作为控件的容器,并将其添加到地图容器中
+        ZoomControl.prototype.initialize = function(page_map) {
+            var searchDiv = document.createElement("div");
+            // searchDiv.style.width = '250px';
+            // searchDiv.style.backgroundColor = 'white';
+            // searchDiv.style.boxShadow = 'grey 0px 0px 5px';
+            searchDiv.innerHTML = '<div style="width: 250px;background-color: white;box-shadow:grey 0px 0px 5px">' +
+                '<p id="r-result">车辆筛选:<!--<input type="text" id="suggestId" size="20" value="百度" placeholder="支持搜索" style="width:150px;" />-->' +
+                '<select class="form-control selectpicker" multiple data-max-options="1" data-actions-box="false"' +
+                'data-live-search="true"  id="suggestId"   style="width:80%;"></select></p>' +
+                '<button type="button" onclick="selectOnchange()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small"> <span>查找</span></button>' +
+                '<button type="button" onclick="selectCancle()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small"> <span>取消选择</span></button></div>';
+
+            initChePai()
+                // 添加DOM元素到地图中
+            page_map.getContainer().appendChild(searchDiv);
+            return searchDiv;
+        };
+        // 创建控件
+        var myZoomCtrl = new ZoomControl();
+        // 添加到地图当中
+        page_map.addControl(myZoomCtrl);
+    }
+
+    function initChePai() {
+        var key = "f30da8ee-61da-4c1a-bd73-54fee1d19d69";
+        $.ajax({
+            // get请求地址
+            url: "http://58.222.201.158:6809/deviceData/vehicleBaseInfo.do?key=" + key,
+            dataType: "json",
+            success: function(data) {
+
+                for (var i = 0; i < data.obj.length; i++) {
+                    $('.selectpicker').append("<option value=" + data.obj[i].id + ">" + data.obj[i].plate + "</option>");
+                }
+
+                $('#suggestId').selectpicker({
+                    'selectedText': 'cat',
+                    'noneSelectedText': '请选择',
+                    'deselectAllText': '全不选',
+                    'selectAllText': '全选'
+                });
+                // 缺一不可
+                $('#suggestId').selectpicker('refresh');
+                $('#suggestId').selectpicker('render');
+
+            }
+        });
+    }
+
+    function showAllTrucks() {
+        $.ajax({
+            type: 'POST',
+            // get请求地址
+            url: "http://58.222.201.158:6809/deviceData/allRealData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&filterTime=0",
+            dataType: "json",
+            success: function(data) {
+                if (data.flag == 1) {
+                    var allTruckData = data.obj.data;
+                    for (var i in allTruckData) {
+                        addMarker(allTruckData[i]);
+                    }
+                } else {
+                    toastr.error(data.msg);
+                }
+            }
+        });
+    }
+
+    function addMarker(truckData) {
+        let myIcon;
+        let myIconStr;
+        let marker;
+        var point = new BMap.Point(truckData.lon, truckData.lat);
+        //0：从未上线 1：行驶 2：停车 3：离线 4：服务到期
+        switch (truckData.vehicleStatus) {
+            case 1:
+                myIconStr = "../images/car/car_gcc_run.png";
+                break;
+            case 2:
+                myIconStr = "../images/car/car_gcc_stop.png";
+                break;
+            case 3:
+                myIconStr = "../images/car/car_gcc_offline.png";
+                break;
+        }
+        myIcon = new BMap.Icon(myIconStr, new BMap.Size(30, 30));
+
+        marker = new BMap.Marker(point, {
+            icon: myIcon,
+            rotation: truckData.direct
+        });
+        page_map.addOverlay(marker);
+
+        let sContent = '<div class="map-info-box">' +
+            '<div class="map-box-content" id=' + truckData.id + '>' +
+            '<ul class="map-box-info-1" style="display:block">' +
+            '<li><div><span class="map-box-name">车牌号:&nbsp;&nbsp;</span>' + truckData.plate + '</div></li>' +
+            '<li><div><span class="map-box-name">报警信息:&nbsp;&nbsp;</span>' + truckData.alarmInfo + '</div></li>' +
+            '<li><div><span class="map-box-name">状态时间:&nbsp;&nbsp;</span>' + truckData.formatTime + '</div></li>' +
+            '<li><div><span class="map-box-name">速度:&nbsp;&nbsp;</span>' + truckData.speed + '</div></li>' +
+            '<li><div><span class="map-box-name">方向:&nbsp;&nbsp;</span>' + getDirect(truckData.direct) + '</div></li>' +
+            '<li><div><span class="map-box-name">里程:&nbsp;&nbsp;</span>' + truckData.mlileage + '</div></li>' +
+            '<li><div id="' + truckData.id + 'address"><span class="map-box-name">地址:&nbsp;&nbsp;正在加载地址..</span></div></li>' +
+            '</ul>' +
+            '</div>';
+        var infoWindow = new BMap.InfoWindow(sContent);
+
+        var truckaddress = '';
+        var geoc = new BMap.Geocoder();
+        marker.addEventListener("click", function(e) {
+            let pt = e.point;
+            geoc.getLocation(pt, function(rs) {
+                truckaddress = rs.address;
+                infoWindow.setContent(infoWindow.getContent().replace("正在加载地址..", truckaddress));
+            });
+            this.openInfoWindow(infoWindow);
+        });
+    }
+
+    function selectOnchange() {
+        let chepaipID = $('#suggestId').val()[0];
+        let datenow = new Date();
+        datenow.setHours(0);
+        datenow.setMinutes(0);
+        datenow.setSeconds(0);
+        datenow.setMilliseconds(0);
+        let starthaomiao = datenow.getTime();
+
+        let endTimehaomiao = new Date().getTime();
+        if (new Date().getHours() < 1) {
+            starthaomiao = starthaomiao - 1000 * 60 * 60;
+        }
+        if (chepaipID != "" && chepaipID != undefined && chepaipID != null) {
+            getguiji(chepaipID, starthaomiao, endTimehaomiao);
+        } else {
+            toastr.error("请选择车牌");
+            alert("请选择车牌");
+        }
+    }
+    //获取选择的车辆的轨迹并画出线路图
+    function getguiji(chepaipID, starthaomiao, endTimehaomiao) {
+        $.ajax({
+            // get请求地址
+            url: "http://58.222.201.158:6809/track/queryTrackData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&startTime=" + starthaomiao + "&endTime=" + endTimehaomiao + "&id=" + chepaipID,
+            dataType: "json",
+            success: function(data) {
+                if (data.flag == 1) {
+                    setDiTu(data.obj, chepaipID);
+                } else {
+                    toastr.error(data.msg);
+                }
+            }
+        });
+    }
+    //获取选择的车辆的最后坐标，并定位到中心
+    function get_yi_liang_che_guiji(chepaipID) {
+        $.ajax({
+            type: 'POST',
+            // get请求地址
+            url: "http://58.222.201.158:6809/deviceData/realtimeData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&ids=" + chepaipID,
+            dataType: "json",
+            success: function(data) {
+                if (data.flag == 1) {
+                    addMarker(data.obj[0]);
+                    page_map.centerAndZoom(new BMap.Point(data.obj[0].lon, data.obj[0].lat), 11);
+                } else {
+                    toastr.error(data.msg);
+                }
+            }
+        });
+    }
+    var truckData;
+    //不转GPS坐标，划选择车辆的轨迹
+    function setDiTu(data, chepaipID) {
+        //记录查询选择的车辆信息
+        truckData = data[data.length - 1];
+        clearInterval(showAllTrucks_timeout);
+        page_map.clearOverlays();
+        get_yi_liang_che_guiji(chepaipID);
+        OneTrucksRefresh_timeout = setInterval(OneTrucksRefresh, 10000);
+        let pointA; // 创建点坐标A
+        let pointB; // 创建点坐标B
+        var convertor = new BMap.Convertor();
+        for (let i = 0; i < data.length - 1; i++) {
+            pointA = new BMap.Point(data[i].lon, data[i].lat);
+            pointB = new BMap.Point(data[i + 1].lon, data[i + 1].lat);
+            var polyline = new BMap.Polyline([pointA, pointB], {
+                strokeColor: "blue",
+                strokeWeight: 6,
+                strokeOpacity: 0.3
+            }); //定义折线
+            page_map.addOverlay(polyline); //添加折线到地图上
+        }
+    }
+    //将gps坐标转成百度地图坐标
+    function setDiTu2(data) {
+        let pointA; // 创建点坐标A
+        let pointB; // 创建点坐标B
+        var convertor = new BMap.Convertor();
+        for (let i = 0; i < data.length - 1; i++) {
+            pointA = new BMap.Point(data[i].lon, data[i].lat);
+            pointB = new BMap.Point(data[i + 1].lon, data[i + 1].lat);
+            var pointArr = [];
+            pointArr.push(pointA);
+            pointArr.push(pointB);
+            convertor.translate(pointArr, 3, 5, translateCallback);
+        }
+    }
+    //坐标转换完之后的回调函数
+    translateCallback = function(data) {
+        if (data.status === 0) {
+            var polyline = new BMap.Polyline([data.points[0], data.points[1]], {
+                strokeColor: "blue",
+                strokeWeight: 6,
+                strokeOpacity: 0.3
+            }); //定义折线
+            page_map.addOverlay(polyline); //添加折线到地图上
+        }
+    }
+
+    function selectCancle() {
+        page_map.clearOverlays();
+        clearInterval(OneTrucksRefresh_timeout);
+        showAllTrucks();
+        showAllTrucks_timeout = setInterval(showAllTrucks, 30000);
+    }
+    //刷新选择车辆的轨迹信息
+    function OneTrucksRefresh() {
+        $.ajax({
+            type: 'POST',
+            // get请求地址
+            url: "http://58.222.201.158:6809/deviceData/realtimeData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&ids=" + truckData.id,
+            dataType: "json",
+            success: function(data) {
+                if (data.flag == 1) {
+                    if (data.obj.length == 0 || truckData.lon == data.obj[0].lon && truckData.lat == data.obj[0].lat) {
+                        return;
+                    } else {
+                        let pointA = new BMap.Point(truckData.lon, truckData.lat);
+                        let pointB = new BMap.Point(data.obj[0].lon, data.obj[0].lat);
+                        var polyline = new BMap.Polyline([data.points[0], data.points[1]], {
+                            strokeColor: "blue",
+                            strokeWeight: 6,
+                            strokeOpacity: 0.3
+                        }); //定义折线
+                        page_map.addOverlay(polyline); //添加折线到地图上
+                        truckData = data.obj[0];
+                    }
+                } else {
+                    toastr.error(data.msg);
+                }
+            }
+        });
+    }
+
+    function getDirect(num) {
+        var num = parseInt(num);
+        var dir = '';
+
+        if (num >= 338 && num < 23) {
+            dir = '北';
+        } else if (num >= 23 && num < 68) {
+            dir = '东北';
+        } else if (num >= 68 && num < 113) {
+            dir = '东';
+        } else if (num >= 113 && num < 158) {
+            dir = '东南';
+        } else if (num >= 158 && num < 203) {
+            dir = '南';
+        } else if (num >= 203 && num < 248) {
+            dir = '西南';
+        } else if (num >= 248 && num < 293) {
+            dir = '西';
+        } else if (num >= 293 && num < 338) {
+            dir = '西北';
+        }
+        return dir;
+    }
+
+    function getVehicleStatus(num) {
+        var num = parseInt(num);
+        switch (num) {
+            case 0:
+                return '从未上线';
+            case 1:
+                return '行驶';
+            case 2:
+                return '停车';
+            case 3:
+                return '离线';
+            case 4:
+                return '服务到期';
+        }
+    }
+
+    function getHaomiao(time) {
+        var startDate = time.replace(new RegExp("-", "gm"), "/");
+        var startDateM = (new Date(startDate)).getTime();
+        return startDateM;
+    }
+</script>
+
+</html>
