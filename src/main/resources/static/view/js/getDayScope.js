@@ -7,8 +7,9 @@ function getDay(day){
     var tDate = today.getDate();
     tMonth = doHandleMonth(tMonth + 1);
     tDate = doHandleMonth(tDate);
+    tDate2 = doHandleMonth(tDate+1);
     var start= tYear+"-"+tMonth+"-"+tDate+" 00:00:00";
-    var end= tYear+"-"+tMonth+"-"+tDate+" 23:59:59";
+    var end= tYear+"-"+tMonth+"-"+tDate2+" 00:00:00";
     if(day!=0&&day!=-1){
         tDate = doHandleMonth(tDate + 1);
         start= tYear+"-"+tMonth+"-"+tDate+" 00:00:00";
@@ -16,7 +17,8 @@ function getDay(day){
         var year = myDate.getFullYear(); //获取当前年
         var mon = doHandleMonth(myDate.getMonth() + 1); //获取当前月
         var date = doHandleMonth(myDate.getDate()); //获取当前日
-        end=year+"-"+mon+"-"+date+" 23:59:59";
+        var date2 = doHandleMonth(myDate.getDate()+1); //获取当前日
+        end=year+"-"+mon+"-"+date2+" 00:00:00";
     }
     $("#starTime").val(start)
     $("#endTime").val(end)

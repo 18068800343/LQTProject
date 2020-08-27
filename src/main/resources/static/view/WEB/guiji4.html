@@ -7,6 +7,9 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/laydate.css" />
+	<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/layui.css" />
+	<link rel="stylesheet" type="text/css" href="../css/layui.mobile.css" />
 	<style type="text/css">
 		body, html, #container {
 			width: 100%;
@@ -19,13 +22,67 @@
 			cursor:pointer;
 			text-decoration:none
 		}
-
+		/*设置 tbody高度大于400px时 出现滚动条*/
+		table tbody {
+			display: block;
+			height: 180px;
+			overflow-y: scroll;
+		}
+		table thead, tbody tr {
+			display: table;
+			width: 100%;
+			table-layout: fixed;
+		}
+		/*滚动条默认宽度是16px 将thead的宽度减16px*/
+		table thead {
+			width: calc( 100% - 1em);
+		}
 
 	</style>
 </head>
 <body>
 
-<div id="container"></div>
+<!--<div id="container"></div>-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="row-fluid">
+				<div class="span12">
+
+					<div id="container" style="height: 60vh;"></div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="zhuti-content">
+						<div class="LowerPart">
+							<table class=" table table-bordered table-condensed table-hover layui-table" lay-skin="line" id="mainContent" style="width: 1800px;white-space: nowrap;">
+								<thead>
+								<tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
+									<th>序号</th>
+									<th>车牌</th>
+									<th style="width: 500px;">开始时间</th>
+									<th style="width: 200px;">结束时间</th>
+									<th>速度(km/h)</th>
+									<th>开始里程(km)</th>
+									<th>结束里程(km)</th>
+									<th>本次行程的持续里程(km)</th>
+									<th>本次行程的持续时间(s)</th>
+									<th>开始经纬度</th>
+									<th>结束经纬度</th>
+
+								</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 
 </html>
@@ -35,6 +92,9 @@
 <script src="../toastr/toastr.js"></script>
 <script src="../js/laydate/laydate.js"></script>
 <script src="../js/getDayScope.js"></script>
+<script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 
 	$(document).ready(function () {
@@ -46,7 +106,102 @@
 			elem: '#endTime', //指定元素
 			type: 'datetime',trigger: 'click'
 		});
+
+
+
 	});
+	let table = $('#mainContent').DataTable({
+		"deferRender": true,
+		"processing": true,
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"searching": false,
+		"lengthChange": false,
+		"oLanguage": {
+			"sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+		},
+		"columns": [
+			{"data": null},
+			{"data": "plate"},
+			{"data": "beginTime"},
+			{"data": "endTime"},
+			{"data": "speed"},
+			{"data": "mileageBegin"},
+			{"data": "mileageEnd"},
+			{"data": "thisMileage"},
+			{"data": "thisSecs"},
+			{"data": "lonBegin"},
+			{"data": "lonEnd"},
+			/*{"data": "latBegin"},
+			{"data": "latEnd"},*/
+		],
+		"columnDefs": [
+			{
+				"class": "tcenter",
+				"targets": 9,
+				"searchable": false,
+				"render": function(data, type, full) {
+					return data+","+full.latBegin;
+				}
+			},{
+				"class": "tcenter",
+				"targets": 10,
+				"searchable": false,
+				"render": function(data, type, full) {
+					return data+","+full.latEnd;
+				}
+			},
+		], "fnDrawCallback": function () {
+			this.api().column(0).nodes().each(function(cell, i){
+				cell.innerHTML=i+1;
+			});
+		},
+		//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
+		"sScrollX":true,
+		// 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
+		//表中的数据自适应 ，表头的宽度固定
+		"bAutoWidth":false,
+		"order": [[2, 'desc']],
+		"oLanguage": { //国际化配置
+			"sProcessing": "正在获取数据，请稍后...",
+			"sLengthMenu": "显示 _MENU_ 条",
+			"sZeroRecords": "查询不到相关数据",
+			"sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+			"sInfoEmpty": "记录数为0",
+			"sInfoFiltered": "(全部记录数 _MAX_ 条)",
+			"sInfoPostFix": "",
+			"sSearch": "搜索",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "第一页",
+				"sPrevious": "上一页",
+				"sNext": "下一页",
+				"sLast": "最后一页"
+			}
+		}
+
+	});
+
+	//行点击事件
+	$('#mainContent tbody').on('click','tr', function (e) {
+		var data = table.row( this ).data();
+		var point = new BMap.Point(data.lonEnd, data.latEnd);
+		map.centerAndZoom(point, 15);
+
+		var marker = new BMap.Marker(point);  // 创建标注
+		map.addOverlay(marker);              // 将标注添加到地图中
+		var opts = {
+			width : 200,     // 信息窗口宽度
+			height: 120,     // 信息窗口高度
+			title : "指定车辆里程数据" , // 信息窗口标题
+			message:"这里是故宫"
+		}
+		var infoWindow = new BMap.InfoWindow(
+				"<div class='amap-info-content amap-info-outer'>车牌："+data.plate+"<br>开始时间："+data.beginTime+"<br>结束时间："+data.endTime+"<br>速度："+data.speed+"Km/h<br>里程："+data.thisMileage+"km/h<br><a class='amap-info-close' href='javascript: void(0)' style='right: 5px;'>×</a></div>", opts);  // 创建信息窗口对象
+			map.openInfoWindow(infoWindow, point); //开启信息窗口
+		/*marker.addEventListener("click", function(){
+		});*/
+	} );
 
 	var key="f30da8ee-61da-4c1a-bd73-54fee1d19d69";
 	function initChePai(){
@@ -74,7 +229,7 @@
 		});
 	}
 
-	function selectOnchang(){
+	function search(){
 		var chepaipID=$('#suggestId').val().toString();
 		let starthaomiao = getHaomiao($("#starTime").val());
 		let endTimehaomiao = getHaomiao($("#endTime").val());
@@ -95,6 +250,8 @@
 			success: function (data) {
 				if(data.flag==1){
 					setDiTu(data.obj);
+					$('#mainContent').dataTable().fnClearTable();
+					$('#mainContent').DataTable().rows.add(data.obj).draw(false);
 				}else{
 					toastr.error(data.msg)
 				}
@@ -161,7 +318,7 @@
 				'<div class="ivu-col ivu-col-span-7">结束时间：</div>' +
 				' <div class="ivu-col ivu-col-span-17">' +
 				'<input type="text" autocomplete="off" id="endTime" placeholder="选择日期时间" ></div>' +
-				'<button type="button" onclick="selectOnchang()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small"> <span>查找</span></button></div>';
+				'<button type="button" onclick="search()" class="search-btn-track ivu-btn ivu-btn-primary ivu-btn-small"> <span>查找</span></button></div>';
 
 
 
