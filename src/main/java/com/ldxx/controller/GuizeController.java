@@ -66,6 +66,13 @@ public class GuizeController {
         return i;
     }
 
+    @RequestMapping("/deleteGuizeAndCarsAndPoints")
+    @ResponseBody
+    public int deleteGuizeAndCarsAndPoints(String guizeId) {
+        int i = service.deleteGuizeAndCarsAndPoints(guizeId);
+        return i;
+    }
+
     @RequestMapping("/updateGuizeAndCars")
     @ResponseBody
     public int updateGuizeAndPlates(@RequestBody GuizeVo guizeVo) {

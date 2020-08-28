@@ -404,7 +404,8 @@
 				"render": function (data, type, full) {
 					let dingwei = '<i class="iconfont icon-genzong" style="font-size:18px;cursor:pointer;" id="dingwei" title="定位" onclick="dingwei(this)"></i>';
 					let xiugai = '<i class="iconfont icon-xiugai" style="font-size:18px;cursor:pointer;" id="upd" onclick="xiugai(this)" title="修改车牌" data-toggle="modal" data-target="#change"></i>';
-					return dingwei + xiugai;
+					let shanchu = '<i class="iconfont icon-shanchu" style="font-size:18px;cursor:pointer;" id="upd" onclick="shanchu(this)" title="删除线路" ></i>';
+					return dingwei + xiugai + shanchu;
 				}
 			},
 			{
@@ -574,6 +575,35 @@
 
 				} else {
 					toastr.success("添加失败")
+				}
+
+			}
+		});
+	}
+
+
+	function shanchu(e) {
+		let tr = $(e).parents("tr");
+		let data = $("#mainContent").DataTable().row(tr).data();
+		let guizeId = data.id;
+
+		$.ajax({
+			type: "post",
+			url: "/Guize/deleteGuizeAndCarsAndPoints",
+			async: false,
+			dataType: "json",
+			data: {
+				guizeId: guizeId
+			},
+			success: function (json) {
+				if (json > 0) {
+					$("#myModal").modal("hide");
+					initTable();
+					toastr.success("删除成功")
+					clearAll();
+
+				} else {
+					toastr.success("删除失败")
 				}
 
 			}

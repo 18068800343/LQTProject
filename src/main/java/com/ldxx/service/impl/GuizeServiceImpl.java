@@ -48,27 +48,39 @@ public class GuizeServiceImpl implements GuizeService {
 	@Override
 	@Transactional
 	public int insertGuizeVo(GuizeVo t) {
-        // TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 
-        String time = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
-        t.setTime(time);
-        int i = dao.insertGuize(t);
-        if (i > 0) {
-            i = dao.insertGuizeLnglat(t);
-            if (i > 0) {
-                i = dao.insertGuizeCar(t);
-            }
-        }
-        return i;
-    }
+		String time = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		t.setTime(time);
+		int i = dao.insertGuize(t);
+		if (i > 0) {
+			i = dao.insertGuizeLnglat(t);
+			if (i > 0) {
+				i = dao.insertGuizeCar(t);
+			}
+		}
+		return i;
+	}
+
+	@Override
+	@Transactional
+	public int deleteGuizeAndCarsAndPoints(String id) {
+		// TODO Auto-generated method stub
+		int i = dao.delGuize(id);
+		if (i > 0) {
+			i = dao.delGuizeCar(id);
+			i = dao.delGuizeLnglat(id);
+		}
+		return i;
+	}
 
 	@Override
 	@Transactional
 	public int updateGuizeVo(GuizeVo t) {
-        // TODO Auto-generated method stub
-        String time = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
-        t.setTime(time);
-        int i = dao.delGuize(t.getId());
+		// TODO Auto-generated method stub
+		String time = DateUtil.getDateStrByPattern(DateConstant.DATE19, new Date());
+		t.setTime(time);
+		int i = dao.delGuize(t.getId());
         if (i > 0) {
             i = dao.delGuizeCar(t.getId());
             i = dao.delGuizeLnglat(t.getId());

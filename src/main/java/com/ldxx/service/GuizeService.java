@@ -17,6 +17,8 @@ public interface GuizeService {
 
     int insertGuizeVo(GuizeVo t);
 
+    int deleteGuizeAndCarsAndPoints(String id);
+
     int updateGuizeVo(GuizeVo t);
 
 }
