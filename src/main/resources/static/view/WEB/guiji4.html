@@ -378,7 +378,7 @@
 		var name = $(this).text()
 		var data = table.row( this ).data();
 		var point = new BMap.Point(data.lon, data.lat);
-		map.centerAndZoom(point, 13);
+		map.centerAndZoom(point, 12);
 
         marker = new BMap.Marker(point);  // 创建标注
 		map.addOverlay(marker);              // 将标注添加到地图中
