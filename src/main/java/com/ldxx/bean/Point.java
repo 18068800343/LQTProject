@@ -4,10 +4,19 @@ public class Point {
 
     double lng;
     double lat;
+    String guizeId;
 
     public Point(double lng, double lat) {
         this.lng = lng;
         this.lat = lat;
+    }
+
+    public String getGuizeId() {
+        return guizeId;
+    }
+
+    public void setGuizeId(String guizeId) {
+        this.guizeId = guizeId;
     }
 
     public double getLng() {

@@ -1,7 +1,9 @@
 package com.ldxx.controller;
 
 import com.ldxx.bean.GuizeCar;
+import com.ldxx.bean.GuizeYujing;
 import com.ldxx.bean.TruckInfo;
+import com.ldxx.dao.GuizeDao;
 import com.ldxx.service.GuizeService;
 import com.ldxx.service.TruckInfoService;
 import com.ldxx.util.LDXXUtils;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,12 +32,22 @@ public class GuizeController {
     @Autowired
     private GuizeService service;
 
+    @Resource
+    private GuizeDao guizeDao;
+
     private Map<String, Object> map = new HashMap<>();
 
     @RequestMapping("/getAllGuize")
     @ResponseBody
     public List<GuizeVo> getAllGuizeVos() {
         List list = service.getAllGuizeVo();
+        return list;
+    }
+
+    @RequestMapping("/getAllGuizeYujingByTime")
+    @ResponseBody
+    public List<GuizeYujing> getAllGuizeYujingByTime(String id, String startTime, String endTime) {
+        List list = guizeDao.getAllGuizeYujingByCarId(id, startTime, endTime);
         return list;
     }
 

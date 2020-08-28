@@ -21,9 +21,20 @@
 		select * from guize
 	</select>
 
+    <select id="getAllGuizeYujingByCarId" resultType="GuizeYujing">
+        select distinct * from guize_yujing
+        <where>
+            car_id = #{id}
+            <if test="startTime != '' and startTime != null and endTime !=''">
+                and gpsTime BETWEEN #{startTime} and #{endTime}
+            </if>
+        </where>
+        order by gpsTime desc
+    </select>
+
     <select id="getPointsByCarId" resultType="Point">
 		SELECT
-           lng,lat
+           lng,lat,guize_id
         FROM
             guize_lnglat
         WHERE
@@ -103,6 +114,21 @@
             #{item.plate}
             )
         </foreach>
+    </insert>
+
+    <insert id="insertGuizeYujing" parameterType="GuizeYujing" useGeneratedKeys="false">
+        insert into guize_yujing (car_id,lng,lat,vehicleStatus,plate,distance,gpsTime,guize_id)
+        values
+            (
+            #{carId},
+            #{lng},
+            #{lat},
+            #{vehicleStatus},
+            #{plate},
+            #{distance},
+            #{gpsTime},
+            #{guizeId}
+            )
     </insert>
 
 </mapper>

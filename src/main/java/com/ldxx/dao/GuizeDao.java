@@ -1,5 +1,6 @@
 package com.ldxx.dao;
 
+import com.ldxx.bean.GuizeYujing;
 import com.ldxx.bean.Point;
 import com.ldxx.vo.GuizeCarVo;
 import com.ldxx.vo.GuizeVo;
@@ -10,6 +11,8 @@ import java.util.List;
 public interface GuizeDao {
 
     List<GuizeVo> getAllGuizeVo();
+
+    List<GuizeYujing> getAllGuizeYujingByCarId(String id, String startTime, String endTime);
 
     String getDistinctAllCar();
 
@@ -30,4 +33,6 @@ public interface GuizeDao {
     int insertGuizeLnglat(GuizeVo t);
 
     int insertGuizeCar(GuizeVo t);
+
+    int insertGuizeYujing(GuizeYujing t);
 }
