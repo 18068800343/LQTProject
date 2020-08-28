@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.DicPeifangjipeiDao" >
+
+	<insert id="insertDicPeifangjipei" parameterType="DicPeifangjipei">
+		insert into dic_peifangjipei(id,name,rate0_075,rate0_15,rate0_3,rate0_6,rate1_18,rate2_36,rate4_75,rate9_5,
+		rate13_2,rate16,rate19,rate26_5,rate31_5,peifang_id) values (#{id},#{name},#{rate0075},#{rate015},#{rate03},#{rate06},#{rate118},
+		#{rate236},#{rate475},#{rate95},#{rate132},#{rate16},#{rate19},#{rate265},#{rate315},#{peifangId})
+	</insert>
+
+	<update id="updDicPeifangjipei" parameterType="DicPeifangjipei">
+		update dic_peifangjipei set
+		name=#{name},
+		rate0_075=#{rate0075},
+		rate0_15=#{rate015},
+		rate0_3=#{rate03},
+		rate0_6=#{rate06},
+		rate1_18=#{rate118},
+		rate2_36=#{rate236},
+		rate4_75=#{rate475},
+		rate9_5=#{rate95},
+		rate13_2=#{rate132},
+		rate16=#{rate16},
+		rate19=#{rate19},
+		rate26_5=#{rate265},
+		rate31_5=#{rate315},
+		peifang_id=#{peifangId}
+		where id=#{id}
+	</update>
+
+	<delete id="delDicPeifangjipei">
+		delete  from dic_peifangjipei where id=#{id}
+	</delete>
+
+	<select id="getAllDicPeifangjipei" resultType="DicPeifangjipei">
+		select a.*,b.fl_name as peifangName from dic_peifangjipei a
+		left join sys_formulation_management b on a.peifang_id=b.fl_id
+	</select>
+
+	<select id="getCountName" parameterType="String" resultType="int">
+		select count(0) from dic_peifangjipei where name=#{name} and peifang_id=#{peifangId}
+	</select>
+
+	<select id="xg_getCountName" parameterType="String" resultType="int">
+		select count(0) from dic_peifangjipei where name=#{name} and peifang_id=#{peifangId} and id!=#{id}
+	</select>
+
+</mapper>
