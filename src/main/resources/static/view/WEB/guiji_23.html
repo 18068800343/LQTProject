@@ -116,7 +116,7 @@
         initmaps();
         showAllTrucks();
 
-        showAllTrucks_timeout = clearInterval(showAllTrucks, 30000);
+        showAllTrucks_timeout = setInterval( showAllTrucks, 30000);
     });
 
     function initmaps() {
@@ -196,6 +196,7 @@
 	
     //查询所有车辆当前信息
     function showAllTrucks() {
+    	page_map.clearOverlays();
         $.ajax({
             type: 'POST',
             // get请求地址
@@ -398,7 +399,7 @@
                         truckData = data.obj[0];
                     }
                 } else {
-                    toastr.error(data.msg);
+                    toastr.error(data.msg); 
                 }
             }
         });
