@@ -146,7 +146,7 @@
 		"deferRender": true,
 		"processing": true,
 		"bDestroy": true,
-		"iDisplayLength": 10,
+		"iDisplayLength": 50,
 		"searching": false,
 		"lengthChange": false,
 		"oLanguage": {
@@ -371,14 +371,16 @@
 
 	});
 
+	var marker
 	//行点击事件
 	$('#mainContent tbody').on('click','tr', function (e) {
+		map.removeOverlay(marker);//清空上次标注
 		var name = $(this).text()
 		var data = table.row( this ).data();
 		var point = new BMap.Point(data.lon, data.lat);
-		map.centerAndZoom(point, 14);
+		map.centerAndZoom(point, 13);
 
-		var marker = new BMap.Marker(point);  // 创建标注
+        marker = new BMap.Marker(point);  // 创建标注
 		map.addOverlay(marker);              // 将标注添加到地图中
 		var opts = {
 			width : 250,     // 信息窗口宽度
