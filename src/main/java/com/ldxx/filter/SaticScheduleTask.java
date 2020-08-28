@@ -33,18 +33,18 @@ public class SaticScheduleTask {
     //或直接指定时间间隔，例如：5秒
     //@Scheduled(fixedRate=5000)
     private void configureTasks() {
-        System.err.println("执行静态定时任务时间: " + LocalDateTime.now());
+//        System.err.println("执行静态定时任务时间: " + LocalDateTime.now());
         String url = "58.222.201.158:6809/deviceData/allRealData.do";
         Map<String, Object> jsonMap = new HashMap<>();
         jsonMap.put("key", "f30da8ee-61da-4c1a-bd73-54fee1d19d69");
         jsonMap.put("filterTime", 20);
         String str = restMock.sendGet(url, jsonMap);
 
-        System.out.println(str);
+//        System.out.println(str);
         if (!"".equals(str)) {
             JSONObject jsonObject = JSONObject.parseObject(str);
             JSONArray jsonArray = jsonObject.getJSONObject("obj").getJSONArray("data");
-            System.out.println(jsonArray);
+//            System.out.println(jsonArray);
             String carIdStr = guizeDao.getDistinctAllCar();
             for (Iterator iterator = jsonArray.iterator(); iterator.hasNext(); ) {
                 JSONObject item = (JSONObject) iterator.next();
@@ -69,7 +69,7 @@ public class SaticScheduleTask {
                             GuizeYujing guizeYujing = new GuizeYujing(carId, alng.toString(), alat.toString(), vehicleStatus, plate, distance.toString(), gpsTime, guizeId);
                             int i = guizeDao.insertGuizeYujing(guizeYujing);
                             if (i > 0) {
-                                System.out.println("*******插入预警信息成功********");
+//                                System.out.println("*******插入预警信息成功********");
                             }
                         }
                     }
