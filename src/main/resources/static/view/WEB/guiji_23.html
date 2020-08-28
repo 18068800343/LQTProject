@@ -337,7 +337,7 @@
             success: function(data) {
                 if (data.flag == 1) {
                     addMarker(data.obj[0]);
-                    page_map.centerAndZoom(new BMap.Point(data.obj[0].lon, data.obj[0].lat), 11);
+                    page_map.centerAndZoom(new BMap.Point(data.obj[0].lon, data.obj[0].lat), 13);
                 } else {
                     toastr.error(data.msg);
                 }
