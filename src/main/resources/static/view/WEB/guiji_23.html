@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
     <link rel="stylesheet" type="text/css" href="../css/laydate.css" />
     <link rel="stylesheet" type="text/css" href="../css/layui.css" />
-	<link rel="stylesheet" type="text/css" href="../css/layui.mobile.css" />
+    <link rel="stylesheet" type="text/css" href="../css/layui.mobile.css" />
     <style>
         #titles {
             width: 100%;
@@ -95,6 +95,26 @@
         </div>
     </div>
 
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="allMsg1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><b>报警信息</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form class="form-inline">
+                            <table class="table table-bordered table-condensed" id="baojinxinxi">
+
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -116,7 +136,7 @@
         initmaps();
         showAllTrucks();
 
-        showAllTrucks_timeout = setInterval( showAllTrucks, 30000);
+        showAllTrucks_timeout = setInterval(showAllTrucks, 30000);
     });
 
     function initmaps() {
@@ -193,10 +213,10 @@
             }
         });
     }
-	
+
     //查询所有车辆当前信息
     function showAllTrucks() {
-    	page_map.clearOverlays();
+        page_map.clearOverlays();
         $.ajax({
             type: 'POST',
             // get请求地址
@@ -249,7 +269,7 @@
             '<li><div><span class="map-box-name">状态时间:&nbsp;&nbsp;</span>' + truckData.formatTime + '</div></li>' +
             '<li><div><span class="map-box-name">速度:&nbsp;&nbsp;</span>' + truckData.speed + '</div></li>' +
             '<li><div><span class="map-box-name">方向:&nbsp;&nbsp;</span>' + getDirect(truckData.direct) + '</div></li>' +
-            '<li><div><span class="map-box-name">定位时间:&nbsp;&nbsp;</span>' + truckData.gpsTime  + '</div></li>' +
+            '<li><div><span class="map-box-name">定位时间:&nbsp;&nbsp;</span>' + truckData.gpsTime + '</div></li>' +
             '<li><div><span class="map-box-name">里程:&nbsp;&nbsp;</span>' + truckData.mlileage + '</div></li>' +
             '<li><div id="' + truckData.id + 'address"><span class="map-box-name">地址:&nbsp;&nbsp;正在加载地址..</span></div></li>' +
             '</ul>' +
@@ -267,10 +287,10 @@
             this.openInfoWindow(infoWindow);
         });
     }
-
+    var chepaipID = "";
     //菜单栏选择了一辆车
     function selectOnchange() {
-        let chepaipID = $('#suggestId').val()[0];
+        chepaipID = $('#suggestId').val()[0];
         let datenow = new Date();
         datenow.setHours(0);
         datenow.setMinutes(0);
@@ -291,6 +311,9 @@
     }
     //获取选择的车辆的轨迹并画出线路图
     function getguiji(chepaipID, starthaomiao, endTimehaomiao) {
+        if (chepaipID == "") {
+            return;
+        }
         $.ajax({
             // get请求地址
             url: "http://58.222.201.158:6809/track/queryTrackData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&startTime=" + starthaomiao + "&endTime=" + endTimehaomiao + "&id=" + chepaipID,
@@ -376,12 +399,13 @@
         showAllTrucks();
         showAllTrucks_timeout = setInterval(showAllTrucks, 30000);
     }
+    var trucks;
     //刷新选择车辆的轨迹信息
     function OneTrucksRefresh() {
         $.ajax({
             type: 'POST',
             // get请求地址
-            url: "http://58.222.201.158:6809/deviceData/realtimeData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&ids=" + truckData.id,
+            url: "http://58.222.201.158:6809/deviceData/realtimeData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&ids=" + chepaipID,
             dataType: "json",
             success: function(data) {
                 if (data.flag == 1) {
@@ -399,10 +423,54 @@
                         truckData = data.obj[0];
                     }
                 } else {
-                    toastr.error(data.msg); 
+                    toastr.error(data.msg);
                 }
             }
         });
+        let datenow = new Date();
+        let enddate = new Date();
+        datenow.setHours(0);
+        datenow.setMinutes(0);
+        datenow.setSeconds(0);
+        datenow.setMilliseconds(0);
+        let startTime = datenow.getFullYear() + "-" + (((datenow.getMonth() + 1) + "").length == 1 ? "0" + (datenow.getMonth() + 1) : (datenow.getMonth() + 1)) + "-" + ((datenow.getDate() + "").length == 1 ? "0" + datenow.getDate() : datenow.getDate()) + " 00:00:00";
+        let endTime = enddate.getFullYear() + "-" + (((enddate.getMonth() + 1) + "").length == 1 ? "0" + (enddate.getMonth() + 1) : (enddate.getMonth() + 1)) + "-" + ((enddate.getDate() + "").length == 1 ? "0" + enddate.getDate() : enddate.getDate()) + " " + enddate.getHours() + ":" + enddate.getMinutes() + ":" + enddate.getSeconds();
+
+        $.ajax({
+
+            // get请求地址
+            url: "/Guize/getAllGuizeYujingByTime?id=" + chepaipID + "&startTime=" + startTime + "&endTime=" + endTime,
+            dataType: "json",
+            success: function(data) {
+                if (data.length == 0) {
+                    return;
+                }
+                truck = data[0];
+                trucks = data;
+                var returnMsg =
+                    '<ul class="map-box-info-1" >' +
+                    '<li><div><span class="map-box-name">车牌号:&nbsp;&nbsp;</span>' + truck.plate + '</div></li>' +
+                    '<li><div><span class="map-box-name">报警信息:&nbsp;&nbsp;</span>路线偏移</div></li>' +
+                    '<li><div><span class="map-box-name">报警时间:&nbsp;&nbsp;</span>' + truck.gpsTime + '</div></li>' +
+                    '<li><div><span class="map-box-name">偏移距离:&nbsp;&nbsp;</span>' + Math.floor(truck.distance * 100) / 100 + '</div></li>' +
+                    '<li><div><span class="map-box-name">经度:&nbsp;&nbsp;</span>' + truck.lng + '</div></li>' +
+                    '<li><div><span class="map-box-name">纬度:&nbsp;&nbsp;</span>' + truck.lat + '</div></li>' +
+                    '</ul>';
+                $.show('警告信息', returnMsg, 100000);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                var i = 0;
+            }
+        });
+    }
+
+    function gengduobaojin() {
+        var baojinhtml = "<tr><th>车牌号</th><th>报警信息</th><th>报警时间</th><th>偏移距离</th><th>经度</th><th>纬度</th></tr>";
+        for (var i = 0; i < trucks.length; i++) {
+            baojinhtml += "<tr><td>" + trucks[i].plate + "</td><td>路线偏移</td><td>" + trucks[i].gpsTime + "</td><td>" + Math.floor(trucks[i].distance * 100) / 100 + "</td><td>" + trucks[i].lng + "</td><td>" + trucks[i].lat + "</td></tr>"
+        }
+        $("#baojinxinxi").html(baojinhtml);
+
     }
 
     function getDirect(num) {
@@ -449,6 +517,93 @@
         var startDate = time.replace(new RegExp("-", "gm"), "/");
         var startDateM = (new Date(startDate)).getTime();
         return startDateM;
+    }
+
+    var time;
+    var delayTime;
+    $(function() {
+        // 增加浮动DIV
+        $('body').append("<div id='notice' onselectstart='return false'><span class='notice_title'> </span>" +
+            "<button type='button' class='btn btn-primary Plda' data-toggle='modal' data-target='#allMsg1' onclick='gengduobaojin()'>更多报警信息</button>" +
+            "<span class='cbtn'>[关闭]</span><div class='notice_content'></div></div>");
+
+        // 更改样式
+        $('#notice').css({
+            right: "0",
+            bottom: "0",
+            cursor: "default",
+            position: "fixed",
+            "background-color": "#F0F9FD",
+            color: "#1F336B",
+            "z-index": "999",
+            border: "1px #F2F2FB solid",
+            margin: "2px",
+            padding: "10px",
+            "font-weight": "bold",
+            "line-height": "25px",
+            display: "none",
+            width: "300px",
+            height: "250px"
+        });
+        $('#notice .cbtn2').css({
+            color: "#FF0000",
+            cursor: "pointer",
+            "padding-right": "5px",
+            float: "right",
+            position: "relative"
+        });
+        $('#notice .cbtn').css({
+            color: "#FF0000",
+            cursor: "pointer",
+            "padding-right": "5px",
+            float: "right",
+            position: "relative"
+        });
+        $('#notice .notice_content').css({
+            margin: "3px",
+            "font-weight": "normal",
+            //border: "1px #B9C9EF solid",
+            "line-height": "20px",
+            "margin-bottom": "10px",
+            padding: "10px",
+            height: "135px"
+        });
+
+        /* 绑定事件*/
+        $('#notice').hover(
+            function() {
+                $(this).stop(true, true).slideDown();
+                clearTimeout(time);
+            },
+            function() {
+                time = setTimeout('_notice()', delayTime);
+            }
+        );
+
+        //绑定关闭事件
+        $('.cbtn').bind('click', function() {
+            $('#notice').slideUp('fast');
+            clearTimeout(time);
+        });
+    });
+    $.extend({
+        lay: function(_width, _height) {
+            $('#notice').css({
+                width: _width,
+                height: _height
+            });
+        },
+        show: function(_title, _msg, _time) {
+            delayTime = _time;
+            $('.notice_title').html(_title);
+            $('.notice_content').html(_msg);
+            $('#notice').slideDown(2000);
+            time = setTimeout('_notice()', delayTime);
+        }
+    });
+
+    function _notice() {
+        $('#notice').slideUp(2000);
     }
 </script>
 
