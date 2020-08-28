@@ -23,7 +23,7 @@
 
     <select id="getPointsByCarId" resultType="Point">
 		SELECT
-            *
+           lng,lat
         FROM
             guize_lnglat
         WHERE

@@ -28,7 +28,7 @@ public class SaticScheduleTask {
     @Resource
     GuizeDao guizeDao;
     //3.添加定时任务
-    @Scheduled(cron = "0/30 * * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     //或直接指定时间间隔，例如：5秒
     //@Scheduled(fixedRate=5000)
     private void configureTasks() {
@@ -36,7 +36,7 @@ public class SaticScheduleTask {
         String url = "58.222.201.158:6809/deviceData/allRealData.do";
         Map<String, Object> jsonMap = new HashMap<>();
         jsonMap.put("key", "f30da8ee-61da-4c1a-bd73-54fee1d19d69");
-        jsonMap.put("filterTime", 0);
+        jsonMap.put("filterTime", 20);
         String str = restMock.sendGet(url, jsonMap);
 
         System.out.println(str);
