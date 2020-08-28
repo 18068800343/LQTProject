@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @description 获取Application配置数据
  * @date
  */
-@Getter
 @Component
 public class ApplicationValues {
 
@@ -33,4 +32,53 @@ public class ApplicationValues {
 
     @Value("${http_pool.validate_after_inactivity}")
     private int inactivity;
+
+
+    public int getMaxTotal() {
+        return maxTotal;
+    }
+
+    public void setMaxTotal(int maxTotal) {
+        this.maxTotal = maxTotal;
+    }
+
+    public int getMaxPerRoute() {
+        return maxPerRoute;
+    }
+
+    public void setMaxPerRoute(int maxPerRoute) {
+        this.maxPerRoute = maxPerRoute;
+    }
+
+    public int getConnTimeOut() {
+        return connTimeOut;
+    }
+
+    public void setConnTimeOut(int connTimeOut) {
+        this.connTimeOut = connTimeOut;
+    }
+
+    public int getConnReqTimeOut() {
+        return connReqTimeOut;
+    }
+
+    public void setConnReqTimeOut(int connReqTimeOut) {
+        this.connReqTimeOut = connReqTimeOut;
+    }
+
+    public int getSocketTimeout() {
+        return socketTimeout;
+    }
+
+    public void setSocketTimeout(int socketTimeout) {
+        this.socketTimeout = socketTimeout;
+    }
+
+    public int getInactivity() {
+        return inactivity;
+    }
+
+    public void setInactivity(int inactivity) {
+        this.inactivity = inactivity;
+    }
 }
