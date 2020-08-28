@@ -384,12 +384,12 @@
 		map.addOverlay(marker);              // 将标注添加到地图中
 		var opts = {
 			width : 250,     // 信息窗口宽度
-			height: 100,     // 信息窗口高度
+			height: 120,     // 信息窗口高度
 			title : "指定车辆里程数据" , // 信息窗口标题
 			message:"这里是故宫"
 		}
 		var infoWindow = new BMap.InfoWindow(
-				"<div class='amap-info-content amap-info-outer'>车牌："+($('#suggestId').find('option:selected')[0].textContent.toString())+"<br>时间："+data.devTime+"<br>速度："+data.speed+"Km/h<br>里程："+data.mileage+"m<br><a class='amap-info-close' href='javascript: void(0)' style='right: 5px;'>×</a></div>", opts);  // 创建信息窗口对象
+				"<div class='amap-info-content amap-info-outer'>车牌："+($('#suggestId').find('option:selected')[0].textContent.toString())+"<br>时间："+data.devTime+"<br>速度："+data.speed+"Km/h<br>里程："+data.mileage+"m<br></div>", opts);  // 创建信息窗口对象
 
 		map.openInfoWindow(infoWindow, point); //开启信息窗口
 		/*marker.addEventListener("click", function(){
