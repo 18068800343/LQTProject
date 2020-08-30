@@ -80,7 +80,7 @@
 									<th style="width: 500px;">时间</th>
 									<th>是否补传数据</th>
 									<th>方向</th>
-									<th>里程(m)</th>
+									<th>里程(km)</th>
 									<th>Acc状态</th>
 									<th>速度(km/h)</th>
 									<th>定位状态</th>
@@ -244,7 +244,7 @@
 				"render": function(data, type, full) {
 					if(data.lbSignal==undefined||data.lbSignal==null||data.lbSignal==""){
 						return ""
-					}else  return data
+					}else  return data.lbSignal;
 				}
 			},{
 				"class": "tcenter",
@@ -386,10 +386,10 @@
 			width : 250,     // 信息窗口宽度
 			height: 120,     // 信息窗口高度
 			title : "指定车辆里程数据" , // 信息窗口标题
-			message:"这里是故宫"
+			message:"发生错误"
 		}
 		var infoWindow = new BMap.InfoWindow(
-				"<div class='amap-info-content amap-info-outer'>车牌："+($('#suggestId').find('option:selected')[0].textContent.toString())+"<br>时间："+data.devTime+"<br>速度："+data.speed+"Km/h<br>里程："+data.mileage+"m<br></div>", opts);  // 创建信息窗口对象
+				"<div class='amap-info-content amap-info-outer'>车牌："+($('#suggestId').find('option:selected')[0].textContent.toString())+"<br>时间："+data.devTime+"<br>速度："+data.speed+"Km/h<br>里程："+data.mileage+"km<br></div>", opts);  // 创建信息窗口对象
 
 		map.openInfoWindow(infoWindow, point); //开启信息窗口
 		/*marker.addEventListener("click", function(){
@@ -501,6 +501,22 @@
 		clearAll()
 		map.addOverlay(polyline);          //增加折线
 		map.setViewport(pois);
+		//显示最新一条并计算总里程
+		var point = new BMap.Point(data[data.length-1].lon,data[data.length-1].lat);
+		map.centerAndZoom(point, 12);
+
+		marker = new BMap.Marker(point);  // 创建标注
+		map.addOverlay(marker);              // 将标注添加到地图中
+		var opts = {
+			width : 250,     // 信息窗口宽度
+			height: 120,     // 信息窗口高度
+			title : "指定车辆里程数据" , // 信息窗口标题
+			message:"发生错误"
+		}
+		var infoWindow = new BMap.InfoWindow(
+				"<div class='amap-info-content amap-info-outer'>车牌："+($('#suggestId').find('option:selected')[0].textContent.toString())+"<br>总里程："+(data[data.length-1].mileage-data[0].mileage).toFixed(2)+"km<br></div>", opts);  // 创建信息窗口对象
+
+		map.openInfoWindow(infoWindow, point); //开启信息窗口
 	}
 
 
