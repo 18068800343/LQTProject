@@ -396,7 +396,7 @@
     	if($(data).val()!=null)
     		{
     		chepaipID=$(data).val();
-    		$('#suggestId').val(chepaipID);
+    		$('#suggestId').selectpicker('val',chepaipID)
     		}else{
         chepaipID = $('#suggestId').val()[0];
     		}
