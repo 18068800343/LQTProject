@@ -67,7 +67,7 @@
 				<button type="button" class="layui-btn layui-btn-normal"style="background-color: #215BA3;width: 70px;" onclick="search()">搜索</button>
 			</div>
 			<div style="overflow:auto;">
-			<table class="layui-table  table-bordered table-condensed table-hover layui-table" lay-skin="line"style="margin-top: 30px; width: 2200px;" id="mainContent" >
+			<table class="layui-table  table-bordered table-condensed table-hover layui-table" lay-skin="line"style="margin-top: 0px; width: 2200px;" id="mainContent" >
 						<colgroup>
 					    <col width="80">
 					    <col width="120">
@@ -179,7 +179,11 @@
 				cell.innerHTML=i+1;
 			});
 		},
-
+		//让表格出横向滚动条 ，此时 表头和 表中数据将分为两个部分
+		"sScrollX":true,
+		// 让表格的宽度不自适应 ，固定宽度。 如果不设置 表头和表中数据会分离
+		//表中的数据自适应 ，表头的宽度固定
+		"bAutoWidth":false,
 		"order": [[2, 'desc']],
 		"oLanguage": { //国际化配置
 			"sProcessing": "正在获取数据，请稍后...",
