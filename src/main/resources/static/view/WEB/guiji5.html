@@ -47,9 +47,9 @@
 			<!---->
 			<div style="margin-top:-5%">
 			<label for="" style="margin-left: 35%;">时间筛选：</label>
-			<button type="button" class="layui-btn layui-btn-primary" onclick="getDay(-1)">昨天</button>
-			<button type="button" class="layui-btn layui-btn-primary" onclick="getDay(-3)">近3天</button>
-			<button type="button" class="layui-btn layui-btn-primary" onclick="getDay(-7)">近7天</button>
+			<button type="button" class="layui-btn layui-btn-primary" onclick="getDay(-1)" style="background-color:#1E9FFF;color:#FFFFFF;">昨天</button>
+			<button type="button" class="layui-btn layui-btn-primary" onclick="getDay(-3)" style="background-color:#1E9FFF;color:#FFFFFF;">近3天</button>
+			<button type="button" class="layui-btn layui-btn-primary" onclick="getDay(-7)" style="background-color:#1E9FFF;color:#FFFFFF;">近7天</button>
 			<br  />
 			</div>
 			<label for="" style="margin-left: 20px;margin-top:10px;width: 100px;">开始时间：</label>
@@ -66,7 +66,7 @@
 				<button type="button" class="layui-btn layui-btn-primary" style="border: 1px solid #A9A9A9;width: 70px;margin-left: 200px" onclick="clearSearch()">重置</button>
 				<button type="button" class="layui-btn layui-btn-normal"style="background-color: #215BA3;width: 70px;" onclick="search()">搜索</button>
 			</div>
-			<div style="overflow:scroll;">
+			<div style="overflow:auto;">
 			<table class="layui-table  table-bordered table-condensed table-hover layui-table" lay-skin="line"style="margin-top: 30px; width: 2200px;" id="mainContent" >
 						<colgroup>
 					    <col width="80">
