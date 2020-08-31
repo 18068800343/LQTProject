@@ -377,7 +377,7 @@
 		map.removeOverlay(marker);//清空上次标注
 		var name = $(this).text()
 		var data = table.row( this ).data();
-		var point = new BMap.Point(data.lon, data.lat);
+		var point = gpsToBaidu(data.lon, data.lat);
 		map.centerAndZoom(point, 12);
 
         marker = new BMap.Marker(point);  // 创建标注
@@ -487,7 +487,7 @@
 
 		if(data!=null&&data.length!=0){
 			for(var i=0;i<data.length;i++){
-				pois.push(new BMap.Point(data[i].lon,data[i].lat))
+				pois.push(gpsToBaidu(data[i].lon,data[i].lat))
 			}
 		}
 		var polyline =new BMap.Polyline(pois, {
@@ -502,7 +502,7 @@
 		map.addOverlay(polyline);          //增加折线
 		map.setViewport(pois);
 		//显示最新一条并计算总里程
-		var point = new BMap.Point(data[data.length-1].lon,data[data.length-1].lat);
+		var point = gpsToBaidu(data[data.length-1].lon,data[data.length-1].lat);
 		map.centerAndZoom(point, 12);
 
 		marker = new BMap.Marker(point);  // 创建标注
@@ -522,7 +522,7 @@
 
 
 	let map = new BMap.Map("container"); // 创建Map实例,GL版命名空间为BMapGL(鼠标右键控制倾斜角度)
-	map.centerAndZoom(new BMap.Point(115.072764,34.331276), 8);      // 初始化地图,设置中心点坐标和地图级别
+	map.centerAndZoom(gpsToBaidu(115.072764,34.331276), 8);      // 初始化地图,设置中心点坐标和地图级别
 	map.enableScrollWheelZoom(true);
 
 
