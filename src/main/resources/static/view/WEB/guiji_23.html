@@ -153,13 +153,25 @@
     var page_map;
     var showAllTrucks_timeout;
     var OneTrucksRefresh_timeout;
+    
     $(document).ready(function() {
+    	initProtocol();
         initmaps();
         showAllTrucks();
-
         showAllTrucks_timeout = setInterval(showAllTrucks, 30000);
     });
-
+    var httpURL;
+    function initProtocol(){
+    	var protocolStr = document.location.protocol;
+    	if(protocolStr == "http:")
+    	{
+    		httpURL = "http://58.222.201.158:6809";
+    	}
+    	else if(protocolStr == "https:")
+    	{
+    		httpURL = "https://oa.htgcjc.com:8094";
+    	}
+    }
     function initmaps() {
 
         page_map = new BMap.Map("dituContent");
@@ -213,7 +225,7 @@
         var key = "f30da8ee-61da-4c1a-bd73-54fee1d19d69";
         $.ajax({
             // get请求地址
-            url: "http://58.222.201.158:6809/deviceData/vehicleBaseInfo.do?key=" + key,
+            url: httpURL+"/deviceData/vehicleBaseInfo.do?key=" + key,
             dataType: "json",
             success: function(data) {
 
@@ -320,7 +332,7 @@
         $.ajax({
             type: 'POST',
             // get请求地址
-            url: "http://58.222.201.158:6809/deviceData/allRealData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&filterTime=0",
+            url: httpURL+"/deviceData/allRealData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&filterTime=0",
             dataType: "json",
             success: function(data) {
                 if (data.flag == 1) {
@@ -415,7 +427,7 @@
             getguiji(chepaipID, starthaomiao, endTimehaomiao);
         } else {
             toastr.error("请选择车牌");
-            alert("请选择车牌");
+            //alert("请选择车牌");
         }
     }
     //获取选择的车辆的轨迹并画出线路图
@@ -425,7 +437,7 @@
         }
         $.ajax({
             // get请求地址
-            url: "http://58.222.201.158:6809/track/queryTrackData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&startTime=" + starthaomiao + "&endTime=" + endTimehaomiao + "&id=" + chepaipID,
+            url: httpURL+"/track/queryTrackData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&startTime=" + starthaomiao + "&endTime=" + endTimehaomiao + "&id=" + chepaipID,
             dataType: "json",
             success: function(data) {
                 if (data.flag == 1) {
@@ -441,7 +453,7 @@
         $.ajax({
             type: 'POST',
             // get请求地址
-            url: "http://58.222.201.158:6809/deviceData/realtimeData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&ids=" + chepaipID,
+            url: httpURL+"/deviceData/realtimeData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&ids=" + chepaipID,
             dataType: "json",
             success: function(data) {
                 if (data.flag == 1) {
@@ -494,7 +506,7 @@
         $.ajax({
             type: 'POST',
             // get请求地址
-            url: "http://58.222.201.158:6809/deviceData/realtimeData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&ids=" + chepaipID,
+            url: httpURL+"/deviceData/realtimeData.do?key=f30da8ee-61da-4c1a-bd73-54fee1d19d69&ids=" + chepaipID,
             dataType: "json",
             success: function(data) {
                 if (data.flag == 1) {
