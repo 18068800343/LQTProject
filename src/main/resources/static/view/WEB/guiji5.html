@@ -134,18 +134,18 @@
 		getDay(-1)
 		search()
 	});
-	var httpURL;
-    function initProtocol(){
-    	var protocolStr = document.location.protocol;
-    	if(protocolStr == "http:")
-    	{
-    		httpURL = "http://58.222.201.158:6809";
-    	}
-    	else if(protocolStr == "https:")
-    	{
-    		httpURL = "https://oa.htgcjc.com:8094";
-    	}
-    }
+	 var httpURL;
+	    function initProtocol(){
+	    	var protocolStr = document.location.protocol;
+	    	if(protocolStr == "http:")
+	    	{
+	    		httpURL = "http://58.222.201.158:6809";
+	    	}
+	    	else if(protocolStr == "https:")
+	    	{
+	    		httpURL = "https://oa.htgcjc.com:8094";
+	    	}
+	    }
 	let table = $('#mainContent').dataTable({
 		"deferRender": true,
 		"processing": true,
@@ -224,7 +224,7 @@
 	function initChePai(){
 		$.ajax({
 	// get请求地址
-			url:httpURL+"http://58.222.201.158:6809/deviceData/vehicleBaseInfo.do?key="+key,
+			url: httpURL+"/deviceData/vehicleBaseInfo.do?key="+key,
 			dataType: "json",
 			async:false,
 			success: function (data) {
@@ -258,14 +258,14 @@
 			getlicheng(chepaipID,starthaomiao,endTimehaomiao)
 		}else{
 			toastr.error("请选择车牌和时间")
-			//alert("请选择车牌和时间")
+			alert("请选择车牌和时间")
 		}
 	}
 
 	function getlicheng(chepaipID,starthaomiao,endTimehaomiao){
 		$.ajax({
 			// get请求地址
-			url:httpURL+"http://58.222.201.158:6809/mileage/mileageData.do?key="+key+"&startTime="+starthaomiao+"&endTime="+endTimehaomiao+"&id="+chepaipID,
+			url: httpURL+"/mileage/mileageData.do?key="+key+"&startTime="+starthaomiao+"&endTime="+endTimehaomiao+"&id="+chepaipID,
 			dataType: "json",
 			success: function (data) {
 				if(data.flag==1){

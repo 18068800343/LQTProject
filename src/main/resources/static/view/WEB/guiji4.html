@@ -139,19 +139,22 @@
 			elem: '#endTime', //指定元素
 			type: 'datetime',trigger: 'click'
 		});
+
+
+
 	});
-	var httpURL;
-    function initProtocol(){
-    	var protocolStr = document.location.protocol;
-    	if(protocolStr == "http:")
-    	{
-    		httpURL = "http://58.222.201.158:6809";
-    	}
-    	else if(protocolStr == "https:")
-    	{
-    		httpURL = "https://oa.htgcjc.com:8094";
-    	}
-    }
+	 var httpURL;
+	    function initProtocol(){
+	    	var protocolStr = document.location.protocol;
+	    	if(protocolStr == "http:")
+	    	{
+	    		httpURL = "http://58.222.201.158:6809";
+	    	}
+	    	else if(protocolStr == "https:")
+	    	{
+	    		httpURL = "https://oa.htgcjc.com:8094";
+	    	}
+	    }
 	let table = $('#mainContent').DataTable({
 		"deferRender": true,
 		"processing": true,
