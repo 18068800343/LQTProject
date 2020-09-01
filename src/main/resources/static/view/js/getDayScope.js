@@ -1,28 +1,51 @@
 function getDay(day){
-    var today = new Date();
-    var targetday_milliseconds=today.getTime() + 1000*60*60*24*day;
-    today.setTime(targetday_milliseconds); //注意，这行是关键代码
-    var tYear = today.getFullYear();
-    var tMonth = today.getMonth();
-    var tDate = today.getDate();
-    tMonth = doHandleMonth(tMonth + 1);
-    tDate = doHandleMonth(tDate);
-    tDate2 = doHandleMonth(tDate+1);
-    var start= tYear+"-"+tMonth+"-"+tDate+" 00:00:00";
-    var end= tYear+"-"+tMonth+"-"+tDate2+" 00:00:00";
-    if(day!=0&&day!=-1){
-        tDate = doHandleMonth(tDate + 1);
-        start= tYear+"-"+tMonth+"-"+tDate+" 00:00:00";
-        var myDate = new Date;
-        var year = myDate.getFullYear(); //获取当前年
-        var mon = doHandleMonth(myDate.getMonth() + 1); //获取当前月
-        var date = doHandleMonth(myDate.getDate()); //获取当前日
-        var date2 = doHandleMonth(myDate.getDate()+1); //获取当前日
-        end=year+"-"+mon+"-"+date2+" 00:00:00";
+    //
+    var startTime;
+    var endTime;
+    if(day==1){//昨天
+         const start = new Date();
+         const end = new Date();
+         start.setTime(start.getTime() - 3600 * 1000 * 24 * day);
+         end.setTime(end.getTime());
+         startTime = start.Format("yyyy-MM-dd 00:00:00");
+         endTime = end.Format("yyyy-MM-dd 00:00:00");
+    }else if(day==3){//近三天
+        const start = new Date();
+        const end = new Date();
+        start.setTime(start.getTime() - 3600 * 1000 * 24 * day);
+        end.setTime(end.getTime());
+        startTime = start.Format("yyyy-MM-dd 00:00:00");
+        endTime = end.Format("yyyy-MM-dd 00:00:00");
+    }else if(day==7){//近七天
+        const start = new Date();
+        const end = new Date();
+        start.setTime(start.getTime() - 3600 * 1000 * 24 * day);
+        end.setTime(end.getTime());
+        startTime = start.Format("yyyy-MM-dd 00:00:00");
+        endTime = end.Format("yyyy-MM-dd 00:00:00");
     }
-    $("#starTime").val(start)
-    $("#endTime").val(end)
 
+    $("#starTime").val(startTime)
+    $("#endTime").val(endTime)
+
+}
+Date.prototype.Format = function(fmt)
+{ //author: meizz
+    var o = {
+        "M+" : this.getMonth()+1,                 //月份
+        "d+" : this.getDate(),                    //日
+        "h+" : this.getHours(),                   //小时
+        "m+" : this.getMinutes(),                 //分
+        "s+" : this.getSeconds(),                 //秒
+        "q+" : Math.floor((this.getMonth()+3)/3), //季度
+        "S"  : this.getMilliseconds()             //毫秒
+    };
+    if(/(y+)/.test(fmt))
+        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+    for(var k in o)
+        if(new RegExp("("+ k +")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+    return fmt;
 }
 function doHandleMonth(month){
     var m = month;
