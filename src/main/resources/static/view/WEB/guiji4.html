@@ -130,6 +130,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
+		initProtocol();
 		laydate.render({
 			elem: '#starTime', //指定元素
 			type: 'datetime',trigger: 'click'
@@ -138,10 +139,19 @@
 			elem: '#endTime', //指定元素
 			type: 'datetime',trigger: 'click'
 		});
-
-
-
 	});
+	var httpURL;
+    function initProtocol(){
+    	var protocolStr = document.location.protocol;
+    	if(protocolStr == "http:")
+    	{
+    		httpURL = "http://58.222.201.158:6809";
+    	}
+    	else if(protocolStr == "https:")
+    	{
+    		httpURL = "https://oa.htgcjc.com:8094";
+    	}
+    }
 	let table = $('#mainContent').DataTable({
 		"deferRender": true,
 		"processing": true,
@@ -400,7 +410,7 @@
 	function initChePai(){
 		$.ajax({
 	// get请求地址
-			url: "http://58.222.201.158:6809/deviceData/vehicleBaseInfo.do?key="+key,
+			url: httpURL+"/deviceData/vehicleBaseInfo.do?key="+key,
 			dataType: "json",
 			success: function (data) {
 
@@ -438,7 +448,7 @@
 	function getlichengguiji(chepaipID,starthaomiao,endTimehaomiao){
 		$.ajax({
 			// get请求地址
-			url: "http://58.222.201.158:6809/track/queryTrackData.do?key="+key+"&startTime="+starthaomiao+"&endTime="+endTimehaomiao+"&id="+chepaipID,
+			url: httpURL+"/track/queryTrackData.do?key="+key+"&startTime="+starthaomiao+"&endTime="+endTimehaomiao+"&id="+chepaipID,
 			dataType: "json",
 			success: function (data) {
 				if(data.flag==1){
