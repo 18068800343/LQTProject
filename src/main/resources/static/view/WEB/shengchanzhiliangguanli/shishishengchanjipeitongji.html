@@ -107,9 +107,19 @@
 	<script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/myTool.js"></script>
+	<script src="../../toastr/toastr.js"></script>
+	<script src="../../js/myUtil.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		let flag = 0;
 		$(document).ready(function () {
+			const start = new Date();
+			const end = new Date();
+			start.setTime(start.getTime() - 3600 * 1000 * 24 * 3);
+			end.setTime(end.getTime());
+			var startTime = start.Format("yyyy-MM-dd hh:mm:ss");
+			var endTime = end.Format("yyyy-MM-dd hh:mm:ss");
+			$("#reservation").val(startTime)
+			$("#reservationEnd").val(endTime)
 			getPeiBiTimeListByTime();
 			flag = 1
 		});
@@ -118,20 +128,22 @@
 		let startTime = {
 			elem: '#reservation',
 			type: 'datetime',
-        trigger: 'click',
-        done: function (date) {
-            let beginDate = date;
-            let endDate = $("#reservationEnd").val();
-            let d1 = beginDate;
-            let d2 = endDate;
-            if (beginDate != "" && endDate != "" && d1 > d2) {
-                toastr.error("开始时间不能大于结束时间！");
-                $("#reservation").val('');
-                return false;
-            }
-
-        }
-    };
+			trigger: 'click',
+			done: function (date) {
+				let beginDate = date;
+				let endDate = $("#reservationEnd").val();
+				let d1 = beginDate;
+				let d2 = endDate;
+				if (beginDate != "" && endDate != "" && d1 > d2) {
+					toastr.error("开始时间不能大于结束时间！");
+					$("#reservation").val('');
+					return false;
+				}
+				if(flag==1){
+					getPeiBiTimeListByTime(d1,d2)
+				}
+			}
+		};
     // 结束时间
     let endTime = {
         elem: '#reservationEnd',
@@ -148,7 +160,7 @@
                 return false;
             }
 			if(flag==1){
-				getPeiBiTimeListByTime2(d1,d2)
+				getPeiBiTimeListByTime(d1,d2)
 			}
 
         }
@@ -165,14 +177,23 @@
 
 
 
-    function getPeiBiTimeListByTime(){
+    function getPeiBiTimeListByTime(obj1,obj2){
+		var begTime;
+		var endTime;
+		if(obj1!=""&&obj1!=undefined&&obj1!=null&&obj2!=""&&obj2!=undefined&&obj2!=null){
+			begTime=obj1;
+			endTime=obj2;
+		}else{
+			begTime=$("#reservation").val();
+			endTime=$("#reservationEnd").val()
+		}
 		showMask()
 		$.ajax({
 			type: 'POST',
-			url: '/QualityByPlateRealTimeProdocutionData/getPeiBiTimeListByTime',
+			url: '/QualityJiPei/getAllQualityJiPeiByTime',
 			dataType: 'json',
 			data: {
-				beginTime:startTime,
+				beginTime:begTime,
 				endTime:endTime,
 			},
 			error: function (msg) {
@@ -181,7 +202,9 @@
 			success: function (json) {
 				$("#time").empty()
 				if(json!=null){
-					$("#time").append(`<option value=${json[0].productionTime}>${json[0].productionTime}_${json[0].peifangName}</option>`);
+					for(var i=0;i<json.length;i++) {
+						$("#time").append(`<option  value=${json[i].datetime}>${json[i].datetime}_${json[i].peifangName}</option>`);
+					}
 				}
 				searchBydate()
 				hidMask()
@@ -189,10 +212,10 @@
 		});
 	}
 
-		function getPeiBiTimeListByTime2(obj1,obj2){
+		/*function getPeiBiTimeListByTime2(obj1,obj2){
 			$.ajax({
 				type: 'POST',
-				url: '/QualityByPlateRealTimeProdocutionData/getPeiBiTimeListByTime',
+				url: '/QualityJiPei/getAllQualityJiPeiByTime',
 				dataType: 'json',
 				data: {
 					beginTime:obj1,
@@ -205,30 +228,32 @@
 					$("#time").empty()
 					if(json!=null){
 						for(var i=0;i<json.length;i++) {
-							$("#time").append(`<option value=${json[i].productionTime}>${json[i].productionTime}_${json[i].peifangName}</option>`);
+							$("#time").append(`<option value=${json[i].datetime}>${json[i].datetime}_${json[i].peifangName}</option>`);
 						}
 					}
 				}
 			});
-		}
+		}*/
 
 
 
 	function searchBydate() {
-		var time = $("#time option:selected").text().split("_")[0];
+		var peifangName = $("#time option:selected").text().split("_")[1];
+		var datetime = $("#time option:selected").text().split("_")[0];
 		$.ajax({
 			type: 'POST',
-			url: '/QualityByPlateRealTimeProdocutionData/getPeiBiOneByTime',
+			url: '/QualityJiPei/getAllQualityJiPeiByPeiFang',
 			dataType: 'json',
 			data: {
-				time: time
+				peifangName: peifangName,
+				datetime:datetime
 			},
 			error: function (msg) {
 				errMessage("请求UserController失败");
 			},
 			success: function (json) {
 				if(json!=null){
-					setEcahrs(json)
+					setEcahrs(json.QualityJiPei,json.DicPeifangshaikong)
 				}
 			}
 		});
@@ -236,26 +261,55 @@
 
 
 
-	function setEcahrs(obj){
+	//obj:集配百分比，obj2:集配上下限
+	function setEcahrs(obj1,obj2){
     	var arr=[]
-		arr.push(obj.baifenbi1)
-		arr.push(obj.baifenbi2)
-		arr.push(obj.baifenbi3)
-		arr.push(obj.baifenbi4)
-		arr.push(obj.baifenbi5)
-		arr.push(obj.baifenbi6)
-		arr.push(obj.baifenbiFen)
-		arr.push(obj.baifenbiLiqing)
+		arr.push(obj1.p0075*100)
+		arr.push(obj1.p015*100)
+		arr.push(obj1.p03*100)
+		arr.push(obj1.p06*100)
+		arr.push(obj1.p118*100)
+		arr.push(obj1.p236*100)
+		arr.push(obj1.p475*100)
+		arr.push(obj1.p95*100)
+		arr.push(obj1.p132*100)
+		arr.push(obj1.p16*100)
+		arr.push(obj1.p19*100)
+
+		var max=[]
+		max.push(obj2[0].max0075)
+		max.push(obj2[0].max015)
+		max.push(obj2[0].max03)
+		max.push(obj2[0].max06)
+		max.push(obj2[0].max118)
+		max.push(obj2[0].max236)
+		max.push(obj2[0].max475)
+		max.push(obj2[0].max95)
+		max.push(obj2[0].max132)
+		max.push(obj2[0].max16)
+		max.push(obj2[0].max19)
+
+		var min=[]
+		min.push(obj2[0].min0075)
+		min.push(obj2[0].min015)
+		min.push(obj2[0].min03)
+		min.push(obj2[0].min06)
+		min.push(obj2[0].min118)
+		min.push(obj2[0].min236)
+		min.push(obj2[0].min475)
+		min.push(obj2[0].min95)
+		min.push(obj2[0].min132)
+		min.push(obj2[0].min16)
+		min.push(obj2[0].min19)
 
 		var myChart = echarts.init(document.getElementById('sec'));
 		var option = {
-
+			legend: {
+				data: ['上限', '实时生产级配统计', '下限']
+			},
 			tooltip: {
 				trigger: 'axis'
 			},
-			/*legend: {
-				data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
-			},*/
 			grid: {
 				left: '3%',
 				right: '4%',
@@ -270,7 +324,7 @@
 			xAxis: {
 				type: 'category',
 				boundaryGap: false,
-				data: ['0-3', '3-6', '6-11', '11-17', '17-22', '22-32', '粉料比', '沥青比']
+				data: ['0.075', '0.15', '0.3', '0.6', '1.18', '2.36', '4.75', '9.5', '13.2', '16', '19']
 			},
 			yAxis: {
 				type: 'value',
@@ -278,10 +332,17 @@
 				position: 'left',
 			},
 			series: [{
+				name: '上限',
+				type: 'line',
+				data: max
+			},{
 				name: '实时生产级配统计',
 				type: 'line',
-				stack: '总量',
 				data: arr
+			},{
+				name: '下限',
+				type: 'line',
+				data: min
 			}
 			]
 		};

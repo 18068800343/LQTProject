@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ldxx.dao.QualityJiPeiDao" >
+
+
+	<select id="getAllQualityJiPeiByPeiFang" resultType="QualityJiPei">
+		select * from quality_ji_pei
+		<where>
+			<if test="peifangName!='' and peifangName!=null">
+				peifang_name=#{peifangName}
+			</if>
+			<if test="datetime!='' and datetime!=null">
+				and datetime = #{datetime}
+			</if>
+		</where>
+	</select>
+
+	<select id="getAllQualityJiPeiByTime" resultType="QualityJiPei">
+		select * from quality_ji_pei
+		<where>
+			<if test="beginTime!='' and beginTime!=null">
+				datetime &gt; #{beginTime}
+			</if>
+			<if test="endTime!='' and endTime!=null">
+				and datetime &lt; #{endTime}
+			</if>
+		</where> order by datetime desc
+	</select>
+
+	<select id="getDicPeifangshaikongByName" resultType="DicPeifangshaikong">
+		select * from dic_peifangshaikong
+		<where>
+			<if test="name!='' and name!=null">
+				name=#{peifangName}
+			</if>
+		</where>
+	</select>
+	
+</mapper>
