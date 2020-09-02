@@ -114,7 +114,7 @@
 	</select>
 
     <select id="getAllTanPuDiDianVoByState" resultType="siteConstructionVo">
-		select sc.*  from site_construction sc WHERE sc.delete_state=#{state}
+		select sc.*,ppc.finish_time  from site_construction sc LEFT JOIN plan_production_collection ppc on sc.id= ppc.site_id WHERE sc.delete_state=#{state}
 	</select>
 
     <select id="getBiaoDuanByLuDuan" resultType="siteConstruction" parameterType="map">

@@ -6,21 +6,31 @@ import java.math.BigDecimal;
 
 public class SiteConstructionVo extends SiteConstruction {
 
-	private String roadno;
-	private String roadname;
-	private BigDecimal allXuQiu;
-	private BigDecimal allGongYing;
-	private String datetime;
+    private String roadno;
+    private String roadname;
+    private BigDecimal allXuQiu;
+    private BigDecimal allGongYing;
+    private String datetime;
 
-	public String getDatetime() {
-		return datetime;
-	}
+    private String finishTime;
 
-	public void setDatetime(String datetime) {
-		this.datetime = datetime;
-	}
+    public String getFinishTime() {
+        return finishTime;
+    }
 
-	public BigDecimal getAllXuQiu() {
+    public void setFinishTime(String finishTime) {
+        this.finishTime = finishTime;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
+    public BigDecimal getAllXuQiu() {
 		return allXuQiu;
 	}
 

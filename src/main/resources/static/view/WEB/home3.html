@@ -181,14 +181,16 @@
 			</div>
 
 		</div>
-		</div>
-		<!-- 左边结束 -->
+	</div>
+	<!-- 左边结束 -->
 	</body>
 	<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js?_v_=1595477515301" type="text/javascript" charset="utf-8"></script>
+	<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js?_v_=1595477515301" type="text/javascript"
+			charset="utf-8"></script>
 	<!-- <script src="../js/layui.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/element.js" type="text/javascript" charset="utf-8"></script> -->
 	<script src="../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/myUtil.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 	<script src="../js/build/dist/echarts.js" type="text/javascript" charset="utf-8"></script>
@@ -196,9 +198,9 @@
 	<script src="../easyUI/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=BmTwezCvWyGaH3KNYkc5P6uq&s=1"></script>
 	<script type="text/javascript">
-	$(document).ready(function () {
+		$(document).ready(function () {
 
-    });
+		});
 
     let points = [{
         id: 1,
@@ -338,30 +340,41 @@
 					}
 					page_pointArray = pointArray
 					page_point = array;*/
-					for(var i in json){
+					for(var i in json) {
 						var point = new BMap.Point(json[i].lng, json[i].lat);
-						addMarker(point, json[i].stakemark, json[i].lane, json[i], i);
+						if (null != json[i].finishTime) {
+							var finishtime = json[i].finishTime.split(" ")[0];
+							const time = new Date();
+							time.setTime(time.getTime());
+							var now = time.Format("yyyy-MM-dd");
+							if (finishtime < now) {
+								addMarker(point, json[i].stakemark, json[i].lane, json[i], 2);
+							} else {
+								addMarker(point, json[i].stakemark, json[i].lane, json[i], 4);
+							}
+						} else {
+							addMarker(point, json[i].stakemark, json[i].lane, json[i], 2);
+						}
 					}
 				}
 			});
 		}
-		function dianImg () {
-			var imgArr=['../images/wz1.png','../images/wz2.png','../images/wz3.png','../images/wz4.png','../images/wz5.png','../images/wz6.png','../images/wz7.png','../images/wz8.png','../images/wz9.png','../images/wz10.png','../images/wz11.png','../images/wz12.png','../images/wz13.png','../images/wz14.png','../images/wz15.png','../images/wz16.png','../images/wz17.png','../images/wz18.png','../images/wz19.png','../images/wz20.png','../images/wz21.png','../images/wz22.png','../images/wz23.png','../images/wz24.png'];
-			var index = Math.floor(Math.random()*imgArr.length);
-			var imgSrc = imgArr[index];
+
+		function dianImg(e) {
+			var imgArr = ['../images/wz1.png', '../images/wz2.png', '../images/wz3.png', '../images/wz4.png', '../images/wz5.png', '../images/wz6.png', '../images/wz7.png', '../images/wz8.png', '../images/wz9.png', '../images/wz10.png', '../images/wz11.png', '../images/wz12.png', '../images/wz13.png', '../images/wz14.png', '../images/wz15.png', '../images/wz16.png', '../images/wz17.png', '../images/wz18.png', '../images/wz19.png', '../images/wz20.png', '../images/wz21.png', '../images/wz22.png', '../images/wz23.png', '../images/wz24.png'];
+			var imgSrc = imgArr[e];
 			return imgSrc;
 		};
-		
-		function addMarker(point, stakemark,lane,obj, i) {
+
+		function addMarker(point, stakemark, lane, obj, i) {
 			var marker = new BMap.Marker(point, {
-				icon: new BMap.Icon(dianImg(), new BMap.Size(30, 30), {
-					  anchor: new BMap.Size(52, 26),
-					  imageSize: new BMap.Size(30, 30)
+				icon: new BMap.Icon(dianImg(i), new BMap.Size(30, 30), {
+					anchor: new BMap.Size(52, 26),
+					imageSize: new BMap.Size(30, 30)
 				})
 			});
 			var sContent =
-					"<h4 style='margin:0 0 5px 0;padding:0.2em 0'>" + obj.stakemark + "</h4>" +"<br/>"
-			"";
+					"<h4 style='margin:0 0 5px 0;padding:0.2em 0'>" + obj.stakemark + "</h4>" + "<br/>";
 			var infoWindow = new BMap.InfoWindow(sContent);
 			page_map.addOverlay(marker);
 			marker.addEventListener("click", function () {
