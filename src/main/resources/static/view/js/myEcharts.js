@@ -39,9 +39,6 @@ function setLableOption(echartsDom){
 			formatter: '{c}  {name|{a}}',
 			fontSize:15,
 			rich: {
-				name: {
-					textBorderColor: '#fffdfc'
-				}
 			}
 		}
 	};
@@ -49,16 +46,13 @@ function setLableOption(echartsDom){
 
 function setCangChuOption(map){
 	let option = {
-			color: ['#1F99EE', '#006699'],
-		    tooltip: {
-		        trigger: 'axis',
-		        axisPointer: {
-					type: 'shadow'
-				}
-		    },
+			color: ['#6A5CFF', '#006699'],
 		    legend: {
 		    	data: ['仓库容量', '剩余重量']
 		    },
+		    textStyle:{
+                color: '#000000'//字体颜色
+            },
 		    grid: {
 		        left: '10%',
 		        right: '4%',
@@ -87,7 +81,9 @@ function setCangChuOption(map){
 				},
 				{
 					name: '剩余重量',
+					barGap: 0,
 					type: 'bar',
+					position: 'top',
 					label: pageCangChuLabelOption,
 					data: map.aList
 				}
