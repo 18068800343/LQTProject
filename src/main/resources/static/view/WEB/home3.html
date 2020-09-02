@@ -323,6 +323,8 @@
 				},
 				success: function (json) {
 
+					let siteList = json.siteList;
+					let nowShengChanJiHua = json.nowShengChanJiHua;
 					/*let pointArray = [];
 					let array = {};
 					for (var i in json) {
@@ -340,20 +342,23 @@
 					}
 					page_pointArray = pointArray
 					page_point = array;*/
-					for(var i in json) {
+					for (var i in siteList) {
+						json = siteList
 						var point = new BMap.Point(json[i].lng, json[i].lat);
 						if (null != json[i].finishTime) {
-							var finishtime = json[i].finishTime.split(" ")[0];
+							var finishtime = json[i].finishTime;
 							const time = new Date();
 							time.setTime(time.getTime());
-							var now = time.Format("yyyy-MM-dd");
-							if (finishtime < now) {
+							let now = time.Format("yyyy-MM-dd HH:mm:ss");
+							let now0 = time.Format("yyyy-MM-dd") + " 00:00:00";
+							if (nowShengChanJiHua != null) {
+								now = nowShengChanJiHua.finishTime;
+							}
+							if (finishtime < now && finishtime > now0) {
 								addMarker(point, json[i].stakemark, json[i].lane, json[i], 2);
-							} else {
+							} else if (finishtime >= now) {
 								addMarker(point, json[i].stakemark, json[i].lane, json[i], 4);
 							}
-						} else {
-							addMarker(point, json[i].stakemark, json[i].lane, json[i], 2);
 						}
 					}
 				}

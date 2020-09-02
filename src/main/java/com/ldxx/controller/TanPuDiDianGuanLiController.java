@@ -3,6 +3,7 @@ package com.ldxx.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ldxx.bean.SiteConstruction;
 import com.ldxx.bean.User;
+import com.ldxx.dao.ShengChanJiHuaDao;
 import com.ldxx.dao.TanPuDiDianGuanLiDao;
 import com.ldxx.service.TanPuDiDianGuanLiService;
 import com.ldxx.util.LDXXUtils;
@@ -24,21 +25,23 @@ import java.util.Map;
 @RequestMapping("/TanPuDiDianGuanLi")
 public class TanPuDiDianGuanLiController {
 
-    @Autowired
-    private TanPuDiDianGuanLiService service;
+	@Autowired
+	private TanPuDiDianGuanLiService service;
 
-    @Resource
-    private TanPuDiDianGuanLiDao dao;
+	@Resource
+	private TanPuDiDianGuanLiDao dao;
+	@Resource
+	private ShengChanJiHuaDao shengChanJiHuaDao;
 
-    @RequestMapping("/getDistinctTanPuDiDian")
-    @ResponseBody
-    public List<SiteConstruction> getDistinctTanPuDiDian() {
-        return service.getDistinctTanPuDiDian();
-    }
+	@RequestMapping("/getDistinctTanPuDiDian")
+	@ResponseBody
+	public List<SiteConstruction> getDistinctTanPuDiDian() {
+		return service.getDistinctTanPuDiDian();
+	}
 
-    @RequestMapping("/getAllTanPuDiDian")
-    @ResponseBody
-    public List<SiteConstructionVo> getAllTanPuDiDian(HttpSession session, String roadquanxain) {
+	@RequestMapping("/getAllTanPuDiDian")
+	@ResponseBody
+	public List<SiteConstructionVo> getAllTanPuDiDian(HttpSession session, String roadquanxain) {
         String luduanquanxian = "";
 		if (roadquanxain != null) {
 			luduanquanxian = roadquanxain;
@@ -52,8 +55,11 @@ public class TanPuDiDianGuanLiController {
 
 	@RequestMapping("/getAllTanPuDiDianVoByState")
 	@ResponseBody
-	public List<SiteConstructionVo> getAllTanPuDiDianVoByState(HttpSession session, Integer state) {
-		return dao.getAllTanPuDiDianVoByState(state);
+	public Map<String, Object> getAllTanPuDiDianVoByState(HttpSession session, Integer state) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("siteList", dao.getAllTanPuDiDianVoByState(state));
+		map.put("nowShengChanJiHua", shengChanJiHuaDao.getShengChanJiHuaNow());
+		return map;
 	}
 
 	@RequestMapping("/delTanPuDiDian")
