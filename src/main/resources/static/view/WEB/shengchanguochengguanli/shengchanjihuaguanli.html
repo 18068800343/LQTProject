@@ -539,10 +539,32 @@
 							<!--										   style="width: 100%; height: 100%; "></td>-->
 							<!--							</tr>-->
 							<tr>
+								<td>长</td>
+								<td><input type="text" class="form-control" id="chang" v-model="chang"
+										   style="width: 100%; height: 100%;"/></td>
+								<td>宽</td>
 								<td>
-									单价
-									<!--									到现场温度要求-->
+									<input type="text" class="form-control" id="kuan" v-model="kuan"
+										   style="width: 100%; height: 100%;"/>
 								</td>
+							</tr>
+							<tr>
+								<td>深</td>
+								<td><input type="text" class="form-control" id="gao" v-model="gao"
+										   style="width: 100%; height: 100%;"/></td>
+								<td>密度</td>
+								<td>
+									<input type="text" id="midu" class="form-control" v-model="midu"
+										   onblur="countWeight(1)" style="width: 100%; height: 100%;"/>
+								</td>
+							</tr>
+							<tr>
+								<td>富余量</td>
+								<td>
+									<input type="text" id="fuyuliang" class="form-control" onblur="countWeight(1)"
+										   v-model="fuyuliang" style="width: 100%; height: 100%;"/>
+								</td>
+								<td>单价</td>
 								<td>
 									<input class="form-control" type="text" @blur="reg(price,'xiaoshu','price')"
 										   v-model="price" id="price" placeholder="请输入"
@@ -552,9 +574,11 @@
 									<!--										   id="arrivetemp" placeholder="请输入"-->
 									<!--										   style="width: 100%; height: 100%; ">-->
 								</td>
+							</tr>
+							<tr>
 								<td>
 									路名
-									<!--									干拌时间-->
+									<!--									到现场温度要求-->
 								</td>
 								<td>
 									<input class="form-control" type="text" v-model="roadName" id="roadName"
@@ -564,6 +588,11 @@
 									<!--										   id="drymixingtime" placeholder="请输入"-->
 									<!--										   style="width: 100%; height: 100%; ">-->
 								</td>
+								<td>
+
+									<!--									干拌时间-->
+								</td>
+								<td></td>
 							</tr>
 
 							<tr>
@@ -628,33 +657,7 @@
 								<td></td>
 								<td></td>
 							</tr>
-							<tr>
-								<td>长</td>
-								<td><input type="text" class="form-control" id="chang"  v-model="chang"
-										   style="width: 100%; height: 100%;"/></td>
-								<td>宽</td>
-								<td>
-									<input type="text" class="form-control" id="kuan"  v-model="kuan"
-										   style="width: 100%; height: 100%;"/>
-								</td>
-							</tr>
-							<tr>
-								<td>深</td>
-								<td><input type="text" class="form-control" id="gao" v-model="gao"
-										   style="width: 100%; height: 100%;" onblur="countWeight(1)"/></td>
-								<td>密度</td>
-								<td>
-									<input type="text" id="midu" class="form-control" v-model="midu" style="width: 100%; height: 100%;"/>
-								</td>
-							</tr>
-							<tr>
-								<td>富余量</td>
-								<td>
-									<input type="text" id="fuyuliang" class="form-control" v-model="fuyuliang" style="width: 100%; height: 100%;"/>
-								</td>
-								<td></td>
-								<td></td>
-							</tr>
+
 						</table>
                         <div style="width: 870px;height: 300px;" id="map"></div>
                     </form>
@@ -911,16 +914,18 @@
 							<tr>
 								<td>深</td>
 								<td><input type="text" class="form-control" id="xg_gao" v-model="gao"
-										   style="width: 100%; height: 100%;" onblur="countWeight(2)"/></td>
+										   style="width: 100%; height: 100%;"/></td>
 								<td>密度</td>
 								<td>
-									<input type="text" id="xg_midu" class="form-control" v-model="midu" style="width: 100%; height: 100%;"/>
+									<input type="text" id="xg_midu" class="form-control" v-model="midu"
+										   onblur="countWeight(2)" style="width: 100%; height: 100%;"/>
 								</td>
 							</tr>
 							<tr>
 								<td>富余量</td>
 								<td>
-									<input type="text" id="xg_fuyuliang" class="form-control" v-model="fuyuliang" style="width: 100%; height: 100%;"/>
+									<input type="text" id="xg_fuyuliang" class="form-control" onblur="countWeight(2)"
+										   v-model="fuyuliang" style="width: 100%; height: 100%;"/>
 								</td>
 								<td></td>
 								<td></td>
@@ -1489,12 +1494,15 @@
 		});
 	}
 	function countWeight(obj) {
-		if(obj==1){
+		if(obj==1) {
 			//let tiji = $("#tiji").val()
-			//let midu = $("#midu").val()
+			let midu = $("#midu").val()
 			let chang = $("#chang").val()
 			let kuan = $("#kuan").val()
 			let gao = $("#gao").val()
+			let fuyuliang = 0;
+			fuyuliang = $("#fuyuliang").val()
+			fuyuliang = parseFloat(fuyuliang);
 
 			let re = new RegExp('^[0-9]+\.?[0-9]*$');
 			let flag1;
@@ -1502,22 +1510,24 @@
 			let flag3;
 			let flag4;
 			let flag5;
+			let flag6;
 			//flag1 = reg(tiji, re);
-			//flag2 = reg(midu, re);
+			flag2 = reg(midu, re);
 			flag3 = reg(chang, re);
 			flag4 = reg(kuan, re);
 			flag5 = reg(gao, re);
+			flag6 = reg(fuyuliang, re);
 
 			// if (!flag1) {
 			//     toastr.error("体积请输入数字");
 			//     $("#tiji").val('')
 			//     return 1
 			// }
-			/*if (!flag2) {
-                toastr.error("密度请输入数字");
-                $("#midu").val('')
-                return 1
-            }*/
+			if (!flag2) {
+				toastr.error("密度请输入数字");
+				$("#midu").val('')
+				return 1
+			}
 			if (!flag3) {
 				toastr.error("长度请输入数字");
 				$("#chang").val('')
@@ -1533,41 +1543,50 @@
 				$("#gao").val('')
 				return 1
 			}
+			if (!flag6) {
+				toastr.error("富余量请输入数字");
+				return 1
+			}
 
 			/*let countWeight = tiji * midu;
             $("#zhongliang").val(countWeight);*/
 			let tijiCount = chang * kuan * gao;
-			$("#pdneed").val(tijiCount);
-			app5.pdneed=tijiCount
-		}else{
+			let countWeight = tijiCount * midu + fuyuliang;
+			$("#pdneed").val(countWeight);
+			app5.pdneed = countWeight
+		}else {
 			//let tiji = $("#tiji").val()
-			//let midu = $("#midu").val()
+			let midu = $("#xg_midu").val()
 			let chang = $("#xg_chang").val()
 			let kuan = $("#xg_kuan").val()
 			let gao = $("#xg_gao").val()
-
+			let fuyuliang = 0;
+			fuyuliang = $("#xg_fuyuliang").val()
+			fuyuliang = parseFloat(fuyuliang);
 			let re = new RegExp('^[0-9]+\.?[0-9]*$');
 			let flag1;
 			let flag2;
 			let flag3;
 			let flag4;
 			let flag5;
+			let flag6;
 			//flag1 = reg(tiji, re);
-			//flag2 = reg(midu, re);
+			flag2 = reg(midu, re);
 			flag3 = reg(chang, re);
 			flag4 = reg(kuan, re);
 			flag5 = reg(gao, re);
+			flag6 = reg(fuyuliang, re);
 
 			// if (!flag1) {
 			//     toastr.error("体积请输入数字");
 			//     $("#tiji").val('')
 			//     return 1
 			// }
-			/*if (!flag2) {
-                toastr.error("密度请输入数字");
-                $("#midu").val('')
-                return 1
-            }*/
+			if (!flag2) {
+				toastr.error("密度请输入数字");
+				$("#xg_midu").val('')
+				return 1
+			}
 			if (!flag3) {
 				toastr.error("长度请输入数字");
 				$("#xg_chang").val('')
@@ -1583,12 +1602,17 @@
 				$("#xg_gao").val('')
 				return 1
 			}
+			if (!flag6) {
+				toastr.error("富余量请输入数字");
+				return 1
+			}
 
 			/*let countWeight = tiji * midu;
             $("#zhongliang").val(countWeight);*/
 			let tijiCount = chang * kuan * gao;
-			$("#xg_pdneed").val(tijiCount);
-			xgSCVm.pdneed=tijiCount
+			let countWeight = tijiCount * midu + fuyuliang;
+			$("#xg_pdneed").val(countWeight);
+			xgSCVm.pdneed = countWeight
 		}
 
 	}
