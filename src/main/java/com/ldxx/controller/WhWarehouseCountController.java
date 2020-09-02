@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.ldxx.bean.User;
 import com.ldxx.dao.WhWarehouseCountDao;
+import com.ldxx.vo.WhCangChuVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,12 @@ public class WhWarehouseCountController {
 	@ResponseBody
 	public List<WhWarehouseCount> getAllWhWarehouseCount() {
 		return service.getAllWhWarehouseCount();
+	}
+
+	@RequestMapping("/initCangChuGuanLi")
+	@ResponseBody
+	public List<WhCangChuVo> initCangChuGuanLi() {
+		return dao.initCangChuGuanLi();
 	}
 
 	@RequestMapping("/getWhWarehouseCountById")

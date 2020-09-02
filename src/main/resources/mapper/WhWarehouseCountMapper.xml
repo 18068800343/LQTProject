@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ldxx.dao.WhWarehouseCountDao" >
-	
+<mapper namespace="com.ldxx.dao.WhWarehouseCountDao">
+	<resultMap id="baseResultMap" type="com.ldxx.vo.WhCangChuVo">
+
+		<id column="id" property="id"/>
+		<result column="bianhao" property="bianhao"/>
+		<result column="chuliang" property="chuliang"/>
+		<!-- 如果这里需要传递一个card和一个driverId到子查询中 -->
+		<!-- cardParam表示自查询中用到的键(键可自己定义)、card表示当前结果集的card列的值(列根据上面的结果集来) -->
+		<!-- driverIdParam表示自查询中用到的键(键可自己定义)、driverId表示当前结果集的driverId列的值(列根据上面的结果集来) -->
+		<association property="whWarehouseCount" column="{storeNo = bianhao}"
+					 javaType="com.ldxx.bean.WhWarehouseCount" select="selectNewWharehouseCountByStorNo">
+		</association>
+	</resultMap>
+
 	<select id="getAllWhWarehouseCount" resultType="WhWarehouseCount">
 		select a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state
 		,a.max_weight,a.tiji
@@ -13,14 +25,22 @@
 		LEFT JOIN u_user usr ON a.edit_user_id2 = usr.user_id and usr.delete_state = 1
 		 where a.delete_state=1
 	</select>
-	
+
+	<select id="initCangChuGuanLi" resultMap="com.ldxx.dao.WhWarehouseCountDao.baseResultMap">
+		select wc.* from wh_cangchu wc
+	</select>
+
+	<select id="selectNewWharehouseCountByStorNo">
+		select top 1 * FROM wh_warehouse_count WHERE delete_state = 1 and stor_no = #{storeNo} ORDER BY edit_datetime2 desc
+	</select>
+
 	<select id="getWhWarehouseCountById" resultType="WhWarehouseCount">
 		select a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state,b.material_name as materialsName
 		from wh_warehouse_count as a
 		left join dic_materials b on a.materials=b.id 
 		 where a.id=#{id}
 	</select>
-	
+
 	<update id="updWhWarehouseCountById" parameterType="WhWarehouseCount">
 		update wh_warehouse_count set 
 			stor_no=#{wwc.storNo},

@@ -689,7 +689,7 @@
         let bList = [];
         for (let i in list) {
             xList[i] = list[i].storNo;
-            aList[i] = list[i].weight;
+            aList[i] = list[i].whWarehouseCount.weight;
             bList[i] = list[i].maxWeight;
         }
         pageVariable.xList = xList;
@@ -725,6 +725,22 @@
             success: function (json) {
                 $('#mainContent').dataTable().fnClearTable();
                 $('#mainContent').DataTable().rows.add(json).draw(false);
+                // getXYList(json);
+                // initOption();
+            }
+        });
+    }
+
+
+    function initCangChuGuanLi() {
+        $.ajax({
+            type: 'POST',
+            url: '/WhWarehouseCount/initCangChuGuanLi',
+            data: {},
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
                 getXYList(json);
                 initOption();
             }

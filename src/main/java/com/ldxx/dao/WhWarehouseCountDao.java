@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.ldxx.bean.WhCangchu;
+import com.ldxx.vo.WhCangChuVo;
 import org.apache.ibatis.annotations.Param;
 
 import com.ldxx.bean.WhWarehouseCount;
 
 public interface WhWarehouseCountDao {
-	
+
 	List<WhWarehouseCount> getAllWhWarehouseCount();
+
+	List<WhCangChuVo> initCangChuGuanLi();
 
 	WhWarehouseCount getWhWarehouseCountById(@Param("id") String id);
 
