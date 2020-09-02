@@ -102,7 +102,7 @@
             <!--                <source src='rtmp://rtmp01open.ys7.com/openlive/0bb5bb8d1e1a457098024003a58ed234' type='rtmp/flv'/>-->
             <!--&lt;!&ndash;                <source src='rtmp://58.200.131.2:1935/livetv/hunantv' type='rtmp/flv'/>&ndash;&gt;-->
             <!--            </video>-->
-            <div id="myPlayer" style="width: 1400px;height: 700px;"></div>
+            <div id="myPlayer" style="width: 1100px;height: 800px;"></div>
         </div>
     </div>
 <!-- allMsg -->
@@ -191,7 +191,7 @@
         // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
         // 开始初始化直播源地址
         //开始初始化监控地址
-        let url = `ezopen://open.ys7.com/E20449234/3.rec?begin=${start}&end=${end}`;
+        let url = `ezopen://open.ys7.com/D99811486/1.rec?begin=${start}&end=${end}`;
 
         let player = new EZUIPlayer({
             id: 'myPlayer',
@@ -200,8 +200,8 @@
             accessToken: page_accessToken,
             //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
             decoderPath: '/view/js/EZUIKit-JavaScript',
-            width: 1400,
-            height: 700,
+            width: 1100,
+            height: 800,
         });
         //播放
         player.play();
@@ -211,7 +211,7 @@
         // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
         // 开始初始化直播源地址
         //开始初始化监控地址
-        let url = `ezopen://open.ys7.com/E20449234/3.live`;
+        let url = `ezopen://open.ys7.com/D99811486/1.live`;
 
         let player = new EZUIPlayer({
             id: 'myPlayer',
@@ -220,8 +220,8 @@
             accessToken: page_accessToken,
             //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
             decoderPath: '/view/js/EZUIKit-JavaScript',
-            width: 1400,
-            height: 700,
+            width: 1100,
+            height: 800,
         });
         //播放
         player.play();
@@ -257,8 +257,8 @@
                     accessToken: accessToken,
                     //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
                     decoderPath: '/view/js/EZUIKit-JavaScript',
-                    width: 1400,
-                    height: 700,
+                    width: 1100,
+                    height: 800,
                 });
                 //播放
                 player.play();
