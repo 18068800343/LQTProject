@@ -30,7 +30,7 @@
 		select wc.* from wh_cangchu wc
 	</select>
 
-	<select id="selectNewWharehouseCountByStorNo">
+	<select id="selectNewWharehouseCountByStorNo" resultType="WhWarehouseCount">
 		select top 1 * FROM wh_warehouse_count WHERE delete_state = 1 and stor_no = #{storeNo} ORDER BY edit_datetime2 desc
 	</select>
 

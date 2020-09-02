@@ -418,6 +418,7 @@
         });
         $("#luduanbianhao").trigger("change");
         initTable();
+        initCangChuGuanLi();
         initTableInOut();
         initCailiao();
     });
@@ -688,9 +689,9 @@
         let aList = [];
         let bList = [];
         for (let i in list) {
-            xList[i] = list[i].storNo;
-            aList[i] = list[i].whWarehouseCount.weight;
-            bList[i] = list[i].maxWeight;
+            xList[i] = list[i].bianhao;
+            aList[i] = list[i].chuliang - list[i].whWarehouseCount.weight;
+            bList[i] = list[i].chuliang;
         }
         pageVariable.xList = xList;
         pageVariable.aList = aList;
