@@ -56,7 +56,8 @@
 			    padding-top:5px;
 			    padding-left:-30px;
 			}
-			.righttop {
+			@media screen and (min-width: 1920px) {
+				.righttop {
 					margin-top: -20% !important;
 				}
 				.rightbottom {
@@ -65,6 +66,7 @@
 				.rightbottom span {
 					margin-top: 1% !important;
 				}
+			}
 			@media screen and (max-width: 1366px) {
 				#main{
 				   width:500px !important;
@@ -105,12 +107,12 @@
 			}
 			@media screen and (max-width: 1600px) {
 			     .rightfirst{
-				   width:450px;
+				   width:450px !important;
 				   height:250px !important;
 				   right:30px;
 				}
 				.rightsec{
-				   width:450px ;
+				   width:450px !important;
 				   margin-top:21%  !important;
 				   height:300px !important;
 				   right:0px;
@@ -118,9 +120,6 @@
 				#chart2{
 				   height:290px !important;
 				   width:400px !important;
-				}
-				.table{
-				   height:600px ;
 				}
 			}
 		</style>
@@ -137,21 +136,21 @@
 		
 		<div class="y-span10 y-last">
 			<div class="B" style="float: right;">
-				<div class="rightfirst col-xs-4" style="float: right;background-color: white;margin-right: 0px;height: 450px;width: 580px;">
+				<div class="rightfirst col-xs-4" style="float: right;background-color: white;margin-right: 0px;height: 400px;width: 580px;">
 					<div class="title2" style="margin-left: 1%;padding-top: 2%;">
 						<img src="../images/dec.png" />
 						<p style="display: inline-block;color: #1897e8;font-size: 15px;font-weight: bold;margin-left: 1%;">供需统计</p>
 					</div>
 					<!--标题结束-->
-					<div id="chart1" style="width:550px; height: 400px;"></div>
+					<div id="chart1" style="width:550px; height: 380px;"></div>
 				</div>
-				<div class="rightsec col-xs-4" style="float: right;background-color: white;margin-right: 2%;height: 490px;width: 580px;position: absolute;margin-top: 28%;">
+				<div class="rightsec col-xs-4" style="float: right;background-color: white;margin-right: 2%;height: 400px;width: 580px;position: absolute;margin-top: 25%;">
 					<div class="title3" style="margin-left: 1%;padding-top: 2%;">
 						<img src="../images/dec.png" />
 						<p style="display: inline-block;color: #1897e8;font-size: 15px;font-weight: bold;margin-left: 1%;">日生产量统计</p>
 					</div>
 					<!--标题结束-->
-					<div id="chart2" style="width:550px; height:450px;"></div>
+					<div id="chart2" style="width:550px; height:380px;"></div>
 				</div>
 				<!-- <div id="cbjdtj" class="rightsec col-xs-4" style="float: right;background-color: white;margin-right: 2%;height: 260px;width: 580px;position: absolute;margin-top: 36%;">
 					<div class="title3" style="margin-left: 1%;padding-top: 2%;">
@@ -164,7 +163,7 @@
 
 				</div> -->
 			</div>
-			<div class="table" style="background-color: #FFF;width: 60%;height: 940px;margin-left: 1%;margin-top: 1%;">
+			<div class="table" style="background-color: #FFF;width: 60%;height: 820px;margin-left: 1%;margin-top: 1%;">
 
 				<div class="bj_nav y-clearfix">
 					<div class="title" style="margin-left: 1%;padding-top: 1%;position:absolute;float:left;width:100%;">
@@ -340,23 +339,27 @@
 					page_point = array;*/
 					for(var i in json){
 						var point = new BMap.Point(json[i].lng, json[i].lat);
-						addMarker(point, json[i].stakemark, json[i].lane, json[i], i);
+						addMarker(point, json[i].stakemark, json[i].lane, json[i],i);
 					}
 				}
 			});
 		}
-		function dianImg () {
-			var imgArr=['../images/wz1.png','../images/wz2.png','../images/wz3.png','../images/wz4.png','../images/wz5.png','../images/wz6.png','../images/wz7.png','../images/wz8.png','../images/wz9.png','../images/wz10.png','../images/wz11.png','../images/wz12.png','../images/wz13.png','../images/wz14.png','../images/wz15.png','../images/wz16.png','../images/wz17.png','../images/wz18.png','../images/wz19.png','../images/wz20.png','../images/wz21.png','../images/wz22.png','../images/wz23.png','../images/wz24.png'];
-			var index = Math.floor(Math.random()*imgArr.length);
-			var imgSrc = imgArr[index];
-			return imgSrc;
-		};
-		
-		function addMarker(point, stakemark,lane,obj, i) {
+
+		function addMarker(point, stakemark,lane,obj,i) {
+			var pointImg;
+			if (i % 2 !== 0) {
+				pointImg = '../images/wz3.png'
+				pointImg = new BMap.Icon(pointImg, new BMap.Size(27, 13), {
+				  anchor: new BMap.Size(52, 26),
+				  imageSize: new BMap.Size(27, 13)
+				})
+			} else {
+				pointImg = '../images/wz4.png'
+			}
 			var marker = new BMap.Marker(point, {
-				icon: new BMap.Icon(dianImg(), new BMap.Size(30, 30), {
-					  anchor: new BMap.Size(52, 26),
-					  imageSize: new BMap.Size(30, 30)
+				icon: new BMap.Icon(pointImg, new BMap.Size(27, 13), {
+					  anchor: new BMap.Size(52,26),
+					  imageSize: new BMap.Size(27, 13)
 				})
 			});
 			var sContent =
@@ -367,10 +370,8 @@
 			marker.addEventListener("click", function () {
 				this.openInfoWindow(infoWindow);
 			});
-		} 
-		
-		
-		
+		}
+
 	function initTableQuanxian(){
 			$.ajax({
 				type:"post",
@@ -586,7 +587,7 @@
 					errMessage("请求UserController失败");
 				},
 				success: function (json) {
-                     
+
 					var datetime=[]
 					var chenneng=[]
 					var feiliao=[]
@@ -611,4 +612,4 @@
 
 	</script>
 
-</html>
+</html>	
