@@ -556,18 +556,21 @@
                 if (data.length == 0) {
                     return;
                 }
-                truck = data[0];
-                trucks = data;
-                var returnMsg =
-                    '<ul class="map-box-info-1" >' +
-                    '<li><div><span class="map-box-name">车牌号:&nbsp;&nbsp;</span>' + truck.plate + '</div></li>' +
-                    '<li><div><span class="map-box-name">报警信息:&nbsp;&nbsp;</span>路线偏移</div></li>' +
-                    '<li><div><span class="map-box-name">报警时间:&nbsp;&nbsp;</span>' + truck.gpsTime + '</div></li>' +
-                    '<li><div><span class="map-box-name">偏移距离:&nbsp;&nbsp;</span>' + Math.floor(truck.distance * 100) / 100 + '</div></li>' +
-                    '<li><div><span class="map-box-name">经度:&nbsp;&nbsp;</span>' + truck.lng + '</div></li>' +
-                    '<li><div><span class="map-box-name">纬度:&nbsp;&nbsp;</span>' + truck.lat + '</div></li>' +
-                    '</ul>';
-                $.show('警告信息', returnMsg, 100000);
+                if(trucks==null||trucks[0].gpsTime != data[0].gpsTime)
+                {
+	                truck = data[0];
+	                trucks = data;
+	                var returnMsg =
+	                    '<ul class="map-box-info-1" >' +
+	                    '<li><div><span class="map-box-name">车牌号:&nbsp;&nbsp;</span>' + truck.plate + '</div></li>' +
+	                    '<li><div><span class="map-box-name">报警信息:&nbsp;&nbsp;</span>路线偏移</div></li>' +
+	                    '<li><div><span class="map-box-name">报警时间:&nbsp;&nbsp;</span>' + truck.gpsTime + '</div></li>' +
+	                    '<li><div><span class="map-box-name">偏移距离:&nbsp;&nbsp;</span>' + Math.floor(truck.distance * 100) / 100 + '</div></li>' +
+	                    '<li><div><span class="map-box-name">经度:&nbsp;&nbsp;</span>' + truck.lng + '</div></li>' +
+	                    '<li><div><span class="map-box-name">纬度:&nbsp;&nbsp;</span>' + truck.lat + '</div></li>' +
+	                    '</ul>';
+	                $.show('警告信息', returnMsg, 100000);
+                }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 var i = 0;
