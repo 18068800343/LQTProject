@@ -4,8 +4,8 @@
 
 	<insert id="insertDicPeifangjipei" parameterType="DicPeifangjipei">
 		insert into dic_peifangjipei(id,name,rate0_075,rate0_15,rate0_3,rate0_6,rate1_18,rate2_36,rate4_75,rate9_5,
-		rate13_2,rate16,rate19,rate26_5,rate31_5,peifang_id,peifang_name) values (#{id},#{name},#{rate0075},#{rate015},#{rate03},#{rate06},#{rate118},
-		#{rate236},#{rate475},#{rate95},#{rate132},#{rate16},#{rate19},#{rate265},#{rate315},#{peifangId},#{peifangName})
+		rate13_2,rate16,rate19,rate26_5,rate31_5,peifang_id,peifang_name,mark) values (#{id},#{name},#{rate0075},#{rate015},#{rate03},#{rate06},#{rate118},
+		#{rate236},#{rate475},#{rate95},#{rate132},#{rate16},#{rate19},#{rate265},#{rate315},#{peifangId},#{peifangName},#{mark})
 	</insert>
 
 	<update id="updDicPeifangjipei" parameterType="DicPeifangjipei">
@@ -25,7 +25,8 @@
 		rate26_5=#{rate265},
 		rate31_5=#{rate315},
 		peifang_id=#{peifangId},
-		peifang_name=#{peifangName}
+		peifang_name=#{peifangName},
+		mark=#{mark}
 		where id=#{id}
 	</update>
 
@@ -45,4 +46,13 @@
 		select count(0) from dic_peifangjipei where name=#{name} and peifang_id=#{peifangId} and id!=#{id}
 	</select>
 
+	<insert id="insertDicPeifangjipeiList" parameterType="java.util.List">
+		insert into dic_peifangjipei(id,name,rate0_075,rate0_15,rate0_3,rate0_6,rate1_18,rate2_36,rate4_75,rate9_5,
+		rate13_2,rate16,rate19,rate26_5,rate31_5,peifang_id,peifang_name,mark) values
+		<foreach collection="DicPeifangjipei" item="item" index="index" separator=",">
+			(#{item.id},#{item.name},#{item.rate0075},#{item.rate015},#{item.rate03},#{item.rate06},#{item.rate118},
+			#{item.rate236},#{item.rate475},#{item.rate95},#{item.rate132},#{item.rate16},#{item.rate19},#{item.rate265},
+			#{item.rate315},#{item.peifangId},#{item.peifangName},#{item.mark})
+		</foreach>
+	</insert>
 </mapper>

@@ -33,6 +33,28 @@ public class DicPeifangjipeiController {
         if(i>0){
             i=-1;
         }else{
+            String mark;
+            switch (DicPeifangjipei.getName()){
+                case "5#仓":
+                    mark="5";
+                    break;
+                case  "4#仓":
+                    mark="4";
+                    break;
+                case  "3#仓":
+                    mark="3";
+                    break;
+                case  "2#仓":
+                    mark="2";
+                    break;
+                case  "矿粉":
+                    mark="kf";
+                    break;
+                default:
+                    mark ="";
+                    break;
+            }
+            DicPeifangjipei.setMark(mark);
             i = dao.insertDicPeifangjipei(DicPeifangjipei);
         }
 
@@ -49,6 +71,28 @@ public class DicPeifangjipeiController {
         if(i>0){
             i=-1;
         }else{
+            String mark;
+            switch (DicPeifangjipei.getName()){
+                case "5#仓":
+                    mark="5";
+                    break;
+                case  "4#仓":
+                    mark="4";
+                    break;
+                case  "3#仓":
+                    mark="3";
+                    break;
+                case  "2#仓":
+                    mark="2";
+                    break;
+                case  "矿粉":
+                    mark="kf";
+                    break;
+                default:
+                    mark ="";
+                    break;
+            }
+            DicPeifangjipei.setMark(mark);
             i = dao.updDicPeifangjipei(DicPeifangjipei);
         }
         String daoMsg = MsgFormatUtils.getMsgByResult(i, "更新");

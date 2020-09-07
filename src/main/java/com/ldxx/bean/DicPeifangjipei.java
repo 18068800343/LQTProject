@@ -19,8 +19,16 @@ public class DicPeifangjipei {
     private BigDecimal rate265;
     private BigDecimal rate315;
     private String peifangId;
-
+    private String mark;
     private String peifangName;
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
 
     public String getId() {
         return id;

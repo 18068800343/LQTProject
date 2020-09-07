@@ -18,4 +18,6 @@ public interface DicPeifangjipeiDao {
     int getCountName(@Param("name") String name, @Param("peifangId")String peifangId);
 
     int xg_getCountName(String name,String peifangId,String id);
+
+    int insertDicPeifangjipeiList(@Param("DicPeifangjipei")List<DicPeifangjipei> DicPeifangjipei);
 }
