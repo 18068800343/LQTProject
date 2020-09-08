@@ -197,13 +197,13 @@
 		LEFT JOIN (
 		SELECT
 		SUM (pd_need) allXuQiu,
-		site_id,datetime
+		site_id,finish_time
 		FROM
 		plan_production_collection
 		WHERE
-		delete_state = 1 and convert(varchar,datetime ,120) like #{time}
+		delete_state = 1 and convert(varchar,finish_time ,120) like #{time}
 		GROUP BY
-		site_id,datetime
+		site_id,finish_time
 		) rn ON srm.id = rn.site_id
 		LEFT JOIN (
 		select  sum(a.weight) as allGongYing ,srm.id as site_id,CONVERT(varchar(10) ,a.production_time, 120) as production_time
@@ -214,7 +214,7 @@
 		) gy ON gy.site_id = srm.id
 		WHERE srm.delete_state=#{state}
 
-		and (convert(varchar,gy.production_time ,120) like #{time} or  convert(varchar,rn.datetime ,120) like #{time})
+		and (convert(varchar,gy.production_time ,120) like #{time} or  convert(varchar,rn.finish_time ,120) like #{time})
 	</select>
 
 	<select id="getAllSysRoadMgn2" resultType="SysRoadMgnLowcase">
