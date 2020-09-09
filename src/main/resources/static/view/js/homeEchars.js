@@ -24,7 +24,7 @@ function setHomeLDGXTJ(xuqiu,gongying,roadname){
 			splitLine: {
 				show: false
 			},
-			boundaryGap: false,
+			/*boundaryGap: false,*/
 			data: roadname,
 			axisLabel : {
 				/*formatter: function (params) {
