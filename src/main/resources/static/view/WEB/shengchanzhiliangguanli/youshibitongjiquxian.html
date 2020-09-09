@@ -352,7 +352,10 @@
 				if (json != null) {
 					$("#peifang").append(`<option value="">全部</option>`);
 					for (var i = 0; i < json.length; i++) {
-						$("#peifang").append(`<option value=${json[i].flId}>${json[i].flName}</option>`);
+						if (null != json[i]) {
+
+							$("#peifang").append(`<option value=${json[i].flId}>${json[i].flName}</option>`);
+						}
 					}
 				}
 				//initPeiBiEcharts();
