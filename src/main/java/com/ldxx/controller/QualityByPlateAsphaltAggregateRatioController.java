@@ -1,5 +1,6 @@
 package com.ldxx.controller;
 
+import com.ldxx.bean.PageUtil;
 import com.ldxx.bean.QualityByPlateAsphaltAggregateRatio;
 import com.ldxx.dao.QualityByPlateAsphaltAggregateRatioDao;
 import com.ldxx.service.QualityByPlateAsphaltAggregateRatioService;
@@ -27,12 +28,19 @@ public class QualityByPlateAsphaltAggregateRatioController {
 
 	@Resource
 	private QualityByPlateAsphaltAggregateRatioDao dao;
-	
-	
+
+
 	@RequestMapping("/getAllQualityByPlateAsphaltAggregateRatio")
 	@ResponseBody
-	public List<QualityByPlateAsphaltAggregateRatio> getAllQualityByPlateAsphaltAggregateRatio(){
-		List list =  service.getAllQualityByPlateAsphaltAggregateRatio();
+	public List<QualityByPlateAsphaltAggregateRatio> getAllQualityByPlateAsphaltAggregateRatio() {
+		List list = service.getAllQualityByPlateAsphaltAggregateRatio();
+		return list;
+	}
+
+	@RequestMapping("/getAllQualityByPageCondition")
+	@ResponseBody
+	public List<QualityByPlateAsphaltAggregateRatio> getAllQualityByPageCondition(PageUtil pageUtil) {
+		List list = dao.getAllQualityByPageCondition(pageUtil);
 		return list;
 	}
 

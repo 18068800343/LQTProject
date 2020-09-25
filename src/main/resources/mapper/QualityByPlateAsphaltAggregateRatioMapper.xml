@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ldxx.dao.QualityByPlateAsphaltAggregateRatioDao" >
+<mapper namespace="com.ldxx.dao.QualityByPlateAsphaltAggregateRatioDao">
 
 	<select id="getAllQualityByPlateAsphaltAggregateRatio" resultType="QualityByPlateAsphaltAggregateRatio">
 		select id,plan_id,plan_no,qbaar.now_time as nowTime,asphalt_aggregate_ratio from quality_by_plate_asphalt_aggregate_ratio qbaar order by now_time desc
+	</select>
+
+	<select id="getAllQualityByPageCondition" resultType="QualityByPlateAsphaltAggregateRatio">
+		select id,plan_id,plan_no,qbaar.now_time as nowTime,asphalt_aggregate_ratio from quality_by_plate_asphalt_aggregate_ratio qbaar order by now_time desc  offset #{page} rows fetch next #{length} rows only
 	</select>
 
 	<select id="getYouShiBiVoListByTime" resultType="QualityByPlateAsphaltAggregateRatio">
