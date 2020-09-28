@@ -286,7 +286,7 @@
 				"targets": 16,
 				"searchable": true,
 				"render": function(data, type, full, columnIdx, rowIdx, code ) {
-					var kaishi='<i class="glyphicon glyphicon-off Pbeb" style="font-size:18px;cursor:pointer;display:none;"   onclick="kaishi(this)" title="开始" ></i>'
+					var kaishi='<i class="glyphicon glyphicon-off Pcda" style="font-size:18px;cursor:pointer;display:none;"   onclick="kaishi(this)" title="开始" ></i>'
 					if(full.finishTime<scjh_now.finishTime||full.finishTime==scjh_now.finishTime){
 						return ""
 					}else {
@@ -357,21 +357,10 @@
 					var arr = json.uPermissions.split(',');
 					for(var i=0;i<arr.length;i++){
 						var arr2 = arr[i].replace("+","");
-						if(arr[i].indexOf("Pbed") >= 0 ){
-							$(".Pbed").show();
+						if(arr[i].indexOf("Pcda") >= 0 ){
+							$(".Pcda").show();
 						}
-						if(arr[i].indexOf("Pbeb") >= 0 ){
-							$(".Pbeb").show();
-						}
-						if(arr[i].indexOf("Pbec") >= 0 ){
-							$(".Pbec").show();
-						}
-						if(arr[i].indexOf("Pbef") >= 0 ){
-							$(".Pbef").show();
-						}
-						if(arr[i].indexOf("Pbeg") >= 0 ){
-							$(".Pbeg").show();
-						}
+
 					}
 
 				}

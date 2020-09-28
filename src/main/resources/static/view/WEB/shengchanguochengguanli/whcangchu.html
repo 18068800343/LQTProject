@@ -70,7 +70,7 @@
                 <div class="zhuti-content">
                     <div class="UpperPart">
                         <div class="UpperPartL">
-<!--                            <button type="button" class="btn btn-primary Pbdba" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入仓储基础信息</button>-->
+<!--                            <button type="button" class="btn btn-primary Pbdca" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入仓储基础信息</button>-->
                         </div>
                         <div class="UpperPartR">
                             <!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
@@ -249,7 +249,7 @@
             "targets": 5,
             "searchable": true,
             "render": function (data, type, full) {
-                return '<i class="iconfont icon-xiugai Pbdbb" style="font-size:18px;cursor:pointer;display:none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
+                return '<i class="iconfont icon-xiugai Pbdcb" style="font-size:18px;cursor:pointer;display:none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
                 // + '<i class="iconfont icon-shanchu Pbdbc" style="font-size:18px;cursor:pointer;display:none;" id="del"  title="删除"></i>'
             }
         }
@@ -310,11 +310,11 @@
                     var arr = json.uPermissions.split(',');
                     for(var i=0;i<arr.length;i++){
                         var arr2 = arr[i].replace("+","");
-                        if(arr[i].indexOf("Pbdbb") >= 0 ){
-                            $(".Pbdbb").show();
+                        if(arr[i].indexOf("Pbdca") >= 0 ){
+                            $(".Pbdca").show();
                         }
-                        if(arr[i].indexOf("Pbdbc") >= 0 ){
-                            $(".Pbdbc").show();
+                        if(arr[i].indexOf("Pbdcb") >= 0 ){
+                            $(".Pbdcb").show();
                         }
                     }
 
