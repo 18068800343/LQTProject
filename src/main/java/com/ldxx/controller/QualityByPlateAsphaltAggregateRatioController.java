@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 逐盘油石比
@@ -39,9 +41,14 @@ public class QualityByPlateAsphaltAggregateRatioController {
 
 	@RequestMapping("/getAllQualityByPageCondition")
 	@ResponseBody
-	public List<QualityByPlateAsphaltAggregateRatio> getAllQualityByPageCondition(PageUtil pageUtil) {
+	public Map getAllQualityByPageCondition(PageUtil pageUtil) {
+		Map map = new HashMap();
 		List list = dao.getAllQualityByPageCondition(pageUtil);
-		return list;
+		Integer count = dao.getQualityCount(pageUtil);
+		pageUtil.setCount(count);
+		map.put("obj", list);
+		map.put("pageInfo", pageUtil);
+		return map;
 	}
 
 	@RequestMapping("/getYouShiBiVoListByTime")
