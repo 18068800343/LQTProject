@@ -11,6 +11,8 @@ public interface QualityByPlateAsphaltAggregateRatioDao {
 
 	List<QualityByPlateAsphaltAggregateRatio> getAllQualityByPageCondition(PageUtil pageUtil);
 
+	Integer getQualityCount(PageUtil pageUtil);
+
 	List<QualityByPlateAsphaltAggregateRatio> getYouShiBiVoListByTime(String beginTime, String endTime, String peifang);
 
 }

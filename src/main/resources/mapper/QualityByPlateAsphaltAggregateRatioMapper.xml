@@ -7,7 +7,30 @@
 	</select>
 
 	<select id="getAllQualityByPageCondition" resultType="QualityByPlateAsphaltAggregateRatio">
-		select id,plan_id,plan_no,qbaar.now_time as nowTime,asphalt_aggregate_ratio from quality_by_plate_asphalt_aggregate_ratio qbaar order by now_time desc  offset #{page} rows fetch next #{length} rows only
+		select id,plan_id,plan_no,qbaar.now_time as nowTime,asphalt_aggregate_ratio
+		from quality_by_plate_asphalt_aggregate_ratio qbaar
+		<where>
+			<if test="beginTime !=null and beginTime!=''">
+				now_time &gt; #{beginTime}
+			</if>
+			<if test="endTime !=null and endTime!=''">
+				and now_time &lt; #{endTime}
+			</if>
+		</where>
+		order by now_time desc offset #{page} rows fetch next #{length} rows only
+	</select>
+
+	<select id="getQualityCount" resultType="int">
+		select count(0)
+		from quality_by_plate_asphalt_aggregate_ratio qbaar
+		<where>
+			<if test="beginTime !=null and beginTime!=''">
+				now_time &gt; #{beginTime}
+			</if>
+			<if test="endTime !=null and endTime!=''">
+				and now_time &lt; #{endTime}
+			</if>
+		</where>
 	</select>
 
 	<select id="getYouShiBiVoListByTime" resultType="QualityByPlateAsphaltAggregateRatio">
