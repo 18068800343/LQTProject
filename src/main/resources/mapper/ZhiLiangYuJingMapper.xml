@@ -39,6 +39,7 @@
 -- 		and srm.delete_state = 1
 
 		WHERE ppw.delete_state = 1
+		ORDER BY datetime desc
 	</select>
 
 </mapper>
