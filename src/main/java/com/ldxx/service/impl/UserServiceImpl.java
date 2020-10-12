@@ -125,11 +125,11 @@ public class UserServiceImpl implements UserService {
             String[] userRoles = userRole.split("_");
 
             for(String roleCode:userRoles){
-                List<URoleVo> roles = uRoleDao.selectRoleByRoleCode(roleCode);
-                if(roles.size()>0){
-                    uPermissions=uPermissions+","+roles.get(0).getuPersmissionCoding();
-                }
-            }
+				List<URoleVo> roles = uRoleDao.selectRoleByRoleCode(roleCode);
+				if (roles.size() > 0) {
+					uPermissions = uPermissions + "," + roles.get(0).getuPersmissionCoding();
+				}
+			}
 
         }
         if(uPermissions.length()>1){
