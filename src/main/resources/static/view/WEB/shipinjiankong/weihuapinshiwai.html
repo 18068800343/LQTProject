@@ -19,9 +19,9 @@
     <link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css" />
     <link rel="stylesheet" type="text/css" href="../../css/layui.css" />
     <link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
     <link rel="stylesheet" type="text/css" href="../../css/code.css" />
     <link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
     <link href="../../toastr/toastr.css" rel="stylesheet">
     <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
@@ -62,7 +62,7 @@
     <ul class="breadcrumb">
         <li><i class="iconfont icon-knowledgebase"></i></li>
         <li>视频监控</li>
-        <li class="active">仓储视频监控</li>
+        <li class="active">出料视频监控</li>
     </ul>
 </div>
 
@@ -133,6 +133,7 @@
 <!--<script src="../../video.min.js"></script>-->
 <!--<script src="../../js/videojs-flash.min.js"></script>-->
 <script>
+
     let startTime = {
         elem: '#reservation',
         type: 'datetime',
@@ -180,11 +181,50 @@
 
     let page_accessToken;
 
+    $(document).ready(function () {
+        initYinShiYun();
+    });
+
+    function initYinShiYun() {
+        $.ajax({
+            type: 'POST',
+            url: 'https://open.ys7.com/api/lapp/token/get',
+            dataType: 'json',
+            data: {
+                appKey: '4d52a9408b4a46a18ab18599dcf5ec19',
+                appSecret: 'decd0cade9d503de6d6380535d867413'
+            },
+            error: function (msg) {
+            },
+            success: function (json) {
+                let accessToken = json.data.accessToken;
+                page_accessToken = accessToken;
+                // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
+                // 开始初始化直播源地址
+                //开始初始化监控地址
+                let url = 'ezopen://open.ys7.com/E20449208/8.hd.live'
+
+                let player = new EZUIPlayer({
+                    id: 'myPlayer',
+                    url: url,
+                    autoplay: true,
+                    accessToken: accessToken,
+                    //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
+                    decoderPath: '/view/js/EZUIKit-JavaScript',
+                    width: 1100,
+                    height: 800,
+                });
+                //播放
+                player.play();
+            }
+        });
+    }
+
     function rePlayYinShiYun(start, end) {
         // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
         // 开始初始化直播源地址
         //开始初始化监控地址
-        let url = `ezopen://open.ys7.com/E20449208/1.rec?begin=${start}&end=${end}`;
+        let url = `ezopen://open.ys7.com/E20449208/8.rec?begin=${start}&end=${end}`;
 
         let player = new EZUIPlayer({
             id: 'myPlayer',
@@ -204,7 +244,7 @@
         // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
         // 开始初始化直播源地址
         //开始初始化监控地址
-        let url = `ezopen://open.ys7.com/E20449208/1.live`;
+        let url = `ezopen://open.ys7.com/E20449208/8.hd.live`;
 
         let player = new EZUIPlayer({
             id: 'myPlayer',
@@ -220,9 +260,6 @@
         player.play();
     }
 
-    $(document).ready(function () {
-        initYinShiYun()
-    });
     var table = $('#mainContent').dataTable({
         "deferRender": true,
         "processing": true,
@@ -287,39 +324,11 @@
         rowIndex = bb.parentNode.parentNode.rowIndex;
     }
 
-    function initYinShiYun() {
-        $.ajax({
-            type: 'POST',
-            url: 'https://open.ys7.com/api/lapp/token/get',
-            dataType: 'json',
-            data: {
-                appKey: '4d52a9408b4a46a18ab18599dcf5ec19',
-                appSecret: 'decd0cade9d503de6d6380535d867413'
-            },
-            error: function (msg) {
-            },
-            success: function (json) {
-                let accessToken = json.data.accessToken;
-                page_accessToken = accessToken;
-                // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
-                // 开始初始化直播源地址
-                //开始初始化监控地址
-                let url = 'ezopen://open.ys7.com/E20449208/1.live'
-
-                let player = new EZUIPlayer({
-                    id: 'myPlayer',
-                    url: url,
-                    autoplay: true,
-                    accessToken: accessToken,
-                    //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
-                    decoderPath: '/view/js/EZUIKit-JavaScript',
-                    width: 1100,
-                    height: 800,
-                });
-                //播放
-                player.play();
-            }
-        });
-    }
+    // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
+    let player = videojs('my-player'); //my-player为页面video元素的id
+    player.play(); //播放
+    // 1. 播放   player.play()
+    // 2. 停止   player.pause()
+    // 3. 暂停   player.pause()
 </script>
 </html>

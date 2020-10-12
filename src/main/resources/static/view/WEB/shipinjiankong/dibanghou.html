@@ -19,7 +19,6 @@
     <link rel="stylesheet" type="text/css" href="../../easyUI/demo/demo.css" />
     <link rel="stylesheet" type="text/css" href="../../css/layui.css" />
     <link rel="stylesheet" type="text/css" href="../../css/layui.mobile.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
     <link rel="stylesheet" type="text/css" href="../../css/code.css" />
     <link rel="stylesheet" type="text/css" href="../../../js/skin/default/layer.css" />
     <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
@@ -63,7 +62,7 @@
     <ul class="breadcrumb">
         <li><i class="iconfont icon-knowledgebase"></i></li>
         <li>视频监控</li>
-        <li class="active">用料视频监控</li>
+        <li class="active">出料视频监控</li>
     </ul>
 </div>
 
@@ -134,6 +133,7 @@
 <!--<script src="../../video.min.js"></script>-->
 <!--<script src="../../js/videojs-flash.min.js"></script>-->
 <script>
+
     let startTime = {
         elem: '#reservation',
         type: 'datetime',
@@ -181,48 +181,8 @@
 
     let page_accessToken;
 
-    function rePlayYinShiYun(start, end) {
-        // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
-        // 开始初始化直播源地址
-        //开始初始化监控地址
-        let url = `ezopen://open.ys7.com/E20449208/3.rec?begin=${start}&end=${end}`;
-
-        let player = new EZUIPlayer({
-            id: 'myPlayer',
-            url: url,
-            autoplay: true,
-            accessToken: page_accessToken,
-            //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
-            decoderPath: '/view/js/EZUIKit-JavaScript',
-            width: 1100,
-            height: 800,
-        });
-        //播放
-        player.play();
-    }
-
-    function playYinShiYun() {
-        // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
-        // 开始初始化直播源地址
-        //开始初始化监控地址
-        let url = `ezopen://open.ys7.com/E20449208/3.live`;
-
-        let player = new EZUIPlayer({
-            id: 'myPlayer',
-            url: url,
-            autoplay: true,
-            accessToken: page_accessToken,
-            //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
-            decoderPath: '/view/js/EZUIKit-JavaScript',
-            width: 1100,
-            height: 800,
-        });
-        //播放
-        player.play();
-    }
-
     $(document).ready(function () {
-        initYinShiYun()
+        initYinShiYun();
     });
 
     function initYinShiYun() {
@@ -242,7 +202,7 @@
                 // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
                 // 开始初始化直播源地址
                 //开始初始化监控地址
-                let url = 'ezopen://open.ys7.com/E20449208/3.live'
+                let url = 'ezopen://open.ys7.com/E20449208/7.hd.live'
 
                 let player = new EZUIPlayer({
                     id: 'myPlayer',
@@ -258,6 +218,46 @@
                 player.play();
             }
         });
+    }
+
+    function rePlayYinShiYun(start, end) {
+        // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
+        // 开始初始化直播源地址
+        //开始初始化监控地址
+        let url = `ezopen://open.ys7.com/E20449208/7.rec?begin=${start}&end=${end}`;
+
+        let player = new EZUIPlayer({
+            id: 'myPlayer',
+            url: url,
+            autoplay: true,
+            accessToken: page_accessToken,
+            //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
+            decoderPath: '/view/js/EZUIKit-JavaScript',
+            width: 1100,
+            height: 800,
+        });
+        //播放
+        player.play();
+    }
+
+    function playYinShiYun() {
+        // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
+        // 开始初始化直播源地址
+        //开始初始化监控地址
+        let url = `ezopen://open.ys7.com/E20449208/7.hd.live`;
+
+        let player = new EZUIPlayer({
+            id: 'myPlayer',
+            url: url,
+            autoplay: true,
+            accessToken: page_accessToken,
+            //accessToken: "at.4sebsr2t6m144jqh7bi52obz54ba2nw2-4jmeip557i-167he0i-hwvn7gp1k",
+            decoderPath: '/view/js/EZUIKit-JavaScript',
+            width: 1100,
+            height: 800,
+        });
+        //播放
+        player.play();
     }
 
     var table = $('#mainContent').dataTable({
@@ -324,5 +324,11 @@
         rowIndex = bb.parentNode.parentNode.rowIndex;
     }
 
+    // 设置flash路径,用于在videojs发现浏览器不支持HTML5播放器的时候自动唤起flash播放器
+    let player = videojs('my-player'); //my-player为页面video元素的id
+    player.play(); //播放
+    // 1. 播放   player.play()
+    // 2. 停止   player.pause()
+    // 3. 暂停   player.pause()
 </script>
 </html>
