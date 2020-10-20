@@ -41,7 +41,7 @@
         group by datepart(week,datetime_in)
     </select>
 
-    <select id="getDayCount" resultType="map">
+    <!--<select id="getDayCount" resultType="map">
         SELECT
             *
         FROM
@@ -63,6 +63,54 @@
                     )
                 GROUP BY
                     peifang_name
+            ) a
+        LEFT JOIN (
+            SELECT
+                CASE
+            WHEN CONVERT (
+                DECIMAL (18, 2),
+                SUM (pitch_weight) / 1000
+            ) IS NULL THEN
+                0
+            ELSE
+                CONVERT (
+                    DECIMAL (18, 2),
+                    SUM (pitch_weight) / 1000
+                )
+            END AS feiliao
+            FROM
+                wh_waste_mgn
+            WHERE
+                CONVERT (VARCHAR, deal_time, 120) LIKE concat (
+                    concat ('%', #{datetime}),
+                    '%'
+                )
+            AND warning_state = 1
+            AND delete_state != 0
+        ) b ON 1 = 1
+    </select>-->
+    <select id="getDayCount" resultType="map">
+        SELECT
+            *
+        FROM
+            (
+                 SELECT
+                    Convert(decimal(18,2),sum(loading_weight-unloaded_weight)/1000) weight,
+                    pitch_type peifangName,
+                    #{datetime} AS datetime
+                FROM
+                    batch_mgt
+                WHERE
+                    CONVERT (
+                        VARCHAR,
+                        datetime_out,
+                        120
+                    ) LIKE concat (
+                        concat ('%', #{datetime}),
+                        '%'
+                    )
+                GROUP BY
+                    pitch_type
             ) a
         LEFT JOIN (
             SELECT
