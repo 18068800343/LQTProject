@@ -33,62 +33,57 @@ function setCangChuEchartsConfig(echartsDom){
 }
 let pageCangChuLabelOption;
 function setLableOption(echartsDom){
-	pageCangChuLabelOption = {
+/*	pageCangChuLabelOption = {
 		normal: {
 			show: true,
 			formatter: '{c}  {name|{a}}',
 			fontSize:15,
+			position:'inside',
 			rich: {
 			}
 		}
-	};
+	};*/
 }
 
 function setCangChuOption(map){
+	
 	let option = {
-			color: ['#6A5CFF', '#006699'],
+			color: ['#ACABFD', '#82E2BC'],
+			 tooltip: {
+			        trigger: 'axis',
+			        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+			            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			        }
+			    },
 		    legend: {
-		    	data: ['仓库容量', '剩余重量']
-		    },
-		    textStyle:{
-                color: '#000000'//字体颜色
-            },
-		    grid: {
-		        left: '10%',
-		        right: '4%',
-		        bottom: '3%',
-		        containLabel: true
+		    	data: ['理论储量', '实际储量']
 		    },
 		    xAxis: {
-		        type: 'value',
-		        name:"重量",
-		        
+		    	name: '仓库编号',
+		        type: 'category',
+		        data: map.xList
 		    },
 		    yAxis: {
-		    	name: '仓库编号',
-				axisTick: {show: true},
-				show:false,
-				data: map.xList
+		        type: 'value',
+		        name:"重量",
+		        data: map.yList
 		    },
-		    series: [
-		    	{
-					name: '仓库容量',
-					type: 'bar',
-					barGap: 0,
-					label: pageCangChuLabelOption,
-					position: 'top',
-					data: map.bList
-				},
-				{
-					name: '剩余重量',
-					barGap: 0,
-					type: 'bar',
-					position: 'top',
-					label: pageCangChuLabelOption,
-					data: map.aList
-				}
+		    series: [{
+		    	name: '理论储量',
+				type: 'bar',
+				barGap: 0,
+				label: pageCangChuLabelOption,
+				data: map.bList
+		    },{
+				name: '实际储量',
+				barGap: 0,
+				type: 'bar',
+				label: pageCangChuLabelOption,
+				data: map.aList
+			}
 		    ]
 		};
+
 
 	return option;
 }
