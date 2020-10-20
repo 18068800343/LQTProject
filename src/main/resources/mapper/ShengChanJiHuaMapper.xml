@@ -23,7 +23,7 @@
     <insert id="addShengChanJiHuaVo" parameterType="planProductionVo">
 		insert into plan_production_collection
 			(plan_id,road_id,plan_no,recipe_id,pd_need,dry_mixing_time,wet_mixing_time,radio,pd_temp,
-			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state,finish_time,site_id,path_plan,distance,chang,kuan,gao,midu,fuyuliang)
+			arrive_temp,price,datetime,edit_user_id,edit_datetime,delete_state,finish_time,site_id,path_plan,distance,chang,kuan,gao,midu,fuyuliang,pd_temp_max,production_time,remark)
 			values(#{planid},#{roadid},#{planno},
 			#{recipeid},#{pdneed},
 			#{drymixingtime},#{wetmixingtime},
@@ -32,7 +32,7 @@
 			#{datetime},#{edituserid},
 			#{editdatetime},#{deletestate},#{finishTime}
 			,#{siteId},#{pathPlan},#{distance}
-			,#{chang},#{kuan},#{gao},#{midu},#{fuyuliang}
+			,#{chang},#{kuan},#{gao},#{midu},#{fuyuliang},#{pdTempMax},#{productionTime},#{remark}
 			)
 	</insert>
 
@@ -85,7 +85,7 @@
 			edit_user_id=#{edituserid},edit_datetime=#{editdatetime},
 			finish_time=#{finishTime},delete_state=#{deletestate},
 			site_id = #{siteId},path_plan = #{pathPlan},distance = #{distance},
-			chang=#{chang},kuan=#{kuan},gao=#{gao},midu=#{midu},fuyuliang=#{fuyuliang}
+			chang=#{chang},kuan=#{kuan},gao=#{gao},midu=#{midu},fuyuliang=#{fuyuliang},pd_temp_max=#{pdTempMax},production_time=#{productionTime},remark=#{remark}
 			where plan_id=#{planid}
 	</update>
 
@@ -156,7 +156,7 @@
     	LEFT JOIN plan_construction_deviation pcd on a.piancha_id = pcd.id and pcd.delete_state = 1
 		LEFT JOIN (select a.plan_id,sum(a.pd_need_inc_or_dec) sumneed from plan_production_count a GROUP BY a.plan_id) pniod on pniod.plan_id = a.plan_id
 	    WHERE
-  		a.delete_state = 1 order by a.datetime desc
+  		a.delete_state = 1 order by a.production_time desc
 	</select>
 
 	<select id="getShengChanJiHuaListByTime" resultType="planProductionCollectionVo">

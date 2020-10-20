@@ -72,13 +72,18 @@
 	</select>
 
 	<select id="getDayWeightCount" resultType="map">
+		--select
+		--top 10
+		--convert(char(10),production_time,120) dayTime,
+		--Convert(decimal(18,1),sum(weight)/1000) totalWeight
+		--from quality_by_plate_real_time_prodocution_data
+		--group by convert(char(10),production_time,120) ORDER BY dayTime desc
 		select
 		top 10
-		convert(char(10),production_time,120) dayTime,
-		Convert(decimal(18,1),sum(weight)/1000) totalWeight
-
-		from quality_by_plate_real_time_prodocution_data
-		group by convert(char(10),production_time,120) ORDER BY dayTime desc
+		convert(char(10),datetime_out,120) dayTime,
+		Convert(decimal(18,1),sum(loading_weight-unloaded_weight)/1000) totalWeight
+		from batch_mgt
+		group by convert(char(10),datetime_out,120) ORDER BY dayTime desc
 	</select>
 
 	<select id="getAllSysRoadMgnVoHomePageCopy" resultType="SysRoadMgnVo">
@@ -185,7 +190,7 @@
 		WHERE srm.delete_state=#{state}
 	</select>-->
 
-	<select id="getAllSysRoadMgnVoHomePage" resultType="SiteConstructionVo">
+	<!--<select id="getAllSysRoadMgnVoHomePage" resultType="SiteConstructionVo">
 		SELECT
 		srm.*,
 		delete_state,
@@ -213,7 +218,36 @@
 		where convert(varchar,a.production_time ,120) like #{time} GROUP BY srm.id,CONVERT(varchar(10) ,a.production_time, 120)
 		) gy ON gy.site_id = srm.id
 		WHERE srm.delete_state=#{state}
-
+		and (convert(varchar,gy.production_time ,120) like #{time} or  convert(varchar,rn.finish_time ,120) like #{time})
+	</select>-->
+	<select id="getAllSysRoadMgnVoHomePage" resultType="SiteConstructionVo">
+		SELECT
+		srm.*,
+		delete_state,
+		direction,
+		CASE WHEN rn.allXuQiu is null then 0 ELSE Convert(decimal(18,1),allXuQiu/1000) end as allXuQiu,
+		CASE WHEN gy.allGongYing is null then 0 ELSE Convert(decimal(18,1),allGongYing/1000) end as allGongYing
+		FROM
+		site_construction srm
+		LEFT JOIN (
+		SELECT
+		SUM (pd_need) allXuQiu,
+		site_id,finish_time
+		FROM
+		plan_production_collection
+		WHERE
+		delete_state = 1 and convert(varchar,finish_time ,120) like #{time}
+		GROUP BY
+		site_id,finish_time
+		) rn ON srm.id = rn.site_id
+		LEFT JOIN (
+		select  sum(a.loading_weight-a.unloaded_weight) as allGongYing ,srm.id as site_id,CONVERT(varchar(10) ,a.datetime_out, 120) as production_time
+		from batch_mgt a
+		LEFT JOIN plan_production_collection b on a.site_id=b.site_id
+		left join site_construction srm ON b.site_id = srm.id
+		where convert(varchar,a.datetime_out ,120) like #{time} GROUP BY srm.id,CONVERT(varchar(10) ,a.datetime_out, 120)
+		) gy ON gy.site_id = srm.id
+		WHERE srm.delete_state=#{state}
 		and (convert(varchar,gy.production_time ,120) like #{time} or  convert(varchar,rn.finish_time ,120) like #{time})
 	</select>
 

@@ -25,7 +25,7 @@ public class PlanProductionVo extends SiteConstructionVo {
 
     private BigDecimal radio;
 
-    private BigDecimal pdtemp;
+    private BigDecimal pdtemp;//成品温度最低要求
 
     private BigDecimal arrivetemp;
 
@@ -54,6 +54,34 @@ public class PlanProductionVo extends SiteConstructionVo {
     private BigDecimal gao;
     private BigDecimal midu;
     private BigDecimal fuyuliang;
+
+    private BigDecimal pdTempMax;//成品温度最高要求
+    private String productionTime;//生产时间
+    private String remark;//备注
+
+    public BigDecimal getPdTempMax() {
+        return pdTempMax;
+    }
+
+    public void setPdTempMax(BigDecimal pdTempMax) {
+        this.pdTempMax = pdTempMax;
+    }
+
+    public String getProductionTime() {
+        return productionTime;
+    }
+
+    public void setProductionTime(String productionTime) {
+        this.productionTime = productionTime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public BigDecimal getChang() {
         return chang;
