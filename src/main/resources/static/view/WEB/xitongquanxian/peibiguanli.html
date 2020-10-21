@@ -266,6 +266,18 @@
 							    <td>沥青用量(kg):</td>
 							    <td><input type="text" class="form-control" id="xq_pitch_use" readonly="readonly"></td>
 							</tr>
+							<tr>
+								<td>标准温度(℃):</td>
+								<td><input type="text" class="form-control" id="xq_biaozhunwendu" readonly="readonly"></td>
+								<td>温度偏差1(℃):</td>
+								<td><input type="text" class="form-control" id="xq_wendupiancha1" readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td>温度偏差2(℃):</td>
+								<td><input type="text" class="form-control" id="xq_wendupiancha2" readonly="readonly"></td>
+								<td></td>
+								<td></td>
+							</tr>
                     </table>
                     <table class="layui-table "lay-skin="line" id="xq_fushumaterials">
 							<thead>
@@ -388,7 +400,7 @@
 								var chakan = '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看添加剂材料"  data-toggle="modal" onclick="xiangqingpeibihuixian(this)"></i>'
 								var xiugai = '<i class="iconfont icon-xiugai Pheb" style="font-size:18px;cursor:pointer;" title="修改" data-toggle="modal" onclick="xgpeibihuixian(this)"></i>'
 								var shanchu = '<i class="iconfont icon-shanchu Phec" style="font-size:18px;cursor:pointer;" title="删除" onclick="deleteyige(this)"></i>';
-								return chakan + xiugai + shanchu;
+								return chakan  + shanchu;
 							}
 							},
 						],"fnDrawCallback" : function() {
@@ -544,6 +556,12 @@
 			toastr.error("配方名称不能为空");
 			return;
 		}
+		var sumNums=materialsUse1*1+materialsUse2*1+materialsUse3*1+materialsUse4*1+materialsUse5*1+materialsUse6*1+boneFlourUse*1+pitchUse*1
+		if(sumNums!=1000){
+			toastr.error("配比石料沥青矿粉加起来不为1000");
+			return;
+		}
+
 
 		var pb = {
 			flId: undefined,
@@ -815,6 +833,9 @@
 		$("#xq_materials_use_5").val(data.materialsUse5);
 		$("#xq_materials_use_6").val(data.materialsUse6);
 		$("#xq_bone_flour_use").val(data.boneFlourUse);
+		$("#xq_biaozhunwendu").val(data.biaozhunwendu);
+		$("#xq_wendupiancha1").val(data.wendupiancha1);
+		$("#xq_wendupiancha2").val(data.wendupiancha2);
 		$("#xq_pitch_use").val(data.pitchUse);
 		$("#xq_fushumaterials tbody").html('');
 		len=1;
