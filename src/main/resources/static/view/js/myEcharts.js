@@ -655,7 +655,7 @@ function setTongGuoVoOption(list){
 //			text: '折线图堆叠'
 //		},
 		legend: {
-			data:['料1','料2','料3','料4','料5','料6','粉用量','沥青用量'],
+			data:['料1(11~17)','料2(6~11)','料3(3~6)','料4','料5','料6','粉用量','沥青用量'],
 			
 		},
 		grid: {
@@ -708,17 +708,17 @@ function setTongGuoVoOption(list){
 		},
 		series: [
 			{
-				name:'料1',
+				name:'料1(11~17)',
 				type:'line',
 				data:list.yList1
 			},
 			{
-				name:'料2',
+				name:'料2(6~11)',
 				type:'line',
 				data:list.yList2
 			},
 			{
-				name:'料3',
+				name:'料3(3~6)',
 				type:'line',
 				data:list.yList3
 			}
