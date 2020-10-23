@@ -437,9 +437,10 @@
 	function cbecharts(datetime,feiliaobi) {
 		var myChart = echarts.init(document.getElementById('chengbenecharts'));
 		var option = {
-				title: {
+            color: ['#3398DB'],
+				/*title: {
 					text: '堆叠区域图'
-				},
+				},*/
 				tooltip: {
 					trigger: 'axis',
 					axisPointer: {
@@ -464,13 +465,19 @@
 					data:datetime
 				}],
 				yAxis: [{		
-					type: 'value'
-
+					type: 'value',
+                    name: '百分比(%)',
 				}],
 				series: [{
-					type: 'line',
+					type: 'bar',
                     data:feiliaobi,
-
+                    label: {
+                        normal: {
+                            show: true,
+                            color:"black",
+                            position: 'top'
+                        }
+                    },
 				}, ]
 			};
 			
