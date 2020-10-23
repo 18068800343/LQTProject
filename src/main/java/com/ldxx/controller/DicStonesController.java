@@ -22,19 +22,25 @@ public class DicStonesController {
 	@RequestMapping("/selectAllDicStones")
 	@ResponseBody
 	public List<DicStones> selectAllDicStones() {
-		List<DicStones> list =  dao.selectAllDicStones();
+		List<DicStones> list = dao.selectAllDicStones();
+		return list;
+	}
+
+	@RequestMapping("/selectDicStonesAndDicMaterials")
+	@ResponseBody
+	public List<DicStones> selectDicStonesAndDicMaterials() {
+		List<DicStones> list = dao.selectDicStonesAndDicMaterials();
 		return list;
 	}
 
 	@RequestMapping("/addDicStones")
 	@ResponseBody
-	public Map<String,Object> addDicStones(DicStones dicStones)
-	{	
+	public Map<String, Object> addDicStones(DicStones dicStones) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		dicStones.setId(LDXXUtils.getUUID12());
-		int state=0;
+		int state = 0;
 		DicStones d = dao.selectByName(dicStones.getStonesName());
-		if(null!=d&&null!=d.getStonesName())
+		if (null != d && null != d.getStonesName())
 		{
 			state=-1;
 		}else {

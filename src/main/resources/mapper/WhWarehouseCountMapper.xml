@@ -15,15 +15,34 @@
 	</resultMap>
 
 	<select id="getAllWhWarehouseCount" resultType="WhWarehouseCount">
-		select a.id,a.stor_no,a.datetime,a.weight,a.materials,a.meminfo,a.edit_user_id2,a.edit_datetime2,a.delete_state
-		,a.max_weight,a.tiji
-		,a.chang,a.kuan
-		,a.gao
-		,b.stones_name as stonesName,usr.u_name
-		from wh_warehouse_count as a
-		left join dic_stones b on a.materials=b.id
-		LEFT JOIN u_user usr ON a.edit_user_id2 = usr.user_id and usr.delete_state = 1
-		 where a.delete_state=1
+		SELECT
+			a.id,
+			a.stor_no,
+			a.datetime,
+			a.weight,
+			a.materials,
+			a.meminfo,
+			a.edit_user_id2,
+			a.edit_datetime2,
+			a.delete_state,
+			a.max_weight,
+			a.tiji,
+			a.chang,
+			a.kuan,
+			a.gao,
+		  CASE WHEN b.stones_name is NULL  THEN dm.material_name
+			WHEN b.stones_name = '' THEN dm.material_name
+			ELSE b.stones_name END
+		  AS stonesName,
+			usr.u_name
+		FROM
+			wh_warehouse_count AS a
+		LEFT JOIN dic_stones b ON a.materials = b.id
+		LEFT JOIN dic_materials dm ON dm.id = a.materials
+		LEFT JOIN u_user usr ON a.edit_user_id2 = usr.user_id
+		AND usr.delete_state = 1
+		WHERE
+			a.delete_state = 1
 	</select>
 
 	<select id="initCangChuGuanLi" resultMap="com.ldxx.dao.WhWarehouseCountDao.baseResultMap">

@@ -692,7 +692,13 @@
         let bList = [];
         for (let i in list) {
             xList[i] = list[i].bianhao;
-            aList[i] = list[i].chuliang - list[i].whWarehouseCount.weight;
+            let weight;
+            if (undefined != list[i].whWarehouseCount && null != list[i].whWarehouseCount) {
+                weight = list[i].whWarehouseCount.weight;
+            } else {
+                weight = 0;
+            }
+            aList[i] = list[i].chuliang - weight;
             bList[i] = list[i].chuliang;
         }
         pageVariable.xList = xList;
@@ -810,7 +816,7 @@
     function initCailiao() {
         $.ajax({
             type: 'POST',
-            url: '/DicStones/selectAllDicStones',
+            url: '/DicStones/selectDicStonesAndDicMaterials',
             dataType: 'json',
             data: {},
             success: function (json) {

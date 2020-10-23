@@ -626,18 +626,30 @@
 
         function liaocangChange() {
             let bianhao = $("#liaocangbianhao").val();
-            $("#caizhi").val(page_liaocang[bianhao].caizhi);
+            let caizhi;
+            if (null != page_liaocang[bianhao] && undefined != page_liaocang[bianhao]) {
+                caizhi = page_liaocang[bianhao].caizhi;
+            } else {
+                caizhi = '';
+            }
+            $("#caizhi").val(caizhi);
         }
 
         function xgliaocangChange() {
             let bianhao = $("#xg_liaocangbianhao").val();
-            $("#xg_caizhi").val(page_liaocang[bianhao].caizhi);
+            let caizhi;
+            if (null != page_liaocang[bianhao] && undefined != page_liaocang[bianhao]) {
+                caizhi = page_liaocang[bianhao].caizhi;
+            } else {
+                caizhi = '';
+            }
+            $("#xg_caizhi").val(caizhi);
         }
 
         function initCailiao() {
             $.ajax({
                 type: 'POST',
-                url: '/DicStones/selectAllDicStones',
+                url: '/DicStones/selectDicStonesAndDicMaterials',
                 dataType: 'json',
                 data: {},
                 success: function (json) {

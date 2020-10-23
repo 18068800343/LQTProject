@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ldxx.dao.DicStonesDao" >
+<mapper namespace="com.ldxx.dao.DicStonesDao">
 
-<select id="selectAllDicStones" resultType="DicStones">
-	select 
+	<select id="selectAllDicStones" resultType="DicStones">
+	select
 		id,stones_name,delete_state
 	from dic_stones
 	where delete_state=1 ORDER BY sort
 </select>
 
-<insert id="addDicStones" parameterType="DicStones">
+	<select id="selectDicStonesAndDicMaterials" resultType="DicStones">
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+					id,
+					stones_name,
+					delete_state
+				FROM
+					dic_stones
+				UNION ALL
+					SELECT
+						id,
+						material_name,
+						delete_state
+					FROM
+						dic_materials
+			) aa
+		WHERE
+			aa.delete_state = 1
+</select>
+
+	<insert id="addDicStones" parameterType="DicStones">
 		insert into 
 		dic_stones(id,stones_name,delete_state)
 		values(#{id},
@@ -17,7 +40,7 @@
 			   1)
 </insert>
 
-<update id="updateDicStones" parameterType="DicStones">
+	<update id="updateDicStones" parameterType="DicStones">
 	update dic_stones
 	set 
 	     stones_name=#{stonesName}

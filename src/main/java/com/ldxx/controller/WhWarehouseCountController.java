@@ -46,7 +46,8 @@ public class WhWarehouseCountController {
 	@RequestMapping("/initCangChuGuanLi")
 	@ResponseBody
 	public List<WhCangChuVo> initCangChuGuanLi() {
-		return dao.initCangChuGuanLi();
+		List list = dao.initCangChuGuanLi();
+		return list;
 	}
 
 	@RequestMapping("/getWhWarehouseCountById")

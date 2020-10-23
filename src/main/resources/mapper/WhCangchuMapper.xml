@@ -3,13 +3,46 @@
 <mapper namespace="com.ldxx.dao.WhCangchuDao">
 
     <select id="getAllWhCangchu" resultType="WhCangchu">
-		select a.id,a.bianhao,a.chuliang,a.cailiao,a.caizhi,a.chandi,b.stones_name as  cailiaoming from wh_cangchu a
-		left join dic_stones b on a.cailiao=b.id order by a.bianhao
+		SELECT
+			a.id,
+			a.bianhao,
+			a.chuliang,
+			a.cailiao,
+			a.caizhi,
+			a.chandi,
+
+		CASE WHEN
+		b.stones_name is NULL THEN dm.material_name
+		WHEN b.stones_name = '' THEN  dm.material_name
+		ELSE b.stones_name
+		END  AS cailiaoming
+		FROM
+			wh_cangchu a
+		LEFT JOIN dic_stones b ON a.cailiao = b.id
+		LEFT JOIN dic_materials dm on a.cailiao = dm.id
+		ORDER BY
+			a.bianhao
 	</select>
 
     <select id="getWhCangchuListByCaiLiao" resultType="WhCangchu">
-		select a.id,a.bianhao,a.chuliang,a.cailiao,a.caizhi,a.chandi,b.stones_name as  cailiaoming from wh_cangchu a
-		left join dic_stones b on a.cailiao=b.id  where a.cailiao=#{cailiao} order by a.bianhao
+		SELECT
+			a.id,
+			a.bianhao,
+			a.chuliang,
+			a.cailiao,
+			a.caizhi,
+			a.chandi,
+		CASE WHEN b.stones_name is NULL  THEN dm.material_name
+		WHEN b.stones_name = '' THEN dm.material_name
+		ELSE b.stones_name END
+		FROM
+			wh_cangchu a
+		LEFT JOIN dic_stones b ON a.cailiao = b.id
+		LEFT JOIN dic_materials dm on a.cailiao = dm.id
+		WHERE
+			a.cailiao =#{ cailiao }
+		ORDER BY
+			a.bianhao
 	</select>
 
     <insert id="addWhCangchu" parameterType="WhCangchu">
