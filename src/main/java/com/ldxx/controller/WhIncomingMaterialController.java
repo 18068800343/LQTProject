@@ -4,6 +4,8 @@ import java.util.*;
 
 import com.ldxx.Constant.DateConstant;
 import com.ldxx.bean.User;
+import com.ldxx.bean.WhCangchu;
+import com.ldxx.dao.WhCangchuDao;
 import com.ldxx.dao.WhIncomingMaterialDao;
 import com.ldxx.dao.WhWarehouseCountDao;
 import com.ldxx.util.DateUtil;
@@ -34,6 +36,9 @@ public class WhIncomingMaterialController {
 	//仓储管理dao
 	@Resource
 	private WhIncomingMaterialDao dao;
+	//仓储管理dao
+	@Resource
+	private WhCangchuDao whCangchuDao;
 	private Map<String, Object> map = new HashMap<>();
 
 	@RequestMapping("/getAllWhIncomingMaterial")
@@ -44,15 +49,22 @@ public class WhIncomingMaterialController {
 
 	@RequestMapping("/getWhIncomingMaterialById")
 	@ResponseBody
-	public WhIncomingMaterial getWhIncomingMaterialById(String id){
+	public WhIncomingMaterial getWhIncomingMaterialById(String id) {
 		return service.getWhIncomingMaterialById(id);
 	}
-	
+
+
+	@RequestMapping("/getWhCangChuByCailiao")
+	@ResponseBody
+	public List<WhCangchu> getWhCangChuByCailiao(String cailiao) {
+		return whCangchuDao.getWhCangchuListByCaiLiao(cailiao);
+	}
+
 	@RequestMapping("/updWhIncomingMaterialById")
 	@ResponseBody
-	public Map<String,Object> updWhIncomingMaterialById(WhIncomingMaterial wm, HttpSession session){
+	public Map<String, Object> updWhIncomingMaterialById(WhIncomingMaterial wm, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		if(null!=user) {
+		if (null != user) {
 			wm.setEditUserId(user.getUserId());
 			wm.setEditDatetime(GetThisTimeUtils.getDateTime());
 			wm.setuName(user.getuName());

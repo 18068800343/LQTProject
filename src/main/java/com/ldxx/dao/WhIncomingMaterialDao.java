@@ -10,7 +10,8 @@ public interface WhIncomingMaterialDao {
 
 	List<WhIncomingMaterial> getAllWhIncomingMaterial(String beginTime, String endTime);
 
-	WhIncomingMaterial getWhIncomingMaterialById(@Param("id") String id);
+
+    WhIncomingMaterial getWhIncomingMaterialById(@Param("id") String id);
 
 	int updWhIncomingMaterialById(@Param("wm") WhIncomingMaterial wm);
 

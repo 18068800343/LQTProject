@@ -22,6 +22,8 @@ public class WhIncomingMaterial {
 	private String materials;//材料id
 	private String materialsName;//材料名
 
+	private String caizhi;//材质
+
 	private String waterContent;//含水量
 
 	private String dustContent;//含尘量
@@ -43,6 +45,14 @@ public class WhIncomingMaterial {
 	private String uName;
 
 	public int deleteState;//逻辑删除 1:存在；0删除
+
+	public String getCaizhi() {
+		return caizhi;
+	}
+
+	public void setCaizhi(String caizhi) {
+		this.caizhi = caizhi;
+	}
 
 	public BigDecimal getJingzhongliang() {
 		return jingzhongliang;

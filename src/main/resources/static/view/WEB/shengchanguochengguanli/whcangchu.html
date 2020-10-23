@@ -70,7 +70,9 @@
                 <div class="zhuti-content">
                     <div class="UpperPart">
                         <div class="UpperPartL">
-<!--                            <button type="button" class="btn btn-primary Pbdca" data-toggle="modal" data-target="#myModal" style="margin: 5PX;float: left;">录入仓储基础信息</button>-->
+                            <button type="button" class="btn btn-primary Pbdca" data-toggle="modal"
+                                    data-target="#myModal" style="margin: 5PX;float: left;">录入仓库信息
+                            </button>
                         </div>
                         <div class="UpperPartR">
                             <!-- <button type="button" class="btn btn-primary" style="margin: 5PX;">导出Excel文件</button> -->
@@ -114,22 +116,30 @@
                     <div class="modal-body">
                             <div>     
                                 <form class="form-inline">
-                                   <table class="layui-table "lay-skin="line" style="height:auto;" >
-                                    	<tr>
-											<td style="width: 20%;">编号</td>
-											<td style="width: 30%;"><input type="text" id="liaocangbianhao" style="width: 70%;" /></td>
+                                    <table class="layui-table " lay-skin="line" style="height:auto;">
+                                        <tr>
+                                            <td style="width: 20%;">编号</td>
+                                            <td style="width: 30%;"><input type="text" id="liaocangbianhao"
+                                                                           style="width: 70%;"/></td>
                                             <td>储量(kg)</td>
-                                            <td><input type="text" id="maxWeight" style="width: 70%;" /></td>
-										</tr>
-										<tr>
-											<td>材料</td>
-											<td>
-												<select id="cailiao" style="width: 70%;">
-												</select>
-											</td>
-											<td></td>
-											<td></td>
+                                            <td><input type="text" id="maxWeight" style="width: 70%;"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>材料</td>
+                                            <td>
+                                                <select id="cailiao" style="width: 70%;">
+                                                </select>
+                                            </td>
+                                            <td>材质</td>
+                                            <td><input type="text" id="caizhi" style="width: 70%;"/></td>
 
+                                        </tr>
+                                        <tr>
+                                            <td>产地</td>
+                                            <td><input type="text" id="chandi" style="width: 70%;"/></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
                                     </table>
                                 </form>  
                             </div>
@@ -250,7 +260,7 @@
             "searchable": true,
             "render": function (data, type, full) {
                 return '<i class="iconfont icon-xiugai Pbdcb" style="font-size:18px;cursor:pointer;display:none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
-                // + '<i class="iconfont icon-shanchu Pbdbc" style="font-size:18px;cursor:pointer;display:none;" id="del"  title="删除"></i>'
+                    + '<i class="iconfont icon-shanchu Pbdbc" style="font-size:18px;cursor:pointer;display:none;" id="del"  title="删除"></i>'
             }
         }
 
@@ -364,19 +374,23 @@
 	        });
 		}
         
-        $("#baocun").click(function(){
-        	var liaocangbianhao=$("#liaocangbianhao").val();
-        	var cailiao=$("#cailiao").val();
-        	var maxWeight = $("#maxWeight").val();
-        	$.ajax({
-	            type: 'POST',
-	            url: '/WhCangchu/addWhCangchu',
-	            dataType: 'json',
-	            data: {
-                    bianhao:liaocangbianhao,
-                    cailiao:cailiao,
-                    chuliang:maxWeight,
-	            },
+        $("#baocun").click(function() {
+            var liaocangbianhao = $("#liaocangbianhao").val();
+            var cailiao = $("#cailiao").val();
+            var maxWeight = $("#maxWeight").val();
+            let caizhi = $("#caizhi").val();
+            let chandi = $("#chandi").val();
+            $.ajax({
+                type: 'POST',
+                url: '/WhCangchu/addWhCangchu',
+                dataType: 'json',
+                data: {
+                    bianhao: liaocangbianhao,
+                    cailiao: cailiao,
+                    chuliang: maxWeight,
+                    caizhi: caizhi,
+                    chandi: chandi,
+                },
 	            error: function (msg) {
 	                errMessage("请求UserController失败");
 	            },

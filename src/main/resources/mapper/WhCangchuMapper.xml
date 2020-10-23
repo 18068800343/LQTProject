@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ldxx.dao.WhCangchuDao" >
+<mapper namespace="com.ldxx.dao.WhCangchuDao">
 
-	<select id="getAllWhCangchu" resultType="WhCangchu">
+    <select id="getAllWhCangchu" resultType="WhCangchu">
 		select a.id,a.bianhao,a.chuliang,a.cailiao,a.caizhi,a.chandi,b.stones_name as  cailiaoming from wh_cangchu a
 		left join dic_stones b on a.cailiao=b.id order by a.bianhao
 	</select>
 
-	<insert id="addWhCangchu" parameterType="WhCangchu">
-		insert into wh_cangchu(id,bianhao,chuliang,cailiao) values (#{id},#{bianhao},#{chuliang},#{cailiao})
+    <select id="getWhCangchuListByCaiLiao" resultType="WhCangchu">
+		select a.id,a.bianhao,a.chuliang,a.cailiao,a.caizhi,a.chandi,b.stones_name as  cailiaoming from wh_cangchu a
+		left join dic_stones b on a.cailiao=b.id  where a.cailiao=#{cailiao} order by a.bianhao
+	</select>
+
+    <insert id="addWhCangchu" parameterType="WhCangchu">
+		insert into wh_cangchu(id,bianhao,chuliang,cailiao,caizhi,chandi) values (#{id},#{bianhao},#{chuliang},#{cailiao},#{caizhi},#{chandi})
 	</insert>
 
-	<update id="updWhCangchu" parameterType="WhCangchu">
+    <update id="updWhCangchu" parameterType="WhCangchu">
 		update  wh_cangchu set bianhao=#{bianhao},chuliang=#{chuliang},cailiao=#{cailiao},caizhi=#{caizhi},chandi=#{chandi} where id=#{id}
 	</update>
 
-	<delete id="delWhCangchu">
+    <delete id="delWhCangchu">
 		delete  from wh_cangchu where id=#{id}
 	</delete>
 

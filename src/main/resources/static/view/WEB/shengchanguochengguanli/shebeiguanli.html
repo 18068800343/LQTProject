@@ -572,7 +572,7 @@
                 })
                 let config = {
                     headers: {
-                        'Content-Type': 'multipart/form-data'
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 }
                 this.$http.post('/DeviceInfo/addDeviceInfo',formData,config).then((res)=>{

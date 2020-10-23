@@ -104,6 +104,7 @@
                                    <th>含水量</th>
                                    <th>来货单位</th>
                                    <th>产地</th>
+                                   <td>材质</td>
                                    <th>单价</th>
                                    <th>总价</th>
                                    <th>料仓编号</th>
@@ -184,6 +185,7 @@
                                 <td>时间</td>
                                 <td>重量(kg)</td>
                                 <td>材料</td>
+
                                 <td>含水量</td>
                                 <td>来货单位</td>
                                 <td>单价</td>
@@ -465,6 +467,7 @@
                 {"data": "waterContent"},
                 {"data": "companyId"},
                 {"data": "chandi"},
+                {"data": "caizhi"},
                 {"data": "price"},
                 {"data": null},
                 {"data": "storNo"},
@@ -474,7 +477,7 @@
             ],
 	        "columnDefs": [{
                 "class": "tcenter",
-                "targets": 8,
+                "targets": 9,
                 "searchable": true,
                 "render": function (data, type, full) {
                     var zongjia = Number(full.price) * Number(full.weight);
@@ -482,7 +485,7 @@
                 }
             }, {
                 "class": "tcenter",
-                "targets": 12,
+                "targets": 13,
                 "searchable": true,
                 "render": function (data, type, full) {
                     return '<i class="iconfont icon-xiugai Pbdab" style="font-size:18px;cursor:pointer;display:none;" id="upd" title="修改" data-toggle="modal" data-target="#change"></i>'
@@ -676,6 +679,44 @@
                 }
             });
         }
+
+        $("#cailiao").click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/WhIncomingMaterial/getWhCangChuByCailiao',
+                dataType: 'json',
+                data: {
+                    cailiao: $("#cailiao").val()
+                },
+                success: function (json) {
+                    $("#liaocangbianhao").html('');
+                    for (var i = 0; i < json.length; i++) {
+                        $("#liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"
+                            + json[i].bianhao + "</option>")
+                    }
+                    $("#liaocangbianhao").trigger("change");
+                }
+            });
+        });
+
+        $("#xg_cailiao").click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/WhIncomingMaterial/getWhCangChuByCailiao',
+                dataType: 'json',
+                data: {
+                    cailiao: $("#xg_cailiao").val()
+                },
+                success: function (json) {
+                    $("#xg_liaocangbianhao").html('');
+                    for (var i = 0; i < json.length; i++) {
+                        $("#xg_liaocangbianhao").append("<option value='" + json[i].bianhao + "'>"
+                            + json[i].bianhao + "</option>")
+                    }
+                    $("#xg_liaocangbianhao").trigger("change");
+                }
+            });
+        });
 
 
         $("#baocun").click(function () {
