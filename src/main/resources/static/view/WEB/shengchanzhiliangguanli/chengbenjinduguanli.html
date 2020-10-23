@@ -506,7 +506,7 @@
     function cbechartsWeek(date,chenneng) {
         var myChart = echarts.init(document.getElementById('weekchanneng'));
         var option = {
-
+            color: ['#3398DB'],
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -560,8 +560,16 @@
                 name: '吨',
             }],
             series: [{
-                type: 'line',
+                type: 'bar',
                 data:chenneng,
+                barWidth: '30%',
+                label: {
+                    normal: {
+                        show: true,
+                        color:"black",
+                        position: 'top'
+                    }
+                },
 
             }, ]
         };
@@ -594,7 +602,7 @@ function initMonth(){
 function cbechartsMonth(date,chenneng) {
     var myChart = echarts.init(document.getElementById('monthchanneng'));
     var option = {
-
+        color: ['#3398DB'],
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -623,9 +631,16 @@ function cbechartsMonth(date,chenneng) {
             name: '吨'
         }],
         series: [{
-            type: 'line',
+            type: 'bar',
             data:chenneng,
-
+            barWidth: '30%',
+            label: {
+                normal: {
+                    show: true,
+                    color:"black",
+                    position: 'top'
+                }
+            },
         }, ]
     };
     // 使用刚指定的配置项和数据显示图表。
