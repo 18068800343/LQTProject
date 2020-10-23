@@ -8,5 +8,5 @@ public interface QualityKeyMeshPassRateDao {
 	
 	List<QualityKeyMeshPassRate> getAllQualityKeyMeshPassRate();
 
-	List<QualityKeyMeshPassRate> getTongGuoLvVoListByTime(String beginTime, String endTime);
+	List<QualityKeyMeshPassRate> getTongGuoLvVoListByTime(String beginTime, String endTime, String peifang);
 }

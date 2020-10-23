@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/laydate.css" />
     <link href="../../toastr/toastr.css" rel="stylesheet">
 	    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-   <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/font.css">
@@ -122,6 +122,10 @@
                                    onclick=""><br/>
                         </div>
                         <div class="form-group">
+                            <select class="form-control" id="peifang" style="width: 100%;">
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <a class="btn btn-primary btn-sm" onclick="searchBydate()">检索</a>
                         </div>
                     </div>
@@ -153,6 +157,7 @@
 <script src="../../js/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/element.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/myEcharts.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/myUtil.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../toastr/toastr.js"></script>
 <!--导出CSV开始-->
 <script src="../../js/datatables/jquery.dataTables.min.js"></script>
@@ -167,8 +172,67 @@
 <script>
     $(document).ready(function () {
         initTable();
+        initPeiFangOption();
         initPeiBiEcharts();
     });
+
+
+    function initPeiFangOption(obj1,obj2) {
+        var startime;
+        var endtime;
+        if(obj1!=""&&obj1!=null&&obj1!=undefined&&obj2!=""&&obj2!=null&&obj2!=undefined){
+            startime=obj1;
+            endtime=obj2;
+        }else{
+            startime=$("#reservation").val();
+            endtime=$("#reservationEnd").val();
+        }
+        $.ajax({
+            type: 'POST',
+            //url: '/SysFormulationManagement/selectAllSysFormulationManagement',
+            url: '/ShengChanJiHua/getDISTINCTRecipeIdByFinishTime',
+            dataType: 'json',
+            data: {
+                startime:startime,
+                endTime:endtime
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                $("#peifang").empty()
+                if (json != null) {
+                    $("#peifang").append(`<option value="">全部</option>`);
+                    for (var i = 0; i < json.length; i++) {
+                        if (null != json[i]) {
+                            $("#peifang").append(`<option value=${json[i].flId}>${json[i].flName}</option>`);
+                        }
+                    }
+                }
+                //initPeiBiEcharts();
+            }
+        });
+    }
+
+    function initPeiBiEcharts(startTime, endTime) {
+        $.ajax({
+            type: 'POST',
+            url: '/QualityKeyMeshPassRate/getTongGuoLvVoListByTime',
+            dataType: 'json',
+            data: {
+                beginTime: startTime,
+                endTime: endTime,
+                peifang: $("#peifang").val()
+            },
+            error: function (msg) {
+                errMessage("请求UserController失败");
+            },
+            success: function (json) {
+                initMychart(json);
+            }
+        });
+    }
+
     var table = $('#mainContent').DataTable({
         "deferRender": true,
         "processing": true,
@@ -258,23 +322,7 @@
         });
     }
 
-    function initPeiBiEcharts(startTime, endTime) {
-        $.ajax({
-            type: 'POST',
-            url: '/QualityKeyMeshPassRate/getTongGuoLvVoListByTime',
-            dataType: 'json',
-            data: {
-                beginTime: startTime,
-                endTime: endTime
-            },
-            error: function (msg) {
-                errMessage("请求UserController失败");
-            },
-            success: function (json) {
-                initMychart(json);
-            }
-        });
-    }
+
 
     let startTime = {
         elem: '#reservation',

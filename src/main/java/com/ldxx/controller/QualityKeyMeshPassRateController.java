@@ -37,8 +37,8 @@ public class QualityKeyMeshPassRateController {
 
 	@RequestMapping("/getTongGuoLvVoListByTime")
 	@ResponseBody
-	public TongGuoLvVo getTongGuoLvVoListByTime(String beginTime, String endTime){
-		List<QualityKeyMeshPassRate> list = dao.getTongGuoLvVoListByTime(beginTime,endTime);
+	public TongGuoLvVo getTongGuoLvVoListByTime(String beginTime, String endTime, String peifang){
+		List<QualityKeyMeshPassRate> list = dao.getTongGuoLvVoListByTime(beginTime,endTime,peifang);
 		TongGuoLvVo tongGuoLvVo = new TongGuoLvVo();
 		tongGuoLvVo  = tongGuoLvVo.getPeiBiVoByPeiBiVoList(list);
 		return tongGuoLvVo;
