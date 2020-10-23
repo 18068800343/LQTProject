@@ -3,15 +3,38 @@
 <mapper namespace="com.ldxx.dao.WhIncomingMaterialDao" >
 
 	<select id="getAllWhIncomingMaterial" resultType="WhIncomingMaterial">
-        select
-        a.id,a.no,a.datetime,a.weight,a.jingzhongliang,a.materials,a.water_content,a.dust_content,a.company_id,a.chandi,a.price,a.stor_no,a.meminfo,a.edit_user_id,a.delete_state,b.stones_name
-        as materialsName,usr.u_name,c.caizhi
-        from wh_incoming_material as a
-        left join dic_stones b on a.materials=b.id
-        LEFT JOIN wh_cangchu c on c.bianhao = a.stor_no
-        LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id and usr.delete_state = 1
-        where a.delete_state=1
-        <if test="beginTime !='' and beginTime !=null">
+		SELECT
+		a.id,
+		a. NO,
+		a.datetime,
+		a.weight,
+		a.jingzhongliang,
+		a.materials,
+		a.water_content,
+		a.dust_content,
+		a.company_id,
+		a.chandi,
+		a.price,
+		a.stor_no,
+		a.meminfo,
+		a.edit_user_id,
+		a.delete_state,
+		CASE WHEN b.stones_name is NULL THEN dm.material_name
+		WHEN b.stones_name = '' THEN dm.material_name
+		ELSE b.stones_name END
+		AS materialsName,
+		usr.u_name,
+		c.caizhi
+		FROM
+		wh_incoming_material AS a
+		LEFT JOIN dic_stones b ON a.materials = b.id
+		LEFT JOIN dic_materials dm on a.materials = dm.id
+		LEFT JOIN wh_cangchu c ON c.bianhao = a.stor_no
+		LEFT JOIN u_user usr ON a.edit_user_id = usr.user_id
+		AND usr.delete_state = 1
+		WHERE
+		a.delete_state = 1
+		<if test="beginTime !='' and beginTime !=null">
 			and datetime > #{beginTime}
 		</if>
 		<if test="beginTime !='' and beginTime !=null">

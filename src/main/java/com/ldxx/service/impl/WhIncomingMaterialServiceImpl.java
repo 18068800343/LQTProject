@@ -40,10 +40,10 @@ public class WhIncomingMaterialServiceImpl implements WhIncomingMaterialService 
 	@Override
 	public int updWhIncomingMaterialById(WhIncomingMaterial wm) {
 		WhWarehouseCount wwc = wwcDao.getWhWarehouseCountByStorNo(wm.getStorNo());
-		if (!wwc.getMaterials().equals(wm.getMaterials())) {
+		/*if (!wwc.getMaterials().equals(wm.getMaterials())) {
 			//如果进料材料类型和料仓对应不上，则不能插入数据
 			return -3;
-		}
+		}*/
 		return dao.updWhIncomingMaterialById(wm);
 	}
 
