@@ -1282,10 +1282,22 @@
 					var xiugai='<i class="iconfont icon-xiugai Pbeb" style="font-size:18px;cursor:pointer;display:none;" data-f="'+full+'"   onclick="udMsg(this)" title="修改" data-toggle="modal" data-target="#change2"></i>'
 
 					var qiyong='<i class="iconfont icon-shanchu Pbec " style="font-size:18px;cursor:pointer;display:none;" data-id="'+data+'" onclick="delMsg(this)" title="删除"></i>'
+					var productionTime=full.productionTime.split(" ")[0];
+					const time = new Date();
+					time.setTime(time.getTime());
+					var now = time.Format("yyyy-MM-dd");
 					if(isNull(full.pianchaid)){
-						return xiugai+qiyong;
+						if(productionTime==now){
+							return xiugai+qiyong;
+						}else{
+							return qiyong;
+						}
 					}else{
-						return xiangqing+xiugai+qiyong;
+						if(productionTime==now){
+							return xiangqing+xiugai+qiyong;
+						}else{
+							return xiangqing+qiyong;
+						}
 					}
 				}
 			},
