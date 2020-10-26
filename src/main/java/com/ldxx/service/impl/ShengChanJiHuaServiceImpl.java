@@ -44,7 +44,12 @@ public class ShengChanJiHuaServiceImpl implements ShengChanJiHuaService {
 	@Override
 	public List<PlanProductionCollectionVo> getShengChanJiHuaListByCondition() {
 		// TODO Auto-generated method stub
-		return dao.getShengChanJiHuaListByCondition();
+		List<PlanProductionCollectionVo> list= dao.getShengChanJiHuaListByConditionToDay();
+		List<PlanProductionCollectionVo> list2= dao.getShengChanJiHuaListByCondition();
+		if(list2!=null&&list2.size()!=0){
+			list.addAll(list2);
+		}
+		return list;
 	}
 
 	@Transactional

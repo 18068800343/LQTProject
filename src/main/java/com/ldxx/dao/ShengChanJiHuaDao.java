@@ -10,6 +10,7 @@ import java.util.List;
 public interface ShengChanJiHuaDao {
 
     List<PlanProductionCollectionVo> getShengChanJiHuaListByCondition();
+    List<PlanProductionCollectionVo> getShengChanJiHuaListByConditionToDay();
 
     List<PlanProductionCollectionVo> getShengChanJiHuaListByTime(String time);
 
