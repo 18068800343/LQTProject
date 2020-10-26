@@ -143,7 +143,7 @@ function setCangChuPanDianOption(map) {
 		title: {
 			text: '仓储盘点'
 		},
-		color: ['#FE545E','#6154FD','#006699'],
+		
 		textStyle: {
 			color: '#black',
 			fontSize: 13
@@ -190,12 +190,21 @@ function setCangChuPanDianOption(map) {
 			{
 				name: '来料信息',
 				type: 'bar',
+				itemStyle:{
+					normal:{
+						   //每根柱子颜色设置
+	                    color: function(params) {
+	                        var colorList = ["#429BDF","#4EC26B","#61a0a8"];
+	                        return colorList[params.dataIndex];
+	                    },
+					}
+				},
 				label: {
 					normal: {
 						show: true,
 						position: 'top',
 						color: 'black',
-					}
+					},
 				},
 				data: map.aList,
 				barWidth: 30,//柱图宽度
