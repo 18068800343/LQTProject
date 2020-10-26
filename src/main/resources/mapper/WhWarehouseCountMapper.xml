@@ -113,11 +113,22 @@
 	</select>
 
     <select id="getLaiLiaoWeightByTime" resultType="Double">
-		SELECT SUM(weight) FROM wh_incoming_material WHERE datetime BETWEEN #{startTime} and  #{endTime}
+		SELECT SUM(weight) FROM wh_incoming_material
+		<where>
+			<if test="startTime !='' and startTime!=null">
+				datetime BETWEEN #{startTime} and #{endTime}
+			</if>
+		</where>
+
 	</select>
 
 	<select id="getYongLiaoWeightByTime" resultType="Double">
-		SELECT SUM(weight) FROM quality_by_plate_real_time_prodocution_data WHERE production_time BETWEEN #{startTime} and  #{endTime}
+		SELECT SUM(weight) FROM quality_by_plate_real_time_prodocution_data
+		<where>
+			<if test="startTime !='' and startTime!=null">
+				production_time BETWEEN #{startTime} and #{endTime}
+			</if>
+		</where>
 	</select>
 
 	<select id="getProductEndTime" resultType="String">
@@ -139,5 +150,29 @@
 				datetime,
 				120
 			) FROM wh_warehouse_count  	ORDER BY datetime desc
+	</select>
+
+
+	<!--	获取最近一次仓库盘点总重-->
+	<select id="getNearPanDianAllWeight" resultType="Double">
+		SELECT
+			sum(weight)
+		FROM
+			wh_warehouse_count
+		WHERE
+			CONVERT (CHAR(10), datetime, 120) = (
+				SELECT
+					TOP 1 CONVERT (CHAR(10), datetime, 120)
+				FROM
+					wh_warehouse_count
+				ORDER BY
+					datetime DESC
+			)
+	</select>
+
+
+	<!--	获取所有仓库容量重量总和-->
+	<select id="getAllCangKuWeight" resultType="Double">
+		select  sum(chuliang*1) from wh_cangchu
 	</select>
 </mapper>

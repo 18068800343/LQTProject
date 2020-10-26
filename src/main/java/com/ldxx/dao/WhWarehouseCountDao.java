@@ -34,6 +34,10 @@ public interface WhWarehouseCountDao {
 
 	Double getYongLiaoWeightByTime(String startTime, String endTime);
 
+	Double getNearPanDianAllWeight();
+
+	Double getAllCangKuWeight();
+
 	String getProductEndTime(String time);
 
 	String getLaiLiaoTime();

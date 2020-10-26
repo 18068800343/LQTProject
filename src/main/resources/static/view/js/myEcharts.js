@@ -156,7 +156,7 @@ function setCangChuPanDianOption(map) {
 		},
 
 		legend: {
-			data: ['来料信息', '用料信息', '余料信息'],
+			data: ['理论材料数量', '实际材料数量', '仓库最大储量'],
 			itemGap: 80,
 			textStyle: {
 				color: '#17447E',
@@ -198,34 +198,34 @@ function setCangChuPanDianOption(map) {
 					}
 				},
 				data: map.aList,
-				barWidth : 30,//柱图宽度
+				barWidth: 30,//柱图宽度
 
-			},
-			{
-				name: '用料信息',
-				type: 'bar',
-				label: {
-					normal: {
-						show: true,
-						position: 'top',
-						color: 'black',
-					}
-				},
-				data: map.bList,
-				barWidth : 30,//柱图宽度
-			},{
-				name: '余料信息',
-				type: 'bar',
-				label: {
-					normal: {
-						show: true,
-						position: 'bottom',
-						color: 'black',
-					}
-				},
-				data: map.cList,
-				barWidth : 30,//柱图宽度
-			}
+			}//,
+			// {
+			// 	name: '用料信息',
+			// 	type: 'bar',
+			// 	label: {
+			// 		normal: {
+			// 			show: true,
+			// 			position: 'top',
+			// 			color: 'black',
+			// 		}
+			// 	},
+			// 	data: map.bList,
+			// 	barWidth : 30,//柱图宽度
+			// },{
+			// 	name: '余料信息',
+			// 	type: 'bar',
+			// 	label: {
+			// 		normal: {
+			// 			show: true,
+			// 			position: 'bottom',
+			// 			color: 'black',
+			// 		}
+			// 	},
+			// 	data: map.cList,
+			// 	barWidth : 30,//柱图宽度
+			// }
 		]
 	};
 	return option;

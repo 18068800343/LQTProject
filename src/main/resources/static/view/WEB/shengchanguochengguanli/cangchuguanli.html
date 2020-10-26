@@ -706,21 +706,12 @@
         pageVariable.bList = bList;
     }
 
-    function getXYListInOut(list) {
-        let xList = [];
-        let aList = [];
-        let bList = [];
-        let cList = [];
-        for (let i in list) {
-            xList[i] = list[i].dayTimeOut;
-            aList[i] = list[i].dayWeightIn;
-            bList[i] = list[i].dayWeightOut;
-            cList[i] = list[i].dayWeightCha;
-        }
-        pageVariableOut.xList = xList;
-        pageVariableOut.aList = aList;
-        pageVariableOut.bList = bList;
-        pageVariableOut.cList = cList;
+    function getXYListInOut(map) {
+        // map.put("liLunCaiLiao",liLunCaiLiao);
+        // map.put("shiJiCaiLiao",shiJiCaiLiao);
+        // map.put("cangKuWeight",cangKuWeight);
+        pageVariableOut.xList = ['理论材料数量', '实际材料数量', '仓库最大储量'];
+        pageVariableOut.aList = [map.liLunCaiLiao, map.shiJiCaiLiao, map.cangKuWeight];
     }
 
     function initTable() {
