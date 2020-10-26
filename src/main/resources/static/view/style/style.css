@@ -1,11 +1,12 @@
 body{
-    font-family:"瀵邦喛钂嬮梿鍛寸拨";
+    font-family:"鐎甸偊鍠涢拏瀣⒖閸涘鎷�";
     overflow-x: hidden;
     overflow-y: auto;
     background: #fff;
     font-size:14px;
     margin:0;
     padding:0;
+    margin-left:2% !important;
 }
 .yihang{
     display:flex;
@@ -37,6 +38,11 @@ body{
 .shuziyanse{
 	font-weight:700;
 	font-size:18px;
+}
+ @media screen and (max-width: 1600px) {
+    body{
+       margin-left:0% !important;
+    }
 }
 /* @media screen and (max-width: 1369px) {
     #shipei {
@@ -267,7 +273,7 @@ a.logo {
     margin-left:3px;
 }
 
-/* 娑撳楠囬懣婊冨礋 */
+/* 濞戞挸顦辨鍥嚕濠婂啫绀� */
 ul.sidebar-menu li>ul>li>ul>li a{
     display:block;
     box-sizing: border-box;
@@ -280,7 +286,7 @@ ul.sidebar-menu li>ul>li>ul>li a{
 ul.sidebar-menu li>ul>li>ul>li a.active{
     color:#fff;
 }
-/* 娑撳楠囬懣婊冨礋缂佹挻娼�*/
+/* 濞戞挸顦辨鍥嚕濠婂啫绀嬬紓浣规尰濞硷拷*/
 .w_nav3 ul {
     padding-left: 0px;
 }
@@ -399,7 +405,7 @@ footer{
     background-color: #003D79;
 
 }
-/* toggle閹稿鎸� */
+/* toggle闁圭顦甸幐锟� */
 .sidebar-toggle-box {
     float: left;
     padding-right: 15px;
@@ -412,7 +418,7 @@ footer{
     font-size: 18px;
 }
 
-/*閸忣剛鏁ら棃銏犲瘶鐏炴垶鐗卞锟�*/
+/*闁稿浚鍓涢弫銈夋閵忕姴鐦堕悘鐐村灦閻楀崬顕ｉ敓锟�*/
 .breadcrumb{
     background: #fff;
     border-bottom:1px solid #ccc;
@@ -428,7 +434,7 @@ footer{
 
 
 
-/*娑撳楠囬懕鏂垮З*/
+/*濞戞挸顦辨鍥嚂閺傚灝袟*/
 
 .city-picker-input {
     opacity: 0 !important;
@@ -612,7 +618,7 @@ footer{
 }
 
 
-/*妤傛楠囩粵娑拷澶婅剨閸戝搫鐪�*/
+/*濡ゅ倹顭囨鍥╃驳濞戭澁鎷锋径濠呭墾闁告垵鎼惇锟�*/
 .saixuan{
     display: none;
     padding: 20px 15px;
@@ -639,7 +645,7 @@ footer{
     margin-left: 10px;
 }
 
-/*閸掓銆冪拠锔藉剰*/
+/*闁告帗顨夐妴鍐嫚閿旇棄鍓�*/
 .renwu{
     padding: 15px 15px 10px;
     color: #626262;
@@ -660,7 +666,7 @@ footer{
 .renwu_content th{
     text-align: center;
 }
-/******妫ｆ牠銆�******/
+/******濡絾鐗犻妴锟�******/
 .home-content{
     padding:0px;
 }
@@ -741,7 +747,7 @@ footer{
     padding-left:12px;
 }
 
-/*css閼奉亜濮╁姘З閹绢厽鏂�*/
+/*css闁煎浜滄慨鈺侇煥濮橆剙袟闁圭虎鍘介弬锟�*/
 @keyframes rowup {
     0% {
         -webkit-transform: translate3d(0, 0, 0);
@@ -770,7 +776,7 @@ footer{
     border-bottom: 1px solid #ccc;
 }
 
-/*js濠婃艾濮�*/
+/*js婵犲﹥鑹炬慨锟�*/
 .gundong {
     margin: 0;
     padding: 0;
@@ -787,7 +793,7 @@ footer{
     padding-left: 10px;
     border-bottom: 1px solid rgba(204, 204, 204,0.5);
 }
-/*閸欏厖鏅舵稉璁崇秼閸愬懎顔�*/
+/*闁告瑥鍘栭弲鑸电▔鐠佸磭绉奸柛鎰噹椤旓拷*/
 .zhuti-content{
     width:100%;
     background: #fff;
