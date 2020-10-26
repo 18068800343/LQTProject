@@ -266,7 +266,7 @@
             let d2 = endDate;
             if (beginDate != "" && endDate != "" && d1 > d2) {
                 toastr.error("开始时间不能大于结束时间！");
-                $("#reservation").val('');
+                $("#reservation").val(d2);
                 return false;
             }
             if(flag==1){
@@ -286,7 +286,7 @@
             let d2 = endDate;
             if (beginDate != "" && endDate != "" && d1 > d2) {
                 toastr.error("开始时间不能大于结束时间！");
-                $("#reservationEnd").val('');
+                $("#reservationEnd").val(d1);
                 return false;
             }
             if(flag==1){
