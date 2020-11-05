@@ -65,7 +65,7 @@ function setCangChuOption(map){
 		    },
 		    yAxis: {
 		        type: 'value',
-		        name:"重量",
+		        name:"重量/吨",
 		        data: map.yList
 		    },
 		    series: [{
@@ -174,6 +174,7 @@ function setCangChuPanDianOption(map) {
 			{
 				show:true,
 				type: 'value',
+				name:"重量/吨",
 				position: 'left',
 				axisLine: {
 					lineStyle: {
