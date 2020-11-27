@@ -1,6 +1,10 @@
 package com.ldxx.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public class SysFormulationManagement {
@@ -20,6 +24,37 @@ public class SysFormulationManagement {
 	private BigDecimal wendupiancha2;
 	private List<SysMaterialAttached> fsclList;
 	private Integer deleteState;
+
+	private String lastUser;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date lastDate;
+
+	private String uName;
+
+	public String getuName() {
+		return uName;
+	}
+
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+
+	public String getLastUser() {
+		return lastUser;
+	}
+
+	public void setLastUser(String lastUser) {
+		this.lastUser = lastUser;
+	}
+
+	public Date getLastDate() {
+		return lastDate;
+	}
+
+	public void setLastDate(Date lastDate) {
+		this.lastDate = lastDate;
+	}
 
 	public BigDecimal getBiaozhunwendu() {
 		return biaozhunwendu;

@@ -314,7 +314,8 @@
 						<th>22-32用量(kg)</th>
 						<th>粉用量(kg)</th>
 						<th>沥青用量(kg)</th>
-						
+						<th>录入人</th>
+						<th>录入时间</th>
                         <th style="width:50px;">操作</th>
                     </tr>
                 </thead>
@@ -389,12 +390,14 @@
 		            { "data": "materialsUse6"},
 		            { "data": "boneFlourUse"},
 		            { "data": "pitchUse"},
+					{ "data": "uName"},
+					{ "data": "lastDate"},
 		            { "data": null}
 		        ],
 		 "columnDefs": [
 							{
 							"class": "tcenter",
-							"targets": 10,
+							"targets": 12,
 							"searchable": false,
 							"render": function(data, type, full) {
 								var chakan = '<i class="iconfont icon-icon-test" style="font-size:20px;cursor:pointer;" title="查看添加剂材料"  data-toggle="modal" onclick="xiangqingpeibihuixian(this)"></i>'
@@ -439,7 +442,7 @@
 							return data;
 						}
 					},
-					columns:[0,1,2,3,4,5,6,7,8,9]
+					columns:[0,1,2,3,4,5,6,7,8,9,10,11]
 				}
 			}
 		]

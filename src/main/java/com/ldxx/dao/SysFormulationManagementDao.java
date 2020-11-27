@@ -1,11 +1,11 @@
 package com.ldxx.dao;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.ldxx.bean.SysFormulationManagement;
 import com.ldxx.bean.SysMaterialAttached;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
 
 public interface SysFormulationManagementDao {
 
@@ -13,7 +13,7 @@ public interface SysFormulationManagementDao {
 	
 	public int updateSysFormulationManagement(@Param("sysFormulationManagement")SysFormulationManagement sysFormulationManagement);
 	
-	public int deleteSysFormulationManagement(String id);
+	public int deleteSysFormulationManagement(String id, String lastUserId, Date date);
 	
 	public List<SysFormulationManagement> selectAllSysFormulationManagement();
 	

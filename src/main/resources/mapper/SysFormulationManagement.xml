@@ -5,7 +5,7 @@
 		insert into 
 		sys_formulation_management(fl_id,fl_no,fl_name,materials_use_1,materials_use_2,
 			materials_use_3,materials_use_4,materials_use_5,materials_use_6,
-			bone_flour_use,pitch_use,delete_state,biaozhunwendu,wendupiancha1,wendupiancha2)
+			bone_flour_use,pitch_use,delete_state,biaozhunwendu,wendupiancha1,wendupiancha2,last_user,last_date)
 		values(#{sysFormulationManagement.flId},
 			   #{sysFormulationManagement.flNo},
 			   #{sysFormulationManagement.flName},
@@ -20,7 +20,9 @@
 			   1,
 			   #{sysFormulationManagement.biaozhunwendu},
 			   #{sysFormulationManagement.wendupiancha1},
-			   #{sysFormulationManagement.wendupiancha2}
+			   #{sysFormulationManagement.wendupiancha2},
+			   #{sysFormulationManagement.lastUser},
+			   #{sysFormulationManagement.lastDate}
 			   )
 	</insert>
 	
@@ -39,17 +41,18 @@
 			 pitch_use=#{sysFormulationManagement.pitchUse},
 			 biaozhunwendu=#{sysFormulationManagement.biaozhunwendu},
 			 wendupiancha1=#{sysFormulationManagement.wendupiancha1},
-			 wendupiancha2=#{sysFormulationManagement.wendupiancha2}
+			 wendupiancha2=#{sysFormulationManagement.wendupiancha2},
+			 last_user=#{sysFormulationManagement.lastUser},
+			 last_date=#{sysFormulationManagement.lastDate}
 	    where fl_id=#{sysFormulationManagement.flId} and delete_state=1
 	</update>
 	<select id="selectAllSysFormulationManagement" resultType="SysFormulationManagement">
 		select 
-			fl_id,fl_no,fl_name,materials_use_1,materials_use_2,
-			materials_use_3,materials_use_4,materials_use_5,materials_use_6,
-			bone_flour_use,pitch_use,delete_state,biaozhunwendu,wendupiancha1,wendupiancha2
+			a.*,usr.u_name
 		from
-		  sys_formulation_management
-		where delete_state=1 ORDER BY fl_name desc
+		  sys_formulation_management a
+		  LEFT JOIN u_user usr ON a.last_user = usr.user_id
+		where a.delete_state=1 ORDER BY fl_name desc
 	</select>
 	
 	<select id="selectByIdSysFormulationManagement" resultType="SysFormulationManagement">
@@ -65,7 +68,9 @@
 	<update id="deleteSysFormulationManagement">
 		update sys_formulation_management 
 		set
-			delete_state=0
+			delete_state=0,
+			last_user=#{lastUserId},
+			last_date=#{date}
 		 where fl_id=#{id}
 	</update>
 	

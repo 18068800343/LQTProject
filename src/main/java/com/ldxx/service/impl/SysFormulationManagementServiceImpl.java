@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -46,8 +47,8 @@ public class SysFormulationManagementServiceImpl implements SysFormulationManage
 	}
 
 	@Override
-	public int deleteSysFormulationManagement(String id) {
-		int num = sdao.deleteSysFormulationManagement(id);
+	public int deleteSysFormulationManagement(String id, String lastUserId, Date date) {
+		int num = sdao.deleteSysFormulationManagement(id,lastUserId,date);
 		return num;
 	}
 
