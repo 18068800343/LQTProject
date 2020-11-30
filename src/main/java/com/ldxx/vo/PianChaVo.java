@@ -136,9 +136,9 @@ public class PianChaVo {
         List<BigDecimal> yList6 = list.stream().map(QualityRealtimeDeviation::getMaterialDeviation6).collect(Collectors.toList());
         List<BigDecimal> yList7 = list.stream().map(QualityRealtimeDeviation::getBoneFlourDeviation).collect(Collectors.toList());
         List<BigDecimal> yList8 = list.stream().map(QualityRealtimeDeviation::getPitchDeviation).collect(Collectors.toList());
-        List<BigDecimal> yList9 = list.stream().map(QualityRealtimeDeviation::getPass475).collect(Collectors.toList());
-        List<BigDecimal> yList10 = list.stream().map(QualityRealtimeDeviation::getPass236).collect(Collectors.toList());
-        List<BigDecimal> yList11 = list.stream().map(QualityRealtimeDeviation::getPass0075).collect(Collectors.toList());
+        //List<BigDecimal> yList9 = list.stream().map(QualityRealtimeDeviation::getPass475).collect(Collectors.toList());
+        //List<BigDecimal> yList10 = list.stream().map(QualityRealtimeDeviation::getPass236).collect(Collectors.toList());
+        //List<BigDecimal> yList11 = list.stream().map(QualityRealtimeDeviation::getPass0075).collect(Collectors.toList());
         List<Date> xList = list.stream().map(QualityRealtimeDeviation::getDatetime).collect(Collectors.toList());
         PianChaVo pianChaVo = new PianChaVo();
         pianChaVo.setyList1(yList1);
@@ -149,9 +149,9 @@ public class PianChaVo {
         pianChaVo.setyList6(yList6);
         pianChaVo.setyList7(yList7);
         pianChaVo.setyList8(yList8);
-        pianChaVo.setyList9(yList9);
-        pianChaVo.setyList10(yList10);
-        pianChaVo.setyList11(yList11);
+        //pianChaVo.setyList9(yList9);
+        //pianChaVo.setyList10(yList10);
+        //pianChaVo.setyList11(yList11);
         pianChaVo.setxList(xList);
         return  pianChaVo;
     }
