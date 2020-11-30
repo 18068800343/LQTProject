@@ -2,28 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ldxx.dao.QualityKeyMeshPassRateDao" >
 
-	<select id="getAllQualityKeyMeshPassRate" resultType="QualityKeyMeshPassRate">
-		select id,plan_id,plan_no,production_time,r1,r2,r3 from quality_key_mesh_pass_rate
+	<select id="getAllQualityKeyMeshPassRate" resultType="QualityJiPei">
+		select * from quality_ji_pei
 	</select>
 
-	<select id="getTongGuoLvVoListByTime" resultType="QualityKeyMeshPassRate">
+	<select id="getTongGuoLvVoListByTime" resultType="QualityJiPei">
 		SELECT
-		*
+		qkr.id,qkr.datetime
+		,qkr.peifang_id
+		,qkr.peifang_name
+		,ISNULL(qkr.p0_075, 0) p0_075
+		,ISNULL(qkr.p0_15, 0) p0_15
+		,ISNULL(qkr.p0_3, 0) p0_3
+		,ISNULL(qkr.p0_6, 0) p0_6
+		,ISNULL(qkr.p1_18, 0) p1_18
+		,ISNULL(qkr.p2_36, 0) p2_36
+		,ISNULL(qkr.p4_75, 0) p4_75
+		,ISNULL(qkr.p9_5, 0) p9_5
+		,ISNULL(qkr.p13_2, 0) p13_2
+		,ISNULL(qkr.p16, 0) p16
+		,ISNULL(qkr.p19, 0) p19
+		,ISNULL(qkr.p26_5, 0) p26_5
+		,ISNULL(qkr.p31_5, 0) p31_5
+		,ISNULL(qkr.p37_5, 0) p37_5
 		FROM
-		quality_key_mesh_pass_rate qkr
+		quality_ji_pei qkr
 		LEFT JOIN plan_production_collection ppc ON qkr.plan_id = ppc.plan_id
 		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id = ppc.recipe_id
 		<where>
 			<if test="beginTime !=null and beginTime!=''">
-				qkr.production_time &gt; #{beginTime}
+				qkr.datetime &gt; #{beginTime}
 			</if>
 			<if test="endTime !=null and endTime!=''">
-				and qkr.production_time &lt;  #{endTime}
+				and qkr.datetime &lt;  #{endTime}
 			</if>
 			<if test="peifang !=null and peifang!=''">
 				and sfm.fl_id = #{peifang}
 			</if>
 		</where>
-		order by qkr.production_time asc
+		order by qkr.datetime asc
+	</select>
+
+	<select id="getDISTINCTPeiFangByTime" resultType="QualityJiPei">
+		SELECT DISTINCT
+		qkr.peifang_id,
+		qkr.peifang_name
+		FROM
+		quality_ji_pei qkr
+		LEFT JOIN plan_production_collection ppc ON qkr.plan_id = ppc.plan_id
+		LEFT JOIN sys_formulation_management sfm ON sfm.fl_id = ppc.recipe_id
+		<where>
+			<if test="beginTime !=null and beginTime!=''">
+				qkr.datetime &gt; #{beginTime}
+			</if>
+			<if test="endTime !=null and endTime!=''">
+				and qkr.datetime &lt;  #{endTime}
+			</if>
+
+		</where>
+
 	</select>
 </mapper>

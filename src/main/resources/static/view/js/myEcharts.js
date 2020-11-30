@@ -665,7 +665,7 @@ function setTongGuoVoOption(list){
 //			text: '折线图堆叠'
 //		},
 		legend: {
-			data:['料1(11~17)','料2(6~11)','料3(3~6)','料4','料5','料6','粉用量','沥青用量'],
+			data:['0.075','0.15','0.3','0.6','1.18','2.36','4.75','9.5','13.2','16','19','26.5','31.5','37.5'],
 			
 		},
 		grid: {
@@ -718,19 +718,74 @@ function setTongGuoVoOption(list){
 		},
 		series: [
 			{
-				name:'料1(11~17)',
+				name:'0.075',
 				type:'line',
-				data:list.yList1
+				data:list.yList0075
 			},
 			{
-				name:'料2(6~11)',
+				name:'0.15',
 				type:'line',
-				data:list.yList2
+				data:list.yList015
 			},
 			{
-				name:'料3(3~6)',
+				name:'0.3',
 				type:'line',
-				data:list.yList3
+				data:list.yList03
+			},
+			{
+				name:'0.6',
+				type:'line',
+				data:list.yList06
+			},
+			{
+				name:'1.18',
+				type:'line',
+				data:list.yList118
+			},
+			{
+				name:'2.36',
+				type:'line',
+				data:list.yList236
+			},
+			{
+				name:'4.75',
+				type:'line',
+				data:list.yList475
+			},
+			{
+				name:'9.5',
+				type:'line',
+				data:list.yList95
+			},
+			{
+				name:'13.2',
+				type:'line',
+				data:list.yList132
+			},
+			{
+				name:'16',
+				type:'line',
+				data:list.yList16
+			},
+			{
+				name:'19',
+				type:'line',
+				data:list.yList19
+			},
+			{
+				name:'26.5',
+				type:'line',
+				data:list.yList265
+			},
+			{
+				name:'31.5',
+				type:'line',
+				data:list.yList315
+			},
+			{
+				name:'37.5',
+				type:'line',
+				data:list.yList375
 			}
 		]
 	};

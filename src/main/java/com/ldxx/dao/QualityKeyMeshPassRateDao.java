@@ -1,12 +1,14 @@
 package com.ldxx.dao;
 
-import com.ldxx.bean.QualityKeyMeshPassRate;
+import com.ldxx.bean.QualityJiPei;
 
 import java.util.List;
 
 public interface QualityKeyMeshPassRateDao {
 	
-	List<QualityKeyMeshPassRate> getAllQualityKeyMeshPassRate();
+	List<QualityJiPei> getAllQualityKeyMeshPassRate();
 
-	List<QualityKeyMeshPassRate> getTongGuoLvVoListByTime(String beginTime, String endTime, String peifang);
+	List<QualityJiPei> getTongGuoLvVoListByTime(String beginTime, String endTime, String peifang);
+
+	List<QualityJiPei> getDISTINCTPeiFangByTime(String beginTime, String endTime);
 }

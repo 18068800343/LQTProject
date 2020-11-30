@@ -23,6 +23,27 @@ public class QualityJiPei {
     private BigDecimal p315;
     private BigDecimal p375;
 
+    //生产计划_ID
+    public String planId;
+    //计划编号
+    public String planNo;
+
+    public String getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(String planId) {
+        this.planId = planId;
+    }
+
+    public String getPlanNo() {
+        return planNo;
+    }
+
+    public void setPlanNo(String planNo) {
+        this.planNo = planNo;
+    }
+
     public String getId() {
         return id;
     }

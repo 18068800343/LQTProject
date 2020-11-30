@@ -1,6 +1,6 @@
 package com.ldxx.controller;
 
-import com.ldxx.bean.QualityKeyMeshPassRate;
+import com.ldxx.bean.QualityJiPei;
 import com.ldxx.dao.QualityKeyMeshPassRateDao;
 import com.ldxx.service.QualityKeyMeshPassRateService;
 import com.ldxx.vo.TongGuoLvVo;
@@ -30,18 +30,24 @@ public class QualityKeyMeshPassRateController {
 
 	@RequestMapping("/getAllQualityKeyMeshPassRate")
 	@ResponseBody
-	public List<QualityKeyMeshPassRate> getAllQualityKeyMeshPassRate(){
-		List<QualityKeyMeshPassRate> list=service.getAllQualityKeyMeshPassRate();
+	public List<QualityJiPei> getAllQualityKeyMeshPassRate(){
+		List<QualityJiPei> list=service.getAllQualityKeyMeshPassRate();
 		return list;
 	}
 
 	@RequestMapping("/getTongGuoLvVoListByTime")
 	@ResponseBody
 	public TongGuoLvVo getTongGuoLvVoListByTime(String beginTime, String endTime, String peifang){
-		List<QualityKeyMeshPassRate> list = dao.getTongGuoLvVoListByTime(beginTime,endTime,peifang);
+		List<QualityJiPei> list = dao.getTongGuoLvVoListByTime(beginTime,endTime,peifang);
 		TongGuoLvVo tongGuoLvVo = new TongGuoLvVo();
 		tongGuoLvVo  = tongGuoLvVo.getPeiBiVoByPeiBiVoList(list);
 		return tongGuoLvVo;
+	}
+
+	@RequestMapping("/getDISTINCTPeiFangByTime")
+	@ResponseBody
+	public List<QualityJiPei> getDISTINCTPeiFangByTime(String startime, String endTime){
+		return dao.getDISTINCTPeiFangByTime(startime,endTime);
 	}
 
 }

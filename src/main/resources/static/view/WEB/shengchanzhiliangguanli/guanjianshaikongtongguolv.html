@@ -60,8 +60,8 @@
         <li class="active">关键筛孔通过率</li>
     </ul>
 </div>
-<div class="background" style="background-color:#F0F1F1;width:100%;height:40px;">
-    </div>
+<!--<div class="background" style="background-color:#F0F1F1;width:100%;height:40px;">
+    </div>-->
 <div>
 <!-- Nav tabs -->
  <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
@@ -91,12 +91,24 @@
                     
                         <thead>
                          <tr style="background-color:#EBF4FF;border-bottom:none;background-image:none;">
-                            <th>序号</th>
-                            <th>生产计划编号</th>
-                            <th>生产时间</th>
-                            <th>11~17</th>
-                            <th>6~11</th>
-                            <th>3~6</th>
+                             <th>序号</th>
+                             <th>生产计划编号</th>
+                             <th>配方名称</th>
+                             <th>生产时间</th>
+                             <th>0.075</th>
+                             <th>0.15</th>
+                             <th>0.3</th>
+                             <th>0.6</th>
+                             <th>1.18</th>
+                             <th>2.36</th>
+                             <th>4.75</th>
+                             <th>9.5</th>
+                             <th>13.2</th>
+                             <th>16</th>
+                             <th>19</th>
+                             <th>26.5</th>
+                             <th>31.5</th>
+                             <th>37.5</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -106,7 +118,7 @@
             </div>
         </div>
 
-    <div role="tabpanel" class="tab-pane" id="messages">
+    <div role="tabpanel" class="tab-pane" id="messages" style="background-color: #ffffff; ">
         <!--<div class="layui-tab-item weadmin-body">-->
         <div class="zhuti-content">
             <div class="UpperPart">
@@ -137,7 +149,7 @@
         </div>
         <div class="LowerPart" style="background-color: #ffffff; ">
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-            <div id="two" style="width: 1500px;height:600px;z-index:5;" ></div>
+            <div id="two" style="width: 1500px;height:600px;z-index:5;margin-top: 50px;" ></div>
         </div>
     </div>
 </div>
@@ -190,7 +202,8 @@
         $.ajax({
             type: 'POST',
             //url: '/SysFormulationManagement/selectAllSysFormulationManagement',
-            url: '/ShengChanJiHua/getDISTINCTRecipeIdByFinishTime',
+            //url: '/ShengChanJiHua/getDISTINCTRecipeIdByFinishTime',
+            url: '/QualityKeyMeshPassRate/getDISTINCTPeiFangByTime',
             dataType: 'json',
             data: {
                 startime:startime,
@@ -202,10 +215,10 @@
             success: function (json) {
                 $("#peifang").empty()
                 if (json != null) {
-                    $("#peifang").append(`<option value="">全部</option>`);
+                    //$("#peifang").append(`<option value="">全部</option>`);
                     for (var i = 0; i < json.length; i++) {
                         if (null != json[i]) {
-                            $("#peifang").append(`<option value=${json[i].flId}>${json[i].flName}</option>`);
+                            $("#peifang").append(`<option value=${json[i].peifangId}>${json[i].peifangName}</option>`);
                         }
                     }
                 }
@@ -246,10 +259,22 @@
         "columns": [
             {"data": null},
             {"data": "planNo"},
-            {"data": "productionTime"},
-            {"data": "r1"},
-            {"data": "r2"},
-            {"data": "r3"},
+            {"data": "peifangName"},
+            {"data": "datetime"},
+            {"data": "p0075"},
+            {"data": "p015"},
+            {"data": "p03"},
+            {"data": "p06"},
+            {"data": "p118"},
+            {"data": "p236"},
+            {"data": "p475"},
+            {"data": "p95"},
+            {"data": "p132"},
+            {"data": "p16"},
+            {"data": "p19"},
+            {"data": "p265"},
+            {"data": "p315"},
+            {"data": "p375"},
         ],
         "order": [[2, 'desc']],
         "oLanguage": { //国际化配置
@@ -285,7 +310,7 @@
                             return data;
                         }
                     },
-                    columns:[1,2,3,4,5]
+                    columns:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
                 }
             }
         ],
@@ -337,7 +362,7 @@
                 toastr.error("开始时间不能大于结束时间！");
                 $("#reservation").val('');
                 return false;
-            }
+            }else initPeiFangOption(d1,d2)
         }
     };
     // 结束时间
@@ -354,7 +379,7 @@
                 toastr.error("开始时间不能大于结束时间！");
                 $("#reservationEnd").val('');
                 return false;
-            }
+            }else initPeiFangOption(d1,d2)
         }
     };
     laydate.render(startTime);

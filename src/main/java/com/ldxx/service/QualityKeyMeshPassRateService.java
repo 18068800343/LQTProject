@@ -1,11 +1,11 @@
 package com.ldxx.service;
 
-import java.util.List;
+import com.ldxx.bean.QualityJiPei;
 
-import com.ldxx.bean.QualityKeyMeshPassRate;
+import java.util.List;
 
 public interface QualityKeyMeshPassRateService {
 	
-	List<QualityKeyMeshPassRate> getAllQualityKeyMeshPassRate();
+	List<QualityJiPei> getAllQualityKeyMeshPassRate();
 
 }
