@@ -665,7 +665,7 @@ function setTongGuoVoOption(list){
 //			text: '折线图堆叠'
 //		},
 		legend: {
-			data:['0.075','0.15','0.3','0.6','1.18','2.36','4.75','9.5','13.2','16','19','26.5','31.5','37.5'],
+			data:['0.075','2.36','4.75'],
 			
 		},
 		grid: {
@@ -722,26 +722,7 @@ function setTongGuoVoOption(list){
 				type:'line',
 				data:list.yList0075
 			},
-			{
-				name:'0.15',
-				type:'line',
-				data:list.yList015
-			},
-			{
-				name:'0.3',
-				type:'line',
-				data:list.yList03
-			},
-			{
-				name:'0.6',
-				type:'line',
-				data:list.yList06
-			},
-			{
-				name:'1.18',
-				type:'line',
-				data:list.yList118
-			},
+
 			{
 				name:'2.36',
 				type:'line',
@@ -751,41 +732,6 @@ function setTongGuoVoOption(list){
 				name:'4.75',
 				type:'line',
 				data:list.yList475
-			},
-			{
-				name:'9.5',
-				type:'line',
-				data:list.yList95
-			},
-			{
-				name:'13.2',
-				type:'line',
-				data:list.yList132
-			},
-			{
-				name:'16',
-				type:'line',
-				data:list.yList16
-			},
-			{
-				name:'19',
-				type:'line',
-				data:list.yList19
-			},
-			{
-				name:'26.5',
-				type:'line',
-				data:list.yList265
-			},
-			{
-				name:'31.5',
-				type:'line',
-				data:list.yList315
-			},
-			{
-				name:'37.5',
-				type:'line',
-				data:list.yList375
 			}
 		]
 	};
@@ -800,7 +746,7 @@ function setPianChaVoOption(list){
 //			text: '折线图堆叠'
 //		},
 		legend: {
-			data:['料1偏差','料2偏差','料3偏差','料4偏差','料5偏差','料6偏差','粉偏差','沥青偏差','通过率偏差4.75','通过率偏差2.36','通过率偏差0.075'],
+			data:['料1偏差','料2偏差','料3偏差','料4偏差','料5偏差','料6偏差','粉偏差','沥青偏差'],
 			right:10
 		},
 		grid: {
@@ -891,21 +837,6 @@ function setPianChaVoOption(list){
 				name:'沥青偏差',
 				type:'line',
 				data:list.yList8
-			},
-			{
-				name:'通过率偏差4.75',
-				type:'line',
-				data:list.yList9
-			},
-			{
-				name:'通过率偏差2.36',
-				type:'line',
-				data:list.yList10
-			},
-			{
-				name:'通过率偏差0.075',
-				type:'line',
-				data:list.yList11
 			}
 		]
 	};

@@ -346,50 +346,57 @@
 					if(json!=null){
 						var obj1=json.QualityJiPei;
 						var obj2=json.DicPeifangshaikong;
-						arr.push((obj1.p0075*100).toFixed(2))
-						arr.push((obj1.p015*100).toFixed(2))
-						arr.push((obj1.p03*100).toFixed(2))
-						arr.push((obj1.p06*100).toFixed(2))
-						arr.push((obj1.p118*100).toFixed(2))
-						arr.push((obj1.p236*100).toFixed(2))
-						arr.push((obj1.p475*100).toFixed(2))
-						arr.push((obj1.p95*100).toFixed(2))
-						arr.push((obj1.p132*100).toFixed(2))
-						arr.push((obj1.p16*100).toFixed(2))
-						arr.push((obj1.p19*100).toFixed(2))
+						if(obj2!=null&&obj2.length!=0){
+							arr.push((obj1.p0075*100).toFixed(2))
+							arr.push((obj1.p015*100).toFixed(2))
+							arr.push((obj1.p03*100).toFixed(2))
+							arr.push((obj1.p06*100).toFixed(2))
+							arr.push((obj1.p118*100).toFixed(2))
+							arr.push((obj1.p236*100).toFixed(2))
+							arr.push((obj1.p475*100).toFixed(2))
+							arr.push((obj1.p95*100).toFixed(2))
+							arr.push((obj1.p132*100).toFixed(2))
+							arr.push((obj1.p16*100).toFixed(2))
+							arr.push((obj1.p19*100).toFixed(2))
 
-						max.push(obj2[0].max0075)
-						max.push(obj2[0].max015)
-						max.push(obj2[0].max03)
-						max.push(obj2[0].max06)
-						max.push(obj2[0].max118)
-						max.push(obj2[0].max236)
-						max.push(obj2[0].max475)
-						max.push(obj2[0].max95)
-						max.push(obj2[0].max132)
-						max.push(obj2[0].max16)
-						max.push(obj2[0].max19)
+							max.push(obj2[0].max0075)
+							max.push(obj2[0].max015)
+							max.push(obj2[0].max03)
+							max.push(obj2[0].max06)
+							max.push(obj2[0].max118)
+							max.push(obj2[0].max236)
+							max.push(obj2[0].max475)
+							max.push(obj2[0].max95)
+							max.push(obj2[0].max132)
+							max.push(obj2[0].max16)
+							max.push(obj2[0].max19)
 
-						min.push(obj2[0].min0075)
-						min.push(obj2[0].min015)
-						min.push(obj2[0].min03)
-						min.push(obj2[0].min06)
-						min.push(obj2[0].min118)
-						min.push(obj2[0].min236)
-						min.push(obj2[0].min475)
-						min.push(obj2[0].min95)
-						min.push(obj2[0].min132)
-						min.push(obj2[0].min16)
-						min.push(obj2[0].min19)
+							min.push(obj2[0].min0075)
+							min.push(obj2[0].min015)
+							min.push(obj2[0].min03)
+							min.push(obj2[0].min06)
+							min.push(obj2[0].min118)
+							min.push(obj2[0].min236)
+							min.push(obj2[0].min475)
+							min.push(obj2[0].min95)
+							min.push(obj2[0].min132)
+							min.push(obj2[0].min16)
+							min.push(obj2[0].min19)
+
+						}else{
+							arr=[0,0,0,0,0,0,0,0,0,0,0]
+							max=[0,0,0,0,0,0,0,0,0,0,0]
+							min=[0,0,0,0,0,0,0,0,0,0,0]
+						}
 
 						setEcahrs(arr,max,min)
 					}
 				}
 			});
 		}else {
-			var arr=[0,0,0,0,0,0,0,0,0,0,0]
-			var max=[0,0,0,0,0,0,0,0,0,0,0]
-			var min=[0,0,0,0,0,0,0,0,0,0,0]
+			 arr=[0,0,0,0,0,0,0,0,0,0,0]
+			 max=[0,0,0,0,0,0,0,0,0,0,0]
+			 min=[0,0,0,0,0,0,0,0,0,0,0]
 			setEcahrs(arr,max,min)
 		}
 
