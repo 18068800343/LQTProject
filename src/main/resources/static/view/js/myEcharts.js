@@ -746,7 +746,7 @@ function setPianChaVoOption(list){
 //			text: '折线图堆叠'
 //		},
 		legend: {
-			data:['料1偏差','料2偏差','料3偏差','料4偏差','料5偏差','料6偏差','粉偏差','沥青偏差'],
+			data:['料1偏差','料2偏差','料3偏差','料4偏差','料5偏差','料6偏差','粉偏差','沥青偏差'/*,'通过率偏差4.75','通过率偏差2.36','通过率偏差0.075'*/],
 			right:10
 		},
 		grid: {
@@ -837,7 +837,22 @@ function setPianChaVoOption(list){
 				name:'沥青偏差',
 				type:'line',
 				data:list.yList8
-			}
+			}/*,
+			{
+				name:'通过率偏差4.75',
+				type:'line',
+				data:list.yList9
+			},
+			{
+				name:'通过率偏差2.36',
+				type:'line',
+				data:list.yList10
+			},
+			{
+				name:'通过率偏差0.075',
+				type:'line',
+				data:list.yList11
+			}*/
 		]
 	};
 	return pianChaOption;
