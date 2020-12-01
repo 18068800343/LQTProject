@@ -338,10 +338,11 @@
 		$.ajax({
 			type: 'POST',
 			//url: '/SysFormulationManagement/selectAllSysFormulationManagement',
-			url: '/ShengChanJiHua/getDISTINCTRecipeIdByFinishTime',
+			//url: '/ShengChanJiHua/getDISTINCTRecipeIdByFinishTime',
+			url: '/QualityByPlateAsphaltAggregateRatio/getDistincePeiFangByTime',
 			dataType: 'json',
 			data: {
-				startime:startime,
+				beginTime:startime,
 				endTime:endtime
 			},
 			error: function (msg) {
@@ -354,7 +355,7 @@
 					for (var i = 0; i < json.length; i++) {
 						if (null != json[i]) {
 
-							$("#peifang").append(`<option value=${json[i].flId}>${json[i].flName}</option>`);
+							$("#peifang").append(`<option value=${json[i].peifangId}>${json[i].peifangName}</option>`);
 						}
 					}
 				}

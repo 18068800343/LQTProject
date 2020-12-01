@@ -15,4 +15,6 @@ public interface QualityByPlateAsphaltAggregateRatioDao {
 
 	List<QualityByPlateAsphaltAggregateRatio> getYouShiBiVoListByTime(String beginTime, String endTime, String peifang);
 
+	List<QualityByPlateAsphaltAggregateRatio> getDistincePeiFangByTime(String beginTime, String endTime);
+
 }

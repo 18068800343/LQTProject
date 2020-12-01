@@ -24,6 +24,24 @@ public class QualityByPlateAsphaltAggregateRatio {
 
     public BigDecimal asphaltAggregateRatio;//油石比
 
+	private String peifangId;
+	private String peifangName;
+
+	public String getPeifangId() {
+		return peifangId;
+	}
+
+	public void setPeifangId(String peifangId) {
+		this.peifangId = peifangId;
+	}
+
+	public String getPeifangName() {
+		return peifangName;
+	}
+
+	public void setPeifangName(String peifangName) {
+		this.peifangName = peifangName;
+	}
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getNowTime() {

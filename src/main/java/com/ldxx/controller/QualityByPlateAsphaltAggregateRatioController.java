@@ -59,4 +59,10 @@ public class QualityByPlateAsphaltAggregateRatioController {
 		youShiBiVo = youShiBiVo.getYouShiBiVoByPeiBiVoList(list);
 		return youShiBiVo;
 	}
+
+	@RequestMapping("/getDistincePeiFangByTime")
+	@ResponseBody
+	public List<QualityByPlateAsphaltAggregateRatio> getDistincePeiFangByTime(String beginTime, String endTime){
+		return dao.getDistincePeiFangByTime(beginTime,endTime);
+	}
 }

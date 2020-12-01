@@ -49,9 +49,26 @@
 			</if>
 
 			<if test="peifang !=null and peifang!=''">
-				and sfm.fl_id = #{peifang}
+				and qba.peifang_id = #{peifang}
 			</if>
 		</where>
 		order by qba.now_time asc
+	</select>
+
+	<select id="getDistincePeiFangByTime" resultType="QualityByPlateAsphaltAggregateRatio">
+		SELECT
+		DISTINCT qba.peifang_id,qba.peifang_name
+		FROM
+		quality_by_plate_asphalt_aggregate_ratio qba
+
+		<where>
+			<if test="beginTime !=null and beginTime!=''">
+				qba.now_time &gt; #{beginTime}
+			</if>
+			<if test="endTime !=null and endTime!=''">
+				and qba.now_time &lt; #{endTime}
+			</if>
+		</where>
+
 	</select>
 </mapper>
