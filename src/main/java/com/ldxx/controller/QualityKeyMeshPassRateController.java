@@ -32,6 +32,10 @@ public class QualityKeyMeshPassRateController {
 	@ResponseBody
 	public List<QualityJiPei> getAllQualityKeyMeshPassRate(){
 		List<QualityJiPei> list=service.getAllQualityKeyMeshPassRate();
+		for(QualityJiPei q:list)
+		{
+			q.setDatetime(q.getDatetime().substring(0,q.getDatetime().indexOf(".")));
+		}
 		return list;
 	}
 
@@ -39,6 +43,10 @@ public class QualityKeyMeshPassRateController {
 	@ResponseBody
 	public TongGuoLvVo getTongGuoLvVoListByTime(String beginTime, String endTime, String peifang){
 		List<QualityJiPei> list = dao.getTongGuoLvVoListByTime(beginTime,endTime,peifang);
+		for(QualityJiPei q:list)
+		{
+			q.setDatetime(q.getDatetime().substring(0,q.getDatetime().indexOf(".")));
+		}
 		TongGuoLvVo tongGuoLvVo = new TongGuoLvVo();
 		tongGuoLvVo  = tongGuoLvVo.getPeiBiVoByPeiBiVoList(list);
 		return tongGuoLvVo;
